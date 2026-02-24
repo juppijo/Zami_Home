@@ -1,0 +1,64 @@
+{
+  "categories": [
+    {
+      "id": "soziale-medien",
+      "title": "📱 Soziale Medien",
+      "links": [
+        { "label": "YouTube", "url": "https://youtube.com", "icon": "🎬" },
+        { "label": "Instagram", "url": "https://instagram.com", "icon": "📸" },
+        { "label": "TikTok", "url": "https://tiktok.com", "icon": "🎵" },
+        { "label": "Twitter / X", "url": "https://x.com", "icon": "🐦" }
+      ]
+    },
+    {
+      "id": "unterhaltung",
+      "title": "🎮 Unterhaltung",
+      "links": [
+        { "label": "Netflix", "url": "https://netflix.com", "icon": "🎬" },
+        { "label": "Spotify", "url": "https://spotify.com", "icon": "🎧" },
+        { "label": "Twitch", "url": "https://twitch.tv", "icon": "🟣" },
+        { "label": "Steam", "url": "https://store.steampowered.com", "icon": "🎮" }
+      ]
+    },
+    {
+      "id": "tools",
+      "title": "🛠️ Tools & Produktivität",
+      "links": [
+        { "label": "Google Drive", "url": "https://drive.google.com", "icon": "☁️" },
+        { "label": "Notion", "url": "https://notion.so", "icon": "📝" },
+        { "label": "ChatGPT", "url": "https://chatgpt.com", "icon": "🤖" },
+        { "label": "Claude", "url": "https://claude.ai", "icon": "✨" }
+      ]
+    },
+    {
+      "id": "nachrichten",
+      "title": "📰 Nachrichten",
+      "links": [
+        { "label": "Spiegel Online", "url": "https://spiegel.de", "icon": "🇩🇪" },
+        { "label": "BBC News", "url": "https://bbc.com/news", "icon": "🌍" },
+        { "label": "Reddit", "url": "https://reddit.com", "icon": "🔴" },
+        { "label": "Heise Online", "url": "https://heise.de", "icon": "💻" }
+      ]
+    },
+    {
+      "id": "einkaufen",
+      "title": "🛒 Einkaufen",
+      "links": [
+        { "label": "Amazon", "url": "https://amazon.de", "icon": "📦" },
+        { "label": "eBay", "url": "https://ebay.de", "icon": "🏷️" },
+        { "label": "Zalando", "url": "https://zalando.de", "icon": "👟" },
+        { "label": "MediaMarkt", "url": "https://mediamarkt.de", "icon": "🔌" }
+      ]
+    },
+    {
+      "id": "lernen",
+      "title": "📚 Lernen & Wissen",
+      "links": [
+        { "label": "Wikipedia", "url": "https://wikipedia.org", "icon": "📖" },
+        { "label": "Khan Academy", "url": "https://khanacademy.org", "icon": "🎓" },
+        { "label": "Udemy", "url": "https://udemy.com", "icon": "🏫" },
+        { "label": "GitHub", "url": "https://github.com", "icon": "🐙" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zaminia Home</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══ HEADER ══════════════════════════════ -->
+  <header>
+    <div class="header-brand">
+      <div class="header-logo">🌐</div>
+      <div class="header-titles">
+        <h1>Zaminia Home</h1>
+        <p>Willkommen in Zami's Welt</p>
+      </div>
+    </div>
+
+    <div class="controls">
+      <!-- Fullscreen -->
+      <button class="ctrl-btn" id="btn-fullscreen" title="Fullscreen" aria-label="Fullscreen">⛶</button>
+
+      <!-- Ton -->
+      <button class="ctrl-btn" id="btn-sound" title="Ton an" aria-label="Ton an/aus">🔇</button>
+
+      <!-- Dark Mode -->
+      <button class="ctrl-btn" id="btn-dark" title="Dark Mode" aria-label="Dark/Light Mode">🌙</button>
+
+      <!-- Einstellungen -->
+      <button class="ctrl-btn settings-btn" id="btn-settings" title="Einstellungen" aria-label="Einstellungen">⚙️</button>
+    </div>
+  </header>
+
+  <!-- ══ SETTINGS PANEL ══════════════════════ -->
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+  <aside class="settings-panel" id="settings-panel" role="dialog" aria-label="Einstellungen">
+    <h3>⚙️ Einstellungen</h3>
+
+    <!-- Hue Regler -->
+    <div class="setting-row">
+      <label for="hue-slider">
+        🎨 Grundfarbe (Hue)
+        <span id="hue-value">180°</span>
+      </label>
+      <input
+        type="range"
+        id="hue-slider"
+        class="hue-slider"
+        min="0" max="360" step="1"
+        value="180"
+        aria-label="Hue Farbwert"
+      />
+
+      <!-- Farbpaletten-Vorschau -->
+      <div class="palette-legend">
+        <span>Primär</span>
+        <span>Hell</span>
+        <span>Dunkel</span>
+        <span>Komp.</span>
+        <span>Ana+</span>
+        <span>Ana−</span>
+        <span>Triade</span>
+      </div>
+      <div class="color-palette">
+        <div class="color-swatch" id="sw-primary"></div>
+        <div class="color-swatch" id="sw-light"></div>
+        <div class="color-swatch" id="sw-dark"></div>
+        <div class="color-swatch" id="sw-comp"></div>
+        <div class="color-swatch" id="sw-analog1"></div>
+        <div class="color-swatch" id="sw-analog2"></div>
+        <div class="color-swatch" id="sw-triad"></div>
+      </div>
+    </div>
+
+    <!-- Hinweis -->
+    <p style="font-size:0.75rem; color:var(--text-muted); line-height:1.5;">
+      Alle Interface-Farben werden automatisch aus dem Hue-Wert berechnet:
+      Komplementär (+180°), Analog (±30°), Triade (+120°/+240°).
+    </p>
+  </aside>
+
+  <!-- ══ HERO ════════════════════════════════ -->
+  <section class="hero">
+    <span class="hero-emoji" aria-hidden="true">🌍</span>
+    <h2>Willkommen in Zami's Welt</h2>
+    <p>Deine persönliche Startseite – alles auf einen Blick.</p>
+    <div class="color-bar" aria-hidden="true"></div>
+  </section>
+
+  <!-- ══ MAIN CONTENT ════════════════════════ -->
+  <main>
+    <div class="categories-grid" id="categories-grid">
+      <div class="loading">⏳ Links werden geladen…</div>
+    </div>
+  </main>
+
+  <!-- ══ FOOTER ══════════════════════════════ -->
+  <footer>
+    <p>Made with ❤️ by <span>Zami</span> · Zaminia Home</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
