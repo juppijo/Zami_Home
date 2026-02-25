@@ -1,25 +1,23 @@
-const localData = [
-  {
-    title: "🌸 Zamis Welten",
-    links: [
-      { label: "Zami GSheet", url: "https://juppijo.github.io/Zaminia-Zen-Theme/GSheet.html", icon: "🌐" },
-      { label: "Shambala Luminia", url: "#", icon: "✨" },
-      { label: "Zamis Dachwohnung", url: "#", icon: "🎨" },
-      { label: "Luna & Mia", url: "#", icon: "🐱" }
-    ]
-  },
-  {
-    title: "📜 Zen & Wissen",
-    links: [
-      { label: "50 Verse Bewusstsein", url: "#", icon: "🧘" },
-      { label: "WRZT Theorie", url: "#", icon: "🌌" },
-      { label: "Intersein", url: "#", icon: "☁️" }
-    ]
-  }
-];
+// Die URL zu deiner JSON auf GitHub (Benutze die "Raw"-URL!)
+const jsonUrl = 'https://raw.githubusercontent.com/juppijo/Zami_Home/main/links.json';
+
+let localData = []; // Startet leer
 
 const music = document.getElementById('bg-music');
 const grid = document.getElementById('categories-grid');
+
+// Funktion zum Laden der Daten
+async function loadLinks() {
+  try {
+    const response = await fetch(jsonUrl);
+    if (!response.ok) throw new Error('Fehler beim Laden der JSON');
+    localData = await response.json();
+    renderContent(); // Erst rendern, wenn die Daten da sind
+  } catch (error) {
+    console.error("Daten konnten nicht geladen werden:", error);
+    // Optional: Hier könntest du Ersatz-Daten definieren, falls GitHub offline ist
+  }
+}
 
 /* ── ERWEITERTER STATE ── */
 const state = { 
@@ -146,6 +144,8 @@ document.getElementById('close-settings').addEventListener('click', () => {
   document.getElementById('overlay').classList.remove('active');
 });
 
+// Ersetze am Ende der Datei den Aufruf renderContent(); durch:
+loadLinks();
 
 // Initial aufrufen
 updateAllStyles();
