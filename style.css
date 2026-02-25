@@ -1,17 +1,41 @@
-:root {
-  --hue: 180;
-  --clr-primary: hsl(var(--hue), 70%, 50%);
-  --clr-bg: #f8f9fa;
-  --clr-card: #ffffff;
-  --clr-text: #2d3436;
-  transition: background-color 1s linear;
-}
+/* ══════════════════════════════════════
+   ZAMINIA HOME – style.css
+  ══════════════════════════════════════ */
 
-/* 1. Globaler Reset: Verhindert, dass Abstände die Breite vergrößern */
-*, *::before, *::after {
+ /* 1. Globaler Reset: Verhindert, dass Abstände die Breite vergrößern */
+*, *::before, *::after { 
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+:root {  
+  --hue: 180deg;
+  --sat: 70%;
+  --light: 50%;
+
+  /* Dynamische Berechnung basierend auf den Schiebern */
+  --clr-primary:       hsl(var(--hue), var(--sat), var(--light));
+  --clr-primary-dark:  hsl(var(--hue), var(--sat), calc(var(--light) - 20%));
+  --clr-primary-light: hsl(var(--hue), var(--sat), calc(var(--light) + 20%));
+
+  --clr-bg:            hsl(var(--hue),  20%, 90%);
+  --clr-card:          hsl(var(--hue),  20%, var(--light));
+  --clr-text:          hsl(var(--hue),  20%, 10%);
+  
+  /* Komplementär & Triade folgen den neuen Werten */
+  --clr-comp:          hsl(calc(var(--hue) + 180), var(--sat), var(--light));
+  --clr-triad1:        hsl(calc(var(--hue) + 120), var(--sat), var(--light));
+  --clr-triad2:        hsl(calc(var(--hue) + 240), var(--sat), var(--light));
+
+  transition: background-color 1s linear;
+}
+
+/* Dark Mode Anpassung (Invertierung der Helligkeit) */
+body.dark-mode {
+  --clr-bg:            hsl(var(--hue), 20%, 10%);
+  --clr-card:          hsl(var(--hue), 20%, 20%);
+  --clr-text:          hsl(var(--hue), 20%, 90%);
 }
 
 /* 2. Den Body absolut absichern */
@@ -23,9 +47,6 @@ html, body {
   color: var(--clr-text);
   margin: 0;
   padding: 0;
-}
-
-body {
   font-family: 'Segoe UI', sans-serif;
   transition: background 1s linear, color 0.3s ease;
 }
@@ -36,26 +57,11 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 5%; /* Das wird jetzt dank border-box korrekt berechnet */
+  padding: 1rem 5%;
   background: var(--clr-card);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-/* 4. Hero-Fix */
-.hero {
-  width: 100%;
-  margin: 0;
-  padding: 50px 20px;
-  background: hsla(var(--hue), 70%, 50%, 0.05);
-}
-
-body.dark-mode {
-  --clr-bg: #121212;
-  --clr-card: #1e1e1e;
-  --clr-text: #dfe6e9;
+  box-shadow: 0 4px 12px var(--clr-primary-dark);
+  position: sticky; top: 0; z-index: 100;
+  color: var(--clr-primary-light); /* Header Text auf dunklerer Karte weiß */
 }
 
 .header-brand {
@@ -63,12 +69,30 @@ body.dark-mode {
   align-items: center; /* Zentriert Bild und Text vertikal */
   gap: 20px;           /* Abstand zwischen Bild und Text */
 }
-.header-titles{
-  color: var(--clr-primary);
+.header-titles h1 {
+  color: var(--clr-primary-dark);
+  /* Ein mehrschichtiger Schatten erzeugt einen weichen, intensiven Glow */
+  text-shadow: 
+    0 0 5px  var(--clr-primary-light),
+    0 0 10px var(--clr-primary),
+    0 0 20px var(--clr-primary);
+  
+  /* Optional: Ein sanftes Ein- und Ausblenden des Leuchtens */
+  animation: title-glow 3s ease-in-out infinite alternate;
+}
+
+/* Die Animation lässt den Titel sanft "atmen" */
+@keyframes title-glow {
+  from {
+    text-shadow: 0 0 5px var(--clr-primary-light), 0 0 10px var(--clr-primary);
+  }
+  to {
+    text-shadow: 0 0 10px var(--clr-primary-light), 0 0 20px var(--clr-primary), 0 0 30px var(--clr-primary);
+  }
 }
 
 .header-img {
-  width: 140px;         /* Breite des Bildes */
+  width: 120px;        /* Breite des Bildes */
   height: 90px;        /* Höhe des Bildes */
   object-fit: cover;   /* Verhindert Verzerrung */
   border-radius: 25%;  /* Macht das Bild rund */
@@ -82,60 +106,95 @@ body.dark-mode {
   .header-img {
     width: 320px;
     height: 180px;
+    border-radius: 20%;
   }
 }
 
+/* 4. Hero-Fix */
+.hero {
+  width: 100%;
+  margin: 0;
+  color: var(--clr-primary-dark);
+  text-align: center;
+  padding: 50px 20px;
+  background: hsla(var(--hue), 70%, 50%, 0.05);
+}
+.hero-emoji{
+  font-size: 2.8rem;
+}
+
 .ctrl-btn {
-  background: transparent;
-  border: 1px solid var(--clr-primary);
-  color: var(--clr-primary);
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
+  background: var(--clr-comp); 
+  border: 1px solid var(--clr-primary-light); 
+  color: var(--clr-triad2); 
+  padding: 8px 12px; 
+  border-radius: 8px; 
+  cursor: pointer; 
   margin-left: 5px;
   transition: 0.3s;
 }
-
-.ctrl-btn:hover, .ctrl-btn.active {
-  background: var(--clr-primary);
-  color: white;
+.ctrl-btn:hover, .ctrl-btn.active { 
+  background: var(--clr-primary); 
+  color: var(--clr-primary-light);
+  transform: translateY(-5px);
 }
 
-.settings-panel {
-  position: fixed; right: -320px; top: 0; width: 300px; height: 100%;
-  background: var(--clr-card); z-index: 1000; padding: 20px;
-  transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-}
-
-.settings-panel.active { right: 0; }
-
-.overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.4);
-  opacity: 0; pointer-events: none; transition: 0.3s; z-index: 999;
-}
-
-.overlay.active { opacity: 1; pointer-events: auto; }
-
-.hero { text-align: center; padding: 50px 20px; background: hsla(var(--hue), 70%, 50%, 0.05); }
-
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 40px 5%; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 20px 5%; }
 
 .card {
-  background: var(--clr-card); border-radius: 15px; padding: 20px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-top: 5px solid var(--clr-primary);
+  background: var(--clr-card); border-radius: 12px; overflow: hidden;
+  padding: 20px;
+  box-shadow: 0 4px 15px var(--clr-comp); border-left: 6px solid var(--clr-primary);
+  color: var(--clr-primary-light);
   transition: transform 0.3s, border-color 1s linear;
 }
 
-.card:hover { transform: translateY(-5px); }
-
-.link-list { list-style: none; padding: 0; }
-.link-list a {
-  text-decoration: none; color: var(--clr-text); display: flex;
-  align-items: center; gap: 10px; padding: 8px; border-radius: 5px; transition: 0.2s;
+.card-header {
+  padding: 15px 20px; cursor: pointer; display: flex; justify-content: space-between; 
+  align-items: center; font-weight: bold; background: var(--clr-card);
 }
 
-.link-list a:hover { background: hsla(var(--hue), 70%, 50%, 0.1); color: var(--clr-primary); }
+.toggle-icon { transition: transform 0.3s ease; font-size: 1rem; }
+.card.collapsed .toggle-icon { transform: rotate(-90deg); }
+.card.collapsed .link-list { display: none; }
 
-.color-palette { display: flex; gap: 10px; margin-top: 20px; }
-.color-swatch { width: 40px; height: 40px; border-radius: 50%; border: 2px solid white; }
+.link-list { list-style: none; padding: 10px; }
+.link-list a {
+  text-decoration: none; color: var(--clr-primary-light); display: flex;
+  align-items: center; gap: 10px; padding: 10px; border-radius: 8px;
+}
+.link-list a:hover { background: var(--clr-primary); }
+
+.settings-panel {
+  position: fixed; right: -320px; top: 0; width: 300px; height: 100%;
+  background: var(--clr-card); color: var(--clr-comp); z-index: 1000; padding: 20px;
+  transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: -5px 0 15px var(--clr-comp);
+}
+.settings-panel.active { right: 0; };
+
+.overlay { 
+  position: fixed; inset: 0; 
+  background: var(--clr-triad1); 
+  opacity: 0; 
+  pointer-events: none; 
+  transition: 0.3s; 
+  z-index: 999; 
+}
+.overlay.active { opacity: 1; pointer-events: auto; }
+
+.color-palette { display: flex; gap: 10px; margin-top: 15px; }
+.color-swatch { width: 40px; height: 40px; border-radius: 8px; border: 2px solid var(--clr-comp); }
+
+/* Einstellungsgruppen im Panel verschönern */
+.setting-group {
+  margin-bottom: 20px;
+}
+.setting-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+.setting-group input {
+  width: 100%;
+  cursor: pointer;
+}

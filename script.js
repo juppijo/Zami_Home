@@ -1,4 +1,3 @@
-/* ── LOKALE DATEN ── */
 const localData = [
   {
     title: "🌸 Zamis Welten",
@@ -6,7 +5,7 @@ const localData = [
       { label: "Zami GSheet", url: "https://juppijo.github.io/Zaminia-Zen-Theme/GSheet.html", icon: "🌐" },
       { label: "Shambala Luminia", url: "#", icon: "✨" },
       { label: "Zamis Dachwohnung", url: "#", icon: "🎨" },
-      { label: "Luna (Die Katze)", url: "#", icon: "🐱" }
+      { label: "Luna & Mia", url: "#", icon: "🐱" }
     ]
   },
   {
@@ -19,112 +18,145 @@ const localData = [
   }
 ];
 
-/* ── STATE ── */
-const state = {
-  hue: 180,
-  isDark: false,
-  isMusicPlaying: false,
-  autoHue: true
+const music = document.getElementById('bg-music');
+const grid = document.getElementById('categories-grid');
+
+/* ── ERWEITERTER STATE ── */
+const state = { 
+  hue: 180, 
+  sat: 70, 
+  light: 50,
+  isDark: false, 
+  isMusicPlaying: false, 
+  autoHue: true 
 };
 
-/* ── DOM ELEMENTE ── */
-const btnFullscreen = document.getElementById('btn-fullscreen');
-const btnSound      = document.getElementById('btn-sound');
-const btnDark       = document.getElementById('btn-dark');
-const btnSettings   = document.getElementById('btn-settings');
-const panel         = document.getElementById('settings-panel');
-const overlay       = document.getElementById('overlay');
-const btnClose      = document.getElementById('close-settings');
-const hueSlider     = document.getElementById('hue-slider');
-const hueValue      = document.getElementById('hue-value');
-const music         = document.getElementById('bg-music');
-const grid          = document.getElementById('categories-grid');
+/* ── FUNKTION ZUM AKTUALISIEREN ALLER WERTE ── */
+function updateAllStyles() {
+  const root = document.documentElement;
+  root.style.setProperty('--hue', state.hue);
+  root.style.setProperty('--sat', state.sat + '%');
+  root.style.setProperty('--light', state.light + '%');
 
-/* ── FUNKTIONEN ── */
+  // Anzeige-Texte aktualisieren
+  document.getElementById('hue-value').textContent = state.hue + "°";
+  document.getElementById('sat-value').textContent = state.sat + "%";
+  document.getElementById('light-value').textContent = state.light + "%";
+
+  // Swatches im Panel aktualisieren
+  document.getElementById('sw-primary').style.background = `hsl(${state.hue}, ${state.sat}%, ${state.light}%)`;
+  document.getElementById('sw-comp').style.background = `hsl(${(parseInt(state.hue) + 180) % 360}, ${state.sat}%, ${state.light}%)`;
+  document.getElementById('sw-triad1').style.background = `hsl(${(parseInt(state.hue) + 120) % 360}, ${state.sat}%, ${state.light}%)`;
+  document.getElementById('sw-triad2').style.background = `hsl(${(parseInt(state.hue) + 240) % 360}, ${state.sat}%, ${state.light}%)`;
+}
+
+/* ── EVENT LISTENER FÜR DIE SCHIEBER ── */
+document.getElementById('hue-slider').addEventListener('input', (e) => {
+  state.hue = e.target.value;
+  updateAllStyles();
+});
+
+document.getElementById('sat-slider').addEventListener('input', (e) => {
+  state.sat = e.target.value;
+  updateAllStyles();
+});
+
+document.getElementById('light-slider').addEventListener('input', (e) => {
+  state.light = e.target.value;
+  updateAllStyles();
+});
 
 function updateColors(val) {
   state.hue = val;
   document.documentElement.style.setProperty('--hue', val);
-  hueValue.textContent = val + "°";
-  hueSlider.value = val;
+  document.getElementById('hue-value').textContent = val + "°";
   
-  // Harmonien für die Swatches
+  // Swatches im Panel aktualisieren
   document.getElementById('sw-primary').style.background = `hsl(${val}, 70%, 50%)`;
-  document.getElementById('sw-comp').style.background = `hsl(${(val + 180) % 360}, 70%, 50%)`;
-  document.getElementById('sw-triad').style.background = `hsl(${(val + 120) % 360}, 70%, 50%)`;
+  document.getElementById('sw-comp').style.background = `hsl(${(parseInt(val) + 180) % 360}, 65%, 50%)`;
+  document.getElementById('sw-triad1').style.background = `hsl(${(parseInt(val) + 120) % 360}, 65%, 50%)`;
+  document.getElementById('sw-triad2').style.background = `hsl(${(parseInt(val) + 240) % 360}, 65%, 50%)`;
 }
 
 function renderContent() {
-  grid.innerHTML = localData.map(cat => `
-    <div class="card">
-      <h3 style="color:var(--clr-primary)">${cat.title}</h3>
+  grid.innerHTML = '';
+  localData.forEach(cat => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    
+    // Hier wird das HTML für die Karte gesetzt
+    card.innerHTML = `
+      <div class="card-header">
+        <span>${cat.title}</span>
+        <span class="toggle-icon">▼</span>
+      </div>
       <ul class="link-list">
-        ${cat.links.map(l => `<li><a href="${l.url}"><span>${l.icon}</span> ${l.label}</a></li>`).join('')}
+        ${cat.links.map(l => `<li><a href="${l.url}" target="_blank">${l.icon} ${l.label}</a></li>`).join('')}
       </ul>
-    </div>
-  `).join('');
+    `;
+
+    // FEHLER BEHOBEN: Hier fehlte der Event-Listener für den Klick!
+    const header = card.querySelector('.card-header');
+    header.addEventListener('click', () => {
+      card.classList.toggle('collapsed');
+    });
+
+    grid.appendChild(card);
+  });
 }
 
-/* ── EVENT LISTENERS ── */
-
-// Fullscreen
-btnFullscreen.addEventListener('click', () => {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen();
-    btnFullscreen.textContent = "🏁";
-  } else {
-    document.exitFullscreen();
-    btnFullscreen.textContent = "⛶";
-  }
-});
-
-// Darkmode
-btnDark.addEventListener('click', () => {
-  state.isDark = !state.isDark;
-  document.body.classList.toggle('dark-mode', state.isDark);
-  btnDark.textContent = state.isDark ? "☀️" : "🌙";
-});
-
-// Musik
-btnSound.addEventListener('click', () => {
+// Controls
+document.getElementById('btn-sound').addEventListener('click', function() {
   state.isMusicPlaying = !state.isMusicPlaying;
   if (state.isMusicPlaying) {
-    music.volume = 0.1; // 10% Lautstärke
+    music.volume = 0.1;
     music.play();
-    btnSound.textContent = "🔊";
-    btnSound.classList.add('active');
+    this.textContent = "🔊";
+    this.classList.add('active');
   } else {
     music.pause();
-    btnSound.textContent = "🔇";
-    btnSound.classList.remove('active');
+    this.textContent = "🔇";
+    this.classList.remove('active');
   }
 });
 
-// Einstellungen Panel
-btnSettings.addEventListener('click', () => {
-  panel.classList.add('active');
-  overlay.classList.add('active');
+document.getElementById('btn-dark').addEventListener('click', function() {
+  state.isDark = !state.isDark;
+  document.body.classList.toggle('dark-mode', state.isDark);
+  this.textContent = state.isDark ? "☀️" : "🌙";
 });
 
-[btnClose, overlay].forEach(el => el.addEventListener('click', () => {
-  panel.classList.remove('active');
-  overlay.classList.remove('active');
-}));
-
-// Manueller Hue-Regler
-hueSlider.addEventListener('input', (e) => {
-  updateColors(parseInt(e.target.value));
+document.getElementById('btn-fullscreen').addEventListener('click', function() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+    this.textContent = "🏁";
+  } else {
+    document.exitFullscreen();
+    this.textContent = "⛶";
+  }
 });
 
-/* ── INITIALISIERUNG & AUTO-HUE ── */
+document.getElementById('btn-settings').addEventListener('click', () => {
+  document.getElementById('settings-panel').classList.add('active');
+  document.getElementById('overlay').classList.add('active');
+});
+
+document.getElementById('close-settings').addEventListener('click', () => {
+  document.getElementById('settings-panel').classList.remove('active');
+  document.getElementById('overlay').classList.remove('active');
+});
+
+
+// Initial aufrufen
+updateAllStyles();
 
 renderContent();
 updateColors(state.hue);
 
-// Der 1° pro Sekunde Kreislauf
+// Auto-Hue
 setInterval(() => {
   if (state.autoHue) {
-    let nextHue = (state.hue + 1) % 360;
+    let nextHue = (parseInt(state.hue) + 1) % 360;
     updateColors(nextHue);
   }
 }, 1000);

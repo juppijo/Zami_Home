@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,7 +10,7 @@
 
   <header>
     <div class="header-brand">
-      <img src="bild.jpg" alt="Zaminia Portrait" class="header-img">
+      <img src="bild.jpg" alt="Zaminia" class="header-img">
       <div class="header-titles">
         <h1>Zaminia Home</h1>
         <p>Willkommen in Zami's Welt</p>
@@ -31,14 +30,27 @@
       <h3>Farbeinstellungen</h3>
       <button id="close-settings">✕</button>
     </div>
+    
     <div class="setting-group">
-      <label>Grundfarbe: <span id="hue-value">180°</span></label>
+      <label>Farbton (Hue): <span id="hue-value">180°</span></label>
       <input type="range" id="hue-slider" min="0" max="360" value="180">
     </div>
+
+    <div class="setting-group">
+      <label>Sättigung: <span id="sat-value">70%</span></label>
+      <input type="range" id="sat-slider" min="0" max="100" value="70">
+    </div>
+
+    <div class="setting-group">
+      <label>Helligkeit: <span id="light-value">50%</span></label>
+      <input type="range" id="light-slider" min="10" max="90" value="50">
+    </div>
+
     <div class="color-palette">
       <div class="color-swatch" id="sw-primary" title="Primär"></div>
       <div class="color-swatch" id="sw-comp" title="Komplementär"></div>
-      <div class="color-swatch" id="sw-triad" title="Triade"></div>
+      <div class="color-swatch" id="sw-triad1" title="Triade 1"></div>
+      <div class="color-swatch" id="sw-triad2" title="Triade 2"></div>
     </div>
   </aside>
 
