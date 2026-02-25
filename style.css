@@ -60,7 +60,8 @@ header {
   padding: 1rem 5%;
   background: var(--clr-card);
   box-shadow: 0 4px 12px var(--clr-primary-dark);
-  position: sticky; top: 0; z-index: 100;
+  position: fixed; /* statt sticky Der Header bleibt fest an seiner Position */
+  top: 0; left: 0; z-index: 1000;
   color: var(--clr-primary-light); /* Header Text auf dunklerer Karte weiß */
 }
 
@@ -101,6 +102,19 @@ header {
   transition: border-color 1s linear; /* Damit der Rahmen mit dem Auto-Hue mitfließt */
 }
 
+/* 4. Hero-Fix */
+.hero {
+  width: 100%;
+  margin: 0;
+  color: var(--clr-primary-dark);
+  text-align: center;
+  padding: 160px 10px 10px 10px;
+  background: hsla(var(--hue), 70%, 50%, 0.05);
+}
+.hero-emoji{
+  font-size: 2.8rem;
+}
+
 /* Optional: Vergrößert das Bild ein wenig auf größeren Bildschirmen */
 @media (min-width: 768px) {
   .header-img {
@@ -108,19 +122,9 @@ header {
     height: 180px;
     border-radius: 20%;
   }
-}
-
-/* 4. Hero-Fix */
-.hero {
-  width: 100%;
-  margin: 0;
-  color: var(--clr-primary-dark);
-  text-align: center;
-  padding: 50px 20px;
-  background: hsla(var(--hue), 70%, 50%, 0.05);
-}
-.hero-emoji{
-  font-size: 2.8rem;
+  .hero {
+    padding: 240px 10px 10px 10px;
+  }
 }
 
 .ctrl-btn {
@@ -151,7 +155,7 @@ header {
 
 .card-header {
   padding: 15px 20px; cursor: pointer; display: flex; justify-content: space-between; 
-  align-items: center; font-weight: bold; background: var(--clr-card);
+  align-items: center; font-weight: bold; background: var(--clr-primary-dark);
 }
 
 .toggle-icon { transition: transform 0.3s ease; font-size: 1rem; }
