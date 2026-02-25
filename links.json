@@ -1,19 +1,47 @@
 [
   {
-    "title": "🌸 Zamis Welten",
+    "title": "Autogenes-Training",
     "links": [
-      { "label": "Zami GSheet", "url": "https://juppijo.github.io/Zaminia-Zen-Theme/GSheet.html", "icon": "🌐" },
-      { "label": "Shambala Luminia", "url": "#", "icon": "✨" },
-      { "label": "Zamis Dachwohnung", "url": "#", "icon": "🎨" },
-      { "label": "Luna & Mia", "url": "#", "icon": "🐱" }
+      { 
+        "label": "Zami GSheet", 
+        "url": "https://juppijo.github.io/Zaminia-Zen-Theme/GSheet.html", 
+        "icon": "🌐" 
+      },
+      {
+        "label": "8 Brokate/8Brokate.html",
+        "url": "https://github.com/juppijo/Autogenes-Training/blob/main/8%20Brokate/8Brokate.html",
+        "icon": "✨"
+      },
+      {
+        "label": "autogenes-training-app_Cl.html",
+        "url": "https://github.com/juppijo/Autogenes-Training/blob/main/autogenes-training-app_Cl.html",
+        "icon": "✨"
+      },
+      {
+        "label": "index.html",
+        "url": "https://github.com/juppijo/Autogenes-Training/blob/main/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "LisaK.html",
+        "url": "https://github.com/juppijo/Autogenes-Training/blob/main/LisaK.html",
+        "icon": "✨"
+      }
     ]
   },
   {
-    "title": "📜 Zen & Wissen",
+    "title": "ZenZamiSpiele-Co",
     "links": [
-      { "label": "50 Verse Bewusstsein", "url": "#", "icon": "🧘" },
-      { "label": "WRZT Theorie", "url": "#", "icon": "🌌" },
-      { "label": "Intersein", "url": "#", "icon": "☁️" }
+      {
+        "label": "Steinverlegung/2025-11-17_22-26.png",
+        "url": "https://github.com/juppijo/ZenZamiSpiele-Co/blob/main/Steinverlegung/2025-11-17_22-26.png",
+        "icon": "✨"
+      },
+      {
+        "label": "Steinverlegung/2025-11-17_22-27.png",
+        "url": "https://github.com/juppijo/ZenZamiSpiele-Co/blob/main/Steinverlegung/2025-11-17_22-27.png",
+        "icon": "✨"
+      }
     ]
   }
 ]
