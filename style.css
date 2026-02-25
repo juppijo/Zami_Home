@@ -7,28 +7,55 @@
   transition: background-color 1s linear;
 }
 
+/* 1. Globaler Reset: Verhindert, dass Abstände die Breite vergrößern */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 2. Den Body absolut absichern */
+html, body {
+  width: 100%;
+  max-width: 100vw; /* Verhindert, dass die Seite breiter als das Fenster wird */
+  overflow-x: hidden; /* Schneidet alles ab, was rechts rausragt */
+  background-color: var(--clr-bg);
+  color: var(--clr-text);
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  transition: background 1s linear, color 0.3s ease;
+}
+
+/* 3. Header-Fix: Padding darf die 100% nicht sprengen */
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%; /* Das wird jetzt dank border-box korrekt berechnet */
+  background: var(--clr-card);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* 4. Hero-Fix */
+.hero {
+  width: 100%;
+  margin: 0;
+  padding: 50px 20px;
+  background: hsla(var(--hue), 70%, 50%, 0.05);
+}
+
 body.dark-mode {
   --clr-bg: #121212;
   --clr-card: #1e1e1e;
   --clr-text: #dfe6e9;
-}
-
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: var(--clr-bg);
-  color: var(--clr-text);
-  transition: background 1s linear, color 0.3s ease;
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 5%;
-  background: var(--clr-card);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  position: sticky; top: 0; z-index: 100;
 }
 
 .header-brand {
@@ -41,7 +68,7 @@ header {
 }
 
 .header-img {
-  width: 160px;         /* Breite des Bildes */
+  width: 140px;         /* Breite des Bildes */
   height: 90px;        /* Höhe des Bildes */
   object-fit: cover;   /* Verhindert Verzerrung */
   border-radius: 25%;  /* Macht das Bild rund */
