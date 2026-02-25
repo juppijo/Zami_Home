@@ -31,13 +31,6 @@
   transition: background-color 1s linear;
 }
 
-/* Dark Mode Anpassung (Invertierung der Helligkeit) */
-body.dark-mode {
-  --clr-bg:            hsl(var(--hue), 20%, 10%);
-  --clr-card:          hsl(var(--hue), 20%, 20%);
-  --clr-text:          hsl(var(--hue), 20%, 90%);
-}
-
 /* 2. Den Body absolut absichern */
 html, body {
   width: 100%;
@@ -49,6 +42,13 @@ html, body {
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
   transition: background 1s linear, color 0.3s ease;
+}
+
+/* Dark Mode Anpassung (Invertierung der Helligkeit) */
+html, body.dark-mode {
+  --clr-bg:            hsl(var(--hue), 20%, 10%);
+  --clr-card:          hsl(var(--hue), 20%, 20%);
+  --clr-text:          hsl(var(--hue), 20%, 90%);
 }
 
 /* 3. Header-Fix: Padding darf die 100% nicht sprengen */
@@ -143,7 +143,13 @@ header {
   transform: translateY(-5px);
 }
 
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 20px 5%; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px 5% 10px 5%; /* Erhöht das Padding UNTEN, damit die Karten nicht am Rand kleben */
+  margin-bottom: 0; /* Verhindert den weißen Rand unter dem Grid */
+}
 
 .card {
   background: var(--clr-card); border-radius: 12px; overflow: hidden;
@@ -201,4 +207,8 @@ header {
 .setting-group input {
   width: 100%;
   cursor: pointer;
+}
+main {
+  background-color: var(--clr-bg);
+  min-height: calc(100vh - 80px); /* Füllt den Rest des Bildschirms unter dem Header */
 }
