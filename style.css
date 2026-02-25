@@ -212,3 +212,35 @@ main {
   background-color: var(--clr-bg);
   min-height: calc(100vh - 80px); /* Füllt den Rest des Bildschirms unter dem Header */
 }
+footer {
+  width: 100%;
+  background: var(--clr-card);
+  color: var(--clr-text);
+  padding: 40px 20px;
+  margin-top: 50px;
+  text-align: center;
+  border-top: 2px solid var(--clr-primary);
+  box-shadow: 0 -4px 15px rgba(0,0,0,0.05);
+}
+
+.zen-quote {
+  font-style: italic;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: var(--clr-primary-dark);
+  /* Ein leichter Glow wie beim Titel */
+  text-shadow: 0 0 5px var(--clr-primary-light);
+}
+
+.footer-bottom {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.footer-divider {
+  color: var(--clr-primary);
+}
