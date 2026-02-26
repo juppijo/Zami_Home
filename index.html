@@ -8,9 +8,23 @@
 </head>
 <body>
 
+  <div id="intro-overlay">
+    <div class="intro-content">
+      <video id="intro-video" autoplay muted playsinline> 
+        <source src="Zami_Welt.mp4" type="video/mp4">
+      </video>
+      <h1 id="intro-text">Hallo, ich bin Zaminia, willkommen in meiner Welt!</h1>
+      <p id="video-hint" style="color: var(--clr-primary-dark); margin-top: 10px; font-size: 0.9rem;">
+        (Klicke auf das Video für Ton)
+      </p>
+      
+      <button id="unmute-btn">🔊 Ton einschalten</button>
+    </div>
+  </div>
+
   <header>
     <div class="header-brand">
-      <img src="bild.jpg" alt="Zaminia" class="header-img">
+      <img src="bild.jpg" alt="Zaminia" class="header-img" id="header-logo-click" title="Klicken für Sound">
       <div class="header-titles">
         <h1>Zaminia Home</h1>
         <p>Willkommen in Zami's Welt</p>
