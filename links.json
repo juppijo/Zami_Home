@@ -163,6 +163,21 @@
     "title": "esp32-d1",
     "links": [
       {
+        "label": "esp32_2.html",
+        "url": "https://juppijo.github.io/esp32-d1/esp32_2.html",
+        "icon": "✨"
+      },
+      {
+        "label": "esp32.html",
+        "url": "https://juppijo.github.io/esp32-d1/esp32.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT_LaTex.html",
+        "url": "https://juppijo.github.io/esp32-d1/WRZT_LaTex.html",
+        "icon": "✨"
+      },
+      {
         "label": "README.md",
         "url": "https://juppijo.github.io/esp32-d1/README.md",
         "icon": "✨"
@@ -513,6 +528,11 @@
     "title": "Rechner",
     "links": [
       {
+        "label": "AstroPhysCalc.html",
+        "url": "https://juppijo.github.io/Rechner/AstroPhysCalc.html",
+        "icon": "✨"
+      },
+      {
         "label": "editor_pro.html",
         "url": "https://juppijo.github.io/Rechner/editor_pro.html",
         "icon": "✨"
@@ -525,6 +545,11 @@
       {
         "label": "einheiten-rechner.html",
         "url": "https://juppijo.github.io/Rechner/einheiten-rechner.html",
+        "icon": "✨"
+      },
+      {
+        "label": "font-editor.html",
+        "url": "https://juppijo.github.io/Rechner/font-editor.html",
         "icon": "✨"
       },
       {
@@ -573,6 +598,16 @@
         "icon": "✨"
       },
       {
+        "label": "Schrift.html",
+        "url": "https://juppijo.github.io/Rechner/Schrift.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZNT-Konstanten.html",
+        "url": "https://juppijo.github.io/Rechner/WRZNT-Konstanten.html",
+        "icon": "✨"
+      },
+      {
         "label": "favicon.jpg",
         "url": "https://juppijo.github.io/Rechner/favicon.jpg",
         "icon": "✨"
@@ -583,8 +618,18 @@
         "icon": "✨"
       },
       {
+        "label": "meine-notizen.json",
+        "url": "https://juppijo.github.io/Rechner/meine-notizen.json",
+        "icon": "✨"
+      },
+      {
         "label": "README.md",
         "url": "https://juppijo.github.io/Rechner/README.md",
+        "icon": "✨"
+      },
+      {
+        "label": "lumi.png",
+        "url": "https://juppijo.github.io/Rechner/lumi.png",
         "icon": "✨"
       },
       {
@@ -596,12 +641,47 @@
         "label": "html-teilen.py",
         "url": "https://juppijo.github.io/Rechner/html-teilen.py",
         "icon": "✨"
+      },
+      {
+        "label": "Luminara.ttf",
+        "url": "https://juppijo.github.io/Rechner/Luminara.ttf",
+        "icon": "✨"
+      }
+    ]
+  },
+  {
+    "title": "robbie",
+    "links": [
+      {
+        "label": "style.css",
+        "url": "https://juppijo.github.io/robbie/style.css",
+        "icon": "✨"
+      },
+      {
+        "label": "index.html",
+        "url": "https://juppijo.github.io/robbie/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "script.js",
+        "url": "https://juppijo.github.io/robbie/script.js",
+        "icon": "✨"
+      },
+      {
+        "label": "README.md",
+        "url": "https://juppijo.github.io/robbie/README.md",
+        "icon": "✨"
       }
     ]
   },
   {
     "title": "TaiChi",
     "links": [
+      {
+        "label": "Kum-Nye/style.css",
+        "url": "https://juppijo.github.io/TaiChi/Kum-Nye/style.css",
+        "icon": "✨"
+      },
       {
         "label": "8 Brokate.docx",
         "url": "https://juppijo.github.io/TaiChi/8%20Brokate.docx",
@@ -610,6 +690,11 @@
       {
         "label": "index.html",
         "url": "https://juppijo.github.io/TaiChi/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Kum-Nye/index.html",
+        "url": "https://juppijo.github.io/TaiChi/Kum-Nye/index.html",
         "icon": "✨"
       },
       {
@@ -638,6 +723,16 @@
         "icon": "✨"
       },
       {
+        "label": "Kum-Nye/Titel.jpg",
+        "url": "https://juppijo.github.io/TaiChi/Kum-Nye/Titel.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "Kum-Nye/script.js",
+        "url": "https://juppijo.github.io/TaiChi/Kum-Nye/script.js",
+        "icon": "✨"
+      },
+      {
         "label": "README.md",
         "url": "https://juppijo.github.io/TaiChi/README.md",
         "icon": "✨"
@@ -650,6 +745,11 @@
       {
         "label": "Klangschale.mp3",
         "url": "https://juppijo.github.io/TaiChi/Klangschale.mp3",
+        "icon": "✨"
+      },
+      {
+        "label": "Kum-Nye/KumNye.mp3",
+        "url": "https://juppijo.github.io/TaiChi/Kum-Nye/KumNye.mp3",
         "icon": "✨"
       },
       {
@@ -828,8 +928,8 @@
         "icon": "✨"
       },
       {
-        "label": "HT/ GravitationTrÃ¤gheit.html",
-        "url": "https://juppijo.github.io/WRZT/HT/%20GravitationTr%C3%A4gheit.html",
+        "label": "HT/GravitationTrÃ¤gheit.html",
+        "url": "https://juppijo.github.io/WRZT/HT/GravitationTr%C3%A4gheit.html",
         "icon": "✨"
       },
       {
