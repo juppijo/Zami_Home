@@ -78,7 +78,21 @@
     <div class="color-bar"></div>
   </section>
 
+  <div class="search-filter-bar" id="search-filter-bar">
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search-input" placeholder="Links durchsuchen…" autocomplete="off" />
+      <button id="search-clear" title="Suche leeren" aria-label="Suche leeren">✕</button>
+    </div>
+    <div class="ext-filter-row" id="ext-filters">
+      <!-- Wird dynamisch per JS befüllt -->
+    </div>
+  </div>
+
   <main>
+    <div id="no-results" class="no-results" style="display:none;">
+      <span>😔 Keine Treffer gefunden.</span>
+    </div>
     <div class="grid" id="categories-grid"></div>
   </main>
 

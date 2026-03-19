@@ -31,21 +31,166 @@ function renderContent() {
   grid.innerHTML = '';
   localData.forEach(cat => {
     const card = document.createElement('div');
-    card.className = 'card';
+    card.className = 'card collapsed';
     card.innerHTML = `
       <div class="card-header">
         <span>${cat.title}</span>
         <span class="toggle-icon">▼</span>
       </div>
       <ul class="link-list">
-        ${cat.links.map(l => `<li><a href="${l.url}" target="_blank">${l.icon} ${l.label}</a></li>`).join('')}
+        ${cat.links.map(l => `<li data-label="${l.label.toLowerCase()}" data-url="${l.url.toLowerCase()}">
+          <a href="${l.url}" target="_blank">${l.icon} <span class="link-label">${l.label}</span></a>
+        </li>`).join('')}
       </ul>
     `;
     const header = card.querySelector('.card-header');
     header.addEventListener('click', () => card.classList.toggle('collapsed'));
     grid.appendChild(card);
   });
+
+  buildExtFilters();
+  filterLinks();
 }
+
+/* ── DATEIENDUNGEN ERKENNEN ── */
+function getExtension(url) {
+  try {
+    const clean = url.split('?')[0].split('#')[0];
+    const parts = clean.split('/').pop().split('.');
+    if (parts.length > 1) {
+      const ext = parts.pop().toLowerCase();
+      if (/^[a-z0-9]{1,6}$/.test(ext)) return ext;
+    }
+  } catch (_) {}
+  return null;
+}
+
+/* ── FILTER-BUTTONS AUFBAUEN ── */
+const activeExts = new Set();
+
+function buildExtFilters() {
+  const container = document.getElementById('ext-filters');
+  if (!container) return;
+  container.innerHTML = '';
+
+  const extSet = new Set();
+  localData.forEach(cat => cat.links.forEach(l => {
+    const ext = getExtension(l.url);
+    if (ext) extSet.add(ext);
+  }));
+
+  if (extSet.size === 0) {
+    container.style.display = 'none';
+    return;
+  }
+  container.style.display = '';
+
+  const allBtn = document.createElement('button');
+  allBtn.className = 'ext-btn active';
+  allBtn.dataset.ext = '__all__';
+  allBtn.textContent = '🗂 Alle';
+  allBtn.addEventListener('click', () => {
+    activeExts.clear();
+    container.querySelectorAll('.ext-btn').forEach(b => b.classList.remove('active'));
+    allBtn.classList.add('active');
+    filterLinks();
+  });
+  container.appendChild(allBtn);
+
+  [...extSet].sort().forEach(ext => {
+    const btn = document.createElement('button');
+    btn.className = 'ext-btn';
+    btn.dataset.ext = ext;
+    btn.textContent = '.' + ext.toUpperCase();
+    btn.addEventListener('click', () => {
+      const allB = container.querySelector('[data-ext="__all__"]');
+      if (activeExts.has(ext)) {
+        activeExts.delete(ext);
+        btn.classList.remove('active');
+      } else {
+        activeExts.add(ext);
+        btn.classList.add('active');
+      }
+      if (activeExts.size > 0) {
+        allB?.classList.remove('active');
+      } else {
+        allB?.classList.add('active');
+      }
+      filterLinks();
+    });
+    container.appendChild(btn);
+  });
+}
+
+/* ── HIGHLIGHT-HELPER ── */
+function highlight(text, query) {
+  if (!query) return text;
+  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return text.replace(new RegExp(`(${escaped})`, 'gi'),
+    '<span class="search-highlight">$1</span>');
+}
+
+/* ── HAUPT-FILTERFUNKTION ── */
+function filterLinks() {
+  const query = (document.getElementById('search-input')?.value || '').toLowerCase().trim();
+  const noResults = document.getElementById('no-results');
+  let visibleCards = 0;
+
+  document.querySelectorAll('.card').forEach(card => {
+    let visibleItems = 0;
+    card.querySelectorAll('.link-list li').forEach(li => {
+      const label = li.dataset.label || '';
+      const url   = li.dataset.url   || '';
+      const ext   = getExtension(url);
+
+      const matchesQuery = !query || label.includes(query) || url.includes(query);
+      const matchesExt   = activeExts.size === 0 || (ext && activeExts.has(ext));
+
+      if (matchesQuery && matchesExt) {
+        li.classList.remove('hidden');
+        const labelSpan = li.querySelector('.link-label');
+        if (labelSpan) labelSpan.innerHTML = highlight(labelSpan.textContent, query);
+        visibleItems++;
+      } else {
+        li.classList.add('hidden');
+        const labelSpan = li.querySelector('.link-label');
+        if (labelSpan) labelSpan.innerHTML = labelSpan.textContent;
+        visibleItems += 0;
+      }
+    });
+
+    if (visibleItems > 0) {
+      card.classList.remove('filtered-out');
+      if (query) card.classList.remove('collapsed');
+      visibleCards++;
+    } else {
+      card.classList.add('filtered-out');
+    }
+  });
+
+  if (noResults) noResults.style.display = visibleCards === 0 ? 'block' : 'none';
+}
+
+/* ── SEARCH EVENT LISTENER ── */
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('search-input');
+  const clearBtn    = document.getElementById('search-clear');
+
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      filterLinks();
+      clearBtn?.classList.toggle('visible', searchInput.value.length > 0);
+    });
+  }
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      clearBtn.classList.remove('visible');
+      filterLinks();
+    });
+  }
+});
 
 /* ── STYLING FUNKTIONEN ── */
 function updateAllStyles() {
