@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON Editor</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f13;
+    --bg2: #16161e;
+    --bg3: #1e1e2a;
+    --bg4: #252535;
+    --border: #2e2e42;
+    --text: #e2e2f0;
+    --text2: #8888aa;
+    --text3: #5555770;
+    --accent: #f0a500;
+    --accent2: #e07800;
+    --accent-glow: rgba(240,165,0,0.15);
+    --key: #7ec8e3;
+    --str: #a8e6a3;
+    --num: #ffb347;
+    --bool: #c9b8ff;
+    --null-c: #ff8888;
+    --arr: #f0a500;
+    --obj: #f0a500;
+    --del: #ff5555;
+    --add: #55dd88;
+    --radius: 6px;
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-ui: 'Syne', sans-serif;
+    --shadow: 0 4px 24px rgba(0,0,0,0.5);
+    --transition: 0.2s ease;
+  }
+  .light {
+    --bg: #f5f5f0;
+    --bg2: #eaeae2;
+    --bg3: #e0e0d8;
+    --bg4: #d5d5cc;
+    --border: #c0c0b5;
+    --text: #1a1a2e;
+    --text2: #55556a;
+    --accent: #d08000;
+    --accent2: #b06800;
+    --accent-glow: rgba(208,128,0,0.12);
+    --key: #1a6e8e;
+    --str: #2a8a25;
+    --num: #b85a00;
+    --bool: #6040aa;
+    --null-c: #cc2222;
+    --shadow: 0 4px 24px rgba(0,0,0,0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-mono);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background var(--transition), color var(--transition);
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 10;
+  }
+
+  .logo {
+    font-family: var(--font-ui);
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+  .logo span { color: var(--text); font-weight: 400; }
+
+  .toolbar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; flex: 1; }
+
+  .btn {
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 14px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all var(--transition);
+    white-space: nowrap;
+  }
+  .btn:hover { background: var(--bg4); border-color: var(--accent); color: var(--accent); }
+  .btn.accent { background: var(--accent); border-color: var(--accent); color: #000; font-weight: 700; }
+  .btn.accent:hover { background: var(--accent2); border-color: var(--accent2); }
+  .btn svg { flex-shrink: 0; }
+
+  .sep { width: 1px; height: 28px; background: var(--border); margin: 0 4px; }
+
+  .status-bar {
+    margin-left: auto;
+    font-size: 0.72rem;
+    color: var(--text2);
+    display: flex; align-items: center; gap: 12px;
+    font-family: var(--font-ui);
+  }
+  .status-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--add);
+    box-shadow: 0 0 6px var(--add);
+    flex-shrink: 0;
+  }
+  .status-dot.error { background: var(--del); box-shadow: 0 0 6px var(--del); }
+
+  /* ── LAYOUT ── */
+  .workspace {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 0;
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  /* ── TREE PANEL ── */
+  .tree-panel {
+    overflow-y: auto;
+    padding: 20px 24px;
+    background: var(--bg);
+  }
+
+  .tree-panel::-webkit-scrollbar { width: 6px; }
+  .tree-panel::-webkit-scrollbar-track { background: transparent; }
+  .tree-panel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* ── JSON TREE ── */
+  .json-tree { font-size: 0.88rem; line-height: 1.9; }
+
+  .tree-node { position: relative; }
+  .tree-node + .tree-node { }
+
+  .node-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 1px 4px;
+    border-radius: 4px;
+    min-height: 28px;
+    transition: background var(--transition);
+  }
+  .node-row:hover { background: var(--accent-glow); }
+
+  .toggle-btn {
+    width: 18px; height: 18px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    color: var(--text2);
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    transition: transform var(--transition), color var(--transition);
+    border-radius: 3px;
+  }
+  .toggle-btn:hover { color: var(--accent); }
+  .toggle-btn.open { transform: rotate(90deg); }
+  .toggle-placeholder { width: 18px; flex-shrink: 0; }
+
+  .node-key {
+    color: var(--key);
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0 2px;
+    border-radius: 3px;
+    transition: background var(--transition);
+  }
+  .node-key:hover { background: rgba(126,200,227,0.15); }
+  .node-colon { color: var(--text2); margin: 0 2px; }
+
+  .node-value {
+    cursor: pointer;
+    padding: 1px 4px;
+    border-radius: 3px;
+    transition: background var(--transition);
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .node-value:hover { outline: 1px solid var(--accent); }
+  .node-value.type-string { color: var(--str); }
+  .node-value.type-number { color: var(--num); }
+  .node-value.type-boolean { color: var(--bool); }
+  .node-value.type-null { color: var(--null-c); }
+  .node-value.type-object,.node-value.type-array { color: var(--accent); }
+
+  .node-actions {
+    display: none;
+    gap: 4px;
+    align-items: center;
+    margin-left: 4px;
+  }
+  .node-row:hover .node-actions { display: flex; }
+
+  .icon-btn {
+    width: 20px; height: 20px;
+    display: flex; align-items: center; justify-content: center;
+    border: none; background: none; cursor: pointer;
+    color: var(--text2);
+    border-radius: 3px;
+    transition: all var(--transition);
+    font-size: 0.8rem;
+  }
+  .icon-btn:hover.del { color: var(--del); background: rgba(255,85,85,0.12); }
+  .icon-btn:hover.add { color: var(--add); background: rgba(85,221,136,0.12); }
+  .icon-btn:hover.edit { color: var(--accent); background: var(--accent-glow); }
+
+  .children {
+    padding-left: 22px;
+    border-left: 1px solid var(--border);
+    margin-left: 9px;
+  }
+  .children.collapsed { display: none; }
+
+  .bracket { color: var(--accent); font-weight: 600; }
+  .count { color: var(--text2); font-size: 0.76rem; margin-left: 4px; }
+
+  /* Inline edit */
+  .inline-input {
+    background: var(--bg3);
+    border: 1px solid var(--accent);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    padding: 1px 6px;
+    border-radius: 4px;
+    outline: none;
+    min-width: 80px;
+    max-width: 260px;
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+
+  .add-field-row {
+    display: flex; gap: 6px; align-items: center;
+    padding: 4px 4px;
+    margin-top: 2px;
+  }
+  .add-field-input {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    outline: none;
+    width: 120px;
+    transition: border var(--transition);
+  }
+  .add-field-input:focus { border-color: var(--accent); }
+  .add-field-btn {
+    background: rgba(85,221,136,0.15);
+    border: 1px solid rgba(85,221,136,0.3);
+    color: var(--add);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    padding: 3px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  .add-field-btn:hover { background: rgba(85,221,136,0.25); }
+  .cancel-btn {
+    background: none; border: none; color: var(--text2); cursor: pointer;
+    font-size: 0.82rem; padding: 2px 4px; border-radius: 3px;
+  }
+  .cancel-btn:hover { color: var(--del); }
+
+  /* ── RAW PANEL ── */
+  .raw-panel {
+    background: var(--bg2);
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .panel-header {
+    padding: 10px 16px;
+    font-family: var(--font-ui);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text2);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .raw-textarea {
+    flex: 1;
+    background: var(--bg2);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    border: none;
+    outline: none;
+    resize: none;
+    padding: 16px;
+    tab-size: 2;
+    overflow-y: auto;
+    transition: background var(--transition), color var(--transition);
+  }
+
+  .raw-apply-bar {
+    padding: 10px 16px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .err-msg {
+    font-size: 0.75rem;
+    color: var(--del);
+    font-family: var(--font-ui);
+    flex: 1;
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px;
+    width: 420px;
+    box-shadow: var(--shadow);
+  }
+  .modal h3 {
+    font-family: var(--font-ui);
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--accent);
+  }
+  .modal-input {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    padding: 8px 12px;
+    border-radius: 6px;
+    outline: none;
+    margin-bottom: 16px;
+    transition: border var(--transition);
+  }
+  .modal-input:focus { border-color: var(--accent); }
+  .modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+
+  /* ── FULLSCREEN ── */
+  :fullscreen { background: var(--bg); }
+  :-webkit-full-screen { background: var(--bg); }
+
+  /* ── SCROLLBAR global ── */
+  * { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+
+  /* ── TOASTS ── */
+  #toast {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    color: var(--text);
+    font-family: var(--font-ui);
+    font-size: 0.82rem;
+    padding: 10px 18px;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+  #toast.show { opacity: 1; transform: translateY(0); }
+
+  /* ── EMPTY STATE ── */
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 12px;
+    color: var(--text2);
+    font-family: var(--font-ui);
+    text-align: center;
+    padding: 40px;
+  }
+  .empty-state svg { opacity: 0.3; }
+  .empty-state p { font-size: 0.9rem; line-height: 1.6; max-width: 260px; }
+
+  /* ── TYPE BADGE ── */
+  .type-select {
+    background: var(--bg4);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 1px 5px;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  @media (max-width: 700px) {
+    .workspace { grid-template-columns: 1fr; }
+    .raw-panel { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">{ <span>JSON</span> } <span style="color:var(--accent);font-weight:800">Editor</span></div>
+
+  <div class="toolbar">
+    <label class="btn" title="JSON-Datei laden">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      Laden
+      <input type="file" accept=".json,application/json" id="fileInput" style="display:none">
+    </label>
+
+    <button class="btn accent" onclick="saveFile()" title="Als JSON speichern">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+      Speichern
+    </button>
+
+    <div class="sep"></div>
+
+    <button class="btn" onclick="newDocument()" title="Neues Dokument">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+      Neu
+    </button>
+
+    <button class="btn" onclick="formatJSON()" title="JSON formatieren">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="21" y1="10" x2="7" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="7" y2="18"/></svg>
+      Format
+    </button>
+
+    <button class="btn" onclick="collapseAll()">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="4 9 9 4 14 9"/><polyline points="4 15 9 20 14 15"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+      Einklappen
+    </button>
+
+    <button class="btn" onclick="expandAll()">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 9 15 4 10 9"/><polyline points="20 15 15 20 10 15"/><line x1="15" y1="4" x2="15" y2="20"/></svg>
+      Ausklappen
+    </button>
+  </div>
+
+  <div class="status-bar">
+    <div id="statusDot" class="status-dot"></div>
+    <span id="statusText">Bereit</span>
+    <div class="sep"></div>
+    <button class="btn" onclick="toggleTheme()" id="themeBtn" title="Design wechseln" style="padding:5px 10px;">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" id="themeIcon"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <button class="btn" onclick="toggleFullscreen()" title="Vollbild" style="padding:5px 10px;">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" id="fsIcon"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="workspace" id="workspace">
+  <!-- Tree Panel -->
+  <div class="tree-panel" id="treePanel">
+    <div class="empty-state" id="emptyState">
+      <svg width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+      <p>JSON-Datei laden oder neues Dokument erstellen</p>
+      <button class="btn accent" onclick="newDocument()" style="margin-top:8px">Neues Dokument</button>
+    </div>
+    <div id="jsonTree" class="json-tree" style="display:none"></div>
+  </div>
+
+  <!-- Raw Panel -->
+  <div class="raw-panel">
+    <div class="panel-header">
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      Raw JSON
+    </div>
+    <textarea class="raw-textarea" id="rawEditor" spellcheck="false" placeholder='{\n  "key": "value"\n}'></textarea>
+    <div class="raw-apply-bar">
+      <button class="btn accent" onclick="applyRaw()" style="font-size:0.78rem;padding:5px 12px">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        Übernehmen
+      </button>
+      <span class="err-msg" id="rawError"></span>
+    </div>
+  </div>
+</div>
+
+<!-- Rename Modal -->
+<div class="modal-overlay" id="keyModal">
+  <div class="modal">
+    <h3>🔑 Schlüssel umbenennen</h3>
+    <input class="modal-input" id="keyInput" placeholder="Neuer Schlüssel..." />
+    <div class="modal-actions">
+      <button class="btn" onclick="closeKeyModal()">Abbrechen</button>
+      <button class="btn accent" onclick="confirmKeyRename()">Umbenennen</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<input type="file" accept=".json" id="fileInput" onchange="loadFile(event)" style="display:none">
+
+<script>
+// ── STATE ──
+let jsonData = null;
+let isDark = true;
+let currentKeyPath = null;
+let syncTimeout = null;
+let filename = 'data.json';
+
+// ── INIT ──
+document.getElementById('fileInput').addEventListener('change', loadFile);
+
+// Raw editor sync → tree
+document.getElementById('rawEditor').addEventListener('input', () => {
+  clearTimeout(syncTimeout);
+  syncTimeout = setTimeout(() => {
+    const raw = document.getElementById('rawEditor').value.trim();
+    if (!raw) return;
+    try {
+      jsonData = JSON.parse(raw);
+      renderTree();
+      document.getElementById('rawError').textContent = '';
+      setStatus('Synchronisiert', false);
+    } catch(e) {
+      document.getElementById('rawError').textContent = '⚠ ' + e.message;
+      setStatus('JSON Fehler', true);
+    }
+  }, 600);
+});
+
+// ── FILE OPS ──
+function loadFile(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  filename = file.name;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      jsonData = JSON.parse(ev.target.result);
+      syncRaw();
+      renderTree();
+      setStatus(file.name, false);
+      showToast('📂 ' + file.name + ' geladen');
+    } catch(err) {
+      showToast('❌ Ungültige JSON-Datei');
+      setStatus('Ladefehler', true);
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+}
+
+function saveFile() {
+  if (jsonData === null) { showToast('⚠ Kein Dokument offen'); return; }
+  const blob = new Blob([JSON.stringify(jsonData, null, 2)], {type: 'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+  showToast('💾 Gespeichert: ' + filename);
+}
+
+function newDocument() {
+  jsonData = { "name": "Wert", "zahl": 42, "aktiv": true };
+  filename = 'neu.json';
+  syncRaw();
+  renderTree();
+  setStatus('Neues Dokument', false);
+  showToast('✨ Neues Dokument erstellt');
+}
+
+function formatJSON() {
+  if (!jsonData) return;
+  document.getElementById('rawEditor').value = JSON.stringify(jsonData, null, 2);
+  showToast('✅ Formatiert');
+}
+
+function applyRaw() {
+  const raw = document.getElementById('rawEditor').value;
+  try {
+    jsonData = JSON.parse(raw);
+    renderTree();
+    document.getElementById('rawError').textContent = '';
+    setStatus('Aktualisiert', false);
+    showToast('✅ JSON übernommen');
+  } catch(e) {
+    document.getElementById('rawError').textContent = '⚠ ' + e.message;
+    setStatus('JSON Fehler', true);
+  }
+}
+
+// ── SYNC ──
+function syncRaw() {
+  document.getElementById('rawEditor').value = JSON.stringify(jsonData, null, 2);
+}
+
+function syncData() {
+  syncRaw();
+  setStatus('Geändert', false);
+}
+
+// ── RENDER TREE ──
+function renderTree() {
+  const tree = document.getElementById('jsonTree');
+  const empty = document.getElementById('emptyState');
+
+  if (jsonData === null || jsonData === undefined) {
+    tree.style.display = 'none';
+    empty.style.display = 'flex';
+    return;
+  }
+
+  empty.style.display = 'none';
+  tree.style.display = 'block';
+  tree.innerHTML = '';
+  tree.appendChild(renderNode(jsonData, null, null, [], true));
+}
+
+function renderNode(value, key, parent, path, isRoot) {
+  const type = getType(value);
+  const node = document.createElement('div');
+  node.className = 'tree-node';
+
+  if (type === 'object' || type === 'array') {
+    const row = document.createElement('div');
+    row.className = 'node-row';
+
+    // Toggle
+    const toggle = document.createElement('span');
+    toggle.className = 'toggle-btn open';
+    toggle.innerHTML = '▶';
+
+    // Key
+    if (key !== null) {
+      const keyEl = document.createElement('span');
+      keyEl.className = 'node-key';
+      keyEl.textContent = type === 'array' ? `[${key}]` : `"${key}"`;
+      keyEl.title = 'Schlüssel umbenennen';
+      keyEl.onclick = () => startKeyRename(path, key, parent);
+      row.appendChild(toggle);
+      row.appendChild(keyEl);
+      const colon = document.createElement('span');
+      colon.className = 'node-colon';
+      colon.textContent = ': ';
+      row.appendChild(colon);
+    } else {
+      row.appendChild(toggle);
+    }
+
+    const openBracket = document.createElement('span');
+    openBracket.className = 'bracket';
+    openBracket.textContent = type === 'object' ? '{' : '[';
+    row.appendChild(openBracket);
+
+    const count = document.createElement('span');
+    count.className = 'count';
+    const len = type === 'object' ? Object.keys(value).length : value.length;
+    count.textContent = ` ${len} ${type === 'object' ? 'Felder' : 'Einträge'}`;
+    row.appendChild(count);
+
+    // Actions
+    const acts = document.createElement('div');
+    acts.className = 'node-actions';
+    acts.innerHTML = `
+      <button class="icon-btn add" title="Feld hinzufügen" onclick="addField(${JSON.stringify(path)}, '${type}', this)">＋</button>
+      ${key !== null ? `<button class="icon-btn del" title="Löschen" onclick="deleteNode(${JSON.stringify(path)})">✕</button>` : ''}
+    `;
+    row.appendChild(acts);
+
+    node.appendChild(row);
+
+    const children = document.createElement('div');
+    children.className = 'children';
+
+    if (type === 'object') {
+      Object.entries(value).forEach(([k, v]) => {
+        children.appendChild(renderNode(v, k, value, [...path, k], false));
+      });
+    } else {
+      value.forEach((v, i) => {
+        children.appendChild(renderNode(v, i, value, [...path, i], false));
+      });
+    }
+
+    // Add field row placeholder
+    const addPlaceholder = document.createElement('div');
+    addPlaceholder.id = 'addPlaceholder_' + pathId(path);
+    children.appendChild(addPlaceholder);
+
+    const closeBracket = document.createElement('div');
+    closeBracket.className = 'node-row';
+    closeBracket.innerHTML = `<span class="toggle-placeholder"></span><span class="bracket">${type === 'object' ? '}' : ']'}</span>`;
+    node.appendChild(children);
+    node.appendChild(closeBracket);
+
+    // Toggle logic
+    toggle.onclick = () => {
+      const open = children.classList.toggle('collapsed');
+      toggle.classList.toggle('open', !open);
+      count.style.display = open ? 'inline' : 'none';
+    };
+
+  } else {
+    // Leaf node
+    const row = document.createElement('div');
+    row.className = 'node-row';
+
+    row.appendChild(document.createElement('span')).className = 'toggle-placeholder';
+
+    if (key !== null) {
+      const keyEl = document.createElement('span');
+      keyEl.className = 'node-key';
+      keyEl.textContent = Array.isArray(parent) ? `[${key}]` : `"${key}"`;
+      keyEl.title = 'Schlüssel umbenennen';
+      if (!Array.isArray(parent)) keyEl.onclick = () => startKeyRename(path, key, parent);
+      row.appendChild(keyEl);
+
+      const colon = document.createElement('span');
+      colon.className = 'node-colon';
+      colon.textContent = ': ';
+      row.appendChild(colon);
+    }
+
+    const valEl = document.createElement('span');
+    valEl.className = `node-value type-${type}`;
+    valEl.textContent = formatValue(value, type);
+    valEl.title = 'Klicken zum Bearbeiten';
+    valEl.onclick = () => startEdit(valEl, path, value, type);
+    row.appendChild(valEl);
+
+    // Actions
+    const acts = document.createElement('div');
+    acts.className = 'node-actions';
+    acts.innerHTML = `<button class="icon-btn del" title="Löschen" onclick="deleteNode(${JSON.stringify(path)})">✕</button>`;
+    row.appendChild(acts);
+
+    node.appendChild(row);
+  }
+
+  return node;
+}
+
+function formatValue(v, type) {
+  if (type === 'string') return `"${v}"`;
+  if (type === 'null') return 'null';
+  return String(v);
+}
+
+function getType(v) {
+  if (v === null) return 'null';
+  if (Array.isArray(v)) return 'array';
+  return typeof v;
+}
+
+function pathId(path) { return path.join('__'); }
+
+// ── INLINE VALUE EDIT ──
+function startEdit(el, path, currentVal, type) {
+  const input = document.createElement('input');
+  input.className = 'inline-input';
+  input.value = type === 'null' ? '' : String(currentVal);
+  input.placeholder = type;
+
+  const typeSelect = document.createElement('select');
+  typeSelect.className = 'type-select';
+  ['string','number','boolean','null'].forEach(t => {
+    const opt = document.createElement('option');
+    opt.value = t; opt.textContent = t;
+    if (t === type) opt.selected = true;
+    typeSelect.appendChild(opt);
+  });
+
+  el.replaceWith(input);
+  input.after(typeSelect);
+  input.focus();
+  input.select();
+
+  const commit = () => {
+    const raw = input.value;
+    const newType = typeSelect.value;
+    let newVal;
+    try {
+      if (newType === 'null') newVal = null;
+      else if (newType === 'boolean') newVal = raw === 'true' || raw === '1';
+      else if (newType === 'number') { newVal = Number(raw); if (isNaN(newVal)) newVal = 0; }
+      else newVal = raw;
+    } catch { newVal = raw; }
+
+    setByPath(jsonData, path, newVal);
+    syncData();
+    renderTree();
+    showToast('✏️ Gespeichert');
+  };
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') commit();
+    if (e.key === 'Escape') renderTree();
+  });
+  // Don't commit when focus moves to the type-select
+  input.addEventListener('blur', e => {
+    if (e.relatedTarget === typeSelect) return;
+    setTimeout(commit, 150);
+  });
+  typeSelect.addEventListener('change', () => input.focus());
+  typeSelect.addEventListener('blur', e => {
+    if (e.relatedTarget === input) return;
+    setTimeout(commit, 150);
+  });
+}
+
+// ── KEY RENAME ──
+function startKeyRename(path, key, parent) {
+  currentKeyPath = { path, key, parent };
+  document.getElementById('keyInput').value = key;
+  document.getElementById('keyModal').classList.add('open');
+  setTimeout(() => document.getElementById('keyInput').focus(), 50);
+}
+
+document.getElementById('keyInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') confirmKeyRename();
+  if (e.key === 'Escape') closeKeyModal();
+});
+
+function closeKeyModal() {
+  document.getElementById('keyModal').classList.remove('open');
+  currentKeyPath = null;
+}
+
+function confirmKeyRename() {
+  if (!currentKeyPath) return;
+  const newKey = document.getElementById('keyInput').value.trim();
+  if (!newKey) { closeKeyModal(); return; }
+
+  const { path, key } = currentKeyPath;
+  const parentPath = path.slice(0, -1);
+  const parent = parentPath.length ? getByPath(jsonData, parentPath) : jsonData;
+
+  if (typeof parent === 'object' && !Array.isArray(parent)) {
+    const newObj = {};
+    Object.entries(parent).forEach(([k, v]) => {
+      newObj[k === key ? newKey : k] = v;
+    });
+    if (parentPath.length) setByPath(jsonData, parentPath, newObj);
+    else jsonData = newObj;
+  }
+
+  syncData();
+  renderTree();
+  closeKeyModal();
+  showToast('🔑 Umbenannt zu "' + newKey + '"');
+}
+
+// ── DELETE ──
+function deleteNode(path) {
+  if (!confirm('Diesen Eintrag wirklich löschen?')) return;
+  const key = path[path.length - 1];
+  const parentPath = path.slice(0, -1);
+  const parent = parentPath.length ? getByPath(jsonData, parentPath) : jsonData;
+
+  if (Array.isArray(parent)) parent.splice(key, 1);
+  else delete parent[key];
+
+  syncData();
+  renderTree();
+  showToast('🗑 Gelöscht');
+}
+
+// ── ADD FIELD ──
+function addField(path, containerType, btn) {
+  const pid = 'addPlaceholder_' + pathId(path);
+  const placeholder = document.getElementById(pid);
+  if (!placeholder) return;
+
+  // Already open?
+  if (placeholder.querySelector('.add-field-row')) { placeholder.innerHTML = ''; return; }
+
+  const row = document.createElement('div');
+  row.className = 'add-field-row';
+
+  let keyInput = null;
+  if (containerType === 'object') {
+    keyInput = document.createElement('input');
+    keyInput.className = 'add-field-input';
+    keyInput.placeholder = 'Schlüssel';
+    row.appendChild(keyInput);
+  }
+
+  const valInput = document.createElement('input');
+  valInput.className = 'add-field-input';
+  valInput.placeholder = 'Wert';
+  row.appendChild(valInput);
+
+  const typeSelect = document.createElement('select');
+  typeSelect.className = 'type-select';
+  ['string','number','boolean','null','object','array'].forEach(t => {
+    const opt = document.createElement('option'); opt.value = t; opt.textContent = t;
+    typeSelect.appendChild(opt);
+  });
+  row.appendChild(typeSelect);
+
+  const addBtn = document.createElement('button');
+  addBtn.className = 'add-field-btn';
+  addBtn.textContent = '+ Hinzufügen';
+  row.appendChild(addBtn);
+
+  const cancelBtn = document.createElement('button');
+  cancelBtn.className = 'cancel-btn';
+  cancelBtn.textContent = '✕';
+  cancelBtn.onclick = () => { placeholder.innerHTML = ''; };
+  row.appendChild(cancelBtn);
+
+  const doAdd = () => {
+    const t = typeSelect.value;
+    let val;
+    const rawVal = valInput.value;
+    if (t === 'null') val = null;
+    else if (t === 'boolean') val = rawVal === 'true' || rawVal === '1';
+    else if (t === 'number') { val = Number(rawVal); if (isNaN(val)) val = 0; }
+    else if (t === 'object') val = {};
+    else if (t === 'array') val = [];
+    else val = rawVal;
+
+    const container = path.length ? getByPath(jsonData, path) : jsonData;
+    if (containerType === 'object') {
+      const k = keyInput ? keyInput.value.trim() : '';
+      if (!k) { showToast('⚠ Schlüssel fehlt'); return; }
+      container[k] = val;
+    } else {
+      container.push(val);
+    }
+
+    syncData();
+    renderTree();
+    showToast('✅ Feld hinzugefügt');
+  };
+
+  addBtn.onclick = doAdd;
+  if (keyInput) keyInput.addEventListener('keydown', e => { if(e.key==='Enter') valInput.focus(); });
+  valInput.addEventListener('keydown', e => { if(e.key==='Enter') doAdd(); if(e.key==='Escape') placeholder.innerHTML=''; });
+
+  placeholder.appendChild(row);
+  if (keyInput) keyInput.focus(); else valInput.focus();
+}
+
+// ── PATH HELPERS ──
+function getByPath(obj, path) {
+  return path.reduce((acc, k) => acc[k], obj);
+}
+function setByPath(obj, path, val) {
+  const parent = path.slice(0, -1).reduce((acc, k) => acc[k], obj);
+  parent[path[path.length-1]] = val;
+}
+
+// ── COLLAPSE/EXPAND ──
+function collapseAll() {
+  document.querySelectorAll('.children').forEach(c => c.classList.add('collapsed'));
+  document.querySelectorAll('.toggle-btn').forEach(t => t.classList.remove('open'));
+}
+function expandAll() {
+  document.querySelectorAll('.children').forEach(c => c.classList.remove('collapsed'));
+  document.querySelectorAll('.toggle-btn').forEach(t => t.classList.add('open'));
+}
+
+// ── THEME ──
+function toggleTheme() {
+  isDark = !isDark;
+  document.body.classList.toggle('light', !isDark);
+  showToast(isDark ? '🌙 Dunkel' : '☀️ Hell');
+}
+
+// ── FULLSCREEN ──
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
+}
+
+// ── STATUS ──
+function setStatus(msg, isError) {
+  document.getElementById('statusText').textContent = msg;
+  document.getElementById('statusDot').className = 'status-dot' + (isError ? ' error' : '');
+}
+
+// ── TOAST ──
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ── KEYBOARD SHORTCUTS ──
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); saveFile(); }
+  if ((e.ctrlKey || e.metaKey) && e.key === 'o') { e.preventDefault(); document.getElementById('fileInput').click(); }
+  if (e.key === 'F11') { e.preventDefault(); toggleFullscreen(); }
+});
+
+// Auto-start with example
+newDocument();
+</script>
+</body>
+</html>
