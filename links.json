@@ -160,6 +160,116 @@
     ]
   },
   {
+    "title": "ESP32-S3",
+    "links": [
+      {
+        "label": "MiniCon/style.css",
+        "url": "https://juppijo.github.io/ESP32-S3/MiniCon/style.css",
+        "icon": "✨"
+      },
+      {
+        "label": "GPIO-Control-2/SecretLogin.h",
+        "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control-2/SecretLogin.h",
+        "icon": "✨"
+      },
+      {
+        "label": "esp32_2.html",
+        "url": "https://juppijo.github.io/ESP32-S3/esp32_2.html",
+        "icon": "✨"
+      },
+      {
+        "label": "esp32.html",
+        "url": "https://juppijo.github.io/ESP32-S3/esp32.html",
+        "icon": "✨"
+      },
+      {
+        "label": "GPIO-Control-2/index.html",
+        "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control-2/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "GPIO-Control-3/index.html",
+        "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control-3/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "GPIO-Control/index.html",
+        "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "MiniCon/index.html",
+        "url": "https://juppijo.github.io/ESP32-S3/MiniCon/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "RGB_LED/index.html",
+        "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT_LaTex.html",
+        "url": "https://juppijo.github.io/ESP32-S3/WRZT_LaTex.html",
+        "icon": "✨"
+      },
+      {
+        "label": "GPIO-Control-2/GPIO2.ino",
+        "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control-2/GPIO2.ino",
+        "icon": "✨"
+      },
+      {
+        "label": "MiniCon/script.js",
+        "url": "https://juppijo.github.io/ESP32-S3/MiniCon/script.js",
+        "icon": "✨"
+      },
+      {
+        "label": "README.md",
+        "url": "https://juppijo.github.io/ESP32-S3/README.md",
+        "icon": "✨"
+      }
+    ]
+  },
+  {
+    "title": "Garten",
+    "links": [
+      {
+        "label": "style.css",
+        "url": "https://juppijo.github.io/Garten/style.css",
+        "icon": "✨"
+      },
+      {
+        "label": "index.html",
+        "url": "https://juppijo.github.io/Garten/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "bild.jpg",
+        "url": "https://juppijo.github.io/Garten/bild.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "favicon.jpg",
+        "url": "https://juppijo.github.io/Garten/favicon.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "script.js",
+        "url": "https://juppijo.github.io/Garten/script.js",
+        "icon": "✨"
+      },
+      {
+        "label": "mein-garten.json",
+        "url": "https://juppijo.github.io/Garten/mein-garten.json",
+        "icon": "✨"
+      },
+      {
+        "label": "README.md",
+        "url": "https://juppijo.github.io/Garten/README.md",
+        "icon": "✨"
+      }
+    ]
+  },
+  {
     "title": "Logik_des_Universums",
     "links": [
       {
@@ -373,6 +483,11 @@
     "title": "Musik_Zami",
     "links": [
       {
+        "label": "Radio/style.css",
+        "url": "https://juppijo.github.io/Musik_Zami/Radio/style.css",
+        "icon": "✨"
+      },
+      {
         "label": "style (Kopie).css",
         "url": "https://juppijo.github.io/Musik_Zami/style%20(Kopie).css",
         "icon": "✨"
@@ -388,6 +503,11 @@
         "icon": "✨"
       },
       {
+        "label": "Lisa/sonic_lisajous.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Lisa/sonic_lisajous.html",
+        "icon": "✨"
+      },
+      {
         "label": "midi-soundfont_instr.html",
         "url": "https://juppijo.github.io/Musik_Zami/midi-soundfont_instr.html",
         "icon": "✨"
@@ -400,6 +520,11 @@
       {
         "label": "musik-touch.html",
         "url": "https://juppijo.github.io/Musik_Zami/musik-touch.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Radio/index.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Radio/index.html",
         "icon": "✨"
       },
       {
@@ -428,13 +553,33 @@
         "icon": "✨"
       },
       {
+        "label": "Lisa/Zami.jpg",
+        "url": "https://juppijo.github.io/Musik_Zami/Lisa/Zami.jpg",
+        "icon": "✨"
+      },
+      {
         "label": "note.jpg",
         "url": "https://juppijo.github.io/Musik_Zami/note.jpg",
         "icon": "✨"
       },
       {
+        "label": "Radio/Zami.jpg",
+        "url": "https://juppijo.github.io/Musik_Zami/Radio/Zami.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "Radio/script.js",
+        "url": "https://juppijo.github.io/Musik_Zami/Radio/script.js",
+        "icon": "✨"
+      },
+      {
         "label": "script.js",
         "url": "https://juppijo.github.io/Musik_Zami/script.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Radio/aether-radio-sender.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Radio/aether-radio-sender.json",
         "icon": "✨"
       },
       {
@@ -455,6 +600,146 @@
       {
         "label": "html-teilen.py",
         "url": "https://juppijo.github.io/Musik_Zami/html-teilen.py",
+        "icon": "✨"
+      }
+    ]
+  },
+  {
+    "title": "Rechner",
+    "links": [
+      {
+        "label": "AstroPhysCalc.html",
+        "url": "https://juppijo.github.io/Rechner/AstroPhysCalc.html",
+        "icon": "✨"
+      },
+      {
+        "label": "editor_pro.html",
+        "url": "https://juppijo.github.io/Rechner/editor_pro.html",
+        "icon": "✨"
+      },
+      {
+        "label": "einheiten-rechner-pro.html",
+        "url": "https://juppijo.github.io/Rechner/einheiten-rechner-pro.html",
+        "icon": "✨"
+      },
+      {
+        "label": "einheiten-rechner.html",
+        "url": "https://juppijo.github.io/Rechner/einheiten-rechner.html",
+        "icon": "✨"
+      },
+      {
+        "label": "favorites_dashboard.html",
+        "url": "https://juppijo.github.io/Rechner/favorites_dashboard.html",
+        "icon": "✨"
+      },
+      {
+        "label": "font-editor.html",
+        "url": "https://juppijo.github.io/Rechner/font-editor.html",
+        "icon": "✨"
+      },
+      {
+        "label": "html-fortgeschritten.html",
+        "url": "https://juppijo.github.io/Rechner/html-fortgeschritten.html",
+        "icon": "✨"
+      },
+      {
+        "label": "html-lernen.html",
+        "url": "https://juppijo.github.io/Rechner/html-lernen.html",
+        "icon": "✨"
+      },
+      {
+        "label": "index.html",
+        "url": "https://juppijo.github.io/Rechner/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Luft-Rechner.html",
+        "url": "https://juppijo.github.io/Rechner/Luft-Rechner.html",
+        "icon": "✨"
+      },
+      {
+        "label": "notizen_mobile.html",
+        "url": "https://juppijo.github.io/Rechner/notizen_mobile.html",
+        "icon": "✨"
+      },
+      {
+        "label": "notizen_pro.html",
+        "url": "https://juppijo.github.io/Rechner/notizen_pro.html",
+        "icon": "✨"
+      },
+      {
+        "label": "physcalc_pro.html",
+        "url": "https://juppijo.github.io/Rechner/physcalc_pro.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Rechner_CGTP.html",
+        "url": "https://juppijo.github.io/Rechner/Rechner_CGTP.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Rechner_DS.html",
+        "url": "https://juppijo.github.io/Rechner/Rechner_DS.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Rechner_DS2.html",
+        "url": "https://juppijo.github.io/Rechner/Rechner_DS2.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Rechner_G.html",
+        "url": "https://juppijo.github.io/Rechner/Rechner_G.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Schrift.html",
+        "url": "https://juppijo.github.io/Rechner/Schrift.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZNT-Konstanten.html",
+        "url": "https://juppijo.github.io/Rechner/WRZNT-Konstanten.html",
+        "icon": "✨"
+      },
+      {
+        "label": "favicon.jpg",
+        "url": "https://juppijo.github.io/Rechner/favicon.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "Zami_Calc.jpg",
+        "url": "https://juppijo.github.io/Rechner/Zami_Calc.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "meine-notizen.json",
+        "url": "https://juppijo.github.io/Rechner/meine-notizen.json",
+        "icon": "✨"
+      },
+      {
+        "label": "README.md",
+        "url": "https://juppijo.github.io/Rechner/README.md",
+        "icon": "✨"
+      },
+      {
+        "label": "lumi.png",
+        "url": "https://juppijo.github.io/Rechner/lumi.png",
+        "icon": "✨"
+      },
+      {
+        "label": "html-funsion.py",
+        "url": "https://juppijo.github.io/Rechner/html-funsion.py",
+        "icon": "✨"
+      },
+      {
+        "label": "html-teilen.py",
+        "url": "https://juppijo.github.io/Rechner/html-teilen.py",
+        "icon": "✨"
+      },
+      {
+        "label": "Luminara.ttf",
+        "url": "https://juppijo.github.io/Rechner/Luminara.ttf",
         "icon": "✨"
       }
     ]
@@ -1603,6 +1888,11 @@
         "icon": "✨"
       },
       {
+        "label": "json_editor.html",
+        "url": "https://juppijo.github.io/Zami_Home/json_editor.html",
+        "icon": "✨"
+      },
+      {
         "label": "bild.jpg",
         "url": "https://juppijo.github.io/Zami_Home/bild.jpg",
         "icon": "✨"
@@ -1985,241 +2275,6 @@
       {
         "label": "Steinverlegung/2025-11-17_22-40.png",
         "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/2025-11-17_22-40.png",
-        "icon": "✨"
-      }
-    ]
-  },
-  {
-    "title": "ESP32-S3",
-    "links": [
-      {
-        "label": "GPIO-Control-2/SecretLogin.h",
-        "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control-2/SecretLogin.h",
-        "icon": "✨"
-      },
-      {
-        "label": "esp32_2.html",
-        "url": "https://juppijo.github.io/ESP32-S3/esp32_2.html",
-        "icon": "✨"
-      },
-      {
-        "label": "esp32.html",
-        "url": "https://juppijo.github.io/ESP32-S3/esp32.html",
-        "icon": "✨"
-      },
-      {
-        "label": "GPIO-Control-2/index.html",
-        "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control-2/index.html",
-        "icon": "✨"
-      },
-      {
-        "label": "GPIO-Control-3/index.html",
-        "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control-3/index.html",
-        "icon": "✨"
-      },
-      {
-        "label": "GPIO-Control/index.html",
-        "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control/index.html",
-        "icon": "✨"
-      },
-      {
-        "label": "RGB_LED/index.html",
-        "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/index.html",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT_LaTex.html",
-        "url": "https://juppijo.github.io/ESP32-S3/WRZT_LaTex.html",
-        "icon": "✨"
-      },
-      {
-        "label": "GPIO-Control-2/GPIO2.ino",
-        "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control-2/GPIO2.ino",
-        "icon": "✨"
-      },
-      {
-        "label": "README.md",
-        "url": "https://juppijo.github.io/ESP32-S3/README.md",
-        "icon": "✨"
-      }
-    ]
-  },
-  {
-    "title": "Garten",
-    "links": [
-      {
-        "label": "style.css",
-        "url": "https://juppijo.github.io/Garten/style.css",
-        "icon": "✨"
-      },
-      {
-        "label": "index.html",
-        "url": "https://juppijo.github.io/Garten/index.html",
-        "icon": "✨"
-      },
-      {
-        "label": "bild.jpg",
-        "url": "https://juppijo.github.io/Garten/bild.jpg",
-        "icon": "✨"
-      },
-      {
-        "label": "favicon.jpg",
-        "url": "https://juppijo.github.io/Garten/favicon.jpg",
-        "icon": "✨"
-      },
-      {
-        "label": "script.js",
-        "url": "https://juppijo.github.io/Garten/script.js",
-        "icon": "✨"
-      },
-      {
-        "label": "mein-garten.json",
-        "url": "https://juppijo.github.io/Garten/mein-garten.json",
-        "icon": "✨"
-      },
-      {
-        "label": "README.md",
-        "url": "https://juppijo.github.io/Garten/README.md",
-        "icon": "✨"
-      }
-    ]
-  },
-  {
-    "title": "Rechner",
-    "links": [
-      {
-        "label": "AstroPhysCalc.html",
-        "url": "https://juppijo.github.io/Rechner/AstroPhysCalc.html",
-        "icon": "✨"
-      },
-      {
-        "label": "editor_pro.html",
-        "url": "https://juppijo.github.io/Rechner/editor_pro.html",
-        "icon": "✨"
-      },
-      {
-        "label": "einheiten-rechner-pro.html",
-        "url": "https://juppijo.github.io/Rechner/einheiten-rechner-pro.html",
-        "icon": "✨"
-      },
-      {
-        "label": "einheiten-rechner.html",
-        "url": "https://juppijo.github.io/Rechner/einheiten-rechner.html",
-        "icon": "✨"
-      },
-      {
-        "label": "favorites_dashboard.html",
-        "url": "https://juppijo.github.io/Rechner/favorites_dashboard.html",
-        "icon": "✨"
-      },
-      {
-        "label": "font-editor.html",
-        "url": "https://juppijo.github.io/Rechner/font-editor.html",
-        "icon": "✨"
-      },
-      {
-        "label": "html-fortgeschritten.html",
-        "url": "https://juppijo.github.io/Rechner/html-fortgeschritten.html",
-        "icon": "✨"
-      },
-      {
-        "label": "html-lernen.html",
-        "url": "https://juppijo.github.io/Rechner/html-lernen.html",
-        "icon": "✨"
-      },
-      {
-        "label": "index.html",
-        "url": "https://juppijo.github.io/Rechner/index.html",
-        "icon": "✨"
-      },
-      {
-        "label": "Luft-Rechner.html",
-        "url": "https://juppijo.github.io/Rechner/Luft-Rechner.html",
-        "icon": "✨"
-      },
-      {
-        "label": "notizen_mobile.html",
-        "url": "https://juppijo.github.io/Rechner/notizen_mobile.html",
-        "icon": "✨"
-      },
-      {
-        "label": "notizen_pro.html",
-        "url": "https://juppijo.github.io/Rechner/notizen_pro.html",
-        "icon": "✨"
-      },
-      {
-        "label": "physcalc_pro.html",
-        "url": "https://juppijo.github.io/Rechner/physcalc_pro.html",
-        "icon": "✨"
-      },
-      {
-        "label": "Rechner_CGTP.html",
-        "url": "https://juppijo.github.io/Rechner/Rechner_CGTP.html",
-        "icon": "✨"
-      },
-      {
-        "label": "Rechner_DS.html",
-        "url": "https://juppijo.github.io/Rechner/Rechner_DS.html",
-        "icon": "✨"
-      },
-      {
-        "label": "Rechner_DS2.html",
-        "url": "https://juppijo.github.io/Rechner/Rechner_DS2.html",
-        "icon": "✨"
-      },
-      {
-        "label": "Rechner_G.html",
-        "url": "https://juppijo.github.io/Rechner/Rechner_G.html",
-        "icon": "✨"
-      },
-      {
-        "label": "Schrift.html",
-        "url": "https://juppijo.github.io/Rechner/Schrift.html",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZNT-Konstanten.html",
-        "url": "https://juppijo.github.io/Rechner/WRZNT-Konstanten.html",
-        "icon": "✨"
-      },
-      {
-        "label": "favicon.jpg",
-        "url": "https://juppijo.github.io/Rechner/favicon.jpg",
-        "icon": "✨"
-      },
-      {
-        "label": "Zami_Calc.jpg",
-        "url": "https://juppijo.github.io/Rechner/Zami_Calc.jpg",
-        "icon": "✨"
-      },
-      {
-        "label": "meine-notizen.json",
-        "url": "https://juppijo.github.io/Rechner/meine-notizen.json",
-        "icon": "✨"
-      },
-      {
-        "label": "README.md",
-        "url": "https://juppijo.github.io/Rechner/README.md",
-        "icon": "✨"
-      },
-      {
-        "label": "lumi.png",
-        "url": "https://juppijo.github.io/Rechner/lumi.png",
-        "icon": "✨"
-      },
-      {
-        "label": "html-funsion.py",
-        "url": "https://juppijo.github.io/Rechner/html-funsion.py",
-        "icon": "✨"
-      },
-      {
-        "label": "html-teilen.py",
-        "url": "https://juppijo.github.io/Rechner/html-teilen.py",
-        "icon": "✨"
-      },
-      {
-        "label": "Luminara.ttf",
-        "url": "https://juppijo.github.io/Rechner/Luminara.ttf",
         "icon": "✨"
       }
     ]
