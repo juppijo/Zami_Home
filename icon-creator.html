@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ICON FORGE</title>
+<title>ZAMI ICON FORGE</title>
+<link rel="icon" href="favicon.jpg" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <style>
@@ -361,12 +362,23 @@
     display: flex; flex-direction: column; align-items: center; gap: 8px;
   }
   #reset-btn { margin-top: 4px; }
+
+  .header-img {
+  width: 360px;        /* Breite des Bildes */
+  height: 250px;        /* Höhe des Bildes */
+  object-fit: cover;   /* Verhindert Verzerrung */
+  border-radius: 25%;  /* Macht das Bild rund */
+  border: 2px solid var(--clr-primary); /* Ein feiner Rahmen in der aktuellen Themenfarbe */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  transition: border-color 1s linear; /* Damit der Rahmen mit dem Auto-Hue mitfließt */
+  margin: 30px;
+}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">ICON FORGE <span>// v1.0</span></div>
+  <div class="logo">🖼️ ZAMI ICON FORGE <span>// v1.0</span></div>
   <div class="header-btns">
     <button class="btn sm" id="theme-btn" title="Hell / Dunkel">☀ HELL</button>
     <button class="btn sm" id="fullscreen-btn" title="Vollbild">⛶ VOLLBILD</button>
@@ -377,6 +389,7 @@
   <!-- ── CANVAS ── -->
   <div id="canvas-area">
     <!-- Drop zone (shown when no image) -->
+    <img src="bild.jpg" alt="Zaminia" class="header-img">
     <div id="drop-zone" title="Bild laden">
       <div class="dz-icon">🖼</div>
       <div class="dz-text">BILD LADEN / ABLEGEN</div>
