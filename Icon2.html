@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profi Icon Generator</title>
+    <style>
+        /* CSS Variablen für Theme-Switching */
+        :root {
+            --bg-color: #f0f2f5;
+            --text-color: #1c1e21;
+            --card-bg: #ffffff;
+            --accent-color: #007bff;
+            --border-color: #ddd;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #18191a;
+            --text-color: #e4e6eb;
+            --card-bg: #242526;
+            --accent-color: #4599ff;
+            --border-color: #3e4042;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            border: 1px solid var(--border-color);
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        button, select {
+            padding: 10px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: var(--accent-color);
+            color: white;
+            font-weight: 600;
+            transition: transform 0.1s, opacity 0.2s;
+        }
+
+        select {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        button:hover { opacity: 0.9; transform: translateY(-1px); }
+        button:active { transform: translateY(0); }
+
+        #preview-container {
+            margin: 20px 0;
+            border: 2px dashed var(--accent-color);
+            border-radius: 8px;
+            padding: 20px;
+            background: rgba(0,0,0,0.02);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 150px;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 200px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        input[type="file"] {
+            margin: 15px 0;
+            color: var(--text-color);
+        }
+
+        .hidden-canvas { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Icon Generator</h2>
+    
+    <div class="controls">
+        <button onclick="toggleTheme()">🌓 Dark/Hell</button>
+        <button onclick="toggleFullscreen()">📺 Vollbild</button>
+    </div>
+
+    <hr style="width:100%; border:0; border-top:1px solid var(--border-color); margin: 20px 0;">
+
+    <input type="file" id="imageInput" accept="image/*">
+    
+    <div id="preview-container">
+        <p id="placeholder">Bild hochladen...</p>
+        <img id="preview" style="display:none;">
+    </div>
+
+    <div id="export-area" style="display:none;">
+        <div class="controls">
+            <select id="sizeSelect">
+                <option value="16">16 x 16 px (Favicon)</option>
+                <option value="32" selected>32 x 32 px (Standard)</option>
+                <option value="64">64 x 64 px (Large)</option>
+            </select>
+            <button onclick="downloadIcon()">💾 Speichern als .ico</button>
+        </div>
+    </div>
+</div>
+
+<canvas id="canvas-buffer" class="hidden-canvas"></canvas>
+
+<script>
+    const imageInput = document.getElementById('imageInput');
+    const preview = document.getElementById('preview');
+    const placeholder = document.getElementById('placeholder');
+    const exportArea = document.getElementById('export-area');
+    const canvas = document.getElementById('canvas-buffer');
+    const ctx = canvas.getContext('2d');
+    const sizeSelect = document.getElementById('sizeSelect');
+
+    // 1. Bild einlesen
+    imageInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                preview.src = event.target.result;
+                preview.style.display = 'block';
+                placeholder.style.display = 'none';
+                exportArea.style.display = 'block';
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // 2. ICO-Datei generieren
+    function downloadIcon() {
+        const size = parseInt(sizeSelect.value);
+        canvas.width = size;
+        canvas.height = size;
+
+        // Bild auf Canvas zeichnen (skaliert)
+        ctx.clearRect(0, 0, size, size);
+        ctx.drawImage(preview, 0, 0, size, size);
+        
+        // Als PNG-Blob exportieren und ICO-Header hinzufügen
+        canvas.toBlob((blob) => {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const pngBytes = new Uint8Array(reader.result);
+                
+                // ICO-Header (22 Bytes Struktur)
+                const icoHeader = new Uint8Array([
+                    0, 0,           // Reserved
+                    1, 0,           // Type: 1 = Icon
+                    1, 0,           // Count: 1 Bild
+                    size,           // Width
+                    size,           // Height
+                    0,              // Palette
+                    0,              // Reserved
+                    1, 0,           // Color Planes
+                    32, 0,          // Bits per Pixel
+                    0, 0, 0, 0,     // Größe (wird gleich gesetzt)
+                    0, 0, 0, 0      // Offset (wird gleich gesetzt)
+                ]);
+
+                const dataView = new DataView(icoHeader.buffer);
+                dataView.setUint32(14, pngBytes.length, true); // Dateigröße
+                dataView.setUint32(18, 22, true);              // Offset nach Header
+
+                const icoBlob = new Blob([icoHeader, pngBytes], { type: 'image/x-icon' });
+                const url = URL.createObjectURL(icoBlob);
+                
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `icon_${size}x${size}.ico`;
+                link.click();
+                
+                // Speicher freigeben
+                setTimeout(() => URL.revokeObjectURL(url), 100);
+            };
+            reader.readAsArrayBuffer(blob);
+        }, 'image/png');
+    }
+
+    // 3. Theme-Steuerung
+    function toggleTheme() {
+        const doc = document.documentElement;
+        const theme = doc.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        doc.setAttribute('data-theme', theme);
+    }
+
+    // 4. Vollbild
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
+</script>
+
+</body>
+</html>

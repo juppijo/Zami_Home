@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icon Generator & Viewer</title>
+    <style>
+        /* CSS Variablen für einfaches Theme-Switching */
+        :root {
+            --bg-color: #f4f4f9;
+            --text-color: #333;
+            --card-bg: #ffffff;
+            --accent-color: #4a90e2;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1e1e1e;
+            --text-color: #f4f4f9;
+            --card-bg: #2d2d2d;
+            --accent-color: #72aee6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            transition: background 0.3s ease;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: var(--accent-color);
+            color: white;
+            font-weight: bold;
+            transition: opacity 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        #preview-container {
+            margin-top: 20px;
+            border: 2px dashed var(--accent-color);
+            padding: 10px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+
+        /* Verstecktes Canvas für die Verarbeitung */
+        #canvas-buffer {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="app-container">
+    <h2>Icon Generator</h2>
+    
+    <div class="controls">
+        <button onclick="toggleTheme()">🌓 Dark/Hell</button>
+        <button onclick="toggleFullscreen()">📺 Vollbild</button>
+    </div>
+
+    <input type="file" id="imageInput" accept="image/*">
+    
+    <div id="preview-container">
+        <p id="placeholder">Bild auswählen...</p>
+        <img id="preview" style="display:none;">
+    </div>
+
+    <div class="controls" style="margin-top: 20px;">
+        <button id="downloadBtn" style="display:none;" onclick="downloadIcon()">💾 Als Icon (32x32) speichern</button>
+    </div>
+</div>
+
+<canvas id="canvas-buffer" width="32" height="32"></canvas>
+
+<script>
+    const imageInput = document.getElementById('imageInput');
+    const preview = document.getElementById('preview');
+    const placeholder = document.getElementById('placeholder');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const canvas = document.getElementById('canvas-buffer');
+    const ctx = canvas.getContext('2d');
+
+    // 1. Bild laden und anzeigen
+    imageInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                preview.src = event.target.result;
+                preview.style.display = 'block';
+                placeholder.style.display = 'none';
+                downloadBtn.style.display = 'inline-block';
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // 2. Icon generieren und herunterladen
+    function downloadIcon() {
+        // Das Bild auf das 32x32 Canvas zeichnen
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(preview, 0, 0, 32, 32);
+        
+        // Download-Link erzeugen
+        const link = document.createElement('a');
+        link.download = 'favicon.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    }
+
+    // 3. Dark/Light Mode Umschalter
+    function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', newTheme);
+    }
+
+    // 4. Vollbild Modus
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(err => {
+                alert(`Fehler beim Aktivieren des Vollbildmodus: ${err.message}`);
+            });
+        } else {
+            document.exitFullscreen();
+        }
+    }
+</script>
+
+</body>
+</html>

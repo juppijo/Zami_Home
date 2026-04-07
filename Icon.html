@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profi Icon Generator mit Crop</title>
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --text-color: #1c1e21;
+            --card-bg: #ffffff;
+            --accent-color: #007bff;
+            --border-color: #ddd;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #18191a;
+            --text-color: #e4e6eb;
+            --card-bg: #242526;
+            --accent-color: #4599ff;
+            --border-color: #3e4042;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            border: 1px solid var(--border-color);
+        }
+
+        .controls {
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button, select, input[type="range"] {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        button {
+            background-color: var(--accent-color);
+            color: white;
+            font-weight: bold;
+            border: none;
+        }
+
+        /* Crop Area Styling */
+        #crop-viewport {
+            width: 300px;
+            height: 300px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--accent-color);
+            border-radius: 4px;
+            background: #eee;
+            cursor: move;
+            display: none;
+        }
+
+        #preview-img {
+            position: absolute;
+            user-select: none;
+            touch-action: none;
+        }
+
+        .guide-box {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border: 1px solid rgba(255,255,255,0.5);
+            pointer-events: none;
+            box-shadow: 0 0 0 9999px rgba(0,0,0,0.3);
+        }
+
+        .hidden-canvas { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Icon Generator & Crop</h2>
+    
+    <div class="controls">
+        <button onclick="toggleTheme()">🌓 Theme</button>
+        <button onclick="toggleFullscreen()">📺 Vollbild</button>
+    </div>
+
+    <input type="file" id="imageInput" accept="image/*">
+    
+    <div id="crop-viewport">
+        <img id="preview-img" src="" alt="Vorschau">
+        <div class="guide-box"></div>
+    </div>
+
+    <div id="editor-controls" style="display:none;">
+        <p>Zoom:</p>
+        <input type="range" id="zoomRange" min="0.1" max="3" step="0.01" value="1" style="width: 100%;">
+        
+        <div class="controls" style="margin-top: 20px;">
+            <select id="sizeSelect">
+                <option value="16">16x16 px</option>
+                <option value="32" selected>32x32 px</option>
+                <option value="64">64x64 px</option>
+            </select>
+            <button onclick="downloadIcon()">💾 Als .ico speichern</button>
+        </div>
+    </div>
+</div>
+
+<canvas id="canvas-buffer" class="hidden-canvas"></canvas>
+
+<script>
+    const imageInput = document.getElementById('imageInput');
+    const previewImg = document.getElementById('preview-img');
+    const cropViewport = document.getElementById('crop-viewport');
+    const editorControls = document.getElementById('editor-controls');
+    const zoomRange = document.getElementById('zoomRange');
+    const canvas = document.getElementById('canvas-buffer');
+    const ctx = canvas.getContext('2d');
+
+    let posX = 0, posY = 0, scale = 1;
+    let isDragging = false;
+    let startX, startY;
+
+    // 1. Bild laden
+    imageInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                previewImg.src = event.target.result;
+                cropViewport.style.display = 'block';
+                editorControls.style.display = 'block';
+                // Reset Transformationen
+                posX = 0; posY = 0; scale = 1;
+                zoomRange.value = 1;
+                updateTransform();
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // 2. Drag & Drop Logik
+    cropViewport.addEventListener('mousedown', (e) => { isDragging = true; startX = e.clientX - posX; startY = e.clientY - posY; });
+    window.addEventListener('mouseup', () => isDragging = false);
+    window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        posX = e.clientX - startX;
+        posY = e.clientY - startY;
+        updateTransform();
+    });
+
+    // Zoom Steuerung
+    zoomRange.addEventListener('input', (e) => {
+        scale = parseFloat(e.target.value);
+        updateTransform();
+    });
+
+    function updateTransform() {
+        previewImg.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
+    }
+
+    // 3. Bild zuschneiden und als ICO exportieren
+    function downloadIcon() {
+        const size = parseInt(document.getElementById('sizeSelect').value);
+        canvas.width = size;
+        canvas.height = size;
+
+        // Wir berechnen die Position relativ zur Originalgröße des Bildes
+        const rect = cropViewport.getBoundingClientRect();
+        const imgRect = previewImg.getBoundingClientRect();
+
+        // Verhältnis zwischen Vorschau und echtem Bild berechnen
+        const ratio = previewImg.naturalWidth / imgRect.width;
+
+        const drawX = (rect.left - imgRect.left) * ratio;
+        const drawY = (rect.top - imgRect.top) * ratio;
+        const drawW = rect.width * ratio;
+        const drawH = rect.height * ratio;
+
+        ctx.clearRect(0, 0, size, size);
+        ctx.drawImage(previewImg, drawX, drawY, drawW, drawH, 0, 0, size, size);
+        
+        // Export Logik (wie zuvor)
+        canvas.toBlob((blob) => {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const pngBytes = new Uint8Array(reader.result);
+                const icoHeader = new Uint8Array([
+                    0, 0, 1, 0, 1, 0, size, size, 0, 0, 1, 0, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0
+                ]);
+                const view = new DataView(icoHeader.buffer);
+                view.setUint32(14, pngBytes.length, true);
+                view.setUint32(18, 22, true);
+
+                const icoBlob = new Blob([icoHeader, pngBytes], { type: 'image/x-icon' });
+                const url = URL.createObjectURL(icoBlob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `icon_${size}x${size}.ico`;
+                link.click();
+                setTimeout(() => URL.revokeObjectURL(url), 100);
+            };
+            reader.readAsArrayBuffer(blob);
+        }, 'image/png');
+    }
+
+    // UI Hilfsfunktionen
+    function toggleTheme() {
+        const doc = document.documentElement;
+        doc.setAttribute('data-theme', doc.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    }
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+        else document.exitFullscreen();
+    }
+</script>
+
+</body>
+</html>
