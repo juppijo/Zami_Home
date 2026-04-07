@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICON FORGE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #0e0e10;
+    --surface:  #17171b;
+    --panel:    #1f1f26;
+    --border:   #2e2e3a;
+    --accent:   #f5a623;
+    --accent2:  #e05c00;
+    --text:     #e8e8ee;
+    --muted:    #6b6b80;
+    --danger:   #e05c5c;
+    --radius:   4px;
+  }
+  [data-theme="light"] {
+    --bg:       #f0ede8;
+    --surface:  #faf8f5;
+    --panel:    #edeae4;
+    --border:   #d0ccc4;
+    --text:     #1a1a1e;
+    --muted:    #8a8578;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Barlow Condensed', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background .25s, color .25s;
+    overflow: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 52px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+    gap: 12px;
+  }
+  .logo {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.25rem;
+    letter-spacing: .12em;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .logo span { color: var(--muted); font-size: .85rem; }
+  .header-btns { display: flex; gap: 8px; align-items: center; }
+
+  /* ── BUTTON BASE ── */
+  .btn {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: .85rem;
+    letter-spacing: .08em;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--text);
+    cursor: pointer;
+    border-radius: var(--radius);
+    transition: background .15s, border-color .15s, color .15s, transform .1s;
+    white-space: nowrap;
+  }
+  .btn:hover { background: var(--border); border-color: var(--muted); }
+  .btn:active { transform: scale(.97); }
+  .btn.accent { background: var(--accent); color: #111; border-color: var(--accent); }
+  .btn.accent:hover { background: var(--accent2); border-color: var(--accent2); color: #fff; }
+  .btn.sm { padding: 4px 10px; font-size: .78rem; }
+  .btn.danger { border-color: var(--danger); color: var(--danger); }
+  .btn.danger:hover { background: var(--danger); color: #fff; }
+  .btn[disabled] { opacity: .35; pointer-events: none; }
+
+  /* ── LAYOUT ── */
+  main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    overflow: hidden;
+  }
+
+  /* ── CANVAS AREA ── */
+  #canvas-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    padding: 20px;
+  }
+
+  #drop-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 4/3;
+    border: 2px dashed var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+    position: relative;
+    overflow: hidden;
+  }
+  #drop-zone:hover, #drop-zone.drag-over {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 5%, transparent);
+  }
+  #drop-zone .dz-icon {
+    font-size: 3.5rem;
+    line-height: 1;
+    filter: opacity(.25);
+  }
+  #drop-zone .dz-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: .06em;
+    color: var(--muted);
+  }
+  #drop-zone .dz-sub {
+    font-size: .8rem;
+    color: var(--muted);
+    opacity: .6;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  /* Crop wrapper */
+  #crop-wrapper {
+    display: none;
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    max-height: calc(100vh - 200px);
+    overflow: hidden;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: #000;
+    cursor: crosshair;
+    user-select: none;
+    touch-action: none;
+  }
+  #source-img {
+    display: block;
+    max-width: 100%;
+    max-height: calc(100vh - 200px);
+    pointer-events: none;
+    user-select: none;
+  }
+  #crop-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  /* Dimmer */
+  .crop-dim {
+    position: absolute;
+    background: rgba(0,0,0,.6);
+    pointer-events: none;
+  }
+  /* Selection box */
+  #crop-box {
+    position: absolute;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 0 9999px rgba(0,0,0,.55);
+    pointer-events: none;
+    display: none;
+  }
+  #crop-box::before, #crop-box::after {
+    content:''; position:absolute; background: var(--accent);
+  }
+  /* Corner handles */
+  .ch {
+    position: absolute;
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .ch-tl { top: -5px; left: -5px; cursor: nw-resize; pointer-events: all; }
+  .ch-tr { top: -5px; right: -5px; cursor: ne-resize; pointer-events: all; }
+  .ch-bl { bottom: -5px; left: -5px; cursor: sw-resize; pointer-events: all; }
+  .ch-br { bottom: -5px; right: -5px; cursor: se-resize; pointer-events: all; }
+  /* Rule-of-thirds */
+  .rot { position: absolute; background: rgba(255,255,255,.15); }
+
+  /* Canvas hint */
+  #canvas-hint {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: .75rem;
+    color: var(--muted);
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: .05em;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  #canvas-hint.show { opacity: 1; }
+
+  /* ── SIDEBAR ── */
+  #sidebar {
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .sb-section {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sb-section:last-child { border-bottom: none; }
+  .sb-title {
+    font-size: .7rem;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: .15em;
+    color: var(--muted);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  /* Size presets */
+  .size-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+  .size-btn {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: .75rem;
+    padding: 7px 4px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--text);
+    border-radius: var(--radius);
+    cursor: pointer;
+    text-align: center;
+    transition: all .15s;
+  }
+  .size-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .size-btn.active { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 15%, transparent); color: var(--accent); }
+
+  /* Custom size */
+  .custom-size {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-top: 4px;
+  }
+  .custom-size input {
+    width: 60px;
+    padding: 5px 8px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: var(--radius);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: .8rem;
+    text-align: center;
+  }
+  .custom-size input:focus { outline: none; border-color: var(--accent); }
+  .custom-size span { color: var(--muted); font-size: .85rem; }
+
+  /* Preview */
+  #preview-container {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    min-height: 80px;
+    justify-content: center;
+  }
+  .preview-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .preview-item canvas {
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: repeating-conic-gradient(#444 0% 25%, #333 0% 50%) 0 0 / 10px 10px;
+    image-rendering: pixelated;
+  }
+  [data-theme="light"] .preview-item canvas {
+    background: repeating-conic-gradient(#ccc 0% 25%, #e8e8e8 0% 50%) 0 0 / 10px 10px;
+  }
+  .preview-label {
+    font-size: .65rem;
+    color: var(--muted);
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  /* Export buttons */
+  .export-btns { display: flex; flex-direction: column; gap: 8px; }
+  .export-row { display: flex; gap: 8px; }
+  .export-row .btn { flex: 1; }
+
+  /* Crop info */
+  #crop-info {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: .7rem;
+    color: var(--muted);
+    margin-top: 6px;
+    min-height: 1.2em;
+  }
+
+  /* ── TOOLBAR ── */
+  #toolbar {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 10px 20px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+    flex-wrap: wrap;
+  }
+  #toolbar .sep { width: 1px; height: 22px; background: var(--border); margin: 0 4px; }
+
+  /* Aspect lock */
+  .toggle-wrap { display: flex; align-items: center; gap: 6px; }
+  .toggle-wrap label { font-size: .8rem; color: var(--muted); cursor: pointer; }
+  input[type="checkbox"] { accent-color: var(--accent); width: 14px; height: 14px; cursor: pointer; }
+
+  /* ── FULLSCREEN ── */
+  :fullscreen body, :-webkit-full-screen body { overflow: auto; }
+  :fullscreen main, :-webkit-full-screen main { height: calc(100vh - 52px - 52px); }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  #file-input { display: none; }
+
+  .no-image-msg {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+  }
+  #reset-btn { margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">ICON FORGE <span>// v1.0</span></div>
+  <div class="header-btns">
+    <button class="btn sm" id="theme-btn" title="Hell / Dunkel">☀ HELL</button>
+    <button class="btn sm" id="fullscreen-btn" title="Vollbild">⛶ VOLLBILD</button>
+  </div>
+</header>
+
+<main>
+  <!-- ── CANVAS ── -->
+  <div id="canvas-area">
+    <!-- Drop zone (shown when no image) -->
+    <div id="drop-zone" title="Bild laden">
+      <div class="dz-icon">🖼</div>
+      <div class="dz-text">BILD LADEN / ABLEGEN</div>
+      <div class="dz-sub">PNG · JPG · WEBP · GIF · BMP</div>
+      <input type="file" id="file-input" accept="image/*">
+    </div>
+    <!-- Crop area (shown when image loaded) -->
+    <div id="crop-wrapper">
+      <img id="source-img" alt="Quelle">
+      <div id="crop-box">
+        <div class="ch ch-tl" data-handle="tl"></div>
+        <div class="ch ch-tr" data-handle="tr"></div>
+        <div class="ch ch-bl" data-handle="bl"></div>
+        <div class="ch ch-br" data-handle="br"></div>
+        <!-- rule of thirds -->
+        <div class="rot" style="left:33.3%;top:0;width:1px;height:100%"></div>
+        <div class="rot" style="left:66.6%;top:0;width:1px;height:100%"></div>
+        <div class="rot" style="top:33.3%;left:0;height:1px;width:100%"></div>
+        <div class="rot" style="top:66.6%;left:0;height:1px;width:100%"></div>
+      </div>
+    </div>
+    <div id="canvas-hint">↖ Ziehe um Bereich auszuwählen</div>
+  </div>
+
+  <!-- ── SIDEBAR ── -->
+  <aside id="sidebar">
+
+    <div class="sb-section">
+      <div class="sb-title">AKTIONEN</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn sm accent" id="load-btn">📂 LADEN</button>
+        <button class="btn sm" id="reset-btn" disabled>✕ ZURÜCK</button>
+        <button class="btn sm" id="crop-apply-btn" disabled>✂ ZUSCHNEIDEN</button>
+      </div>
+      <div id="crop-info">— Kein Bild geladen —</div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-title">ICON GRÖSSE</div>
+      <div class="size-grid" id="size-grid">
+        <div class="size-btn active" data-size="16">16×16</div>
+        <div class="size-btn" data-size="32">32×32</div>
+        <div class="size-btn" data-size="48">48×48</div>
+        <div class="size-btn" data-size="64">64×64</div>
+        <div class="size-btn" data-size="96">96×96</div>
+        <div class="size-btn" data-size="128">128×128</div>
+        <div class="size-btn" data-size="180">180×180</div>
+        <div class="size-btn" data-size="256">256×256</div>
+      </div>
+      <div class="custom-size">
+        <input type="number" id="custom-w" placeholder="W" min="1" max="512">
+        <span>×</span>
+        <input type="number" id="custom-h" placeholder="H" min="1" max="512">
+        <button class="btn sm" id="custom-apply">OK</button>
+      </div>
+      <div class="toggle-wrap" style="margin-top:8px">
+        <input type="checkbox" id="lock-aspect" checked>
+        <label for="lock-aspect">Seitenverhältnis sperren (quadrat)</label>
+      </div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-title">VORSCHAU</div>
+      <div id="preview-container"><span style="color:var(--muted);font-size:.75rem;font-family:'Share Tech Mono',monospace">— leer —</span></div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-title">EXPORTIEREN</div>
+      <div class="export-btns">
+        <div class="export-row">
+          <button class="btn accent" id="save-png" disabled>⬇ PNG</button>
+          <button class="btn" id="save-ico" disabled>⬇ ICO</button>
+        </div>
+        <button class="btn" id="save-all-ico" disabled>⬇ ICO (Multi: 16/32/48/256)</button>
+      </div>
+    </div>
+
+  </aside>
+</main>
+
+<!-- ── TOOLBAR ── -->
+<div id="toolbar">
+  <button class="btn sm" id="select-all-btn" disabled>⊞ Alles auswählen</button>
+  <div class="sep"></div>
+  <button class="btn sm" id="crop-square-btn" disabled>□ Quadrat (Mitte)</button>
+  <button class="btn sm" id="crop-reset-btn" disabled>↺ Auswahl zurücksetzen</button>
+  <div class="sep"></div>
+  <span style="font-size:.75rem;color:var(--muted);font-family:'Share Tech Mono',monospace" id="status-bar">bereit.</span>
+</div>
+
+<canvas id="work-canvas" style="display:none"></canvas>
+
+<script>
+/* ═══════════════════════════════════════════════════
+   ICON FORGE — core logic
+═══════════════════════════════════════════════════ */
+
+const $ = id => document.getElementById(id);
+
+// State
+let imgOriginal = null;
+let imgDisplayed = null; // current (cropped or original)
+let crop = null;         // {x,y,w,h} in display px
+let selectedSize = 16;
+
+// ── Theme ──
+const themeBtn = $('theme-btn');
+themeBtn.addEventListener('click', () => {
+  const t = document.documentElement.getAttribute('data-theme');
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'light' : 'dark');
+  themeBtn.textContent = t === 'dark' ? '🌙 DUNKEL' : '☀ HELL';
+});
+
+// ── Fullscreen ──
+$('fullscreen-btn').addEventListener('click', () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+    $('fullscreen-btn').textContent = '✕ VOLLBILD';
+  } else {
+    document.exitFullscreen();
+    $('fullscreen-btn').textContent = '⛶ VOLLBILD';
+  }
+});
+document.addEventListener('fullscreenchange', () => {
+  if (!document.fullscreenElement) $('fullscreen-btn').textContent = '⛶ VOLLBILD';
+});
+
+// ── File loading ──
+const fileInput = $('file-input');
+const dropZone  = $('drop-zone');
+
+$('load-btn').addEventListener('click', () => fileInput.click());
+dropZone.addEventListener('click', () => fileInput.click());
+
+fileInput.addEventListener('change', e => {
+  if (e.target.files[0]) loadFile(e.target.files[0]);
+});
+
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropZone.classList.remove('drag-over');
+  if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+});
+
+// Paste
+document.addEventListener('paste', e => {
+  const item = [...e.clipboardData.items].find(i => i.type.startsWith('image/'));
+  if (item) loadFile(item.getAsFile());
+});
+
+function loadFile(file) {
+  if (!file || !file.type.startsWith('image/')) return setStatus('⚠ Keine gültige Bilddatei');
+  const url = URL.createObjectURL(file);
+  const img = new Image();
+  img.onload = () => {
+    imgOriginal = img;
+    imgDisplayed = img;
+    crop = null;
+    showImage(img);
+    setStatus(`Geladen: ${img.naturalWidth}×${img.naturalHeight}px`);
+    updatePreview();
+    enableButtons(true);
+  };
+  img.src = url;
+}
+
+function showImage(img) {
+  dropZone.style.display = 'none';
+  const wrapper = $('crop-wrapper');
+  wrapper.style.display = 'block';
+  const srcImg = $('source-img');
+  srcImg.src = img.src;
+  srcImg.onload = () => {
+    hideCropBox();
+    $('canvas-hint').classList.add('show');
+    setTimeout(() => $('canvas-hint').classList.remove('show'), 2500);
+  };
+}
+
+function enableButtons(on) {
+  [$('reset-btn'), $('crop-apply-btn'), $('save-png'), $('save-ico'),
+   $('save-all-ico'), $('select-all-btn'), $('crop-square-btn'), $('crop-reset-btn')]
+    .forEach(b => b.disabled = !on);
+  if (!on) { $('crop-apply-btn').disabled = true; }
+}
+
+// ── Reset ──
+$('reset-btn').addEventListener('click', () => {
+  dropZone.style.display = '';
+  $('crop-wrapper').style.display = 'none';
+  imgOriginal = imgDisplayed = null;
+  crop = null;
+  hideCropBox();
+  clearPreview();
+  enableButtons(false);
+  $('reset-btn').disabled = true;
+  $('crop-info').textContent = '— Kein Bild geladen —';
+  setStatus('bereit.');
+  fileInput.value = '';
+});
+
+// ══════════════════════════════════════════════
+// CROP  (mouse + touch)
+// ══════════════════════════════════════════════
+const cropWrapper = $('crop-wrapper');
+const cropBox     = $('crop-box');
+const sourceImg   = $('source-img');
+
+let dragging = false;
+let dragMode = null; // 'new', 'tl','tr','bl','br', 'move'
+let dragStart = {x:0,y:0};
+let cropRect  = null; // {x,y,w,h} in display px
+
+function getWrapperRect() { return cropWrapper.getBoundingClientRect(); }
+function clamp(v,a,b) { return Math.max(a, Math.min(b, v)); }
+function clientToLocal(cx, cy) {
+  const r = getWrapperRect();
+  return { x: cx - r.left, y: cy - r.top };
+}
+
+function startDrag(e) {
+  if (!imgDisplayed) return;
+  const handle = e.target.dataset?.handle;
+  const {x,y} = clientToLocal(
+    e.touches ? e.touches[0].clientX : e.clientX,
+    e.touches ? e.touches[0].clientY : e.clientY
+  );
+  if (handle) {
+    dragMode = handle;
+  } else if (cropRect && isInsideCropBox(x, y)) {
+    dragMode = 'move';
+  } else {
+    dragMode = 'new';
+    cropRect = {x, y, w:0, h:0};
+  }
+  dragStart = {x, y, ox: cropRect?.x??x, oy: cropRect?.y??y,
+               ow: cropRect?.w??0, oh: cropRect?.h??0};
+  dragging = true;
+  e.preventDefault();
+}
+
+function isInsideCropBox(x, y) {
+  if (!cropRect) return false;
+  const {x:bx,y:by,w:bw,h:bh} = normRect(cropRect);
+  return x>=bx && x<=bx+bw && y>=by && y<=by+bh;
+}
+
+function moveDrag(e) {
+  if (!dragging || !cropRect) return;
+  const {x,y} = clientToLocal(
+    e.touches ? e.touches[0].clientX : e.clientX,
+    e.touches ? e.touches[0].clientY : e.clientY
+  );
+  const W = sourceImg.offsetWidth, H = sourceImg.offsetHeight;
+  const dx = x - dragStart.x, dy = y - dragStart.y;
+
+  if (dragMode === 'new') {
+    cropRect.w = clamp(x,0,W) - cropRect.x;
+    cropRect.h = clamp(y,0,H) - cropRect.y;
+  } else if (dragMode === 'move') {
+    const nr = normRect({x:dragStart.ox,y:dragStart.oy,w:dragStart.ow,h:dragStart.oh});
+    let nx = nr.x + dx, ny = nr.y + dy;
+    nx = clamp(nx, 0, W - nr.w);
+    ny = clamp(ny, 0, H - nr.h);
+    cropRect = {x:nx,y:ny,w:nr.w,h:nr.h};
+  } else {
+    // handle resize
+    let nr = normRect({x:dragStart.ox,y:dragStart.oy,w:dragStart.ow,h:dragStart.oh});
+    if (dragMode==='tl') { nr.w-=dx; nr.h-=dy; nr.x+=dx; nr.y+=dy; }
+    if (dragMode==='tr') { nr.w+=dx; nr.h-=dy; nr.y+=dy; }
+    if (dragMode==='bl') { nr.w-=dx; nr.h+=dy; nr.x+=dx; }
+    if (dragMode==='br') { nr.w+=dx; nr.h+=dy; }
+    cropRect = {x: clamp(nr.x,0,W-1), y: clamp(nr.y,0,H-1),
+                w: clamp(nr.w,1,W-nr.x), h: clamp(nr.h,1,H-nr.y)};
+  }
+  drawCropBox();
+  updateCropInfo();
+  e.preventDefault();
+}
+
+function endDrag(e) {
+  if (!dragging) return;
+  dragging = false;
+  if (cropRect) {
+    const nr = normRect(cropRect);
+    if (nr.w < 4 || nr.h < 4) { cropRect = null; hideCropBox(); }
+    else { cropRect = nr; drawCropBox(); updateCropInfo(); }
+  }
+}
+
+cropWrapper.addEventListener('mousedown',  startDrag);
+cropWrapper.addEventListener('touchstart', startDrag, {passive:false});
+window.addEventListener('mousemove',  moveDrag);
+window.addEventListener('touchmove',  moveDrag, {passive:false});
+window.addEventListener('mouseup',    endDrag);
+window.addEventListener('touchend',   endDrag);
+
+// Handles get their own drag start
+cropBox.querySelectorAll('.ch').forEach(h => {
+  h.addEventListener('mousedown', e => { e.stopPropagation(); startDrag(e); });
+});
+
+function normRect(r) {
+  let {x,y,w,h} = r;
+  if (w<0) { x+=w; w=-w; }
+  if (h<0) { y+=h; h=-h; }
+  return {x,y,w,h};
+}
+
+function drawCropBox() {
+  if (!cropRect) return;
+  const nr = normRect(cropRect);
+  cropBox.style.left   = nr.x + 'px';
+  cropBox.style.top    = nr.y + 'px';
+  cropBox.style.width  = nr.w + 'px';
+  cropBox.style.height = nr.h + 'px';
+  cropBox.style.display = 'block';
+}
+
+function hideCropBox() {
+  cropBox.style.display = 'none';
+  cropRect = null;
+}
+
+function updateCropInfo() {
+  if (!cropRect || !imgDisplayed) return;
+  const nr = normRect(cropRect);
+  // Scale to original image coords
+  const scaleX = imgDisplayed.naturalWidth  / sourceImg.offsetWidth;
+  const scaleY = imgDisplayed.naturalHeight / sourceImg.offsetHeight;
+  const ox = Math.round(nr.x * scaleX), oy = Math.round(nr.y * scaleY);
+  const ow = Math.round(nr.w * scaleX), oh = Math.round(nr.h * scaleY);
+  $('crop-info').textContent = `${ox},${oy}  ${ow}×${oh}px`;
+}
+
+// ── Apply crop ──
+$('crop-apply-btn').addEventListener('click', () => {
+  if (!cropRect || !imgDisplayed) return;
+  const nr = normRect(cropRect);
+  const scaleX = imgDisplayed.naturalWidth  / sourceImg.offsetWidth;
+  const scaleY = imgDisplayed.naturalHeight / sourceImg.offsetHeight;
+  const ox = nr.x * scaleX, oy = nr.y * scaleY;
+  const ow = nr.w * scaleX, oh = nr.h * scaleY;
+
+  const c = document.createElement('canvas');
+  c.width = ow; c.height = oh;
+  c.getContext('2d').drawImage(imgDisplayed, ox,oy,ow,oh, 0,0,ow,oh);
+  const newImg = new Image();
+  newImg.onload = () => {
+    imgDisplayed = newImg;
+    sourceImg.src = newImg.src;
+    hideCropBox();
+    setStatus(`Zugeschnitten: ${Math.round(ow)}×${Math.round(oh)}px`);
+    $('crop-info').textContent = `${Math.round(ow)}×${Math.round(oh)}px`;
+    updatePreview();
+  };
+  newImg.src = c.toDataURL();
+});
+
+// ── Toolbar helpers ──
+$('select-all-btn').addEventListener('click', () => {
+  if (!imgDisplayed) return;
+  cropRect = {x:0,y:0,w:sourceImg.offsetWidth,h:sourceImg.offsetHeight};
+  drawCropBox();
+  updateCropInfo();
+});
+
+$('crop-square-btn').addEventListener('click', () => {
+  if (!imgDisplayed) return;
+  const W = sourceImg.offsetWidth, H = sourceImg.offsetHeight;
+  const s = Math.min(W,H);
+  cropRect = {x:(W-s)/2,y:(H-s)/2,w:s,h:s};
+  drawCropBox();
+  updateCropInfo();
+});
+
+$('crop-reset-btn').addEventListener('click', () => {
+  hideCropBox();
+  if (imgOriginal && imgDisplayed !== imgOriginal) {
+    imgDisplayed = imgOriginal;
+    sourceImg.src = imgOriginal.src;
+    setStatus('Zurückgesetzt auf Original.');
+    updatePreview();
+  }
+});
+
+// ══════════════════════════════════════════════
+// SIZE SELECTION
+// ══════════════════════════════════════════════
+document.querySelectorAll('.size-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedSize = parseInt(btn.dataset.size);
+    $('custom-w').value = ''; $('custom-h').value = '';
+    updatePreview();
+  });
+});
+
+$('custom-apply').addEventListener('click', () => {
+  const w = parseInt($('custom-w').value)||selectedSize;
+  const h = parseInt($('custom-h').value)||selectedSize;
+  const lock = $('lock-aspect').checked;
+  selectedSize = lock ? Math.max(w,h) : w;
+  document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+  updatePreview();
+  setStatus(`Benutzerdefiniert: ${w}×${h}px`);
+});
+
+$('lock-aspect').addEventListener('change', () => {
+  $('custom-h').disabled = $('lock-aspect').checked;
+  if ($('lock-aspect').checked && $('custom-w').value)
+    $('custom-h').value = $('custom-w').value;
+});
+
+$('custom-w').addEventListener('input', () => {
+  if ($('lock-aspect').checked) $('custom-h').value = $('custom-w').value;
+});
+
+// ══════════════════════════════════════════════
+// PREVIEW
+// ══════════════════════════════════════════════
+function renderIcon(size) {
+  if (!imgDisplayed) return null;
+  const c = document.createElement('canvas');
+  c.width = size; c.height = size;
+  const ctx = c.getContext('2d');
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(imgDisplayed, 0,0,size,size);
+  return c;
+}
+
+function updatePreview() {
+  const pc = $('preview-container');
+  pc.innerHTML = '';
+  if (!imgDisplayed) { pc.innerHTML = '<span style="color:var(--muted);font-size:.75rem;font-family:\'Share Tech Mono\',monospace">— leer —</span>'; return; }
+  const sizes = [16,32,48,selectedSize].filter((v,i,a)=>a.indexOf(v)===i).sort((a,b)=>a-b);
+  sizes.forEach(s => {
+    const c = renderIcon(s);
+    if (!c) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'preview-item';
+    c.style.width  = Math.min(s,64)+'px';
+    c.style.height = Math.min(s,64)+'px';
+    wrap.appendChild(c);
+    const lbl = document.createElement('div');
+    lbl.className = 'preview-label';
+    lbl.textContent = `${s}px`;
+    wrap.appendChild(lbl);
+    pc.appendChild(wrap);
+  });
+}
+
+function clearPreview() {
+  $('preview-container').innerHTML = '<span style="color:var(--muted);font-size:.75rem;font-family:\'Share Tech Mono\',monospace">— leer —</span>';
+}
+
+// ══════════════════════════════════════════════
+// EXPORT
+// ══════════════════════════════════════════════
+
+// PNG
+$('save-png').addEventListener('click', () => {
+  if (!imgDisplayed) return;
+  const c = renderIcon(selectedSize);
+  c.toBlob(blob => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `icon_${selectedSize}x${selectedSize}.png`;
+    a.click();
+    setStatus(`PNG gespeichert: ${selectedSize}×${selectedSize}px`);
+  }, 'image/png');
+});
+
+// Single ICO (BMP-based)
+$('save-ico').addEventListener('click', () => {
+  if (!imgDisplayed) return;
+  const size = selectedSize <= 256 ? selectedSize : 256;
+  const blob = createIcoBlob([size]);
+  downloadBlob(blob, `icon_${size}x${size}.ico`);
+  setStatus(`ICO gespeichert: ${size}×${size}px`);
+});
+
+// Multi ICO
+$('save-all-ico').addEventListener('click', () => {
+  if (!imgDisplayed) return;
+  const blob = createIcoBlob([16,32,48,256]);
+  downloadBlob(blob, 'icon_multi.ico');
+  setStatus('Multi-ICO gespeichert: 16/32/48/256px');
+});
+
+function downloadBlob(blob, name) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  a.click();
+}
+
+/* ── ICO writer ──
+   ICO format: header + directory entries + BMP data (32bpp ARGB)
+*/
+function createIcoBlob(sizes) {
+  const images = sizes.map(s => renderIconBMP(s));
+  const count  = images.length;
+
+  // ICO header: 6 bytes
+  // Dir entry:  16 bytes each
+  // Images follow
+  const headerSize = 6 + count * 16;
+  let offset = headerSize;
+  const parts = [];
+
+  // Header
+  const hdr = new DataView(new ArrayBuffer(6));
+  hdr.setUint16(0, 0, true);  // reserved
+  hdr.setUint16(2, 1, true);  // type: icon
+  hdr.setUint16(4, count, true);
+  parts.push(hdr.buffer);
+
+  // Directory entries
+  images.forEach((img, i) => {
+    const entry = new DataView(new ArrayBuffer(16));
+    const s = sizes[i];
+    entry.setUint8(0, s >= 256 ? 0 : s);   // width (0 = 256)
+    entry.setUint8(1, s >= 256 ? 0 : s);   // height
+    entry.setUint8(2, 0);                   // color count
+    entry.setUint8(3, 0);                   // reserved
+    entry.setUint16(4, 1, true);            // color planes
+    entry.setUint16(6, 32, true);           // bits per pixel
+    entry.setUint32(8, img.byteLength, true);
+    entry.setUint32(12, offset, true);
+    offset += img.byteLength;
+    parts.push(entry.buffer);
+  });
+
+  // Image data
+  images.forEach(img => parts.push(img));
+
+  return new Blob(parts, {type: 'image/x-icon'});
+}
+
+function renderIconBMP(size) {
+  // Draw image to canvas
+  const c = renderIcon(size);
+  const ctx = c.getContext('2d');
+  const imgData = ctx.getImageData(0, 0, size, size);
+  const pixels  = imgData.data; // RGBA
+
+  // BMP info header (40 bytes) + pixel data
+  // For ICO: height is doubled in header (for XOR + AND mask)
+  const rowBytes = size * 4;
+  const dataSize = rowBytes * size;
+  const buf = new ArrayBuffer(40 + dataSize);
+  const dv  = new DataView(buf);
+
+  // BITMAPINFOHEADER
+  dv.setUint32(0,  40, true);          // header size
+  dv.setInt32 (4,  size, true);        // width
+  dv.setInt32 (8,  size * 2, true);    // height (×2 for ICO)
+  dv.setUint16(12, 1, true);           // planes
+  dv.setUint16(14, 32, true);          // bit count
+  dv.setUint32(16, 0, true);           // compression
+  dv.setUint32(20, dataSize, true);    // image size
+  dv.setInt32 (24, 0, true);           // X ppm
+  dv.setInt32 (28, 0, true);           // Y ppm
+  dv.setUint32(32, 0, true);           // colors used
+  dv.setUint32(36, 0, true);           // colors important
+
+  // Pixel data: bottom-up, BGRA
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
+      const si = ((size - 1 - y) * size + x) * 4; // flip Y
+      const di = 40 + (y * size + x) * 4;
+      dv.setUint8(di,     pixels[si+2]); // B
+      dv.setUint8(di + 1, pixels[si+1]); // G
+      dv.setUint8(di + 2, pixels[si]);   // R
+      dv.setUint8(di + 3, pixels[si+3]); // A
+    }
+  }
+  return buf;
+}
+
+function setStatus(msg) {
+  $('status-bar').textContent = msg;
+}
+
+// ── Init ──
+setStatus('bereit. — Bild laden oder ablegen.');
+</script>
+</body>
+</html>
