@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>PhotoVault</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ═══════════════════ HEADER ═══════════════════ -->
+  <header class="header">
+    <div class="header-logo">
+      <svg class="logo-hex" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="16,2 29,9 29,23 16,30 3,23 3,9" fill="none" stroke="currentColor" stroke-width="2"/>
+        <text x="16" y="21" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">PV</text>
+      </svg>
+      <span class="logo-text">PHOTO<strong>VAULT</strong></span>
+    </div>
+
+    <div class="header-search">
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 20 20"><circle cx="8" cy="8" r="5" fill="none" stroke="currentColor" stroke-width="1.8"/><line x1="12" y1="12" x2="18" y2="18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <input type="text" id="searchInput" placeholder="Dateiname, Notiz oder Verzeichnis …" autocomplete="off" spellcheck="false">
+        <button class="search-clear" id="searchClear" title="Löschen">✕</button>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button class="icon-btn" id="themeToggle" title="Hell / Dunkel wechseln" aria-label="Theme wechseln">
+        <svg id="themeIconDark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg id="themeIconLight" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="icon-btn" id="sidebarToggleBtn" title="Sidebar ein-/ausblenden" aria-label="Sidebar umschalten">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+      </button>
+      <label class="open-btn" for="dirInput" title="Verzeichnis öffnen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        <span>Öffnen</span>
+      </label>
+      <input type="file" id="dirInput" webkitdirectory multiple accept="image/jpeg,image/jpg,image/png,image/webp,image/gif" style="display:none">
+    </div>
+  </header>
+
+  <!-- ═══════════════════ LAYOUT ═══════════════════ -->
+  <div class="layout" id="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-inner">
+        <div class="sidebar-head">
+          <span class="sidebar-label">VERZEICHNISSE</span>
+          <span class="dir-count" id="dirCount"></span>
+        </div>
+        <nav class="dir-list" id="dirList">
+          <div class="placeholder-msg">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40"><path d="M6 40V14a2 2 0 0 1 2-2h9l3 4h20a2 2 0 0 1 2 2v22a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2z"/></svg>
+            <p>Noch kein Verzeichnis<br>geladen</p>
+          </div>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- MAIN GALLERY -->
+    <main class="main" id="main">
+
+      <div class="toolbar" id="toolbar" style="display:none">
+        <div class="breadcrumb" id="breadcrumb"></div>
+        <div class="toolbar-right">
+          <span class="img-count" id="imgCount"></span>
+          <div class="size-slider-wrap" title="Thumbnail-Größe">
+            <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor" opacity=".5"><rect x="1" y="4" width="6" height="6" rx="1"/></svg>
+            <input type="range" id="sizeSlider" min="100" max="400" value="200" class="size-slider">
+            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" opacity=".5"><rect x="1" y="2" width="10" height="10" rx="1"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-wrap">
+        <div class="gallery" id="gallery">
+
+          <!-- Welcome screen shown on startup -->
+          <div class="welcome" id="welcome">
+            <div class="welcome-hex">
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="40,5 72,22.5 72,57.5 40,75 8,57.5 8,22.5" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"/>
+                <polygon points="40,15 62,27.5 62,52.5 40,65 18,52.5 18,27.5" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".2"/>
+                <text x="40" y="46" text-anchor="middle" font-size="20" font-weight="800" fill="currentColor" opacity=".6" font-family="Syne">PV</text>
+              </svg>
+            </div>
+            <h1>PhotoVault</h1>
+            <p>Wähle ein Hauptverzeichnis mit Unterordnern und JPG-Bildern.<br>Alle Fotos werden als Vorschaubilder angezeigt.</p>
+            <label class="welcome-btn" for="dirInput">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+              Verzeichnis öffnen
+            </label>
+          </div>
+
+          <!-- Grid filled by JS -->
+          <div class="thumb-grid" id="thumbGrid" style="display:none"></div>
+
+          <!-- Empty folder state -->
+          <div class="empty-dir" id="emptyDir" style="display:none">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48" opacity=".3"><path d="M6 40V14a2 2 0 0 1 2-2h9l3 4h20a2 2 0 0 1 2 2v22a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2z"/><line x1="16" y1="28" x2="32" y2="28" opacity=".5"/></svg>
+            <p>Keine Bilder in diesem Verzeichnis</p>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ═══════════════════ LIGHTBOX ═══════════════════ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Bild-Vollansicht">
+    <div class="lb-backdrop" id="lbBackdrop"></div>
+    <div class="lb-stage">
+      <button class="lb-close" id="lbClose" title="Schließen (Esc)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <button class="lb-nav lb-prev" id="lbPrev" title="Vorheriges (←)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg>
+      </button>
+      <button class="lb-nav lb-next" id="lbNext" title="Nächstes (→)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg>
+      </button>
+
+      <div class="lb-image-area">
+        <img src="" alt="" id="lbImg" class="lb-img" draggable="false">
+      </div>
+
+      <div class="lb-panel" id="lbPanel">
+        <div class="lb-meta">
+          <span class="lb-fname" id="lbFname"></span>
+          <span class="lb-fpath" id="lbFpath"></span>
+          <span class="lb-fsize" id="lbFsize"></span>
+          <span class="lb-counter" id="lbCounter"></span>
+        </div>
+        <div class="lb-note-area">
+          <label class="note-label" for="lbNoteInput">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="13"><path d="M2 2h8l4 4v8H2z"/><line x1="5" y1="8" x2="11" y2="8"/><line x1="5" y1="11" x2="9" y2="11"/></svg>
+            Notiz
+          </label>
+          <textarea id="lbNoteInput" class="lb-note" placeholder="Kurze Beschreibung, Stichwörter …" rows="3" spellcheck="false"></textarea>
+          <button class="note-save-btn" id="noteSaveBtn">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="13"><path d="M13 2H3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5l-3-3z"/><polyline points="9,2 9,6 3,6"/><rect x="5" y="10" width="6" height="4" rx=".5"/></svg>
+            Speichern
+          </button>
+          <span class="note-saved" id="noteSaved">✓ Gespeichert</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ STATUS TOAST ═══════════════════ -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
