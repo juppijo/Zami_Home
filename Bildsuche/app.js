@@ -157,8 +157,9 @@ async function startUrlLoad() {
     baseUrl = url;
     dirMap.clear();
 
+    const visited = new Set();   // ← verhindert Doppel-Requests
     setProgress(10, `Lese: ${url}`);
-    await fetchDirRecursive(url, url, 0);
+    await fetchDirRecursive(url, url, 0, visited);
     setProgress(95, 'Verzeichnisstruktur aufgebaut …');
 
     if (dirMap.size === 0) {
@@ -193,73 +194,99 @@ function setProgress(pct, text) {
 }
 
 /* ── Rekursives Einlesen des Verzeichnis-Listings ── */
-async function fetchDirRecursive(url, rootUrl, depth) {
-  if (depth > 8) return;   // Sicherheitslimit: max 8 Ebenen tief
+async function fetchDirRecursive(url, rootUrl, depth, visited) {
+  if (depth > 10) return;                 // max. Tiefenlimit
+
+  // URL normalisieren (trailing slash, kein Fragment/Query)
+  const normUrl = normalizeUrl(url);
+  if (!normUrl) return;
+
+  // Bereits besucht? → Abbruch (verhindert Endlosschleifen & Duplikate)
+  if (visited.has(normUrl)) return;
+  visited.add(normUrl);
 
   let html;
   try {
-    const res = await fetch(url, { mode: 'cors' });
-    if (!res.ok) throw new Error(`HTTP ${res.status} bei ${url}`);
+    const res = await fetch(normUrl, { mode: 'cors' });
+    if (!res.ok) throw new Error(`HTTP ${res.status} bei ${normUrl}`);
     html = await res.text();
   } catch (e) {
-    if (depth === 0) throw e;  // Nur auf Root-Ebene wirft es weiter
+    if (depth === 0) throw e;   // Root-Fehler nach oben weiterwerfen
     return;
   }
 
-  const parser  = new DOMParser();
-  const doc     = parser.parseFromString(html, 'text/html');
-  const links   = Array.from(doc.querySelectorAll('a[href]'));
+  const parser = new DOMParser();
+  const doc    = parser.parseFromString(html, 'text/html');
+  const links  = Array.from(doc.querySelectorAll('a[href]'));
 
   const subDirs = [];
   const images  = [];
 
   for (const a of links) {
-    const href = a.getAttribute('href');
-    if (!href || href.startsWith('?') || href.startsWith('/..') ||
-        href === '../' || href === './' || href === '/') continue;
+    const raw = a.getAttribute('href');
+    if (!raw) continue;
 
-    // Absolute URL bauen
+    // Query-Strings (Sortierspalten), Anker, Parent-Links überspringen
+    if (raw.startsWith('?') || raw.startsWith('#') ||
+        raw === '../' || raw === './' || raw === '/' ||
+        raw.startsWith('javascript:')) continue;
+
+    // Absolute URL bauen und normalisieren
     let full;
-    try {
-      full = new URL(href, url).href;
-    } catch { continue; }
+    try { full = normalizeUrl(new URL(raw, normUrl).href); }
+    catch { continue; }
+    if (!full) continue;
 
-    // Nur unterhalb von rootUrl akzeptieren (kein Aufsteigen)
+    // Strikt nur unterhalb von rootUrl erlauben
     if (!full.startsWith(rootUrl)) continue;
 
-    if (href.endsWith('/')) {
+    // Bereits besucht?
+    if (visited.has(full)) continue;
+
+    if (full.endsWith('/')) {
       subDirs.push(full);
-    } else if (IMAGE_EXTS.test(href)) {
-      images.push({ href, full });
+    } else if (IMAGE_EXTS.test(full.split('/').pop().split('?')[0])) {
+      images.push(full);
     }
   }
 
-  // Bilder registrieren
+  // Bilder dieses Verzeichnisses registrieren
   if (images.length > 0) {
-    const dirPath = url === rootUrl ? '(Wurzel)' : url.replace(rootUrl, '').replace(/\/$/, '');
-    if (!dirMap.has(url)) dirMap.set(url, []);
-    for (const img of images) {
-      dirMap.get(url).push({
-        name  : decodeURIComponent(img.href.split('/').pop()),
-        url   : img.full,
+    if (!dirMap.has(normUrl)) dirMap.set(normUrl, []);
+    for (const imgUrl of images) {
+      const fname = decodeURIComponent(imgUrl.split('/').pop().split('?')[0]);
+      dirMap.get(normUrl).push({
+        name  : fname,
+        url   : imgUrl,
         file  : null,
         size  : null,
-        path  : img.full,
+        path  : imgUrl,
         isUrl : true
       });
     }
   }
 
-  // Unterverzeichnisse rekursiv einlesen
-  const label = url.replace(rootUrl, '').replace(/\/$/, '') || '…';
+  // Fortschritt & Unterverzeichnisse
+  const label = decodeURIComponent(normUrl.replace(rootUrl, '').replace(/\/$/, '')) || '/';
   setProgress(
-    Math.min(10 + depth * 12, 85),
-    `Lese Unterordner (${depth + 1}): ${label || url}`
+    Math.min(12 + depth * 10, 88),
+    `Ordner ${visited.size}: ${label}`
   );
 
   for (const sub of subDirs) {
-    await fetchDirRecursive(sub, rootUrl, depth + 1);
+    await fetchDirRecursive(sub, rootUrl, depth + 1, visited);
   }
+}
+
+/* URL normalisieren: trailing slash erzwingen bei Verzeichnissen,
+   Fragment und Query entfernen */
+function normalizeUrl(raw) {
+  try {
+    const u = new URL(raw);
+    u.search = '';
+    u.hash   = '';
+    return u.href;
+  } catch { return null; }
 }
 
 /* ── Zuletzt genutzte URLs ── */
