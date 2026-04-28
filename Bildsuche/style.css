@@ -670,3 +670,38 @@ input, textarea { font-family: inherit; }
 
 /* thumb-skeleton done state */
 .thumb-skeleton.done { display: none; }
+
+/* ── URL Progress row mit Stop-Button ── */
+.url-progress-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.url-progress-row span {
+  font-size: 11.5px;
+  color: var(--text-2);
+  font-family: var(--mono);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.url-stop-btn {
+  display: none;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  background: var(--danger);
+  color: #fff;
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: var(--radius);
+  flex-shrink: 0;
+  transition: opacity var(--ease), transform .1s;
+  letter-spacing: .04em;
+}
+.url-stop-btn:hover  { opacity: .85; }
+.url-stop-btn:active { transform: scale(.95); }

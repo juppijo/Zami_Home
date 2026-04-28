@@ -110,7 +110,13 @@
         <div class="url-recents" id="urlRecents"></div>
         <div class="url-progress" id="urlProgress" style="display:none">
           <div class="url-progress-track"><div class="url-progress-fill" id="urlProgressFill"></div></div>
-          <span id="urlProgressText">Verbinde …</span>
+          <div class="url-progress-row">
+            <span id="urlProgressText">Verbinde …</span>
+            <button class="url-stop-btn" id="urlStopBtn" title="Laden stoppen und bisherige Ergebnisse anzeigen">
+              <svg viewBox="0 0 16 16" fill="currentColor" width="10" height="10"><rect x="3" y="3" width="10" height="10" rx="1"/></svg>
+              Stopp
+            </button>
+          </div>
         </div>
         <div class="url-error" id="urlError" style="display:none"></div>
         <details class="url-cors-help">

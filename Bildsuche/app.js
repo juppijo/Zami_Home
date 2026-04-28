@@ -38,6 +38,7 @@ const urlRecents       = $('urlRecents');
 const urlProgress      = $('urlProgress');
 const urlProgressFill  = $('urlProgressFill');
 const urlProgressText  = $('urlProgressText');
+const urlStopBtn       = $('urlStopBtn');
 const urlError         = $('urlError');
 const welcomeUrlBtn    = $('welcomeUrlBtn');
 const lightbox         = $('lightbox');
@@ -127,6 +128,8 @@ function loadLocalFiles(files) {
    URL-LADEN (Apache / Nginx directory listing)
 ═════════════════════════════════════════════════════ */
 
+let crawlAbort = null;   // aktueller AbortController
+
 /* ── Modal öffnen / schließen ── */
 function openUrlModal()  { urlModal.classList.add('open'); renderRecents(); urlInput.focus(); }
 function closeUrlModal() { urlModal.classList.remove('open'); }
@@ -135,9 +138,15 @@ urlOpenBtn.addEventListener('click', openUrlModal);
 welcomeUrlBtn.addEventListener('click', openUrlModal);
 urlModalClose.addEventListener('click', closeUrlModal);
 urlModalBackdrop.addEventListener('click', closeUrlModal);
-
 urlInput.addEventListener('keydown', e => { if (e.key === 'Enter') startUrlLoad(); });
 urlLoadBtn.addEventListener('click', startUrlLoad);
+
+/* ── STOPP-Button ── */
+urlStopBtn.addEventListener('click', () => {
+  if (crawlAbort) {
+    crawlAbort.abort('user_stop');
+  }
+});
 
 /* ── URL-Laden Hauptfunktion ── */
 async function startUrlLoad() {
@@ -146,26 +155,53 @@ async function startUrlLoad() {
   if (!url.endsWith('/')) url += '/';
   if (!/^https?:\/\//i.test(url)) url = 'http://' + url;
 
-  urlError.style.display    = 'none';
-  urlProgress.style.display = 'flex';
-  urlProgressFill.style.width = '5%';
-  urlProgressText.textContent = 'Verbinde …';
-  urlLoadBtn.disabled = true;
+  // Laufenden Crawl abbrechen
+  if (crawlAbort) crawlAbort.abort('restart');
+  crawlAbort = new AbortController();
+  const signal = crawlAbort.signal;
+
+  urlError.style.display       = 'none';
+  urlProgress.style.display    = 'flex';
+  urlProgressFill.style.width  = '5%';
+  urlProgressText.textContent  = 'Verbinde …';
+  urlLoadBtn.disabled          = true;
+  urlStopBtn.style.display     = 'inline-flex';
+
+  mode    = 'url';
+  baseUrl = url;
+  dirMap.clear();
+
+  let stopped = false;
 
   try {
-    mode    = 'url';
-    baseUrl = url;
-    dirMap.clear();
+    setProgress(8, `Verbinde: ${url}`);
+    await crawlDir(url, url, signal);
+    setProgress(100, 'Fertig');
 
-    const visited = new Set();   // ← verhindert Doppel-Requests
-    setProgress(10, `Lese: ${url}`);
-    await fetchDirRecursive(url, url, 0, visited);
-    setProgress(95, 'Verzeichnisstruktur aufgebaut …');
-
-    if (dirMap.size === 0) {
-      throw new Error('Keine Bilder gefunden. Bitte URL und CORS-Einstellungen prüfen.');
+  } catch (err) {
+    if (signal.aborted) {
+      stopped = true;
+      // Kein echter Fehler — nur Stopp durch Nutzer
+    } else {
+      urlError.textContent   = `⚠ ${err.message}`;
+      urlError.style.display = 'block';
     }
+  }
 
+  urlLoadBtn.disabled      = false;
+  urlStopBtn.style.display = 'none';
+  urlProgress.style.display = 'none';
+  crawlAbort = null;
+
+  const total = [...dirMap.values()].reduce((s, a) => s + a.length, 0);
+
+  if (total === 0 && !stopped) {
+    urlError.textContent   = '⚠ Keine Bilder gefunden. Bitte URL und CORS-Einstellungen prüfen.';
+    urlError.style.display = 'block';
+    return;
+  }
+
+  if (total > 0) {
     saveRecent(url);
     buildTree();
     renderSidebar();
@@ -174,112 +210,115 @@ async function startUrlLoad() {
     const first = dirTree[0]?.path;
     if (first) selectDir(first);
 
-    const total = [...dirMap.values()].reduce((s, a) => s + a.length, 0);
-    showToast(`${total} Bild${total === 1 ? '' : 'er'} von ${url} geladen.`);
-    setProgress(100, 'Fertig');
-
-  } catch (err) {
-    urlError.textContent  = `⚠ ${err.message}`;
-    urlError.style.display = 'block';
-    setProgress(0, '');
-    urlProgress.style.display = 'none';
-  } finally {
-    urlLoadBtn.disabled = false;
+    const hint = stopped ? ' (gestoppt, Teilergebnis)' : '';
+    showToast(`${total} Bild${total === 1 ? '' : 'er'} in ${dirMap.size} Ordner${hint}`);
   }
 }
 
 function setProgress(pct, text) {
-  urlProgressFill.style.width  = pct + '%';
-  urlProgressText.textContent  = text;
+  urlProgressFill.style.width = pct + '%';
+  urlProgressText.textContent = text;
 }
 
-/* ── Rekursives Einlesen des Verzeichnis-Listings ── */
-async function fetchDirRecursive(url, rootUrl, depth, visited) {
-  if (depth > 10) return;                 // max. Tiefenlimit
+/* ── Iterativer BFS-Crawler (kein Rekursions-Stack) ── */
+async function crawlDir(rootUrl, startUrl, signal) {
+  // BFS-Queue statt Rekursion → kein Call-Stack-Überlauf, sauberere Kontrolle
+  const visited = new Set();
+  const queue   = [startUrl];
+  let   fetched = 0;
 
-  // URL normalisieren (trailing slash, kein Fragment/Query)
-  const normUrl = normalizeUrl(url);
-  if (!normUrl) return;
+  while (queue.length > 0) {
+    // Abbruch-Signal prüfen
+    if (signal.aborted) throw new DOMException('Stopped', 'AbortError');
 
-  // Bereits besucht? → Abbruch (verhindert Endlosschleifen & Duplikate)
-  if (visited.has(normUrl)) return;
-  visited.add(normUrl);
+    const url = queue.shift();
+    const norm = normalizeUrl(url);
+    if (!norm || visited.has(norm)) continue;
+    visited.add(norm);
 
-  let html;
-  try {
-    const res = await fetch(normUrl, { mode: 'cors' });
-    if (!res.ok) throw new Error(`HTTP ${res.status} bei ${normUrl}`);
-    html = await res.text();
-  } catch (e) {
-    if (depth === 0) throw e;   // Root-Fehler nach oben weiterwerfen
-    return;
-  }
-
-  const parser = new DOMParser();
-  const doc    = parser.parseFromString(html, 'text/html');
-  const links  = Array.from(doc.querySelectorAll('a[href]'));
-
-  const subDirs = [];
-  const images  = [];
-
-  for (const a of links) {
-    const raw = a.getAttribute('href');
-    if (!raw) continue;
-
-    // Query-Strings (Sortierspalten), Anker, Parent-Links überspringen
-    if (raw.startsWith('?') || raw.startsWith('#') ||
-        raw === '../' || raw === './' || raw === '/' ||
-        raw.startsWith('javascript:')) continue;
-
-    // Absolute URL bauen und normalisieren
-    let full;
-    try { full = normalizeUrl(new URL(raw, normUrl).href); }
-    catch { continue; }
-    if (!full) continue;
-
-    // Strikt nur unterhalb von rootUrl erlauben
-    if (!full.startsWith(rootUrl)) continue;
-
-    // Bereits besucht?
-    if (visited.has(full)) continue;
-
-    if (full.endsWith('/')) {
-      subDirs.push(full);
-    } else if (IMAGE_EXTS.test(full.split('/').pop().split('?')[0])) {
-      images.push(full);
+    // Fetch mit Timeout (10 s)
+    let html;
+    try {
+      const ctrl = new AbortController();
+      const tid  = setTimeout(() => ctrl.abort(), 10000);
+      // Beide Signale kombinieren: globaler Stopp ODER Timeout
+      const combined = anyAbort([signal, ctrl.signal]);
+      const res = await fetch(norm, { mode: 'cors', signal: combined });
+      clearTimeout(tid);
+      if (!res.ok) { fetched++; continue; }
+      html = await res.text();
+    } catch (e) {
+      if (signal.aborted) throw e;   // globaler Stopp → weiterwerfen
+      fetched++;
+      continue;   // Timeout oder Netzwerkfehler → diesen Ordner überspringen
     }
-  }
 
-  // Bilder dieses Verzeichnisses registrieren
-  if (images.length > 0) {
-    if (!dirMap.has(normUrl)) dirMap.set(normUrl, []);
-    for (const imgUrl of images) {
-      const fname = decodeURIComponent(imgUrl.split('/').pop().split('?')[0]);
-      dirMap.get(normUrl).push({
-        name  : fname,
-        url   : imgUrl,
-        file  : null,
-        size  : null,
-        path  : imgUrl,
-        isUrl : true
-      });
+    fetched++;
+
+    // HTML parsen
+    const doc   = new DOMParser().parseFromString(html, 'text/html');
+    const links = Array.from(doc.querySelectorAll('a[href]'));
+
+    const imgs = [];
+    for (const a of links) {
+      const raw = a.getAttribute('href');
+      if (!raw) continue;
+
+      // Apache-Sortierspalten, Anker, Parent überspringen
+      if (raw.startsWith('?') || raw.startsWith('#') ||
+          raw === '../' || raw === './' || raw === '/' ||
+          raw.startsWith('javascript:') || raw.includes('://') && !raw.startsWith(rootUrl))
+        continue;
+
+      let full;
+      try { full = normalizeUrl(new URL(raw, norm).href); }
+      catch { continue; }
+      if (!full || !full.startsWith(rootUrl) || visited.has(full)) continue;
+
+      const fname = full.split('/').pop().split('?')[0];
+      if (full.endsWith('/')) {
+        queue.push(full);           // Unterordner in die Queue
+      } else if (fname && IMAGE_EXTS.test(fname)) {
+        imgs.push(full);
+      }
     }
-  }
 
-  // Fortschritt & Unterverzeichnisse
-  const label = decodeURIComponent(normUrl.replace(rootUrl, '').replace(/\/$/, '')) || '/';
-  setProgress(
-    Math.min(12 + depth * 10, 88),
-    `Ordner ${visited.size}: ${label}`
-  );
+    // Bilder registrieren
+    if (imgs.length > 0) {
+      if (!dirMap.has(norm)) dirMap.set(norm, []);
+      for (const imgUrl of imgs) {
+        dirMap.get(norm).push({
+          name  : decodeURIComponent(imgUrl.split('/').pop().split('?')[0]),
+          url   : imgUrl,
+          file  : null,
+          size  : null,
+          path  : imgUrl,
+          isUrl : true
+        });
+      }
+    }
 
-  for (const sub of subDirs) {
-    await fetchDirRecursive(sub, rootUrl, depth + 1, visited);
+    // Fortschritt anzeigen
+    const label = decodeURIComponent(norm.replace(rootUrl, '').replace(/\/$/, '')) || '/';
+    const total = [...dirMap.values()].reduce((s, a) => s + a.length, 0);
+    const pct   = Math.min(8 + fetched * 4, 92);
+    setProgress(pct,
+      `Ordner ${fetched} | ${total} Bilder | Warteschlange: ${queue.length} — ${label}`
+    );
   }
 }
 
-/* URL normalisieren: trailing slash erzwingen bei Verzeichnissen,
-   Fragment und Query entfernen */
+/* Hilfsfunktion: AbortSignal der zuerst abbricht gewinnt */
+function anyAbort(signals) {
+  const ctrl = new AbortController();
+  for (const s of signals) {
+    if (s.aborted) { ctrl.abort(); break; }
+    s.addEventListener('abort', () => ctrl.abort(), { once: true });
+  }
+  return ctrl.signal;
+}
+
+/* URL normalisieren: Query + Fragment entfernen */
 function normalizeUrl(raw) {
   try {
     const u = new URL(raw);
