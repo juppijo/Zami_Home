@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML → DOCX Converter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css">
+<style>
+:root {
+  --bg: #090c14;
+  --panel: #0f1420;
+  --surface: #141927;
+  --border: #1e2640;
+  --border2: #252e48;
+  --accent: #00c8ff;
+  --accent2: #ff5f40;
+  --accent3: #7c5cfc;
+  --text: #c8d4e8;
+  --text-dim: #4a5878;
+  --text-mid: #7a8aaa;
+  --toolbar-h: 54px;
+  --header-h: 34px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--text);font-family:'Exo 2',sans-serif;display:flex;flex-direction:column}
+
+/* ── TOOLBAR ── */
+#toolbar{
+  height:var(--toolbar-h);background:var(--panel);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;padding:0 14px;gap:8px;flex-shrink:0;
+  position:relative;z-index:10;
+}
+#toolbar::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),var(--accent3),transparent);
+  opacity:0.4;
+}
+.logo{
+  display:flex;align-items:baseline;gap:4px;
+  font-weight:800;font-size:15px;letter-spacing:1px;white-space:nowrap;
+}
+.logo-html{color:var(--accent)}
+.logo-arrow{color:var(--text-dim);font-size:12px;margin:0 2px}
+.logo-docx{color:var(--accent2)}
+.logo-sub{font-size:9px;letter-spacing:3px;color:var(--text-dim);text-transform:uppercase;margin-left:6px;align-self:center}
+.tsep{width:1px;height:22px;background:var(--border2);flex-shrink:0}
+.tsp{flex:1}
+.tbtn{
+  background:transparent;border:1px solid var(--border2);color:var(--text-mid);
+  padding:5px 13px;border-radius:5px;font-family:'Exo 2',sans-serif;
+  font-size:12px;font-weight:600;cursor:pointer;letter-spacing:.5px;
+  transition:all .15s;white-space:nowrap;
+}
+.tbtn:hover{border-color:var(--accent);color:var(--accent)}
+.tbtn.active{border-color:var(--accent3);color:var(--accent3);background:rgba(124,92,252,.08)}
+.tbtn.primary{
+  background:linear-gradient(135deg,var(--accent),var(--accent3));
+  border-color:transparent;color:#000;font-weight:700;letter-spacing:.8px;
+}
+.tbtn.primary:hover{opacity:.85;transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,200,255,.25)}
+#status{font-size:11px;font-family:'Fira Code',monospace;color:var(--text-dim);min-width:120px;text-align:right}
+
+/* ── MAIN ── */
+#main{flex:1;display:flex;overflow:hidden}
+
+/* ── PANEL HEADERS ── */
+.panel-hdr{
+  height:var(--header-h);background:var(--surface);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;padding:0 12px;gap:8px;flex-shrink:0;
+}
+.panel-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim)}
+.panel-badge{
+  background:var(--border2);border-radius:3px;font-size:10px;font-family:'Fira Code',monospace;
+  color:var(--text-mid);padding:1px 6px;
+}
+
+/* ── EDITOR ── */
+#ed-panel{display:flex;flex-direction:column;overflow:hidden;width:46%;min-width:200px;border-right:1px solid var(--border)}
+.CodeMirror{
+  height:100%!important;font-family:'Fira Code',monospace!important;
+  font-size:13px!important;line-height:1.65!important;background:var(--bg)!important;
+}
+.CodeMirror-scroll{padding:6px 0}
+.CodeMirror-gutters{background:var(--panel)!important;border-right:1px solid var(--border)!important}
+.CodeMirror-linenumber{color:var(--text-dim)!important;font-size:11px}
+#ed-panel .cm-wrap{flex:1;overflow:hidden}
+
+/* ── PREVIEW ── */
+#pv-panel{flex:1;display:flex;flex-direction:column;overflow:hidden;border-right:1px solid var(--border)}
+#preview-iframe{width:100%;flex:1;border:none;background:#fff}
+
+/* ── STYLE PANEL ── */
+#st-panel{
+  width:0;overflow:hidden;background:var(--panel);
+  transition:width .22s cubic-bezier(.4,0,.2,1);flex-shrink:0;
+  display:flex;flex-direction:column;
+}
+#st-panel.open{width:290px}
+#st-header{height:var(--header-h);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 12px;gap:8px;flex-shrink:0}
+#st-scroll{flex:1;overflow-y:auto;padding:12px}
+#st-scroll::-webkit-scrollbar{width:4px}
+#st-scroll::-webkit-scrollbar-track{background:transparent}
+#st-scroll::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+
+.sg{margin-bottom:18px}
+.sg-title{
+  font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:10px;padding-bottom:6px;
+  border-bottom:1px solid var(--border);
+}
+.sr{display:flex;align-items:center;margin-bottom:7px;gap:6px}
+.sl{font-size:11px;color:var(--text-mid);white-space:nowrap;min-width:88px}
+.sc{flex:1;min-width:0}
+.sc select,.sc input[type=text]{
+  width:100%;background:var(--bg);border:1px solid var(--border2);
+  color:var(--text);padding:4px 8px;border-radius:4px;font-size:11px;
+  font-family:'Exo 2',sans-serif;outline:none;
+}
+.sc select:focus,.sc input[type=text]:focus{border-color:var(--accent)}
+.sc input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
+.sc input[type=color]{
+  width:100%;height:26px;border:1px solid var(--border2);border-radius:4px;
+  padding:2px;background:var(--bg);cursor:pointer;
+}
+.sv{font-size:10px;font-family:'Fira Code',monospace;color:var(--text-dim);min-width:38px;text-align:right}
+.preset-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:2px}
+.preset-btn{
+  background:var(--bg);border:1px solid var(--border2);color:var(--text-mid);
+  padding:5px 8px;border-radius:4px;font-size:10px;font-weight:600;
+  font-family:'Exo 2',sans-serif;letter-spacing:.5px;cursor:pointer;
+  transition:all .13s;text-align:center;
+}
+.preset-btn:hover{border-color:var(--accent3);color:var(--accent3)}
+
+/* ── RESIZER ── */
+.rz{width:5px;cursor:col-resize;background:transparent;flex-shrink:0;transition:background .15s}
+.rz:hover,.rz.dragging{background:rgba(0,200,255,.25)}
+
+/* ── LOADING ── */
+#loading{
+  position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(4px);
+  display:none;align-items:center;justify-content:center;z-index:100;
+}
+.loading-box{
+  background:var(--panel);border:1px solid var(--accent);border-radius:12px;
+  padding:36px 56px;text-align:center;
+  box-shadow:0 0 60px rgba(0,200,255,.15);
+}
+.loading-box h3{
+  color:var(--accent);font-size:13px;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:8px;
+}
+.loading-box p{color:var(--text-dim);font-size:11px;font-family:'Fira Code',monospace}
+.ld-bar{
+  width:180px;height:2px;background:var(--border);border-radius:1px;
+  margin:16px auto 0;overflow:hidden;
+}
+.ld-bar-inner{
+  height:100%;background:linear-gradient(90deg,var(--accent),var(--accent3));
+  border-radius:1px;animation:ldanim 1.4s ease-in-out infinite;
+  transform-origin:left;
+}
+@keyframes ldanim{0%{transform:scaleX(0) translateX(0)}50%{transform:scaleX(1) translateX(0)}100%{transform:scaleX(0) translateX(200%)}
+}
+
+/* ── SCROLLBAR (global) ── */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--text-dim)}
+</style>
+</head>
+<body>
+
+<div id="toolbar">
+  <div class="logo">
+    <span class="logo-html">HTML</span>
+    <span class="logo-arrow">⟶</span>
+    <span class="logo-docx">DOCX</span>
+    <span class="logo-sub">Converter</span>
+  </div>
+  <div class="tsep"></div>
+  <button class="tbtn" id="btn-format" title="HTML formatieren (Alt+F)">⌥ Format</button>
+  <button class="tbtn" id="btn-sample" title="Beispiel laden">📄 Beispiel</button>
+  <button class="tbtn" id="btn-clear" title="Editor leeren">🗑 Leeren</button>
+  <div class="tsep"></div>
+  <button class="tbtn" id="btn-style" title="Style-Panel öffnen/schließen">⚙ Stile</button>
+  <div class="tsp"></div>
+  <span id="status"></span>
+  <button class="tbtn primary" id="btn-export">⬇&nbsp; DOCX Exportieren</button>
+</div>
+
+<div id="main">
+  <!-- EDITOR -->
+  <div id="ed-panel">
+    <div class="panel-hdr">
+      <span class="panel-title">HTML Editor</span>
+      <span class="panel-badge" id="char-count">0 Zeichen</span>
+    </div>
+    <textarea id="code-editor"></textarea>
+  </div>
+  <div class="rz" id="rz1"></div>
+
+  <!-- PREVIEW -->
+  <div id="pv-panel">
+    <div class="panel-hdr">
+      <span class="panel-title">Live Vorschau</span>
+      <span class="panel-badge">KaTeX • LaTeX</span>
+    </div>
+    <iframe id="preview-iframe" sandbox="allow-scripts allow-same-origin"></iframe>
+  </div>
+
+  <!-- STYLE PANEL -->
+  <div id="st-panel">
+    <div id="st-header">
+      <span class="panel-title">Stil-Editor</span>
+    </div>
+    <div id="st-scroll">
+
+      <div class="sg">
+        <div class="sg-title">Vorlagen</div>
+        <div class="preset-grid">
+          <button class="preset-btn" onclick="applyPreset('academic')">📚 Akademisch</button>
+          <button class="preset-btn" onclick="applyPreset('modern')">✦ Modern</button>
+          <button class="preset-btn" onclick="applyPreset('minimal')">○ Minimal</button>
+          <button class="preset-btn" onclick="applyPreset('dark')">◆ Dunkel</button>
+          <button class="preset-btn" onclick="applyPreset('elegant')">✦ Elegant</button>
+          <button class="preset-btn" onclick="applyPreset('technical')">⌥ Technical</button>
+        </div>
+      </div>
+
+      <div class="sg">
+        <div class="sg-title">Schrift</div>
+        <div class="sr">
+          <span class="sl">Schriftart</span>
+          <div class="sc">
+            <select id="s-font">
+              <option value="Georgia,'Times New Roman',serif">Georgia (Serif)</option>
+              <option value="'Palatino Linotype',Palatino,serif">Palatino</option>
+              <option value="'Times New Roman',Times,serif">Times New Roman</option>
+              <option value="Garamond,'EB Garamond',serif">Garamond</option>
+              <option value="Arial,Helvetica,sans-serif" selected>Arial (Sans)</option>
+              <option value="'Helvetica Neue',Helvetica,sans-serif">Helvetica Neue</option>
+              <option value="'Segoe UI',Tahoma,sans-serif">Segoe UI</option>
+              <option value="Calibri,sans-serif">Calibri</option>
+              <option value="'Courier New',Courier,monospace">Courier New</option>
+            </select>
+          </div>
+        </div>
+        <div class="sr">
+          <span class="sl">Größe</span>
+          <div class="sc"><input type="range" id="s-size" min="12" max="22" value="16" oninput="updateVal('s-size','s-size-v','px')"></div>
+          <span class="sv" id="s-size-v">16px</span>
+        </div>
+        <div class="sr">
+          <span class="sl">Zeilenabstand</span>
+          <div class="sc"><input type="range" id="s-lh" min="1.2" max="2.5" step="0.05" value="1.7" oninput="updateVal('s-lh','s-lh-v','')"></div>
+          <span class="sv" id="s-lh-v">1.7</span>
+        </div>
+      </div>
+
+      <div class="sg">
+        <div class="sg-title">Farben</div>
+        <div class="sr"><span class="sl">Seite BG</span><div class="sc"><input type="color" id="s-pagebg" value="#ffffff" oninput="schedulePreview()"></div></div>
+        <div class="sr"><span class="sl">Textfarbe</span><div class="sc"><input type="color" id="s-color" value="#1a1a2e" oninput="schedulePreview()"></div></div>
+        <div class="sr"><span class="sl">H1 Farbe</span><div class="sc"><input type="color" id="s-h1c" value="#0d0d1a" oninput="schedulePreview()"></div></div>
+        <div class="sr"><span class="sl">H2 Farbe</span><div class="sc"><input type="color" id="s-h2c" value="#1a2d6e" oninput="schedulePreview()"></div></div>
+        <div class="sr"><span class="sl">H3 Farbe</span><div class="sc"><input type="color" id="s-h3c" value="#2d3d8e" oninput="schedulePreview()"></div></div>
+        <div class="sr"><span class="sl">Links</span><div class="sc"><input type="color" id="s-linkc" value="#1565c0" oninput="schedulePreview()"></div></div>
+        <div class="sr"><span class="sl">Code BG</span><div class="sc"><input type="color" id="s-codebg" value="#f0f4f8" oninput="schedulePreview()"></div></div>
+        <div class="sr"><span class="sl">Tabellen-TH</span><div class="sc"><input type="color" id="s-thbg" value="#e4ecf7" oninput="schedulePreview()"></div></div>
+        <div class="sr"><span class="sl">Akzent-Linie</span><div class="sc"><input type="color" id="s-accent" value="#1565c0" oninput="schedulePreview()"></div></div>
+      </div>
+
+      <div class="sg">
+        <div class="sg-title">Überschriften</div>
+        <div class="sr">
+          <span class="sl">H1 Größe</span>
+          <div class="sc"><input type="range" id="s-h1s" min="18" max="52" value="32" oninput="updateVal('s-h1s','s-h1s-v','px')"></div>
+          <span class="sv" id="s-h1s-v">32px</span>
+        </div>
+        <div class="sr">
+          <span class="sl">H2 Größe</span>
+          <div class="sc"><input type="range" id="s-h2s" min="14" max="40" value="24" oninput="updateVal('s-h2s','s-h2s-v','px')"></div>
+          <span class="sv" id="s-h2s-v">24px</span>
+        </div>
+        <div class="sr">
+          <span class="sl">H3 Größe</span>
+          <div class="sc"><input type="range" id="s-h3s" min="12" max="32" value="20" oninput="updateVal('s-h3s','s-h3s-v','px')"></div>
+          <span class="sv" id="s-h3s-v">20px</span>
+        </div>
+      </div>
+
+      <div class="sg">
+        <div class="sg-title">Layout</div>
+        <div class="sr">
+          <span class="sl">Max. Breite</span>
+          <div class="sc"><input type="range" id="s-mw" min="400" max="1200" step="20" value="820" oninput="updateVal('s-mw','s-mw-v','px')"></div>
+          <span class="sv" id="s-mw-v">820px</span>
+        </div>
+        <div class="sr">
+          <span class="sl">Innenrand</span>
+          <div class="sc"><input type="range" id="s-pad" min="16" max="100" step="4" value="48" oninput="updateVal('s-pad','s-pad-v','px')"></div>
+          <span class="sv" id="s-pad-v">48px</span>
+        </div>
+        <div class="sr">
+          <span class="sl">Absatz-Abst.</span>
+          <div class="sc"><input type="range" id="s-ps" min="0.4" max="2.5" step="0.1" value="1.1" oninput="updateVal('s-ps','s-ps-v','em')"></div>
+          <span class="sv" id="s-ps-v">1.1em</span>
+        </div>
+      </div>
+
+      <div class="sg">
+        <div class="sg-title">DOCX Ausgabe</div>
+        <div class="sr">
+          <span class="sl">Papierformat</span>
+          <div class="sc">
+            <select id="s-paper">
+              <option value="a4" selected>A4</option>
+              <option value="letter">US Letter</option>
+              <option value="a5">A5</option>
+            </select>
+          </div>
+        </div>
+        <div class="sr">
+          <span class="sl">Seitenrand (cm)</span>
+          <div class="sc"><input type="range" id="s-margin" min="1" max="4" step="0.25" value="2.5" oninput="updateVal('s-margin','s-margin-v','cm')"></div>
+          <span class="sv" id="s-margin-v">2.5cm</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="loading">
+  <div class="loading-box">
+    <h3>Exportiere DOCX</h3>
+    <p id="loading-msg">Formeln werden gerendert…</p>
+    <div class="ld-bar"><div class="ld-bar-inner"></div></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+
+<script>
+'use strict';
+
+// ═══════════════════════════════════════════════
+//  DEFAULT SAMPLE
+// ═══════════════════════════════════════════════
+const SAMPLE_HTML = `<h1>Physik &amp; Mathematik</h1>
+<p>Willkommen im <strong>HTML → DOCX Converter</strong> mit LaTeX-Unterstützung.
+Schreibe Inline-Formeln mit <code>$...$</code> und Block-Formeln mit <code>$$...$$</code>.</p>
+
+<h2>Grundlegende Formeln</h2>
+<p>Einsteins Masse-Energie-Äquivalenz: $E = mc^2$</p>
+<p>Pythagoras: $a^2 + b^2 = c^2$</p>
+<p>Eulers Identität: $e^{i\\pi} + 1 = 0$</p>
+
+<h2>Maxwell-Gleichungen</h2>
+<p>Die vier Maxwell-Gleichungen in differentieller Form:</p>
+$$\\nabla \\cdot \\mathbf{E} = \\frac{\\rho}{\\varepsilon_0}$$
+$$\\nabla \\cdot \\mathbf{B} = 0$$
+$$\\nabla \\times \\mathbf{E} = -\\frac{\\partial \\mathbf{B}}{\\partial t}$$
+$$\\nabla \\times \\mathbf{B} = \\mu_0\\mathbf{J} + \\mu_0\\varepsilon_0\\frac{\\partial \\mathbf{E}}{\\partial t}$$
+
+<h2>Schrödinger-Gleichung</h2>
+<p>Die zeitabhängige Schrödinger-Gleichung:</p>
+$$i\\hbar\\frac{\\partial}{\\partial t}\\Psi(\\mathbf{r},t) = \\hat{H}\\Psi(\\mathbf{r},t)$$
+<p>Hierbei ist $\\hat{H} = -\\dfrac{\\hbar^2}{2m}\\nabla^2 + V(\\mathbf{r})$ der Hamilton-Operator.</p>
+
+<h2>Weitere Integrale</h2>
+<p>Das Gauß'sche Integral:</p>
+$$\\int_{-\\infty}^{\\infty} e^{-x^2}\\,dx = \\sqrt{\\pi}$$
+<p>Fourier-Transformation: $\\hat{f}(\\xi) = \\int_{-\\infty}^{\\infty} f(x)\\,e^{-2\\pi i x \\xi}\\,dx$</p>
+
+<h2>Physikalische Konstanten</h2>
+<table>
+  <thead>
+    <tr><th>Symbol</th><th>Bedeutung</th><th>Wert</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>$\\hbar$</td><td>Reduz. Planck-Konstante</td><td>$1.055 \\times 10^{-34}$ J·s</td></tr>
+    <tr><td>$c$</td><td>Lichtgeschwindigkeit</td><td>$2.998 \\times 10^8$ m/s</td></tr>
+    <tr><td>$\\varepsilon_0$</td><td>Elektrische Feldkonstante</td><td>$8.854 \\times 10^{-12}$ F/m</td></tr>
+    <tr><td>$\\mu_0$</td><td>Magnetische Feldkonstante</td><td>$4\\pi \\times 10^{-7}$ H/m</td></tr>
+    <tr><td>$k_B$</td><td>Boltzmann-Konstante</td><td>$1.381 \\times 10^{-23}$ J/K</td></tr>
+  </tbody>
+</table>
+
+<h2>Aufzählung</h2>
+<ul>
+  <li>Klassische Mechanik: $F = ma$</li>
+  <li>Elektromagnetismus: Maxwell-Gleichungen</li>
+  <li>Quantenmechanik: Schrödinger-Gleichung</li>
+  <li>Spezielle Relativität: $E^2 = (pc)^2 + (mc^2)^2$</li>
+  <li>Allgemeine Relativität: $G_{\\mu\\nu} + \\Lambda g_{\\mu\\nu} = \\frac{8\\pi G}{c^4}T_{\\mu\\nu}$</li>
+</ul>
+
+<h3>Code-Beispiel</h3>
+<pre>def euler_identity():
+    import cmath
+    return cmath.exp(1j * cmath.pi) + 1  # ≈ 0</pre>
+
+<blockquote>„Gott würfelt nicht." — Albert Einstein</blockquote>`;
+
+// ═══════════════════════════════════════════════
+//  CRC32
+// ═══════════════════════════════════════════════
+const CRC32 = (() => {
+  const t = new Uint32Array(256);
+  for (let i = 0; i < 256; i++) {
+    let c = i;
+    for (let j = 0; j < 8; j++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+    t[i] = c;
+  }
+  return d => {
+    let crc = 0xFFFFFFFF;
+    for (let i = 0; i < d.length; i++) crc = (crc >>> 8) ^ t[(crc ^ d[i]) & 0xFF];
+    return (crc ^ 0xFFFFFFFF) >>> 0;
+  };
+})();
+
+// ═══════════════════════════════════════════════
+//  ZIP BUILDER (store, no compression)
+// ═══════════════════════════════════════════════
+function buildZip(files) {
+  const enc = new TextEncoder();
+  const entries = [];
+  const localParts = [];
+  let offset = 0;
+
+  for (const {name, data} of files) {
+    const nb = enc.encode(name);
+    const fd = typeof data === 'string' ? enc.encode(data) : data;
+    const crc = CRC32(fd);
+    const lh = new Uint8Array(30 + nb.length);
+    const v = new DataView(lh.buffer);
+    v.setUint32(0,0x04034b50,true); v.setUint16(4,20,true);
+    v.setUint16(6,0,true); v.setUint16(8,0,true);
+    v.setUint16(10,0,true); v.setUint16(12,0,true);
+    v.setUint32(14,crc,true); v.setUint32(18,fd.length,true);
+    v.setUint32(22,fd.length,true); v.setUint16(26,nb.length,true);
+    v.setUint16(28,0,true); lh.set(nb,30);
+    entries.push({nb,crc,size:fd.length,offset});
+    localParts.push(lh,fd);
+    offset += lh.length + fd.length;
+  }
+
+  const cdParts = [];
+  let cdSize = 0;
+  for (let i = 0; i < files.length; i++) {
+    const {nb,crc,size,offset:lo} = entries[i];
+    const cd = new Uint8Array(46 + nb.length);
+    const v = new DataView(cd.buffer);
+    v.setUint32(0,0x02014b50,true); v.setUint16(4,20,true); v.setUint16(6,20,true);
+    v.setUint16(8,0,true); v.setUint16(10,0,true);
+    v.setUint16(12,0,true); v.setUint16(14,0,true);
+    v.setUint32(16,crc,true); v.setUint32(20,size,true); v.setUint32(24,size,true);
+    v.setUint16(28,nb.length,true); v.setUint16(30,0,true); v.setUint16(32,0,true);
+    v.setUint16(34,0,true); v.setUint16(36,0,true);
+    v.setUint32(38,0,true); v.setUint32(42,lo,true);
+    cd.set(nb,46); cdParts.push(cd); cdSize += cd.length;
+  }
+
+  const eocd = new Uint8Array(22);
+  const ev = new DataView(eocd.buffer);
+  ev.setUint32(0,0x06054b50,true); ev.setUint16(4,0,true); ev.setUint16(6,0,true);
+  ev.setUint16(8,files.length,true); ev.setUint16(10,files.length,true);
+  ev.setUint32(12,cdSize,true); ev.setUint32(16,offset,true); ev.setUint16(20,0,true);
+
+  const all = [...localParts,...cdParts,eocd];
+  const total = all.reduce((s,p) => s+p.length, 0);
+  const out = new Uint8Array(total);
+  let pos = 0;
+  for (const p of all) { out.set(p,pos); pos += p.length; }
+  return out;
+}
+
+// ═══════════════════════════════════════════════
+//  HELPERS
+// ═══════════════════════════════════════════════
+function xe(s) {
+  return String(s||'')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function hexCol(c) {
+  if (!c) return '000000';
+  if (c.startsWith('#')) return c.slice(1);
+  const m = c.match(/\d+/g);
+  if (!m) return '000000';
+  return m.slice(0,3).map(n=>parseInt(n).toString(16).padStart(2,'0')).join('');
+}
+
+// ═══════════════════════════════════════════════
+//  MATH RENDERER (LaTeX → PNG bytes via canvas)
+// ═══════════════════════════════════════════════
+let _katexCSS = null;
+function getKaTeXCSS() {
+  if (_katexCSS !== null) return _katexCSS;
+  for (const sheet of document.styleSheets) {
+    try {
+      if (sheet.href && sheet.href.includes('katex')) {
+        _katexCSS = Array.from(sheet.cssRules).map(r => r.cssText).join('\n');
+        return _katexCSS;
+      }
+    } catch(e) {}
+  }
+  return (_katexCSS = '');
+}
+
+async function renderMathToPNG(latex, isDisplay, fontSize=18) {
+  if (typeof katex === 'undefined') return null;
+  try {
+    const html = katex.renderToString(latex, {
+      displayMode: isDisplay, throwOnError: false, output: 'html'
+    });
+    const container = document.createElement('div');
+    container.style.cssText = `
+      position:fixed;left:-9999px;top:-9999px;
+      font-size:${fontSize}px;line-height:1.2;background:white;
+      padding:${isDisplay?'10px 14px':'4px 8px'};color:black;
+      display:inline-block;white-space:nowrap;
+    `;
+    container.innerHTML = html;
+    document.body.appendChild(container);
+    await new Promise(r => requestAnimationFrame(r));
+    const rect = container.getBoundingClientRect();
+    const W = Math.ceil(rect.width) + 20;
+    const H = Math.ceil(rect.height) + 16;
+    document.body.removeChild(container);
+
+    const css = getKaTeXCSS();
+    const svgSrc = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
+      <defs><style>
+        *{box-sizing:border-box}
+        ${css}
+        body,div{background:white;color:black}
+      </style></defs>
+      <foreignObject x="0" y="0" width="${W}" height="${H}">
+        <div xmlns="http://www.w3.org/1999/xhtml"
+             style="font-size:${fontSize}px;line-height:1.2;padding:${isDisplay?'10px 14px':'4px 8px'};background:white;color:black;display:inline-block">
+          ${html}
+        </div>
+      </foreignObject>
+    </svg>`;
+
+    const blob = new Blob([svgSrc], {type:'image/svg+xml;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => {
+        const SCALE = 2;
+        const canvas = document.createElement('canvas');
+        canvas.width = W * SCALE; canvas.height = H * SCALE;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.scale(SCALE, SCALE);
+        ctx.drawImage(img, 0, 0);
+        URL.revokeObjectURL(url);
+        canvas.toBlob(blob2 => {
+          if (!blob2) { resolve(null); return; }
+          const fr = new FileReader();
+          fr.onload = e => {
+            const b64 = e.target.result.split(',')[1];
+            const bin = atob(b64);
+            const bytes = new Uint8Array(bin.length);
+            for (let i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i);
+            resolve({bytes, w:W*SCALE, h:H*SCALE, dispW:W, dispH:H});
+          };
+          fr.readAsDataURL(blob2);
+        }, 'image/png');
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); resolve(null); };
+      img.src = url;
+    });
+  } catch(e) { console.error('MathRender:', e); return null; }
+}
+
+// Split text into text/math segments
+function splitMath(text) {
+  const segs = [];
+  let rem = text;
+  while (rem.length > 0) {
+    const dd = rem.indexOf('$$');
+    const sd = rem.indexOf('$');
+    if (dd === -1 && sd === -1) { if (rem) segs.push({t:'text',c:rem}); break; }
+
+    if (dd !== -1 && dd === sd) {
+      if (dd > 0) segs.push({t:'text',c:rem.slice(0,dd)});
+      const end = rem.indexOf('$$', dd+2);
+      if (end === -1) { segs.push({t:'text',c:rem.slice(dd)}); break; }
+      const latex = rem.slice(dd+2,end).trim();
+      if (latex) segs.push({t:'display',c:latex});
+      rem = rem.slice(end+2);
+    } else if (sd !== -1) {
+      if (sd > 0) segs.push({t:'text',c:rem.slice(0,sd)});
+      const end = rem.indexOf('$',sd+1);
+      if (end === -1) { segs.push({t:'text',c:rem.slice(sd)}); break; }
+      const latex = rem.slice(sd+1,end).trim();
+      if (latex) segs.push({t:'inline',c:latex});
+      rem = rem.slice(end+1);
+    } else {
+      segs.push({t:'text',c:rem}); break;
+    }
+  }
+  return segs;
+}
+
+// ═══════════════════════════════════════════════
+//  DOCX BUILDER
+// ═══════════════════════════════════════════════
+class DocxBuilder {
+  constructor(styles) {
+    this.s = styles;
+    this.images = [];
+    this.ridNext = 3; // rId1=styles, rId2=numbering
+  }
+
+  imgXml(rid, dispW, dispH) {
+    const EMU = 9525; // at 96dpi
+    const cx = dispW * EMU, cy = dispH * EMU;
+    return `<w:drawing>
+<wp:inline xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+  <wp:extent cx="${cx}" cy="${cy}"/>
+  <wp:effectExtent l="0" t="0" r="0" b="0"/>
+  <wp:docPr id="${rid}" name="Formel${rid}"/>
+  <wp:cNvGraphicFramePr>
+    <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
+  </wp:cNvGraphicFramePr>
+  <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+    <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+      <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+        <pic:nvPicPr>
+          <pic:cNvPr id="${rid}" name="Formel${rid}"/>
+          <pic:cNvPicPr><a:picLocks noChangeAspect="1"/></pic:cNvPicPr>
+        </pic:nvPicPr>
+        <pic:blipFill>
+          <a:blip r:embed="rId${rid}" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+          <a:stretch><a:fillRect/></a:stretch>
+        </pic:blipFill>
+        <pic:spPr>
+          <a:xfrm><a:off x="0" y="0"/><a:ext cx="${cx}" cy="${cy}"/></a:xfrm>
+          <a:prstGeom prst="rect"><a:avLst/></a:prstGeom>
+        </pic:spPr>
+      </pic:pic>
+    </a:graphicData>
+  </a:graphic>
+</wp:inline>
+</w:drawing>`;
+  }
+
+  runXml(text, rpr={}) {
+    const parts = [];
+    if (rpr.font) parts.push(`<w:rFonts w:ascii="${xe(rpr.font)}" w:hAnsi="${xe(rpr.font)}"/>`);
+    if (rpr.bold) parts.push('<w:b/>');
+    if (rpr.italic) parts.push('<w:i/>');
+    if (rpr.underline) parts.push('<w:u w:val="single"/>');
+    if (rpr.strike) parts.push('<w:strike/>');
+    if (rpr.code) parts.push('<w:rFonts w:ascii="Courier New" w:hAnsi="Courier New"/><w:sz w:val="20"/>');
+    if (rpr.color) parts.push(`<w:color w:val="${hexCol(rpr.color)}"/>`);
+    if (rpr.sz) parts.push(`<w:sz w:val="${rpr.sz}"/>`);
+    const rprXml = parts.length ? `<w:rPr>${parts.join('')}</w:rPr>` : '';
+    return `<w:r>${rprXml}<w:t xml:space="preserve">${xe(text)}</w:t></w:r>`;
+  }
+
+  async processInline(node, rpr={}) {
+    if (!node) return [];
+    const runs = [];
+
+    if (node.nodeType === 3) { // TEXT
+      const text = node.textContent;
+      if (!text) return [];
+      if (!text.includes('$')) return [this.runXml(text, rpr)];
+      // process math
+      for (const seg of splitMath(text)) {
+        if (seg.t === 'text') {
+          if (seg.c) runs.push(this.runXml(seg.c, rpr));
+        } else {
+          const isDisp = seg.t === 'display';
+          const img = await renderMathToPNG(seg.c, isDisp);
+          if (img) {
+            const rid = this.ridNext++;
+            this.images.push({rid, bytes:img.bytes, w:img.w, h:img.h, dw:img.dispW, dh:img.dispH});
+            runs.push(`<w:r>${this.imgXml(rid, img.dispW, img.dispH)}</w:r>`);
+          } else {
+            runs.push(this.runXml(`$${seg.c}$`, {...rpr, code:true}));
+          }
+        }
+      }
+      return runs;
+    }
+
+    if (node.nodeType !== 1) return [];
+    const tag = node.tagName.toLowerCase();
+    const cr = {...rpr};
+
+    if (tag==='br') return ['<w:r><w:br/></w:r>'];
+    if (tag==='strong'||tag==='b') cr.bold=true;
+    if (tag==='em'||tag==='i') cr.italic=true;
+    if (tag==='u') cr.underline=true;
+    if (tag==='s'||tag==='del') cr.strike=true;
+    if (tag==='code'||tag==='tt') cr.code=true;
+    if (tag==='a') { cr.color=this.s.linkColor||'#1565c0'; cr.underline=true; }
+    if (tag==='sup') { /* skip sub/sup for simplicity */ }
+    if (tag==='span') {
+      const st = node.style;
+      if (st.fontWeight==='bold') cr.bold=true;
+      if (st.fontStyle==='italic') cr.italic=true;
+      if (st.color) cr.color=st.color;
+    }
+
+    for (const c of node.childNodes) {
+      const r = await this.processInline(c, cr);
+      runs.push(...r);
+    }
+    return runs;
+  }
+
+  pPrXml(style, extra='') {
+    const spacings = {
+      Heading1: '<w:spacing w:before="480" w:after="200"/>',
+      Heading2: '<w:spacing w:before="360" w:after="160"/>',
+      Heading3: '<w:spacing w:before="280" w:after="120"/>',
+      Heading4: '<w:spacing w:before="200" w:after="100"/>',
+      Normal: `<w:spacing w:after="${Math.round(parseFloat(this.s.paraSpacing||1.1)*160)}"/>`,
+    };
+    const sp = spacings[style]||spacings.Normal;
+    return `<w:pPr><w:pStyle w:val="${style}"/>${sp}${extra}</w:pPr>`;
+  }
+
+  async processBlock(node) {
+    if (!node || node.nodeType !== 1) return [];
+    const tag = node.tagName.toLowerCase();
+    const paras = [];
+
+    if (/^h[1-6]$/.test(tag)) {
+      const lvl = tag[1];
+      const style = 'Heading'+lvl;
+      const runs = [];
+      for (const c of node.childNodes) runs.push(...(await this.processInline(c)));
+      paras.push(`<w:p>${this.pPrXml(style)}${runs.join('')}</w:p>`);
+    }
+    else if (tag==='p') {
+      const runs = [];
+      for (const c of node.childNodes) runs.push(...(await this.processInline(c)));
+      if (runs.length) paras.push(`<w:p>${this.pPrXml('Normal')}${runs.join('')}</w:p>`);
+    }
+    else if (tag==='pre') {
+      const text = node.textContent;
+      const codeBg = (this.s.codeBg||'#f0f4f8').replace('#','');
+      for (const line of text.split('\n')) {
+        paras.push(`<w:p>
+          <w:pPr>
+            <w:pStyle w:val="Normal"/>
+            <w:shd w:val="clear" w:color="auto" w:fill="${codeBg}"/>
+            <w:ind w:left="360"/>
+            <w:spacing w:after="0"/>
+          </w:pPr>
+          <w:r>
+            <w:rPr>
+              <w:rFonts w:ascii="Courier New" w:hAnsi="Courier New"/>
+              <w:sz w:val="20"/>
+            </w:rPr>
+            <w:t xml:space="preserve">${xe(line||' ')}</w:t>
+          </w:r>
+        </w:p>`);
+      }
+    }
+    else if (tag==='blockquote') {
+      const runs = [];
+      for (const c of node.childNodes) runs.push(...(await this.processInline(c)));
+      const accentHex = (this.s.accentColor||'#1565c0').replace('#','');
+      paras.push(`<w:p>
+        <w:pPr>
+          <w:pStyle w:val="Normal"/>
+          <w:ind w:left="600"/>
+          <w:pBdr><w:left w:val="single" w:sz="12" w:space="4" w:color="${accentHex}"/></w:pBdr>
+          <w:spacing w:after="200"/>
+        </w:pPr>
+        ${runs.join('')}
+      </w:p>`);
+    }
+    else if (tag==='ul'||tag==='ol') {
+      const isOl = tag==='ol';
+      for (const li of node.querySelectorAll(':scope > li')) {
+        const runs = [];
+        for (const c of li.childNodes) {
+          if (c.nodeType===1 && /^[uo]l$/.test(c.tagName.toLowerCase())) continue;
+          runs.push(...(await this.processInline(c)));
+        }
+        paras.push(`<w:p>
+          <w:pPr>
+            <w:numPr>
+              <w:ilvl w:val="0"/>
+              <w:numId w:val="${isOl?2:1}"/>
+            </w:numPr>
+            <w:spacing w:after="80"/>
+          </w:pPr>
+          ${runs.join('')}
+        </w:p>`);
+      }
+    }
+    else if (tag==='table') {
+      paras.push(await this.buildTable(node));
+    }
+    else if (tag==='hr') {
+      paras.push(`<w:p>
+        <w:pPr><w:pBdr>
+          <w:bottom w:val="single" w:sz="6" w:space="1" w:color="CCCCCC"/>
+        </w:pBdr></w:pPr>
+      </w:p>`);
+    }
+    else if (tag==='br') {
+      paras.push('<w:p><w:pPr><w:spacing w:after="0"/></w:pPr></w:p>');
+    }
+    else {
+      // Generic container
+      for (const c of node.children) paras.push(...(await this.processBlock(c)));
+    }
+
+    return paras;
+  }
+
+  async buildTable(tbl) {
+    const s = this.s;
+    const paper = s.paper||'a4';
+    const marginCm = parseFloat(s.margin||2.5);
+    const pw = {a4:11906,letter:12240,a5:8418}[paper]||11906;
+    const mDxa = Math.round(marginCm*1440/2.54);
+    const contentW = pw - 2*mDxa;
+
+    const allRows = [...tbl.querySelectorAll('tr')];
+    let maxCols = 0;
+    for (const row of allRows) {
+      let cols = 0;
+      for (const cell of row.querySelectorAll('td,th')) {
+        cols += parseInt(cell.getAttribute('colspan')||1);
+      }
+      maxCols = Math.max(maxCols, cols);
+    }
+    if (maxCols === 0) return '';
+    const colW = Math.floor(contentW / maxCols);
+    const thBg = hexCol(s.tableHeadBg||'#e4ecf7');
+
+    const rowXmls = [];
+    for (const row of allRows) {
+      const cells = [...row.querySelectorAll('td,th')];
+      const isHead = row.closest('thead') || cells.some(c=>c.tagName==='TH');
+      const cellXmls = [];
+      for (let i = 0; i < maxCols; i++) {
+        const cell = cells[i];
+        const runs = cell
+          ? await this.processInline(cell, isHead?{bold:true}:{})
+          : [this.runXml(' ')];
+        const shd = isHead ? `<w:shd w:val="clear" w:color="auto" w:fill="${thBg}"/>` : '';
+        const bdr = `<w:tcBorders>
+          <w:top w:val="single" w:sz="4" w:color="CCCCCC"/>
+          <w:bottom w:val="single" w:sz="4" w:color="CCCCCC"/>
+          <w:left w:val="single" w:sz="4" w:color="CCCCCC"/>
+          <w:right w:val="single" w:sz="4" w:color="CCCCCC"/>
+        </w:tcBorders>`;
+        cellXmls.push(`<w:tc>
+          <w:tcPr>
+            <w:tcW w:w="${colW}" w:type="dxa"/>
+            ${bdr}${shd}
+            <w:tcMar>
+              <w:top w:w="80" w:type="dxa"/><w:bottom w:w="80" w:type="dxa"/>
+              <w:left w:w="120" w:type="dxa"/><w:right w:w="120" w:type="dxa"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p><w:pPr><w:spacing w:after="0"/></w:pPr>${runs.join('')}</w:p>
+        </w:tc>`);
+      }
+      rowXmls.push(`<w:tr>${cellXmls.join('')}</w:tr>`);
+    }
+
+    const tblW = colW * maxCols;
+    return `<w:tbl>
+      <w:tblPr>
+        <w:tblW w:w="${tblW}" w:type="dxa"/>
+        <w:tblBorders>
+          <w:top w:val="single" w:sz="4" w:color="CCCCCC"/>
+          <w:left w:val="single" w:sz="4" w:color="CCCCCC"/>
+          <w:bottom w:val="single" w:sz="4" w:color="CCCCCC"/>
+          <w:right w:val="single" w:sz="4" w:color="CCCCCC"/>
+          <w:insideH w:val="single" w:sz="4" w:color="CCCCCC"/>
+          <w:insideV w:val="single" w:sz="4" w:color="CCCCCC"/>
+        </w:tblBorders>
+        <w:tblCellMar>
+          <w:top w:w="80" w:type="dxa"/><w:bottom w:w="80" w:type="dxa"/>
+          <w:left w:w="120" w:type="dxa"/><w:right w:w="120" w:type="dxa"/>
+        </w:tblCellMar>
+      </w:tblPr>
+      <w:tblGrid>${Array(maxCols).fill(`<w:gridCol w:w="${colW}"/>`).join('')}</w:tblGrid>
+      ${rowXmls.join('\n')}
+    </w:tbl>`;
+  }
+
+  async generate(htmlSrc) {
+    setLoading('HTML wird geparst…');
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlSrc, 'text/html');
+    const body = doc.body;
+    const paras = [];
+
+    let idx = 0;
+    const children = [...body.children];
+    for (const child of children) {
+      idx++;
+      if (idx % 3 === 0) setLoading(`Verarbeite Element ${idx}/${children.length}…`);
+      paras.push(...(await this.processBlock(child)));
+    }
+
+    // Handle top-level text (display math outside tags)
+    for (const node of body.childNodes) {
+      if (node.nodeType === 3 && node.textContent.trim()) {
+        for (const seg of splitMath(node.textContent)) {
+          if (seg.t === 'display') {
+            const img = await renderMathToPNG(seg.c, true);
+            if (img) {
+              const rid = this.ridNext++;
+              this.images.push({rid,bytes:img.bytes,w:img.w,h:img.h,dw:img.dispW,dh:img.dispH});
+              paras.push(`<w:p>
+                <w:pPr><w:jc w:val="center"/><w:spacing w:before="160" w:after="160"/></w:pPr>
+                <w:r>${this.imgXml(rid,img.dispW,img.dispH)}</w:r>
+              </w:p>`);
+            }
+          }
+        }
+      }
+    }
+
+    if (!paras.length) paras.push('<w:p><w:r><w:t> </w:t></w:r></w:p>');
+
+    setLoading('DOCX wird zusammengestellt…');
+    return this.assemble(paras);
+  }
+
+  assemble(paras) {
+    const s = this.s;
+    const paper = s.paper||'a4';
+    const dim = {a4:{w:11906,h:16838},letter:{w:12240,h:15840},a5:{w:8418,h:11906}}[paper]||{w:11906,h:16838};
+    const marginDxa = Math.round(parseFloat(s.margin||2.5)*1440/2.54);
+
+    const fn = s.fontFamily||'Arial';
+    const fontName = fn.split(',')[0].trim().replace(/'/g,'');
+    const fSize = Math.round(parseFloat(s.fontSize||16)*2);
+    const h1Size = Math.round(parseFloat(s.h1Size||32)*2);
+    const h2Size = Math.round(parseFloat(s.h2Size||24)*2);
+    const h3Size = Math.round(parseFloat(s.h3Size||20)*2);
+    const paraAfter = Math.round(parseFloat(s.paraSpacing||1.1)*160);
+
+    const textHex = hexCol(s.textColor||'#1a1a2e');
+    const h1Hex = hexCol(s.h1Color||'#0d0d1a');
+    const h2Hex = hexCol(s.h2Color||'#1a2d6e');
+    const h3Hex = hexCol(s.h3Color||'#2d3d8e');
+    const accentHex = hexCol(s.accentColor||'#1565c0');
+    const codeBgHex = hexCol(s.codeBg||'#f0f4f8');
+
+    const imgRels = this.images.map(i =>
+      `<Relationship Id="rId${i.rid}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/img${i.rid}.png"/>`
+    ).join('\n');
+
+    const CT = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+  <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+  <Default Extension="xml" ContentType="application/xml"/>
+  <Default Extension="png" ContentType="image/png"/>
+  <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
+  <Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>
+  <Override PartName="/word/numbering.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml"/>
+</Types>`;
+
+    const RELS = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
+</Relationships>`;
+
+    const WORD_RELS = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>
+  <Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering" Target="numbering.xml"/>
+  ${imgRels}
+</Relationships>`;
+
+    const STYLES = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:docDefaults>
+    <w:rPrDefault><w:rPr>
+      <w:rFonts w:ascii="${xe(fontName)}" w:hAnsi="${xe(fontName)}"/>
+      <w:sz w:val="${fSize}"/>
+      <w:color w:val="${textHex}"/>
+      <w:lang w:val="de-DE"/>
+    </w:rPr></w:rPrDefault>
+    <w:pPrDefault><w:pPr>
+      <w:spacing w:after="${paraAfter}" w:line="276" w:lineRule="auto"/>
+    </w:pPr></w:pPrDefault>
+  </w:docDefaults>
+  <w:style w:type="paragraph" w:default="1" w:styleId="Normal">
+    <w:name w:val="Normal"/><w:qFormat/>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Heading1">
+    <w:name w:val="heading 1"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:qFormat/>
+    <w:pPr><w:spacing w:before="480" w:after="200"/><w:outlineLvl w:val="0"/></w:pPr>
+    <w:rPr>
+      <w:rFonts w:ascii="${xe(fontName)}" w:hAnsi="${xe(fontName)}"/>
+      <w:b/><w:color w:val="${h1Hex}"/><w:sz w:val="${h1Size}"/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Heading2">
+    <w:name w:val="heading 2"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:qFormat/>
+    <w:pPr>
+      <w:spacing w:before="360" w:after="160"/><w:outlineLvl w:val="1"/>
+      <w:pBdr><w:bottom w:val="single" w:sz="4" w:space="1" w:color="${accentHex}"/></w:pBdr>
+    </w:pPr>
+    <w:rPr>
+      <w:rFonts w:ascii="${xe(fontName)}" w:hAnsi="${xe(fontName)}"/>
+      <w:b/><w:color w:val="${h2Hex}"/><w:sz w:val="${h2Size}"/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Heading3">
+    <w:name w:val="heading 3"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:qFormat/>
+    <w:pPr><w:spacing w:before="280" w:after="120"/><w:outlineLvl w:val="2"/></w:pPr>
+    <w:rPr>
+      <w:rFonts w:ascii="${xe(fontName)}" w:hAnsi="${xe(fontName)}"/>
+      <w:b/><w:color w:val="${h3Hex}"/><w:sz w:val="${h3Size}"/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Heading4">
+    <w:name w:val="heading 4"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:qFormat/>
+    <w:pPr><w:spacing w:before="200" w:after="100"/><w:outlineLvl w:val="3"/></w:pPr>
+    <w:rPr><w:b/><w:i/><w:sz w:val="${Math.round(h3Size*0.9)}"/></w:rPr>
+  </w:style>
+</w:styles>`;
+
+    const NUMBERING = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:numbering xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:abstractNum w:abstractNumId="0">
+    <w:multiLevelType w:val="hybridMultilevel"/>
+    <w:lvl w:ilvl="0">
+      <w:start w:val="1"/><w:numFmt w:val="bullet"/>
+      <w:lvlText w:val="•"/><w:lvlJc w:val="left"/>
+      <w:pPr><w:ind w:left="720" w:hanging="360"/></w:pPr>
+      <w:rPr><w:rFonts w:ascii="Symbol" w:hAnsi="Symbol"/></w:rPr>
+    </w:lvl>
+  </w:abstractNum>
+  <w:abstractNum w:abstractNumId="1">
+    <w:multiLevelType w:val="hybridMultilevel"/>
+    <w:lvl w:ilvl="0">
+      <w:start w:val="1"/><w:numFmt w:val="decimal"/>
+      <w:lvlText w:val="%1."/><w:lvlJc w:val="left"/>
+      <w:pPr><w:ind w:left="720" w:hanging="360"/></w:pPr>
+    </w:lvl>
+  </w:abstractNum>
+  <w:num w:numId="1"><w:abstractNumId w:val="0"/></w:num>
+  <w:num w:numId="2"><w:abstractNumId w:val="1"/></w:num>
+</w:numbering>`;
+
+    const DOCUMENT = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document
+  xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+  xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+  xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing"
+  xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"
+  xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+  <w:body>
+    ${paras.join('\n')}
+    <w:sectPr>
+      <w:pgSz w:w="${dim.w}" w:h="${dim.h}"/>
+      <w:pgMar w:top="${marginDxa}" w:right="${marginDxa}" w:bottom="${marginDxa}" w:left="${marginDxa}" w:header="720" w:footer="720" w:gutter="0"/>
+    </w:sectPr>
+  </w:body>
+</w:document>`;
+
+    const enc = new TextEncoder();
+    const zipFiles = [
+      {name:'[Content_Types].xml', data:enc.encode(CT)},
+      {name:'_rels/.rels', data:enc.encode(RELS)},
+      {name:'word/document.xml', data:enc.encode(DOCUMENT)},
+      {name:'word/_rels/document.xml.rels', data:enc.encode(WORD_RELS)},
+      {name:'word/styles.xml', data:enc.encode(STYLES)},
+      {name:'word/numbering.xml', data:enc.encode(NUMBERING)},
+      ...this.images.map(i => ({name:`word/media/img${i.rid}.png`, data:i.bytes}))
+    ];
+
+    return buildZip(zipFiles);
+  }
+}
+
+// ═══════════════════════════════════════════════
+//  STYLE PRESETS
+// ═══════════════════════════════════════════════
+const PRESETS = {
+  academic: {
+    's-font':'Georgia,\'Times New Roman\',serif', 's-size':'16', 's-lh':'1.75',
+    's-pagebg':'#fefefe', 's-color':'#1a1a1a', 's-h1c':'#0a0a1a',
+    's-h2c':'#1a2050', 's-h3c':'#2a3060', 's-linkc':'#1a3a8a',
+    's-codebg':'#f5f5f5', 's-thbg':'#dde4f0', 's-accent':'#1a2050',
+    's-h1s':'28', 's-h2s':'22', 's-h3s':'18', 's-mw':'780', 's-pad':'52', 's-ps':'1.3',
+  },
+  modern: {
+    's-font':'\'Segoe UI\',Tahoma,sans-serif', 's-size':'15', 's-lh':'1.65',
+    's-pagebg':'#ffffff', 's-color':'#1e1e2e', 's-h1c':'#0a0a2a',
+    's-h2c':'#2a0a6a', 's-h3c':'#3a1a8a', 's-linkc':'#5a2af0',
+    's-codebg':'#f0eeff', 's-thbg':'#e8e0ff', 's-accent':'#5a2af0',
+    's-h1s':'34', 's-h2s':'26', 's-h3s':'20', 's-mw':'860', 's-pad':'56', 's-ps':'1.0',
+  },
+  minimal: {
+    's-font':'\'Helvetica Neue\',Helvetica,sans-serif', 's-size':'15', 's-lh':'1.6',
+    's-pagebg':'#ffffff', 's-color':'#222222', 's-h1c':'#000000',
+    's-h2c':'#333333', 's-h3c':'#444444', 's-linkc':'#000000',
+    's-codebg':'#f4f4f4', 's-thbg':'#eeeeee', 's-accent':'#888888',
+    's-h1s':'30', 's-h2s':'22', 's-h3s':'18', 's-mw':'740', 's-pad':'60', 's-ps':'1.0',
+  },
+  dark: {
+    's-font':'Arial,Helvetica,sans-serif', 's-size':'15', 's-lh':'1.7',
+    's-pagebg':'#1a1a2e', 's-color':'#d0d8f0', 's-h1c':'#7adfff',
+    's-h2c':'#5ac0ff', 's-h3c':'#8888ff', 's-linkc':'#7adfff',
+    's-codebg':'#0d0d20', 's-thbg':'#252540', 's-accent':'#7adfff',
+    's-h1s':'32', 's-h2s':'24', 's-h3s':'20', 's-mw':'820', 's-pad':'52', 's-ps':'1.1',
+  },
+  elegant: {
+    's-font':'\'Palatino Linotype\',Palatino,serif', 's-size':'17', 's-lh':'1.8',
+    's-pagebg':'#faf8f3', 's-color':'#1e1810', 's-h1c':'#1e1810',
+    's-h2c':'#4a2a10', 's-h3c':'#6a3a18', 's-linkc':'#8b4513',
+    's-codebg':'#f0e8d8', 's-thbg':'#e8d8c0', 's-accent':'#8b4513',
+    's-h1s':'30', 's-h2s':'24', 's-h3s':'20', 's-mw':'760', 's-pad':'60', 's-ps':'1.4',
+  },
+  technical: {
+    's-font':'Calibri,sans-serif', 's-size':'14', 's-lh':'1.55',
+    's-pagebg':'#ffffff', 's-color':'#1a2a3a', 's-h1c':'#0a1828',
+    's-h2c':'#004488', 's-h3c':'#006699', 's-linkc':'#0066cc',
+    's-codebg':'#eaf4ff', 's-thbg':'#d0e8f8', 's-accent':'#004488',
+    's-h1s':'26', 's-h2s':'20', 's-h3s':'16', 's-mw':'900', 's-pad':'44', 's-ps':'0.9',
+  },
+};
+
+function applyPreset(name) {
+  const p = PRESETS[name]; if (!p) return;
+  for (const [id, val] of Object.entries(p)) {
+    const el = document.getElementById(id); if (!el) continue;
+    el.value = val;
+    if (el.type==='range') {
+      const valId = id+'-v';
+      const suffix = valId.includes('lh')||valId.includes('ps') ? '' :
+                     valId.includes('margin') ? 'cm' : 'px';
+      const vo = document.getElementById(valId);
+      if (vo) vo.textContent = val + suffix;
+    }
+  }
+  schedulePreview();
+}
+
+// ═══════════════════════════════════════════════
+//  STYLE READING
+// ═══════════════════════════════════════════════
+function getStyles() {
+  const g = id => {const e=document.getElementById(id); return e?e.value:''};
+  return {
+    fontFamily: g('s-font'), fontSize: g('s-size'), lineHeight: g('s-lh'),
+    pageBg: g('s-pagebg'), textColor: g('s-color'),
+    h1Color: g('s-h1c'), h2Color: g('s-h2c'), h3Color: g('s-h3c'),
+    linkColor: g('s-linkc'), codeBg: g('s-codebg'), tableHeadBg: g('s-thbg'),
+    accentColor: g('s-accent'),
+    h1Size: g('s-h1s'), h2Size: g('s-h2s'), h3Size: g('s-h3s'),
+    maxWidth: g('s-mw'), padding: g('s-pad'), paraSpacing: g('s-ps'),
+    paper: g('s-paper'), margin: g('s-margin'),
+  };
+}
+
+// ═══════════════════════════════════════════════
+//  PREVIEW
+// ═══════════════════════════════════════════════
+let previewTimer = null;
+function schedulePreview() {
+  clearTimeout(previewTimer);
+  previewTimer = setTimeout(renderPreview, 120);
+}
+
+function renderPreview() {
+  const s = getStyles();
+  const html = editor ? editor.getValue() : '';
+
+  const css = `
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: ${s.fontFamily};
+      font-size: ${s.fontSize}px;
+      line-height: ${s.lineHeight};
+      color: ${s.textColor};
+      background: ${s.pageBg};
+      max-width: ${s.maxWidth}px;
+      margin: 0 auto;
+      padding: ${s.padding}px;
+    }
+    h1 { color:${s.h1Color}; font-size:${s.h1Size}px; margin:1.4em 0 .5em; }
+    h2 {
+      color:${s.h2Color}; font-size:${s.h2Size}px; margin:1.2em 0 .45em;
+      padding-bottom:.3em; border-bottom:2px solid ${s.accentColor};
+    }
+    h3 { color:${s.h3Color}; font-size:${s.h3Size}px; margin:1em 0 .4em; }
+    h4,h5,h6 { margin:.8em 0 .35em; }
+    p { margin:0 0 ${s.paraSpacing}em; }
+    a { color:${s.linkColor}; }
+    strong,b { font-weight:700; }
+    em,i { font-style:italic; }
+    code {
+      background:${s.codeBg}; padding:2px 6px; border-radius:4px;
+      font-family:'Courier New',monospace; font-size:.88em;
+    }
+    pre {
+      background:${s.codeBg}; padding:16px 20px; border-radius:6px;
+      border-left:4px solid ${s.accentColor};
+      overflow-x:auto; font-family:'Courier New',monospace; font-size:.88em;
+    }
+    blockquote {
+      border-left:4px solid ${s.accentColor}; margin:1.2em 0;
+      padding:.5em 1.2em; color:${s.textColor}aa; font-style:italic;
+    }
+    table { border-collapse:collapse; width:100%; margin:1.2em 0; }
+    thead tr { background:${s.tableHeadBg}; }
+    th { padding:9px 13px; font-weight:700; border:1px solid #ccc; text-align:left; }
+    td { padding:8px 12px; border:1px solid #ddd; }
+    tr:nth-child(even) td { background:${s.pageBg}ee; }
+    ul, ol { margin:.8em 0; padding-left:2em; }
+    li { margin:.25em 0; }
+    hr { border:none; border-top:1px solid #ccc; margin:2em 0; }
+    img { max-width:100%; }
+    .katex-display { margin:1.2em 0; overflow-x:auto; }
+  `;
+
+  const iframeHtml = `<!DOCTYPE html><html><head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <style>${css}</style>
+  </head><body>
+  ${html}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"><\/script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"><\/script>
+  <script>
+    window.addEventListener('load', function() {
+      if (typeof renderMathInElement !== 'undefined') {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left:'$$',right:'$$',display:true},
+            {left:'$',right:'$',display:false},
+            {left:'\\\\[',right:'\\\\]',display:true},
+            {left:'\\\\(',right:'\\\\)',display:false}
+          ],
+          throwOnError: false
+        });
+      }
+    });
+  <\/script>
+  </body></html>`;
+
+  document.getElementById('preview-iframe').srcdoc = iframeHtml;
+}
+
+// ═══════════════════════════════════════════════
+//  EXPORT
+// ═══════════════════════════════════════════════
+async function exportDocx() {
+  const loadEl = document.getElementById('loading');
+  loadEl.style.display = 'flex';
+  try {
+    const styles = getStyles();
+    const html = editor.getValue();
+    const builder = new DocxBuilder(styles);
+    const bytes = await builder.generate(html);
+    const blob = new Blob([bytes], {type:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'dokument.docx';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    setStatus('✓ DOCX exportiert – ' + new Date().toLocaleTimeString('de-DE'));
+  } catch(e) {
+    console.error('Export error:', e);
+    setStatus('✗ Fehler: ' + e.message);
+  } finally {
+    loadEl.style.display = 'none';
+  }
+}
+
+// ═══════════════════════════════════════════════
+//  UI HELPERS
+// ═══════════════════════════════════════════════
+function setStatus(msg) {
+  document.getElementById('status').textContent = msg;
+}
+function setLoading(msg) {
+  document.getElementById('loading-msg').textContent = msg;
+}
+function updateVal(rangeId, valId, suffix) {
+  const el = document.getElementById(rangeId);
+  const vo = document.getElementById(valId);
+  if (el && vo) vo.textContent = el.value + suffix;
+  schedulePreview();
+}
+
+// ═══════════════════════════════════════════════
+//  RESIZER
+// ═══════════════════════════════════════════════
+function initResizer(rz, left) {
+  let dragging = false, startX, startW;
+  rz.addEventListener('mousedown', e => {
+    dragging = true; startX = e.clientX;
+    startW = parseInt(getComputedStyle(left).width);
+    rz.classList.add('dragging');
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+  });
+  document.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    const dx = e.clientX - startX;
+    const newW = Math.max(150, Math.min(startW + dx, window.innerWidth - 350));
+    left.style.width = newW + 'px';
+  });
+  document.addEventListener('mouseup', () => {
+    if (!dragging) return;
+    dragging = false; rz.classList.remove('dragging');
+    document.body.style.cursor = ''; document.body.style.userSelect = '';
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  FORMAT HTML
+// ═══════════════════════════════════════════════
+function formatHTML(html) {
+  let indent = 0;
+  const lines = [];
+  html = html.replace(/>\s*</g, '>\n<').trim();
+  for (const line of html.split('\n')) {
+    const t = line.trim(); if (!t) continue;
+    const isClose = t.startsWith('</');
+    const isSelfClose = t.endsWith('/>') || /^<(br|hr|img|input|meta|link)[^>]*>$/i.test(t);
+    if (isClose) indent = Math.max(0, indent-1);
+    lines.push('  '.repeat(indent) + t);
+    if (!isClose && !isSelfClose && t.startsWith('<') && !t.includes('</')) indent++;
+  }
+  return lines.join('\n');
+}
+
+// ═══════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════
+let editor;
+
+window.addEventListener('DOMContentLoaded', () => {
+  // CodeMirror
+  editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
+    mode: 'htmlmixed',
+    theme: 'dracula',
+    lineNumbers: true,
+    lineWrapping: true,
+    indentWithTabs: false,
+    tabSize: 2,
+    indentUnit: 2,
+    autofocus: true,
+    extraKeys: {
+      'Ctrl-Space': 'autocomplete',
+      'Tab': cm => cm.replaceSelection('  '),
+      'Alt-F': () => {
+        editor.setValue(formatHTML(editor.getValue()));
+        setStatus('HTML formatiert');
+      }
+    }
+  });
+
+  // Make CM fill panel
+  const edPanel = document.getElementById('ed-panel');
+  const setEditorHeight = () => {
+    const hdr = edPanel.querySelector('.panel-hdr').offsetHeight;
+    editor.setSize(null, edPanel.offsetHeight - hdr);
+  };
+  setTimeout(setEditorHeight, 50);
+  new ResizeObserver(setEditorHeight).observe(edPanel);
+
+  // Load sample
+  editor.setValue(SAMPLE_HTML);
+
+  // Events
+  editor.on('change', () => {
+    const len = editor.getValue().length;
+    document.getElementById('char-count').textContent = len.toLocaleString('de-DE') + ' Zeichen';
+    schedulePreview();
+  });
+
+  document.getElementById('btn-export').addEventListener('click', exportDocx);
+  document.getElementById('btn-style').addEventListener('click', () => {
+    const panel = document.getElementById('st-panel');
+    panel.classList.toggle('open');
+    document.getElementById('btn-style').classList.toggle('active');
+  });
+  document.getElementById('btn-format').addEventListener('click', () => {
+    editor.setValue(formatHTML(editor.getValue()));
+    setStatus('HTML formatiert');
+  });
+  document.getElementById('btn-sample').addEventListener('click', () => {
+    if (confirm('Beispiel-Inhalt laden? Aktueller Inhalt wird überschrieben.')) {
+      editor.setValue(SAMPLE_HTML);
+      setStatus('Beispiel geladen');
+    }
+  });
+  document.getElementById('btn-clear').addEventListener('click', () => {
+    if (confirm('Editor leeren?')) { editor.setValue(''); setStatus('Geleert'); }
+  });
+
+  // Style panel inputs → live preview
+  document.querySelectorAll('#st-scroll input, #st-scroll select').forEach(el => {
+    el.addEventListener('change', schedulePreview);
+    el.addEventListener('input', schedulePreview);
+  });
+
+  // Keyboard shortcut
+  document.addEventListener('keydown', e => {
+    if ((e.ctrlKey||e.metaKey) && e.key==='s') { e.preventDefault(); exportDocx(); }
+  });
+
+  // Resizer
+  initResizer(document.getElementById('rz1'), document.getElementById('ed-panel'));
+
+  // Initial preview
+  renderPreview();
+  setStatus('Bereit');
+});
+</script>
+</body>
+</html>
