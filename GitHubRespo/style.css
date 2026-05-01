@@ -531,6 +531,20 @@ body.is-fullscreen .icon-expand         { display: none; }
 .panel-action-btn svg { width: 12px; height: 12px; }
 .panel-action-btn:hover { border-color: var(--accent); color: var(--accent); }
 
+.panel-action-btn.launch-pages-btn {
+  border-color: var(--accent-2);
+  color: var(--accent-2);
+  background: color-mix(in srgb, var(--accent-2) 10%, transparent);
+  font-weight: 600;
+}
+
+.panel-action-btn.launch-pages-btn:hover {
+  background: var(--accent-2);
+  color: #fff;
+  border-color: var(--accent-2);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--accent-2) 35%, transparent);
+}
+
 /* File Tree */
 .file-tree-wrap {
   flex: 1;
@@ -736,6 +750,49 @@ body.is-fullscreen .icon-expand         { display: none; }
   .layout { flex-direction: column; }
   .sidebar { width: 100%; height: 200px; border-right: none; border-bottom: 1px solid var(--border); }
   :root { --sidebar-w: 100%; }
+}
+
+/* ── LAUNCH BUTTON ──────────────────────────────────────────── */
+.launch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 3px 9px;
+  border-radius: 20px;
+  border: 1px solid var(--accent-2);
+  color: var(--accent-2);
+  background: color-mix(in srgb, var(--accent-2) 10%, transparent);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  margin-left: 4px;
+}
+
+/* Show on row hover */
+.file-row:hover .launch-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.launch-btn:hover {
+  background: var(--accent-2);
+  color: #fff;
+  box-shadow: 0 0 10px color-mix(in srgb, var(--accent-2) 40%, transparent);
+  transform: translateY(-1px);
+}
+
+/* Always visible for html files (most important) */
+.file-row.is-file:has(.launch-btn[href$=".html"]) .launch-btn,
+.file-row.is-file:has(.launch-btn[href$=".htm"]) .launch-btn {
+  opacity: 0.7;
+  pointer-events: auto;
 }
 
 /* ── GRID VIEW TOGGLE ───────────────────────────────────────── */

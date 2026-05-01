@@ -29,6 +29,46 @@ let fileCount      = 0;
 let searchQuery    = '';
 let allExpanded    = false;
 
+/* ── GITHUB PAGES LAUNCH ──────────────────────────────────── */
+const GITHUB_PAGES_BASE = `https://${GITHUB_USER}.github.io`;
+
+// Extensions that can be "launched" in the browser via GitHub Pages
+const LAUNCHABLE_EXTS = new Set([
+  'html', 'htm', 'pdf', 'svg', 'json', 'txt', 'md',
+  'png', 'jpg', 'jpeg', 'gif', 'webp', 'ico',
+  'mp3', 'wav', 'ogg', 'mp4', 'webm',
+  'js', 'css',
+]);
+
+// Ext → launch label
+const LAUNCH_LABELS = {
+  html: '▶ Starten', htm: '▶ Starten',
+  pdf:  '▶ PDF öffnen',
+  svg:  '▶ SVG öffnen',
+  mp3:  '▶ Anhören', wav: '▶ Anhören', ogg: '▶ Anhören',
+  mp4:  '▶ Video', webm: '▶ Video',
+  png:  '▶ Bild', jpg: '▶ Bild', jpeg: '▶ Bild', gif: '▶ Bild', webp: '▶ Bild',
+};
+
+function isLaunchable(name) {
+  return LAUNCHABLE_EXTS.has(extOf(name));
+}
+
+/**
+ * Build the GitHub Pages URL for a file.
+ * fullName = "juppijo/RepoName"
+ * filePath = "subfolder/index.html"  (from GitHub API item.path)
+ */
+function pagesUrl(fullName, filePath) {
+  const repoName = fullName.split('/')[1];
+  return `${GITHUB_PAGES_BASE}/${repoName}/${filePath}`;
+}
+
+function launchLabel(name) {
+  const ext = extOf(name);
+  return LAUNCH_LABELS[ext] || '▶ Öffnen';
+}
+
 /* ── FILE EXTENSION UTILS ─────────────────────────────────── */
 const EXT_ICONS = {
   html:  '🌐', css: '🎨', js: '⚡', json: '📋', md: '📝',
@@ -341,6 +381,12 @@ async function loadMainTree(fullName, subPath, repoUrl) {
       }).join('')}
     </nav>
     <div class="panel-actions">
+      <a class="panel-action-btn launch-pages-btn" href="https://${GITHUB_USER}.github.io/${fullName.split('/')[1]}/" target="_blank" title="GitHub Pages starten">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="5 3 19 12 5 21 5 3"/>
+        </svg>
+        Starten
+      </a>
       <a class="panel-action-btn" href="${repoUrl}" target="_blank">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
@@ -398,6 +444,9 @@ function renderMainTree(items, fullName, subPath, repoUrl) {
     const isDir = item.type === 'dir';
     const dotColor = colorFor(item.name);
 
+    const canLaunch = !isDir && isLaunchable(item.name);
+    const pgUrl = canLaunch ? pagesUrl(fullName, item.path) : '';
+
     li.innerHTML = `
       <div class="file-row ${isDir ? 'is-dir' : 'is-file'}">
         ${isDir ? `<svg class="file-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 4 10 8 6 12"/></svg>` : `<span style="width:12px"></span>`}
@@ -405,11 +454,15 @@ function renderMainTree(items, fullName, subPath, repoUrl) {
         ${dotColor ? `<span class="ext-dot" style="background:${dotColor}"></span>` : ''}
         <span class="file-label">${escHtml(item.name)}</span>
         ${item.size ? `<span class="file-size">${formatSize(item.size)}</span>` : ''}
+        ${canLaunch ? `<a class="launch-btn" href="${escHtml(pgUrl)}" target="_blank" title="GitHub Pages: ${escHtml(pgUrl)}">${launchLabel(item.name)}</a>` : ''}
       </div>
       ${isDir ? '<ul class="sub-tree"></ul>' : ''}
     `;
 
     const row = li.querySelector('.file-row');
+    // Prevent launch-btn click from also triggering row click
+    li.querySelector('.launch-btn')?.addEventListener('click', e => e.stopPropagation());
+
     row.addEventListener('click', () => {
       if (isDir) {
         const isOpen = row.classList.contains('dir-open');
@@ -447,6 +500,8 @@ async function loadSubDir(path, fullName, repoUrl, container) {
       li.style.animationDelay = `${i * 0.02}s`;
       const isDir = item.type === 'dir';
       const dotColor = colorFor(item.name);
+      const canLaunch = !isDir && isLaunchable(item.name);
+      const pgUrl = canLaunch ? pagesUrl(fullName, item.path) : '';
       li.innerHTML = `
         <div class="file-row ${isDir ? 'is-dir' : 'is-file'}">
           ${isDir ? `<svg class="file-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 4 10 8 6 12"/></svg>` : `<span style="width:12px"></span>`}
@@ -454,10 +509,12 @@ async function loadSubDir(path, fullName, repoUrl, container) {
           ${dotColor ? `<span class="ext-dot" style="background:${dotColor}"></span>` : ''}
           <span class="file-label">${escHtml(item.name)}</span>
           ${item.size ? `<span class="file-size">${formatSize(item.size)}</span>` : ''}
+          ${canLaunch ? `<a class="launch-btn" href="${escHtml(pgUrl)}" target="_blank" title="GitHub Pages: ${escHtml(pgUrl)}">${launchLabel(item.name)}</a>` : ''}
         </div>
         ${isDir ? '<ul class="sub-tree"></ul>' : ''}
       `;
       const row = li.querySelector('.file-row');
+      li.querySelector('.launch-btn')?.addEventListener('click', e => e.stopPropagation());
       row.addEventListener('click', () => {
         if (isDir) {
           const isOpen = row.classList.contains('dir-open');
