@@ -295,10 +295,12 @@ main{
     <button class="ibtn" onclick="openAddLink()" title="Link hinzufügen">＋ <span class="lbl">Link</span></button>
     <button class="ibtn" onclick="toggleTheme()" id="themeBtn" title="Hell/Dunkel">☀️</button>
     <button class="ibtn" onclick="toggleFullscreen()" id="fsBtn" title="Vollbild">⛶</button>
-    <button class="ibtn" onclick="exportJSON()" title="Export JSON">↓ <span class="lbl">Export</span></button>
+    <button class="ibtn" onclick="triggerLoad()" title="JSON-Datei laden" style="color:#4ade80;border-color:rgba(74,222,128,.35)">↑ <span class="lbl">Laden</span></button>
+    <button class="ibtn" onclick="exportJSON()" title="Als JSON speichern" style="color:#38bdf8;border-color:rgba(56,189,248,.35)">↓ <span class="lbl">Speichern</span></button>
     <button class="ibtn" onclick="resetData()" title="Zurücksetzen" style="color:#ef4444">↺</button>
   </div>
 </header>
+<input type="file" id="fileInput" accept=".json,application/json" style="display:none" onchange="loadFromFile(event)">
 
 <main id="main"></main>
 
@@ -627,14 +629,44 @@ document.addEventListener('fullscreenchange', () => {
   document.getElementById('fsBtn').textContent = document.fullscreenElement ? '⊠' : '⛶';
 });
 
-// ─── EXPORT / RESET ──────────────────────────────────────────────────────────
+// ─── LADEN / SPEICHERN ───────────────────────────────────────────────────────
+function triggerLoad() {
+  document.getElementById('fileInput').value = '';
+  document.getElementById('fileInput').click();
+}
+
+function loadFromFile(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const parsed = JSON.parse(ev.target.result);
+      if (!Array.isArray(parsed)) throw new Error('Kein Array');
+      // Validate minimal structure
+      parsed.forEach(cat => {
+        if (typeof cat.title !== 'string') throw new Error('Ungültiges Format');
+        if (!Array.isArray(cat.links)) cat.links = [];
+      });
+      data = parsed;
+      saveData();
+      render();
+      showToast(`✅ "${file.name}" geladen — ${data.length} Kategorien`);
+    } catch(err) {
+      showToast('❌ Ungültige JSON-Datei: ' + err.message);
+    }
+  };
+  reader.onerror = () => showToast('❌ Datei konnte nicht gelesen werden');
+  reader.readAsText(file, 'UTF-8');
+}
+
 function exportJSON() {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = 'links_hub.json';
   a.click();
-  showToast('⬇ JSON exportiert');
+  showToast('💾 JSON gespeichert');
 }
 
 function resetData() {
