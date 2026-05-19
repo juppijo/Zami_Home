@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub Link Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #07090c;
+  --s1:       #0e1217;
+  --s2:       #141a21;
+  --s3:       #1b2229;
+  --border:   #222a34;
+  --border2:  #2d3847;
+  --green:    #00e87a;
+  --green-d:  #007a3d;
+  --green-bg: #001f10;
+  --blue:     #3ec9ff;
+  --orange:   #ff8c42;
+  --yellow:   #f5c842;
+  --pink:     #ff5599;
+  --text:     #b8c8d8;
+  --muted:    #4a5a6a;
+  --font: 'JetBrains Mono', 'Courier New', monospace;
+  --head: 'Syne', sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--text);
+  font-size:12.5px;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ── Header ─────────────────────────────── */
+header{
+  background:var(--s1);
+  border-bottom:1px solid var(--border);
+  padding:10px 16px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex-shrink:0;
+  z-index:50;
+}
+.logo{
+  font-family:var(--head);
+  font-size:17px;
+  font-weight:800;
+  color:var(--green);
+  white-space:nowrap;
+  letter-spacing:-0.5px;
+}
+.logo em{color:var(--muted);font-style:normal}
+.toolbar{display:flex;align-items:center;gap:7px;flex:1;flex-wrap:wrap}
+.sep{color:var(--border2);padding:0 2px}
+
+/* Buttons */
+.btn{
+  background:var(--s2);
+  border:1px solid var(--border2);
+  color:var(--text);
+  font-family:var(--font);
+  font-size:11.5px;
+  padding:5px 11px;
+  cursor:pointer;
+  display:flex;align-items:center;gap:5px;
+  transition:border-color .13s, color .13s, background .13s;
+  white-space:nowrap;
+}
+.btn:hover{border-color:var(--green);color:var(--green)}
+.btn.p{background:var(--green-bg);border-color:var(--green-d);color:var(--green)}
+.btn.p:hover{background:#002a17}
+.btn.d:hover{border-color:var(--orange);color:var(--orange)}
+.btn:disabled{opacity:.35;cursor:default;pointer-events:none}
+
+/* Base URL */
+.base-wrap{display:flex;align-items:center;gap:6px;margin-left:auto}
+.base-label{color:var(--muted);font-size:11px;white-space:nowrap}
+.base-input{
+  background:var(--s2);border:1px solid var(--border);
+  color:var(--blue);font-family:var(--font);font-size:11px;
+  padding:5px 8px;width:255px;
+}
+.base-input:focus{outline:none;border-color:var(--blue)}
+
+/* ── Infobar ─────────────────────────────── */
+#infobar{
+  background:var(--s1);
+  border-bottom:1px solid var(--border);
+  padding:5px 16px;
+  display:none;
+  align-items:center;
+  gap:20px;
+  flex-shrink:0;
+}
+.stat{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)}
+.sv{color:var(--text)}
+.sv.g{color:var(--green)}
+.stat-sep{flex:1}
+
+/* ── Filterbar ───────────────────────────── */
+#filterbar{
+  background:var(--s1);
+  border-bottom:1px solid var(--border);
+  padding:5px 16px;
+  display:none;
+  align-items:center;
+  gap:6px;
+  flex-shrink:0;
+  flex-wrap:wrap;
+}
+.flabel{color:var(--muted);font-size:11px;margin-right:2px}
+.chip{
+  background:none;border:1px solid var(--border2);
+  color:var(--muted);font-family:var(--font);font-size:11px;
+  padding:3px 9px;cursor:pointer;transition:all .12s;
+}
+.chip:hover{color:var(--text);border-color:var(--border2)}
+.chip.on{border-color:var(--green-d);color:var(--green);background:var(--green-bg)}
+.search{
+  background:var(--s2);border:1px solid var(--border);
+  color:var(--text);font-family:var(--font);font-size:11px;
+  padding:4px 8px;width:180px;margin-left:auto;
+}
+.search:focus{outline:none;border-color:var(--green-d)}
+.mini{
+  background:none;border:1px solid var(--border);
+  color:var(--muted);font-family:var(--font);font-size:10px;
+  padding:2px 7px;cursor:pointer;
+}
+.mini:hover{color:var(--green);border-color:var(--green-d)}
+
+/* ── Main scroll area ────────────────────── */
+#main{flex:1;overflow-y:auto;padding:10px 16px 20px}
+
+/* Scrollbar */
+#main::-webkit-scrollbar{width:5px}
+#main::-webkit-scrollbar-track{background:var(--bg)}
+#main::-webkit-scrollbar-thumb{background:var(--border2)}
+
+/* ── Empty state ─────────────────────────── */
+#empty{
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:100px 20px;gap:14px;
+}
+.e-icon{font-size:52px;opacity:.3}
+.e-title{font-family:var(--head);font-size:20px;color:var(--text)}
+.e-sub{color:var(--muted);font-size:12px;text-align:center;max-width:380px;line-height:1.7}
+.e-hint{
+  margin-top:8px;border:1px dashed var(--border2);
+  color:var(--muted);font-size:11px;padding:10px 18px;
+  line-height:1.8;
+}
+.e-hint b{color:var(--green)}
+
+/* Progress bar */
+#progress{
+  position:fixed;top:0;left:0;height:2px;
+  background:var(--green);width:0%;
+  transition:width .2s;z-index:999;
+}
+
+/* Toast */
+.toast{
+  position:fixed;bottom:18px;right:18px;
+  background:var(--s2);border:1px solid var(--green-d);
+  color:var(--green);padding:9px 14px;font-size:12px;z-index:998;
+  animation:tin .18s ease;pointer-events:none;
+}
+.toast.err{border-color:#a03020;color:var(--orange)}
+@keyframes tin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ── Group ───────────────────────────────── */
+.group{
+  margin-bottom:3px;
+  border:1px solid var(--border);
+}
+.gh{
+  background:var(--s1);padding:7px 10px;
+  display:flex;align-items:center;gap:9px;
+  cursor:pointer;user-select:none;
+  border-bottom:1px solid transparent;
+  transition:background .1s;
+}
+.gh:hover{background:var(--s2)}
+.group.open .gh{border-bottom-color:var(--border)}
+.gtri{
+  color:var(--muted);font-size:9px;
+  transition:transform .14s;width:9px;
+  flex-shrink:0;
+}
+.group.open .gtri{transform:rotate(90deg)}
+.gtitle{font-weight:600;color:var(--blue);font-size:13px}
+.gcnt{color:var(--muted);font-size:10.5px}
+.gact{
+  margin-left:auto;display:flex;gap:5px;align-items:center;
+  opacity:0;transition:opacity .12s;
+}
+.gh:hover .gact{opacity:1}
+.gbody{display:none;background:var(--bg)}
+.group.open .gbody{display:block}
+
+/* ── File rows ───────────────────────────── */
+/* cols: check | icon | label | url | ext */
+.frow{
+  display:grid;
+  grid-template-columns:30px 28px 1fr 1fr 64px;
+  align-items:stretch;
+  border-bottom:1px solid var(--border);
+  min-height:28px;
+  transition:background .08s;
+}
+.frow:last-child{border-bottom:none}
+.frow:hover{background:#0d1218}
+.frow.off{opacity:.38}
+
+.fcheck,.ficon{
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+input[type=checkbox]{accent-color:var(--green);width:13px;height:13px;cursor:pointer}
+
+.iico{
+  background:none;border:none;color:var(--text);
+  font-size:14px;width:24px;text-align:center;
+  cursor:text;padding:0;font-family:inherit;
+}
+.iico:focus{outline:1px solid var(--green-d);background:var(--s2)}
+
+.ilabel{
+  background:none;border:none;border-left:1px solid var(--border);
+  color:var(--text);font-family:var(--font);font-size:11.5px;
+  padding:0 8px;width:100%;align-self:stretch;
+}
+.ilabel:focus{outline:none;background:var(--s2);color:var(--green)}
+
+.iurl{
+  border-left:1px solid var(--border);
+  padding:0 8px;color:var(--muted);font-size:10.5px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  cursor:pointer;display:flex;align-items:center;
+  transition:color .1s;
+}
+.iurl:hover{color:var(--blue)}
+.iurl:hover::after{content:" ⎘";font-size:9px}
+
+.iext{
+  border-left:1px solid var(--border);
+  font-size:10px;color:var(--muted);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.x-html{color:var(--orange)}
+.x-js{color:var(--yellow)}
+.x-css{color:#4c8dde}
+.x-md{color:#aaa}
+.x-json{color:var(--green)}
+.x-img{color:var(--pink)}
+.x-py{color:#4c8}
+
+.no-files{padding:12px 14px;color:var(--muted);font-size:11px}
+
+/* Column headers */
+.col-head{
+  display:grid;
+  grid-template-columns:30px 28px 1fr 1fr 64px;
+  border-bottom:1px solid var(--border2);
+  font-size:10px;color:var(--muted);
+  padding:0;background:var(--s1);
+}
+.ch{padding:4px 8px;border-left:1px solid var(--border)}
+.ch:first-child{border-left:none;text-align:center;padding:4px 0}
+.ch:nth-child(2){border-left:none;text-align:center;padding:4px 0}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<header>
+  <div class="logo">⬡ GitHub<em>/</em>LinkBuilder</div>
+  <div class="toolbar">
+    <button class="btn p" id="btnOpen" onclick="openDir()">📁 Ordner öffnen</button>
+    <button class="btn" onclick="loadJson()">📂 JSON laden</button>
+    <span class="sep">│</span>
+    <button class="btn p" id="btnExport" disabled onclick="exportJson()">💾 links.json speichern</button>
+    <button class="btn d" onclick="clearAll()">✕ Leeren</button>
+  </div>
+  <div class="base-wrap">
+    <span class="base-label">Base URL:</span>
+    <input class="base-input" id="baseUrl" value="https://juppijo.github.io" oninput="rebuildUrls()">
+  </div>
+</header>
+
+<div id="infobar">
+  <div class="stat">Repos: <span class="sv" id="s-repos">0</span></div>
+  <div class="stat">Dateien gesamt: <span class="sv" id="s-total">0</span></div>
+  <div class="stat">Ausgewählt: <span class="sv g" id="s-sel">0</span></div>
+  <div class="stat">Ausgeschlossen: <span class="sv" id="s-excl">0</span></div>
+  <div class="stat-sep"></div>
+  <div class="stat" style="margin-left:auto">
+    <button class="mini" onclick="selAll(true)">✓ alle</button>
+    <button class="mini" onclick="selAll(false)">✗ alle</button>
+    <button class="mini" onclick="selHtmlAll()">nur .html</button>
+  </div>
+</div>
+
+<div id="filterbar">
+  <span class="flabel">Filter:</span>
+  <button class="chip on" data-f="all"   onclick="setFilter('all',this)">alle</button>
+  <button class="chip"    data-f="html"  onclick="setFilter('html',this)">.html</button>
+  <button class="chip"    data-f="code"  onclick="setFilter('code',this)">code</button>
+  <button class="chip"    data-f="nobin" onclick="setFilter('nobin',this)">kein Bild/Audio</button>
+  <button class="chip"    data-f="sel"   onclick="setFilter('sel',this)">nur ✓ ausgewählt</button>
+  <span class="sep" style="margin:0 2px">│</span>
+  <input class="search" id="search" placeholder="🔍 suchen …" oninput="renderGroups()">
+</div>
+
+<div id="main">
+  <div id="empty">
+    <div class="e-icon">📂</div>
+    <div class="e-title">Kein Ordner geöffnet</div>
+    <div class="e-sub">Wähle deinen lokalen GitHub-Ordner — alle Unterordner werden als Repos erkannt.</div>
+    <div class="e-hint">
+      <b>Struktur erwartet:</b><br>
+      GitHub/<br>
+      ├── Autogenes-Training/<br>
+      ├── ESP32-S3/<br>
+      ├── Rechner/<br>
+      └── …
+    </div>
+  </div>
+  <div id="groups"></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// State
+// ═══════════════════════════════════════════
+const S = {
+  baseUrl: 'https://juppijo.github.io',
+  groups: [],   // [{title, open, links:[{id,label,url,icon,included,path,ext}]}]
+  filter: 'all'
+};
+
+const ASSET_EXT = new Set(['jpg','jpeg','png','gif','webp','svg','ico','bmp','mp3','mp4','wav','ogg','flac','ttf','woff','woff2','eot','pdf','zip','tar','gz']);
+const CODE_EXT  = new Set(['html','htm','js','ts','css','json','py','md','ino','h','cpp','c','sh','txt','xml','yaml','yml','toml']);
+
+function uid(){ return Math.random().toString(36).slice(2,9) }
+function ext(name){ const m=name.match(/\.([^.]+)$/); return m?m[1].toLowerCase():'' }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') }
+function encPath(p){ return p.split('/').map(s=>encodeURIComponent(s)).join('/') }
+function buildUrl(base,repo,rel){ return `${base}/${repo}/${encPath(rel)}` }
+
+// ═══════════════════════════════════════════
+// Progress / Toast
+// ═══════════════════════════════════════════
+function setProgress(p){ document.getElementById('progress').style.width=p+'%' }
+function toast(msg,err=false){
+  const el=document.createElement('div');
+  el.className='toast'+(err?' err':'');
+  el.textContent=msg;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),3000);
+}
+
+// ═══════════════════════════════════════════
+// Directory scan
+// ═══════════════════════════════════════════
+async function scanFlat(handle, base=''){
+  const files=[];
+  for await(const [name,entry] of handle.entries()){
+    if(entry.kind==='directory'){
+      if(!name.startsWith('.')&&name!=='node_modules'){
+        const sub=await scanFlat(entry, base?`${base}/${name}`:name);
+        files.push(...sub);
+      }
+    } else {
+      if(!name.startsWith('.'))
+        files.push(base?`${base}/${name}`:name);
+    }
+  }
+  return files;
+}
+
+async function openDir(){
+  try{
+    const handle=await window.showDirectoryPicker({mode:'read'});
+    setProgress(5);
+
+    // collect top-level repo folders
+    const repos=[];
+    for await(const [name,entry] of handle.entries()){
+      if(entry.kind==='directory'&&!name.startsWith('.')&&name!=='node_modules')
+        repos.push({name,entry});
+    }
+    repos.sort((a,b)=>a.name.localeCompare(b.name));
+
+    // build lookup from existing state to preserve edits
+    const prev={};
+    for(const g of S.groups){
+      prev[g.title]={};
+      for(const l of g.links) prev[g.title][l.path]=l;
+    }
+
+    S.groups=[];
+    const n=repos.length;
+    let done=0;
+
+    for(const {name,entry} of repos){
+      const files=(await scanFlat(entry)).sort();
+      const links=files.map(rel=>{
+        const path=`${name}/${rel}`;
+        const old=prev[name]?.[path];
+        return {
+          id: old?.id||uid(),
+          label: rel,
+          url: buildUrl(S.baseUrl,name,rel),
+          icon: old?.icon||'✨',
+          included: old!==undefined?old.included:true,
+          path,
+          ext: ext(rel)
+        };
+      });
+      S.groups.push({title:name, open:true, links});
+      done++;
+      setProgress(5+Math.round(done/n*90));
+    }
+
+    setProgress(100);
+    setTimeout(()=>setProgress(0),600);
+    document.getElementById('btnExport').disabled=false;
+    renderAll();
+    toast(`✓ ${S.groups.length} Repos, ${S.groups.reduce((s,g)=>s+g.links.length,0)} Dateien geladen`);
+
+  } catch(e){
+    setProgress(0);
+    if(e.name!=='AbortError') toast('Fehler: '+e.message,true);
+  }
+}
+
+// ═══════════════════════════════════════════
+// Filter
+// ═══════════════════════════════════════════
+function setFilter(f,el){
+  S.filter=f;
+  document.querySelectorAll('#filterbar .chip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  renderGroups();
+}
+
+function matchFilter(l){
+  const q=(document.getElementById('search')?.value||'').toLowerCase();
+  if(q&&!l.label.toLowerCase().includes(q)&&!l.url.toLowerCase().includes(q)) return false;
+  switch(S.filter){
+    case 'html':  return ['html','htm'].includes(l.ext);
+    case 'code':  return CODE_EXT.has(l.ext);
+    case 'nobin': return !ASSET_EXT.has(l.ext);
+    case 'sel':   return l.included;
+    default: return true;
+  }
+}
+
+// ═══════════════════════════════════════════
+// Render
+// ═══════════════════════════════════════════
+function renderAll(){
+  const has=S.groups.length>0;
+  document.getElementById('empty').style.display=has?'none':'flex';
+  document.getElementById('groups').style.display=has?'block':'none';
+  document.getElementById('infobar').style.display=has?'flex':'none';
+  document.getElementById('filterbar').style.display=has?'flex':'none';
+  if(has){ updateStats(); renderGroups(); }
+}
+
+function updateStats(){
+  let total=0,sel=0;
+  for(const g of S.groups) for(const l of g.links){total++;if(l.included)sel++;}
+  document.getElementById('s-repos').textContent=S.groups.length;
+  document.getElementById('s-total').textContent=total;
+  document.getElementById('s-sel').textContent=sel;
+  document.getElementById('s-excl').textContent=total-sel;
+}
+
+function extClass(e){
+  if(['html','htm'].includes(e)) return 'x-html';
+  if(e==='js'||e==='ts') return 'x-js';
+  if(e==='css') return 'x-css';
+  if(e==='md') return 'x-md';
+  if(e==='json') return 'x-json';
+  if(['jpg','jpeg','png','gif','webp','svg','ico'].includes(e)) return 'x-img';
+  if(e==='py') return 'x-py';
+  return '';
+}
+
+function renderGroups(){
+  const buf=[];
+  for(let gi=0;gi<S.groups.length;gi++){
+    const g=S.groups[gi];
+    const vis=g.links.filter(matchFilter);
+    if(!vis.length&&S.filter!=='all') continue;
+
+    const chk=vis.filter(l=>l.included).length;
+    const rows=vis.map(l=>{
+      const ec=extClass(l.ext);
+      return `<div class="frow${l.included?'':' off'}" data-id="${l.id}" data-gi="${gi}">
+  <div class="fcheck"><input type="checkbox" ${l.included?'checked':''} data-act="chk" data-gi="${gi}" data-id="${l.id}"></div>
+  <div class="ficon"><input class="iico" value="${esc(l.icon)}" maxlength="4" data-act="ico" data-gi="${gi}" data-id="${l.id}" title="Icon"></div>
+  <input class="ilabel" value="${esc(l.label)}" data-act="lbl" data-gi="${gi}" data-id="${l.id}" title="${esc(l.label)}">
+  <div class="iurl" data-act="url" data-gi="${gi}" data-id="${l.id}" title="${esc(l.url)}">${esc(l.url)}</div>
+  <div class="iext ${ec}">${l.ext?'.'+l.ext:'—'}</div>
+</div>`;
+    }).join('');
+
+    buf.push(`<div class="group${g.open?' open':''}" id="g${gi}">
+  <div class="gh" data-gi="${gi}" data-act="grp">
+    <span class="gtri">▶</span>
+    <span class="gtitle">${esc(g.title)}</span>
+    <span class="gcnt">${chk}/${vis.length}</span>
+    <div class="gact" onclick="event.stopPropagation()">
+      <button class="mini" data-act="gsel" data-gi="${gi}" data-v="1">✓ alle</button>
+      <button class="mini" data-act="gsel" data-gi="${gi}" data-v="0">✗ keine</button>
+      <button class="mini" data-act="ghtml" data-gi="${gi}">nur .html</button>
+    </div>
+  </div>
+  <div class="gbody">
+    <div class="col-head">
+      <div class="ch" style="grid-column:1/3"></div>
+      <div class="ch">Label</div>
+      <div class="ch">URL</div>
+      <div class="ch" style="text-align:center">Typ</div>
+    </div>
+    ${rows||'<div class="no-files">keine sichtbaren Dateien</div>'}
+  </div>
+</div>`);
+  }
+  document.getElementById('groups').innerHTML=buf.join('');
+}
+
+// ═══════════════════════════════════════════
+// Event delegation
+// ═══════════════════════════════════════════
+document.getElementById('groups').addEventListener('click', e=>{
+  const el=e.target.closest('[data-act]');
+  if(!el) return;
+  const act=el.dataset.act;
+  const gi=+el.dataset.gi;
+  const id=el.dataset.id;
+  const g=S.groups[gi];
+
+  if(act==='grp'){
+    g.open=!g.open;
+    document.getElementById('g'+gi)?.classList.toggle('open',g.open);
+    const tri=document.querySelector('#g'+gi+' .gtri');
+    if(tri) tri.style.transform=g.open?'rotate(90deg)':'';
+  }
+  if(act==='url'){
+    const l=g?.links.find(x=>x.id===id);
+    if(l) navigator.clipboard.writeText(l.url).then(()=>toast('URL kopiert!'));
+  }
+  if(act==='gsel'){
+    const val=el.dataset.v==='1';
+    g.links.filter(matchFilter).forEach(l=>l.included=val);
+    updateStats(); renderGroups();
+  }
+  if(act==='ghtml'){
+    g.links.forEach(l=>l.included=['html','htm'].includes(l.ext));
+    updateStats(); renderGroups();
+  }
+});
+
+document.getElementById('groups').addEventListener('change', e=>{
+  const el=e.target.closest('[data-act]');
+  if(!el) return;
+  const act=el.dataset.act;
+  const gi=+el.dataset.gi;
+  const id=el.dataset.id;
+  const g=S.groups[gi];
+  const l=g?.links.find(x=>x.id===id);
+  if(!l) return;
+
+  if(act==='chk'){
+    l.included=el.checked;
+    el.closest('.frow')?.classList.toggle('off',!l.included);
+    updateStats();
+    // update count in header
+    const vis=g.links.filter(matchFilter);
+    const chk=vis.filter(x=>x.included).length;
+    const cnt=document.querySelector('#g'+gi+' .gcnt');
+    if(cnt) cnt.textContent=`${chk}/${vis.length}`;
+  }
+  if(act==='ico'){
+    l.icon=el.value;
+  }
+  if(act==='lbl'){
+    l.label=el.value;
+    l.ext=ext(el.value);
+    l.url=buildUrl(S.baseUrl,g.title,el.value);
+    // update url cell
+    const row=el.closest('.frow');
+    if(row){
+      const uc=row.querySelector('[data-act=url]');
+      if(uc){uc.textContent=esc(l.url);uc.title=l.url;}
+    }
+  }
+});
+
+// ═══════════════════════════════════════════
+// Global actions
+// ═══════════════════════════════════════════
+function selAll(v){
+  for(const g of S.groups) g.links.filter(matchFilter).forEach(l=>l.included=v);
+  updateStats(); renderGroups();
+}
+function selHtmlAll(){
+  for(const g of S.groups) g.links.forEach(l=>l.included=['html','htm'].includes(l.ext));
+  updateStats(); renderGroups();
+}
+function rebuildUrls(){
+  S.baseUrl=document.getElementById('baseUrl').value.replace(/\/+$/,'');
+  for(const g of S.groups)
+    for(const l of g.links){
+      const rel=l.path.startsWith(g.title+'/')?l.path.slice(g.title.length+1):l.label;
+      l.url=buildUrl(S.baseUrl,g.title,rel);
+    }
+  renderGroups();
+}
+function clearAll(){
+  if(!confirm('Alle Daten löschen?')) return;
+  S.groups=[];
+  document.getElementById('btnExport').disabled=true;
+  renderAll();
+}
+
+// ═══════════════════════════════════════════
+// JSON Export
+// ═══════════════════════════════════════════
+function exportJson(){
+  const out=[];
+  for(const g of S.groups){
+    const links=g.links.filter(l=>l.included);
+    if(!links.length) continue;
+    out.push({
+      title:g.title,
+      links:links.map(l=>({label:l.label, url:l.url, icon:l.icon}))
+    });
+  }
+  const json=JSON.stringify(out,null,2);
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([json],{type:'application/json'}));
+  a.download='links.json';
+  a.click();
+  const tot=out.reduce((s,g)=>s+g.links.length,0);
+  toast(`✓ ${out.length} Repos, ${tot} Links gespeichert`);
+}
+
+// ═══════════════════════════════════════════
+// JSON Import (load & merge)
+// ═══════════════════════════════════════════
+function loadJson(){
+  const inp=document.createElement('input');
+  inp.type='file'; inp.accept='.json,application/json';
+  inp.onchange=async()=>{
+    try{
+      const text=await inp.files[0].text();
+      const data=JSON.parse(text);
+      if(!Array.isArray(data)) throw new Error('Erwartet ein JSON-Array');
+
+      if(S.groups.length===0){
+        // direct load (no dir scanned)
+        S.groups=data.map(g=>({
+          title:g.title, open:true,
+          links:(g.links||[]).map(l=>({
+            id:uid(), label:l.label, url:l.url,
+            icon:l.icon||'✨', included:true,
+            path:`${g.title}/${l.label}`, ext:ext(l.label)
+          }))
+        }));
+      } else {
+        // merge: apply icons, mark included/excluded
+        for(const jg of data){
+          const g=S.groups.find(x=>x.title===jg.title);
+          if(!g) continue;
+          const jmap=new Map((jg.links||[]).map(l=>[l.label,l]));
+          for(const l of g.links){
+            const jl=jmap.get(l.label);
+            if(jl){ l.icon=jl.icon||l.icon; l.included=true; }
+            else    l.included=false;
+          }
+        }
+      }
+
+      document.getElementById('btnExport').disabled=false;
+      renderAll();
+      toast(`✓ JSON geladen: ${data.length} Gruppen`);
+    } catch(e){ toast('Fehler: '+e.message,true); }
+  };
+  inp.click();
+}
+
+// Check API availability
+if(!window.showDirectoryPicker){
+  document.querySelector('.e-sub').textContent=
+    '⚠ Dein Browser unterstützt die File System Access API nicht. Bitte Chrome oder Edge verwenden.';
+}
+</script>
+</body>
+</html>

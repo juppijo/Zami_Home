@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Repo Scanner & JSON Manager</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --panel-bg: #ffffff;
+            --primary-color: #4a90e2;
+            --text-color: #333333;
+            --accent-color: #e28743;
+            --border-color: #dddddd;
+            --shadow: 0 4px 6px rgba(0,0,0,0.05);
+            --header-color: #2c3e50;
+            --sub-header: #7f8c8d;
+            --item-border: #f1f1f1;
+            --input-bg: #ffffff;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            --bg-color: #1a1a1a;
+            --panel-bg: #2d2d2d;
+            --primary-color: #529bf5;
+            --text-color: #e0e0e0;
+            --accent-color: #f39c12;
+            --border-color: #444444;
+            --shadow: 0 4px 6px rgba(0,0,0,0.3);
+            --header-color: #ecf0f1;
+            --sub-header: #bdc3c7;
+            --item-border: #3d3d3d;
+            --input-bg: #3a3a3a;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Editierbarer Haupttitel */
+        .main-title-input {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--header-color);
+            text-align: center;
+            border: 1px solid transparent;
+            background: transparent;
+            width: 80%;
+            margin: 0 auto 5px auto;
+            display: block;
+        }
+
+        .main-title-input:hover, .main-title-input:focus {
+            border: 1px solid var(--border-color);
+            background: var(--panel-bg);
+            border-radius: 6px;
+        }
+
+        p.subtitle {
+            color: var(--sub-header);
+            margin-top: 0;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 12px;
+            background: var(--panel-bg);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .toolbar label {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .toolbar input[type="text"] {
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+        }
+
+        /* Suchfeld Styling */
+        .search-box {
+            min-width: 200px;
+            border-left: 3px solid var(--primary-color) !important;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.1s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        button:hover { opacity: 0.9; }
+        button:active { transform: scale(0.98); }
+
+        button.btn-accent { background-color: var(--accent-color); }
+        button.btn-success { background-color: #2ecc71; }
+        button.btn-secondary { background-color: #7f8c8d; }
+
+        button.btn-open-link {
+            padding: 4px 8px;
+            font-size: 0.8rem;
+            background-color: #34495e;
+            border-radius: 4px;
+        }
+        body.dark-mode button.btn-open-link { background-color: #16a085; }
+
+        .category-panel {
+            background: var(--panel-bg);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            border-left: 5px solid var(--primary-color);
+            overflow: hidden;
+        }
+
+        .category-header {
+            background: rgba(0, 0, 0, 0.03);
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .category-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        /* Einklapp-Pfeil */
+        .toggle-icon {
+            cursor: pointer;
+            font-size: 1.2rem;
+            user-select: none;
+            color: var(--primary-color);
+            width: 20px;
+            text-align: center;
+        }
+
+        .category-title-input {
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: 1px solid transparent;
+            background: transparent;
+            padding: 5px;
+            color: var(--header-color);
+            width: 60%;
+        }
+
+        .category-title-input:hover, .category-title-input:focus {
+            border: 1px solid var(--border-color);
+            background: var(--input-bg);
+            border-radius: 4px;
+        }
+
+        .file-list {
+            padding: 10px 15px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        /* Wenn eingeklappt */
+        .collapsed .file-list {
+            display: none;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 5px;
+            border-bottom: 1px solid var(--item-border);
+        }
+
+        .file-item:last-child { border-bottom: none; }
+        .file-item input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; }
+
+        /* NEU: Editierbares Label Styling */
+        .file-label-input {
+            flex: 1.2;
+            font-family: monospace;
+            font-size: 0.9rem;
+            border: 1px solid transparent;
+            background: transparent;
+            padding: 4px;
+            color: var(--text-color);
+            text-overflow: ellipsis;
+        }
+
+        .file-label-input:focus, .file-label-input:hover {
+            border: 1px solid var(--border-color);
+            background: var(--input-bg);
+            border-radius: 4px;
+        }
+
+        .file-url {
+            flex: 2;
+            font-size: 0.85rem;
+            border: 1px solid transparent;
+            background: transparent;
+            padding: 4px;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .file-url:focus, .file-url:hover {
+            border: 1px solid var(--border-color);
+            background: var(--input-bg);
+            border-radius: 4px;
+            opacity: 1;
+        }
+
+        .file-icon-input {
+            width: 40px;
+            text-align: center;
+            padding: 4px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+        }
+
+        .right-aligned {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <input type="text" id="main-title" class="main-title-input" value="GitHub Repository Scanner & JSON-Editor">
+        <p class="subtitle">Lokale Kopie scannen, Pfade verwalten, filtern und direkt im Browser testen.</p>
+    </header>
+
+    <div class="toolbar">
+        <button id="btn-browse" class="btn-accent">📂 Ordner öffnen</button>
+        <button id="btn-load-json">📥 JSON laden</button>
+        <button id="btn-save-json" class="btn-success">💾 JSON保存</button>
+        <button id="btn-fullscreen" class="btn-secondary">📺 Vollbild</button>
+        <button id="btn-theme" class="btn-secondary">🌓 Dark/Light</button>
+        
+        <button id="btn-collapse-all" class="btn-secondary" title="Alle Kategorien einklappen">📁 Alle zu</button>
+        <button id="btn-expand-all" class="btn-secondary" title="Alle Kategorien ausklappen">📂 Alle auf</button>
+        
+        <input type="text" id="search-input" class="search-box" placeholder="🔍 Suchen nach Datei oder Ordner...">
+
+        <div class="right-aligned">
+            <label for="base-url">GitHub Pages Basis-URL:</label>
+            <input type="text" id="base-url" value="https://juppijo.github.io/" placeholder="https://username.github.io/">
+        </div>
+    </div>
+
+    <div id="status" class="toolbar" style="display:none; background: #e8f4fd; color: #2b579a;"></div>
+
+    <div id="output-container">
+        </div>
+</div>
+
+<script>
+    let projectStructure = [];
+
+    const btnBrowse = document.getElementById('btn-browse');
+    const btnSaveJson = document.getElementById('btn-save-json');
+    const btnLoadJson = document.getElementById('btn-load-json');
+    const btnFullscreen = document.getElementById('btn-fullscreen');
+    const btnTheme = document.getElementById('btn-theme');
+    const btnCollapseAll = document.getElementById('btn-collapse-all');
+    const btnExpandAll = document.getElementById('btn-expand-all');
+    const searchInput = document.getElementById('search-input');
+    const mainTitleInput = document.getElementById('main-title');
+    const baseUrlInput = document.getElementById('base-url');
+    const outputContainer = document.getElementById('output-container');
+    const statusDiv = document.getElementById('status');
+
+    function showStatus(text, isError = false) {
+        statusDiv.style.display = 'block';
+        statusDiv.style.backgroundColor = isError ? (document.body.classList.contains('dark-mode') ? '#5c2626' : '#fde8e8') : (document.body.classList.contains('dark-mode') ? '#1e3d59' : '#e8f4fd');
+        statusDiv.style.color = isError ? '#e74c3c' : (document.body.classList.contains('dark-mode') ? '#ecf0f1' : '#2b579a');
+        statusDiv.textContent = text;
+    }
+
+    // Vollbild Funktion
+    btnFullscreen.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(err => {
+                alert(`Fehler beim Aktivieren des Vollbildmodus: ${err.message}`);
+            });
+            btnFullscreen.textContent = "📴 Vollbild Verlassen";
+        } else {
+            document.exitFullscreen();
+            btnFullscreen.textContent = "📺 Vollbild";
+        }
+    });
+
+    // Dark / Light Theme
+    btnTheme.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+    });
+
+    // NEU: Alle Kategorien einklappen
+    btnCollapseAll.addEventListener('click', () => {
+        projectStructure.forEach(cat => cat.collapsed = true);
+        const panels = document.querySelectorAll('.category-panel');
+        panels.forEach(panel => {
+            panel.classList.add('collapsed');
+            const icon = panel.querySelector('.toggle-icon');
+            if(icon) icon.textContent = '►';
+        });
+    });
+
+    // NEU: Alle Kategorien ausklappen
+    btnExpandAll.addEventListener('click', () => {
+        projectStructure.forEach(cat => cat.collapsed = false);
+        const panels = document.querySelectorAll('.category-panel');
+        panels.forEach(panel => {
+            panel.classList.remove('collapsed');
+            const icon = panel.querySelector('.toggle-icon');
+            if(icon) icon.textContent = '▼';
+        });
+    });
+
+    // Echtzeit-Suchfilter
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.toLowerCase().trim();
+        const panels = document.querySelectorAll('.category-panel');
+
+        panels.forEach(panel => {
+            const catTitle = panel.querySelector('.category-title-input').value.toLowerCase();
+            const fileItems = panel.querySelectorAll('.file-item');
+            let hasVisibleFiles = false;
+
+            fileItems.forEach(item => {
+                const labelText = item.querySelector('.file-label-input').value.toLowerCase();
+                const urlText = item.querySelector('.file-url').value.toLowerCase();
+
+                if (query === "" || labelText.includes(query) || urlText.includes(query)) {
+                    item.style.display = 'flex';
+                    hasVisibleFiles = true;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            if (catTitle.includes(query) && query !== "") {
+                fileItems.forEach(item => item.style.display = 'flex');
+                hasVisibleFiles = true;
+            }
+
+            if (hasVisibleFiles || query === "") {
+                panel.style.display = 'block';
+            } else {
+                panel.style.display = 'none';
+            }
+        });
+    });
+
+    // Rekursives Einlesen des Verzeichnisses
+    async function scanDirectory(dirHandle, currentPath = "") {
+        let files = [];
+        for await (const entry of dirHandle.values()) {
+            if (entry.name.startsWith('.')) continue;
+
+            if (entry.kind === 'file') {
+                const relativeLabel = currentPath ? `${currentPath}/${entry.name}` : entry.name;
+                files.push({ label: relativeLabel, name: entry.name });
+            } else if (entry.kind === 'directory') {
+                const subPath = currentPath ? `${currentPath}/${entry.name}` : entry.name;
+                const subFiles = await scanDirectory(entry, subPath);
+                files = files.concat(subFiles);
+            }
+        }
+        return files;
+    }
+
+    btnBrowse.addEventListener('click', async () => {
+        try {
+            const dirHandle = await window.showDirectoryPicker();
+            projectStructure = [];
+            outputContainer.innerHTML = "";
+            
+            showStatus(`Scanne Hauptordner: "${dirHandle.name}"...`);
+
+            for await (const entry of dirHandle.values()) {
+                if (entry.name.startsWith('.')) continue;
+
+                if (entry.kind === 'directory') {
+                    const filesInCat = await scanDirectory(entry);
+                    
+                    if (filesInCat.length > 0) {
+                        const baseUrl = baseUrlInput.value.endsWith('/') ? baseUrlInput.value : baseUrlInput.value + '/';
+                        
+                        const categoryData = {
+                            title: entry.name,
+                            collapsed: false,
+                            links: filesInCat.map(f => ({
+                                label: f.label,
+                                url: `${baseUrl}${entry.name}/${f.label}`,
+                                icon: "✨",
+                                enabled: true
+                            }))
+                        };
+                        projectStructure.push(categoryData);
+                    }
+                }
+            }
+
+            renderStructure();
+            showStatus(`Scan erfolgreich! ${projectStructure.length} Kategorien gefunden.`);
+        } catch (err) {
+            console.error(err);
+            if(err.name !== 'AbortError') {
+                showStatus("Fehler beim Lesen des Ordners.", true);
+            }
+        }
+    });
+
+    // UI rendern
+    function renderStructure() {
+        outputContainer.innerHTML = "";
+
+        if (projectStructure.length === 0) {
+            outputContainer.innerHTML = "<p style='text-align:center; opacity: 0.6;'>Keine Daten geladen. Öffne einen Ordner oder lade eine JSON-Datei.</p>";
+            return;
+        }
+
+        projectStructure.forEach((category, catIndex) => {
+            const panel = document.createElement('div');
+            panel.className = 'category-panel';
+            if (category.collapsed) {
+                panel.classList.add('collapsed');
+            }
+
+            const header = document.createElement('div');
+            header.className = 'category-header';
+
+            const catLeft = document.createElement('div');
+            catLeft.className = 'category-left';
+
+            const toggleIcon = document.createElement('span');
+            toggleIcon.className = 'toggle-icon';
+            toggleIcon.textContent = category.collapsed ? '►' : '▼';
+            toggleIcon.addEventListener('click', () => {
+                category.collapsed = !category.collapsed;
+                panel.classList.toggle('collapsed');
+                toggleIcon.textContent = category.collapsed ? '►' : '▼';
+            });
+
+            const titleInput = document.createElement('input');
+            titleInput.className = 'category-title-input';
+            titleInput.value = category.title;
+            titleInput.addEventListener('input', (e) => { category.title = e.target.value; });
+
+            catLeft.appendChild(toggleIcon);
+            catLeft.appendChild(titleInput);
+
+            const fileCountInfo = document.createElement('span');
+            fileCountInfo.style.fontSize = '0.85rem';
+            fileCountInfo.style.opacity = '0.7';
+            fileCountInfo.textContent = `${category.links.length} Datei(en)`;
+
+            header.appendChild(catLeft);
+            header.appendChild(fileCountInfo);
+            panel.appendChild(header);
+
+            const fileListDiv = document.createElement('div');
+            fileListDiv.className = 'file-list';
+
+            category.links.forEach((link, linkIndex) => {
+                const item = document.createElement('div');
+                item.className = 'file-item';
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.checked = link.enabled !== false;
+                checkbox.addEventListener('change', (e) => { link.enabled = e.target.checked; });
+
+                const iconInput = document.createElement('input');
+                iconInput.type = 'text';
+                iconInput.className = 'file-icon-input';
+                iconInput.value = link.icon || "✨";
+                iconInput.addEventListener('input', (e) => { link.icon = e.target.value; });
+
+                // NEU: Jetzt als editierbares Input-Feld statt reinem Text span
+                const labelInput = document.createElement('input');
+                labelInput.type = 'text';
+                labelInput.className = 'file-label-input';
+                labelInput.value = link.label;
+                labelInput.addEventListener('input', (e) => { link.label = e.target.value; });
+
+                const urlInput = document.createElement('input');
+                urlInput.type = 'text';
+                urlInput.className = 'file-url';
+                urlInput.value = link.url;
+                urlInput.addEventListener('input', (e) => { link.url = e.target.value; });
+
+                const openBtn = document.createElement('button');
+                openBtn.className = 'btn-open-link';
+                openBtn.innerHTML = '🔗';
+                openBtn.title = "Link in neuem Tab öffnen";
+                openBtn.addEventListener('click', () => {
+                    if (urlInput.value) {
+                        window.open(urlInput.value, '_blank');
+                    }
+                });
+
+                item.appendChild(checkbox);
+                item.appendChild(iconInput);
+                item.appendChild(labelInput); // Editierbares Label hinzugefügt
+                item.appendChild(urlInput);
+                item.appendChild(openBtn);
+                fileListDiv.appendChild(item);
+            });
+
+            panel.appendChild(fileListDiv);
+            outputContainer.appendChild(panel);
+        });
+
+        if(searchInput.value !== "") {
+            searchInput.dispatchEvent(new Event('input'));
+        }
+    }
+
+    // JSON Struktur säubern
+    function buildCleanJson() {
+        return projectStructure
+            .map(cat => {
+                const activeLinks = cat.links
+                    .filter(l => l.enabled !== false)
+                    .map(l => ({
+                        label: l.label, // Hier wird das editierte Label ausgelesen
+                        url: l.url,
+                        icon: l.icon || "✨"
+                    }));
+                return { title: cat.title, links: activeLinks };
+            })
+            .filter(cat => cat.links.length > 0);
+    }
+
+    // JSON speichern
+    btnSaveJson.addEventListener('click', async () => {
+        const cleanData = buildCleanJson();
+        if (cleanData.length === 0) {
+            alert("Keine Daten zum Speichern vorhanden.");
+            return;
+        }
+
+        try {
+            const handle = await window.showSaveFilePicker({
+                suggestedName: 'links.json',
+                types: [{ description: 'JSON Files', accept: { 'application/json': ['.json'] } }],
+            });
+            const writable = await handle.createWritable();
+            await writable.write(JSON.stringify(cleanData, null, 2));
+            await writable.close();
+            showStatus("Datei erfolgreich als JSON gespeichert!");
+        } catch (err) {
+            console.error(err);
+        }
+    });
+
+    // JSON laden
+    btnLoadJson.addEventListener('click', async () => {
+        try {
+            const [fileHandle] = await window.showOpenFilePicker({
+                types: [{ description: 'JSON Files', accept: { 'application/json': ['.json'] } }],
+            });
+            const file = await fileHandle.getFile();
+            const contents = await file.text();
+            const parsed = JSON.parse(contents);
+
+            if (Array.isArray(parsed)) {
+                projectStructure = parsed.map(cat => ({
+                    title: cat.title,
+                    collapsed: false,
+                    links: (cat.links || []).map(l => ({
+                        label: l.label,
+                        url: l.url,
+                        icon: l.icon || "✨",
+                        enabled: true
+                    }))
+                }));
+                renderStructure();
+                showStatus("JSON-Struktur erfolgreich eingelesen!");
+            } else {
+                showStatus("Ungültiges JSON-Format.", true);
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    });
+</script>
+
+</body>
+</html>
