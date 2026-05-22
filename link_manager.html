@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zami Link Manager 🌟</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --panel-bg: #ffffff;
+            --text-color: #2c3e50;
+            --accent-color: #00b4d8;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 15px rgba(0,0,0,0.05);
+            --transition: all 0.3s ease;
+            
+            /* Fähnchen-Farben */
+            --flag-none: #94a3b8;
+            --flag-red: #ef4444;
+            --flag-green: #22c55e;
+            --flag-blue: #3b82f6;
+            --flag-yellow: #eab308;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121824;
+            --panel-bg: #1e293b;
+            --text-color: #f8fafc;
+            --accent-color: #38bdf8;
+            --border-color: #334155;
+            --shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: var(--transition);
+            padding-bottom: 50px;
+        }
+
+        header {
+            background-color: var(--panel-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .brand h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text-color);
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        button, .file-label {
+            background-color: var(--panel-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        button:hover, .file-label:hover {
+            border-color: var(--accent-color);
+            background-color: rgba(0, 180, 216, 0.05);
+        }
+
+        button.active-filter {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .search-bar {
+            padding: 8px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            width: 260px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .search-bar:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            width: 320px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            opacity: 1;
+        }
+
+        .card.dragging {
+            opacity: 0.4;
+            border: 2px dashed var(--accent-color);
+        }
+
+        .card-header {
+            padding: 15px;
+            background-color: rgba(0,0,0,0.02);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: grab;
+        }
+
+        .card-header:active {
+            cursor: grabbing;
+        }
+
+        .card-title-area {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-weight: 600;
+            font-size: 1.05rem;
+            border: 1px solid transparent;
+            padding: 2px 6px;
+            border-radius: 4px;
+            word-break: break-all;
+        }
+
+        .card-title:focus {
+            background-color: var(--bg-color);
+            border-color: var(--accent-color);
+            outline: none;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            box-shadow: none;
+            padding: 4px;
+            font-size: 0.8rem;
+        }
+
+        .toggle-btn:hover {
+            background: none;
+        }
+
+        .card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .card.open .card-content {
+            max-height: 2000px;
+            transition: max-height 0.5s ease-in;
+        }
+
+        .link-list {
+            list-style: none;
+            padding: 10px 15px;
+        }
+
+        .link-item {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .link-item:last-child {
+            border-bottom: none;
+        }
+
+        .link-row-main {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .link-anchor-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-grow: 1;
+        }
+
+        .link-anchor {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.95rem;
+            word-break: break-all;
+        }
+
+        .link-anchor:hover {
+            text-decoration: underline;
+        }
+
+        .flag-icon {
+            font-size: 0.85rem;
+            display: inline-block;
+        }
+
+        .fav-star {
+            cursor: pointer;
+            font-size: 0.95rem;
+            user-select: none;
+            transition: transform 0.2s;
+            opacity: 0.4;
+        }
+
+        .fav-star.active {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .url-text {
+            color: #718096;
+            font-family: monospace;
+            font-size: 0.75rem;
+            word-break: break-all;
+            padding-left: 24px;
+        }
+
+        .hashtags-display {
+            font-size: 0.75rem;
+            color: var(--accent-color);
+            opacity: 0.8;
+            padding-left: 24px;
+            font-style: italic;
+            word-break: break-all;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 4px;
+            opacity: 0.3;
+            transition: var(--transition);
+        }
+
+        .link-item:hover .action-btns, .card-header:hover .action-btns {
+            opacity: 1;
+        }
+
+        .small-btn {
+            padding: 2px 6px;
+            font-size: 0.75rem;
+            border-radius: 4px;
+        }
+
+        .add-zone {
+            padding: 10px 15px;
+            background-color: rgba(0,0,0,0.01);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 6px;
+        }
+
+        .add-zone input {
+            padding: 4px 8px;
+            font-size: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background: var(--bg-color);
+            color: var(--text-color);
+            flex-grow: 1;
+        }
+
+        .footer-add {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        /* --- MODAL DIALOG (Kleines Editier-Fenster) --- */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(2px);
+        }
+
+        .modal-backdrop.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--panel-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-header h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+
+        .form-group input, .form-group select {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: 0.9rem;
+            width: 100%;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="brand">
+            <h1>Zami Link Manager 🌟</h1>
+        </div>
+        <div class="controls">
+            <input type="text" class="search-bar" id="search" placeholder="Suchen... (Text, #rot oder #tag)" oninput="filterLinks()">
+            
+            <button id="fav-filter-btn" onclick="toggleFavFilter()">⭐ Nur Favoriten</button>
+            
+            <label class="file-label" for="load-file">📂 JSON Laden</label>
+            <input type="file" id="load-file" accept=".json" onchange="loadJSON(event)">
+            
+            <button onclick="saveJSON()">💾 JSON Speichern</button>
+            <button onclick="sortAll()">🔤 Sortieren (A-Z)</button>
+            <button onclick="toggleAllCards()">↕️ Alle auf/zu</button>
+            <button onclick="toggleFullScreen()">🖥️ Vollbild</button>
+            <button onclick="toggleTheme()">🌓 Theme</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="grid" id="grid-container">
+            </div>
+
+        <div class="footer-add">
+            <button onclick="addNewCategory()" style="padding: 12px 24px; font-weight: bold; border-color: var(--accent-color);">➕ Neue Kategorie hinzufügen</button>
+        </div>
+    </div>
+
+    <div class="modal-backdrop" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Eintrag bearbeiten</h3>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-cat-index">
+                <input type="hidden" id="edit-link-index">
+                
+                <div class="form-group">
+                    <label for="edit-label">Titel / Label</label>
+                    <input type="text" id="edit-label">
+                </div>
+                <div class="form-group">
+                    <label for="edit-url">URL</label>
+                    <input type="text" id="edit-url">
+                </div>
+                <div class="form-group">
+                    <label for="edit-icon">Icon</label>
+                    <input type="text" id="edit-icon" placeholder="✨">
+                </div>
+                <div class="form-group">
+                    <label for="edit-hashtags">Hashtags (mit #, z.B. #wichtig #app)</label>
+                    <input type="text" id="edit-hashtags" placeholder="#tag1 #tag2">
+                </div>
+                <div class="form-group">
+                    <label for="edit-flag">Farb-Fähnchen 🚩</label>
+                    <select id="edit-flag">
+                        <option value="">Keins (Grau)</option>
+                        <option value="rot" style="color: var(--flag-red);">🔴 Rot</option>
+                        <option value="grün" style="color: var(--flag-green);">🟢 Grün</option>
+                        <option value="blau" style="color: var(--flag-blue);">🔵 Blau</option>
+                        <option value="gelb" style="color: var(--flag-yellow);">🟡 Gelb</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="edit-category-select">Kategorie wechseln</label>
+                    <select id="edit-category-select">
+                        </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeEditModal()">Abbrechen</button>
+                <button onclick="saveItemChanges()" style="background-color: var(--accent-color); color: white; border: none;">Speichern</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let linkData = [];
+        let draggedCard = null;
+        let showOnlyFavorites = false;
+
+        // Theme umschalten
+        function toggleTheme() {
+            const body = document.body;
+            const current = body.getAttribute('data-theme');
+            body.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+        }
+
+        // Vollbild umschalten
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    alert(`Fehler beim Aktivieren des Vollbildmodus: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // Favoriten Filter global an/aus
+        function toggleFavFilter() {
+            showOnlyFavorites = !showOnlyFavorites;
+            const btn = document.getElementById('fav-filter-btn');
+            if (showOnlyFavorites) {
+                btn.classList.add('active-filter');
+            } else {
+                btn.classList.remove('active-filter');
+            }
+            filterLinks();
+        }
+
+        // JSON Datei einlesen
+        function loadJSON(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    linkData = JSON.parse(e.target.result);
+                    renderDashboard();
+                } catch (error) {
+                    alert("Ungültiges JSON-Format!");
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // Dashboard zeichnen
+        function renderDashboard() {
+            const container = document.getElementById('grid-container');
+            container.innerHTML = '';
+
+            linkData.forEach((category, catIndex) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.id = `cat-card-${catIndex}`;
+                card.setAttribute('draggable', 'true');
+
+                // Drag & Drop für Kategorien
+                card.addEventListener('dragstart', (e) => {
+                    draggedCard = card;
+                    card.classList.add('dragging');
+                    e.dataTransfer.effectAllowed = 'move';
+                });
+                card.addEventListener('dragend', () => {
+                    card.classList.remove('dragging');
+                    draggedCard = null;
+                    rebuildDataFromDOM();
+                });
+                card.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    if (draggedCard && draggedCard !== card) {
+                        const bounding = card.getBoundingClientRect();
+                        const offset = e.clientY - bounding.top;
+                        if (offset > bounding.height / 2) {
+                            card.after(draggedCard);
+                        } else {
+                            card.before(draggedCard);
+                        }
+                    }
+                });
+
+                // Header
+                const header = document.createElement('div');
+                header.className = 'card-header';
+
+                const titleArea = document.createElement('div');
+                titleArea.className = 'card-title-area';
+                
+                const titleSpan = document.createElement('span');
+                titleSpan.className = 'card-title';
+                titleSpan.contentEditable = true;
+                titleSpan.innerText = category.title;
+                titleSpan.addEventListener('blur', () => { category.title = titleSpan.innerText; });
+                
+                const toggleBtn = document.createElement('button');
+                toggleBtn.className = 'toggle-btn';
+                toggleBtn.innerText = '▶';
+                toggleBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    card.classList.toggle('open');
+                    toggleBtn.innerText = card.classList.contains('open') ? '▼' : '▶';
+                };
+
+                titleArea.appendChild(toggleBtn);
+                titleArea.appendChild(titleSpan);
+
+                const headerActions = document.createElement('div');
+                headerActions.className = 'action-btns';
+                
+                const delCatBtn = document.createElement('button');
+                delCatBtn.className = 'small-btn';
+                delCatBtn.innerText = '🗑️';
+                delCatBtn.style.color = '#ef4444';
+                delCatBtn.onclick = () => {
+                    if(confirm(`Kategorie "${category.title}" wirklich löschen?`)) {
+                        linkData.splice(catIndex, 1);
+                        renderDashboard();
+                    }
+                };
+                headerActions.appendChild(delCatBtn);
+
+                header.appendChild(titleArea);
+                header.appendChild(headerActions);
+
+                // Content
+                const content = document.createElement('div');
+                content.className = 'card-content';
+
+                const list = document.createElement('ul');
+                list.className = 'link-list';
+
+                category.links.forEach((link, linkIndex) => {
+                    const item = document.createElement('li');
+                    item.className = 'link-item';
+                    
+                    // Daten-Attribute für Filterung anhängen
+                    item.setAttribute('data-favorite', link.favorite ? 'true' : 'false');
+                    item.setAttribute('data-flag', link.flag || '');
+                    item.setAttribute('data-hashtags', (link.hashtags || '').toLowerCase());
+
+                    const rowMain = document.createElement('div');
+                    rowMain.className = 'link-row-main';
+
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'link-anchor-wrapper';
+
+                    // Favoriten-Stern
+                    const star = document.createElement('span');
+                    star.className = `fav-star ${link.favorite ? 'active' : ''}`;
+                    star.innerText = link.favorite ? '⭐' : '☆';
+                    star.onclick = (e) => {
+                        e.preventDefault();
+                        link.favorite = !link.favorite;
+                        star.className = `fav-star ${link.favorite ? 'active' : ''}`;
+                        star.innerText = link.favorite ? '⭐' : '☆';
+                        item.setAttribute('data-favorite', link.favorite ? 'true' : 'false');
+                        if(showOnlyFavorites) filterLinks();
+                    };
+
+                    // Fähnchen-Symbol anzeigen
+                    const flagSpan = document.createElement('span');
+                    flagSpan.className = 'flag-icon';
+                    if (link.flag) {
+                        flagSpan.innerText = '🚩';
+                        if(link.flag === 'rot') flagSpan.style.color = 'var(--flag-red)';
+                        if(link.flag === 'grün') flagSpan.style.color = 'var(--flag-green)';
+                        if(link.flag === 'blau') flagSpan.style.color = 'var(--flag-blue)';
+                        if(link.flag === 'gelb') flagSpan.style.color = 'var(--flag-yellow)';
+                    } else {
+                        flagSpan.innerText = '';
+                    }
+
+                    const anchor = document.createElement('a');
+                    anchor.className = 'link-anchor';
+                    anchor.href = link.url;
+                    anchor.target = '_blank';
+                    anchor.innerText = `${link.icon || '✨'} ${link.label}`;
+
+                    wrapper.appendChild(star);
+                    wrapper.appendChild(flagSpan);
+                    wrapper.appendChild(anchor);
+
+                    const itemActions = document.createElement('div');
+                    itemActions.className = 'action-btns';
+
+                    // Editier-Button
+                    const editLinkBtn = document.createElement('button');
+                    editLinkBtn.className = 'small-btn';
+                    editLinkBtn.innerText = '✏️';
+                    editLinkBtn.onclick = () => openEditModal(catIndex, linkIndex);
+
+                    const delLinkBtn = document.createElement('button');
+                    delLinkBtn.className = 'small-btn';
+                    delLinkBtn.innerText = '❌';
+                    delLinkBtn.onclick = () => {
+                        category.links.splice(linkIndex, 1);
+                        renderDashboard();
+                    };
+                    
+                    itemActions.appendChild(editLinkBtn);
+                    itemActions.appendChild(delLinkBtn);
+
+                    rowMain.appendChild(wrapper);
+                    rowMain.appendChild(itemActions);
+
+                    // URL Anzeige
+                    const urlDiv = document.createElement('div');
+                    urlDiv.className = 'url-text';
+                    urlDiv.innerText = link.url;
+
+                    // Hashtag Anzeige (falls vorhanden)
+                    const tagsDiv = document.createElement('div');
+                    tagsDiv.className = 'hashtags-display';
+                    tagsDiv.innerText = link.hashtags ? link.hashtags : '';
+
+                    item.appendChild(rowMain);
+                    item.appendChild(urlDiv);
+                    if(link.hashtags) item.appendChild(tagsDiv);
+                    
+                    list.appendChild(item);
+                });
+
+                // Hinzufügen-Bereich für neue Links
+                const addZone = document.createElement('div');
+                addZone.className = 'add-zone';
+                
+                const inputLabel = document.createElement('input');
+                inputLabel.type = 'text';
+                inputLabel.placeholder = 'Label (z.B. App.html)';
+                
+                const inputUrl = document.createElement('input');
+                inputUrl.type = 'text';
+                inputUrl.placeholder = 'https://...';
+
+                const addLinkBtn = document.createElement('button');
+                addLinkBtn.className = 'small-btn';
+                addLinkBtn.innerText = '➕';
+                addLinkBtn.onclick = () => {
+                    if (inputLabel.value.trim() !== "" && inputUrl.value.trim() !== "") {
+                        category.links.push({
+                            label: inputLabel.value.trim(),
+                            url: inputUrl.value.trim(),
+                            icon: '✨',
+                            favorite: false,
+                            flag: '',
+                            hashtags: ''
+                        });
+                        renderDashboard();
+                        document.getElementById(`cat-card-${catIndex}`).classList.add('open');
+                    }
+                };
+
+                addZone.appendChild(inputLabel);
+                addZone.appendChild(inputUrl);
+                addZone.appendChild(addLinkBtn);
+
+                content.appendChild(list);
+                content.appendChild(addZone);
+
+                card.appendChild(header);
+                card.appendChild(content);
+                container.appendChild(card);
+            });
+            
+            filterLinks();
+        }
+
+        // --- MODAL DIALOG STEUERUNG ---
+        function openEditModal(catIndex, linkIndex) {
+            const modal = document.getElementById('editModal');
+            const item = linkData[catIndex].links[linkIndex];
+
+            document.getElementById('edit-cat-index').value = catIndex;
+            document.getElementById('edit-link-index').value = linkIndex;
+
+            document.getElementById('edit-label').value = item.label;
+            document.getElementById('edit-url').value = item.url;
+            document.getElementById('edit-icon').value = item.icon || '✨';
+            document.getElementById('edit-flag').value = item.flag || '';
+            document.getElementById('edit-hashtags').value = item.hashtags || '';
+
+            const select = document.getElementById('edit-category-select');
+            select.innerHTML = '';
+            linkData.forEach((cat, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.text = cat.title;
+                if (index === catIndex) option.selected = true;
+                select.appendChild(option);
+            });
+
+            modal.classList.add('show');
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').classList.remove('show');
+        }
+
+        function saveItemChanges() {
+            const oldCatIndex = parseInt(document.getElementById('edit-cat-index').value);
+            const linkIndex = parseInt(document.getElementById('edit-link-index').value);
+            const newCatIndex = parseInt(document.getElementById('edit-category-select').value);
+
+            const updatedLabel = document.getElementById('edit-label').value.trim();
+            const updatedUrl = document.getElementById('edit-url').value.trim();
+            const updatedIcon = document.getElementById('edit-icon').value.trim();
+            const updatedFlag = document.getElementById('edit-flag').value;
+            const updatedHashtags = document.getElementById('edit-hashtags').value.trim();
+
+            if (!updatedLabel || !updatedUrl) {
+                alert("Label und URL dürfen nicht leer sein!");
+                return;
+            }
+
+            const item = linkData[oldCatIndex].links[linkIndex];
+            
+            item.label = updatedLabel;
+            item.url = updatedUrl;
+            item.icon = updatedIcon;
+            item.flag = updatedFlag;
+            item.hashtags = updatedHashtags;
+
+            if (oldCatIndex !== newCatIndex) {
+                linkData[oldCatIndex].links.splice(linkIndex, 1);
+                linkData[newCatIndex].links.push(item);
+            }
+
+            closeEditModal();
+            renderDashboard();
+
+            const targetCard = document.getElementById(`cat-card-${newCatIndex}`);
+            if (targetCard) {
+                targetCard.classList.add('open');
+                const toggleBtn = targetCard.querySelector('.toggle-btn');
+                if (toggleBtn) toggleBtn.innerText = '▼';
+            }
+        }
+
+        // Live-Filter für Text-Suche, Favoriten, Farb-Fähnchen und Custom Hashtags
+        function filterLinks() {
+            const query = document.getElementById('search').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.card');
+
+            // Prüfen, ob nach einem Standard-Farb-Fähnchen gesucht wird (#rot, #grün, etc.)
+            const flagColors = ['rot', 'grün', 'blau', 'gelb'];
+            let searchForFlag = false;
+            let flagColorQuery = "";
+            
+            if (query.startsWith('#') && flagColors.includes(query.replace('#', ''))) {
+                searchForFlag = true;
+                flagColorQuery = query.replace('#', '');
+            }
+
+            cards.forEach(card => {
+                const title = card.querySelector('.card-title').innerText.toLowerCase();
+                const links = card.querySelectorAll('.link-item');
+                let hasMatch = title.includes(query) && !query.startsWith('#');
+
+                links.forEach(link => {
+                    const label = link.querySelector('.link-anchor').innerText.toLowerCase();
+                    const url = link.querySelector('.url-text').innerText.toLowerCase();
+                    const tags = link.getAttribute('data-hashtags');
+                    const isFav = link.getAttribute('data-favorite') === 'true';
+                    const flagColor = link.getAttribute('data-flag');
+
+                    // 1. Favoriten Filter
+                    let passFav = true;
+                    if (showOnlyFavorites && !isFav) {
+                        passFav = false;
+                    }
+
+                    // 2. Text-, Fähnchen- oder Hashtag-Suche
+                    let passQuery = false;
+                    if (searchForFlag) {
+                        // Matcht das Farb-Fähnchen
+                        if (flagColor === flagColorQuery) passQuery = true;
+                    } else {
+                        // Matcht Text in Label, URL ODER im eigenen Hashtag-String
+                        if (label.includes(query) || url.includes(query) || tags.includes(query)) {
+                            passQuery = true;
+                        }
+                    }
+
+                    if (passFav && passQuery) {
+                        link.style.display = 'flex';
+                        hasMatch = true;
+                    } else {
+                        link.style.display = 'none';
+                    }
+                });
+
+                if (hasMatch) {
+                    card.style.display = 'block';
+                    if (query.length > 0 || showOnlyFavorites) {
+                        card.classList.add('open');
+                        const toggleBtn = card.querySelector('.toggle-btn');
+                        if(toggleBtn) toggleBtn.innerText = '▼';
+                    }
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Sortieren (A-Z)
+        function sortAll() {
+            linkData.sort((a, b) => a.title.localeCompare(b.title));
+            linkData.forEach(cat => {
+                cat.links.sort((a, b) => a.label.localeCompare(b.label));
+            });
+            renderDashboard();
+        }
+
+        // Alle Karten umschalten
+        let allOpen = false;
+        function toggleAllCards() {
+            allOpen = !allOpen;
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const toggleBtn = card.querySelector('.toggle-btn');
+                if (allOpen) {
+                    card.classList.add('open');
+                    if(toggleBtn) toggleBtn.innerText = '▼';
+                } else {
+                    card.classList.remove('open');
+                    if(toggleBtn) toggleBtn.innerText = '▶';
+                }
+            });
+        }
+
+        // Neue Kategorie hinzufügen
+        function addNewCategory() {
+            const name = prompt("Name der neuen Kategorie:");
+            if (name && name.trim() !== "") {
+                linkData.push({
+                    title: name.trim(),
+                    links: []
+                });
+                renderDashboard();
+                const lastCard = document.getElementById(`cat-card-${linkData.length - 1}`);
+                if (lastCard) lastCard.classList.add('open');
+            }
+        }
+
+        // Reihenfolge nach Drag & Drop synchronisieren
+        function rebuildDataFromDOM() {
+            const newLinkData = [];
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                const title = card.querySelector('.card-title').innerText;
+                const originalCat = linkData.find(c => c.title === title);
+                if (originalCat) {
+                    newLinkData.push(originalCat);
+                }
+            });
+            linkData = newLinkData;
+        }
+
+        // JSON Speichern & Downloaden
+        function saveJSON() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(linkData, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", "links.json");
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        // Beispieldaten laden
+        window.onload = () => {
+            linkData = [
+                {
+                    "title": "Vorschau-Kategorie (Bitte deine links.json laden)",
+                    "links": [
+                        { "label": "Beispiel Link", "url": "https://google.com", "icon": "✨", "favorite": true, "flag": "rot", "hashtags": "#wichtig #suche" }
+                    ]
+                }
+            ];
+            renderDashboard();
+        };
+    </script>
+</body>
+</html>
