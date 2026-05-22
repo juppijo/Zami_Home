@@ -7,7 +7,10 @@
     <style>
         :root {
             --bg-color: #f4f7f6;
-            --panel-bg: #ffffff;
+            --bg1-color: #c4c7ff;
+            --bg2-color: #bbbbff;
+
+            --panel-bg: #eeeeff;
             --text-color: #2c3e50;
             --accent-color: #00b4d8;
             --border-color: #e2e8f0;
@@ -24,7 +27,10 @@
 
         [data-theme="dark"] {
             --bg-color: #121824;
-            --panel-bg: #1e293b;
+            --bg1-color: #121855;
+            --bg2-color: #000088;
+
+            --panel-bg: #1e2945;
             --text-color: #f8fafc;
             --accent-color: #38bdf8;
             --border-color: #334155;
@@ -39,7 +45,9 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
+
+            background-color: var(--bg2-color);
+
             color: var(--text-color);
             transition: var(--transition);
             padding-bottom: 50px;
@@ -47,6 +55,7 @@
 
         header {
             background-color: var(--panel-bg);
+
             border-bottom: 1px solid var(--border-color);
             padding: 15px 25px;
             display: flex;
