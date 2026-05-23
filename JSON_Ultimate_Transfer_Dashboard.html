@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Link-Vergleicher & Transfer-Editor</title>
+    <style>
+        :root {
+            --bg-color: #f0f6f7;
+            --panel-bg: #ffffff;
+            --primary-color: #00a896; /* Blau-Türkis */
+            --primary-dark: #028090;
+            --primary-light: #e0f2f1;
+            --text-color: #2c3e50;
+            --text-muted: #7f8c8d;
+            --accent-removed: #e74c3c;
+            --accent-added: #2ecc71;
+            --accent-transfer: #3498db;
+            --border-color: #d1e8e8;
+            --shadow: 0 4px 15px rgba(2, 128, 144, 0.08);
+            --radius: 12px;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #12181a;
+            --panel-bg: #1a2426;
+            --primary-color: #00c4b0;
+            --primary-dark: #00e5cf;
+            --primary-light: #1c3335;
+            --text-color: #e2f1f1;
+            --text-muted: #a0b2b2;
+            --accent-removed: #ff6b6b;
+            --accent-added: #2ecc71;
+            --accent-transfer: #5dade2;
+            --border-color: #2c3d40;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 30px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+            padding: 30px;
+            border-radius: var(--radius);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .header-text h1 {
+            font-size: 22pt;
+            font-weight: 600;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .header-text p {
+            font-size: 11pt;
+            opacity: 0.9;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-action {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 10.5pt;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-action:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .btn-download {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 9.5pt;
+            margin-top: 10px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn-download:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .upload-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .upload-card {
+            background-color: var(--panel-bg);
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .upload-card h3 {
+            font-size: 12pt;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+        }
+
+        .control-panel {
+            background-color: var(--panel-bg);
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 11pt;
+            color: var(--primary-color);
+        }
+
+        select, input[type="file"], input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 11pt;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--panel-bg);
+            color: var(--text-color);
+            outline: none;
+        }
+
+        select:focus, input[type="text"]:focus {
+            border-color: var(--primary-color);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background-color: var(--panel-bg);
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            border-bottom: 4px solid var(--border-color);
+        }
+
+        .stat-card.primary { border-bottom-color: var(--primary-color); }
+        .stat-card.added { border-bottom-color: var(--accent-added); }
+        .stat-card.removed { border-bottom-color: var(--accent-removed); }
+
+        .stat-val {
+            font-size: 24pt;
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 4px;
+        }
+        
+        .stat-card.added .stat-val { color: var(--accent-added); }
+        .stat-card.removed .stat-val { color: var(--accent-removed); }
+
+        .stat-label {
+            font-size: 9.5pt;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Form Inline */
+        .inline-creator {
+            background-color: var(--panel-bg);
+            padding: 15px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            border: 1px dashed var(--primary-color);
+        }
+        .inline-creator h4 {
+            font-size: 11pt;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+        .creator-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 10px;
+            align-items: end;
+        }
+        .btn-add-now {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-add-now:hover { background-color: var(--primary-dark); }
+
+        .results-section {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        @media (min-width: 850px) {
+            .results-section {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .result-block {
+            background-color: var(--panel-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 20px;
+        }
+
+        .result-block h2 {
+            font-size: 13pt;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .result-block.added-block h2 { color: var(--accent-added); }
+        .result-block.removed-block h2 { color: var(--accent-removed); }
+        .result-block.identical-block h2 { color: var(--primary-color); }
+
+        .link-list {
+            list-style: none;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .link-list::-webkit-scrollbar { width: 6px; }
+        .link-list::-webkit-scrollbar-track { background: transparent; }
+        .link-list::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+
+        .link-item {
+            padding: 12px;
+            border-radius: 6px;
+            background-color: rgba(0, 168, 150, 0.02);
+            margin-bottom: 12px;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .link-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+            gap: 8px;
+        }
+
+        .edit-input-label {
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 11pt;
+            border: 1px solid transparent;
+            background: transparent;
+            padding: 2px 4px;
+            width: 55%;
+        }
+        .edit-input-label:focus {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--primary-color);
+            border-radius: 4px;
+        }
+
+        .category-tag {
+            font-size: 8pt;
+            padding: 1px 6px;
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .url-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .edit-input-url {
+            font-size: 9.5pt;
+            color: var(--primary-dark);
+            background: transparent;
+            border: 1px solid transparent;
+            width: 82%;
+            padding: 2px 4px;
+        }
+        .edit-input-url:focus {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--primary-color);
+            border-radius: 4px;
+        }
+
+        .action-button-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-icon-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 12pt;
+            padding: 2px;
+            opacity: 0.6;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .action-icon-btn:hover {
+            opacity: 1;
+            transform: scale(1.15);
+        }
+        .btn-delete { color: var(--accent-removed); }
+        .btn-transfer { color: var(--accent-transfer); font-size: 13pt; }
+
+        .empty-message {
+            color: var(--text-muted);
+            font-style: italic;
+            text-align: center;
+            padding: 30px 0;
+            font-size: 10.5pt;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 9pt;
+            font-weight: bold;
+            color: white;
+        }
+        .badge.added { background-color: var(--accent-added); }
+        .badge.removed { background-color: var(--accent-removed); }
+        .badge.neutral { background-color: var(--primary-color); }
+    </style>
+</head>
+<body>
+
+<div class="container" id="appContainer">
+    <header>
+        <div class="header-text">
+            <h1>JSON Link-Vergleicher & Transfer-Zentrale</h1>
+            <p>Übertrage fehlende oder neue Links mit einem Klick in die jeweils andere Datei</p>
+        </div>
+        <div class="header-controls">
+            <button class="btn-action" onclick="toggleTheme()" id="themeBtn">🌙 Dark Modus</button>
+            <button class="btn-action" onclick="toggleFullscreen()">📺 Vollbild</button>
+        </div>
+    </header>
+
+    <div class="upload-grid">
+        <div class="upload-card">
+            <div>
+                <h3>📁 Basis-Datei 1 (z.B. links.json)</h3>
+                <input type="file" id="fileInput1" accept=".json" onchange="handleFileUpload(1)">
+            </div>
+            <button class="btn-download" id="dlBtn1" onclick="downloadJSON(1)" disabled>💾 Datei 1 herunterladen</button>
+        </div>
+        <div class="upload-card">
+            <div>
+                <h3>📁 Vergleichs-Datei 2 (z.B. links2.json)</h3>
+                <input type="file" id="fileInput2" accept=".json" onchange="handleFileUpload(2)">
+            </div>
+            <button class="btn-download" id="dlBtn2" onclick="downloadJSON(2)" disabled>💾 Datei 2 herunterladen</button>
+        </div>
+    </div>
+
+    <div class="control-panel">
+        <div class="form-group">
+            <label for="categorySelect">Wähle eine Kategorie zum Vergleichen & Bearbeiten:</label>
+            <select id="categorySelect" onchange="performComparison()">
+                <option value="">-- Bitte lade zuerst JSON-Dateien hoch --</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Neuer Eintrag Creator Panel -->
+    <div class="inline-creator" id="creatorPanel" style="display:none;">
+        <h4>➕ Neuen Link hinzufügen</h4>
+        <div class="creator-row">
+            <div>
+                <label style="font-size:9pt;">Ziel-Datei</label>
+                <select id="creatorTargetFile" style="padding:8px;">
+                    <option value="1">Datei 1</option>
+                    <option value="2">Datei 2</option>
+                    <option value="both">In beide Dateien</option>
+                </select>
+            </div>
+            <div>
+                <label style="font-size:9pt;">Name / Label</label>
+                <input type="text" id="creatorLabel" placeholder="z.B. index.html" style="padding:8px;">
+            </div>
+            <div>
+                <label style="font-size:9pt;">URL-Adresse</label>
+                <input type="text" id="creatorUrl" placeholder="https://..." style="padding:8px;">
+            </div>
+            <button class="btn-add-now" onclick="addNewLinkFromForm()">Hinzufügen</button>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card primary">
+            <div class="stat-val" id="countFile1">0</div>
+            <div class="stat-label">Einträge in Datei 1</div>
+        </div>
+        <div class="stat-card primary">
+            <div class="stat-val" id="countFile2">0</div>
+            <div class="stat-label">Einträge in Datei 2</div>
+        </div>
+        <div class="stat-card added">
+            <div class="stat-val" id="countAdded">0</div>
+            <div class="stat-label">Neu hinzugefügt</div>
+        </div>
+        <div class="stat-card removed">
+            <div class="stat-val" id="countRemoved">0</div>
+            <div class="stat-label">In Datei 2 gelöscht</div>
+        </div>
+    </div>
+
+    <div class="results-section">
+        <div class="result-block added-block">
+            <h2>
+                <span>➕ Nur in Datei 2 (Neu)</span>
+                <span class="badge added" id="badgeAdded">0</span>
+            </h2>
+            <ul class="link-list" id="addedList">
+                <div class="empty-message">Warte auf JSON-Dateien...</div>
+            </ul>
+        </div>
+
+        <div class="result-block removed-block">
+            <h2>
+                <span>❌ Nur in Datei 1 (Fehlt)</span>
+                <span class="badge removed" id="badgeRemoved">0</span>
+            </h2>
+            <ul class="link-list" id="removedList">
+                <div class="empty-message">Warte auf JSON-Dateien...</div>
+            </ul>
+        </div>
+    </div>
+
+    <div class="result-block identical-block" style="margin-top: 25px;">
+        <h2>
+            <span>✅ Gemeinsame Einträge (Identisch)</span>
+            <span class="badge neutral" id="badgeIdentical">0</span>
+        </h2>
+        <ul class="link-list" id="identicalList" style="max-height: 450px;">
+            <div class="empty-message">Warte auf JSON-Dateien...</div>
+        </ul>
+    </div>
+</div>
+
+<script>
+    let dataFile1 = null;
+    let dataFile2 = null;
+    let file1Name = "links.json";
+    let file2Name = "links2.json";
+
+    function handleFileUpload(fileNumber) {
+        const input = document.getElementById('fileInput' + fileNumber);
+        if (!input.files || input.files.length === 0) return;
+        
+        const file = input.files[0];
+        if(fileNumber === 1) file1Name = file.name;
+        else file2Name = file.name;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const parsed = JSON.parse(e.target.result);
+                if (fileNumber === 1) {
+                    dataFile1 = parsed;
+                    document.getElementById('dlBtn1').disabled = false;
+                } else {
+                    dataFile2 = parsed;
+                    document.getElementById('dlBtn2').disabled = false;
+                }
+                
+                document.getElementById('creatorPanel').style.display = 'block';
+                initCategoryDropdown();
+                performComparison();
+            } catch (err) {
+                alert("Fehler beim Parsen der JSON-Datei: " + err.message);
+            }
+        };
+        reader.readAsText(file, "UTF-8");
+    }
+
+    function initCategoryDropdown() {
+        const select = document.getElementById('categorySelect');
+        const previousSelection = select.value;
+        const categories = new Set();
+        
+        if (Array.isArray(dataFile1)) dataFile1.forEach(item => { if(item.title) categories.add(item.title); });
+        if (Array.isArray(dataFile2)) dataFile2.forEach(item => { if(item.title) categories.add(item.title); });
+        
+        select.innerHTML = '';
+        const sortedCategories = Array.from(categories).sort();
+        
+        if(sortedCategories.length === 0) {
+            select.innerHTML = '<option value="">-- Keine Kategorien gefunden --</option>';
+            return;
+        }
+
+        const allOption = document.createElement('option');
+        allOption.value = "__ALL__";
+        allOption.textContent = "✨ ALLE KATEGORIEN AUF EINMAL VERGLEICHEN ✨";
+        if (previousSelection === "__ALL__" || !previousSelection) allOption.selected = true;
+        select.appendChild(allOption);
+
+        sortedCategories.forEach(cat => {
+            const option = document.createElement('option');
+            option.value = cat;
+            option.textContent = "Kategorie: " + cat;
+            if (previousSelection === cat) option.selected = true;
+            select.appendChild(option);
+        });
+    }
+
+    function getLinksMap(data, categoryTitle) {
+        const linksMap = new Map();
+        if (!Array.isArray(data)) return linksMap;
+        
+        data.forEach((item, catIdx) => {
+            if (categoryTitle === "__ALL__" || item.title === categoryTitle) {
+                const currentCat = item.title || "Unbekannt";
+                if (item.links && Array.isArray(item.links)) {
+                    item.links.forEach((link, linkIdx) => {
+                        if (link.url) {
+                            const uniqueKey = currentCat + ":::" + link.url;
+                            linksMap.set(uniqueKey, {
+                                url: link.url,
+                                category: currentCat,
+                                label: link.label || 'Unbenannter Link',
+                                icon: link.icon || '✨',
+                                catIdx: catIdx,
+                                linkIdx: linkIdx
+                            });
+                        }
+                    });
+                }
+            }
+        });
+        return linksMap;
+    }
+
+    // Erzeugt Einträge für "Neu" oder "Fehlt" mit einem zusätzlichen Transfer-Button
+    function createEditableLinkHTML(info, originFileNum, uniqueId) {
+        // Richtungs-Symbol bestimmen: Aus Datei 2 nach Datei 1 (⬅️) oder aus Datei 1 nach Datei 2 (➡️)
+        const transferIcon = (originFileNum === 2) ? "⬅️" : "➡️";
+        const transferTitle = (originFileNum === 2) ? "In Basis-Datei 1 kopieren" : "In Vergleichs-Datei 2 kopieren";
+
+        return `
+            <li class="link-item" id="item-${uniqueId}">
+                <div class="link-header">
+                    <input type="text" class="edit-input-label" value="${info.label}" 
+                        onchange="updateLiveEntry(${originFileNum}, ${info.catIdx}, ${info.linkIdx}, 'label', this.value)">
+                    <div class="action-button-group">
+                        <span class="category-tag">${info.category}</span>
+                        <button class="action-icon-btn btn-transfer" onclick="transferLiveEntry(${originFileNum}, '${escapeHtml(info.category)}', '${escapeHtml(info.label)}', '${escapeHtml(info.url)}')" title="${transferTitle}">${transferIcon}</button>
+                        <button class="action-icon-btn btn-delete" onclick="deleteLiveEntry(${originFileNum}, ${info.catIdx}, ${info.linkIdx})" title="Eintrag löschen">🗑️</button>
+                    </div>
+                </div>
+                <div class="url-row">
+                    <input type="text" class="edit-input-url" value="${info.url}" 
+                        onchange="updateLiveEntry(${originFileNum}, ${info.catIdx}, ${info.linkIdx}, 'url', this.value)">
+                    <a href="${info.url}" target="_blank">🔗</a>
+                </div>
+            </li>
+        `;
+    }
+
+    function createIdenticalLinkHTML(info, uniqueId) {
+        return `
+            <li class="link-item" id="item-${uniqueId}">
+                <div class="link-header">
+                    <input type="text" class="edit-input-label" value="${info.label}" 
+                        onchange="updateIdenticalEntry(${info.catIdxFile1}, ${info.linkIdxFile1}, ${info.catIdxFile2}, ${info.linkIdxFile2}, 'label', this.value)">
+                    <div class="action-button-group">
+                        <span class="category-tag">${info.category}</span>
+                        <button class="action-icon-btn btn-delete" onclick="deleteIdenticalEntry(${info.catIdxFile1}, ${info.linkIdxFile1}, ${info.catIdxFile2}, ${info.linkIdxFile2})" title="Aus beiden löschen">🗑️</button>
+                    </div>
+                </div>
+                <div class="url-row">
+                    <input type="text" class="edit-input-url" value="${info.url}" 
+                        onchange="updateIdenticalEntry(${info.catIdxFile1}, ${info.linkIdxFile1}, ${info.catIdxFile2}, ${info.linkIdxFile2}, 'url', this.value)">
+                    <a href="${info.url}" target="_blank">🔗</a>
+                </div>
+            </li>
+        `;
+    }
+
+    function performComparison() {
+        const selectedCategory = document.getElementById('categorySelect').value;
+        if (!selectedCategory) return;
+
+        const map1 = getLinksMap(dataFile1, selectedCategory);
+        const map2 = getLinksMap(dataFile2, selectedCategory);
+        
+        document.getElementById('countFile1').textContent = map1.size;
+        document.getElementById('countFile2').textContent = map2.size;
+        
+        const addedList = document.getElementById('addedList');
+        const removedList = document.getElementById('removedList');
+        const identicalList = document.getElementById('identicalList');
+        
+        addedList.innerHTML = '';
+        removedList.innerHTML = '';
+        identicalList.innerHTML = '';
+        
+        let addedCount = 0;
+        let removedCount = 0;
+        let identicalCount = 0;
+        let idCounter = 0;
+        
+        map2.forEach((info, key) => {
+            if (!map1.has(key)) {
+                addedList.innerHTML += createEditableLinkHTML(info, 2, 'add-' + idCounter++);
+                addedCount++;
+            } else {
+                const info1 = map1.get(key);
+                const combinedInfo = {
+                    url: info.url,
+                    category: info.category,
+                    label: info.label,
+                    catIdxFile1: info1.catIdx,
+                    linkIdxFile1: info1.linkIdx,
+                    catIdxFile2: info.catIdx,
+                    linkIdxFile2: info.linkIdx
+                };
+                identicalList.innerHTML += createIdenticalLinkHTML(combinedInfo, 'idnt-' + idCounter++);
+                identicalCount++;
+            }
+        });
+        
+        map1.forEach((info, key) => {
+            if (!map2.has(key)) {
+                removedList.innerHTML += createEditableLinkHTML(info, 1, 'rem-' + idCounter++);
+                removedCount++;
+            }
+        });
+        
+        document.getElementById('countAdded').textContent = addedCount;
+        document.getElementById('countRemoved').textContent = removedCount;
+        document.getElementById('badgeAdded').textContent = addedCount;
+        document.getElementById('badgeRemoved').textContent = removedCount;
+        document.getElementById('badgeIdentical').textContent = identicalCount;
+        
+        if (addedCount === 0) addedList.innerHTML = '<div class="empty-message">Keine neuen Einträge.</div>';
+        if (removedCount === 0) removedList.innerHTML = '<div class="empty-message">Keine fehlenden Einträge.</div>';
+        if (identicalCount === 0) identicalList.innerHTML = '<div class="empty-message">Keine gemeinsamen Einträge.</div>';
+    }
+
+    // Die smarte Transfer-Funktion
+    function transferLiveEntry(originFileNum, category, label, url) {
+        // Wenn Herkunft Datei 2 ist, wollen wir nach Datei 1 kopieren, und umgekehrt
+        let destinationData = (originFileNum === 2) ? dataFile1 : dataFile2;
+        if (!destinationData) {
+            alert("Die Zieldatei ist nicht geladen!");
+            return;
+        }
+
+        // Finde die Kategorie in der Zieldatei oder erstelle sie neu
+        let targetCategoryObj = destinationData.find(item => item.title === category);
+        if (!targetCategoryObj) {
+            targetCategoryObj = { title: category, links: [] };
+            destinationData.push(targetCategoryObj);
+        }
+
+        // Füge den Eintrag in die Liste der Zieldatei ein
+        targetCategoryObj.links.push({
+            label: label,
+            url: url,
+            icon: "✨"
+        });
+
+        // Ansicht sofort live aktualisieren – der Eintrag springt nun automatisch zu "Gemeinsame Einträge"
+        initCategoryDropdown();
+        performComparison();
+    }
+
+    function updateLiveEntry(fileNum, catIdx, linkIdx, field, newValue) {
+        let targetData = (fileNum === 1) ? dataFile1 : dataFile2;
+        if (targetData && targetData[catIdx] && targetData[catIdx].links[linkIdx]) {
+            targetData[catIdx].links[linkIdx][field] = newValue;
+            setTimeout(performComparison, 500);
+        }
+    }
+
+    function updateIdenticalEntry(catIdx1, linkIdx1, catIdx2, linkIdx2, field, newValue) {
+        if (dataFile1 && dataFile1[catIdx1] && dataFile1[catIdx1].links[linkIdx1]) {
+            dataFile1[catIdx1].links[linkIdx1][field] = newValue;
+        }
+        if (dataFile2 && dataFile2[catIdx2] && dataFile2[catIdx2].links[linkIdx2]) {
+            dataFile2[catIdx2].links[linkIdx2][field] = newValue;
+        }
+        setTimeout(performComparison, 500);
+    }
+
+    function deleteLiveEntry(fileNum, catIdx, linkIdx) {
+        let targetData = (fileNum === 1) ? dataFile1 : dataFile2;
+        if (targetData && targetData[catIdx] && targetData[catIdx].links) {
+            targetData[catIdx].links.splice(linkIdx, 1);
+            performComparison();
+        }
+    }
+
+    function deleteIdenticalEntry(catIdx1, linkIdx1, catIdx2, linkIdx2) {
+        if (dataFile1 && dataFile1[catIdx1] && dataFile1[catIdx1].links) {
+            dataFile1[catIdx1].links.splice(linkIdx1, 1);
+        }
+        if (dataFile2 && dataFile2[catIdx2] && dataFile2[catIdx2].links) {
+            dataFile2[catIdx2].links.splice(linkIdx2, 1);
+        }
+        performComparison();
+    }
+
+    function addNewLinkFromForm() {
+        const targetFile = document.getElementById('creatorTargetFile').value;
+        const label = document.getElementById('creatorLabel').value.trim();
+        const url = document.getElementById('creatorUrl').value.trim();
+        let selectedCategory = document.getElementById('categorySelect').value;
+
+        if(!label || !url) {
+            alert("Bitte gib ein Label und eine URL ein.");
+            return;
+        }
+        if (selectedCategory === "__ALL__") selectedCategory = "Allgemein";
+
+        const newLinkObj = { label: label, url: url, icon: "✨" };
+
+        function injectIntoFile(data) {
+            if (!Array.isArray(data)) return;
+            let categoryObj = data.find(item => item.title === selectedCategory);
+            if (!categoryObj) {
+                categoryObj = { title: selectedCategory, links: [] };
+                data.push(categoryObj);
+            }
+            categoryObj.links.push(newLinkObj);
+        }
+
+        if (targetFile === "1" || targetFile === "both") { if(dataFile1) injectIntoFile(dataFile1); }
+        if (targetFile === "2" || targetFile === "both") { if(dataFile2) injectIntoFile(dataFile2); }
+
+        document.getElementById('creatorLabel').value = '';
+        document.getElementById('creatorUrl').value = '';
+        
+        initCategoryDropdown();
+        document.getElementById('categorySelect').value = selectedCategory;
+        performComparison();
+    }
+
+    function downloadJSON(fileNumber) {
+        const targetData = (fileNumber === 1) ? dataFile1 : dataFile2;
+        const originalName = (fileNumber === 1) ? file1Name : file2Name;
+        if (!targetData) return;
+
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(targetData, null, 2));
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute("download", originalName);
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+    }
+
+    function escapeHtml(str) {
+        return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+
+    function toggleTheme() {
+        const body = document.body;
+        const btn = document.getElementById('themeBtn');
+        if (body.getAttribute('data-theme') === 'dark') {
+            body.removeAttribute('data-theme');
+            btn.textContent = '🌙 Dark Modus';
+        } else {
+            body.setAttribute('data-theme', 'dark');
+            btn.textContent = '☀️ Hell Modus';
+        }
+    }
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
+</script>
+
+</body>
+</html>
