@@ -4,721 +4,881 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jupp's Link Hub</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #0d0d14;
-  --bg2: #13131e;
-  --bg3: #1b1b29;
-  --text: #e4e4f0;
-  --text2: #8888a8;
-  --border: #252535;
-  --shadow: rgba(0,0,0,0.6);
-  --modal-bg: #181826;
-  --input-bg: #0d0d18;
-  --header-h: 58px;
-  --radius: 8px;
+:root{
+  --bg:#0d0d14;--bg2:#12121c;--bg3:#1a1a28;--bg4:#222234;
+  --text:#e2e2f0;--text2:#8888aa;--border:#252538;
+  --shadow:rgba(0,0,0,.6);--modal:#161624;--input:#0d0d18;
+  --hh:56px;--fh:42px;--r:8px;
 }
-[data-theme="light"] {
-  --bg: #ebebf5;
-  --bg2: #ffffff;
-  --bg3: #e0e0ee;
-  --text: #16162a;
-  --text2: #5a5a78;
-  --border: #ccccde;
-  --shadow: rgba(0,0,0,0.1);
-  --modal-bg: #f8f8ff;
-  --input-bg: #f0f0f8;
+[data-theme=light]{
+  --bg:#eeeef8;--bg2:#fff;--bg3:#e4e4f2;--bg4:#d8d8ec;
+  --text:#141428;--text2:#5a5a78;--border:#cccce0;
+  --shadow:rgba(0,0,0,.1);--modal:#f6f6ff;--input:#ededf8;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
-body{
-  font-family:'DM Mono',monospace;
-  background:var(--bg);
-  color:var(--text);
-  font-size:13px;
-  transition:background .25s,color .25s;
-}
+body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--text);font-size:12px;transition:background .25s,color .25s}
 
-/* ─── HEADER ─── */
-header{
-  position:sticky;top:0;z-index:100;
-  height:var(--header-h);
-  background:var(--bg2);
+/* ── HEADER ─────────────────────────────────────── */
+#topbar{
+  position:sticky;top:0;z-index:200;
+  height:var(--hh);background:var(--bg2);
   border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:10px;
-  padding:0 18px;
-  backdrop-filter:blur(12px);
+  display:flex;align-items:center;gap:8px;padding:0 14px;
 }
-.logo{
-  font-family:'Syne',sans-serif;
-  font-weight:800;font-size:17px;
-  letter-spacing:-0.5px;
-  white-space:nowrap;
-  user-select:none;
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;letter-spacing:-.5px;white-space:nowrap;user-select:none}
+.logo b{color:#818cf8}
+.srchw{flex:1;max-width:360px;position:relative}
+.srchw input{
+  width:100%;background:var(--input);border:1px solid var(--border);
+  border-radius:6px;padding:5px 10px 5px 28px;
+  color:var(--text);font-family:'DM Mono',monospace;font-size:11px;outline:none;
+  transition:border-color .15s;
 }
-.logo span{color:#818cf8}
-.search-wrap{flex:1;max-width:380px}
-.search-wrap input{
-  width:100%;
-  background:var(--input-bg);
-  border:1px solid var(--border);
-  border-radius:6px;
-  padding:6px 12px 6px 32px;
-  color:var(--text);
-  font-family:'DM Mono',monospace;
-  font-size:12px;outline:none;
-  transition:border-color .2s;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='%238888a8' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zm-5.242 1.656a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:10px center;
+.srchw input:focus{border-color:#818cf8}
+.srchw input::placeholder{color:var(--text2)}
+.srchw::before{content:'⌕';position:absolute;left:8px;top:50%;transform:translateY(-50%);color:var(--text2);font-size:14px;pointer-events:none}
+#statsBar{font-size:10px;color:var(--text2);white-space:nowrap}
+.topbtns{display:flex;gap:5px;margin-left:auto;flex-shrink:0}
+.ib{
+  background:var(--bg3);border:1px solid var(--border);border-radius:6px;
+  padding:4px 8px;cursor:pointer;color:var(--text2);font-size:13px;
+  line-height:1;transition:all .15s;display:flex;align-items:center;gap:4px;
 }
-.search-wrap input:focus{border-color:#818cf8}
-.search-wrap input::placeholder{color:var(--text2)}
-.stats{font-size:11px;color:var(--text2);white-space:nowrap}
-.hdr-btns{display:flex;gap:6px;margin-left:auto;flex-shrink:0}
-.ibtn{
-  background:var(--bg3);
-  border:1px solid var(--border);
-  border-radius:6px;
-  padding:5px 9px;cursor:pointer;
-  color:var(--text2);font-size:15px;
-  line-height:1;transition:all .15s;
-  display:flex;align-items:center;gap:4px;
-}
-.ibtn:hover{color:var(--text);border-color:#818cf8}
-.ibtn .lbl{font-size:10px;font-family:'DM Mono',monospace}
-.btn-add-cat{
-  background:#818cf8;color:#fff;
-  border:none;border-radius:6px;
-  padding:5px 11px;
-  font-size:11px;font-family:'DM Mono',monospace;
-  cursor:pointer;white-space:nowrap;
-  transition:background .15s;
-}
-.btn-add-cat:hover{background:#6366f1}
+.ib:hover{color:var(--text);border-color:#818cf8}
+.ib .t{font-size:10px;font-family:'DM Mono',monospace}
+.ib.green{color:#4ade80;border-color:rgba(74,222,128,.3)}
+.ib.green:hover{border-color:#4ade80}
+.ib.blue{color:#38bdf8;border-color:rgba(56,189,248,.3)}
+.ib.blue:hover{border-color:#38bdf8}
+.ib.red{color:#ef4444;border-color:rgba(239,68,68,.2)}
+.ib.red:hover{border-color:#ef4444}
+.btn-new{background:#818cf8;color:#fff;border:none;border-radius:6px;padding:4px 10px;font-size:10px;font-family:'DM Mono',monospace;cursor:pointer;transition:background .15s;white-space:nowrap}
+.btn-new:hover{background:#6366f1}
 
-/* ─── MAIN ─── */
-main{
-  padding:20px 20px 40px;
-  max-width:1700px;
-  margin:0 auto;
+/* ── FILTER BAR ──────────────────────────────────── */
+#filterbar{
+  position:sticky;top:var(--hh);z-index:190;
+  height:var(--fh);background:var(--bg2);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:6px;
+  padding:0 14px;overflow-x:auto;
 }
-
-/* ─── CATEGORY ─── */
-.cat-section{margin-bottom:26px}
-.cat-section.hidden{display:none}
-.cat-hdr{
-  display:flex;align-items:center;gap:8px;
-  margin-bottom:9px;padding-bottom:8px;
-  border-bottom:2px solid var(--cc,#818cf8);
-}
-.cat-ico{font-size:17px;line-height:1}
-.cat-name{
-  font-family:'Syne',sans-serif;
-  font-weight:700;font-size:14px;
-  color:var(--cc,#818cf8);
-  letter-spacing:.2px;
-}
-.cat-badge{
-  font-size:10px;color:var(--text2);
-  background:var(--bg3);
-  padding:1px 7px;border-radius:10px;
-}
-.cat-actions{margin-left:auto;display:flex;gap:6px}
-.cat-btn{
-  border-radius:5px;padding:3px 10px;
-  font-size:10px;cursor:pointer;
+#filterbar::-webkit-scrollbar{height:3px}
+#filterbar::-webkit-scrollbar-thumb{background:var(--border)}
+.fsep{width:1px;height:18px;background:var(--border);flex-shrink:0}
+.ftoggle{
+  border:1px solid var(--border);border-radius:5px;
+  padding:3px 9px;cursor:pointer;font-size:10px;
+  background:var(--bg3);color:var(--text2);
+  white-space:nowrap;transition:all .15s;flex-shrink:0;
   font-family:'DM Mono',monospace;
+}
+.ftoggle:hover{border-color:#818cf8;color:var(--text)}
+.ftoggle.on{background:#818cf8;color:#fff;border-color:#818cf8}
+.flag-dot{
+  display:inline-block;width:10px;height:10px;border-radius:50%;
+  border:2px solid transparent;cursor:pointer;flex-shrink:0;
   transition:all .15s;
 }
-.cat-btn-add{
-  background:transparent;
-  border:1px solid var(--cc,#818cf8);
-  color:var(--cc,#818cf8);
+.flag-dot.on{border-color:var(--text)!important}
+.flag-dot:hover{transform:scale(1.3)}
+.ftag{
+  border:1px solid var(--border);border-radius:4px;
+  padding:2px 7px;cursor:pointer;font-size:9px;
+  background:var(--bg3);color:var(--text2);
+  white-space:nowrap;transition:all .15s;flex-shrink:0;
 }
+.ftag:hover{border-color:#818cf8;color:var(--text)}
+.ftag.on{background:#818cf8;color:#fff;border-color:#818cf8}
+.flbl{font-size:9px;color:var(--text2);white-space:nowrap;flex-shrink:0}
+
+/* ── MAIN ────────────────────────────────────────── */
+#main{padding:16px 16px 40px;max-width:1800px;margin:0 auto}
+
+/* ── CATEGORY ────────────────────────────────────── */
+.cats{margin-bottom:20px}
+.cats.drag-over-cat > .cat-hdr{background:rgba(129,140,248,.08)!important;border-radius:var(--r)}
+.cat-hdr{
+  display:flex;align-items:center;gap:7px;
+  margin-bottom:0;padding:6px 4px;
+  border-bottom:2px solid var(--cc,#818cf8);
+  cursor:pointer;user-select:none;
+  transition:background .15s;border-radius:var(--r) var(--r) 0 0;
+}
+.cat-hdr:hover{background:rgba(128,128,200,.04)}
+.drag-handle{color:var(--text2);font-size:12px;cursor:grab;padding:0 2px;flex-shrink:0}
+.drag-handle:active{cursor:grabbing}
+.cat-ico{font-size:16px;line-height:1;flex-shrink:0}
+.cat-name{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--cc,#818cf8)}
+.cat-count{font-size:9px;color:var(--text2);background:var(--bg3);padding:1px 6px;border-radius:10px}
+.cat-arrow{font-size:11px;color:var(--text2);transition:transform .2s;flex-shrink:0}
+.cats.collapsed .cat-arrow{transform:rotate(-90deg)}
+.cats.collapsed .cat-grid{display:none}
+.cat-actions{margin-left:auto;display:flex;gap:5px}
+.cat-btn{
+  border-radius:4px;padding:2px 8px;font-size:9px;cursor:pointer;
+  font-family:'DM Mono',monospace;transition:all .15s;
+}
+.cat-btn-add{background:transparent;border:1px solid var(--cc,#818cf8);color:var(--cc,#818cf8)}
 .cat-btn-add:hover{background:var(--cc,#818cf8);color:#0d0d14}
-.cat-btn-del{
-  background:transparent;
-  border:1px solid var(--border);
-  color:var(--text2);
-}
+.cat-btn-del{background:transparent;border:1px solid var(--border);color:var(--text2)}
 .cat-btn-del:hover{border-color:#ef4444;color:#ef4444}
 
-/* ─── GRID ─── */
-.cards-grid{
+/* ── CARD GRID ───────────────────────────────────── */
+.cat-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(148px,1fr));
-  gap:7px;
+  grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
+  gap:6px;padding-top:8px;
+}
+.cat-grid.drag-over-grid{
+  outline:2px dashed var(--cc,#818cf8);
+  outline-offset:3px;border-radius:var(--r);
 }
 
-/* ─── CARD ─── */
+/* ── CARD ────────────────────────────────────────── */
 .card{
   position:relative;
 
-  background: color-mix(in srgb, var(--cc, #818cf8) 60%, black);
+  /*background:var(--bg2);*/
+  background: color-mix(in srgb, var(--cc, #818cf8) 70%, black);
 
   border:1px solid var(--border);
   border-left:3px solid var(--cc,#818cf8);
-  border-radius:var(--radius);
-  padding:9px 10px 9px 11px;
+  border-radius:var(--r);
+  padding:8px 9px 8px 10px;
   cursor:pointer;
-  transition:transform .15s,box-shadow .15s,border-color .15s;
-  display:flex;flex-direction:column;gap:4px;
-  min-height:58px;
-  overflow:hidden;
+  display:flex;flex-direction:column;gap:3px;
+  min-height:54px;overflow:hidden;
+  transition:transform .12s,box-shadow .12s,border-color .12s,opacity .2s;
 }
-.card::after{
-  content:'';position:absolute;inset:0;
-  background:var(--cc,#818cf8);
-  opacity:0;transition:opacity .15s;
-  pointer-events:none;
-}
-.card:hover{
-  border-color:var(--cc,#818cf8);
-  transform:translateY(-2px);
-  box-shadow:0 5px 20px var(--shadow);
-}
+.card::after{content:'';position:absolute;inset:0;background:var(--cc,#818cf8);opacity:0;transition:opacity .12s;pointer-events:none}
+.card:hover{border-color:var(--cc,#818cf8);transform:translateY(-1px);box-shadow:0 4px 18px var(--shadow)}
 .card:hover::after{opacity:.04}
-.card.hidden{display:none}
-.card-ico{font-size:25px;line-height:2}
-.card-lbl{
-  font-size:11px;
-  color:var(--text);
-  word-break:break-word;line-height:1.35;
-  font-weight:400;
+.card.drag-source{opacity:.4;transform:scale(.97)}
+.card.drag-over{outline:2px solid var(--cc,#818cf8);outline-offset:2px}
+.card.hidden-card{opacity:.35}
+.card.hidden-card::before{content:'👁';position:absolute;top:3px;left:3px;font-size:9px;opacity:.7}
+/* indicators */
+.card-flag{position:absolute;top:5px;right:5px;width:7px;height:7px;border-radius:50%;z-index:1}
+.card-fav{position:absolute;top:5px;right:15px;font-size:9px;z-index:1;opacity:.8}
+/* content */
+.card-ico{font-size:24px;line-height:1}
+.card-lbl{font-size:10.5px;color:var(--text);word-break:break-word;line-height:1.3;padding-right:14px}
+.card-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:2px}
+.ctag{font-size:8px;background:var(--bg4);color:var(--text2);border-radius:3px;padding:1px 4px}
+/* hover buttons */
+.card-acts{
+  position:absolute;bottom:5px;right:5px;
+  display:flex;gap:3px;opacity:0;transition:opacity .12s;z-index:2;
 }
-.card-lbl-full{font-size:9.5px;color:var(--text2);word-break:break-all;line-height:1.2;display:none}
+.card:hover .card-acts{opacity:1}
+.card-act{
+  background:var(--bg3);border:1px solid var(--border);border-radius:3px;
+  padding:2px 5px;font-size:9px;cursor:pointer;color:var(--text2);
+  font-family:'DM Mono',monospace;transition:all .12s;
+}
+.card-act:hover{color:var(--text);border-color:#818cf8}
 
-/* edit btn */
-.card-edit{
-  position:absolute;top:5px;right:5px;
-  background:var(--bg3);border:1px solid var(--border);
-  border-radius:4px;padding:2px 7px;
-  font-size:9px;cursor:pointer;color:var(--text2);
-  opacity:0;transition:opacity .15s;z-index:2;
-  font-family:'DM Mono',monospace;
-}
-.card:hover .card-edit{opacity:1}
-.card-edit:hover{color:var(--text);border-color:#818cf8}
-
-/* ─── MODAL ─── */
-.overlay{
-  display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,.72);z-index:500;
-  align-items:center;justify-content:center;
-  backdrop-filter:blur(5px);
-}
-.overlay.active{display:flex}
-.modal{
-  background:var(--modal-bg);
-  border:1px solid var(--border);
-  border-radius:12px;padding:24px;
-  min-width:340px;max-width:460px;width:92%;
-  box-shadow:0 24px 70px rgba(0,0,0,.5);
-  animation:modalIn .2s ease;
-}
-@keyframes modalIn{from{transform:scale(.95) translateY(8px);opacity:0}to{transform:none;opacity:1}}
-.modal h3{
-  font-family:'Syne',sans-serif;
-  font-size:15px;font-weight:700;
-  margin-bottom:16px;color:var(--text);
-}
-.fg{margin-bottom:12px}
-.fg label{
-  display:block;font-size:10px;
-  color:var(--text2);margin-bottom:4px;
-  text-transform:uppercase;letter-spacing:.6px;
-}
-.fg input,.fg select{
-  width:100%;
-  background:var(--input-bg);
-  border:1px solid var(--border);
-  border-radius:6px;padding:8px 10px;
-  color:var(--text);
-  font-family:'DM Mono',monospace;
-  font-size:12px;outline:none;
+/* ── MODALS ──────────────────────────────────────── */
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:500;align-items:center;justify-content:center;backdrop-filter:blur(5px)}
+.ov.on{display:flex}
+.modal{background:var(--modal);border:1px solid var(--border);border-radius:12px;padding:22px;min-width:340px;max-width:460px;width:92%;box-shadow:0 24px 70px rgba(0,0,0,.5);animation:mIn .2s ease}
+@keyframes mIn{from{transform:scale(.95) translateY(8px);opacity:0}to{transform:none;opacity:1}}
+.modal h3{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:14px;color:var(--text)}
+.fg{margin-bottom:10px}
+.fg label{display:block;font-size:9px;color:var(--text2);margin-bottom:3px;text-transform:uppercase;letter-spacing:.6px}
+.fg input,.fg select,.fg textarea{
+  width:100%;background:var(--input);border:1px solid var(--border);
+  border-radius:5px;padding:7px 9px;color:var(--text);
+  font-family:'DM Mono',monospace;font-size:11px;outline:none;
   transition:border-color .15s;
 }
-.fg input:focus,.fg select:focus{border-color:#818cf8}
-.fg select option{background:var(--modal-bg)}
-.fg input[type=color]{height:36px;cursor:pointer;padding:3px 6px}
-.hint{font-size:10px;color:var(--text2);margin-top:3px}
-.mactions{display:flex;gap:8px;margin-top:18px;justify-content:flex-end}
-.btn-primary{background:#818cf8;color:#fff;border:none;border-radius:6px;padding:8px 16px;font-size:12px;font-family:'DM Mono',monospace;cursor:pointer;transition:background .15s}
-.btn-primary:hover{background:#6366f1}
-.btn-cancel{background:var(--bg3);color:var(--text2);border:1px solid var(--border);border-radius:6px;padding:8px 16px;font-size:12px;font-family:'DM Mono',monospace;cursor:pointer;transition:all .15s}
-.btn-cancel:hover{color:var(--text)}
-.btn-danger{background:transparent;color:#ef4444;border:1px solid #ef4444;border-radius:6px;padding:8px 16px;font-size:12px;font-family:'DM Mono',monospace;cursor:pointer;transition:all .15s;margin-right:auto}
-.btn-danger:hover{background:#ef4444;color:#fff}
-
-/* ─── TOAST ─── */
-.toast{
-  position:fixed;bottom:20px;right:20px;
-  background:var(--bg3);
-  border:1px solid #818cf8;
-  color:var(--text);border-radius:8px;
-  padding:9px 16px;font-size:12px;z-index:999;
-  transform:translateY(60px);opacity:0;
-  transition:all .3s cubic-bezier(.34,1.56,.64,1);
-  pointer-events:none;
-  font-family:'DM Mono',monospace;
+.fg textarea{resize:vertical;min-height:40px}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:#818cf8}
+.fg select option{background:var(--modal)}
+.fg input[type=color]{height:32px;cursor:pointer;padding:2px 5px}
+.fg-row{display:flex;gap:8px;align-items:center}
+.fg-row label{margin-bottom:0;white-space:nowrap}
+/* flag selector in modal */
+.flag-sel{display:flex;gap:8px;align-items:center;margin-top:4px}
+.flag-opt{width:14px;height:14px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .15s;flex-shrink:0}
+.flag-opt:hover{transform:scale(1.3)}
+.flag-opt.sel{border-color:white!important}
+/* fav toggle */
+.fav-toggle{
+  display:flex;align-items:center;gap:6px;cursor:pointer;
+  font-size:10px;color:var(--text2);padding:5px 9px;
+  background:var(--bg3);border:1px solid var(--border);border-radius:5px;
+  transition:all .15s;user-select:none;
 }
-.toast.show{transform:none;opacity:1}
+.fav-toggle:hover{border-color:#fbbf24;color:var(--text)}
+.fav-toggle.on{border-color:#fbbf24;color:#fbbf24;background:rgba(251,191,36,.1)}
+/* hide toggle */
+.hide-toggle{
+  display:flex;align-items:center;gap:6px;cursor:pointer;
+  font-size:10px;color:var(--text2);padding:5px 9px;
+  background:var(--bg3);border:1px solid var(--border);border-radius:5px;
+  transition:all .15s;user-select:none;
+}
+.hide-toggle:hover{border-color:#818cf8;color:var(--text)}
+.hide-toggle.on{border-color:#818cf8;color:#818cf8;background:rgba(129,140,248,.1)}
+/* modal actions */
+.mact{display:flex;gap:7px;margin-top:16px;justify-content:flex-end;flex-wrap:wrap}
+.mprim{background:#818cf8;color:#fff;border:none;border-radius:5px;padding:7px 14px;font-size:11px;font-family:'DM Mono',monospace;cursor:pointer;transition:background .15s}
+.mprim:hover{background:#6366f1}
+.mcanc{background:var(--bg3);color:var(--text2);border:1px solid var(--border);border-radius:5px;padding:7px 14px;font-size:11px;font-family:'DM Mono',monospace;cursor:pointer;transition:all .15s}
+.mcanc:hover{color:var(--text)}
+.mdang{background:transparent;color:#ef4444;border:1px solid #ef4444;border-radius:5px;padding:7px 14px;font-size:11px;font-family:'DM Mono',monospace;cursor:pointer;transition:all .15s;margin-right:auto}
+.mdang:hover{background:#ef4444;color:#fff}
+/* type selector chips in modal */
+.type-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.type-chip{border:1px solid var(--border);border-radius:4px;padding:2px 7px;cursor:pointer;font-size:9px;background:var(--bg3);color:var(--text2);transition:all .15s}
+.type-chip:hover,.type-chip.on{background:#818cf8;color:#fff;border-color:#818cf8}
 
-/* ─── SCROLLBAR ─── */
+/* ── TOAST ───────────────────────────────────────── */
+.toast{position:fixed;bottom:18px;right:18px;background:var(--bg3);border:1px solid #818cf8;color:var(--text);border-radius:7px;padding:8px 14px;font-size:11px;z-index:999;transform:translateY(60px);opacity:0;transition:all .3s cubic-bezier(.34,1.56,.64,1);pointer-events:none;font-family:'DM Mono',monospace}
+.toast.on{transform:none;opacity:1}
+
+/* ── SCROLLBAR ───────────────────────────────────── */
 ::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 ::-webkit-scrollbar-thumb:hover{background:#444}
 
-/* ─── RESPONSIVE ─── */
-@media(max-width:600px){
-  header{padding:0 10px;gap:6px}
-  .stats{display:none}
-  main{padding:12px 12px 30px}
-  .cards-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
-  .lbl{display:none}
-}
-@media(max-width:420px){
-  .btn-add-cat .cat-lbl{display:none}
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media(max-width:640px){
+  #topbar{padding:0 8px;gap:5px}
+  #statsBar{display:none}
+  #main{padding:10px 10px 30px}
+  .cat-grid{grid-template-columns:repeat(auto-fill,minmax(115px,1fr))}
+  .ib .t{display:none}
 }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">LINK<span>HUB</span></div>
-  <div class="search-wrap">
-    <input type="text" id="searchInput" placeholder="Suchen …" autocomplete="off" oninput="onSearch()">
+<!-- HEADER -->
+<div id="topbar">
+  <div class="logo">LINK<b>HUB</b></div>
+  <div class="srchw">
+    <input id="qinput" type="text" placeholder="Suchen …" autocomplete="off" oninput="applyFilters()">
   </div>
-  <span class="stats" id="statsBar"></span>
-  <div class="hdr-btns">
-    <button class="btn-add-cat" onclick="openAddCategory()">＋ <span class="cat-lbl">Kategorie</span></button>
-    <button class="ibtn" onclick="openAddLink()" title="Link hinzufügen">＋ <span class="lbl">Link</span></button>
-    <button class="ibtn" onclick="toggleTheme()" id="themeBtn" title="Hell/Dunkel">☀️</button>
-    <button class="ibtn" onclick="toggleFullscreen()" id="fsBtn" title="Vollbild">⛶</button>
-    <button class="ibtn" onclick="triggerLoad()" title="JSON-Datei laden" style="color:#4ade80;border-color:rgba(74,222,128,.35)">↑ <span class="lbl">Laden</span></button>
-    <button class="ibtn" onclick="exportJSON()" title="Als JSON speichern" style="color:#38bdf8;border-color:rgba(56,189,248,.35)">↓ <span class="lbl">Speichern</span></button>
-    <button class="ibtn" onclick="resetData()" title="Zurücksetzen" style="color:#ef4444">↺</button>
+  <span id="statsBar"></span>
+  <div class="topbtns">
+    <button class="btn-new" onclick="openAddCat()">＋ Kategorie</button>
+    <button class="ib" onclick="openAddLink()" title="Link hinzufügen">＋ <span class="t">Link</span></button>
+    <button class="ib" id="filterToggleBtn" onclick="toggleFilterBar()" title="Filter">⊟ <span class="t">Filter</span></button>
+    <button class="ib" onclick="toggleTheme()" id="themeBtn" title="Hell/Dunkel">☀️</button>
+    <button class="ib" onclick="toggleFS()" id="fsBtn" title="Vollbild">⛶</button>
+    <button class="ib green" onclick="triggerLoad()" title="JSON laden">↑ <span class="t">Laden</span></button>
+    <button class="ib blue" onclick="doSave()" title="JSON speichern">↓ <span class="t">Speichern</span></button>
+    <button class="ib red" onclick="doReset()" title="Zurücksetzen">↺</button>
   </div>
-</header>
-<input type="file" id="fileInput" accept=".json,application/json" style="display:none" onchange="loadFromFile(event)">
+</div>
 
-<main id="main"></main>
+<!-- FILTER BAR -->
+<div id="filterbar" style="display:none">
+  <span class="flbl">Filter:</span>
+  <button class="ftoggle" id="fFav" onclick="toggleF('fav')">⭐ Favoriten</button>
+  <button class="ftoggle" id="fHidden" onclick="toggleF('hidden')">👁 Versteckte</button>
+  <div class="fsep"></div>
+  <span class="flbl">Flag:</span>
+  <span class="flag-dot" id="fd-red"    style="background:#ef4444" title="Rot"    onclick="toggleFlag('red')"></span>
+  <span class="flag-dot" id="fd-yellow" style="background:#fbbf24" title="Gelb"   onclick="toggleFlag('yellow')"></span>
+  <span class="flag-dot" id="fd-green"  style="background:#4ade80" title="Grün"   onclick="toggleFlag('green')"></span>
+  <span class="flag-dot" id="fd-blue"   style="background:#38bdf8" title="Blau"   onclick="toggleFlag('blue')"></span>
+  <span class="flag-dot" id="fd-purple" style="background:#a78bfa" title="Lila"   onclick="toggleFlag('purple')"></span>
+  <span class="flag-dot" id="fd-orange" style="background:#f97316" title="Orange" onclick="toggleFlag('orange')"></span>
+  <div class="fsep"></div>
+  <span class="flbl">Typ:</span>
+  <button class="ftoggle" id="ft-html"  onclick="toggleType('html')">🌐 html</button>
+  <button class="ftoggle" id="ft-js"    onclick="toggleType('js')">⚡ js</button>
+  <button class="ftoggle" id="ft-css"   onclick="toggleType('css')">🎨 css</button>
+  <button class="ftoggle" id="ft-json"  onclick="toggleType('json')">📋 json</button>
+  <button class="ftoggle" id="ft-md"    onclick="toggleType('md')">📝 md</button>
+  <button class="ftoggle" id="ft-py"    onclick="toggleType('py')">🐍 py</button>
+  <button class="ftoggle" id="ft-img"   onclick="toggleType('img')">🖼 img</button>
+  <button class="ftoggle" id="ft-media" onclick="toggleType('media')">🎵 media</button>
+  <button class="ftoggle" id="ft-pdf"   onclick="toggleType('pdf')">📄 pdf</button>
+  <div class="fsep"></div>
+  <span class="flbl">Tags:</span>
+  <div id="tagChips" style="display:flex;gap:4px;flex-shrink:0"></div>
+  <button class="ftoggle" onclick="clearFilters()" style="margin-left:8px;border-color:#ef4444;color:#ef4444">✕ Reset</button>
+</div>
 
-<!-- Edit Link Modal -->
-<div class="overlay" id="editModal" onclick="bgClose(event,'editModal')">
+<div id="main"></div>
+
+<!-- Edit Modal -->
+<div class="ov" id="editMod" onclick="bgClose(event,'editMod')">
   <div class="modal">
     <h3>✏️ Link bearbeiten</h3>
-    <div class="fg">
-      <label>Icon (Emoji)</label>
-      <input type="text" id="eIcon" maxlength="8" placeholder="✨">
-      <div class="hint">z.B. 🔧 🌿 🎵 ⚛️ 📚 🎮 🌌</div>
+    <div class="fg"><label>Icon (Emoji)</label><input id="eIco" maxlength="8" placeholder="✨"></div>
+    <div class="fg"><label>Label</label><input id="eLbl"></div>
+    <div class="fg"><label>URL</label><input id="eUrl"></div>
+    <div class="fg-row" style="margin-bottom:10px">
+      <div class="fg" style="flex:1;margin-bottom:0">
+        <label>Kategorie</label>
+        <select id="eCat"></select>
+      </div>
+    </div>
+    <div class="fg-row" style="gap:10px;margin-bottom:10px">
+      <div class="fav-toggle" id="eFavTgl" onclick="toggleEditFav()">⭐ Favorit</div>
+      <div class="hide-toggle" id="eHideTgl" onclick="toggleEditHide()">👁 Verstecken</div>
     </div>
     <div class="fg">
-      <label>Label</label>
-      <input type="text" id="eLabel">
+      <label>Flag-Farbe</label>
+      <div class="flag-sel">
+        <span class="flag-opt" id="fo-none" style="background:var(--bg4);border-color:var(--border)" onclick="setEditFlag(null)" title="Kein Flag">✕</span>
+        <span class="flag-opt" id="fo-red"    style="background:#ef4444" onclick="setEditFlag('red')"></span>
+        <span class="flag-opt" id="fo-yellow" style="background:#fbbf24" onclick="setEditFlag('yellow')"></span>
+        <span class="flag-opt" id="fo-green"  style="background:#4ade80" onclick="setEditFlag('green')"></span>
+        <span class="flag-opt" id="fo-blue"   style="background:#38bdf8" onclick="setEditFlag('blue')"></span>
+        <span class="flag-opt" id="fo-purple" style="background:#a78bfa" onclick="setEditFlag('purple')"></span>
+        <span class="flag-opt" id="fo-orange" style="background:#f97316" onclick="setEditFlag('orange')"></span>
+      </div>
     </div>
     <div class="fg">
-      <label>URL</label>
-      <input type="text" id="eUrl">
+      <label>Tags (kommagetrennt)</label>
+      <input id="eTags" placeholder="formeln, buch, neu …">
     </div>
-    <div class="mactions">
-      <button class="btn-danger" onclick="deleteLink()">🗑 Löschen</button>
-      <button class="btn-cancel" onclick="closeModal('editModal')">Abbrechen</button>
-      <button class="btn-primary" onclick="saveEdit()">Speichern</button>
+    <div class="mact">
+      <button class="mdang" onclick="doDeleteLink()">🗑 Löschen</button>
+      <button class="mcanc" onclick="closeOv('editMod')">Abbrechen</button>
+      <button class="mprim" onclick="saveEdit()">Speichern</button>
     </div>
   </div>
 </div>
 
 <!-- Add Link Modal -->
-<div class="overlay" id="addLinkModal" onclick="bgClose(event,'addLinkModal')">
+<div class="ov" id="addLinkMod" onclick="bgClose(event,'addLinkMod')">
   <div class="modal">
     <h3>➕ Link hinzufügen</h3>
-    <div class="fg">
-      <label>Kategorie</label>
-      <select id="aLinkCat"></select>
-    </div>
-    <div class="fg">
-      <label>Icon (Emoji)</label>
-      <input type="text" id="aIcon" maxlength="8" placeholder="✨">
-    </div>
-    <div class="fg">
-      <label>Label</label>
-      <input type="text" id="aLabel" placeholder="Mein Link">
-    </div>
-    <div class="fg">
-      <label>URL</label>
-      <input type="text" id="aUrl" placeholder="https://...">
-    </div>
-    <div class="mactions">
-      <button class="btn-cancel" onclick="closeModal('addLinkModal')">Abbrechen</button>
-      <button class="btn-primary" onclick="saveAddLink()">Hinzufügen</button>
+    <div class="fg"><label>Kategorie</label><select id="alCat"></select></div>
+    <div class="fg"><label>Icon</label><input id="alIco" maxlength="8" placeholder="✨"></div>
+    <div class="fg"><label>Label</label><input id="alLbl" placeholder="mein-tool.html"></div>
+    <div class="fg"><label>URL</label><input id="alUrl" placeholder="https://…"></div>
+    <div class="fg"><label>Tags</label><input id="alTags" placeholder="optional, kommagetrennt"></div>
+    <div class="mact">
+      <button class="mcanc" onclick="closeOv('addLinkMod')">Abbrechen</button>
+      <button class="mprim" onclick="saveAddLink()">Hinzufügen</button>
     </div>
   </div>
 </div>
 
 <!-- Add Category Modal -->
-<div class="overlay" id="addCatModal" onclick="bgClose(event,'addCatModal')">
+<div class="ov" id="addCatMod" onclick="bgClose(event,'addCatMod')">
   <div class="modal">
     <h3>📁 Neue Kategorie</h3>
-    <div class="fg">
-      <label>Name</label>
-      <input type="text" id="ncName" placeholder="MeineKategorie">
-    </div>
-    <div class="fg">
-      <label>Icon (Emoji)</label>
-      <input type="text" id="ncIcon" maxlength="4" placeholder="📁">
-    </div>
-    <div class="fg">
-      <label>Farbe</label>
-      <input type="color" id="ncColor" value="#818cf8">
-    </div>
-    <div class="mactions">
-      <button class="btn-cancel" onclick="closeModal('addCatModal')">Abbrechen</button>
-      <button class="btn-primary" onclick="saveAddCategory()">Erstellen</button>
+    <div class="fg"><label>Name</label><input id="ncName" placeholder="MeineKategorie"></div>
+    <div class="fg"><label>Icon</label><input id="ncIco" maxlength="4" placeholder="📁"></div>
+    <div class="fg"><label>Farbe</label><input type="color" id="ncColor" value="#818cf8"></div>
+    <div class="mact">
+      <button class="mcanc" onclick="closeOv('addCatMod')">Abbrechen</button>
+      <button class="mprim" onclick="saveAddCat()">Erstellen</button>
     </div>
   </div>
 </div>
 
+<input type="file" id="fileInp" accept=".json" style="display:none" onchange="loadFile(event)">
 <div class="toast" id="toast"></div>
 
 <script>
-// ─── DEFAULT DATA ───────────────────────────────────────────────────────────
-const DEFAULT_DATA = [{"title":"Autogenes-Training","links":[{"label":"8 Brokate/8Brokate.html","url":"https://juppijo.github.io/Autogenes-Training/8%20Brokate/8Brokate.html","icon":"✨"},{"label":"autogenes-training-app_Cl.html","url":"https://juppijo.github.io/Autogenes-Training/autogenes-training-app_Cl.html","icon":"✨"},{"label":"index.html","url":"https://juppijo.github.io/Autogenes-Training/index.html","icon":"✨"},{"label":"LisaK.html","url":"https://juppijo.github.io/Autogenes-Training/LisaK.html","icon":"✨"},{"label":"yout.html","url":"https://juppijo.github.io/Autogenes-Training/yout.html","icon":"✨"}]},{"title":"ESP32-S3","links":[{"label":"esp32_2.html","url":"https://juppijo.github.io/ESP32-S3/esp32_2.html","icon":"✨"},{"label":"esp32.html","url":"https://juppijo.github.io/ESP32-S3/esp32.html","icon":"✨"},{"label":"GPIO-Control-2/index.html","url":"https://juppijo.github.io/ESP32-S3/GPIO-Control-2/index.html","icon":"✨"},{"label":"GPIO-Control-3/index.html","url":"https://juppijo.github.io/ESP32-S3/GPIO-Control-3/index.html","icon":"✨"},{"label":"GPIO-Control/index.html","url":"https://juppijo.github.io/ESP32-S3/GPIO-Control/index.html","icon":"✨"},{"label":"MiniCon/index.html","url":"https://juppijo.github.io/ESP32-S3/MiniCon/index.html","icon":"✨"},{"label":"RGB_LED/index.html","url":"https://juppijo.github.io/ESP32-S3/RGB_LED/index.html","icon":"✨"},{"label":"WRZT_LaTex.html","url":"https://juppijo.github.io/ESP32-S3/WRZT_LaTex.html","icon":"✨"}]},{"title":"Garten","links":[{"label":"index.html","url":"https://juppijo.github.io/Garten/index.html","icon":"✨"}]},{"title":"Logik_des_Universums","links":[{"label":"index.html","url":"https://juppijo.github.io/Logik_des_Universums/index.html","icon":"✨"},{"label":"smart.html","url":"https://juppijo.github.io/Logik_des_Universums/smart.html","icon":"✨"}]},{"title":"Musik_Zami","links":[{"label":"index.html","url":"https://juppijo.github.io/Musik_Zami/index.html","icon":"✨"},{"label":"Lisa/sonic_lisajous.html","url":"https://juppijo.github.io/Musik_Zami/Lisa/sonic_lisajous.html","icon":"✨"},{"label":"midi-soundfont_instr.html","url":"https://juppijo.github.io/Musik_Zami/midi-soundfont_instr.html","icon":"✨"},{"label":"musik-touch-pro.html","url":"https://juppijo.github.io/Musik_Zami/musik-touch-pro.html","icon":"✨"},{"label":"musik-touch.html","url":"https://juppijo.github.io/Musik_Zami/musik-touch.html","icon":"✨"},{"label":"Radio/index.html","url":"https://juppijo.github.io/Musik_Zami/Radio/index.html","icon":"✨"},{"label":"soundfont-touch.html","url":"https://juppijo.github.io/Musik_Zami/soundfont-touch.html","icon":"✨"},{"label":"test.html","url":"https://juppijo.github.io/Musik_Zami/test.html","icon":"✨"},{"label":"Zaminia-Chord-Interface_1.html","url":"https://juppijo.github.io/Musik_Zami/Zaminia-Chord-Interface_1.html","icon":"✨"},{"label":"Zaminia-Chord-Interface.html","url":"https://juppijo.github.io/Musik_Zami/Zaminia-Chord-Interface.html","icon":"✨"}]},{"title":"Rechner","links":[{"label":"AstroPhysCalc.html","url":"https://juppijo.github.io/Rechner/AstroPhysCalc.html","icon":"✨"},{"label":"editor_pro.html","url":"https://juppijo.github.io/Rechner/editor_pro.html","icon":"✨"},{"label":"einheiten-rechner-pro.html","url":"https://juppijo.github.io/Rechner/einheiten-rechner-pro.html","icon":"✨"},{"label":"einheiten-rechner.html","url":"https://juppijo.github.io/Rechner/einheiten-rechner.html","icon":"✨"},{"label":"favorites_dashboard.html","url":"https://juppijo.github.io/Rechner/favorites_dashboard.html","icon":"✨"},{"label":"font-editor.html","url":"https://juppijo.github.io/Rechner/font-editor.html","icon":"✨"},{"label":"html-fortgeschritten.html","url":"https://juppijo.github.io/Rechner/html-fortgeschritten.html","icon":"✨"},{"label":"html-lernen.html","url":"https://juppijo.github.io/Rechner/html-lernen.html","icon":"✨"},{"label":"index.html","url":"https://juppijo.github.io/Rechner/index.html","icon":"✨"},{"label":"Luft-Rechner.html","url":"https://juppijo.github.io/Rechner/Luft-Rechner.html","icon":"✨"},{"label":"notizen_mobile.html","url":"https://juppijo.github.io/Rechner/notizen_mobile.html","icon":"✨"},{"label":"notizen_pro.html","url":"https://juppijo.github.io/Rechner/notizen_pro.html","icon":"✨"},{"label":"physcalc_pro.html","url":"https://juppijo.github.io/Rechner/physcalc_pro.html","icon":"✨"},{"label":"Rechner_CGTP.html","url":"https://juppijo.github.io/Rechner/Rechner_CGTP.html","icon":"✨"},{"label":"Rechner_DS.html","url":"https://juppijo.github.io/Rechner/Rechner_DS.html","icon":"✨"},{"label":"Rechner_DS2.html","url":"https://juppijo.github.io/Rechner/Rechner_DS2.html","icon":"✨"},{"label":"Rechner_G.html","url":"https://juppijo.github.io/Rechner/Rechner_G.html","icon":"✨"},{"label":"Schrift.html","url":"https://juppijo.github.io/Rechner/Schrift.html","icon":"✨"},{"label":"WRZNT-Konstanten.html","url":"https://juppijo.github.io/Rechner/WRZNT-Konstanten.html","icon":"✨"}]},{"title":"robbie","links":[{"label":"index.html","url":"https://juppijo.github.io/robbie/index.html","icon":"✨"}]},{"title":"TaiChi","links":[{"label":"index.html","url":"https://juppijo.github.io/TaiChi/index.html","icon":"✨"},{"label":"Kum-Nye/index.html","url":"https://juppijo.github.io/TaiChi/Kum-Nye/index.html","icon":"✨"},{"label":"QiGong_G2.html","url":"https://juppijo.github.io/TaiChi/QiGong_G2.html","icon":"✨"},{"label":"QiGong_G3.html","url":"https://juppijo.github.io/TaiChi/QiGong_G3.html","icon":"✨"},{"label":"Tai_Chi.html","url":"https://juppijo.github.io/TaiChi/Tai_Chi.html","icon":"✨"},{"label":"taichi_practice.html","url":"https://juppijo.github.io/TaiChi/taichi_practice.html","icon":"✨"},{"label":"taichi_practice108.html","url":"https://juppijo.github.io/TaiChi/taichi_practice108.html","icon":"✨"}]},{"title":"TNH","links":[{"label":"Atmen.html","url":"https://juppijo.github.io/TNH/Atmen.html","icon":"✨"},{"label":"DIESECHSZEHNBUNGENDESBEWUSSTENATMENS.html","url":"https://juppijo.github.io/TNH/DIESECHSZEHNBUNGENDESBEWUSSTENATMENS.html","icon":"✨"},{"label":"index.html","url":"https://juppijo.github.io/TNH/index.html","icon":"✨"},{"label":"zen_atem_pwa_gefuhrter_meditationsmodus (2).html","url":"https://juppijo.github.io/TNH/zen_atem_pwa_gefuhrter_meditationsmodus%20(2).html","icon":"✨"},{"label":"zen_atem_pwa_gefuhrter_meditationsmodus (4).html","url":"https://juppijo.github.io/TNH/zen_atem_pwa_gefuhrter_meditationsmodus%20(4).html","icon":"✨"},{"label":"zen_atem_pwa_gefuhrter_meditationsmodus (5).html","url":"https://juppijo.github.io/TNH/zen_atem_pwa_gefuhrter_meditationsmodus%20(5).html","icon":"✨"},{"label":"zen_atem_pwa_gefuhrter_meditationsmodus.html","url":"https://juppijo.github.io/TNH/zen_atem_pwa_gefuhrter_meditationsmodus.html","icon":"✨"},{"label":"zen_breath_enhanced.html","url":"https://juppijo.github.io/TNH/zen_breath_enhanced.html","icon":"✨"}]},{"title":"WRZT","links":[{"label":"3Rmin.html","url":"https://juppijo.github.io/WRZT/3Rmin.html","icon":"✨"},{"label":"GWelle3D.html","url":"https://juppijo.github.io/WRZT/GWelle3D.html","icon":"✨"},{"label":"HT/GravitationTrägheit.html","url":"https://juppijo.github.io/WRZT/HT/GravitationTr%C3%A4gheit.html","icon":"✨"},{"label":"HT/index.html","url":"https://juppijo.github.io/WRZT/HT/index.html","icon":"✨"},{"label":"HT/photon2(1).html","url":"https://juppijo.github.io/WRZT/HT/photon2(1).html","icon":"✨"},{"label":"HT/photon2(2).html","url":"https://juppijo.github.io/WRZT/HT/photon2(2).html","icon":"✨"},{"label":"HT/photon2(2D).html","url":"https://juppijo.github.io/WRZT/HT/photon2(2D).html","icon":"✨"},{"label":"HT/photon2(3).html","url":"https://juppijo.github.io/WRZT/HT/photon2(3).html","icon":"✨"},{"label":"HT/photon2(3D) (2).html","url":"https://juppijo.github.io/WRZT/HT/photon2(3D)%20(2).html","icon":"✨"},{"label":"HT/photon2(3D) (3).html","url":"https://juppijo.github.io/WRZT/HT/photon2(3D)%20(3).html","icon":"✨"},{"label":"HT/photon2(3D).html","url":"https://juppijo.github.io/WRZT/HT/photon2(3D).html","icon":"✨"},{"label":"HT/photon2(4).html","url":"https://juppijo.github.io/WRZT/HT/photon2(4).html","icon":"✨"},{"label":"HT/spiral_undatron (Kopie).html","url":"https://juppijo.github.io/WRZT/HT/spiral_undatron%20(Kopie).html","icon":"✨"},{"label":"HT/spiral_undatron.html","url":"https://juppijo.github.io/WRZT/HT/spiral_undatron.html","icon":"✨"},{"label":"HT/stone-layout-planner.html","url":"https://juppijo.github.io/WRZT/HT/stone-layout-planner.html","icon":"✨"},{"label":"HT/t.html","url":"https://juppijo.github.io/WRZT/HT/t.html","icon":"✨"},{"label":"HT/t2.html","url":"https://juppijo.github.io/WRZT/HT/t2.html","icon":"✨"},{"label":"HT/Traegheit.html","url":"https://juppijo.github.io/WRZT/HT/Traegheit.html","icon":"✨"},{"label":"HT/U_Tensor.html","url":"https://juppijo.github.io/WRZT/HT/U_Tensor.html","icon":"✨"},{"label":"HT/wave_double_slit_f.html","url":"https://juppijo.github.io/WRZT/HT/wave_double_slit_f.html","icon":"✨"},{"label":"HT/wave_double_slit.html","url":"https://juppijo.github.io/WRZT/HT/wave_double_slit.html","icon":"✨"},{"label":"HT/wave-net-simulation (9).html","url":"https://juppijo.github.io/WRZT/HT/wave-net-simulation%20(9).html","icon":"✨"},{"label":"HT/wave-net-simulation.html","url":"https://juppijo.github.io/WRZT/HT/wave-net-simulation.html","icon":"✨"},{"label":"HT/Wellenraumzeit.html","url":"https://juppijo.github.io/WRZT/HT/Wellenraumzeit.html","icon":"✨"},{"label":"HT/wrznt_enhanced(3D).html","url":"https://juppijo.github.io/WRZT/HT/wrznt_enhanced(3D).html","icon":"✨"},{"label":"HT/wrznt_ladund.html","url":"https://juppijo.github.io/WRZT/HT/wrznt_ladund.html","icon":"✨"},{"label":"HT/wrznt_netzwerk_simulation_3d.html","url":"https://juppijo.github.io/WRZT/HT/wrznt_netzwerk_simulation_3d.html","icon":"✨"},{"label":"HT/wrznt_netzwerk_simulation.html","url":"https://juppijo.github.io/WRZT/HT/wrznt_netzwerk_simulation.html","icon":"✨"},{"label":"HT/wrzt_kapitel_gravitation_lichtgeschwindigkeit.html","url":"https://juppijo.github.io/WRZT/HT/wrzt_kapitel_gravitation_lichtgeschwindigkeit.html","icon":"✨"},{"label":"index.html","url":"https://juppijo.github.io/WRZT/index.html","icon":"✨"},{"label":"Kugel(5).html","url":"https://juppijo.github.io/WRZT/Kugel(5).html","icon":"✨"},{"label":"LisaK.html","url":"https://juppijo.github.io/WRZT/LisaK.html","icon":"✨"},{"label":"Lorentz-Wand.html","url":"https://juppijo.github.io/WRZT/Lorentz-Wand.html","icon":"✨"},{"label":"Lorentz-Wand(2).html","url":"https://juppijo.github.io/WRZT/Lorentz-Wand(2).html","icon":"✨"},{"label":"Lorenz2.html","url":"https://juppijo.github.io/WRZT/Lorenz2.html","icon":"✨"},{"label":"LWT_Def.html","url":"https://juppijo.github.io/WRZT/LWT_Def.html","icon":"✨"},{"label":"LWT.html","url":"https://juppijo.github.io/WRZT/LWT.html","icon":"✨"},{"label":"Physiker.html","url":"https://juppijo.github.io/WRZT/Physiker.html","icon":"✨"},{"label":"trigonometrie_formeln.html","url":"https://juppijo.github.io/WRZT/trigonometrie_formeln.html","icon":"✨"},{"label":"wave_double_slit_f.html","url":"https://juppijo.github.io/WRZT/wave_double_slit_f.html","icon":"✨"},{"label":"wave-net-simulation (9).html","url":"https://juppijo.github.io/WRZT/wave-net-simulation%20(9).html","icon":"✨"},{"label":"WD.html","url":"https://juppijo.github.io/WRZT/WD.html","icon":"✨"},{"label":"Wellen_1(1)(1).html","url":"https://juppijo.github.io/WRZT/Wellen_1(1)(1).html","icon":"✨"},{"label":"WRZNT_Buch_JZ.html","url":"https://juppijo.github.io/WRZT/WRZNT_Buch_JZ.html","icon":"✨"},{"label":"WRZNT_C/index.html","url":"https://juppijo.github.io/WRZT/WRZNT_C/index.html","icon":"✨"},{"label":"wrznt_enhanced(3D).html","url":"https://juppijo.github.io/WRZT/wrznt_enhanced(3D).html","icon":"✨"},{"label":"wrznt_ladund.html","url":"https://juppijo.github.io/WRZT/wrznt_ladund.html","icon":"✨"},{"label":"wrznt_netzwerk_simulation_3d.html","url":"https://juppijo.github.io/WRZT/wrznt_netzwerk_simulation_3d.html","icon":"✨"},{"label":"wrznt_netzwerk_simulation.html","url":"https://juppijo.github.io/WRZT/wrznt_netzwerk_simulation.html","icon":"✨"},{"label":"WRZNT/curve3d-1.html","url":"https://juppijo.github.io/WRZT/WRZNT/curve3d-1.html","icon":"✨"},{"label":"WRZNT/curve3d.html","url":"https://juppijo.github.io/WRZT/WRZNT/curve3d.html","icon":"✨"},{"label":"WRZNT/index.html","url":"https://juppijo.github.io/WRZT/WRZNT/index.html","icon":"✨"},{"label":"WRZNT/Rmin_Kurve_G3.html","url":"https://juppijo.github.io/WRZT/WRZNT/Rmin_Kurve_G3.html","icon":"✨"},{"label":"WRZNT/sinus-cube-3d.html","url":"https://juppijo.github.io/WRZT/WRZNT/sinus-cube-3d.html","icon":"✨"},{"label":"WRZNT/WRZNT.html","url":"https://juppijo.github.io/WRZT/WRZNT/WRZNT.html","icon":"✨"},{"label":"WRZT_Calc/alpha-Formeln.html","url":"https://juppijo.github.io/WRZT/WRZT_Calc/alpha-Formeln.html","icon":"✨"},{"label":"WRZT_Calc/index.html","url":"https://juppijo.github.io/WRZT/WRZT_Calc/index.html","icon":"✨"},{"label":"WRZT_Calc/wrzt_zusammenfassung.html","url":"https://juppijo.github.io/WRZT/WRZT_Calc/wrzt_zusammenfassung.html","icon":"✨"},{"label":"WRZT_Lorenz_2.html","url":"https://juppijo.github.io/WRZT/WRZT_Lorenz_2.html","icon":"✨"},{"label":"WRZT_Lorenz.html","url":"https://juppijo.github.io/WRZT/WRZT_Lorenz.html","icon":"✨"},{"label":"wrzt_rmin.html","url":"https://juppijo.github.io/WRZT/wrzt_rmin.html","icon":"✨"},{"label":"wrzt_rmin1.html","url":"https://juppijo.github.io/WRZT/wrzt_rmin1.html","icon":"✨"},{"label":"wrzt_rmin2.html","url":"https://juppijo.github.io/WRZT/wrzt_rmin2.html","icon":"✨"},{"label":"wrzt_rmin3.html","url":"https://juppijo.github.io/WRZT/wrzt_rmin3.html","icon":"✨"},{"label":"WRZT_Theorie_JZ.html","url":"https://juppijo.github.io/WRZT/WRZT_Theorie_JZ.html","icon":"✨"},{"label":"WRZT_Theorie.html","url":"https://juppijo.github.io/WRZT/WRZT_Theorie.html","icon":"✨"},{"label":"WRZT.html","url":"https://juppijo.github.io/WRZT/WRZT.html","icon":"✨"},{"label":"WRZT2/dreieck.html","url":"https://juppijo.github.io/WRZT/WRZT2/dreieck.html","icon":"✨"},{"label":"WRZT2/ico.html","url":"https://juppijo.github.io/WRZT/WRZT2/ico.html","icon":"✨"},{"label":"WRZT2/Lorenz_Geo.html","url":"https://juppijo.github.io/WRZT/WRZT2/Lorenz_Geo.html","icon":"✨"},{"label":"WRZT2/Lorenz_Trigo.html","url":"https://juppijo.github.io/WRZT/WRZT2/Lorenz_Trigo.html","icon":"✨"},{"label":"WRZT2/Lorenz.html","url":"https://juppijo.github.io/WRZT/WRZT2/Lorenz.html","icon":"✨"},{"label":"WRZT2/urknall-LKM.html","url":"https://juppijo.github.io/WRZT/WRZT2/urknall-LKM.html","icon":"✨"},{"label":"WRZT2/Urknall.html","url":"https://juppijo.github.io/WRZT/WRZT2/Urknall.html","icon":"✨"},{"label":"WRZT2/urknall.html","url":"https://juppijo.github.io/WRZT/WRZT2/urknall.html","icon":"✨"},{"label":"wrztbugwelle.html","url":"https://juppijo.github.io/WRZT/wrztbugwelle.html","icon":"✨"},{"label":"WRZTNetz.html","url":"https://juppijo.github.io/WRZT/WRZTNetz.html","icon":"✨"},{"label":"yout.html","url":"https://juppijo.github.io/WRZT/yout.html","icon":"✨"}]},{"title":"Zami_Buecher","links":[{"label":"Index.html","url":"https://juppijo.github.io/Zami_Buecher/Index.html","icon":"✨"},{"label":"index.html","url":"https://juppijo.github.io/Zami_Buecher/index.html","icon":"✨"},{"label":"Index2.html","url":"https://juppijo.github.io/Zami_Buecher/Index2.html","icon":"✨"},{"label":"Kunst_des_einfühlsamen_Zuhörens/index.html","url":"https://juppijo.github.io/Zami_Buecher/Kunst_des_einf%C3%BChlsamen_Zuh%C3%B6rens/index.html","icon":"✨"},{"label":"Kunst_des_einfühlsamen_Zuhörens/smart.html","url":"https://juppijo.github.io/Zami_Buecher/Kunst_des_einf%C3%BChlsamen_Zuh%C3%B6rens/smart.html","icon":"✨"},{"label":"Shambala_Luminia/index.html","url":"https://juppijo.github.io/Zami_Buecher/Shambala_Luminia/index.html","icon":"✨"},{"label":"ZanimiasWeltreise/index-s.html","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/index-s.html","icon":"✨"},{"label":"ZanimiasWeltreise/index.html","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/index.html","icon":"✨"}]},{"title":"Zami_Home","links":[{"label":"index.html","url":"https://juppijo.github.io/Zami_Home/index.html","icon":"✨"},{"label":"json_editor.html","url":"https://juppijo.github.io/Zami_Home/json_editor.html","icon":"✨"}]},{"title":"zaminia","links":[{"label":"autogenes-training-app_Cl.html","url":"https://juppijo.github.io/zaminia/autogenes-training-app_Cl.html","icon":"✨"},{"label":"github-compare.html","url":"https://juppijo.github.io/zaminia/github-compare.html","icon":"✨"},{"label":"index.html","url":"https://juppijo.github.io/zaminia/index.html","icon":"✨"},{"label":"LinkList.html","url":"https://juppijo.github.io/zaminia/LinkList.html","icon":"✨"},{"label":"LisaK.html","url":"https://juppijo.github.io/zaminia/LisaK.html","icon":"✨"},{"label":"yout.html","url":"https://juppijo.github.io/zaminia/yout.html","icon":"✨"},{"label":"ZaminiasKunstwelt.html","url":"https://juppijo.github.io/zaminia/ZaminiasKunstwelt.html","icon":"✨"}]},{"title":"Zaminia-Zen-Theme","links":[{"label":"3DSchrift.html","url":"https://juppijo.github.io/Zaminia-Zen-Theme/3DSchrift.html","icon":"✨"},{"label":"GITALL.html","url":"https://juppijo.github.io/Zaminia-Zen-Theme/GITALL.html","icon":"✨"},{"label":"GSheet.html","url":"https://juppijo.github.io/Zaminia-Zen-Theme/GSheet.html","icon":"✨"},{"label":"index.html","url":"https://juppijo.github.io/Zaminia-Zen-Theme/index.html","icon":"✨"}]},{"title":"ZenZamiSpiele-Co","links":[{"label":"chat_farben (3).html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/chat_farben%20(3).html","icon":"✨"},{"label":"Gem_farben (4).html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Gem_farben%20(4).html","icon":"✨"},{"label":"index.html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/index.html","icon":"✨"},{"label":"Puzzle_JO(ABC).html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Puzzle_JO(ABC).html","icon":"✨"},{"label":"Puzzle_JO3.html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Puzzle_JO3.html","icon":"✨"},{"label":"Steinverlegung/index.html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/index.html","icon":"✨"},{"label":"Steinverlegung/stone-layout-planner.html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/stone-layout-planner.html","icon":"✨"},{"label":"WT.html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/WT.html","icon":"✨"},{"label":"WTS.html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/WTS.html","icon":"✨"},{"label":"Zami-mp3-editor.html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Zami-mp3-editor.html","icon":"✨"},{"label":"Zamis-zen-music-player.html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Zamis-zen-music-player.html","icon":"✨"}]}];
+// ── EMBEDDED DEFAULT DATA ─────────────────────────────────────────────────
+const DFLT = [{"title":"Autogenes-Training","links":[{"icon":"✨","label":"autogenes-training-app_Cl.html","url":"https://juppijo.github.io/Autogenes-Training/autogenes-training-app_Cl.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"AutogenesTraining.mp3","url":"https://juppijo.github.io/Autogenes-Training/AutogenesTraining.mp3","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"index.html","url":"https://juppijo.github.io/Autogenes-Training/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"LisaK.html","url":"https://juppijo.github.io/Autogenes-Training/LisaK.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"README.md","url":"https://juppijo.github.io/Autogenes-Training/README.md","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"yout.html","url":"https://juppijo.github.io/Autogenes-Training/yout.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZamiZen.jpg","url":"https://juppijo.github.io/Autogenes-Training/ZamiZen.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZamiZen1.jpg","url":"https://juppijo.github.io/Autogenes-Training/ZamiZen1.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZamiZen2.jpg","url":"https://juppijo.github.io/Autogenes-Training/ZamiZen2.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZamiZen3.jpg","url":"https://juppijo.github.io/Autogenes-Training/ZamiZen3.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZamiZen4.jpg","url":"https://juppijo.github.io/Autogenes-Training/ZamiZen4.jpg","fav":false,"flag":null,"tags":[]}]},{"title":"Dashboard","links":[{"icon":"✨","label":"app.js","url":"https://juppijo.github.io/Dashboard/app.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"bild.jpg","url":"https://juppijo.github.io/Dashboard/bild.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Buch_Konverter_Pro/index.html","url":"https://juppijo.github.io/Dashboard/Buch_Konverter_Pro/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"Buch_Konverter_Pro/script.js","url":"https://juppijo.github.io/Dashboard/Buch_Konverter_Pro/script.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Buch_Konverter_Pro/style.css","url":"https://juppijo.github.io/Dashboard/Buch_Konverter_Pro/style.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Buch_Konverter/index.html","url":"https://juppijo.github.io/Dashboard/Buch_Konverter/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"Buch_Konverter/script.js","url":"https://juppijo.github.io/Dashboard/Buch_Konverter/script.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Buch_Konverter/style.css","url":"https://juppijo.github.io/Dashboard/Buch_Konverter/style.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"code-editor.html","url":"https://juppijo.github.io/Dashboard/code-editor.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"CSS-Editor/CSS-Editor-G.html","url":"https://juppijo.github.io/Dashboard/CSS-Editor/CSS-Editor-G.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"CSS-Editor/css-editor.css","url":"https://juppijo.github.io/Dashboard/CSS-Editor/css-editor.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"CSS-Editor/css-editor.html","url":"https://juppijo.github.io/Dashboard/CSS-Editor/css-editor.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"CSS-Editor/css-editor.js","url":"https://juppijo.github.io/Dashboard/CSS-Editor/css-editor.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"CSS-Editor/css-preview.html","url":"https://juppijo.github.io/Dashboard/CSS-Editor/css-preview.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"CSS-Editor/index.html","url":"https://juppijo.github.io/Dashboard/CSS-Editor/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"CSS-Editor/mein-element-2.css","url":"https://juppijo.github.io/Dashboard/CSS-Editor/mein-element-2.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"CSS-Editor/mein-element.css","url":"https://juppijo.github.io/Dashboard/CSS-Editor/mein-element.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Dashboard.html","url":"https://juppijo.github.io/Dashboard/Dashboard.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Dashboard2.html","url":"https://juppijo.github.io/Dashboard/Dashboard2.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"favicon.jpg","url":"https://juppijo.github.io/Dashboard/favicon.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HTML-Editor.html","url":"https://juppijo.github.io/Dashboard/HTML-Editor.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"index.html","url":"https://juppijo.github.io/Dashboard/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"README.md","url":"https://juppijo.github.io/Dashboard/README.md","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"styles.css","url":"https://juppijo.github.io/Dashboard/styles.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"test.html","url":"https://juppijo.github.io/Dashboard/test.html","fav":false,"flag":null,"tags":[]}]},{"title":"ESP32-S3","links":[{"icon":"✨","label":"esp32_2.html","url":"https://juppijo.github.io/ESP32-S3/esp32_2.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"esp32.html","url":"https://juppijo.github.io/ESP32-S3/esp32.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"GPIO-Control-2/GPIO2.ino","url":"https://juppijo.github.io/ESP32-S3/GPIO-Control-2/GPIO2.ino","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"GPIO-Control-2/index.html","url":"https://juppijo.github.io/ESP32-S3/GPIO-Control-2/index.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"GPIO-Control-2/SecretLogin.h","url":"https://juppijo.github.io/ESP32-S3/GPIO-Control-2/SecretLogin.h","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"GPIO-Control-3/index.html","url":"https://juppijo.github.io/ESP32-S3/GPIO-Control-3/index.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"GPIO-Control/index.html","url":"https://juppijo.github.io/ESP32-S3/GPIO-Control/index.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"MiniCon/index.html","url":"https://juppijo.github.io/ESP32-S3/MiniCon/index.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"MiniCon/script.js","url":"https://juppijo.github.io/ESP32-S3/MiniCon/script.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"MiniCon/style.css","url":"https://juppijo.github.io/ESP32-S3/MiniCon/style.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"README.md","url":"https://juppijo.github.io/ESP32-S3/README.md","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"RGB_LED/index.html","url":"https://juppijo.github.io/ESP32-S3/RGB_LED/index.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZT_LaTex.html","url":"https://juppijo.github.io/ESP32-S3/WRZT_LaTex.html","fav":false,"flag":null,"tags":[]}]},{"title":"Garten","links":[{"icon":"✨","label":"bild.jpg","url":"https://juppijo.github.io/Garten/bild.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"favicon.jpg","url":"https://juppijo.github.io/Garten/favicon.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"index.html","url":"https://juppijo.github.io/Garten/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"mein-garten.json","url":"https://juppijo.github.io/Garten/mein-garten.json","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"README.md","url":"https://juppijo.github.io/Garten/README.md","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"script.js","url":"https://juppijo.github.io/Garten/script.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"stone-layout-planner.html","url":"https://juppijo.github.io/Garten/stone-layout-planner.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"style.css","url":"https://juppijo.github.io/Garten/style.css","fav":false,"flag":null,"tags":[]}]},{"title":"Logik_des_Universums","links":[{"icon":"✨","label":"images/bild_1.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_1.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_10.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_10.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_11.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_11.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_12.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_12.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_13.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_13.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_14.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_14.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_15.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_15.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_16.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_16.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_17.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_17.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_18.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_18.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_19.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_19.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_2.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_2.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_20.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_20.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_21.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_21.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_22.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_22.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_23.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_23.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_24.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_24.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_25.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_25.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_26.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_26.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_27.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_27.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_28.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_28.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_3.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_3.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_4.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_4.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_5.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_5.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_6.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_6.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_7.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_7.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_8.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_8.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"images/bild_9.jpg","url":"https://juppijo.github.io/Logik_des_Universums/images/bild_9.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"index.html","url":"https://juppijo.github.io/Logik_des_Universums/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"konverter_docx_large_LU2.py","url":"https://juppijo.github.io/Logik_des_Universums/konverter_docx_large_LU2.py","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"konverter_docx_large.py","url":"https://juppijo.github.io/Logik_des_Universums/konverter_docx_large.py","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"konverter_smartphone_lu.py","url":"https://juppijo.github.io/Logik_des_Universums/konverter_smartphone_lu.py","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"konverter_smartphone_lu2.py","url":"https://juppijo.github.io/Logik_des_Universums/konverter_smartphone_lu2.py","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"konverter_smartphone.py","url":"https://juppijo.github.io/Logik_des_Universums/konverter_smartphone.py","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"README.md","url":"https://juppijo.github.io/Logik_des_Universums/README.md","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"script-s.js","url":"https://juppijo.github.io/Logik_des_Universums/script-s.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"script.js","url":"https://juppijo.github.io/Logik_des_Universums/script.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"smart.html","url":"https://juppijo.github.io/Logik_des_Universums/smart.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Sort_html.py","url":"https://juppijo.github.io/Logik_des_Universums/Sort_html.py","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"style-s.css","url":"https://juppijo.github.io/Logik_des_Universums/style-s.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"style.css","url":"https://juppijo.github.io/Logik_des_Universums/style.css","fav":false,"flag":null,"tags":[]}]},{"title":"Musik_Zami","links":[{"icon":"✨","label":"chord_sequence.mid","url":"https://juppijo.github.io/Musik_Zami/chord_sequence.mid","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"html-teilen.py","url":"https://juppijo.github.io/Musik_Zami/html-teilen.py","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"index.html","url":"https://juppijo.github.io/Musik_Zami/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"Lisa/sonic_lisajous.html","url":"https://juppijo.github.io/Musik_Zami/Lisa/sonic_lisajous.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"Lisa/Zami.jpg","url":"https://juppijo.github.io/Musik_Zami/Lisa/Zami.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Loop/index.html","url":"https://juppijo.github.io/Musik_Zami/Loop/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"Loop/loopmatrix_session.json","url":"https://juppijo.github.io/Musik_Zami/Loop/loopmatrix_session.json","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Loop/script.js","url":"https://juppijo.github.io/Musik_Zami/Loop/script.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Loop/style.css","url":"https://juppijo.github.io/Musik_Zami/Loop/style.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"markdown-preview.pdf","url":"https://juppijo.github.io/Musik_Zami/markdown-preview.pdf","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"midi-soundfont_instr.html","url":"https://juppijo.github.io/Musik_Zami/midi-soundfont_instr.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"musik-touch-pro.html","url":"https://juppijo.github.io/Musik_Zami/musik-touch-pro.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"musik-touch.html","url":"https://juppijo.github.io/Musik_Zami/musik-touch.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"note.jpg","url":"https://juppijo.github.io/Musik_Zami/note.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Radio/aether-radio-sender.json","url":"https://juppijo.github.io/Musik_Zami/Radio/aether-radio-sender.json","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Radio/index.html","url":"https://juppijo.github.io/Musik_Zami/Radio/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"Radio/Make_Default_Station.py","url":"https://juppijo.github.io/Musik_Zami/Radio/Make_Default_Station.py","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Radio/script.js","url":"https://juppijo.github.io/Musik_Zami/Radio/script.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Radio/stations.js","url":"https://juppijo.github.io/Musik_Zami/Radio/stations.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Radio/style.css","url":"https://juppijo.github.io/Musik_Zami/Radio/style.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Radio/Zami.jpg","url":"https://juppijo.github.io/Musik_Zami/Radio/Zami.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"README.md","url":"https://juppijo.github.io/Musik_Zami/README.md","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"script.js","url":"https://juppijo.github.io/Musik_Zami/script.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"soundfont-touch.html","url":"https://juppijo.github.io/Musik_Zami/soundfont-touch.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"style (Kopie).css","url":"https://juppijo.github.io/Musik_Zami/style%20(Kopie).css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"style.css","url":"https://juppijo.github.io/Musik_Zami/style.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"test.html","url":"https://juppijo.github.io/Musik_Zami/test.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZamiKlavier.jpeg","url":"https://juppijo.github.io/Musik_Zami/ZamiKlavier.jpeg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Zaminia-Chord-Interface_1.html","url":"https://juppijo.github.io/Musik_Zami/Zaminia-Chord-Interface_1.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"Zaminia-Chord-Interface.html","url":"https://juppijo.github.io/Musik_Zami/Zaminia-Chord-Interface.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"Zamis-zen-music-player.html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Zamis-zen-music-player.html","fav":true,"flag":"red","tags":[]}]},{"title":"Rechner","links":[{"icon":"✨","label":"AstroPhysCalc.html","url":"https://juppijo.github.io/Rechner/AstroPhysCalc.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"editor_pro.html","url":"https://juppijo.github.io/Rechner/editor_pro.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"einheiten-rechner-pro.html","url":"https://juppijo.github.io/Rechner/einheiten-rechner-pro.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"einheiten-rechner.html","url":"https://juppijo.github.io/Rechner/einheiten-rechner.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"favicon.jpg","url":"https://juppijo.github.io/Rechner/favicon.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"favorites_dashboard.html","url":"https://juppijo.github.io/Rechner/favorites_dashboard.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"font-editor.html","url":"https://juppijo.github.io/Rechner/font-editor.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"html-fortgeschritten.html","url":"https://juppijo.github.io/Rechner/html-fortgeschritten.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"html-funsion.py","url":"https://juppijo.github.io/Rechner/html-funsion.py","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"html-lernen.html","url":"https://juppijo.github.io/Rechner/html-lernen.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"html-teilen.py","url":"https://juppijo.github.io/Rechner/html-teilen.py","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"index.html","url":"https://juppijo.github.io/Rechner/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"LaTex-Editor/index.html","url":"https://juppijo.github.io/Rechner/LaTex-Editor/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"LaTex-Editor/LaTex-Editor.html","url":"https://juppijo.github.io/Rechner/LaTex-Editor/LaTex-Editor.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"LaTex-Editor/script.js","url":"https://juppijo.github.io/Rechner/LaTex-Editor/script.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"LaTex-Editor/style.css","url":"https://juppijo.github.io/Rechner/LaTex-Editor/style.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Luft-Rechner.html","url":"https://juppijo.github.io/Rechner/Luft-Rechner.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"lumi.png","url":"https://juppijo.github.io/Rechner/lumi.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Luminara.ttf","url":"https://juppijo.github.io/Rechner/Luminara.ttf","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"meine-notizen.json","url":"https://juppijo.github.io/Rechner/meine-notizen.json","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"notizen_mobile.html","url":"https://juppijo.github.io/Rechner/notizen_mobile.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"notizen_pro.html","url":"https://juppijo.github.io/Rechner/notizen_pro.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"physcalc_pro.html","url":"https://juppijo.github.io/Rechner/physcalc_pro.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"README.md","url":"https://juppijo.github.io/Rechner/README.md","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Rechner_CGTP.html","url":"https://juppijo.github.io/Rechner/Rechner_CGTP.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Rechner_DS.html","url":"https://juppijo.github.io/Rechner/Rechner_DS.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Rechner_DS2.html","url":"https://juppijo.github.io/Rechner/Rechner_DS2.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Rechner_G.html","url":"https://juppijo.github.io/Rechner/Rechner_G.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Schrift.html","url":"https://juppijo.github.io/Rechner/Schrift.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Zami_Calc.jpg","url":"https://juppijo.github.io/Rechner/Zami_Calc.jpg","fav":false,"flag":null,"tags":[]}]},{"title":"robbie","links":[{"icon":"✨","label":"index.html","url":"https://juppijo.github.io/robbie/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"README.md","url":"https://juppijo.github.io/robbie/README.md","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"script.js","url":"https://juppijo.github.io/robbie/script.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"style.css","url":"https://juppijo.github.io/robbie/style.css","fav":false,"flag":null,"tags":[]}]},{"title":"TaiChi","links":[{"icon":"✨","label":"8 Brokate.docx","url":"https://juppijo.github.io/TaiChi/8%20Brokate.docx","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/8Brokate_App.html","url":"https://juppijo.github.io/TaiChi/8-Brokate/8Brokate_App.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/8Brokate_S.html","url":"https://juppijo.github.io/TaiChi/8-Brokate/8Brokate_S.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/8Brokate.html","url":"https://juppijo.github.io/TaiChi/8-Brokate/8Brokate.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/Gong.mp3","url":"https://juppijo.github.io/TaiChi/8-Brokate/Gong.mp3","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/dia.php","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/dia.php","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/diaf.php","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/diaf.php","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/diaff.php","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/diaff.php","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/image1.png","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/image1.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/image10.png","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/image10.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/image11.png","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/image11.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/image12.png","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/image12.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/image13.png","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/image13.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/image14.png","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/image14.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/image15.png","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/image15.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/image16.png","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/image16.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/image17.png","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/image17.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/image18.png","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/image18.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/image19.png","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/image19.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/image2.png","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/image2.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/image20.png","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/image20.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/image3.png","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/image3.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/image4.png","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/image4.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/image5.png","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/image5.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/image6.png","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/image6.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/image7.png","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/image7.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/image8.png","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/image8.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/image9.png","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/image9.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/index.html","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/index.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/index.php","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/index.php","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/images/zenjio-gallery.html","url":"https://juppijo.github.io/TaiChi/8-Brokate/images/zenjio-gallery.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/index.html","url":"https://juppijo.github.io/TaiChi/8-Brokate/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"8-Brokate/QiGong.mp3","url":"https://juppijo.github.io/TaiChi/8-Brokate/QiGong.mp3","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"favicon.png","url":"https://juppijo.github.io/TaiChi/favicon.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Gayatri Mantra.mp3","url":"https://juppijo.github.io/TaiChi/Gayatri%20Mantra.mp3","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"index.html","url":"https://juppijo.github.io/TaiChi/index.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Klangschale.mp3","url":"https://juppijo.github.io/TaiChi/Klangschale.mp3","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Kum-Nye/index.html","url":"https://juppijo.github.io/TaiChi/Kum-Nye/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"Kum-Nye/KumNye.mp3","url":"https://juppijo.github.io/TaiChi/Kum-Nye/KumNye.mp3","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Kum-Nye/script.js","url":"https://juppijo.github.io/TaiChi/Kum-Nye/script.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Kum-Nye/style.css","url":"https://juppijo.github.io/TaiChi/Kum-Nye/style.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Kum-Nye/Titel.jpg","url":"https://juppijo.github.io/TaiChi/Kum-Nye/Titel.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"QiGong_G2.html","url":"https://juppijo.github.io/TaiChi/QiGong_G2.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"QiGong_G3.html","url":"https://juppijo.github.io/TaiChi/QiGong_G3.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"README.md","url":"https://juppijo.github.io/TaiChi/README.md","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Tai_Chi.html","url":"https://juppijo.github.io/TaiChi/Tai_Chi.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"taichi_practice.html","url":"https://juppijo.github.io/TaiChi/taichi_practice.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"taichi_practice108.html","url":"https://juppijo.github.io/TaiChi/taichi_practice108.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"TaiChi.mp3","url":"https://juppijo.github.io/TaiChi/TaiChi.mp3","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"zami_übung_Z.png","url":"https://juppijo.github.io/TaiChi/zami_%C3%BCbung_Z.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"zami_übung1.png","url":"https://juppijo.github.io/TaiChi/zami_%C3%BCbung1.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"zami_übung2.png","url":"https://juppijo.github.io/TaiChi/zami_%C3%BCbung2.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"zami_übung3.png","url":"https://juppijo.github.io/TaiChi/zami_%C3%BCbung3.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"zami_übung4.png","url":"https://juppijo.github.io/TaiChi/zami_%C3%BCbung4.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"zami_übung5.png","url":"https://juppijo.github.io/TaiChi/zami_%C3%BCbung5.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"zami_übung6.png","url":"https://juppijo.github.io/TaiChi/zami_%C3%BCbung6.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"zami_übung7.png","url":"https://juppijo.github.io/TaiChi/zami_%C3%BCbung7.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"zami_übung8.png","url":"https://juppijo.github.io/TaiChi/zami_%C3%BCbung8.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"zami_übungen_Titel.png","url":"https://juppijo.github.io/TaiChi/zami_%C3%BCbungen_Titel.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"zami_übungen.png","url":"https://juppijo.github.io/TaiChi/zami_%C3%BCbungen.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZamiTaichi2.png","url":"https://juppijo.github.io/TaiChi/ZamiTaichi2.png","fav":false,"flag":null,"tags":[]}]},{"title":"TNH","links":[{"icon":"✨","label":"Atmen.html","url":"https://juppijo.github.io/TNH/Atmen.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"DIE SECHSZEHN ÜBUNGEN DES BEWUSSTEN ATMEN .mp3","url":"https://juppijo.github.io/TNH/DIE%20SECHSZEHN%20%C3%9CBUNGEN%20DES%20BEWUSSTEN%20ATMEN%20.mp3","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"DIESECHSZEHNBUNGENDESBEWUSSTENATMENS.html","url":"https://juppijo.github.io/TNH/DIESECHSZEHNBUNGENDESBEWUSSTENATMENS.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"fisher_anpassungstest.html","url":"https://juppijo.github.io/TNH/fisher_anpassungstest.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"fuenf_sprachen_der_liebe.html","url":"https://juppijo.github.io/TNH/fuenf_sprachen_der_liebe.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"index.html","url":"https://juppijo.github.io/TNH/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"klangschale.mp3","url":"https://juppijo.github.io/TNH/klangschale.mp3","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"README.md","url":"https://juppijo.github.io/TNH/README.md","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Zami.jpg","url":"https://juppijo.github.io/TNH/Zami.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Zami2.jpg","url":"https://juppijo.github.io/TNH/Zami2.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"zen_atem_pwa_gefuhrter_meditationsmodus (2).html","url":"https://juppijo.github.io/TNH/zen_atem_pwa_gefuhrter_meditationsmodus%20(2).html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"zen_atem_pwa_gefuhrter_meditationsmodus (4).html","url":"https://juppijo.github.io/TNH/zen_atem_pwa_gefuhrter_meditationsmodus%20(4).html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"zen_atem_pwa_gefuhrter_meditationsmodus (5).html","url":"https://juppijo.github.io/TNH/zen_atem_pwa_gefuhrter_meditationsmodus%20(5).html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"zen_atem_pwa_gefuhrter_meditationsmodus.html","url":"https://juppijo.github.io/TNH/zen_atem_pwa_gefuhrter_meditationsmodus.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"zen_breath_enhanced.html","url":"https://juppijo.github.io/TNH/zen_breath_enhanced.html","fav":true,"flag":null,"tags":[]}]},{"title":"WRZT","links":[{"icon":"✨","label":"3Rmin.html","url":"https://juppijo.github.io/WRZT/3Rmin.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"astro_physform.html","url":"https://juppijo.github.io/WRZT/astro_physform.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"favicon.png","url":"https://juppijo.github.io/WRZT/favicon.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"G-E-Welle/G-E-Welle-1.html","url":"https://juppijo.github.io/WRZT/G-E-Welle/G-E-Welle-1.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"G-E-Welle/G-E-Welle-2.html","url":"https://juppijo.github.io/WRZT/G-E-Welle/G-E-Welle-2.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"G-E-Welle/index.html","url":"https://juppijo.github.io/WRZT/G-E-Welle/index.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"G-E-Welle/script.js","url":"https://juppijo.github.io/WRZT/G-E-Welle/script.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"G-E-Welle/style.css","url":"https://juppijo.github.io/WRZT/G-E-Welle/style.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"G-E-Welle/Wellenfeld-Sim.html","url":"https://juppijo.github.io/WRZT/G-E-Welle/Wellenfeld-Sim.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"GWelle3D.html","url":"https://juppijo.github.io/WRZT/GWelle3D.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HT/index.html","url":"https://juppijo.github.io/WRZT/HT/index.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HT/photon2(1).html","url":"https://juppijo.github.io/WRZT/HT/photon2(1).html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HT/photon2(2).html","url":"https://juppijo.github.io/WRZT/HT/photon2(2).html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HT/photon2(2D).html","url":"https://juppijo.github.io/WRZT/HT/photon2(2D).html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HT/photon2(3).html","url":"https://juppijo.github.io/WRZT/HT/photon2(3).html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HT/photon2(3D) (2).html","url":"https://juppijo.github.io/WRZT/HT/photon2(3D)%20(2).html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HT/photon2(3D) (3).html","url":"https://juppijo.github.io/WRZT/HT/photon2(3D)%20(3).html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HT/photon2(3D).html","url":"https://juppijo.github.io/WRZT/HT/photon2(3D).html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HT/photon2(4).html","url":"https://juppijo.github.io/WRZT/HT/photon2(4).html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HT/script.js","url":"https://juppijo.github.io/WRZT/HT/script.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HT/spiral_undatron (Kopie).html","url":"https://juppijo.github.io/WRZT/HT/spiral_undatron%20(Kopie).html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HT/spiral_undatron.html","url":"https://juppijo.github.io/WRZT/HT/spiral_undatron.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HT/styles.css","url":"https://juppijo.github.io/WRZT/HT/styles.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HT/wave_double_slit_f.html","url":"https://juppijo.github.io/WRZT/HT/wave_double_slit_f.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HT/wave_double_slit.html","url":"https://juppijo.github.io/WRZT/HT/wave_double_slit.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HT/wave-net-simulation (9).html","url":"https://juppijo.github.io/WRZT/HT/wave-net-simulation%20(9).html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HT/wave-net-simulation.html","url":"https://juppijo.github.io/WRZT/HT/wave-net-simulation.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HT/wrznt_enhanced(3D).html","url":"https://juppijo.github.io/WRZT/HT/wrznt_enhanced(3D).html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HT/wrznt_ladund.html","url":"https://juppijo.github.io/WRZT/HT/wrznt_ladund.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HT/wrznt_netzwerk_simulation_3d.html","url":"https://juppijo.github.io/WRZT/HT/wrznt_netzwerk_simulation_3d.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HT/wrznt_netzwerk_simulation.html","url":"https://juppijo.github.io/WRZT/HT/wrznt_netzwerk_simulation.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"index.html","url":"https://juppijo.github.io/WRZT/index.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Kugel(5).html","url":"https://juppijo.github.io/WRZT/Kugel(5).html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"LisaK.html","url":"https://juppijo.github.io/WRZT/LisaK.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Lorentz-Wand.html","url":"https://juppijo.github.io/WRZT/Lorentz-Wand.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Lorentz-Wand(2).html","url":"https://juppijo.github.io/WRZT/Lorentz-Wand(2).html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"LWT.html","url":"https://juppijo.github.io/WRZT/LWT.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"physik_formel_editor.html","url":"https://juppijo.github.io/WRZT/physik_formel_editor.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Physiker.html","url":"https://juppijo.github.io/WRZT/Physiker.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"QW.png","url":"https://juppijo.github.io/WRZT/QW.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"README.md","url":"https://juppijo.github.io/WRZT/README.md","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"titelbild.jpeg","url":"https://juppijo.github.io/WRZT/titelbild.jpeg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Undatron_3D.html","url":"https://juppijo.github.io/WRZT/Undatron_3D.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"wave_double_slit_f.html","url":"https://juppijo.github.io/WRZT/wave_double_slit_f.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"wave-net-simulation (9).html","url":"https://juppijo.github.io/WRZT/wave-net-simulation%20(9).html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Wellen_1(1)(1).html","url":"https://juppijo.github.io/WRZT/Wellen_1(1)(1).html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZNT_C/script (Kopie).js","url":"https://juppijo.github.io/WRZT/WRZNT_C/script%20(Kopie).js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZNT_C/script.js","url":"https://juppijo.github.io/WRZT/WRZNT_C/script.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZNT_C/styles.css","url":"https://juppijo.github.io/WRZT/WRZNT_C/styles.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZNT_C/titelbild.jpeg","url":"https://juppijo.github.io/WRZT/WRZNT_C/titelbild.jpeg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"wrznt_enhanced(3D).html","url":"https://juppijo.github.io/WRZT/wrznt_enhanced(3D).html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"wrznt_ladund.html","url":"https://juppijo.github.io/WRZT/wrznt_ladund.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"wrznt_netzwerk_simulation_3d.html","url":"https://juppijo.github.io/WRZT/wrznt_netzwerk_simulation_3d.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"wrznt_netzwerk_simulation.html","url":"https://juppijo.github.io/WRZT/wrznt_netzwerk_simulation.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZNT/curve3d-1.html","url":"https://juppijo.github.io/WRZT/WRZNT/curve3d-1.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZNT/curve3d.html","url":"https://juppijo.github.io/WRZT/WRZNT/curve3d.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZNT/images/image1.png","url":"https://juppijo.github.io/WRZT/WRZNT/images/image1.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZNT/Quanten-Spin-Raumwirbel-3d.html","url":"https://juppijo.github.io/WRZT/WRZNT/Quanten-Spin-Raumwirbel-3d.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZNT/Quanten-Spin-Raumwirbel.html","url":"https://juppijo.github.io/WRZT/WRZNT/Quanten-Spin-Raumwirbel.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZNT/Rmin_Kurve_G3.html","url":"https://juppijo.github.io/WRZT/WRZNT/Rmin_Kurve_G3.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZNT/sinus-cube-3d.html","url":"https://juppijo.github.io/WRZT/WRZNT/sinus-cube-3d.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZT_Calc/alpha.py","url":"https://juppijo.github.io/WRZT/WRZT_Calc/alpha.py","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZT_Calc/index.html","url":"https://juppijo.github.io/WRZT/WRZT_Calc/index.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZT_Calc/logo.png","url":"https://juppijo.github.io/WRZT/WRZT_Calc/logo.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZT_Calc/physik_formeln_2026-02-17.json","url":"https://juppijo.github.io/WRZT/WRZT_Calc/physik_formeln_2026-02-17.json","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZT_Calc/physik_formeln_2026-02-18.json","url":"https://juppijo.github.io/WRZT/WRZT_Calc/physik_formeln_2026-02-18.json","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZT_Calc/Physik.jpeg","url":"https://juppijo.github.io/WRZT/WRZT_Calc/Physik.jpeg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZT_Calc/readme.md","url":"https://juppijo.github.io/WRZT/WRZT_Calc/readme.md","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZT_Calc/script.js","url":"https://juppijo.github.io/WRZT/WRZT_Calc/script.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZT_Calc/style.css","url":"https://juppijo.github.io/WRZT/WRZT_Calc/style.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZT2/dreieck.html","url":"https://juppijo.github.io/WRZT/WRZT2/dreieck.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZT2/favicon.png","url":"https://juppijo.github.io/WRZT/WRZT2/favicon.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZT2/ico.html","url":"https://juppijo.github.io/WRZT/WRZT2/ico.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZT2/logo.svg","url":"https://juppijo.github.io/WRZT/WRZT2/logo.svg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZT2/Lorenz_Geo.html","url":"https://juppijo.github.io/WRZT/WRZT2/Lorenz_Geo.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZT2/Lorenz.md","url":"https://juppijo.github.io/WRZT/WRZT2/Lorenz.md","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"wrztbugwelle.html","url":"https://juppijo.github.io/WRZT/wrztbugwelle.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"yout.html","url":"https://juppijo.github.io/WRZT/yout.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"zen-links.json","url":"https://juppijo.github.io/WRZT/zen-links.json","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"G-E-Welle/MD_Editor.html","url":"https://juppijo.github.io/WRZT/G-E-Welle/MD_Editor.html","fav":true,"flag":"green","tags":[]}]},{"title":"WRZT_Theorie","links":[{"icon":"✨","label":"HT/GravitationTrägheit.html","url":"https://juppijo.github.io/WRZT/HT/GravitationTr%C3%A4gheit.html","fav":true,"flag":"yellow","tags":[]},{"icon":"✨","label":"HT/t.html","url":"https://juppijo.github.io/WRZT/HT/t.html","fav":true,"flag":"yellow","tags":[]},{"icon":"✨","label":"WRZNT .pdf","url":"https://juppijo.github.io/WRZT/WRZNT%20.pdf","fav":true,"flag":"yellow","tags":[]},{"icon":"✨","label":"G-E-Welle/Readme.md","url":"https://juppijo.github.io/WRZT/G-E-Welle/Readme.md","fav":true,"flag":"green","tags":[]},{"icon":"✨","label":"G-E-Welle/Wellenfeld-Gleichung.html","url":"https://juppijo.github.io/WRZT/G-E-Welle/Wellenfeld-Gleichung.html","fav":true,"flag":"yellow","tags":["formeln"]},{"icon":"✨","label":"HT/t2.html","url":"https://juppijo.github.io/WRZT/HT/t2.html","fav":true,"flag":"purple","tags":[]},{"icon":"✨","label":"HT/Traegheit.html","url":"https://juppijo.github.io/WRZT/HT/Traegheit.html","fav":true,"flag":"yellow","tags":[]},{"icon":"✨","label":"HT/wrzt_kapitel_gravitation_lichtgeschwindigkeit.html","url":"https://juppijo.github.io/WRZT/HT/wrzt_kapitel_gravitation_lichtgeschwindigkeit.html","fav":true,"flag":"purple","tags":["neu"]},{"icon":"✨","label":"Lorenz2.html","url":"https://juppijo.github.io/WRZT/Lorenz2.html","fav":true,"flag":"yellow","tags":[]},{"icon":"✨","label":"LWT_Def.html","url":"https://juppijo.github.io/WRZT/LWT_Def.html","fav":true,"flag":"yellow","tags":[]},{"icon":"✨","label":"WD.html","url":"https://juppijo.github.io/WRZT/WD.html","fav":true,"flag":"green","tags":[]},{"icon":"✨","label":"WRZNT_Buch_JZ.html","url":"https://juppijo.github.io/WRZT/WRZNT_Buch_JZ.html","fav":true,"flag":"yellow","tags":["buch"]},{"icon":"✨","label":"trigonometrie_formeln.html","url":"https://juppijo.github.io/WRZT/trigonometrie_formeln.html","fav":true,"flag":"blue","tags":["formeln"]},{"icon":"✨","label":"W_Formeln_A.html","url":"https://juppijo.github.io/WRZT/W_Formeln_A.html","fav":true,"flag":"yellow","tags":["formeln"]},{"icon":"✨","label":"WRZNT_C/index.html","url":"https://juppijo.github.io/WRZT/WRZNT_C/index.html","fav":true,"flag":"yellow","tags":[]},{"icon":"✨","label":"HT/U_Tensor.html","url":"https://juppijo.github.io/WRZT/HT/U_Tensor.html","fav":true,"flag":"yellow","tags":["formeln"]},{"icon":"✨","label":"HT/Wellenraumzeit.html","url":"https://juppijo.github.io/WRZT/HT/Wellenraumzeit.html","fav":true,"flag":"yellow","tags":["formel"]},{"icon":"✨","label":"WRZTNetz.html","url":"https://juppijo.github.io/WRZT/WRZTNetz.html","fav":true,"flag":"yellow","tags":["formel"]},{"icon":"✨","label":"WRZNT/index.html","url":"https://juppijo.github.io/WRZT/WRZNT/index.html","fav":true,"flag":"yellow","tags":["buch"]},{"icon":"✨","label":"WRZNT/kurven_formeln.xlsx","url":"https://juppijo.github.io/WRZT/WRZNT/kurven_formeln.xlsx","fav":false,"flag":"purple","tags":[]},{"icon":"✨","label":"WRZNT/WRZNT.html","url":"https://juppijo.github.io/WRZT/WRZNT/WRZNT.html","fav":true,"flag":"yellow","tags":["buch"]},{"icon":"✨","label":"WRZT_Calc/alpha-Formeln.html","url":"https://juppijo.github.io/WRZT/WRZT_Calc/alpha-Formeln.html","fav":true,"flag":"yellow","tags":[]},{"icon":"✨","label":"WRZNT/Raumwirbel.html","url":"https://juppijo.github.io/WRZT/WRZNT/Raumwirbel.html","fav":false,"flag":"yellow","tags":["formeln"]},{"icon":"✨","label":"WRZT_Calc/wrzt_zusammenfassung.html","url":"https://juppijo.github.io/WRZT/WRZT_Calc/wrzt_zusammenfassung.html","fav":true,"flag":"yellow","tags":["formeln"]},{"icon":"✨","label":"WRZT2/urknall-LKM.html","url":"https://juppijo.github.io/WRZT/WRZT2/urknall-LKM.html","fav":false,"flag":"yellow","tags":[]},{"icon":"✨","label":"WRZT2/urknall.html","url":"https://juppijo.github.io/WRZT/WRZT2/urknall.html","fav":false,"flag":"yellow","tags":[]},{"icon":"✨","label":"WRZT2/Urknall2.html","url":"https://juppijo.github.io/WRZT/WRZT2/Urknall2.html","fav":false,"flag":"yellow","tags":[]},{"icon":"✨","label":"WRZT2/Lorenz.html","url":"https://juppijo.github.io/WRZT/WRZT2/Lorenz.html","fav":false,"flag":"yellow","tags":["in_arbeit"]},{"icon":"✨","label":"wrzt_rmin.html","url":"https://juppijo.github.io/WRZT/wrzt_rmin.html","fav":true,"flag":"yellow","tags":[]},{"icon":"✨","label":"wrzt_rmin1.html","url":"https://juppijo.github.io/WRZT/wrzt_rmin1.html","fav":false,"flag":"yellow","tags":[]},{"icon":"✨","label":"wrzt_rmin2.html","url":"https://juppijo.github.io/WRZT/wrzt_rmin2.html","fav":false,"flag":"yellow","tags":[]},{"icon":"✨","label":"wrzt_rmin3.html","url":"https://juppijo.github.io/WRZT/wrzt_rmin3.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"WRZT.html","url":"https://juppijo.github.io/WRZT/WRZT.html","fav":true,"flag":"yellow","tags":[]},{"icon":"✨","label":"WRZT_Theorie.html","url":"https://juppijo.github.io/WRZT/WRZT_Theorie.html","fav":true,"flag":"yellow","tags":[]},{"icon":"✨","label":"WRZT_Theorie_JZ.html","url":"https://juppijo.github.io/WRZT/WRZT_Theorie_JZ.html","fav":true,"flag":"yellow","tags":[]},{"icon":"✨","label":"WRZT_Formelsammlung.html","url":"https://juppijo.github.io/WRZT/WRZT_Formelsammlung.html","fav":true,"flag":"yellow","tags":["formeln"]},{"icon":"✨","label":"WRZT_Lorenz.html","url":"https://juppijo.github.io/WRZT/WRZT_Lorenz.html","fav":false,"flag":"yellow","tags":[]},{"icon":"✨","label":"WRZT_Lorenz_2.html","url":"https://juppijo.github.io/WRZT/WRZT_Lorenz_2.html","fav":false,"flag":"yellow","tags":[]},{"icon":"✨","label":"WRZT2/Lorenz_Trigo.html","url":"https://juppijo.github.io/WRZT/WRZT2/Lorenz_Trigo.html","fav":false,"flag":"yellow","tags":[]},{"icon":"✨","label":"WRZNT-Konstanten.html","url":"https://juppijo.github.io/Rechner/WRZNT-Konstanten.html","fav":true,"flag":"yellow","tags":["rechner"]}]},{"title":"Zami_Buecher","links":[{"icon":"✨","label":"docx_to_html.py","url":"https://juppijo.github.io/Zami_Buecher/docx_to_html.py","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Home.jpeg","url":"https://juppijo.github.io/Zami_Buecher/Home.jpeg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"HomeL.jpeg","url":"https://juppijo.github.io/Zami_Buecher/HomeL.jpeg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"index.html","url":"https://juppijo.github.io/Zami_Buecher/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"Index2.html","url":"https://juppijo.github.io/Zami_Buecher/Index2.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Index3.html","url":"https://juppijo.github.io/Zami_Buecher/Index3.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"konverter_docx_large.py","url":"https://juppijo.github.io/Zami_Buecher/konverter_docx_large.py","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"konverter_smartphone.py","url":"https://juppijo.github.io/Zami_Buecher/konverter_smartphone.py","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Kunst_des_einfühlsamen_Zuhörens/images/bild_1.jpg","url":"https://juppijo.github.io/Zami_Buecher/Kunst_des_einf%C3%BChlsamen_Zuh%C3%B6rens/images/bild_1.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Kunst_des_einfühlsamen_Zuhörens/images/bild_10.jpg","url":"https://juppijo.github.io/Zami_Buecher/Kunst_des_einf%C3%BChlsamen_Zuh%C3%B6rens/images/bild_10.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Kunst_des_einfühlsamen_Zuhörens/images/bild_11.jpg","url":"https://juppijo.github.io/Zami_Buecher/Kunst_des_einf%C3%BChlsamen_Zuh%C3%B6rens/images/bild_11.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Kunst_des_einfühlsamen_Zuhörens/images/bild_2.jpg","url":"https://juppijo.github.io/Zami_Buecher/Kunst_des_einf%C3%BChlsamen_Zuh%C3%B6rens/images/bild_2.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Kunst_des_einfühlsamen_Zuhörens/images/bild_3.jpg","url":"https://juppijo.github.io/Zami_Buecher/Kunst_des_einf%C3%BChlsamen_Zuh%C3%B6rens/images/bild_3.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Kunst_des_einfühlsamen_Zuhörens/images/bild_4.jpg","url":"https://juppijo.github.io/Zami_Buecher/Kunst_des_einf%C3%BChlsamen_Zuh%C3%B6rens/images/bild_4.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Kunst_des_einfühlsamen_Zuhörens/images/bild_5.jpg","url":"https://juppijo.github.io/Zami_Buecher/Kunst_des_einf%C3%BChlsamen_Zuh%C3%B6rens/images/bild_5.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Kunst_des_einfühlsamen_Zuhörens/images/bild_6.jpg","url":"https://juppijo.github.io/Zami_Buecher/Kunst_des_einf%C3%BChlsamen_Zuh%C3%B6rens/images/bild_6.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Kunst_des_einfühlsamen_Zuhörens/images/bild_7.jpg","url":"https://juppijo.github.io/Zami_Buecher/Kunst_des_einf%C3%BChlsamen_Zuh%C3%B6rens/images/bild_7.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Kunst_des_einfühlsamen_Zuhörens/images/bild_8.jpg","url":"https://juppijo.github.io/Zami_Buecher/Kunst_des_einf%C3%BChlsamen_Zuh%C3%B6rens/images/bild_8.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Kunst_des_einfühlsamen_Zuhörens/images/bild_9.jpg","url":"https://juppijo.github.io/Zami_Buecher/Kunst_des_einf%C3%BChlsamen_Zuh%C3%B6rens/images/bild_9.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Kunst_des_einfühlsamen_Zuhörens/index.html","url":"https://juppijo.github.io/Zami_Buecher/Kunst_des_einf%C3%BChlsamen_Zuh%C3%B6rens/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"Kunst_des_einfühlsamen_Zuhörens/script-s.js","url":"https://juppijo.github.io/Zami_Buecher/Kunst_des_einf%C3%BChlsamen_Zuh%C3%B6rens/script-s.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Kunst_des_einfühlsamen_Zuhörens/script.js","url":"https://juppijo.github.io/Zami_Buecher/Kunst_des_einf%C3%BChlsamen_Zuh%C3%B6rens/script.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Kunst_des_einfühlsamen_Zuhörens/smart.html","url":"https://juppijo.github.io/Zami_Buecher/Kunst_des_einf%C3%BChlsamen_Zuh%C3%B6rens/smart.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"Kunst_des_einfühlsamen_Zuhörens/style-s.css","url":"https://juppijo.github.io/Zami_Buecher/Kunst_des_einf%C3%BChlsamen_Zuh%C3%B6rens/style-s.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Kunst_des_einfühlsamen_Zuhörens/style.css","url":"https://juppijo.github.io/Zami_Buecher/Kunst_des_einf%C3%BChlsamen_Zuh%C3%B6rens/style.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"README.md","url":"https://juppijo.github.io/Zami_Buecher/README.md","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Shambala_Luminia/images/bild_1.jpg","url":"https://juppijo.github.io/Zami_Buecher/Shambala_Luminia/images/bild_1.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Shambala_Luminia/images/bild_2.jpg","url":"https://juppijo.github.io/Zami_Buecher/Shambala_Luminia/images/bild_2.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Shambala_Luminia/index.html","url":"https://juppijo.github.io/Zami_Buecher/Shambala_Luminia/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"Shambala_Luminia/script.js","url":"https://juppijo.github.io/Zami_Buecher/Shambala_Luminia/script.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Shambala_Luminia/style.css","url":"https://juppijo.github.io/Zami_Buecher/Shambala_Luminia/style.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_1.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_1.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_10.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_10.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_11.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_11.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_12.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_12.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_13.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_13.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_14.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_14.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_15.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_15.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_16.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_16.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_17.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_17.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_18.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_18.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_19.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_19.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_2.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_2.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_20.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_20.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_21.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_21.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_22.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_22.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_23.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_23.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_24.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_24.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_25.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_25.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_26.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_26.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_27.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_27.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_28.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_28.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_29.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_29.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_3.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_3.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_30.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_30.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_31.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_31.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_4.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_4.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_5.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_5.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_6.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_6.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_7.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_7.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_8.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_8.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/images/bild_9.jpg","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_9.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/index-s.html","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/index-s.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/index.html","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/konverter_docx_ZW.py","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/konverter_docx_ZW.py","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/konverter_smart_ZW.py","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/konverter_smart_ZW.py","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/script-s.js","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/script-s.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/script.js","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/script.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/style-s.css","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/style-s.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZanimiasWeltreise/style.css","url":"https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/style.css","fav":false,"flag":null,"tags":[]}]},{"title":"Zami_Home","links":[{"icon":"✨","label":"bild.jpg","url":"https://juppijo.github.io/Zami_Home/bild.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Bildsuche-Pro/app.js","url":"https://juppijo.github.io/Zami_Home/Bildsuche-Pro/app.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Bildsuche-Pro/index.html","url":"https://juppijo.github.io/Zami_Home/Bildsuche-Pro/index.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Bildsuche-Pro/style.css","url":"https://juppijo.github.io/Zami_Home/Bildsuche-Pro/style.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Bildsuche-Pro/thumbcache.js","url":"https://juppijo.github.io/Zami_Home/Bildsuche-Pro/thumbcache.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Bildsuche/app.js","url":"https://juppijo.github.io/Zami_Home/Bildsuche/app.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Bildsuche/index.html","url":"https://juppijo.github.io/Zami_Home/Bildsuche/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"Bildsuche/style.css","url":"https://juppijo.github.io/Zami_Home/Bildsuche/style.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"dokument.json","url":"https://juppijo.github.io/Zami_Home/dokument.json","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"favicon.jpg","url":"https://juppijo.github.io/Zami_Home/favicon.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"GitHub Repository Index - GITALL.csv","url":"https://juppijo.github.io/Zami_Home/GitHub%20Repository%20Index%20-%20GITALL.csv","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"github-link-builder.html","url":"https://juppijo.github.io/Zami_Home/github-link-builder.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"GitHubLinks.html","url":"https://juppijo.github.io/Zami_Home/GitHubLinks.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"GitHubRespo/index.html","url":"https://juppijo.github.io/Zami_Home/GitHubRespo/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"GitHubRespo/script.js","url":"https://juppijo.github.io/Zami_Home/GitHubRespo/script.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"GitHubRespo/style.css","url":"https://juppijo.github.io/Zami_Home/GitHubRespo/style.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Hintergrung.mp3","url":"https://juppijo.github.io/Zami_Home/Hintergrung.mp3","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"html2doc/html-to-docx-converter-pro.html","url":"https://juppijo.github.io/Zami_Home/html2doc/html-to-docx-converter-pro.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"html2doc/html-to-docx-converter.html","url":"https://juppijo.github.io/Zami_Home/html2doc/html-to-docx-converter.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"html2doc/index.html","url":"https://juppijo.github.io/Zami_Home/html2doc/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"icon-creator.html","url":"https://juppijo.github.io/Zami_Home/icon-creator.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"Icon.html","url":"https://juppijo.github.io/Zami_Home/Icon.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Icon2.html","url":"https://juppijo.github.io/Zami_Home/Icon2.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"IconFavicon.html","url":"https://juppijo.github.io/Zami_Home/IconFavicon.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"index.html","url":"https://juppijo.github.io/Zami_Home/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"json_editor.html","url":"https://juppijo.github.io/Zami_Home/json_editor.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"json_vergleich.py","url":"https://juppijo.github.io/Zami_Home/json_vergleich.py","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"linkhub.html","url":"https://juppijo.github.io/Zami_Home/linkhub.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"links.json","url":"https://juppijo.github.io/Zami_Home/links.json","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"links2.json","url":"https://juppijo.github.io/Zami_Home/links2.json","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"README.md","url":"https://juppijo.github.io/Zami_Home/README.md","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"script.js","url":"https://juppijo.github.io/Zami_Home/script.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"style.css","url":"https://juppijo.github.io/Zami_Home/style.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"transform.py","url":"https://juppijo.github.io/Zami_Home/transform.py","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Zami_Welt.mp4","url":"https://juppijo.github.io/Zami_Home/Zami_Welt.mp4","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"linkvault_pro.html","url":"https://juppijo.github.io/Zami_Home/linkvault_pro.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"linksg.json","url":"https://juppijo.github.io/Zami_Home/linksg.json","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"links_cl.json","url":"https://juppijo.github.io/Zami_Home/links_cl.json","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"link_manager.html","url":"https://juppijo.github.io/Zami_Home/link_manager.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"JSON_Ultimate_Transfer_Dashboard.html","url":"https://juppijo.github.io/Zami_Home/JSON_Ultimate_Transfer_Dashboard.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"JSON_Pro_Max_Vergleicher_Dashboard.html","url":"https://juppijo.github.io/Zami_Home/JSON_Pro_Max_Vergleicher_Dashboard.html","fav":false,"flag":null,"tags":[]}]},{"title":"zaminia","links":[{"icon":"✨","label":"autogenes-training-app_Cl.html","url":"https://juppijo.github.io/zaminia/autogenes-training-app_Cl.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"AutogenesTraining.mp3","url":"https://juppijo.github.io/zaminia/AutogenesTraining.mp3","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"b1.png","url":"https://juppijo.github.io/zaminia/b1.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"bilder/kunst1.jpg","url":"https://juppijo.github.io/zaminia/bilder/kunst1.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"bilder/kunst2.jpg","url":"https://juppijo.github.io/zaminia/bilder/kunst2.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"bilder/kunst3.jpg","url":"https://juppijo.github.io/zaminia/bilder/kunst3.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"bilder/kunst4.jpg","url":"https://juppijo.github.io/zaminia/bilder/kunst4.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"BilderView/dia.php","url":"https://juppijo.github.io/zaminia/BilderView/dia.php","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"BilderView/diaf.php","url":"https://juppijo.github.io/zaminia/BilderView/diaf.php","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"BilderView/diaff.php","url":"https://juppijo.github.io/zaminia/BilderView/diaff.php","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"BilderView/index.php","url":"https://juppijo.github.io/zaminia/BilderView/index.php","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"favicon.png","url":"https://juppijo.github.io/zaminia/favicon.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"github-compare.html","url":"https://juppijo.github.io/zaminia/github-compare.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"index.html","url":"https://juppijo.github.io/zaminia/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"LinkList.html","url":"https://juppijo.github.io/zaminia/LinkList.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"LisaK.html","url":"https://juppijo.github.io/zaminia/LisaK.html","fav":true,"flag":"orange","tags":[]},{"icon":"✨","label":"README.md","url":"https://juppijo.github.io/zaminia/README.md","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"script.js","url":"https://juppijo.github.io/zaminia/script.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"style.css","url":"https://juppijo.github.io/zaminia/style.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"yout.html","url":"https://juppijo.github.io/zaminia/yout.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"zami.jpg","url":"https://juppijo.github.io/zaminia/zami.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"zami.png","url":"https://juppijo.github.io/zaminia/zami.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZaminiasKunstwelt.html","url":"https://juppijo.github.io/zaminia/ZaminiasKunstwelt.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"ZamiZen.jpg","url":"https://juppijo.github.io/zaminia/ZamiZen.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZamiZen1.jpg","url":"https://juppijo.github.io/zaminia/ZamiZen1.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZamiZen2.jpg","url":"https://juppijo.github.io/zaminia/ZamiZen2.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZamiZen3.jpg","url":"https://juppijo.github.io/zaminia/ZamiZen3.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"ZamiZen4.jpg","url":"https://juppijo.github.io/zaminia/ZamiZen4.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"zen-links.json","url":"https://juppijo.github.io/zaminia/zen-links.json","fav":false,"flag":null,"tags":[]}]},{"title":"Zaminia-Zen-Theme","links":[{"icon":"✨","label":"3DSchrift.html","url":"https://juppijo.github.io/Zaminia-Zen-Theme/3DSchrift.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"favicon.jpg","url":"https://juppijo.github.io/Zaminia-Zen-Theme/favicon.jpg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"GITALL.html","url":"https://juppijo.github.io/Zaminia-Zen-Theme/GITALL.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"GSheet.html","url":"https://juppijo.github.io/Zaminia-Zen-Theme/GSheet.html","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"index.html","url":"https://juppijo.github.io/Zaminia-Zen-Theme/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"klangschale.mp3","url":"https://juppijo.github.io/Zaminia-Zen-Theme/klangschale.mp3","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Meditation.mp3","url":"https://juppijo.github.io/Zaminia-Zen-Theme/Meditation.mp3","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Om Tare Tuttare ture soha.mp3","url":"https://juppijo.github.io/Zaminia-Zen-Theme/Om%20Tare%20Tuttare%20ture%20soha.mp3","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"README.md","url":"https://juppijo.github.io/Zaminia-Zen-Theme/README.md","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"resources/sheet.css","url":"https://juppijo.github.io/Zaminia-Zen-Theme/resources/sheet.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"script.js","url":"https://juppijo.github.io/Zaminia-Zen-Theme/script.js","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"style.css","url":"https://juppijo.github.io/Zaminia-Zen-Theme/style.css","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Zami.jpg","url":"https://juppijo.github.io/Zaminia-Zen-Theme/Zami.jpg","fav":false,"flag":null,"tags":[]}]},{"title":"ZenZamiSpiele-Co","links":[{"icon":"✨","label":"chat_farben (3).html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/chat_farben%20(3).html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"Gate gate Paragate.mp3","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Gate%20gate%20Paragate.mp3","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Gem_farben (4).html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Gem_farben%20(4).html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"index.html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"p1.jpeg","url":"https://juppijo.github.io/ZenZamiSpiele-Co/p1.jpeg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Puzzle_JO(ABC).html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Puzzle_JO(ABC).html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"Puzzle_JO3.html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Puzzle_JO3.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"README.md","url":"https://juppijo.github.io/ZenZamiSpiele-Co/README.md","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Steinverlegung/2025-11-17_22-07.png","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/2025-11-17_22-07.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Steinverlegung/2025-11-17_22-13.png","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/2025-11-17_22-13.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Steinverlegung/2025-11-17_22-15.png","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/2025-11-17_22-15.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Steinverlegung/2025-11-17_22-18.png","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/2025-11-17_22-18.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Steinverlegung/2025-11-17_22-24.png","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/2025-11-17_22-24.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Steinverlegung/2025-11-17_22-26.png","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/2025-11-17_22-26.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Steinverlegung/2025-11-17_22-27.png","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/2025-11-17_22-27.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Steinverlegung/2025-11-17_22-32.png","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/2025-11-17_22-32.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Steinverlegung/2025-11-17_22-40.png","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/2025-11-17_22-40.png","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Steinverlegung/index.html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/index.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"Steinverlegung/stone-layout-planner.html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/stone-layout-planner.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"WT.html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/WT.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"WTS.html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/WTS.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"Zami-mp3-editor.html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Zami-mp3-editor.html","fav":true,"flag":null,"tags":[]},{"icon":"✨","label":"ZAMI.jpeg","url":"https://juppijo.github.io/ZenZamiSpiele-Co/ZAMI.jpeg","fav":false,"flag":null,"tags":[]},{"icon":"✨","label":"Zamis-zen-music-player.html","url":"https://juppijo.github.io/ZenZamiSpiele-Co/Zamis-zen-music-player.html","fav":true,"flag":null,"tags":[]}]}];
 
-// ─── CATEGORY THEME DEFAULTS ────────────────────────────────────────────────
-const CAT_THEME = {
-  'Autogenes-Training': { icon:'🧘', color:'#2dd4bf' },
-  'ESP32-S3':           { icon:'🔧', color:'#f97316' },
-  'Garten':             { icon:'🌿', color:'#4ade80' },
-  'Logik_des_Universums':{ icon:'🌌', color:'#c084fc' },
-  'Musik_Zami':         { icon:'🎵', color:'#f472b6' },
-  'Rechner':            { icon:'🔢', color:'#38bdf8' },
-  'robbie':             { icon:'🤖', color:'#fde047' },
-  'TaiChi':             { icon:'☯️', color:'#86efac' },
-  'TNH':                { icon:'🌬️', color:'#fb923c' },
-  'WRZT':               { icon:'⚛️', color:'#818cf8' },
-  'Zami_Buecher':       { icon:'📚', color:'#f9a8d4' },
-  'Zami_Home':          { icon:'🏠', color:'#7dd3fc' },
-  'zaminia':            { icon:'🌟', color:'#f87171' },
-  'Zaminia-Zen-Theme':  { icon:'🎋', color:'#fbbf24' },
-  'ZenZamiSpiele-Co':   { icon:'🎮', color:'#a3e635' }
+// ── CATEGORY THEMES ───────────────────────────────────────────────────────
+const CTHEME = {
+  'Autogenes-Training':{icon:'🧘',color:'#2dd4bf'},
+  'Dashboard':         {icon:'📊',color:'#60a5fa'},
+  'ESP32-S3':          {icon:'🔧',color:'#f97316'},
+  'Garten':            {icon:'🌿',color:'#4ade80'},
+  'Logik_des_Universums':{icon:'🌌',color:'#c084fc'},
+  'Musik_Zami':        {icon:'🎵',color:'#f472b6'},
+  'Rechner':           {icon:'🔢',color:'#38bdf8'},
+  'robbie':            {icon:'🤖',color:'#fde047'},
+  'TaiChi':            {icon:'☯️',color:'#86efac'},
+  'TNH':               {icon:'🌬️',color:'#fb923c'},
+  'WRZT':              {icon:'⚛️',color:'#818cf8'},
+  'WRZT_Theorie':      {icon:'📐',color:'#e879f9'},
+  'Zami_Buecher':      {icon:'📚',color:'#f9a8d4'},
+  'Zami_Home':         {icon:'🏠',color:'#7dd3fc'},
+  'zaminia':           {icon:'🌟',color:'#f87171'},
+  'Zaminia-Zen-Theme': {icon:'🎋',color:'#fbbf24'},
+  'ZenZamiSpiele-Co':  {icon:'🎮',color:'#a3e635'},
 };
 
-const LS_KEY = 'linkHubData_v2';
-const LS_THEME_KEY = 'linkHubData_catTheme';
+const FLAG_C = {red:'#ef4444',yellow:'#fbbf24',green:'#4ade80',blue:'#38bdf8',purple:'#a78bfa',orange:'#f97316'};
 
+const EXT_MAP = {
+  html:'html',htm:'html',
+  js:'js',ts:'js',mjs:'js',
+  css:'css',
+  json:'json',
+  md:'md',txt:'md',
+  py:'py',
+  jpg:'img',jpeg:'img',png:'img',gif:'img',svg:'img',webp:'img',ico:'img',bmp:'img',
+  mp3:'media',wav:'media',ogg:'media',mp4:'media',mkv:'media',avi:'media',mid:'media',
+  pdf:'pdf',
+  docx:'office',doc:'office',xlsx:'office',xls:'office',pptx:'office',ppt:'office',
+  ino:'code',h:'code',c:'code',cpp:'code',php:'code',
+};
+const TYPE_ICO = {html:'🌐',js:'⚡',css:'🎨',json:'📋',md:'📝',py:'🐍',img:'🖼',media:'🎵',pdf:'📄',office:'📊',code:'🔩',other:'📎'};
+
+// ── STATE ─────────────────────────────────────────────────────────────────
+const LS_D = 'lh_data_v3', LS_T = 'lh_cat_theme', LS_THEME = 'lh_theme';
 let data = [];
-let catTheme = {};
-let editState = null; // {catIdx, linkIdx}
-let addLinkCatIdx = null;
+let catMeta = {}; // {title: {icon, color, collapsed}}
+let F = {q:'',fav:false,hidden:false,flags:new Set(),types:new Set(),tags:new Set()};
+let editState = null; // {ci, li}
+let editFav = false, editHide = false, editFlag = null;
+let drag = null; // {type:'card'|'cat', ci, li}
+let filterOpen = false;
 
-// ─── INIT ────────────────────────────────────────────────────────────────────
-function loadData() {
-  try {
-    const saved = localStorage.getItem(LS_KEY);
-    data = saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(DEFAULT_DATA));
-  } catch(e) { data = JSON.parse(JSON.stringify(DEFAULT_DATA)); }
-  try {
-    const st = localStorage.getItem(LS_THEME_KEY);
-    catTheme = st ? JSON.parse(st) : {};
-  } catch(e) { catTheme = {}; }
+// ── HELPERS ───────────────────────────────────────────────────────────────
+function getExt(label){const m=label.match(/\.([^./\\]+)$/);return m?m[1].toLowerCase():''}
+function getType(label){return EXT_MAP[getExt(label)]||'other'}
+function getCatMeta(title){
+  const m=catMeta[title];const d=CTHEME[title]||{icon:'📁',color:'#818cf8'};
+  return {icon:m?.icon||d.icon, color:m?.color||d.color, collapsed:m?.collapsed||false};
+}
+function shortLabel(label){
+  const p=label.split('/');let n=p[p.length-1];
+  // keep .ext but trim long names
+  if(n.length>30)n=n.slice(0,28)+'…';
+  return n;
+}
+function prefix(label){const p=label.split('/');return p.length>1?p.slice(0,-1).join('/')+'/ ':''}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function escA(s){return String(s).replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
+
+function allTags(){
+  const s=new Set();
+  data.forEach(c=>c.links.forEach(l=>(l.tags||[]).forEach(t=>s.add(t))));
+  return [...s].sort();
 }
 
-function saveData() {
-  localStorage.setItem(LS_KEY, JSON.stringify(data));
-  localStorage.setItem(LS_THEME_KEY, JSON.stringify(catTheme));
+function matchesFilter(link, cat){
+  const q=F.q.toLowerCase();
+  if(q&&!link.label.toLowerCase().includes(q)&&!link.url.toLowerCase().includes(q)&&!cat.title.toLowerCase().includes(q)&&!(link.tags||[]).some(t=>t.toLowerCase().includes(q)))return false;
+  if(F.fav&&!link.fav)return false;
+  if(!F.hidden&&link.hidden)return false;
+  if(F.flags.size>0&&!F.flags.has(link.flag))return false;
+  if(F.types.size>0&&!F.types.has(getType(link.label)))return false;
+  if(F.tags.size>0&&![...(link.tags||[])].some(t=>F.tags.has(t)))return false;
+  return true;
 }
 
-function getCatInfo(title) {
-  const saved = catTheme[title];
-  const def = CAT_THEME[title] || { icon:'📁', color:'#818cf8' };
-  return { icon: saved?.icon || def.icon, color: saved?.color || def.color };
+// ── LOAD/SAVE ─────────────────────────────────────────────────────────────
+function loadData(){
+  try{const s=localStorage.getItem(LS_D);data=s?JSON.parse(s):JSON.parse(JSON.stringify(DFLT));}
+  catch(e){data=JSON.parse(JSON.stringify(DFLT));}
+  try{const s=localStorage.getItem(LS_T);catMeta=s?JSON.parse(s):{};}
+  catch(e){catMeta={};}
+}
+function saveData(){
+  localStorage.setItem(LS_D,JSON.stringify(data));
+  localStorage.setItem(LS_T,JSON.stringify(catMeta));
 }
 
-// ─── LABEL SHORTENER ─────────────────────────────────────────────────────────
-function shortLabel(label) {
-  const parts = label.split('/');
-  let name = parts[parts.length - 1];
-  name = name.replace(/\.html?$/i, '');
-  // Truncate very long names
-  if (name.length > 28) name = name.slice(0, 26) + '…';
-  return name;
-}
-
-function pathPrefix(label) {
-  const parts = label.split('/');
-  if (parts.length < 2) return '';
-  return parts.slice(0, -1).join('/') + '/';
-}
-
-// ─── RENDER ──────────────────────────────────────────────────────────────────
-function render() {
-  const main = document.getElementById('main');
-  const q = document.getElementById('searchInput').value.trim().toLowerCase();
-  main.innerHTML = '';
-
-  let totalCats = 0, totalLinks = 0, visLinks = 0;
-
-  data.forEach((cat, ci) => {
-    const { icon, color } = getCatInfo(cat.title);
-    const section = document.createElement('div');
-    section.className = 'cat-section';
-    section.style.setProperty('--cc', color);
-
-    let visCount = 0;
-    const cardsHtml = cat.links.map((link, li) => {
-      const sl = shortLabel(link.label);
-      const prefix = pathPrefix(link.label);
-      const matches = !q || sl.toLowerCase().includes(q) || link.url.toLowerCase().includes(q) || cat.title.toLowerCase().includes(q);
-      if (matches) visCount++;
-      return `<div class="card${matches ? '' : ' hidden'}" 
-                   onclick="openLink(event,'${escHref(link.url)}')" 
-                   title="${escAttr(link.label)}\n${escAttr(link.url)}">
-        <button class="card-edit" onclick="openEdit(event,${ci},${li})">✏ edit</button>
-        <div class="card-ico">${link.icon || icon}</div>
-        <div class="card-lbl">${prefix ? '<span style="opacity:.5;font-size:9.5px">'+escHtml(prefix)+'</span><br>' : ''}${escHtml(sl)}</div>
-      </div>`;
-    }).join('');
-
-    if (q && visCount === 0) {
-      section.classList.add('hidden');
-    }
-
-    section.innerHTML = `
-      <div class="cat-hdr">
-        <span class="cat-ico">${icon}</span>
-        <span class="cat-name">${escHtml(cat.title)}</span>
-        <span class="cat-badge">${q ? visCount + '/' : ''}${cat.links.length}</span>
-        <div class="cat-actions">
-          <button class="cat-btn cat-btn-add" onclick="openAddLink(${ci})">＋ Link</button>
-          <button class="cat-btn cat-btn-del" onclick="deleteCategory(${ci})">✕</button>
-        </div>
-      </div>
-      <div class="cards-grid">${cardsHtml}</div>`;
-
-    main.appendChild(section);
-    totalCats++;
-    totalLinks += cat.links.length;
-    visLinks += visCount;
-  });
-
-  const stats = document.getElementById('statsBar');
-  if (q) {
-    stats.textContent = `${visLinks} Treffer`;
-  } else {
-    stats.textContent = `${totalCats} Kategorien · ${totalLinks} Links`;
-  }
-}
-
-// ─── OPEN LINK ───────────────────────────────────────────────────────────────
-function openLink(e, url) {
-  if (e.target.classList.contains('card-edit') || e.target.closest('.card-edit')) return;
-  window.open(url, '_blank', 'noopener');
-}
-
-// ─── EDIT ────────────────────────────────────────────────────────────────────
-function openEdit(e, ci, li) {
-  e.stopPropagation();
-  editState = { ci, li };
-  const link = data[ci].links[li];
-  document.getElementById('eIcon').value = link.icon || '';
-  document.getElementById('eLabel').value = link.label;
-  document.getElementById('eUrl').value = link.url;
-  openModal('editModal');
-}
-
-function saveEdit() {
-  if (!editState) return;
-  const { ci, li } = editState;
-  data[ci].links[li].icon = document.getElementById('eIcon').value.trim() || '✨';
-  data[ci].links[li].label = document.getElementById('eLabel').value.trim();
-  data[ci].links[li].url = document.getElementById('eUrl').value.trim();
-  saveData(); render(); closeModal('editModal');
-  showToast('✅ Gespeichert');
-}
-
-function deleteLink() {
-  if (!editState) return;
-  const { ci, li } = editState;
-  if (!confirm(`Link "${data[ci].links[li].label}" löschen?`)) return;
-  data[ci].links.splice(li, 1);
-  saveData(); render(); closeModal('editModal');
-  showToast('🗑 Gelöscht');
-}
-
-// ─── ADD LINK ────────────────────────────────────────────────────────────────
-function openAddLink(ci) {
-  addLinkCatIdx = ci !== undefined ? ci : null;
-  const sel = document.getElementById('aLinkCat');
-  sel.innerHTML = data.map((c, i) =>
-    `<option value="${i}"${i===addLinkCatIdx?' selected':''}>${c.title}</option>`
-  ).join('');
-  document.getElementById('aIcon').value = '';
-  document.getElementById('aLabel').value = '';
-  document.getElementById('aUrl').value = '';
-  openModal('addLinkModal');
-}
-
-function saveAddLink() {
-  const catIdx = parseInt(document.getElementById('aLinkCat').value);
-  const icon = document.getElementById('aIcon').value.trim() || '✨';
-  const label = document.getElementById('aLabel').value.trim();
-  const url = document.getElementById('aUrl').value.trim();
-  if (!label || !url) { showToast('⚠ Label & URL erforderlich'); return; }
-  data[catIdx].links.push({ label, url, icon });
-  saveData(); render(); closeModal('addLinkModal');
-  showToast('✅ Link hinzugefügt');
-}
-
-// ─── ADD / DELETE CATEGORY ───────────────────────────────────────────────────
-function openAddCategory() {
-  document.getElementById('ncName').value = '';
-  document.getElementById('ncIcon').value = '';
-  document.getElementById('ncColor').value = '#818cf8';
-  openModal('addCatModal');
-}
-
-function saveAddCategory() {
-  const name = document.getElementById('ncName').value.trim();
-  const icon = document.getElementById('ncIcon').value.trim() || '📁';
-  const color = document.getElementById('ncColor').value;
-  if (!name) { showToast('⚠ Name erforderlich'); return; }
-  data.push({ title: name, links: [] });
-  catTheme[name] = { icon, color };
-  saveData(); render(); closeModal('addCatModal');
-  showToast('✅ Kategorie erstellt');
-}
-
-function deleteCategory(ci) {
-  const cat = data[ci];
-  if (!confirm(`Kategorie "${cat.title}" mit ${cat.links.length} Links löschen?`)) return;
-  data.splice(ci, 1);
-  saveData(); render();
-  showToast('🗑 Kategorie gelöscht');
-}
-
-// ─── SEARCH ──────────────────────────────────────────────────────────────────
-function onSearch() { render(); }
-
-// ─── THEME ───────────────────────────────────────────────────────────────────
-function toggleTheme() {
-  const html = document.documentElement;
-  const isDark = html.getAttribute('data-theme') === 'dark';
-  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  document.getElementById('themeBtn').textContent = isDark ? '🌙' : '☀️';
-  localStorage.setItem('linkHubTheme', isDark ? 'light' : 'dark');
-}
-
-function loadTheme() {
-  const t = localStorage.getItem('linkHubTheme') || 'dark';
-  document.documentElement.setAttribute('data-theme', t);
-  document.getElementById('themeBtn').textContent = t === 'dark' ? '☀️' : '🌙';
-}
-
-// ─── FULLSCREEN ──────────────────────────────────────────────────────────────
-function toggleFullscreen() {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen().catch(()=>{});
-    document.getElementById('fsBtn').textContent = '⊠';
-  } else {
-    document.exitFullscreen();
-    document.getElementById('fsBtn').textContent = '⛶';
-  }
-}
-document.addEventListener('fullscreenchange', () => {
-  document.getElementById('fsBtn').textContent = document.fullscreenElement ? '⊠' : '⛶';
-});
-
-// ─── LADEN / SPEICHERN ───────────────────────────────────────────────────────
-function triggerLoad() {
-  document.getElementById('fileInput').value = '';
-  document.getElementById('fileInput').click();
-}
-
-function loadFromFile(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    try {
-      const parsed = JSON.parse(ev.target.result);
-      if (!Array.isArray(parsed)) throw new Error('Kein Array');
-      // Validate minimal structure
-      parsed.forEach(cat => {
-        if (typeof cat.title !== 'string') throw new Error('Ungültiges Format');
-        if (!Array.isArray(cat.links)) cat.links = [];
-      });
-      data = parsed;
-      saveData();
-      render();
-      showToast(`✅ "${file.name}" geladen — ${data.length} Kategorien`);
-    } catch(err) {
-      showToast('❌ Ungültige JSON-Datei: ' + err.message);
-    }
+function triggerLoad(){document.getElementById('fileInp').value='';document.getElementById('fileInp').click();}
+function loadFile(e){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    try{
+      const p=JSON.parse(ev.target.result);
+      if(!Array.isArray(p))throw new Error('Kein Array');
+      p.forEach(c=>{if(!c.links)c.links=[];});
+      data=p;saveData();render();
+      showToast(`✅ "${f.name}" geladen — ${data.length} Kategorien`);
+    }catch(err){showToast('❌ '+err.message);}
   };
-  reader.onerror = () => showToast('❌ Datei konnte nicht gelesen werden');
-  reader.readAsText(file, 'UTF-8');
+  r.readAsText(f,'UTF-8');
 }
-
-function exportJSON() {
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'links_hub.json';
-  a.click();
-  showToast('💾 JSON gespeichert');
+function doSave(){
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='links_cl.json';a.click();
+  showToast('💾 links_cl.json gespeichert');
 }
-
-function resetData() {
-  if (!confirm('Alle Änderungen verwerfen und auf Original zurücksetzen?')) return;
-  localStorage.removeItem(LS_KEY);
-  localStorage.removeItem(LS_THEME_KEY);
-  data = JSON.parse(JSON.stringify(DEFAULT_DATA));
-  catTheme = {};
-  saveData(); render();
+function doReset(){
+  if(!confirm('Alles zurücksetzen auf Original?'))return;
+  localStorage.removeItem(LS_D);localStorage.removeItem(LS_T);
+  data=JSON.parse(JSON.stringify(DFLT));catMeta={};saveData();render();
   showToast('↺ Zurückgesetzt');
 }
 
-// ─── MODAL HELPERS ───────────────────────────────────────────────────────────
-function openModal(id) { document.getElementById(id).classList.add('active'); }
-function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-function bgClose(e, id) { if (e.target === e.currentTarget) closeModal(id); }
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') document.querySelectorAll('.overlay.active').forEach(m => m.classList.remove('active'));
-  if ((e.ctrlKey||e.metaKey) && e.key === 'f') {
-    e.preventDefault();
-    document.getElementById('searchInput').focus();
+// ── RENDER ────────────────────────────────────────────────────────────────
+function render(){
+  renderTagChips();
+  const main=document.getElementById('main');
+  main.innerHTML='';
+  let totalCats=0,totalLinks=0,visLinks=0;
+  const q=F.q;
+
+  data.forEach((cat,ci)=>{
+    const {icon,color,collapsed}=getCatMeta(cat.title);
+    const cards=cat.links.map((link,li)=>{
+      if(!matchesFilter(link,cat))return null;
+      visLinks++;totalLinks++;
+      const type=getType(link.label);
+      const ico=(link.icon&&link.icon!=='✨')?link.icon:TYPE_ICO[type]||'📎';
+      const sl=shortLabel(link.label);
+      const pre=prefix(link.label);
+      const flagStyle=link.flag?`background:${FLAG_C[link.flag]}`:
+        'background:transparent;border:1px solid var(--border)';
+      const tags=(link.tags||[]).map(t=>`<span class="ctag">#${esc(t)}</span>`).join('');
+      const hideCls=link.hidden?' hidden-card':'';
+      return `<div class="card${hideCls}" draggable="true"
+        onclick="cardClick(event,${ci},${li})"
+        ondragstart="dsDragCard(event,${ci},${li})"
+        ondragover="dvDragOver(event,${ci},${li})"
+        ondragleave="dlDragLeave(event)"
+        ondrop="dpDropCard(event,${ci},${li})"
+        ondragend="deDragEnd(event)"
+        style="--cc:${color}"
+        title="${escA(link.label)}\n${escA(link.url)}">
+        ${link.flag?`<span class="card-flag" style="${flagStyle}"></span>`:''}
+        ${link.fav?'<span class="card-fav">⭐</span>':''}
+        <div class="card-ico">${ico}</div>
+        <div class="card-lbl">${pre?`<span style="opacity:.45;font-size:9px">${esc(pre)}</span>`:''}${esc(sl)}</div>
+        ${tags?`<div class="card-tags">${tags}</div>`:''}
+        <div class="card-acts">
+          <button class="card-act" onclick="openEdit(event,${ci},${li})">✏</button>
+          <button class="card-act" onclick="toggleHide(event,${ci},${li})">${link.hidden?'👁':'🙈'}</button>
+        </div>
+      </div>`;
+    }).filter(Boolean);
+
+    if(cards.length===0&&(q||F.fav||F.flags.size||F.types.size||F.tags.size))return;
+    totalCats++;
+
+    const section=document.createElement('div');
+    section.className='cats'+(collapsed?' collapsed':'');
+    section.dataset.ci=ci;
+    section.style.setProperty('--cc',color);
+    section.ondragover=ev=>dvDragCat(ev,ci);
+    section.ondragleave=ev=>ev.currentTarget.classList.remove('drag-over-cat');
+    section.ondrop=ev=>dpDropCat(ev,ci);
+
+    section.innerHTML=`
+      <div class="cat-hdr" onclick="toggleCat(${ci})"
+           ondragover="ev=>{ev.preventDefault()}"
+           ondrop="dpDropCat2(event,${ci})">
+        <span class="drag-handle" draggable="true"
+              ondragstart="dsDragCat(event,${ci})"
+              onclick="ev=>ev.stopPropagation()">⠿</span>
+        <span class="cat-ico">${icon}</span>
+        <span class="cat-name">${esc(cat.title)}</span>
+        <span class="cat-count">${cards.length}/${cat.links.length}</span>
+        <span class="cat-arrow">▾</span>
+        <div class="cat-actions" onclick="ev=>ev.stopPropagation()">
+          <button class="cat-btn cat-btn-add" onclick="openAddLink(${ci})">＋</button>
+          <button class="cat-btn cat-btn-del" onclick="deleteCat(${ci})">✕</button>
+        </div>
+      </div>
+      <div class="cat-grid"
+           ondragover="dvDragGrid(event,${ci})"
+           ondragleave="ev=>ev.currentTarget.classList.remove('drag-over-grid')"
+           ondrop="dpDropGrid(event,${ci})">
+        ${cards.join('')}
+      </div>`;
+    main.appendChild(section);
+  });
+
+  // Stats
+  const s=document.getElementById('statsBar');
+  if(F.q||F.fav||F.flags.size||F.types.size||F.tags.size||F.hidden)
+    s.textContent=`${visLinks} Treffer`;
+  else
+    s.textContent=`${totalCats} Kat · ${data.reduce((a,c)=>a+c.links.length,0)} Links`;
+}
+
+function renderTagChips(){
+  const c=document.getElementById('tagChips');
+  c.innerHTML=allTags().map(t=>`<span class="ftag${F.tags.has(t)?' on':''}" onclick="toggleTag('${escA(t)}')">#${esc(t)}</span>`).join('');
+}
+
+// ── FILTER ────────────────────────────────────────────────────────────────
+function applyFilters(){F.q=document.getElementById('qinput').value.trim();render();}
+function toggleF(k){
+  F[k]=!F[k];
+  document.getElementById('fFav').classList.toggle('on',F.fav);
+  document.getElementById('fHidden').classList.toggle('on',F.hidden);
+  render();
+}
+function toggleFlag(c){
+  if(F.flags.has(c))F.flags.delete(c);else F.flags.add(c);
+  document.getElementById('fd-'+c).classList.toggle('on',F.flags.has(c));
+  render();
+}
+function toggleType(t){
+  if(F.types.has(t))F.types.delete(t);else F.types.add(t);
+  document.getElementById('ft-'+t).classList.toggle('on',F.types.has(t));
+  render();
+}
+function toggleTag(t){
+  if(F.tags.has(t))F.tags.delete(t);else F.tags.add(t);
+  render();
+}
+function clearFilters(){
+  F={q:'',fav:false,hidden:false,flags:new Set(),types:new Set(),tags:new Set()};
+  document.getElementById('qinput').value='';
+  document.querySelectorAll('.ftoggle.on,.flag-dot.on,.ftag.on').forEach(el=>el.classList.remove('on'));
+  render();
+}
+function toggleFilterBar(){
+  filterOpen=!filterOpen;
+  document.getElementById('filterbar').style.display=filterOpen?'flex':'none';
+  document.getElementById('filterToggleBtn').classList.toggle('on',filterOpen);
+  if(filterOpen)renderTagChips();
+}
+
+// ── CATEGORY COLLAPSE ────────────────────────────────────────────────────
+function toggleCat(ci){
+  const m=catMeta[data[ci].title]||{};
+  m.collapsed=!m.collapsed;
+  catMeta[data[ci].title]=m;
+  saveData();
+  const el=document.querySelector(`.cats[data-ci="${ci}"]`);
+  if(el)el.classList.toggle('collapsed');
+}
+
+// ── CARD CLICK ────────────────────────────────────────────────────────────
+function cardClick(e,ci,li){
+  if(e.target.closest('.card-acts'))return;
+  window.open(data[ci].links[li].url,'_blank','noopener');
+}
+function toggleHide(e,ci,li){
+  e.stopPropagation();
+  data[ci].links[li].hidden=!data[ci].links[li].hidden;
+  saveData();render();
+}
+
+// ── EDIT LINK ─────────────────────────────────────────────────────────────
+function openEdit(e,ci,li){
+  e.stopPropagation();
+  editState={ci,li};
+  const l=data[ci].links[li];
+  document.getElementById('eIco').value=l.icon||'';
+  document.getElementById('eLbl').value=l.label;
+  document.getElementById('eUrl').value=l.url;
+  document.getElementById('eTags').value=(l.tags||[]).join(', ');
+  // populate cat select
+  const sel=document.getElementById('eCat');
+  sel.innerHTML=data.map((c,i)=>`<option value="${i}"${i===ci?' selected':''}>${esc(c.title)}</option>`).join('');
+  editFav=!!l.fav;editHide=!!l.hidden;editFlag=l.flag||null;
+  updateEditToggles();
+  openOv('editMod');
+}
+function updateEditToggles(){
+  document.getElementById('eFavTgl').classList.toggle('on',editFav);
+  document.getElementById('eHideTgl').classList.toggle('on',editHide);
+  // flags
+  document.querySelectorAll('.flag-opt').forEach(el=>el.classList.remove('sel'));
+  const id=editFlag?'fo-'+editFlag:'fo-none';
+  const el=document.getElementById(id);if(el)el.classList.add('sel');
+}
+function toggleEditFav(){editFav=!editFav;updateEditToggles();}
+function toggleEditHide(){editHide=!editHide;updateEditToggles();}
+function setEditFlag(c){editFlag=c;updateEditToggles();}
+function saveEdit(){
+  if(!editState)return;
+  const {ci,li}=editState;
+  const newCi=parseInt(document.getElementById('eCat').value);
+  const link=data[ci].links[li];
+  link.icon=document.getElementById('eIco').value.trim()||'✨';
+  link.label=document.getElementById('eLbl').value.trim();
+  link.url=document.getElementById('eUrl').value.trim();
+  link.fav=editFav;
+  link.hidden=editHide;
+  link.flag=editFlag;
+  link.tags=document.getElementById('eTags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  if(newCi!==ci){
+    data[ci].links.splice(li,1);
+    data[newCi].links.push(link);
   }
+  saveData();render();closeOv('editMod');showToast('✅ Gespeichert');
+}
+function doDeleteLink(){
+  if(!editState)return;
+  const {ci,li}=editState;
+  if(!confirm(`Link "${data[ci].links[li].label}" löschen?`))return;
+  data[ci].links.splice(li,1);
+  saveData();render();closeOv('editMod');showToast('🗑 Gelöscht');
+}
+
+// ── ADD LINK ──────────────────────────────────────────────────────────────
+function openAddLink(ci){
+  const sel=document.getElementById('alCat');
+  sel.innerHTML=data.map((c,i)=>`<option value="${i}"${i===ci?' selected':''}>${esc(c.title)}</option>`).join('');
+  ['alIco','alLbl','alUrl','alTags'].forEach(id=>document.getElementById(id).value='');
+  openOv('addLinkMod');
+}
+function saveAddLink(){
+  const ci=parseInt(document.getElementById('alCat').value);
+  const ico=document.getElementById('alIco').value.trim()||'✨';
+  const lbl=document.getElementById('alLbl').value.trim();
+  const url=document.getElementById('alUrl').value.trim();
+  const tags=document.getElementById('alTags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  if(!lbl||!url){showToast('⚠ Label & URL erforderlich');return;}
+  data[ci].links.push({icon:ico,label:lbl,url,fav:false,flag:null,tags,hidden:false});
+  saveData();render();closeOv('addLinkMod');showToast('✅ Link hinzugefügt');
+}
+
+// ── ADD CATEGORY ──────────────────────────────────────────────────────────
+function openAddCat(){
+  ['ncName','ncIco'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('ncColor').value='#818cf8';
+  openOv('addCatMod');
+}
+function saveAddCat(){
+  const name=document.getElementById('ncName').value.trim();
+  const ico=document.getElementById('ncIco').value.trim()||'📁';
+  const color=document.getElementById('ncColor').value;
+  if(!name){showToast('⚠ Name erforderlich');return;}
+  data.push({title:name,links:[]});
+  catMeta[name]={icon:ico,color};
+  saveData();render();closeOv('addCatMod');showToast('✅ Kategorie erstellt');
+}
+function deleteCat(ci){
+  const cat=data[ci];
+  if(!confirm(`"${cat.title}" mit ${cat.links.length} Links löschen?`))return;
+  data.splice(ci,1);saveData();render();showToast('🗑 Kategorie gelöscht');
+}
+
+// ── DRAG & DROP — CARDS ───────────────────────────────────────────────────
+function dsDragCard(e,ci,li){
+  drag={type:'card',ci,li};
+  e.dataTransfer.effectAllowed='move';
+  e.dataTransfer.setData('text/plain','card');
+  setTimeout(()=>{
+    const card=e.target.closest('.card');
+    if(card)card.classList.add('drag-source');
+  },0);
+  e.stopPropagation();
+}
+function dvDragOver(e,ci,li){
+  if(!drag||drag.type!=='card')return;
+  e.preventDefault();e.stopPropagation();
+  e.dataTransfer.dropEffect='move';
+  document.querySelectorAll('.card.drag-over').forEach(c=>c.classList.remove('drag-over'));
+  e.target.closest('.card')?.classList.add('drag-over');
+}
+function dlDragLeave(e){
+  e.target.closest('.card')?.classList.remove('drag-over');
+}
+function dpDropCard(e,toCi,toLi){
+  e.preventDefault();e.stopPropagation();
+  if(!drag||drag.type!=='card')return;
+  const {ci:fromCi,li:fromLi}=drag;
+  if(fromCi===toCi&&fromLi===toLi){drag=null;return;}
+  const link=data[fromCi].links.splice(fromLi,1)[0];
+  // adjust toLi if same category and source was before dest
+  let adj=toLi;
+  if(fromCi===toCi&&fromLi<toLi)adj=Math.max(0,toLi-1);
+  data[toCi].links.splice(adj,0,link);
+  drag=null;saveData();render();
+}
+function deDragEnd(e){
+  document.querySelectorAll('.card.drag-source,.card.drag-over').forEach(c=>{
+    c.classList.remove('drag-source','drag-over');
+  });
+  document.querySelectorAll('.cat-grid.drag-over-grid').forEach(g=>g.classList.remove('drag-over-grid'));
+  drag=null;
+}
+
+// drop on empty grid
+function dvDragGrid(e,ci){
+  if(!drag||drag.type!=='card')return;
+  e.preventDefault();
+  e.currentTarget.classList.add('drag-over-grid');
+}
+function dpDropGrid(e,ci){
+  e.preventDefault();
+  e.currentTarget.classList.remove('drag-over-grid');
+  if(!drag||drag.type!=='card')return;
+  const {ci:fromCi,li:fromLi}=drag;
+  if(fromCi===ci&&data[ci].links.length===1){drag=null;return;}
+  const link=data[fromCi].links.splice(fromLi,1)[0];
+  data[ci].links.push(link);
+  drag=null;saveData();render();
+}
+
+// ── DRAG & DROP — CATEGORIES ──────────────────────────────────────────────
+function dsDragCat(e,ci){
+  drag={type:'cat',ci};
+  e.dataTransfer.effectAllowed='move';
+  e.dataTransfer.setData('text/plain','cat');
+  e.stopPropagation();
+}
+function dvDragCat(e,ci){
+  if(!drag||drag.type!=='cat'||drag.ci===ci)return;
+  e.preventDefault();
+  document.querySelectorAll('.cats.drag-over-cat').forEach(s=>s.classList.remove('drag-over-cat'));
+  e.currentTarget.classList.add('drag-over-cat');
+}
+function dpDropCat(e,ci){
+  e.currentTarget.classList.remove('drag-over-cat');
+  if(!drag||drag.type!=='cat'||drag.ci===ci)return;
+  e.preventDefault();
+  const fromCi=drag.ci;
+  const [removed]=data.splice(fromCi,1);
+  const insertAt=fromCi<ci?ci-1:ci;
+  data.splice(insertAt,0,removed);
+  drag=null;saveData();render();
+}
+function dpDropCat2(e,ci){
+  // drop on header → move card to end of this cat
+  e.preventDefault();
+  document.querySelectorAll('.cats.drag-over-cat').forEach(s=>s.classList.remove('drag-over-cat'));
+  if(!drag||drag.type!=='card')return;
+  const {ci:fromCi,li:fromLi}=drag;
+  if(fromCi===ci){drag=null;return;}
+  const link=data[fromCi].links.splice(fromLi,1)[0];
+  data[ci].links.push(link);
+  drag=null;saveData();render();
+}
+
+// ── THEME / FULLSCREEN ────────────────────────────────────────────────────
+function toggleTheme(){
+  const html=document.documentElement;
+  const isDark=html.getAttribute('data-theme')==='dark';
+  html.setAttribute('data-theme',isDark?'light':'dark');
+  document.getElementById('themeBtn').textContent=isDark?'🌙':'☀️';
+  localStorage.setItem(LS_THEME,isDark?'light':'dark');
+}
+function loadTheme(){
+  const t=localStorage.getItem(LS_THEME)||'dark';
+  document.documentElement.setAttribute('data-theme',t);
+  document.getElementById('themeBtn').textContent=t==='dark'?'☀️':'🌙';
+}
+function toggleFS(){
+  if(!document.fullscreenElement){document.documentElement.requestFullscreen().catch(()=>{});document.getElementById('fsBtn').textContent='⊠';}
+  else{document.exitFullscreen();document.getElementById('fsBtn').textContent='⛶';}
+}
+document.addEventListener('fullscreenchange',()=>document.getElementById('fsBtn').textContent=document.fullscreenElement?'⊠':'⛶');
+
+// ── MODAL ─────────────────────────────────────────────────────────────────
+function openOv(id){document.getElementById(id).classList.add('on')}
+function closeOv(id){document.getElementById(id).classList.remove('on')}
+function bgClose(e,id){if(e.target===e.currentTarget)closeOv(id)}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')document.querySelectorAll('.ov.on').forEach(m=>m.classList.remove('on'));
+  if((e.ctrlKey||e.metaKey)&&e.key==='f'){e.preventDefault();document.getElementById('qinput').focus();}
 });
 
-// ─── TOAST ───────────────────────────────────────────────────────────────────
-let toastTimer;
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+// ── TOAST ─────────────────────────────────────────────────────────────────
+let _tt;
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('on');
+  clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('on'),2300);
 }
 
-// ─── ESCAPE HELPERS ──────────────────────────────────────────────────────────
-function escHtml(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-function escAttr(s) {
-  return String(s).replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-}
-function escHref(s) {
-  return String(s).replace(/'/g,'%27');
-}
-
-// ─── BOOT ────────────────────────────────────────────────────────────────────
-loadData();
-loadTheme();
-render();
+// ── BOOT ──────────────────────────────────────────────────────────────────
+loadData();loadTheme();render();
 </script>
 </body>
 </html>
