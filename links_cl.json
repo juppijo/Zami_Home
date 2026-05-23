@@ -3808,6 +3808,54 @@
         "fav": false,
         "flag": null,
         "tags": []
+      },
+      {
+        "icon": "✨",
+        "label": "linkvault_pro.html",
+        "url": "https://juppijo.github.io/Zami_Home/linkvault_pro.html",
+        "fav": false,
+        "flag": null,
+        "tags": []
+      },
+      {
+        "icon": "✨",
+        "label": "linksg.json",
+        "url": "https://juppijo.github.io/Zami_Home/linksg.json",
+        "fav": false,
+        "flag": null,
+        "tags": []
+      },
+      {
+        "icon": "✨",
+        "label": "links_cl.json",
+        "url": "https://juppijo.github.io/Zami_Home/links_cl.json",
+        "fav": false,
+        "flag": null,
+        "tags": []
+      },
+      {
+        "icon": "✨",
+        "label": "link_manager.html",
+        "url": "https://juppijo.github.io/Zami_Home/link_manager.html",
+        "fav": false,
+        "flag": null,
+        "tags": []
+      },
+      {
+        "icon": "✨",
+        "label": "JSON_Ultimate_Transfer_Dashboard.html",
+        "url": "https://juppijo.github.io/Zami_Home/JSON_Ultimate_Transfer_Dashboard.html",
+        "fav": false,
+        "flag": null,
+        "tags": []
+      },
+      {
+        "icon": "✨",
+        "label": "JSON_Pro_Max_Vergleicher_Dashboard.html",
+        "url": "https://juppijo.github.io/Zami_Home/JSON_Pro_Max_Vergleicher_Dashboard.html",
+        "fav": false,
+        "flag": null,
+        "tags": []
       }
     ]
   },
@@ -4341,6 +4389,14 @@
         "label": "ZAMI.jpeg",
         "url": "https://juppijo.github.io/ZenZamiSpiele-Co/ZAMI.jpeg",
         "fav": false,
+        "flag": null,
+        "tags": []
+      },
+      {
+        "icon": "✨",
+        "label": "Zamis-zen-music-player.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Zamis-zen-music-player.html",
+        "fav": true,
         "flag": null,
         "tags": []
       }
