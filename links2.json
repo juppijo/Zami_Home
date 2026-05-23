@@ -670,6 +670,21 @@
     ]
   },
   {
+    "title": "Neues Dokument_files",
+    "links": [
+      {
+        "label": "css2",
+        "url": "https://juppijo.github.io/Neues Dokument_files/css2",
+        "icon": "✨"
+      },
+      {
+        "label": "tex-chtml.js.Download",
+        "url": "https://juppijo.github.io/Neues Dokument_files/tex-chtml.js.Download",
+        "icon": "✨"
+      }
+    ]
+  },
+  {
     "title": "Rechner",
     "links": [
       {
@@ -1523,6 +1538,11 @@
         "icon": "✨"
       },
       {
+        "label": "WRZNT/Raumwirbel.html",
+        "url": "https://juppijo.github.io/WRZT/WRZNT/Raumwirbel.html",
+        "icon": "✨"
+      },
+      {
         "label": "WRZNT/Rmin_Kurve_G3.html",
         "url": "https://juppijo.github.io/WRZT/WRZNT/Rmin_Kurve_G3.html",
         "icon": "✨"
@@ -1840,6 +1860,51 @@
       {
         "label": "zen-links.json",
         "url": "https://juppijo.github.io/WRZT/zen-links.json",
+        "icon": "✨"
+      }
+    ]
+  },
+  {
+    "title": "WRZT — Gravitation, Trägheit und Lichtgeschwindigkeit_files",
+    "links": [
+      {
+        "label": "css2",
+        "url": "https://juppijo.github.io/WRZT — Gravitation, Trägheit und Lichtgeschwindigkeit_files/css2",
+        "icon": "✨"
+      },
+      {
+        "label": "tex-mml-chtml.js.Download",
+        "url": "https://juppijo.github.io/WRZT — Gravitation, Trägheit und Lichtgeschwindigkeit_files/tex-mml-chtml.js.Download",
+        "icon": "✨"
+      }
+    ]
+  },
+  {
+    "title": "WRZT_files",
+    "links": [
+      {
+        "label": "css2",
+        "url": "https://juppijo.github.io/WRZT_files/css2",
+        "icon": "✨"
+      },
+      {
+        "label": "css2(1)",
+        "url": "https://juppijo.github.io/WRZT_files/css2(1)",
+        "icon": "✨"
+      },
+      {
+        "label": "katex.min.css",
+        "url": "https://juppijo.github.io/WRZT_files/katex.min.css",
+        "icon": "✨"
+      },
+      {
+        "label": "katex.min.js.Download",
+        "url": "https://juppijo.github.io/WRZT_files/katex.min.js.Download",
+        "icon": "✨"
+      },
+      {
+        "label": "marked.min.js.Download",
+        "url": "https://juppijo.github.io/WRZT_files/marked.min.js.Download",
         "icon": "✨"
       }
     ]
@@ -2298,6 +2363,11 @@
         "icon": "✨"
       },
       {
+        "label": "dokument.json",
+        "url": "https://juppijo.github.io/Zami_Home/dokument.json",
+        "icon": "✨"
+      },
+      {
         "label": "favicon.jpg",
         "url": "https://juppijo.github.io/Zami_Home/favicon.jpg",
         "icon": "✨"
@@ -2343,6 +2413,11 @@
         "icon": "✨"
       },
       {
+        "label": "link_manager.html",
+        "url": "https://juppijo.github.io/Zami_Home/link_manager.html",
+        "icon": "✨"
+      },
+      {
         "label": "linkhub.html",
         "url": "https://juppijo.github.io/Zami_Home/linkhub.html",
         "icon": "✨"
@@ -2355,6 +2430,21 @@
       {
         "label": "links2.json",
         "url": "https://juppijo.github.io/Zami_Home/links2.json",
+        "icon": "✨"
+      },
+      {
+        "label": "links_cl.json",
+        "url": "https://juppijo.github.io/Zami_Home/links_cl.json",
+        "icon": "✨"
+      },
+      {
+        "label": "linksg.json",
+        "url": "https://juppijo.github.io/Zami_Home/linksg.json",
+        "icon": "✨"
+      },
+      {
+        "label": "linkvault_pro.html",
+        "url": "https://juppijo.github.io/Zami_Home/linkvault_pro.html",
         "icon": "✨"
       },
       {

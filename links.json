@@ -670,6 +670,21 @@
     ]
   },
   {
+    "title": "Neues Dokument_files",
+    "links": [
+      {
+        "label": "css2",
+        "url": "https://juppijo.github.io/Neues Dokument_files/css2",
+        "icon": "✨"
+      },
+      {
+        "label": "tex-chtml.js.Download",
+        "url": "https://juppijo.github.io/Neues Dokument_files/tex-chtml.js.Download",
+        "icon": "✨"
+      }
+    ]
+  },
+  {
     "title": "Rechner",
     "links": [
       {
@@ -1850,6 +1865,51 @@
     ]
   },
   {
+    "title": "WRZT — Gravitation, Trägheit und Lichtgeschwindigkeit_files",
+    "links": [
+      {
+        "label": "css2",
+        "url": "https://juppijo.github.io/WRZT — Gravitation, Trägheit und Lichtgeschwindigkeit_files/css2",
+        "icon": "✨"
+      },
+      {
+        "label": "tex-mml-chtml.js.Download",
+        "url": "https://juppijo.github.io/WRZT — Gravitation, Trägheit und Lichtgeschwindigkeit_files/tex-mml-chtml.js.Download",
+        "icon": "✨"
+      }
+    ]
+  },
+  {
+    "title": "WRZT_files",
+    "links": [
+      {
+        "label": "css2",
+        "url": "https://juppijo.github.io/WRZT_files/css2",
+        "icon": "✨"
+      },
+      {
+        "label": "css2(1)",
+        "url": "https://juppijo.github.io/WRZT_files/css2(1)",
+        "icon": "✨"
+      },
+      {
+        "label": "katex.min.css",
+        "url": "https://juppijo.github.io/WRZT_files/katex.min.css",
+        "icon": "✨"
+      },
+      {
+        "label": "katex.min.js.Download",
+        "url": "https://juppijo.github.io/WRZT_files/katex.min.js.Download",
+        "icon": "✨"
+      },
+      {
+        "label": "marked.min.js.Download",
+        "url": "https://juppijo.github.io/WRZT_files/marked.min.js.Download",
+        "icon": "✨"
+      }
+    ]
+  },
+  {
     "title": "Zami_Buecher",
     "links": [
       {
@@ -2370,6 +2430,11 @@
       {
         "label": "links2.json",
         "url": "https://juppijo.github.io/Zami_Home/links2.json",
+        "icon": "✨"
+      },
+      {
+        "label": "links_cl.json",
+        "url": "https://juppijo.github.io/Zami_Home/links_cl.json",
         "icon": "✨"
       },
       {
