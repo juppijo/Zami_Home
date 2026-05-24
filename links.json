@@ -305,6 +305,76 @@
     ]
   },
   {
+    "title": "Kegeln",
+    "links": [
+      {
+        "label": "Kegeln-2/Kegelclub_Backup_2026-05-24.json",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2/Kegelclub_Backup_2026-05-24.json",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-2/Kegelclub_Gesamtstand_2026-05-24.json",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2/Kegelclub_Gesamtstand_2026-05-24.json",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-2/Kegelclub_Setup_2026-05-24.json",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2/Kegelclub_Setup_2026-05-24.json",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-2/Vorlage-Kegelspiele.xlsx",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2/Vorlage-Kegelspiele.xlsx",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-2/index.html",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-2/script.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2/script.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-2/style.css",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2/style.css",
+        "icon": "✨"
+      },
+      {
+        "label": "README.md",
+        "url": "https://juppijo.github.io/Kegeln/README.md",
+        "icon": "✨"
+      },
+      {
+        "label": "Vorlage-Kegelspiele.xlsx",
+        "url": "https://juppijo.github.io/Kegeln/Vorlage-Kegelspiele.xlsx",
+        "icon": "✨"
+      },
+      {
+        "label": "index.html",
+        "url": "https://juppijo.github.io/Kegeln/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "kegelspiele_24-5-2026.json",
+        "url": "https://juppijo.github.io/Kegeln/kegelspiele_24-5-2026.json",
+        "icon": "✨"
+      },
+      {
+        "label": "script.js",
+        "url": "https://juppijo.github.io/Kegeln/script.js",
+        "icon": "✨"
+      },
+      {
+        "label": "style.css",
+        "url": "https://juppijo.github.io/Kegeln/style.css",
+        "icon": "✨"
+      }
+    ]
+  },
+  {
     "title": "Logik_des_Universums",
     "links": [
       {
@@ -2300,6 +2370,11 @@
       {
         "label": "README.md",
         "url": "https://juppijo.github.io/Zami_Home/README.md",
+        "icon": "✨"
+      },
+      {
+        "label": "Zami-Bild.html",
+        "url": "https://juppijo.github.io/Zami_Home/Zami-Bild.html",
         "icon": "✨"
       },
       {
