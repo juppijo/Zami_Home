@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub Desktop – juppijo</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       MENU BAR
+  ══════════════════════════════════════════════ -->
+  <div class="menubar">
+    <div class="menubar-logo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+      </svg>
+      <span>GitHub Desktop</span>
+    </div>
+
+    <nav class="menubar-nav">
+      <!-- File Menu -->
+      <div class="menu-item" id="menu-file">
+        <button class="menu-btn" onclick="toggleMenu('file-dropdown')">Datei</button>
+        <div class="dropdown" id="file-dropdown">
+          <button onclick="openCloneModal(); closeAllMenus()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Repository klonen…
+          </button>
+          <button onclick="showNewRepoModal(); closeAllMenus()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Neues Repository…
+          </button>
+          <hr class="menu-divider"/>
+          <button onclick="showAddLocalModal(); closeAllMenus()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            Lokales Repo hinzufügen…
+          </button>
+          <hr class="menu-divider"/>
+          <button onclick="closeAllMenus(); showToast('App wird beendet…')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Beenden
+          </button>
+        </div>
+      </div>
+
+      <!-- Edit Menu -->
+      <div class="menu-item" id="menu-edit">
+        <button class="menu-btn" onclick="toggleMenu('edit-dropdown')">Bearbeiten</button>
+        <div class="dropdown" id="edit-dropdown">
+          <button onclick="document.execCommand('undo'); closeAllMenus()">Rückgängig</button>
+          <button onclick="document.execCommand('redo'); closeAllMenus()">Wiederholen</button>
+          <hr class="menu-divider"/>
+          <button onclick="document.execCommand('cut'); closeAllMenus()">Ausschneiden</button>
+          <button onclick="document.execCommand('copy'); closeAllMenus()">Kopieren</button>
+          <button onclick="document.execCommand('paste'); closeAllMenus()">Einfügen</button>
+          <button onclick="document.execCommand('selectAll'); closeAllMenus()">Alles auswählen</button>
+        </div>
+      </div>
+
+      <!-- View Menu -->
+      <div class="menu-item" id="menu-view">
+        <button class="menu-btn" onclick="toggleMenu('view-dropdown')">Ansicht</button>
+        <div class="dropdown" id="view-dropdown">
+          <button onclick="switchTab('changes'); closeAllMenus()">Änderungen</button>
+          <button onclick="switchTab('history'); closeAllMenus()">Verlauf</button>
+          <button onclick="switchTab('repos'); closeAllMenus()">Repositories</button>
+          <hr class="menu-divider"/>
+          <button onclick="toggleDarkMode(); closeAllMenus()">Dark/Light Mode</button>
+        </div>
+      </div>
+
+      <!-- Repository Menu -->
+      <div class="menu-item" id="menu-repo">
+        <button class="menu-btn" onclick="toggleMenu('repo-dropdown')">Repository</button>
+        <div class="dropdown" id="repo-dropdown">
+          <button onclick="fetchCurrentRepo(); closeAllMenus()">Aktualisieren</button>
+          <button onclick="openInTerminal(); closeAllMenus()">Im Terminal öffnen</button>
+          <button onclick="openInFileManager(); closeAllMenus()">Im Dateimanager öffnen</button>
+          <hr class="menu-divider"/>
+          <button onclick="pushChanges(); closeAllMenus()">Push origin</button>
+          <button onclick="pullChanges(); closeAllMenus()">Pull origin</button>
+          <button onclick="fetchAll(); closeAllMenus()">Fetch alle</button>
+        </div>
+      </div>
+
+      <!-- Branch Menu -->
+      <div class="menu-item" id="menu-branch">
+        <button class="menu-btn" onclick="toggleMenu('branch-dropdown')">Branch</button>
+        <div class="dropdown" id="branch-dropdown">
+          <button onclick="showNewBranchModal(); closeAllMenus()">Neuer Branch…</button>
+          <button onclick="showMergeModal(); closeAllMenus()">Branch mergen…</button>
+          <hr class="menu-divider"/>
+          <button onclick="showDeleteBranchModal(); closeAllMenus()">Branch löschen…</button>
+        </div>
+      </div>
+
+      <!-- Setup / Einstellungen -->
+      <div class="menu-item" id="menu-setup">
+        <button class="menu-btn" onclick="toggleMenu('setup-dropdown')">⚙ Einstellungen</button>
+        <div class="dropdown" id="setup-dropdown">
+          <button onclick="openSettings(); closeAllMenus()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 0-14.14 0"/><path d="M21.5 12c0 5.25-4.25 9.5-9.5 9.5S2.5 17.25 2.5 12 6.75 2.5 12 2.5"/></svg>
+            Einstellungen…
+          </button>
+          <button onclick="openAccountSettings(); closeAllMenus()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Konto verwalten…
+          </button>
+          <hr class="menu-divider"/>
+          <button onclick="openThemeSettings(); closeAllMenus()">Design &amp; Erscheinungsbild</button>
+          <button onclick="openGitSettings(); closeAllMenus()">Git-Konfiguration</button>
+          <button onclick="openEditorSettings(); closeAllMenus()">Standard-Editor</button>
+          <button onclick="openShellSettings(); closeAllMenus()">Standard-Shell</button>
+          <hr class="menu-divider"/>
+          <button onclick="showAbout(); closeAllMenus()">Über GitHub Desktop</button>
+        </div>
+      </div>
+
+      <!-- Help Menu -->
+      <div class="menu-item" id="menu-help">
+        <button class="menu-btn" onclick="toggleMenu('help-dropdown')">Hilfe</button>
+        <div class="dropdown" id="help-dropdown">
+          <button onclick="window.open('https://docs.github.com/en/desktop','_blank'); closeAllMenus()">Dokumentation öffnen</button>
+          <button onclick="window.open('https://github.com/juppijo','_blank'); closeAllMenus()">Mein GitHub-Profil</button>
+          <hr class="menu-divider"/>
+          <button onclick="showKeyboardShortcuts(); closeAllMenus()">Tastenkürzel</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Right side: user info -->
+    <div class="menubar-user">
+      <div class="user-avatar" id="header-avatar" title="juppijo">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+      </div>
+      <span id="header-username">juppijo</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       MAIN LAYOUT
+  ══════════════════════════════════════════════ -->
+  <div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-header">
+          <span>Repositories</span>
+          <button class="icon-btn" onclick="loadRepositories()" title="Aktualisieren">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          </button>
+        </div>
+        <div class="repo-search-wrap">
+          <input type="text" id="repo-search" placeholder="Repository suchen…" oninput="filterRepos(this.value)" />
+        </div>
+        <div class="repo-list" id="repo-list">
+          <div class="loading-msg">
+            <div class="spinner"></div>
+            <span>Lade Repositories…</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section sidebar-bottom">
+        <button class="clone-btn" onclick="openCloneModal()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Repository klonen
+        </button>
+        <button class="clone-btn secondary" onclick="showNewRepoModal()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Neues Repository
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN PANEL -->
+    <main class="main-panel">
+
+      <!-- TOP BAR (current repo + branch) -->
+      <div class="topbar">
+        <div class="topbar-left">
+          <div class="repo-selector" id="current-repo-display">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            <span id="current-repo-name">Kein Repository ausgewählt</span>
+          </div>
+
+          <div class="branch-selector" onclick="toggleBranchDropdown()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+            <span id="current-branch-name">main</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="branch-dropdown" id="branch-dropdown-panel">
+              <div class="branch-search-wrap">
+                <input type="text" placeholder="Branch suchen…" id="branch-search-input" oninput="filterBranches(this.value)" onclick="event.stopPropagation()" />
+              </div>
+              <div id="branch-list-panel"></div>
+              <div class="branch-dropdown-footer">
+                <button onclick="showNewBranchModal(); event.stopPropagation()">+ Neuer Branch</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <button class="topbar-btn" onclick="fetchAll()" title="Fetch">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            Fetch
+          </button>
+          <button class="topbar-btn" onclick="pullChanges()" title="Pull">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Pull
+          </button>
+          <button class="topbar-btn accent" onclick="pushChanges()" title="Push">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Push origin
+          </button>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="tab-bar">
+        <button class="tab active" id="tab-changes" onclick="switchTab('changes')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          Änderungen
+          <span class="tab-badge" id="changes-badge" style="display:none">0</span>
+        </button>
+        <button class="tab" id="tab-history" onclick="switchTab('history')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Verlauf
+        </button>
+        <button class="tab" id="tab-repos" onclick="switchTab('repos')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          Übersicht
+        </button>
+      </div>
+
+      <!-- TAB CONTENT -->
+      <div class="tab-content" id="tab-content-changes">
+        <div class="changes-layout">
+          <div class="changes-left">
+            <div class="section-label">Geänderte Dateien</div>
+            <div id="changed-files-list" class="file-list">
+              <div class="empty-state">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                <p>Keine Änderungen</p>
+                <small>Wähle ein Repository aus der linken Liste</small>
+              </div>
+            </div>
+          </div>
+          <div class="changes-right">
+            <div class="diff-header" id="diff-header">
+              <span>Kein Diff ausgewählt</span>
+            </div>
+            <div class="diff-view" id="diff-view">
+              <div class="empty-state">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+                <p>Datei auswählen um Diff anzuzeigen</p>
+              </div>
+            </div>
+            <div class="commit-area">
+              <input type="text" id="commit-title" placeholder="Commit-Titel (z.B. Fix: Bug behoben)" maxlength="72" />
+              <textarea id="commit-desc" placeholder="Optionale Beschreibung…" rows="3"></textarea>
+              <div class="commit-footer">
+                <div class="commit-author">
+                  <div class="commit-avatar">J</div>
+                  <div>
+                    <div class="commit-name">juppijo</div>
+                    <div class="commit-email">Konfiguriert via Git</div>
+                  </div>
+                </div>
+                <button class="commit-btn" onclick="commitChanges()" id="commit-btn">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><line x1="1.05" y1="12" x2="7" y2="12"/><line x1="17.01" y1="12" x2="22.96" y2="12"/></svg>
+                  Commit zu main
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content hidden" id="tab-content-history">
+        <div class="history-layout">
+          <div class="history-left">
+            <div class="section-label">Commits</div>
+            <div id="commit-list" class="commit-list">
+              <div class="loading-msg"><div class="spinner"></div><span>Lade Commits…</span></div>
+            </div>
+          </div>
+          <div class="history-right">
+            <div id="commit-detail-panel">
+              <div class="empty-state">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <p>Commit auswählen</p>
+                <small>Details und Dateien werden hier angezeigt</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content hidden" id="tab-content-repos">
+        <div class="overview-layout">
+          <div class="profile-card" id="profile-card">
+            <div class="loading-msg"><div class="spinner"></div><span>Lade Profil…</span></div>
+          </div>
+          <div class="repo-grid" id="repo-grid">
+            <div class="loading-msg"><div class="spinner"></div><span>Lade Repositories…</span></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       MODALS
+  ══════════════════════════════════════════════ -->
+
+  <!-- Overlay -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModal()"></div>
+
+  <!-- Clone Modal -->
+  <div class="modal" id="modal-clone">
+    <div class="modal-header">
+      <h2>Repository klonen</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-tabs">
+      <button class="modal-tab active" id="clone-tab-github" onclick="switchCloneTab('github')">GitHub.com</button>
+      <button class="modal-tab" id="clone-tab-url" onclick="switchCloneTab('url')">URL</button>
+      <button class="modal-tab" id="clone-tab-local" onclick="switchCloneTab('local')">Lokal</button>
+    </div>
+    <div class="modal-body">
+      <div id="clone-panel-github">
+        <label>Repository durchsuchen</label>
+        <div class="search-row">
+          <input type="text" id="clone-repo-search" placeholder="Repository suchen…" oninput="searchReposForClone(this.value)" />
+          <button onclick="searchReposForClone(document.getElementById('clone-repo-search').value)">Suchen</button>
+        </div>
+        <div id="clone-repo-results" class="clone-result-list"></div>
+        <label style="margin-top:16px">Lokaler Pfad</label>
+        <div class="path-row">
+          <input type="text" id="clone-path-github" value="~/GitHub" />
+          <button onclick="showToast('Ordnerauswahl nur in nativer App verfügbar')">Auswählen</button>
+        </div>
+      </div>
+      <div id="clone-panel-url" class="hidden">
+        <label>Repository-URL</label>
+        <input type="text" id="clone-url-input" placeholder="https://github.com/user/repo.git" />
+        <label style="margin-top:12px">Lokaler Pfad</label>
+        <div class="path-row">
+          <input type="text" id="clone-path-url" value="~/GitHub" />
+          <button onclick="showToast('Ordnerauswahl nur in nativer App verfügbar')">Auswählen</button>
+        </div>
+      </div>
+      <div id="clone-panel-local" class="hidden">
+        <label>Lokaler Ordner mit Git-Repository</label>
+        <div class="path-row">
+          <input type="text" id="clone-path-local" placeholder="/home/user/mein-projekt" />
+          <button onclick="showToast('Ordnerauswahl nur in nativer App verfügbar')">Auswählen</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button onclick="closeModal()" class="btn-secondary">Abbrechen</button>
+      <button onclick="executeClone()" class="btn-primary">Klonen</button>
+    </div>
+  </div>
+
+  <!-- New Repo Modal -->
+  <div class="modal" id="modal-new-repo">
+    <div class="modal-header">
+      <h2>Neues Repository erstellen</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <label>Name</label>
+      <input type="text" id="new-repo-name" placeholder="mein-projekt" />
+      <label>Beschreibung (optional)</label>
+      <input type="text" id="new-repo-desc" placeholder="Kurze Beschreibung…" />
+      <label>Lokaler Pfad</label>
+      <div class="path-row">
+        <input type="text" id="new-repo-path" value="~/GitHub" />
+        <button onclick="showToast('Ordnerauswahl nur in nativer App verfügbar')">Auswählen</button>
+      </div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="new-repo-readme" checked />
+        <label for="new-repo-readme">README.md initialisieren</label>
+      </div>
+      <label>Gitignore-Vorlage</label>
+      <select id="new-repo-gitignore">
+        <option value="">Keine</option>
+        <option value="Node">Node</option>
+        <option value="Python">Python</option>
+        <option value="Java">Java</option>
+        <option value="Go">Go</option>
+        <option value="Rust">Rust</option>
+        <option value="C++">C++</option>
+        <option value="Ruby">Ruby</option>
+      </select>
+      <label>Lizenz</label>
+      <select id="new-repo-license">
+        <option value="">Keine</option>
+        <option value="MIT">MIT</option>
+        <option value="GPL-3.0">GPL-3.0</option>
+        <option value="Apache-2.0">Apache-2.0</option>
+        <option value="BSD-2-Clause">BSD-2-Clause</option>
+      </select>
+      <div class="checkbox-row">
+        <input type="checkbox" id="new-repo-private" />
+        <label for="new-repo-private">Privates Repository</label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button onclick="closeModal()" class="btn-secondary">Abbrechen</button>
+      <button onclick="createNewRepo()" class="btn-primary">Repository erstellen</button>
+    </div>
+  </div>
+
+  <!-- New Branch Modal -->
+  <div class="modal" id="modal-new-branch">
+    <div class="modal-header">
+      <h2>Neuen Branch erstellen</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <label>Branch-Name</label>
+      <input type="text" id="new-branch-name" placeholder="feature/meine-funktion" />
+      <label>Basierend auf</label>
+      <select id="new-branch-base">
+        <option value="main">main</option>
+        <option value="develop">develop</option>
+      </select>
+    </div>
+    <div class="modal-footer">
+      <button onclick="closeModal()" class="btn-secondary">Abbrechen</button>
+      <button onclick="createNewBranch()" class="btn-primary">Branch erstellen</button>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div class="modal modal-large" id="modal-settings">
+    <div class="modal-header">
+      <h2>Einstellungen</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="settings-layout">
+      <div class="settings-nav">
+        <button class="settings-nav-btn active" onclick="switchSettings('account', this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Konto
+        </button>
+        <button class="settings-nav-btn" onclick="switchSettings('git', this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><line x1="6" y1="9" x2="6" y2="21"/></svg>
+          Git
+        </button>
+        <button class="settings-nav-btn" onclick="switchSettings('appearance', this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          Erscheinungsbild
+        </button>
+        <button class="settings-nav-btn" onclick="switchSettings('editor', this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Editor
+        </button>
+        <button class="settings-nav-btn" onclick="switchSettings('shell', this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          Shell
+        </button>
+        <button class="settings-nav-btn" onclick="switchSettings('advanced', this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 0-14.14 0M4.93 19.07a10 10 0 0 0 14.14 0"/></svg>
+          Erweitert
+        </button>
+      </div>
+      <div class="settings-content">
+        <div id="settings-account">
+          <h3>Konto</h3>
+          <div class="account-info-card">
+            <div class="account-avatar" id="settings-avatar">J</div>
+            <div>
+              <div class="account-name" id="settings-username">juppijo</div>
+              <div class="account-email" id="settings-email">github.com/juppijo</div>
+            </div>
+            <button class="btn-danger" onclick="showToast('Abmelden…')">Abmelden</button>
+          </div>
+          <div class="form-group">
+            <label>GitHub-Token (PAT)</label>
+            <input type="password" id="settings-token" placeholder="ghp_xxxxxxxxxxxx" />
+            <small>Einstellungen → Developer settings → Personal access tokens auf GitHub</small>
+          </div>
+          <button class="btn-primary" onclick="saveToken()">Token speichern &amp; Verbinden</button>
+        </div>
+        <div id="settings-git" class="hidden">
+          <h3>Git-Konfiguration</h3>
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" id="git-name" placeholder="Dein Name" />
+          </div>
+          <div class="form-group">
+            <label>E-Mail</label>
+            <input type="email" id="git-email" placeholder="email@beispiel.de" />
+          </div>
+          <div class="form-group">
+            <label>Standard-Branch</label>
+            <select id="git-default-branch">
+              <option value="main">main</option>
+              <option value="master">master</option>
+              <option value="develop">develop</option>
+            </select>
+          </div>
+          <button class="btn-primary" onclick="saveGitConfig()">Speichern</button>
+        </div>
+        <div id="settings-appearance" class="hidden">
+          <h3>Erscheinungsbild</h3>
+          <div class="form-group">
+            <label>Design</label>
+            <div class="theme-cards">
+              <div class="theme-card dark-preview active" onclick="setTheme('dark')">
+                <div class="theme-preview"></div>
+                <span>Dark</span>
+              </div>
+              <div class="theme-card light-preview" onclick="setTheme('light')">
+                <div class="theme-preview"></div>
+                <span>Light</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Akzentfarbe</label>
+            <div class="color-options">
+              <button class="color-dot active" style="background:#58a6ff" onclick="setAccent('#58a6ff')"></button>
+              <button class="color-dot" style="background:#3fb950" onclick="setAccent('#3fb950')"></button>
+              <button class="color-dot" style="background:#f78166" onclick="setAccent('#f78166')"></button>
+              <button class="color-dot" style="background:#d2a8ff" onclick="setAccent('#d2a8ff')"></button>
+              <button class="color-dot" style="background:#ffa657" onclick="setAccent('#ffa657')"></button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Schriftgröße</label>
+            <select id="font-size-select" onchange="setFontSize(this.value)">
+              <option value="13px">Klein (13px)</option>
+              <option value="14px" selected>Standard (14px)</option>
+              <option value="16px">Groß (16px)</option>
+            </select>
+          </div>
+        </div>
+        <div id="settings-editor" class="hidden">
+          <h3>Standard-Editor</h3>
+          <div class="form-group">
+            <label>Editor</label>
+            <select id="editor-select">
+              <option value="code">Visual Studio Code</option>
+              <option value="vim">Vim</option>
+              <option value="nano">Nano</option>
+              <option value="gedit">Gedit</option>
+              <option value="sublime">Sublime Text</option>
+              <option value="atom">Atom</option>
+            </select>
+          </div>
+          <button class="btn-primary" onclick="saveEditorConfig()">Speichern</button>
+        </div>
+        <div id="settings-shell" class="hidden">
+          <h3>Standard-Shell</h3>
+          <div class="form-group">
+            <label>Shell</label>
+            <select id="shell-select">
+              <option value="bash">Bash</option>
+              <option value="zsh">Zsh</option>
+              <option value="fish">Fish</option>
+              <option value="sh">Sh</option>
+            </select>
+          </div>
+          <button class="btn-primary" onclick="saveShellConfig()">Speichern</button>
+        </div>
+        <div id="settings-advanced" class="hidden">
+          <h3>Erweiterte Einstellungen</h3>
+          <div class="checkbox-row">
+            <input type="checkbox" id="setting-auto-fetch" checked />
+            <label for="setting-auto-fetch">Automatisch fetchen (alle 15 Min.)</label>
+          </div>
+          <div class="checkbox-row">
+            <input type="checkbox" id="setting-prune" checked />
+            <label for="setting-prune">Remote-Branches beim Fetch bereinigen</label>
+          </div>
+          <div class="checkbox-row">
+            <input type="checkbox" id="setting-rebase" />
+            <label for="setting-rebase">Rebase statt Merge beim Pullen verwenden</label>
+          </div>
+          <div class="checkbox-row">
+            <input type="checkbox" id="setting-lfs" />
+            <label for="setting-lfs">Git LFS unterstützen</label>
+          </div>
+          <div class="form-group" style="margin-top:16px">
+            <label>Cache löschen</label>
+            <button class="btn-danger" onclick="clearCache()">Cache leeren</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Modal -->
+  <div class="modal modal-small" id="modal-about">
+    <div class="modal-header">
+      <h2>Über GitHub Desktop</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body center">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="var(--accent)">
+        <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+      </svg>
+      <h3>GitHub Desktop für Linux</h3>
+      <p>Version 1.0.0 (Community Build)</p>
+      <p style="color:var(--text-muted); font-size:12px; margin-top:8px">Gebaut für juppijo · Läuft im Browser</p>
+      <p style="margin-top:16px; font-size:12px; color:var(--text-muted)">Dieses Tool nutzt die öffentliche GitHub REST API.</p>
+    </div>
+    <div class="modal-footer" style="justify-content:center">
+      <button onclick="closeModal()" class="btn-primary">Schließen</button>
+    </div>
+  </div>
+
+  <!-- Keyboard Shortcuts Modal -->
+  <div class="modal" id="modal-shortcuts">
+    <div class="modal-header">
+      <h2>Tastenkürzel</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <table class="shortcuts-table">
+        <tr><td><kbd>Ctrl</kbd>+<kbd>N</kbd></td><td>Neues Repository</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>O</kbd></td><td>Repository klonen</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>1</kbd></td><td>Änderungen anzeigen</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>2</kbd></td><td>Verlauf anzeigen</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>3</kbd></td><td>Übersicht anzeigen</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd></td><td>Push origin</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd></td><td>Fetch alle</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>,</kbd></td><td>Einstellungen öffnen</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Enter</kbd></td><td>Commit durchführen</td></tr>
+        <tr><td><kbd>Escape</kbd></td><td>Modal schließen</td></tr>
+      </table>
+    </div>
+    <div class="modal-footer">
+      <button onclick="closeModal()" class="btn-primary">Schließen</button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
