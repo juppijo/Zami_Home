@@ -236,6 +236,10 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
           Übersicht
         </button>
+        <button class="tab" id="tab-files" onclick="switchTab('files')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg>
+          Dateien
+        </button>
       </div>
 
       <!-- TAB CONTENT -->
@@ -302,6 +306,77 @@
         </div>
       </div>
 
+      <!-- FILES TAB -->
+      <div class="tab-content hidden" id="tab-content-files">
+        <div class="files-layout">
+
+          <!-- Left: tree panel -->
+          <div class="files-left">
+            <div class="files-toolbar">
+              <div class="file-search-wrap">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="file-search-input" placeholder="Dateien suchen…"
+                       onkeydown="if(event.key==='Enter') searchFiles(this.value)"
+                       oninput="if(!this.value) clearFileSearch()" />
+                <button class="file-search-clear" id="file-search-clear" onclick="clearFileSearch()" title="Zurücksetzen">✕</button>
+              </div>
+              <div class="files-actions">
+                <button class="icon-btn" onclick="fileGoBack()" title="Zurück">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <button class="icon-btn" onclick="loadFileTree(STATE.filePath)" title="Aktualisieren">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                </button>
+                <button class="icon-btn" onclick="loadFileTree('')" title="Root">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Breadcrumb -->
+            <div class="file-breadcrumb-bar">
+              <div class="file-breadcrumb" id="file-breadcrumb">
+                <span class="bc-item bc-root">Kein Repository</span>
+              </div>
+            </div>
+
+            <!-- Tree -->
+            <div class="file-tree" id="file-tree">
+              <div class="empty-state">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                </svg>
+                <p>Repository auswählen</p>
+                <small>Dann Dateien durchsuchen</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: preview panel -->
+          <div class="files-right">
+            <!-- Preview header (filename + actions) -->
+            <div class="file-preview-header" id="file-preview-header">
+              <div class="fp-header-left">
+                <span class="fp-filename" style="color:var(--text-muted)">Keine Datei geöffnet</span>
+              </div>
+              <div class="fp-header-right"></div>
+            </div>
+
+            <!-- Preview content -->
+            <div class="file-preview-panel" id="file-preview-panel">
+              <div class="empty-state">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                </svg>
+                <p>Datei auswählen</p>
+                <small>Inhalt wird hier angezeigt</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="tab-content hidden" id="tab-content-repos">
         <div class="overview-layout">
           <div class="profile-card" id="profile-card">
@@ -343,8 +418,11 @@
         <div id="clone-repo-results" class="clone-result-list"></div>
         <label style="margin-top:16px">Lokaler Pfad</label>
         <div class="path-row">
-          <input type="text" id="clone-path-github" value="~/GitHub" />
-          <button onclick="showToast('Ordnerauswahl nur in nativer App verfügbar')">Auswählen</button>
+          <input type="text" id="clone-path-github" value="/home/jo-ssd/GitHub" />
+          <button class="btn-folder-pick" onclick="pickFolder('clone-path-github')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            Ordner wählen…
+          </button>
         </div>
       </div>
       <div id="clone-panel-url" class="hidden">
@@ -352,21 +430,62 @@
         <input type="text" id="clone-url-input" placeholder="https://github.com/user/repo.git" />
         <label style="margin-top:12px">Lokaler Pfad</label>
         <div class="path-row">
-          <input type="text" id="clone-path-url" value="~/GitHub" />
-          <button onclick="showToast('Ordnerauswahl nur in nativer App verfügbar')">Auswählen</button>
+          <input type="text" id="clone-path-url" value="/home/jo-ssd/GitHub" />
+          <button class="btn-folder-pick" onclick="pickFolder('clone-path-url')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            Ordner wählen…
+          </button>
         </div>
       </div>
       <div id="clone-panel-local" class="hidden">
         <label>Lokaler Ordner mit Git-Repository</label>
         <div class="path-row">
           <input type="text" id="clone-path-local" placeholder="/home/user/mein-projekt" />
-          <button onclick="showToast('Ordnerauswahl nur in nativer App verfügbar')">Auswählen</button>
+          <button class="btn-folder-pick" onclick="pickFolder('clone-path-local')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            Ordner wählen…
+          </button>
         </div>
+        <div class="local-files-preview" id="local-clone-preview"></div>
       </div>
     </div>
     <div class="modal-footer">
       <button onclick="closeModal()" class="btn-secondary">Abbrechen</button>
       <button onclick="executeClone()" class="btn-primary">Klonen</button>
+    </div>
+  </div>
+
+  <!-- Clone Result Modal -->
+  <div class="modal" id="modal-clone-result">
+    <div class="modal-header">
+      <h2>✓ Klon-Befehl bereit</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="clone-info-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>Browser können aus Sicherheitsgründen kein <code>git clone</code> direkt auf der Festplatte ausführen. Nutze eine der beiden Optionen unten.</span>
+      </div>
+
+      <label>1. Befehl im Terminal ausführen (empfohlen)</label>
+      <div class="clone-command-box">
+        <code id="clone-result-command">git clone …</code>
+        <button class="fp-btn" onclick="copyCloneCommand()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Kopieren
+        </button>
+      </div>
+      <small>Befehl ist bereits in der Zwischenablage. Zielordner: <span id="clone-result-path" style="font-family:var(--font-mono);color:var(--text-secondary)"></span></small>
+
+      <label style="margin-top:16px">2. Oder direkt als ZIP herunterladen</label>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Lädt den Code als ZIP-Datei in einen von dir gewählten Ordner – ganz ohne Terminal.</div>
+      <button class="btn-secondary" id="clone-download-btn" style="width:100%">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Als ZIP in Ordner speichern…
+      </button>
+    </div>
+    <div class="modal-footer">
+      <button onclick="closeModal()" class="btn-primary">Fertig</button>
     </div>
   </div>
 
@@ -383,8 +502,11 @@
       <input type="text" id="new-repo-desc" placeholder="Kurze Beschreibung…" />
       <label>Lokaler Pfad</label>
       <div class="path-row">
-        <input type="text" id="new-repo-path" value="~/GitHub" />
-        <button onclick="showToast('Ordnerauswahl nur in nativer App verfügbar')">Auswählen</button>
+        <input type="text" id="new-repo-path" value="/home/jo-ssd/GitHub" />
+        <button class="btn-folder-pick" onclick="pickFolder('new-repo-path')">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          Ordner wählen…
+        </button>
       </div>
       <div class="checkbox-row">
         <input type="checkbox" id="new-repo-readme" checked />
@@ -601,6 +723,147 @@
     </div>
   </div>
 
+  <!-- Merge Branch Modal -->
+  <div class="modal" id="modal-merge">
+    <div class="modal-header">
+      <h2>Branch mergen</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="merge-info-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></svg>
+        <span>Branch in <strong id="merge-target-label">main</strong> mergen</span>
+      </div>
+      <label>Branch auswählen (Quelle)</label>
+      <select id="merge-source-branch">
+        <option value="">-- Branch wählen --</option>
+      </select>
+      <label style="margin-top:10px">Merge-Strategie</label>
+      <select id="merge-strategy">
+        <option value="merge">Merge Commit (--no-ff)</option>
+        <option value="squash">Squash und Merge</option>
+        <option value="rebase">Rebase und Merge</option>
+      </select>
+      <div class="merge-preview" id="merge-preview">
+        <div style="color:var(--text-muted);font-size:12px">Branch wählen für Vorschau…</div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button onclick="closeModal()" class="btn-secondary">Abbrechen</button>
+      <button onclick="executeMerge()" class="btn-primary" id="merge-execute-btn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></svg>
+        Mergen
+      </button>
+    </div>
+  </div>
+
+  <!-- Delete Branch Modal -->
+  <div class="modal modal-small" id="modal-delete-branch">
+    <div class="modal-header">
+      <h2>Branch löschen</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="danger-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <span>Diese Aktion kann nicht rückgängig gemacht werden!</span>
+      </div>
+      <label>Branch löschen</label>
+      <select id="delete-branch-select">
+        <option value="">-- Branch wählen --</option>
+      </select>
+      <div class="checkbox-row" style="margin-top:10px">
+        <input type="checkbox" id="delete-remote-too" />
+        <label for="delete-remote-too">Auch Remote-Branch löschen (origin)</label>
+      </div>
+      <div class="form-group" style="margin-top:10px">
+        <label>Zur Bestätigung Branch-Namen eingeben</label>
+        <input type="text" id="delete-branch-confirm" placeholder="Branch-Name eingeben…" oninput="checkDeleteConfirm()" />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button onclick="closeModal()" class="btn-secondary">Abbrechen</button>
+      <button onclick="executeDeleteBranch()" class="btn-danger" id="delete-branch-btn" disabled>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+        Branch löschen
+      </button>
+    </div>
+  </div>
+
+  <!-- Add Local Repo Modal -->
+  <div class="modal" id="modal-add-local">
+    <div class="modal-header">
+      <h2>Lokales Repository hinzufügen</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-tabs">
+      <button class="modal-tab active" id="local-tab-picker" onclick="switchLocalTab('picker')">📁 Ordner wählen</button>
+      <button class="modal-tab" id="local-tab-browse" onclick="switchLocalTab('browse')">🗂 Dateien durchsuchen</button>
+    </div>
+    <div class="modal-body">
+      <!-- Panel: pick via File System API -->
+      <div id="local-panel-picker">
+        <div class="folder-drop-zone" id="folder-drop-zone" onclick="pickLocalRepoFolder()" ondragover="event.preventDefault()" ondrop="handleFolderDrop(event)">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          <p>Ordner hier hineinziehen</p>
+          <small>oder klicken um Ordner zu wählen</small>
+          <button class="btn-primary" style="margin-top:12px" onclick="event.stopPropagation(); pickLocalRepoFolder()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            Ordner auswählen (Linux)
+          </button>
+        </div>
+        <div id="local-folder-result" class="local-folder-result hidden">
+          <div class="lfr-header">
+            <span class="lfr-icon">📁</span>
+            <div>
+              <div class="lfr-name" id="lfr-name">–</div>
+              <div class="lfr-path" id="lfr-path">–</div>
+            </div>
+            <span class="lfr-badge" id="lfr-badge">?</span>
+          </div>
+          <div class="lfr-files" id="lfr-files"></div>
+          <button class="btn-secondary" style="width:100%;margin-top:10px" onclick="openLocalFolderViewer()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Dateien jetzt durchsuchen
+          </button>
+        </div>
+      </div>
+
+      <!-- Panel: browse local files in app -->
+      <div id="local-panel-browse" class="hidden">
+        <div class="local-browser-note">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Hier kannst du Dateien aus einem lokalen Ordner importieren und im Dateibrowser anzeigen lassen.
+        </div>
+        <label>Dateien auswählen (mehrere möglich)</label>
+        <input type="file" id="local-file-input" multiple onchange="loadLocalFiles(this.files)"
+               style="background:var(--bg-base);border:1px solid var(--border);border-radius:var(--radius);padding:8px;width:100%;color:var(--text-primary)" />
+        <div id="local-file-list" class="local-file-list"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button onclick="closeModal()" class="btn-secondary">Abbrechen</button>
+      <button onclick="addLocalRepo()" class="btn-primary">Hinzufügen &amp; öffnen</button>
+    </div>
+  </div>
+
+  <!-- Local File Viewer Modal (full screen) -->
+  <div class="modal modal-large" id="modal-local-viewer">
+    <div class="modal-header">
+      <h2>📁 Lokale Dateien – <span id="local-viewer-title">–</span></h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="local-viewer-layout">
+      <div class="local-viewer-tree" id="local-viewer-tree"></div>
+      <div class="local-viewer-content" id="local-viewer-content">
+        <div class="empty-state">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <p>Datei auswählen</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- About Modal -->
   <div class="modal modal-small" id="modal-about">
     <div class="modal-header">
@@ -634,6 +897,7 @@
         <tr><td><kbd>Ctrl</kbd>+<kbd>1</kbd></td><td>Änderungen anzeigen</td></tr>
         <tr><td><kbd>Ctrl</kbd>+<kbd>2</kbd></td><td>Verlauf anzeigen</td></tr>
         <tr><td><kbd>Ctrl</kbd>+<kbd>3</kbd></td><td>Übersicht anzeigen</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>4</kbd></td><td>Dateibrowser öffnen</td></tr>
         <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd></td><td>Push origin</td></tr>
         <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd></td><td>Fetch alle</td></tr>
         <tr><td><kbd>Ctrl</kbd>+<kbd>,</kbd></td><td>Einstellungen öffnen</td></tr>

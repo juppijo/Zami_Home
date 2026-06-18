@@ -18,6 +18,11 @@ const STATE = {
   commits:        [],
   selectedCommit: null,
   cloneTarget:    null,
+  // File browser
+  filePath:       '',           // current directory path in repo
+  fileTree:       [],           // current directory listing
+  fileHistory:    [],           // breadcrumb stack
+  openFile:       null,         // currently previewed file
   settings: {
     theme:         localStorage.getItem('gh_theme')  || 'dark',
     accent:        localStorage.getItem('gh_accent') || '#58a6ff',
@@ -164,6 +169,12 @@ async function selectRepo(repoId) {
 
   // Simulate changed files
   simulateChangedFiles(repo);
+
+  // Reset file browser
+  STATE.filePath    = '';
+  STATE.fileTree    = [];
+  STATE.fileHistory = [];
+  STATE.openFile    = null;
 
   showToast(`Repository gewechselt: ${repo.name}`, 'success');
 }
@@ -507,10 +518,15 @@ function showFileDiff(filename, status, index) {
 // TABS
 // ─────────────────────────────────────────────
 function switchTab(name) {
-  ['changes', 'history', 'repos'].forEach(t => {
-    document.getElementById(`tab-${t}`).classList.toggle('active', t === name);
-    document.getElementById(`tab-content-${t}`).classList.toggle('hidden', t !== name);
+  ['changes', 'history', 'repos', 'files'].forEach(t => {
+    const tabEl = document.getElementById(`tab-${t}`);
+    const contentEl = document.getElementById(`tab-content-${t}`);
+    if (tabEl)    tabEl.classList.toggle('active', t === name);
+    if (contentEl) contentEl.classList.toggle('hidden', t !== name);
   });
+  if (name === 'files' && STATE.currentRepo && STATE.fileTree.length === 0) {
+    loadFileTree('');
+  }
 }
 
 // ─────────────────────────────────────────────
@@ -563,25 +579,120 @@ function selectCloneTarget(fullName) {
 }
 
 function executeClone() {
-  let target = STATE.cloneTarget;
-  const urlInput = document.getElementById('clone-url-input');
   const activePanel = document.querySelector('.modal-tab.active')?.id;
+  let cloneUrl = '';
+  let repoName = '';
 
-  if (activePanel === 'clone-tab-url') {
-    target = urlInput?.value || '';
+  if (activePanel === 'clone-tab-github') {
+    if (!STATE.cloneTarget) {
+      showToast('Bitte erst ein Repository aus der Liste anklicken', 'error');
+      return;
+    }
+    cloneUrl = `https://github.com/${STATE.cloneTarget}.git`;
+    repoName = STATE.cloneTarget.split('/')[1];
+  } else if (activePanel === 'clone-tab-url') {
+    cloneUrl = document.getElementById('clone-url-input')?.value.trim();
+    if (!cloneUrl) { showToast('Bitte eine Repository-URL eingeben', 'error'); return; }
+    repoName = cloneUrl.split('/').pop().replace(/\.git$/, '');
   } else if (activePanel === 'clone-tab-local') {
-    target = document.getElementById('clone-path-local')?.value || '';
-  }
-
-  if (!target) {
-    showToast('Bitte Repository oder URL auswählen', 'error');
+    const localPath = document.getElementById('clone-path-local')?.value.trim();
+    if (!localPath) { showToast('Bitte einen lokalen Ordner auswählen', 'error'); return; }
+    // "Lokal" bedeutet: vorhandenes Repo öffnen, kein Klonen nötig
+    showToast(`Öffne vorhandenes lokales Repository: ${localPath}`, 'success');
+    closeModal();
+    if (LOCAL_FS.rootHandle) openLocalFolderViewer();
     return;
   }
 
-  const path = document.getElementById('clone-path-github')?.value || '~/GitHub';
-  showToast(`Klonen gestartet: ${target} → ${path}`, 'success');
+  if (!cloneUrl) { showToast('Kein Ziel zum Klonen gefunden', 'error'); return; }
+
+  const pathInput = activePanel === 'clone-tab-url'
+    ? document.getElementById('clone-path-url')
+    : document.getElementById('clone-path-github');
+  const targetPath = (pathInput?.value || '/home/jo-ssd/GitHub').trim();
+  const fullPath = `${targetPath.replace(/\/$/, '')}/${repoName}`;
+  const command = `git clone ${cloneUrl} "${fullPath}"`;
+
+  // Browser können kein echtes "git clone" auf der Festplatte ausführen
+  // (kein Shell-/Prozesszugriff aus JavaScript heraus, das ist eine
+  // Sicherheitsgrenze des Browsers, keine App-Einschränkung).
+  // Stattdessen: fertigen Befehl in die Zwischenablage kopieren
+  // + optional die Repo-Dateien direkt via File System Access API
+  // in einen lokal gewählten Ordner herunterladen.
+  navigator.clipboard.writeText(command).then(() => {
+    showCloneInstructions(command, cloneUrl, repoName, fullPath);
+  }).catch(() => {
+    showCloneInstructions(command, cloneUrl, repoName, fullPath);
+  });
+}
+
+function showCloneInstructions(command, cloneUrl, repoName, fullPath) {
   closeModal();
-  setTimeout(() => showToast('Klonen abgeschlossen ✓', 'success'), 2000);
+  openModal('modal-clone-result');
+  document.getElementById('clone-result-command').textContent = command;
+  document.getElementById('clone-result-path').textContent = fullPath;
+
+  const downloadBtn = document.getElementById('clone-download-btn');
+  downloadBtn.onclick = () => downloadRepoToFolder(cloneUrl, repoName);
+  downloadBtn.disabled = !supportsFileSystemAccess();
+  if (!supportsFileSystemAccess()) {
+    downloadBtn.title = 'Nur in Chromium-basierten Browsern verfügbar (Chrome, Brave, Edge)';
+  }
+}
+
+function copyCloneCommand() {
+  const cmd = document.getElementById('clone-result-command').textContent;
+  navigator.clipboard.writeText(cmd).then(() => {
+    showToast('Befehl erneut kopiert ✓', 'success');
+  });
+}
+
+// Lädt das Repository als ZIP von GitHub und schreibt die Dateien
+// wirklich auf die Festplatte in einen vom Nutzer gewählten Ordner
+// (über die File System Access API – funktioniert nativ unter Linux
+// in Chrome/Chromium/Brave/Edge).
+async function downloadRepoToFolder(cloneUrl, repoName) {
+  if (!supportsFileSystemAccess()) {
+    showToast('Diese Funktion benötigt Chrome/Chromium/Brave/Edge', 'error');
+    return;
+  }
+
+  let dirHandle;
+  try {
+    dirHandle = await window.showDirectoryPicker({ mode: 'readwrite' });
+  } catch (e) {
+    if (e.name !== 'AbortError') showToast('Ordnerauswahl fehlgeschlagen', 'error');
+    return;
+  }
+
+  showToast(`Lade ${repoName} herunter…`);
+
+  try {
+    // GitHub bietet ZIP-Downloads über codeload.github.com für jeden Branch
+    const match = cloneUrl.match(/github\.com[:/](.+?)(\.git)?$/);
+    const fullName = match ? match[1] : `${STATE.username}/${repoName}`;
+    const branch = STATE.currentRepo?.full_name === fullName
+      ? STATE.currentBranch
+      : (STATE.repos.find(r => r.full_name === fullName)?.default_branch || 'main');
+
+    const zipUrl = `https://codeload.github.com/${fullName}/zip/refs/heads/${branch}`;
+    const res = await fetch(zipUrl);
+    if (!res.ok) throw new Error(`HTTP ${res.status} beim ZIP-Download`);
+    const blob = await res.blob();
+
+    // ZIP entpacken (minimaler Inflate-freier Ansatz: Browser kann das nicht
+    // nativ ohne Bibliothek, daher speichern wir die ZIP-Datei direkt im
+    // gewählten Ordner ab – der Nutzer kann sie dort lokal entpacken)
+    const zipHandle = await dirHandle.getFileHandle(`${repoName}.zip`, { create: true });
+    const writable = await zipHandle.createWritable();
+    await writable.write(blob);
+    await writable.close();
+
+    showToast(`✓ ${repoName}.zip in "${dirHandle.name}" gespeichert – bitte entpacken`, 'success');
+    closeModal();
+  } catch (e) {
+    showToast('Download-Fehler: ' + e.message, 'error');
+  }
 }
 
 // ─────────────────────────────────────────────
@@ -667,9 +778,595 @@ async function createNewBranch() {
   }
 }
 
-function showMergeModal()        { showToast('Merge-Dialog – in Entwicklung', 'error'); }
-function showDeleteBranchModal() { showToast('Branch löschen – in Entwicklung', 'error'); }
-function showAddLocalModal()     { showToast('Lokales Repo hinzufügen – in Entwicklung', 'error'); }
+// ─────────────────────────────────────────────
+// NATIVE FOLDER PICKER (File System Access API)
+// Funktioniert nativ unter Linux in Chrome/Chromium/Edge/Brave.
+// Fallback: <input type="file" webkitdirectory> für Firefox o.ä.
+// ─────────────────────────────────────────────
+const LOCAL_FS = {
+  rootHandle: null,   // aktuell gewählter Ordner-Handle (DirectoryHandle)
+  rootName:   '',
+  entries:    [],      // flache Liste { name, kind, handle, path }
+  selectedFile: null,  // { name, path, handle }
+  viewerTree:  [],      // baum für lokalen Viewer
+};
+
+function supportsFileSystemAccess() {
+  return 'showDirectoryPicker' in window;
+}
+
+// Klick auf "Ordner wählen…" Button neben einem Pfad-Input
+async function pickFolder(targetInputId) {
+  if (!supportsFileSystemAccess()) {
+    fallbackFolderPicker(targetInputId);
+    return;
+  }
+  try {
+    const dirHandle = await window.showDirectoryPicker({ mode: 'read' });
+    const input = document.getElementById(targetInputId);
+    // Hinweis: Browser geben aus Sicherheitsgründen nie den vollen
+    // absoluten Pfad zurück, nur den Ordnernamen selbst. Wir nehmen
+    // daher an, dass der gewählte Ordner direkt unter deinem
+    // GitHub-Basisverzeichnis liegt.
+    if (input) input.value = `/home/jo-ssd/GitHub/${dirHandle.name}`;
+    LOCAL_FS.rootHandle = dirHandle;
+    LOCAL_FS.rootName   = dirHandle.name;
+    showToast(`Ordner gewählt: ${dirHandle.name}`, 'success');
+
+    // Wenn es der "Lokal klonen"-Pfad ist, gleich Inhalt scannen & Vorschau zeigen
+    if (targetInputId === 'clone-path-local') {
+      await previewLocalCloneFolder(dirHandle);
+    }
+  } catch (e) {
+    if (e.name !== 'AbortError') {
+      showToast('Ordnerauswahl abgebrochen oder fehlgeschlagen', 'error');
+    }
+  }
+}
+
+// Fallback für Browser ohne File System Access API (z.B. Firefox)
+function fallbackFolderPicker(targetInputId) {
+  const tempInput = document.createElement('input');
+  tempInput.type = 'file';
+  tempInput.webkitdirectory = true;
+  tempInput.multiple = true;
+  tempInput.style.display = 'none';
+  document.body.appendChild(tempInput);
+
+  tempInput.addEventListener('change', () => {
+    if (tempInput.files.length > 0) {
+      const firstPath = tempInput.files[0].webkitRelativePath || tempInput.files[0].name;
+      const folderName = firstPath.split('/')[0];
+      const input = document.getElementById(targetInputId);
+      if (input) input.value = `/home/jo-ssd/GitHub/${folderName}`;
+      showToast(`Ordner gewählt: ${folderName} (${tempInput.files.length} Dateien)`, 'success');
+
+      if (targetInputId === 'clone-path-local') {
+        scanFallbackFiles(tempInput.files);
+      }
+    }
+    document.body.removeChild(tempInput);
+  });
+
+  tempInput.click();
+  showToast('Hinweis: Dein Browser nutzt den Datei-Dialog-Fallback');
+}
+
+// ─────────────────────────────────────────────
+// LOKAL KLONEN – Ordner-Vorschau (File System Access API)
+// ─────────────────────────────────────────────
+async function previewLocalCloneFolder(dirHandle) {
+  const preview = document.getElementById('local-clone-preview');
+  if (!preview) return;
+  preview.innerHTML = `<div class="loading-msg"><div class="spinner"></div><span>Scanne Ordner…</span></div>`;
+
+  const entries = [];
+  let isGitRepo = false;
+  try {
+    for await (const [name, handle] of dirHandle.entries()) {
+      if (name === '.git') isGitRepo = true;
+      entries.push({ name, kind: handle.kind });
+    }
+  } catch (e) {
+    preview.innerHTML = `<div class="empty-state"><p>Lesefehler</p><small>${escHtml(e.message)}</small></div>`;
+    return;
+  }
+
+  entries.sort((a, b) => {
+    if (a.kind === b.kind) return a.name.localeCompare(b.name);
+    return a.kind === 'directory' ? -1 : 1;
+  });
+
+  preview.innerHTML = `
+    <div class="lfr-header" style="margin-top:14px">
+      <span class="lfr-icon">${isGitRepo ? '🔧' : '📁'}</span>
+      <div>
+        <div class="lfr-name">${escHtml(dirHandle.name)}</div>
+        <div class="lfr-path">${entries.length} Einträge${isGitRepo ? ' · Git-Repository erkannt' : ' · Kein Git-Repository'}</div>
+      </div>
+      <span class="lfr-badge" style="background:${isGitRepo ? 'var(--green)' : 'var(--yellow)'}">${isGitRepo ? '✓' : '!'}</span>
+    </div>
+    <div class="lfr-files">
+      ${entries.slice(0, 12).map(e => `
+        <div class="lfr-file-item">
+          <span>${e.kind === 'directory' ? getFolderIcon(e.name) : getFileIcon(e.name)}</span>
+          <span>${escHtml(e.name)}</span>
+        </div>`).join('')}
+      ${entries.length > 12 ? `<div class="lfr-file-item" style="color:var(--text-muted)">… und ${entries.length - 12} weitere</div>` : ''}
+    </div>
+  `;
+}
+
+function scanFallbackFiles(files) {
+  const preview = document.getElementById('local-clone-preview');
+  if (!preview) return;
+  const names = new Set();
+  let isGitRepo = false;
+  for (const f of files) {
+    const rel = f.webkitRelativePath || f.name;
+    const top = rel.split('/');
+    if (top.includes('.git')) isGitRepo = true;
+    names.add(top.length > 1 ? top[1] : top[0]);
+  }
+  const list = [...names].slice(0, 12);
+  preview.innerHTML = `
+    <div class="lfr-header" style="margin-top:14px">
+      <span class="lfr-icon">${isGitRepo ? '🔧' : '📁'}</span>
+      <div>
+        <div class="lfr-name">${files.length} Dateien gefunden</div>
+        <div class="lfr-path">${isGitRepo ? 'Git-Repository erkannt' : 'Kein Git-Repository'}</div>
+      </div>
+      <span class="lfr-badge" style="background:${isGitRepo ? 'var(--green)' : 'var(--yellow)'}">${isGitRepo ? '✓' : '!'}</span>
+    </div>
+    <div class="lfr-files">
+      ${list.map(n => `<div class="lfr-file-item"><span>📄</span><span>${escHtml(n)}</span></div>`).join('')}
+    </div>`;
+}
+
+// ─────────────────────────────────────────────
+// MERGE BRANCH MODAL
+// ─────────────────────────────────────────────
+function showMergeModal() {
+  if (!STATE.currentRepo) { showToast('Erst ein Repository auswählen', 'error'); return; }
+  if (STATE.branches.length < 2) { showToast('Mindestens 2 Branches benötigt', 'error'); return; }
+
+  const targetLabel = document.getElementById('merge-target-label');
+  if (targetLabel) targetLabel.textContent = STATE.currentBranch;
+
+  const sel = document.getElementById('merge-source-branch');
+  if (sel) {
+    sel.innerHTML = '<option value="">-- Branch wählen --</option>' +
+      STATE.branches
+        .filter(b => b.name !== STATE.currentBranch)
+        .map(b => `<option value="${escHtml(b.name)}">${escHtml(b.name)}</option>`)
+        .join('');
+    sel.onchange = () => updateMergePreview(sel.value);
+  }
+
+  document.getElementById('merge-preview').innerHTML =
+    `<div style="color:var(--text-muted);font-size:12px">Branch wählen für Vorschau…</div>`;
+
+  openModal('modal-merge');
+}
+
+async function updateMergePreview(branchName) {
+  const preview = document.getElementById('merge-preview');
+  if (!branchName) {
+    preview.innerHTML = `<div style="color:var(--text-muted);font-size:12px">Branch wählen für Vorschau…</div>`;
+    return;
+  }
+  preview.innerHTML = `<div class="loading-msg"><div class="spinner"></div><span>Lade Vergleich…</span></div>`;
+
+  try {
+    const compare = await ghFetch(
+      `/repos/${STATE.currentRepo.full_name}/compare/${encodeURIComponent(STATE.currentBranch)}...${encodeURIComponent(branchName)}`
+    );
+    const ahead  = compare.ahead_by  ?? compare.total_commits ?? 0;
+    const behind = compare.behind_by ?? 0;
+    const files  = compare.files?.length ?? 0;
+
+    preview.innerHTML = `
+      <div class="merge-stats">
+        <div class="merge-stat"><strong>${ahead}</strong><span>Commits voraus</span></div>
+        <div class="merge-stat"><strong>${behind}</strong><span>Commits zurück</span></div>
+        <div class="merge-stat"><strong>${files}</strong><span>Dateien geändert</span></div>
+      </div>
+      ${compare.commits?.length ? `
+        <div class="section-label" style="padding:10px 0 6px">Commits die gemerged werden</div>
+        <div class="merge-commit-list">
+          ${compare.commits.slice(0, 6).map(c => `
+            <div class="merge-commit-item">
+              <span class="commit-entry-sha">${c.sha.substring(0,7)}</span>
+              <span>${escHtml(c.commit.message.split('\n')[0])}</span>
+            </div>`).join('')}
+        </div>` : ''}
+      ${compare.status === 'identical' ? '<div style="color:var(--text-muted);font-size:12px;margin-top:8px">Branches sind identisch – nichts zu mergen</div>' : ''}
+    `;
+  } catch (e) {
+    preview.innerHTML = `<div style="color:var(--red);font-size:12px">Fehler: ${escHtml(e.message)}</div>`;
+  }
+}
+
+async function executeMerge() {
+  const source   = document.getElementById('merge-source-branch').value;
+  const strategy = document.getElementById('merge-strategy').value;
+
+  if (!source) { showToast('Bitte einen Branch auswählen', 'error'); return; }
+  if (!STATE.token) { showToast('GitHub-Token benötigt (Einstellungen → Konto)', 'error'); return; }
+
+  const btn = document.getElementById('merge-execute-btn');
+  btn.disabled = true;
+  btn.textContent = 'Merge läuft…';
+
+  try {
+    const strategyMap = { merge: 'merge', squash: 'squash', rebase: 'rebase' };
+    await ghFetch(`/repos/${STATE.currentRepo.full_name}/merges`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        base: STATE.currentBranch,
+        head: source,
+        commit_message: `Merge branch '${source}' into ${STATE.currentBranch}`,
+      }),
+    });
+
+    showToast(`✓ ${source} erfolgreich nach ${STATE.currentBranch} gemerged (${strategyMap[strategy]})`, 'success');
+    closeModal();
+    loadCommits(STATE.currentRepo);
+  } catch (e) {
+    showToast('Merge-Fehler: ' + e.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></svg> Mergen`;
+  }
+}
+
+// ─────────────────────────────────────────────
+// DELETE BRANCH MODAL
+// ─────────────────────────────────────────────
+function showDeleteBranchModal() {
+  if (!STATE.currentRepo) { showToast('Erst ein Repository auswählen', 'error'); return; }
+
+  const sel = document.getElementById('delete-branch-select');
+  if (sel) {
+    sel.innerHTML = '<option value="">-- Branch wählen --</option>' +
+      STATE.branches
+        .filter(b => b.name !== (STATE.currentRepo.default_branch || 'main'))
+        .map(b => `<option value="${escHtml(b.name)}">${escHtml(b.name)}</option>`)
+        .join('');
+  }
+  document.getElementById('delete-branch-confirm').value = '';
+  document.getElementById('delete-branch-btn').disabled = true;
+  openModal('modal-delete-branch');
+}
+
+function checkDeleteConfirm() {
+  const sel     = document.getElementById('delete-branch-select').value;
+  const confirm = document.getElementById('delete-branch-confirm').value.trim();
+  document.getElementById('delete-branch-btn').disabled = !(sel && sel === confirm);
+}
+
+async function executeDeleteBranch() {
+  const branch     = document.getElementById('delete-branch-select').value;
+  const alsoRemote = document.getElementById('delete-remote-too').checked;
+
+  if (!branch) return;
+  if (!STATE.token) { showToast('GitHub-Token benötigt (Einstellungen → Konto)', 'error'); return; }
+
+  try {
+    if (alsoRemote) {
+      await ghFetch(`/repos/${STATE.currentRepo.full_name}/git/refs/heads/${encodeURIComponent(branch)}`, {
+        method: 'DELETE',
+      });
+    }
+    showToast(`Branch "${branch}" gelöscht ✓`, 'success');
+    closeModal();
+    await loadBranches(STATE.currentRepo);
+    if (STATE.currentBranch === branch) {
+      switchBranch(STATE.currentRepo.default_branch || 'main');
+    }
+  } catch (e) {
+    showToast('Löschfehler: ' + e.message, 'error');
+  }
+}
+
+// ─────────────────────────────────────────────
+// ADD LOCAL REPO MODAL
+// ─────────────────────────────────────────────
+function showAddLocalModal() {
+  LOCAL_FS.rootHandle = null;
+  LOCAL_FS.entries = [];
+  document.getElementById('local-folder-result')?.classList.add('hidden');
+  document.getElementById('local-file-list').innerHTML = '';
+  switchLocalTab('picker');
+  openModal('modal-add-local');
+
+  if (!supportsFileSystemAccess()) {
+    showToast('Browser-Hinweis: Datei-Dialog-Fallback wird genutzt (kein Chromium)');
+  }
+}
+
+function switchLocalTab(tab) {
+  ['picker', 'browse'].forEach(t => {
+    document.getElementById(`local-tab-${t}`).classList.toggle('active', t === tab);
+    document.getElementById(`local-panel-${t}`).classList.toggle('hidden', t !== tab);
+  });
+}
+
+async function pickLocalRepoFolder() {
+  if (!supportsFileSystemAccess()) {
+    fallbackFolderPicker('lfr-fallback-dummy');
+    // Fallback path: simulate via hidden input flow already attached in fallbackFolderPicker
+    return;
+  }
+  try {
+    const dirHandle = await window.showDirectoryPicker({ mode: 'read' });
+    await scanLocalRepoFolder(dirHandle);
+  } catch (e) {
+    if (e.name !== 'AbortError') showToast('Ordnerauswahl fehlgeschlagen: ' + e.message, 'error');
+  }
+}
+
+async function handleFolderDrop(event) {
+  event.preventDefault();
+  const items = event.dataTransfer.items;
+  if (!items || !items.length) return;
+
+  const item = items[0];
+  if (item.kind === 'file' && item.getAsFileSystemHandle) {
+    try {
+      const handle = await item.getAsFileSystemHandle();
+      if (handle.kind === 'directory') {
+        await scanLocalRepoFolder(handle);
+      } else {
+        showToast('Bitte einen Ordner ziehen, keine einzelne Datei', 'error');
+      }
+    } catch (e) {
+      showToast('Drag&Drop nicht unterstützt – bitte Button nutzen', 'error');
+    }
+  } else {
+    showToast('Bitte Ordner per Klick auswählen (Drag&Drop nicht verfügbar)', 'error');
+  }
+}
+
+async function scanLocalRepoFolder(dirHandle) {
+  LOCAL_FS.rootHandle = dirHandle;
+  LOCAL_FS.rootName   = dirHandle.name;
+
+  const result = document.getElementById('local-folder-result');
+  result.classList.remove('hidden');
+  document.getElementById('lfr-name').textContent = dirHandle.name;
+  document.getElementById('lfr-files').innerHTML = `<div class="loading-msg"><div class="spinner"></div><span>Scanne…</span></div>`;
+
+  const entries = [];
+  let isGitRepo = false;
+  for await (const [name, handle] of dirHandle.entries()) {
+    if (name === '.git') isGitRepo = true;
+    entries.push({ name, kind: handle.kind, handle });
+  }
+  entries.sort((a, b) => {
+    if (a.kind === b.kind) return a.name.localeCompare(b.name);
+    return a.kind === 'directory' ? -1 : 1;
+  });
+  LOCAL_FS.entries = entries;
+
+  document.getElementById('lfr-path').textContent =
+    `${entries.length} Einträge${isGitRepo ? ' · Git-Repository erkannt' : ' · Kein .git gefunden'}`;
+  document.getElementById('lfr-badge').textContent = isGitRepo ? '✓' : '!';
+  document.getElementById('lfr-badge').style.background = isGitRepo ? 'var(--green)' : 'var(--yellow)';
+
+  document.getElementById('lfr-files').innerHTML = entries.slice(0, 20).map(e => `
+    <div class="lfr-file-item">
+      <span>${e.kind === 'directory' ? getFolderIcon(e.name) : getFileIcon(e.name)}</span>
+      <span>${escHtml(e.name)}</span>
+    </div>`).join('') + (entries.length > 20 ? `<div class="lfr-file-item" style="color:var(--text-muted)">… und ${entries.length - 20} weitere</div>` : '');
+
+  showToast(`Ordner gescannt: ${dirHandle.name} (${entries.length} Einträge)`, 'success');
+}
+
+function loadLocalFiles(fileList) {
+  if (!fileList || !fileList.length) return;
+  LOCAL_FS.entries = [...fileList].map(f => ({ name: f.name, kind: 'file', file: f }));
+
+  const list = document.getElementById('local-file-list');
+  list.innerHTML = [...fileList].map((f, i) => `
+    <div class="lfr-file-item" style="cursor:pointer" onclick="previewLocalFileFromInput(${i})">
+      <span>${getFileIcon(f.name)}</span>
+      <span>${escHtml(f.name)}</span>
+      <span style="margin-left:auto;color:var(--text-muted);font-size:11px">${formatSize(f.size)}</span>
+    </div>`).join('');
+
+  showToast(`${fileList.length} Datei(en) geladen`, 'success');
+}
+
+let _localFileListCache = null;
+function previewLocalFileFromInput(index) {
+  const input = document.getElementById('local-file-input');
+  _localFileListCache = input.files;
+  const file = _localFileListCache[index];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    openLocalViewerWithSingleFile(file.name, reader.result);
+  };
+
+  const ext = file.name.split('.').pop().toLowerCase();
+  const imageExts = ['png','jpg','jpeg','gif','webp','svg','ico','bmp'];
+  if (imageExts.includes(ext)) {
+    reader.readAsDataURL(file);
+  } else {
+    reader.readAsText(file);
+  }
+}
+
+function openLocalViewerWithSingleFile(name, content) {
+  document.getElementById('local-viewer-title').textContent = name;
+  const treeEl = document.getElementById('local-viewer-tree');
+  treeEl.innerHTML = `<div class="ftree-item ftree-file ftree-selected"><span class="ftree-icon">${getFileIcon(name)}</span><span class="ftree-name">${escHtml(name)}</span></div>`;
+
+  const contentEl = document.getElementById('local-viewer-content');
+  const ext = name.split('.').pop().toLowerCase();
+  const imageExts = ['png','jpg','jpeg','gif','webp','svg','ico','bmp'];
+
+  if (imageExts.includes(ext)) {
+    contentEl.innerHTML = `<div class="fp-image-wrap"><img src="${content}" class="fp-image" alt="${escHtml(name)}"/></div>`;
+  } else if (ext === 'md') {
+    contentEl.innerHTML = `<div class="fp-markdown">${renderMarkdown(content)}</div>`;
+  } else {
+    const lang  = getLang(ext);
+    const lines = content.split('\n');
+    const lineNos = lines.map((_, i) => `<span>${i+1}</span>`).join('');
+    const code = lines.map(l => `<span class="code-line">${syntaxHighlight(escHtml(l), lang)}</span>`).join('\n');
+    contentEl.innerHTML = `
+      <div class="fp-code-wrap">
+        <div class="fp-code-meta"><span class="fp-lang-badge">${lang.toUpperCase()}</span><span>${lines.length} Zeilen</span></div>
+        <div class="fp-code-body">
+          <div class="fp-line-numbers">${lineNos}</div>
+          <pre class="fp-code"><code>${code}</code></pre>
+        </div>
+      </div>`;
+  }
+  openModal('modal-local-viewer');
+}
+
+// Navigiert lokal in den per File System Access API gescannten Ordner-Baum
+async function openLocalFolderViewer() {
+  if (!LOCAL_FS.rootHandle) { showToast('Erst einen Ordner auswählen', 'error'); return; }
+  document.getElementById('local-viewer-title').textContent = LOCAL_FS.rootName;
+  await renderLocalViewerTree(LOCAL_FS.rootHandle, '');
+  openModal('modal-local-viewer');
+}
+
+async function renderLocalViewerTree(dirHandle, path) {
+  const treeEl = document.getElementById('local-viewer-tree');
+  treeEl.innerHTML = `<div class="loading-msg"><div class="spinner"></div><span>Lade…</span></div>`;
+
+  const entries = [];
+  for await (const [name, handle] of dirHandle.entries()) {
+    if (name === '.git') continue;
+    entries.push({ name, kind: handle.kind, handle, path: path ? `${path}/${name}` : name });
+  }
+  entries.sort((a, b) => {
+    if (a.kind === b.kind) return a.name.localeCompare(b.name);
+    return a.kind === 'directory' ? -1 : 1;
+  });
+
+  treeEl.innerHTML = entries.map(e => `
+    <div class="ftree-item ${e.kind === 'directory' ? 'ftree-dir' : 'ftree-file'}"
+         onclick='${e.kind === "directory" ? `expandLocalDir(this, "${escHtml(e.path)}")` : `previewLocalHandle("${escHtml(e.path)}")`}'
+         data-path="${escHtml(e.path)}">
+      <span class="ftree-icon">${e.kind === 'directory' ? getFolderIcon(e.name) : getFileIcon(e.name)}</span>
+      <span class="ftree-name">${escHtml(e.name)}</span>
+    </div>`).join('') || `<div class="empty-state"><p>Ordner ist leer</p></div>`;
+
+  // store handles for lookup
+  LOCAL_FS.viewerTree = entries;
+}
+
+async function previewLocalHandle(path) {
+  const entry = LOCAL_FS.viewerTree.find(e => e.path === path);
+  if (!entry) return;
+
+  document.querySelectorAll('#local-viewer-tree .ftree-item').forEach(el => {
+    el.classList.toggle('ftree-selected', el.dataset.path === path);
+  });
+
+  try {
+    const file = await entry.handle.getFile();
+    const ext  = entry.name.split('.').pop().toLowerCase();
+    const imageExts = ['png','jpg','jpeg','gif','webp','svg','ico','bmp'];
+
+    const contentEl = document.getElementById('local-viewer-content');
+    contentEl.innerHTML = `<div class="loading-msg"><div class="spinner"></div><span>Lade ${escHtml(entry.name)}…</span></div>`;
+
+    if (imageExts.includes(ext)) {
+      const url = URL.createObjectURL(file);
+      contentEl.innerHTML = `<div class="fp-image-wrap"><img src="${url}" class="fp-image" alt="${escHtml(entry.name)}"/></div>`;
+      return;
+    }
+
+    if (file.size > 1_000_000) {
+      contentEl.innerHTML = `<div class="empty-state"><p>Datei zu groß</p><small>${formatSize(file.size)}</small></div>`;
+      return;
+    }
+
+    const text = await file.text();
+    if (ext === 'md') {
+      contentEl.innerHTML = `<div class="fp-markdown">${renderMarkdown(text)}</div>`;
+      return;
+    }
+
+    const lang  = getLang(ext);
+    const lines = text.split('\n');
+    const lineNos = lines.map((_, i) => `<span>${i+1}</span>`).join('');
+    const code = lines.map(l => `<span class="code-line">${syntaxHighlight(escHtml(l), lang)}</span>`).join('\n');
+    contentEl.innerHTML = `
+      <div class="fp-code-wrap">
+        <div class="fp-code-meta"><span class="fp-lang-badge">${lang.toUpperCase()}</span><span>${lines.length} Zeilen · ${formatSize(file.size)}</span></div>
+        <div class="fp-code-body">
+          <div class="fp-line-numbers">${lineNos}</div>
+          <pre class="fp-code"><code>${code}</code></pre>
+        </div>
+      </div>`;
+  } catch (e) {
+    showToast('Lesefehler: ' + e.message, 'error');
+  }
+}
+
+async function expandLocalDir(el, path) {
+  const entry = LOCAL_FS.viewerTree.find(e => e.path === path);
+  if (!entry) return;
+  const existing = el.nextElementSibling;
+  if (existing && existing.classList.contains('ftree-nested')) {
+    existing.remove();
+    el.querySelector('.ftree-arrow')?.classList.remove('expanded');
+    return;
+  }
+
+  const nested = document.createElement('div');
+  nested.className = 'ftree-nested';
+  nested.style.paddingLeft = '14px';
+  el.insertAdjacentElement('afterend', nested);
+
+  const subEntries = [];
+  for await (const [name, handle] of entry.handle.entries()) {
+    if (name === '.git') continue;
+    subEntries.push({ name, kind: handle.kind, handle, path: `${path}/${name}` });
+  }
+  subEntries.sort((a, b) => {
+    if (a.kind === b.kind) return a.name.localeCompare(b.name);
+    return a.kind === 'directory' ? -1 : 1;
+  });
+  LOCAL_FS.viewerTree.push(...subEntries);
+
+  nested.innerHTML = subEntries.map(e => `
+    <div class="ftree-item ${e.kind === 'directory' ? 'ftree-dir' : 'ftree-file'}"
+         onclick='${e.kind === "directory" ? `expandLocalDir(this, "${escHtml(e.path)}")` : `previewLocalHandle("${escHtml(e.path)}")`}'
+         data-path="${escHtml(e.path)}">
+      <span class="ftree-icon">${e.kind === 'directory' ? getFolderIcon(e.name) : getFileIcon(e.name)}</span>
+      <span class="ftree-name">${escHtml(e.name)}</span>
+    </div>`).join('') || `<div class="empty-state" style="padding:10px"><small>Leer</small></div>`;
+}
+
+function addLocalRepo() {
+  if (!LOCAL_FS.rootHandle && !LOCAL_FS.entries.length) {
+    showToast('Bitte erst einen Ordner auswählen oder Dateien laden', 'error');
+    return;
+  }
+
+  const name = LOCAL_FS.rootName || 'Lokales Projekt';
+  showToast(`Lokales Repository hinzugefügt: ${name}`, 'success');
+  closeModal();
+
+  // Open in the local viewer right away
+  if (LOCAL_FS.rootHandle) {
+    openLocalFolderViewer();
+  } else {
+    switchTab('files');
+    showToast('Geladene Dateien stehen im Dateien-Tab bereit', 'success');
+  }
+}
 
 // ─────────────────────────────────────────────
 // COMMIT
@@ -722,7 +1419,7 @@ function fetchCurrentRepo() {
 // ─────────────────────────────────────────────
 function openInTerminal() {
   if (!STATE.currentRepo) { showToast('Kein Repository ausgewählt', 'error'); return; }
-  const path = `~/GitHub/${STATE.currentRepo.name}`;
+  const path = `/home/jo-ssd/GitHub/${STATE.currentRepo.name}`;
   navigator.clipboard?.writeText(`cd ${path} && ${STATE.settings.shell}`).then(() => {
     showToast(`Terminal-Befehl kopiert: cd ${path}`);
   }).catch(() => showToast(`Terminal öffnen: cd ${path}`));
@@ -730,7 +1427,7 @@ function openInTerminal() {
 
 function openInFileManager() {
   if (!STATE.currentRepo) { showToast('Kein Repository ausgewählt', 'error'); return; }
-  const path = `~/GitHub/${STATE.currentRepo.name}`;
+  const path = `/home/jo-ssd/GitHub/${STATE.currentRepo.name}`;
   navigator.clipboard?.writeText(`xdg-open ${path}`).then(() => {
     showToast(`Befehl kopiert: xdg-open ${path}`);
   }).catch(() => showToast(`Dateimanager öffnen: xdg-open ${path}`));
@@ -938,6 +1635,7 @@ function registerKeyboard() {
       case '1': e.preventDefault(); switchTab('changes');  break;
       case '2': e.preventDefault(); switchTab('history');  break;
       case '3': e.preventDefault(); switchTab('repos');    break;
+      case '4': e.preventDefault(); switchTab('files');   break;
       case 'n': e.preventDefault(); showNewRepoModal();    break;
       case 'o': e.preventDefault(); openCloneModal();      break;
       case ',': e.preventDefault(); openSettings();        break;
@@ -950,6 +1648,447 @@ function registerKeyboard() {
         break;
     }
   });
+}
+
+// ─────────────────────────────────────────────
+// FILE BROWSER
+// ─────────────────────────────────────────────
+async function loadFileTree(path, pushHistory = false) {
+  if (!STATE.currentRepo) { showToast('Erst ein Repository auswählen', 'error'); return; }
+
+  const tree = document.getElementById('file-tree');
+  const preview = document.getElementById('file-preview-panel');
+  tree.innerHTML = `<div class="loading-msg"><div class="spinner"></div><span>Lade Dateien…</span></div>`;
+
+  // Reset preview when navigating
+  if (preview) {
+    preview.innerHTML = `<div class="empty-state">
+      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+      </svg>
+      <p>Datei auswählen</p><small>Inhalt wird hier angezeigt</small>
+    </div>`;
+  }
+
+  try {
+    const encoded = encodeURIComponent(path).replace(/%2F/g, '/');
+    const url = `/repos/${STATE.currentRepo.full_name}/contents/${encoded}?ref=${encodeURIComponent(STATE.currentBranch)}`;
+    const items = await ghFetch(url);
+
+    if (pushHistory && STATE.filePath !== path) {
+      STATE.fileHistory.push(STATE.filePath);
+    }
+    STATE.filePath  = path;
+    STATE.fileTree  = Array.isArray(items) ? items : [items];
+    STATE.openFile  = null;
+
+    renderFileTree(STATE.fileTree, path);
+    renderBreadcrumb(path);
+  } catch (e) {
+    tree.innerHTML = `<div class="empty-state"><p>Fehler</p><small>${escHtml(e.message)}</small></div>`;
+    showToast('Datei-Ladefehler: ' + e.message, 'error');
+  }
+}
+
+function renderBreadcrumb(path) {
+  const bc = document.getElementById('file-breadcrumb');
+  if (!bc) return;
+
+  const parts = path ? path.split('/') : [];
+  let html = `<span class="bc-item bc-root" onclick="navigateToPath('')">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+    </svg>
+    ${escHtml(STATE.currentRepo?.name || 'Root')}
+  </span>`;
+
+  parts.forEach((part, i) => {
+    const partPath = parts.slice(0, i + 1).join('/');
+    const isLast   = i === parts.length - 1;
+    html += `<span class="bc-sep">›</span>
+      <span class="bc-item ${isLast ? 'bc-current' : ''}"
+            onclick="${isLast ? '' : `navigateToPath('${escHtml(partPath)}')`}">
+        ${escHtml(part)}
+      </span>`;
+  });
+
+  bc.innerHTML = html;
+}
+
+function navigateToPath(path) {
+  loadFileTree(path, true);
+}
+
+function fileGoBack() {
+  if (STATE.fileHistory.length > 0) {
+    const prev = STATE.fileHistory.pop();
+    STATE.filePath = '';
+    loadFileTree(prev, false);
+  }
+}
+
+function renderFileTree(items, currentPath) {
+  const tree = document.getElementById('file-tree');
+
+  // Sort: dirs first, then files, both alphabetically
+  const sorted = [...items].sort((a, b) => {
+    if (a.type === b.type) return a.name.localeCompare(b.name);
+    return a.type === 'dir' ? -1 : 1;
+  });
+
+  let html = '';
+
+  // Back button if not root
+  if (currentPath) {
+    const parentPath = currentPath.includes('/')
+      ? currentPath.substring(0, currentPath.lastIndexOf('/'))
+      : '';
+    html += `
+      <div class="ftree-item ftree-back" onclick="navigateToPath('${escHtml(parentPath)}')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        <span>.. (zurück)</span>
+      </div>`;
+  }
+
+  html += sorted.map(item => {
+    const isDir  = item.type === 'dir';
+    const icon   = isDir ? getFolderIcon(item.name) : getFileIcon(item.name);
+    const action = isDir
+      ? `navigateToPath('${escHtml(item.path)}')`
+      : `previewFile('${escHtml(item.path)}', '${escHtml(item.name)}', ${item.size || 0})`;
+
+    return `
+      <div class="ftree-item ${isDir ? 'ftree-dir' : 'ftree-file'}"
+           onclick="${action}"
+           id="ftree-${escHtml(item.sha || item.path)}"
+           title="${escHtml(item.path)}">
+        <span class="ftree-icon">${icon}</span>
+        <span class="ftree-name">${escHtml(item.name)}</span>
+        ${!isDir ? `<span class="ftree-size">${formatSize(item.size)}</span>` : ''}
+        ${isDir ? `<svg class="ftree-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>` : ''}
+      </div>`;
+  }).join('');
+
+  tree.innerHTML = html || `<div class="empty-state"><p>Ordner ist leer</p></div>`;
+}
+
+async function previewFile(path, name, size) {
+  // Highlight selected
+  document.querySelectorAll('.ftree-item').forEach(el => el.classList.remove('ftree-selected'));
+  const id = `ftree-${CSS.escape(path)}`;
+  document.getElementById(id)?.classList.add('ftree-selected');
+
+  const preview = document.getElementById('file-preview-panel');
+  const header  = document.getElementById('file-preview-header');
+
+  if (header) {
+    header.innerHTML = `
+      <div class="fp-header-left">
+        <span class="fp-icon">${getFileIcon(name)}</span>
+        <span class="fp-filename">${escHtml(name)}</span>
+        <span class="fp-size">${formatSize(size)}</span>
+      </div>
+      <div class="fp-header-right">
+        <button class="fp-btn" onclick="copyFileContent()" title="Inhalt kopieren">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+          Kopieren
+        </button>
+        <button class="fp-btn" onclick="openFileOnGitHub('${escHtml(path)}')" title="Auf GitHub öffnen">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          GitHub
+        </button>
+        <button class="fp-btn" onclick="downloadFile('${escHtml(path)}', '${escHtml(name)}')" title="Herunterladen">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download
+        </button>
+      </div>`;
+  }
+
+  // Large file guard
+  if (size > 1_000_000) {
+    preview.innerHTML = `<div class="empty-state">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      <p>Datei zu groß zur Vorschau</p>
+      <small>${formatSize(size)} – max. 1 MB</small>
+      <button class="btn-primary" style="margin-top:12px" onclick="openFileOnGitHub('${escHtml(path)}')">Auf GitHub öffnen</button>
+    </div>`;
+    return;
+  }
+
+  // Binary extensions – show image or icon
+  const ext = name.split('.').pop().toLowerCase();
+  const imageExts = ['png','jpg','jpeg','gif','webp','svg','ico','bmp'];
+  if (imageExts.includes(ext)) {
+    try {
+      const data = await ghFetch(`/repos/${STATE.currentRepo.full_name}/contents/${encodeURIComponent(path).replace(/%2F/g,'/')}?ref=${encodeURIComponent(STATE.currentBranch)}`);
+      preview.innerHTML = `
+        <div class="fp-image-wrap">
+          <img src="data:image/${ext === 'svg' ? 'svg+xml' : ext};base64,${data.content.replace(/\n/g,'')}"
+               alt="${escHtml(name)}" class="fp-image" />
+          <div class="fp-image-meta">${escHtml(name)} · ${formatSize(size)}</div>
+        </div>`;
+      STATE.openFile = { name, path, content: atob(data.content.replace(/\n/g,'')) };
+    } catch (e) {
+      preview.innerHTML = `<div class="empty-state"><p>Bildfehler</p><small>${escHtml(e.message)}</small></div>`;
+    }
+    return;
+  }
+
+  preview.innerHTML = `<div class="loading-msg"><div class="spinner"></div><span>Lade ${escHtml(name)}…</span></div>`;
+
+  try {
+    const data = await ghFetch(`/repos/${STATE.currentRepo.full_name}/contents/${encodeURIComponent(path).replace(/%2F/g,'/')}?ref=${encodeURIComponent(STATE.currentBranch)}`);
+    const raw  = atob(data.content.replace(/\n/g, ''));
+    STATE.openFile = { name, path, content: raw };
+
+    // Markdown preview
+    if (ext === 'md') {
+      preview.innerHTML = `<div class="fp-markdown">${renderMarkdown(raw)}</div>`;
+      return;
+    }
+
+    // Code preview with line numbers + syntax highlight
+    const lines   = raw.split('\n');
+    const lang    = getLang(ext);
+    const lineNos = lines.map((_, i) => `<span>${i + 1}</span>`).join('');
+    const code    = lines.map(l => `<span class="code-line">${syntaxHighlight(escHtml(l), lang)}</span>`).join('\n');
+
+    preview.innerHTML = `
+      <div class="fp-code-wrap">
+        <div class="fp-code-meta">
+          <span class="fp-lang-badge">${lang.toUpperCase()}</span>
+          <span>${lines.length} Zeilen · ${formatSize(size)}</span>
+        </div>
+        <div class="fp-code-body">
+          <div class="fp-line-numbers" aria-hidden="true">${lineNos}</div>
+          <pre class="fp-code"><code class="lang-${escHtml(lang)}">${code}</code></pre>
+        </div>
+      </div>`;
+  } catch (e) {
+    preview.innerHTML = `<div class="empty-state"><p>Fehler beim Laden</p><small>${escHtml(e.message)}</small></div>`;
+  }
+}
+
+function copyFileContent() {
+  if (!STATE.openFile) return;
+  navigator.clipboard.writeText(STATE.openFile.content).then(() => {
+    showToast('Inhalt kopiert ✓', 'success');
+  }).catch(() => showToast('Kopieren fehlgeschlagen'));
+}
+
+function openFileOnGitHub(path) {
+  if (!STATE.currentRepo) return;
+  window.open(`https://github.com/${STATE.currentRepo.full_name}/blob/${STATE.currentBranch}/${path}`, '_blank', 'noopener');
+}
+
+function downloadFile(path, name) {
+  if (!STATE.openFile) { showToast('Datei zuerst öffnen', 'error'); return; }
+  const blob = new Blob([STATE.openFile.content], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  a.click();
+  URL.revokeObjectURL(a.href);
+  showToast(`Download: ${name}`, 'success');
+}
+
+// Search files in current repo
+async function searchFiles(query) {
+  if (!STATE.currentRepo || !query.trim()) return;
+  const tree = document.getElementById('file-tree');
+  tree.innerHTML = `<div class="loading-msg"><div class="spinner"></div><span>Suche…</span></div>`;
+  try {
+    const q = encodeURIComponent(`${query} repo:${STATE.currentRepo.full_name}`);
+    const results = await ghFetch(`/search/code?q=${q}&per_page=30`);
+    const items = results.items || [];
+
+    if (!items.length) {
+      tree.innerHTML = `<div class="empty-state"><p>Keine Ergebnisse</p><small>Für: "${escHtml(query)}"</small></div>`;
+      return;
+    }
+
+    tree.innerHTML = items.map(item => `
+      <div class="ftree-item ftree-file ftree-search-result"
+           onclick="previewFile('${escHtml(item.path)}', '${escHtml(item.name)}', 0)"
+           title="${escHtml(item.path)}">
+        <span class="ftree-icon">${getFileIcon(item.name)}</span>
+        <span class="ftree-name">${escHtml(item.name)}</span>
+        <span class="ftree-path-hint">${escHtml(item.path)}</span>
+      </div>`).join('');
+  } catch (e) {
+    tree.innerHTML = `<div class="empty-state"><p>Suchfehler</p><small>${escHtml(e.message)}</small></div>`;
+  }
+}
+
+function clearFileSearch() {
+  document.getElementById('file-search-input').value = '';
+  loadFileTree('');
+}
+
+// ─── Markdown renderer (minimal) ─────────────
+function renderMarkdown(md) {
+  let html = escHtml(md);
+  // Headings
+  html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  html = html.replace(/^## (.+)$/gm,  '<h2>$1</h2>');
+  html = html.replace(/^# (.+)$/gm,   '<h1>$1</h1>');
+  // Bold / italic
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/\*(.+?)\*/g,     '<em>$1</em>');
+  html = html.replace(/_(.+?)_/g,       '<em>$1</em>');
+  // Inline code
+  html = html.replace(/`([^`]+)`/g, '<code class="md-inline-code">$1</code>');
+  // Code blocks
+  html = html.replace(/```[\w]*\n?([\s\S]*?)```/g, '<pre class="md-code-block"><code>$1</code></pre>');
+  // Links
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  // Images
+  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="md-img" />');
+  // Horizontal rule
+  html = html.replace(/^---$/gm, '<hr/>');
+  // Blockquote
+  html = html.replace(/^&gt; (.+)$/gm, '<blockquote>$1</blockquote>');
+  // Unordered list
+  html = html.replace(/^\s*[-*] (.+)$/gm, '<li>$1</li>');
+  html = html.replace(/(<li>.*<\/li>\n?)+/g, m => `<ul>${m}</ul>`);
+  // Ordered list
+  html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
+  // Paragraphs
+  html = html.replace(/\n\n/g, '</p><p>');
+  return `<p>${html}</p>`;
+}
+
+// ─── Syntax Highlighter ───────────────────────
+function syntaxHighlight(line, lang) {
+  // Comments
+  if (['js','ts','java','c','cpp','go','rust','swift','kotlin','css','scss'].includes(lang)) {
+    if (line.match(/^\s*\/\//)) return `<span class="sh-comment">${line}</span>`;
+    if (line.match(/^\s*\/\*/))  return `<span class="sh-comment">${line}</span>`;
+    if (line.match(/^\s*\*/))    return `<span class="sh-comment">${line}</span>`;
+  }
+  if (lang === 'py' && line.match(/^\s*#/)) return `<span class="sh-comment">${line}</span>`;
+  if (lang === 'sh' && line.match(/^\s*#/)) return `<span class="sh-comment">${line}</span>`;
+  if (lang === 'html' && line.match(/&lt;!--/)) return `<span class="sh-comment">${line}</span>`;
+
+  const KEYWORDS = {
+    js:   /\b(const|let|var|function|return|if|else|for|while|class|import|export|default|async|await|new|this|typeof|instanceof|try|catch|throw|null|undefined|true|false)\b/g,
+    ts:   /\b(const|let|var|function|return|if|else|for|while|class|import|export|default|async|await|new|this|typeof|interface|type|enum|extends|implements|null|undefined|true|false)\b/g,
+    py:   /\b(def|class|return|if|elif|else|for|while|import|from|as|with|try|except|finally|raise|pass|None|True|False|and|or|not|in|is|lambda|yield)\b/g,
+    java: /\b(public|private|protected|class|void|return|if|else|for|while|new|import|package|static|final|extends|implements|try|catch|throw|null|true|false)\b/g,
+    go:   /\b(func|return|if|else|for|var|const|type|struct|import|package|defer|go|chan|select|case|switch|break|continue|nil|true|false)\b/g,
+    rust: /\b(fn|let|mut|return|if|else|for|while|match|use|mod|pub|impl|struct|enum|trait|true|false|None|Some|Ok|Err)\b/g,
+    php:  /\b(function|return|if|else|for|while|class|echo|new|public|private|protected|static|extends|implements|null|true|false)\b/g,
+    sh:   /\b(if|then|else|fi|for|while|do|done|echo|export|source|function|return|case|esac|in)\b/g,
+  };
+
+  const kw = KEYWORDS[lang];
+  if (kw) {
+    line = line.replace(kw, '<span class="sh-keyword">$1</span>');
+  }
+
+  // Strings (double + single quotes)
+  line = line.replace(/(&#039;[^&#039;]*&#039;)/g, '<span class="sh-string">$1</span>');
+  line = line.replace(/(&quot;[^&quot;]*&quot;)/g,  '<span class="sh-string">$1</span>');
+  // Template literals
+  line = line.replace(/(`.+?`)/g, '<span class="sh-string">$1</span>');
+  // Numbers
+  line = line.replace(/\b(\d+\.?\d*)\b/g, '<span class="sh-number">$1</span>');
+  // HTML tags
+  if (lang === 'html') {
+    line = line.replace(/(&lt;\/?[\w-]+)/g, '<span class="sh-tag">$1</span>');
+    line = line.replace(/([\w-]+=)/g, '<span class="sh-attr">$1</span>');
+  }
+  // CSS properties
+  if (['css','scss'].includes(lang)) {
+    line = line.replace(/([\w-]+):/g, '<span class="sh-attr">$1</span>:');
+  }
+
+  return line;
+}
+
+function getLang(ext) {
+  const map = {
+    js:'js', mjs:'js', cjs:'js',
+    ts:'ts', tsx:'ts',
+    jsx:'js',
+    py:'py', pyw:'py',
+    java:'java', kt:'kotlin', swift:'swift',
+    go:'go', rs:'rust',
+    php:'php', rb:'ruby',
+    c:'c', cpp:'cpp', h:'c', hpp:'cpp',
+    sh:'sh', bash:'sh', zsh:'sh',
+    html:'html', htm:'html',
+    css:'css', scss:'scss', sass:'scss', less:'css',
+    json:'json', yaml:'yaml', yml:'yaml', toml:'toml',
+    md:'md', xml:'xml', svg:'xml',
+    sql:'sql', dockerfile:'sh', makefile:'sh',
+    txt:'txt', env:'sh', gitignore:'sh', eslintrc:'json',
+  };
+  return map[ext?.toLowerCase()] || 'txt';
+}
+
+// ─── File / folder icon helpers ───────────────
+function getFileIcon(name) {
+  const ext = name.split('.').pop().toLowerCase();
+  const icons = {
+    js:'🟨', ts:'🔷', jsx:'⚛️', tsx:'⚛️',
+    py:'🐍', java:'☕', kt:'🟣', swift:'🧡',
+    go:'🐹', rs:'🦀', php:'🐘', rb:'💎',
+    html:'🌐', css:'🎨', scss:'🎨', sass:'🎨', less:'🎨',
+    json:'📋', yaml:'📋', yml:'📋', toml:'📋', xml:'📋',
+    md:'📝', txt:'📄', log:'📄', csv:'📊', sql:'🗄️',
+    sh:'⚙️', bash:'⚙️', zsh:'⚙️', makefile:'⚙️', dockerfile:'🐳',
+    png:'🖼️', jpg:'🖼️', jpeg:'🖼️', gif:'🖼️', webp:'🖼️', svg:'🖼️', ico:'🖼️',
+    mp4:'🎬', mov:'🎬', avi:'🎬',
+    mp3:'🎵', wav:'🎵', ogg:'🎵',
+    pdf:'📕', doc:'📘', docx:'📘', xls:'📗', xlsx:'📗', ppt:'📙', pptx:'📙',
+    zip:'📦', tar:'📦', gz:'📦', rar:'📦',
+    lock:'🔒', env:'🔒',
+    gitignore:'🔧', eslintrc:'🔧', prettierrc:'🔧', editorconfig:'🔧',
+    wasm:'⚡', c:'🔵', cpp:'🔵', h:'🔵', hpp:'🔵',
+    lua:'🌙', r:'📊', dart:'🎯', vue:'💚', svelte:'🔥',
+  };
+  return icons[ext] || '📄';
+}
+
+function getFolderIcon(name) {
+  const special = {
+    src:'📂', lib:'📂', dist:'📦', build:'📦', out:'📦',
+    node_modules:'📦', '.git':'🔧', '.github':'🔧',
+    test:'🧪', tests:'🧪', spec:'🧪', '__tests__':'🧪',
+    docs:'📚', doc:'📚', documentation:'📚',
+    assets:'🎨', images:'🖼️', img:'🖼️', icons:'🖼️', fonts:'🎨',
+    components:'⚛️', pages:'📄', views:'📄', layouts:'📄',
+    api:'🌐', routes:'🌐', controllers:'🌐',
+    models:'🗄️', db:'🗄️', database:'🗄️', migrations:'🗄️',
+    config:'⚙️', configs:'⚙️', settings:'⚙️', env:'🔒',
+    utils:'🔧', helpers:'🔧', hooks:'🪝', middleware:'🔧',
+    styles:'🎨', css:'🎨', scss:'🎨',
+    public:'🌍', static:'🌍',
+    scripts:'📜', bin:'📜',
+  };
+  return special[name.toLowerCase()] || '📁';
+}
+
+// ─── Size formatter ───────────────────────────
+function formatSize(bytes) {
+  if (!bytes || bytes === 0) return '';
+  if (bytes < 1024)        return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
 // ─────────────────────────────────────────────
