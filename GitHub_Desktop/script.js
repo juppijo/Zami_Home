@@ -647,10 +647,17 @@ function copyCloneCommand() {
   });
 }
 
-// Lädt das Repository als ZIP von GitHub und schreibt die Dateien
-// wirklich auf die Festplatte in einen vom Nutzer gewählten Ordner
-// (über die File System Access API – funktioniert nativ unter Linux
-// in Chrome/Chromium/Brave/Edge).
+// Lädt das komplette Repository über die GitHub-API (Git Trees +
+// Contents, beide CORS-fähig) und schreibt jede Datei wirklich auf
+// die Festplatte in einen vom Nutzer gewählten Ordner – über die
+// File System Access API (funktioniert nativ unter Linux in
+// Chrome/Chromium/Brave/Edge).
+//
+// Hinweis: codeload.github.com (ZIP-Download) unterstützt kein CORS
+// und kann daher von Browser-JavaScript aus nie direkt geladen werden
+// ("Failed to fetch" ist somit kein Bug, sondern eine GitHub-seitige
+// Einschränkung). Diese Funktion umgeht das, indem sie jede Datei
+// einzeln über die API holt.
 async function downloadRepoToFolder(cloneUrl, repoName) {
   if (!supportsFileSystemAccess()) {
     showToast('Diese Funktion benötigt Chrome/Chromium/Brave/Edge', 'error');
@@ -665,33 +672,72 @@ async function downloadRepoToFolder(cloneUrl, repoName) {
     return;
   }
 
-  showToast(`Lade ${repoName} herunter…`);
+  const match = cloneUrl.match(/github\.com[:/](.+?)(\.git)?$/);
+  const fullName = match ? match[1] : `${STATE.username}/${repoName}`;
+  const branch = STATE.currentRepo?.full_name === fullName
+    ? STATE.currentBranch
+    : (STATE.repos.find(r => r.full_name === fullName)?.default_branch || 'main');
+
+  const downloadBtn = document.getElementById('clone-download-btn');
+  const originalLabel = downloadBtn.innerHTML;
+  downloadBtn.disabled = true;
 
   try {
-    // GitHub bietet ZIP-Downloads über codeload.github.com für jeden Branch
-    const match = cloneUrl.match(/github\.com[:/](.+?)(\.git)?$/);
-    const fullName = match ? match[1] : `${STATE.username}/${repoName}`;
-    const branch = STATE.currentRepo?.full_name === fullName
-      ? STATE.currentBranch
-      : (STATE.repos.find(r => r.full_name === fullName)?.default_branch || 'main');
+    downloadBtn.innerHTML = `<div class="spinner" style="width:13px;height:13px;border-width:2px"></div> Lade Dateiliste…`;
 
-    const zipUrl = `https://codeload.github.com/${fullName}/zip/refs/heads/${branch}`;
-    const res = await fetch(zipUrl);
-    if (!res.ok) throw new Error(`HTTP ${res.status} beim ZIP-Download`);
-    const blob = await res.blob();
+    // 1) Kompletten Dateibaum in einem Call holen (rekursiv, CORS-fähig)
+    const branchInfo = await ghFetch(`/repos/${fullName}/branches/${encodeURIComponent(branch)}`);
+    const treeSha = branchInfo.commit.sha;
+    const tree = await ghFetch(`/repos/${fullName}/git/trees/${treeSha}?recursive=1`);
 
-    // ZIP entpacken (minimaler Inflate-freier Ansatz: Browser kann das nicht
-    // nativ ohne Bibliothek, daher speichern wir die ZIP-Datei direkt im
-    // gewählten Ordner ab – der Nutzer kann sie dort lokal entpacken)
-    const zipHandle = await dirHandle.getFileHandle(`${repoName}.zip`, { create: true });
-    const writable = await zipHandle.createWritable();
-    await writable.write(blob);
-    await writable.close();
+    if (tree.truncated) {
+      showToast('Warnung: Repository sehr groß, eventuell nicht alle Dateien', 'error');
+    }
 
-    showToast(`✓ ${repoName}.zip in "${dirHandle.name}" gespeichert – bitte entpacken`, 'success');
+    const blobs = tree.tree.filter(item => item.type === 'blob');
+    const total = blobs.length;
+    if (total === 0) throw new Error('Keine Dateien im Repository gefunden');
+
+    // Ziel-Unterordner mit Repo-Namen anlegen
+    const repoDir = await dirHandle.getDirectoryHandle(repoName, { create: true });
+
+    let done = 0;
+    for (const item of blobs) {
+      downloadBtn.innerHTML = `<div class="spinner" style="width:13px;height:13px;border-width:2px"></div> ${done}/${total} Dateien…`;
+
+      // 2) Jede Datei einzeln über die Blob-API laden (Base64, CORS-fähig)
+      const blobData = await ghFetch(`/repos/${fullName}/git/blobs/${item.sha}`);
+
+      // Zielordner-Struktur nachbilden (Unterordner anlegen falls nötig)
+      const parts = item.path.split('/');
+      const fileName = parts.pop();
+      let currentDir = repoDir;
+      for (const folder of parts) {
+        currentDir = await currentDir.getDirectoryHandle(folder, { create: true });
+      }
+
+      const fileHandle = await currentDir.getFileHandle(fileName, { create: true });
+      const writable = await fileHandle.createWritable();
+
+      if (blobData.encoding === 'base64') {
+        const binary = atob(blobData.content.replace(/\n/g, ''));
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+        await writable.write(bytes);
+      } else {
+        await writable.write(blobData.content || '');
+      }
+      await writable.close();
+      done++;
+    }
+
+    showToast(`✓ ${repoName} komplett herunterladen (${total} Dateien) in "${dirHandle.name}/${repoName}"`, 'success');
     closeModal();
   } catch (e) {
     showToast('Download-Fehler: ' + e.message, 'error');
+  } finally {
+    downloadBtn.disabled = false;
+    downloadBtn.innerHTML = originalLabel;
   }
 }
 

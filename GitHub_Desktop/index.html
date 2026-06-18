@@ -477,12 +477,13 @@
       </div>
       <small>Befehl ist bereits in der Zwischenablage. Zielordner: <span id="clone-result-path" style="font-family:var(--font-mono);color:var(--text-secondary)"></span></small>
 
-      <label style="margin-top:16px">2. Oder direkt als ZIP herunterladen</label>
-      <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Lädt den Code als ZIP-Datei in einen von dir gewählten Ordner – ganz ohne Terminal.</div>
+      <label style="margin-top:16px">2. Oder direkt in einen Ordner herunterladen</label>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Lädt alle Dateien einzeln über die GitHub-API direkt in einen von dir gewählten Ordner – ganz ohne Terminal, kein ZIP nötig.</div>
       <button class="btn-secondary" id="clone-download-btn" style="width:100%">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Als ZIP in Ordner speichern…
+        Dateien direkt in Ordner speichern…
       </button>
+      <small style="display:block;margin-top:6px">Bei großen Repositories kann das einen Moment dauern, da jede Datei einzeln geladen wird.</small>
     </div>
     <div class="modal-footer">
       <button onclick="closeModal()" class="btn-primary">Fertig</button>
