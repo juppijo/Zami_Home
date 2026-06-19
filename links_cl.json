@@ -63,6 +63,21 @@
         "icon": "✨"
       },
       {
+        "label": "eq_emotional_intelligence_test _2.html",
+        "url": "https://juppijo.github.io/Autogenes-Training/eq_emotional_intelligence_test%20_2.html",
+        "icon": "✨"
+      },
+      {
+        "label": "eq_emotional_intelligence_test.html",
+        "url": "https://juppijo.github.io/Autogenes-Training/eq_emotional_intelligence_test.html",
+        "icon": "✨"
+      },
+      {
+        "label": "eq_test.html",
+        "url": "https://juppijo.github.io/Autogenes-Training/eq_test.html",
+        "icon": "✨"
+      },
+      {
         "label": "index.html",
         "url": "https://juppijo.github.io/Autogenes-Training/index.html",
         "icon": "✨"
@@ -348,11 +363,6 @@
         "icon": "✨"
       },
       {
-        "label": "Kegeln-1/spiele.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-1/spiele.js",
-        "icon": "✨"
-      },
-      {
         "label": "Kegeln-1/style.css",
         "url": "https://juppijo.github.io/Kegeln/Kegeln-1/style.css",
         "icon": "✨"
@@ -375,11 +385,6 @@
       {
         "label": "Kegeln-2/index.html",
         "url": "https://juppijo.github.io/Kegeln/Kegeln-2/index.html",
-        "icon": "✨"
-      },
-      {
-        "label": "Kegeln-2/js/app.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-2/js/app.js",
         "icon": "✨"
       },
       {
@@ -408,6 +413,11 @@
         "icon": "✨"
       },
       {
+        "label": "Kegeln-2/js/ärgere-dich-nicht.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2/js/%C3%A4rgere-dich-nicht.js",
+        "icon": "✨"
+      },
+      {
         "label": "Kegeln-2/kegelspiel_17_und_4_regelnl.html",
         "url": "https://juppijo.github.io/Kegeln/Kegeln-2/kegelspiel_17_und_4_regelnl.html",
         "icon": "✨"
@@ -423,8 +433,93 @@
         "icon": "✨"
       },
       {
+        "label": "Kegeln-2/manifest.json",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2/manifest.json",
+        "icon": "✨"
+      },
+      {
         "label": "Kegeln-2/style.css",
         "url": "https://juppijo.github.io/Kegeln/Kegeln-2/style.css",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-2/sw.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2/sw.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-3/games/busfahren.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/games/busfahren.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-3/games/einsacken.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/games/einsacken.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-3/games/fuchs.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/games/fuchs.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-3/games/hausnummer.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/games/hausnummer.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-3/games/idiot.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/games/idiot.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-3/games/mensch.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/games/mensch.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-3/games/schwein.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/games/schwein.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-3/games/sechstagerennen.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/games/sechstagerennen.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-3/games/siebzehnundvier.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/games/siebzehnundvier.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-3/games/tannenbaum.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/games/tannenbaum.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-3/index.html",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-3/kegelbuch.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/kegelbuch.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-3/main.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/main.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-3/player.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/player.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-3/style.css",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/style.css",
         "icon": "✨"
       },
       {
@@ -505,16 +600,6 @@
       {
         "label": "player.js",
         "url": "https://juppijo.github.io/Kegeln/player.js",
-        "icon": "✨"
-      },
-      {
-        "label": "script.js",
-        "url": "https://juppijo.github.io/Kegeln/script.js",
-        "icon": "✨"
-      },
-      {
-        "label": "spiele.js",
-        "url": "https://juppijo.github.io/Kegeln/spiele.js",
         "icon": "✨"
       },
       {
@@ -2540,6 +2625,21 @@
       {
         "label": "GitHubRespo/style.css",
         "url": "https://juppijo.github.io/Zami_Home/GitHubRespo/style.css",
+        "icon": "✨"
+      },
+      {
+        "label": "GitHub_Desktop/index.html",
+        "url": "https://juppijo.github.io/Zami_Home/GitHub_Desktop/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "GitHub_Desktop/script.js",
+        "url": "https://juppijo.github.io/Zami_Home/GitHub_Desktop/script.js",
+        "icon": "✨"
+      },
+      {
+        "label": "GitHub_Desktop/style.css",
+        "url": "https://juppijo.github.io/Zami_Home/GitHub_Desktop/style.css",
         "icon": "✨"
       },
       {
