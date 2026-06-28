@@ -178,6 +178,21 @@
         "icon": "✨"
       },
       {
+        "label": "PDF_Editor/index.html",
+        "url": "https://juppijo.github.io/Dashboard/PDF_Editor/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "PDF_Editor/script.js",
+        "url": "https://juppijo.github.io/Dashboard/PDF_Editor/script.js",
+        "icon": "✨"
+      },
+      {
+        "label": "PDF_Editor/style.css",
+        "url": "https://juppijo.github.io/Dashboard/PDF_Editor/style.css",
+        "icon": "✨"
+      },
+      {
         "label": "README.md",
         "url": "https://juppijo.github.io/Dashboard/README.md",
         "icon": "✨"
@@ -292,6 +307,11 @@
   {
     "title": "Kegeln",
     "links": [
+      {
+        "label": "Kegelhub_Links_Sicherung.json",
+        "url": "https://juppijo.github.io/Kegeln/Kegelhub_Links_Sicherung.json",
+        "icon": "✨"
+      },
       {
         "label": "Kegeln-1/games/busfahren.js",
         "url": "https://juppijo.github.io/Kegeln/Kegeln-1/games/busfahren.js",
@@ -448,78 +468,73 @@
         "icon": "✨"
       },
       {
-        "label": "Kegeln-3/games/busfahren.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/games/busfahren.js",
+        "label": "Kegeln-2b/Anleitung.txt",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/Anleitung.txt",
         "icon": "✨"
       },
       {
-        "label": "Kegeln-3/games/einsacken.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/games/einsacken.js",
+        "label": "Kegeln-2b/Gebrauchts-Anweisung.html",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/Gebrauchts-Anweisung.html",
         "icon": "✨"
       },
       {
-        "label": "Kegeln-3/games/fuchs.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/games/fuchs.js",
+        "label": "Kegeln-2b/KegelApp_Anleitung.pdf",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/KegelApp_Anleitung.pdf",
         "icon": "✨"
       },
       {
-        "label": "Kegeln-3/games/hausnummer.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/games/hausnummer.js",
+        "label": "Kegeln-2b/index.html",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/index.html",
         "icon": "✨"
       },
       {
-        "label": "Kegeln-3/games/idiot.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/games/idiot.js",
+        "label": "Kegeln-2b/js/config.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/js/config.js",
         "icon": "✨"
       },
       {
-        "label": "Kegeln-3/games/mensch.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/games/mensch.js",
+        "label": "Kegeln-2b/js/games.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/js/games.js",
         "icon": "✨"
       },
       {
-        "label": "Kegeln-3/games/schwein.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/games/schwein.js",
+        "label": "Kegeln-2b/js/main.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/js/main.js",
         "icon": "✨"
       },
       {
-        "label": "Kegeln-3/games/sechstagerennen.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/games/sechstagerennen.js",
+        "label": "Kegeln-2b/js/storage.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/js/storage.js",
         "icon": "✨"
       },
       {
-        "label": "Kegeln-3/games/siebzehnundvier.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/games/siebzehnundvier.js",
+        "label": "Kegeln-2b/js/ui.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/js/ui.js",
         "icon": "✨"
       },
       {
-        "label": "Kegeln-3/games/tannenbaum.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/games/tannenbaum.js",
+        "label": "Kegeln-2b/js/ärgere-dich-nicht.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/js/%C3%A4rgere-dich-nicht.js",
         "icon": "✨"
       },
       {
-        "label": "Kegeln-3/index.html",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/index.html",
+        "label": "Kegeln-2b/server.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/server.js",
         "icon": "✨"
       },
       {
-        "label": "Kegeln-3/kegelbuch.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/kegelbuch.js",
+        "label": "Kegeln-2b/style.css",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/style.css",
         "icon": "✨"
       },
       {
-        "label": "Kegeln-3/main.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/main.js",
+        "label": "Kegeln-2b/sw.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/sw.js",
         "icon": "✨"
       },
       {
-        "label": "Kegeln-3/player.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/player.js",
-        "icon": "✨"
-      },
-      {
-        "label": "Kegeln-3/style.css",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-3/style.css",
+        "label": "Kegeln-2b/🎳 KegelClub Master Pro 🏆.pdf",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/%F0%9F%8E%B3%20KegelClub%20Master%20Pro%20%F0%9F%8F%86.pdf",
         "icon": "✨"
       },
       {
@@ -533,78 +548,18 @@
         "icon": "✨"
       },
       {
-        "label": "games/busfahren.js",
-        "url": "https://juppijo.github.io/Kegeln/games/busfahren.js",
-        "icon": "✨"
-      },
-      {
-        "label": "games/einsacken.js",
-        "url": "https://juppijo.github.io/Kegeln/games/einsacken.js",
-        "icon": "✨"
-      },
-      {
-        "label": "games/fuchs.js",
-        "url": "https://juppijo.github.io/Kegeln/games/fuchs.js",
-        "icon": "✨"
-      },
-      {
-        "label": "games/hausnummer.js",
-        "url": "https://juppijo.github.io/Kegeln/games/hausnummer.js",
-        "icon": "✨"
-      },
-      {
-        "label": "games/idiot.js",
-        "url": "https://juppijo.github.io/Kegeln/games/idiot.js",
-        "icon": "✨"
-      },
-      {
-        "label": "games/mensch.js",
-        "url": "https://juppijo.github.io/Kegeln/games/mensch.js",
-        "icon": "✨"
-      },
-      {
-        "label": "games/schwein.js",
-        "url": "https://juppijo.github.io/Kegeln/games/schwein.js",
-        "icon": "✨"
-      },
-      {
-        "label": "games/sechstagerennen.js",
-        "url": "https://juppijo.github.io/Kegeln/games/sechstagerennen.js",
-        "icon": "✨"
-      },
-      {
-        "label": "games/siebzehnundvier.js",
-        "url": "https://juppijo.github.io/Kegeln/games/siebzehnundvier.js",
-        "icon": "✨"
-      },
-      {
-        "label": "games/tannenbaum.js",
-        "url": "https://juppijo.github.io/Kegeln/games/tannenbaum.js",
-        "icon": "✨"
-      },
-      {
         "label": "index.html",
         "url": "https://juppijo.github.io/Kegeln/index.html",
         "icon": "✨"
       },
       {
-        "label": "kegelbuch.js",
-        "url": "https://juppijo.github.io/Kegeln/kegelbuch.js",
+        "label": "kegel-apps.json",
+        "url": "https://juppijo.github.io/Kegeln/kegel-apps.json",
         "icon": "✨"
       },
       {
-        "label": "main.js",
-        "url": "https://juppijo.github.io/Kegeln/main.js",
-        "icon": "✨"
-      },
-      {
-        "label": "player.js",
-        "url": "https://juppijo.github.io/Kegeln/player.js",
-        "icon": "✨"
-      },
-      {
-        "label": "style.css",
-        "url": "https://juppijo.github.io/Kegeln/style.css",
+        "label": "kegel_hub_index.html",
+        "url": "https://juppijo.github.io/Kegeln/kegel_hub_index.html",
         "icon": "✨"
       }
     ]
