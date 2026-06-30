@@ -528,6 +528,16 @@
         "icon": "✨"
       },
       {
+        "label": "Kegeln-2b/hotspot_starten.bat",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/hotspot_starten.bat",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-2b/hotspot_stoppen.bat",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/hotspot_stoppen.bat",
+        "icon": "✨"
+      },
+      {
         "label": "Kegeln-2b/index.html",
         "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/index.html",
         "icon": "✨"
@@ -565,6 +575,11 @@
       {
         "label": "Kegeln-2b/kegel-server-starten.bat",
         "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/kegel-server-starten.bat",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-2b/kegel_hotspot_starten.bat",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/kegel_hotspot_starten.bat",
         "icon": "✨"
       },
       {
@@ -1985,6 +2000,16 @@
       {
         "label": "WRZT2/Lorenz_Trigo.html",
         "url": "https://juppijo.github.io/WRZT/WRZT2/Lorenz_Trigo.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT2/Raumzeit-Feldwirbel.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT2/Raumzeit-Feldwirbel.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT2/Topologischer-3D-Raumwirbel.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT2/Topologischer-3D-Raumwirbel.html",
         "icon": "✨"
       },
       {
