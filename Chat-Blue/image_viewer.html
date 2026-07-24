@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bild & DAT Viewer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .viewer-card {
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            border: 1px solid #2d2d2d;
+        }
+        h2 {
+            margin-top: 0;
+            color: #ffffff;
+            font-weight: 500;
+        }
+        .drop-zone {
+            border: 2px dashed #2196f3;
+            border-radius: 8px;
+            padding: 30px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+            margin-bottom: 20px;
+            background-color: #152238;
+        }
+        .drop-zone:hover, .drop-zone.dragover {
+            background-color: #1d3557;
+            border-color: #64b5f6;
+        }
+        .drop-zone p {
+            margin: 0;
+            font-size: 14px;
+            color: #90caf9;
+        }
+        #file-input {
+            display: none;
+        }
+        .file-info {
+            margin: 10px 0;
+            font-size: 14px;
+            color: #b0b0b0;
+            word-break: break-all;
+        }
+        .image-container {
+            margin-top: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #151515;
+            border: 1px solid #333;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            min-height: 200px;
+        }
+        #preview-img {
+            max-width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            transition: transform 0.2s ease;
+            border-radius: 4px;
+        }
+        .controls {
+            margin-top: 15px;
+            display: none;
+            gap: 10px;
+            justify-content: center;
+        }
+        .btn {
+            background-color: #2d2d2d;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+        .btn:hover {
+            background-color: #444;
+        }
+    </style>
+</head>
+<body>
+
+<div class="viewer-card">
+    <h2>Bild Viewer</h2>
+    <p style="font-size: 13px; color: #888; margin-bottom: 20px;">Unterstützt gängige Bildformate und als .dat getarnte Bilder</p>
+    
+    <div class="drop-zone" id="drop-zone">
+        <p>Bild hierher ziehen oder anklicken zum Auswählen</p>
+        <input type="file" id="file-input" accept=".dat,.jpg,.jpeg,.png,.webp,image/*">
+    </div>
+
+    <div class="file-info" id="file-info">Keine Datei geladen</div>
+    
+    <div class="image-container" id="image-container">
+        <img id="preview-img" alt="Vorschau">
+    </div>
+
+    <div class="controls" id="controls">
+        <button class="btn" id="btn-rot-left">🔄 Links drehen</button>
+        <button class="btn" id="btn-rot-right">🔄 Rechts drehen</button>
+    </div>
+</div>
+
+<script>
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-input');
+    const previewImg = document.getElementById('preview-img');
+    const imageContainer = document.getElementById('image-container');
+    const fileInfo = document.getElementById('file-info');
+    const controls = document.getElementById('controls');
+    
+    const btnRotLeft = document.getElementById('btn-rot-left');
+    const btnRotRight = document.getElementById('btn-rot-right');
+
+    let currentRotation = 0;
+
+    // Klick auf die Dropzone öffnet den Dateidialog
+    dropZone.addEventListener('click', () => fileInput.click());
+
+    // Drag & Drop Events
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('dragover');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            handleFile(files[0]);
+        }
+    });
+
+    // Event bei Dateiauswahl über Dialog
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            handleFile(e.target.files[0]);
+        }
+    });
+
+    // Datei verarbeiten und anzeigen
+    function handleFile(file) {
+        fileInfo.textContent = `Geladen: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+        
+        // Zurücksetzen der Rotation bei neuem Bild
+        currentRotation = 0;
+        previewImg.style.transform = `rotate(${currentRotation}deg)`;
+
+        // Erstelle einen Blob aus den Dateidaten. Wir nutzen standardmäßig 'image/jpeg', 
+        // da deine .dat-Dateien meistens JPEG-Header besitzen.
+        const imageBlob = new Blob([file], { type: 'image/jpeg' });
+        const fileURL = URL.createObjectURL(imageBlob);
+        
+        // Dem Image-Element die URL übergeben
+        previewImg.src = fileURL;
+        
+        // Container und Steuerung sichtbar machen
+        imageContainer.style.display = 'flex';
+        controls.style.display = 'flex';
+    }
+
+    // Rotations-Funktionen
+    btnRotLeft.addEventListener('click', () => {
+        currentRotation -= 90;
+        previewImg.style.transform = `rotate(${currentRotation}deg)`;
+    });
+
+    btnRotRight.addEventListener('click', () => {
+        currentRotation += 90;
+        previewImg.style.transform = `rotate(${currentRotation}deg)`;
+    });
+</script>
+
+</body>
+</html>

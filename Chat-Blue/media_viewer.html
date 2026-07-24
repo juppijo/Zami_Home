@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Media & DAT Viewer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .viewer-card {
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 650px;
+            text-align: center;
+            border: 1px solid #2d2d2d;
+        }
+        h2 {
+            margin-top: 0;
+            color: #ffffff;
+            font-weight: 500;
+        }
+        .drop-zone {
+            border: 2px dashed #9c27b0;
+            border-radius: 8px;
+            padding: 35px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+            margin-bottom: 20px;
+            background-color: #24152f;
+        }
+        .drop-zone:hover, .drop-zone.dragover {
+            background-color: #381e4a;
+            border-color: #ba68c8;
+        }
+        .drop-zone p {
+            margin: 0;
+            font-size: 14px;
+            color: #e1bee7;
+        }
+        #file-input {
+            display: none;
+        }
+        .file-info {
+            margin: 10px 0 20px 0;
+            font-size: 14px;
+            color: #b0b0b0;
+            word-break: break-all;
+        }
+        
+        /* Anzeige-Bereiche */
+        .media-container {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            background-color: #151515;
+            border: 1px solid #333;
+            border-radius: 8px;
+            min-height: 100px;
+            margin-bottom: 15px;
+        }
+        
+        #preview-img {
+            max-width: 100%;
+            max-height: 60vh;
+            object-fit: contain;
+            display: none;
+            border-radius: 4px;
+            transition: transform 0.2s ease;
+        }
+        
+        audio {
+            width: 100%;
+            display: none;
+            border-radius: 8px;
+            outline: none;
+        }
+        audio::-webkit-media-controls-enclosure {
+            background-color: #2d2d2d;
+        }
+
+        /* Steuerungs-Buttons */
+        .controls {
+            display: none;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            background-color: #2d2d2d;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .btn:hover {
+            background-color: #444;
+        }
+
+        /* Vollbild-Modus via CSS-Klasse falls native API genutzt wird */
+        #preview-img:fullscreen {
+            background-color: #000;
+            object-fit: contain;
+            max-height: 100vh;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="viewer-card">
+    <h2>Universal Media Viewer</h2>
+    <p style="font-size: 13px; color: #888; margin-bottom: 20px;">Ziehe eine beliebige Audio- oder Bilddatei (auch als .dat) hierher</p>
+    
+    <div class="drop-zone" id="drop-zone">
+        <p>Datei hierher ziehen oder anklicken zum Auswählen</p>
+        <input type="file" id="file-input" accept=".dat,.wav,.mp3,.jpg,.jpeg,.png,.webp,audio/*,image/*">
+    </div>
+
+    <div class="file-info" id="file-info">Keine Datei geladen</div>
+    
+    <div class="media-container" id="media-container">
+        <img id="preview-img" alt="Bild Vorschau">
+        <audio id="audio-player" controls></audio>
+    </div>
+
+    <div class="controls" id="image-controls">
+        <button class="btn" id="btn-fullscreen">📺 Vollbild</button>
+        <button class="btn" id="btn-rot-left">🔄 Links drehen</button>
+        <button class="btn" id="btn-rot-right">🔄 Rechts drehen</button>
+    </div>
+</div>
+
+<script>
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-input');
+    const mediaContainer = document.getElementById('media-container');
+    const previewImg = document.getElementById('preview-img');
+    const audioPlayer = document.getElementById('audio-player');
+    const fileInfo = document.getElementById('file-info');
+    const imageControls = document.getElementById('image-controls');
+    
+    const btnFullscreen = document.getElementById('btn-fullscreen');
+    const btnRotLeft = document.getElementById('btn-rot-left');
+    const btnRotRight = document.getElementById('btn-rot-right');
+
+    let currentRotation = 0;
+
+    // Klick auf die Dropzone öffnet den Dateidialog
+    dropZone.addEventListener('click', () => fileInput.click());
+
+    // Drag & Drop Events
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+    });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        if (e.dataTransfer.files.length > 0) handleFile(e.dataTransfer.files[0]);
+    });
+
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) handleFile(e.target.files[0]);
+    });
+
+    // Intelligente Medienanalyse und Verarbeitung
+    function handleFile(file) {
+        fileInfo.textContent = `Geladen: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+        
+        // Player & Bild zurücksetzen und stoppen
+        audioPlayer.pause();
+        audioPlayer.src = "";
+        audioPlayer.style.display = 'none';
+        previewImg.src = "";
+        previewImg.style.display = 'none';
+        imageControls.style.display = 'none';
+        mediaContainer.style.display = 'none';
+        
+        currentRotation = 0;
+        previewImg.style.transform = `rotate(${currentRotation}deg)`;
+
+        // Wir lesen die ersten paar Bytes (Magic Bytes), um den echten Dateityp zu ermitteln,
+        // falls die Datei nur ".dat" heißt.
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const arr = new Uint8Array(e.target.result);
+            let header = "";
+            for (let i = 0; i < Math.min(arr.length, 4); i++) {
+                header += arr[i].toString(16).padStart(2, '0');
+            }
+            
+            // Überprüfe Dateityp (Header oder Erweiterung)
+            const isWav = header.startsWith("52494646") || file.name.toLowerCase().endsWith('.wav'); // "RIFF" für WAV
+            const isJpg = header.startsWith("ffd8ff") || file.name.toLowerCase().endsWith('.jpg') || file.name.toLowerCase().endsWith('.jpeg');
+            const isPng = header.startsWith("89504e47") || file.name.toLowerCase().endsWith('.png');
+            
+            const fileURL = URL.createObjectURL(file);
+
+            if (isWav || file.type.startsWith('audio/')) {
+                // Als Audio verarbeiten
+                const audioBlob = new Blob([file], { type: 'audio/wav' });
+                audioPlayer.src = URL.createObjectURL(audioBlob);
+                audioPlayer.style.display = 'block';
+                mediaContainer.style.display = 'flex';
+                audioPlayer.load();
+                audioPlayer.play().catch(() => {});
+            } else if (isJpg || isPng || file.type.startsWith('image/')) {
+                // Als Bild verarbeiten
+                const mimeType = isPng ? 'image/png' : 'image/jpeg';
+                const imageBlob = new Blob([file], { type: mimeType });
+                previewImg.src = URL.createObjectURL(imageBlob);
+                previewImg.style.display = 'block';
+                mediaContainer.style.display = 'flex';
+                imageControls.style.display = 'flex';
+            } else {
+                // Fallback: Wenn unbekannt, versuchen wir es zuerst als Bild anzuzeigen
+                previewImg.src = fileURL;
+                previewImg.style.display = 'block';
+                mediaContainer.style.display = 'flex';
+                imageControls.style.display = 'flex';
+                fileInfo.textContent += " (Typ unklar, wird als Bild versucht)";
+            }
+        };
+        
+        // Nur die ersten 4 Bytes lesen, um den Typ blitzschnell zu bestimmen
+        reader.readAsArrayBuffer(file.slice(0, 4));
+    }
+
+    // Vollbild Funktion
+    btnFullscreen.addEventListener('click', () => {
+        if (previewImg.src) {
+            if (previewImg.requestFullscreen) {
+                previewImg.requestFullscreen();
+            } else if (previewImg.webkitRequestFullscreen) { /* Safari */
+                previewImg.webkitRequestFullscreen();
+            } else if (previewImg.msRequestFullscreen) { /* IE11 */
+                previewImg.msRequestFullscreen();
+            }
+        }
+    });
+
+    // Rotation
+    btnRotLeft.addEventListener('click', () => {
+        currentRotation -= 90;
+        previewImg.style.transform = `rotate(${currentRotation}deg)`;
+    });
+
+    btnRotRight.addEventListener('click', () => {
+        currentRotation += 90;
+        previewImg.style.transform = `rotate(${currentRotation}deg)`;
+    });
+</script>
+
+</body>
+</html>

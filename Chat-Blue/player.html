@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAV & DAT Audio Player</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .player-card {
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            width: 400px;
+            text-align: center;
+            border: 1px solid #2d2d2d;
+        }
+        h2 {
+            margin-top: 0;
+            color: #ffffff;
+            font-weight: 500;
+        }
+        .drop-zone {
+            border: 2px dashed #4caf50;
+            border-radius: 8px;
+            padding: 40px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+            margin-bottom: 20px;
+            background-color: #1a231a;
+        }
+        .drop-zone:hover, .drop-zone.dragover {
+            background-color: #223e22;
+            border-color: #81c784;
+        }
+        .drop-zone p {
+            margin: 0;
+            font-size: 14px;
+            color: #a5d6a7;
+        }
+        #file-input {
+            display: none;
+        }
+        .file-info {
+            margin: 15px 0;
+            font-size: 14px;
+            color: #b0b0b0;
+            word-break: break-all;
+            min-height: 20px;
+        }
+        audio {
+            width: 100%;
+            margin-top: 10px;
+            border-radius: 8px;
+            outline: none;
+        }
+        /* Custom styling placeholder for HTML5 Audio dark mode compatibility */
+        audio::-webkit-media-controls-enclosure {
+            background-color: #2d2d2d;
+        }
+    </style>
+</head>
+<body>
+
+<div class="player-card">
+    <h2>Audio Player</h2>
+    <p style="font-size: 13px; color: #888; margin-bottom: 20px;">Unterstützt .wav und als .dat getarnte Audiodateien</p>
+    
+    <div class="drop-zone" id="drop-zone">
+        <p>Datei hierher ziehen oder anklicken zum Auswählen</p>
+        <input type="file" id="file-input" accept=".dat,.wav,audio/*">
+    </div>
+
+    <div class="file-info" id="file-info">Keine Datei geladen</div>
+    
+    <audio id="audio-player" controls></audio>
+</div>
+
+<script>
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-input');
+    const audioPlayer = document.getElementById('audio-player');
+    const fileInfo = document.getElementById('file-info');
+
+    // Klick auf die Dropzone öffnet den Dateidialog
+    dropZone.addEventListener('click', () => fileInput.click());
+
+    // Drag & Drop Events
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('dragover');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            handleFile(files[0]);
+        }
+    });
+
+    // Event bei Dateiauswahl über Dialog
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            handleFile(e.target.files[0]);
+        }
+    });
+
+    // Datei verarbeiten und im Player laden
+    function handleFile(file) {
+        fileInfo.textContent = `Geladen: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+        
+        // Erstelle einen temporären Blob-URL aus den Dateidaten
+        // Wir erzwingen hier den MIME-Type 'audio/wav', damit der Browser weiß, wie er die .dat-Datei interpretieren muss
+        const audioBlob = new Blob([file], { type: 'audio/wav' });
+        const fileURL = URL.createObjectURL(audioBlob);
+        
+        // Dem Audio-Element die URL übergeben und abspielen
+        audioPlayer.src = fileURL;
+        audioPlayer.load();
+        audioPlayer.play().catch(err => {
+            console.log("Autoplay wurde vom Browser blockiert. Bitte drücke manuell auf Play.", err);
+        });
+    }
+</script>
+
+</body>
+</html>

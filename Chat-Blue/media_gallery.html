@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAT Medien-Galerie</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --accent: #9c27b0;
+            --accent-hover: #ba68c8;
+            --text: #e0e0e0;
+            --border: #2d2d2d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+        }
+
+        h1 { margin: 0 0 10px 0; color: #fff; }
+
+        /* Toolbar Controls */
+        .toolbar {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background-color: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+        .btn:hover { background-color: var(--accent-hover); }
+
+        .search-input, .filter-select {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+        .search-input { width: 250px; }
+
+        /* Grid System */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            border-color: var(--accent);
+        }
+
+        .thumbnail-area {
+            width: 100%;
+            height: 150px;
+            background-color: #151515;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .thumbnail-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .audio-icon {
+            font-size: 40px;
+            color: #4caf50;
+        }
+
+        .unknown-icon {
+            font-size: 40px;
+            color: #ff9800;
+        }
+
+        .card-info {
+            padding: 12px;
+            font-size: 13px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            background-color: #1a1a1a;
+            border-top: 1px solid var(--border);
+        }
+
+        .file-name {
+            font-weight: bold;
+            color: #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .file-meta { color: #888; font-size: 11px; }
+
+        .badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .badge.image { background-color: #2196f3; color: #fff; }
+        .badge.audio { background-color: #4caf50; color: #fff; }
+
+        /* Lightbox / Modal für Detailansicht */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 8px;
+        }
+        .lightbox audio {
+            width: 400px;
+            margin-top: 20px;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px; right: 20px;
+            font-size: 30px; color: #fff; cursor: pointer;
+            background: none; border: none;
+        }
+        .lightbox-title {
+            margin-top: 15px;
+            color: #fff;
+            font-size: 16px;
+        }
+        .status-msg {
+            text-align: center;
+            color: #888;
+            margin-top: 40px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>DAT Medien-Zentrale</h1>
+        <p>Analysiere und betrachte ganze Verzeichnisse voller Bild- und Audiodateien</p>
+    </header>
+
+    <div class="toolbar">
+        <button class="btn" id="btn-open-dir">📂 Ordner öffnen</button>
+        <input type="text" class="search-input" id="search" placeholder="Dateiname suchen...">
+        <select class="filter-select" id="filter">
+            <option value="all">Alle Typen</option>
+            <option value="image">Bilder</option>
+            <option value="audio">Audio</option>
+        </select>
+    </div>
+
+    <div id="status" class="status-msg">Bitte klicke auf "Ordner öffnen", um deine Dateien zu laden.</div>
+    <div class="grid" id="gallery-grid"></div>
+</div>
+
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close">&times;</button>
+    <div id="lightbox-media-container"></div>
+    <div class="lightbox-title" id="lightbox-title"></div>
+</div>
+
+<script>
+    const btnOpenDir = document.getElementById('btn-open-dir');
+    const grid = document.getElementById('gallery-grid');
+    const status = document.getElementById('status');
+    const searchInput = document.getElementById('search');
+    const filterSelect = document.getElementById('filter');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxMedia = document.getElementById('lightbox-media-container');
+    const lightboxTitle = document.getElementById('lightbox-title');
+
+    let allFiles = []; // Speichert die analysierten Datei-Objekte
+
+    // Event: Ordner öffnen
+    btnOpenDir.addEventListener('click', async () => {
+        try {
+            // Öffnet den nativen Ordner-Auswahldialog des Browsers
+            const dirHandle = await window.showDirectoryPicker();
+            grid.innerHTML = "";
+            status.textContent = "Analysiere Dateien...";
+            allFiles = [];
+
+            for await (const entry of dirHandle.values()) {
+                if (entry.kind === 'file') {
+                    const file = await entry.getFile();
+                    // Wir filtern grob nach .dat, .wav, .jpg etc.
+                    if (file.name.toLowerCase().endsWith('.dat') || 
+                        file.name.toLowerCase().endsWith('.wav') || 
+                        file.name.toLowerCase().endsWith('.jpg') || 
+                        file.name.toLowerCase().endsWith('.jpeg') || 
+                        file.name.toLowerCase().endsWith('.png')) {
+                        
+                        // Typbestimmung via Magic Bytes (erste 4 Bytes)
+                        const typeInfo = await getFileType(file);
+                        allFiles.push({
+                            file: file,
+                            name: file.name,
+                            size: file.size,
+                            type: typeInfo.type,
+                            mime: typeInfo.mime
+                        });
+                    }
+                }
+            }
+
+            status.style.display = 'none';
+            renderGrid(allFiles);
+
+        } catch (err) {
+            console.error(err);
+            status.textContent = "Ordner konnte nicht geladen werden oder Vorgang abgebrochen.";
+        }
+    });
+
+    // Magic-Byte Erkennung
+    async function getFileType(file) {
+        const slice = file.slice(0, 4);
+        const buffer = await slice.arrayBuffer();
+        const arr = new Uint8Array(buffer);
+        let header = "";
+        for (let i = 0; i < arr.length; i++) {
+            header += arr[i].toString(16).padStart(2, '0');
+        }
+
+        if (header.startsWith("52494646") || file.name.toLowerCase().endsWith('.wav')) {
+            return { type: 'audio', mime: 'audio/wav' };
+        } else if (header.startsWith("ffd8ff") || file.name.toLowerCase().endsWith('.jpg') || file.name.toLowerCase().endsWith('.jpeg')) {
+            return { type: 'image', mime: 'image/jpeg' };
+        } else if (header.startsWith("89504e47") || file.name.toLowerCase().endsWith('.png')) {
+            return { type: 'image', mime: 'image/png' };
+        }
+        return { type: 'unknown', mime: 'application/octet-stream' };
+    }
+
+    // Galerie rendern
+    function renderGrid(filesList) {
+        grid.innerHTML = "";
+        if(filesList.length === 0) {
+            status.style.display = 'block';
+            status.textContent = "Keine passenden Mediendateien gefunden.";
+            return;
+        }
+
+        filesList.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            
+            let thumbnailHTML = '';
+            const blobURL = URL.createObjectURL(new Blob([item.file], { type: item.mime }));
+
+            if (item.type === 'image') {
+                thumbnailHTML = `<img src="${blobURL}" loading="lazy">`;
+            } else if (item.type === 'audio') {
+                thumbnailHTML = `<div class="audio-icon">🎵</div>`;
+            } else {
+                thumbnailHTML = `<div class="unknown-icon">📄</div>`;
+            }
+
+            card.innerHTML = `
+                <div class="thumbnail-area">
+                    ${thumbnailHTML}
+                    <span class="badge ${item.type}">${item.type}</span>
+                </div>
+                <div class="card-info">
+                    <div class="file-name" title="${item.name}">${item.name}</div>
+                    <div class="file-meta">${(item.size / 1024).toFixed(1)} KB</div>
+                </div>
+            `;
+
+            card.addEventListener('click', () => openLightbox(item, blobURL));
+            grid.appendChild(card);
+        });
+    }
+
+    // Filter & Suche
+    function filterFiles() {
+        const query = searchInput.value.toLowerCase();
+        const typeFilter = filterSelect.value;
+
+        const filtered = allFiles.filter(item => {
+            const matchesSearch = item.name.toLowerCase().includes(query);
+            const matchesType = (typeFilter === 'all') || (item.type === typeFilter);
+            return matchesSearch && matchesType;
+        });
+
+        renderGrid(filtered);
+    }
+
+    searchInput.addEventListener('input', filterFiles);
+    filterSelect.addEventListener('change', filterFiles);
+
+    // Lightbox öffnen (Großansicht / Player)
+    function openLightbox(item, blobURL) {
+        lightboxMedia.innerHTML = "";
+        lightboxTitle.textContent = item.name;
+
+        if (item.type === 'image') {
+            const img = document.createElement('img');
+            img.src = blobURL;
+            img.className = 'lightbox-content';
+            lightboxMedia.appendChild(img);
+        } else if (item.type === 'audio') {
+            const audio = document.createElement('audio');
+            audio.src = blobURL;
+            audio.controls = true;
+            audio.autoplay = true;
+            lightboxMedia.appendChild(audio);
+        }
+
+        lightbox.style.display = 'flex';
+    }
+
+    // Lightbox schließen
+    lightboxClose.addEventListener('click', () => {
+        lightbox.style.display = 'none';
+        // Audio stoppen beim Schließen
+        const audio = lightboxMedia.querySelector('audio');
+        if(audio) audio.pause();
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        if(e.target === lightbox) {
+            lightbox.style.display = 'none';
+            const audio = lightboxMedia.querySelector('audio');
+            if(audio) audio.pause();
+        }
+    });
+</script>
+
+</body>
+</html>

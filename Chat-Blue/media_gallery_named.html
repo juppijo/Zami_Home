@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAT Medien-Zentrale mit Klarnamen</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --accent: #9c27b0;
+            --accent-hover: #ba68c8;
+            --text: #e0e0e0;
+            --border: #2d2d2d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+        }
+
+        h1 { margin: 0 0 10px 0; color: #fff; }
+
+        /* Toolbar Controls */
+        .toolbar {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            background-color: #1a1a1a;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .btn {
+            background-color: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+        .btn:hover { background-color: var(--accent-hover); }
+
+        .btn-secondary {
+            background-color: #333;
+            border: 1px solid #444;
+        }
+        .btn-secondary:hover { background-color: #444; }
+
+        .search-input, .filter-select {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+        .search-input { width: 220px; }
+
+        #json-status {
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* Grid System */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            border-color: var(--accent);
+        }
+
+        .thumbnail-area {
+            width: 100%;
+            height: 150px;
+            background-color: #151515;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .thumbnail-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .audio-icon, .unknown-icon {
+            font-size: 40px;
+        }
+        .audio-icon { color: #4caf50; }
+        .unknown-icon { color: #ff9800; }
+
+        .card-info {
+            padding: 12px;
+            font-size: 13px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            background-color: #1a1a1a;
+            border-top: 1px solid var(--border);
+        }
+
+        .file-name {
+            font-weight: bold;
+            color: #fff;
+            word-break: break-all;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            height: 36px; /* Platz für 2 Zeilen */
+        }
+
+        .original-name {
+            color: #666;
+            font-size: 11px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .file-meta { color: #888; font-size: 11px; display: flex; justify-content: space-between; }
+
+        .badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .badge.image { background-color: #2196f3; color: #fff; }
+        .badge.audio { background-color: #4caf50; color: #fff; }
+
+        /* Lightbox / Modal */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 8px;
+        }
+        .lightbox audio {
+            width: 400px;
+            margin-top: 20px;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px; right: 20px;
+            font-size: 30px; color: #fff; cursor: pointer;
+            background: none; border: none;
+        }
+        .lightbox-title {
+            margin-top: 15px;
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .status-msg {
+            text-align: center;
+            color: #888;
+            margin-top: 40px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>DAT Medien-Zentrale</h1>
+        <p>Analysiere Verzeichnisse und weise mit deiner JSON-Datei echte Klarnamen zu</p>
+    </header>
+
+    <div class="toolbar">
+        <button class="btn" id="btn-open-dir">📂 1. Ordner öffnen</button>
+        
+        <button class="btn btn-secondary" id="btn-load-json">🔗 2. Namens-JSON laden</button>
+        <input type="file" id="json-input" accept=".json" style="display: none;">
+        <span id="json-status">Keine JSON geladen</span>
+
+        <input type="text" class="search-input" id="search" placeholder="Name suchen...">
+        <select class="filter-select" id="filter">
+            <option value="all">Alle Typen</option>
+            <option value="image">Bilder</option>
+            <option value="audio">Audio</option>
+        </select>
+    </div>
+
+    <div id="status" class="status-msg">Bitte klicke auf "Ordner öffnen", um deine Mediendateien zu laden.</div>
+    <div class="grid" id="gallery-grid"></div>
+</div>
+
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close">&times;</button>
+    <div id="lightbox-media-container"></div>
+    <div class="lightbox-title" id="lightbox-title"></div>
+</div>
+
+<script>
+    const btnOpenDir = document.getElementById('btn-open-dir');
+    const btnLoadJson = document.getElementById('btn-load-json');
+    const jsonInput = document.getElementById('json-input');
+    const jsonStatus = document.getElementById('json-status');
+    
+    const grid = document.getElementById('gallery-grid');
+    const status = document.getElementById('status');
+    const searchInput = document.getElementById('search');
+    const filterSelect = document.getElementById('filter');
+    
+    const lightbox = document.getElementById('lightbox');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxMedia = document.getElementById('lightbox-media-container');
+    const lightboxTitle = document.getElementById('lightbox-title');
+
+    let allFiles = [];      // Speichert die eingelesenen Dateien
+    let nameMapping = {};   // Speichert die Zuordnungen aus der JSON
+
+    // 1. Ordner einlesen
+    btnOpenDir.addEventListener('click', async () => {
+        try {
+            const dirHandle = await window.showDirectoryPicker();
+            grid.innerHTML = "";
+            status.textContent = "Analysiere Verzeichniseinträge...";
+            allFiles = [];
+
+            for await (const entry of dirHandle.values()) {
+                if (entry.kind === 'file') {
+                    const file = await entry.getFile();
+                    const lowerName = file.name.toLowerCase();
+                    
+                    if (lowerName.endsWith('.dat') || lowerName.endsWith('.wav') || 
+                        lowerName.endsWith('.jpg') || lowerName.endsWith('.jpeg') || lowerName.endsWith('.png')) {
+                        
+                        const typeInfo = await getFileType(file);
+                        allFiles.push({
+                            file: file,
+                            idName: file.name, // Der originale kryptische Name (z.B. file_0000...dat)
+                            displayName: file.name, // Standardmäßig erst mal der Dateiname
+                            size: file.size,
+                            type: typeInfo.type,
+                            mime: typeInfo.mime
+                        });
+                    }
+                }
+            }
+
+            status.style.display = 'none';
+            applyNamingAndRender();
+
+        } catch (err) {
+            console.error(err);
+            status.textContent = "Ordner konnte nicht geladen werden oder Vorgang abgebrochen.";
+        }
+    });
+
+    // 2. JSON für Klarnamen laden
+    btnLoadJson.addEventListener('click', () => jsonInput.click());
+    jsonInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+            try {
+                const parsed = JSON.parse(evt.target.result);
+                nameMapping = {};
+                
+                // Wir bereinigen die Keys, um sicherzustellen, dass Pfade oder exakte Namen passen
+                for (let key in parsed) {
+                    let cleanKey = key.split('/').pop(); // Falls Pfade drin sind, nur den Dateinamen nehmen
+                    let cleanValue = parsed[key].split('/').pop();
+                    nameMapping[cleanKey] = cleanValue;
+                }
+
+                const count = Object.keys(nameMapping).length;
+                jsonStatus.textContent = `✅ ${count} Namen geladen`;
+                jsonStatus.style.color = '#4caf50';
+
+                // Wenn bereits Dateien eingelesen wurden, Namen direkt aktualisieren
+                applyNamingAndRender();
+
+            } catch(err) {
+                jsonStatus.textContent = "❌ Ungültige JSON-Datei";
+                jsonStatus.style.color = '#f44336';
+            }
+        };
+        reader.readAsText(file);
+    });
+
+    // Namen abgleichen und Grid neu zeichnen
+    function applyNamingAndRender() {
+        allFiles.forEach(item => {
+            if (nameMapping[item.idName]) {
+                item.displayName = nameMapping[item.idName];
+            }
+        });
+        filterFiles();
+    }
+
+    // Magic-Byte Erkennung
+    async function getFileType(file) {
+        const slice = file.slice(0, 4);
+        const buffer = await slice.arrayBuffer();
+        const arr = new Uint8Array(buffer);
+        let header = "";
+        for (let i = 0; i < arr.length; i++) {
+            header += arr[i].toString(16).padStart(2, '0');
+        }
+
+        if (header.startsWith("52494646") || file.name.toLowerCase().endsWith('.wav')) {
+            return { type: 'audio', mime: 'audio/wav' };
+        } else if (header.startsWith("ffd8ff") || file.name.toLowerCase().endsWith('.jpg') || file.name.toLowerCase().endsWith('.jpeg')) {
+            return { type: 'image', mime: 'image/jpeg' };
+        } else if (header.startsWith("89504e47") || file.name.toLowerCase().endsWith('.png')) {
+            return { type: 'image', mime: 'image/png' };
+        }
+        return { type: 'unknown', mime: 'application/octet-stream' };
+    }
+
+    // Gitter generieren
+    function renderGrid(filesList) {
+        grid.innerHTML = "";
+        if(filesList.length === 0) {
+            status.style.display = 'block';
+            status.textContent = "Keine passenden Mediendateien gefunden.";
+            return;
+        }
+
+        filesList.forEach((item) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            
+            let thumbnailHTML = '';
+            const blobURL = URL.createObjectURL(new Blob([item.file], { type: item.mime }));
+
+            if (item.type === 'image') {
+                thumbnailHTML = `<img src="${blobURL}" loading="lazy">`;
+            } else if (item.type === 'audio') {
+                thumbnailHTML = `<div class="audio-icon">🎵</div>`;
+            } else {
+                thumbnailHTML = `<div class="unknown-icon">📄</div>`;
+            }
+
+            // Falls ein Klarname gefunden wurde, zeigen wir den kryptischen Namen klein darunter an
+            const hasRealName = item.displayName !== item.idName;
+            const subNameHTML = hasRealName ? `<div class="original-name" title="Original: ${item.idName}">${item.idName}</div>` : '';
+
+            card.innerHTML = `
+                <div class="thumbnail-area">
+                    ${thumbnailHTML}
+                    <span class="badge ${item.type}">${item.type}</span>
+                </div>
+                <div class="card-info">
+                    <div class="file-name" title="${item.displayName}">${item.displayName}</div>
+                    ${subNameHTML}
+                    <div class="file-meta">
+                        <span>${(item.size / 1024).toFixed(1)} KB</span>
+                    </div>
+                </div>
+            `;
+
+            card.addEventListener('click', () => openLightbox(item, blobURL));
+            grid.appendChild(card);
+        });
+    }
+
+    // Filter & Live-Suche (sucht jetzt im Klarnamen und im originalen Namen!)
+    function filterFiles() {
+        const query = searchInput.value.toLowerCase();
+        const typeFilter = filterSelect.value;
+
+        const filtered = allFiles.filter(item => {
+            const matchesSearch = item.displayName.toLowerCase().includes(query) || item.idName.toLowerCase().includes(query);
+            const matchesType = (typeFilter === 'all') || (item.type === typeFilter);
+            return matchesSearch && matchesType;
+        });
+
+        renderGrid(filtered);
+    }
+
+    searchInput.addEventListener('input', filterFiles);
+    filterSelect.addEventListener('change', filterFiles);
+
+    // Lightbox öffnen
+    function openLightbox(item, blobURL) {
+        lightboxMedia.innerHTML = "";
+        lightboxTitle.innerHTML = `<strong>${item.displayName}</strong>` + (item.displayName !== item.idName ? `<br><span style="font-size:12px; color:#888;">${item.idName}</span>` : '');
+
+        if (item.type === 'image') {
+            const img = document.createElement('img');
+            img.src = blobURL;
+            img.className = 'lightbox-content';
+            lightboxMedia.appendChild(img);
+        } else if (item.type === 'audio') {
+            const audio = document.createElement('audio');
+            audio.src = blobURL;
+            audio.controls = true;
+            audio.autoplay = true;
+            lightboxMedia.appendChild(audio);
+        }
+
+        lightbox.style.display = 'flex';
+    }
+
+    // Lightbox schließen
+    lightboxClose.addEventListener('click', () => {
+        lightbox.style.display = 'none';
+        const audio = lightboxMedia.querySelector('audio');
+        if(audio) audio.pause();
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        if(e.target === lightbox) {
+            lightbox.style.display = 'none';
+            const audio = lightboxMedia.querySelector('audio');
+            if(audio) audio.pause();
+        }
+    });
+</script>
+
+</body>
+</html>

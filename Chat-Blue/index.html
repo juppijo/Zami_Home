@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WRZT - Chat & Manifest Viewer V2.5</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                processEscapes: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <span>
+            <h1>WRZT Viewer</h1>
+        </span>
+        
+        <!-- Button zum Einklappen -->
+        <button id="toggle-converter-btn" class="toggle-btn">◄ / ► 🧪 Live-Konverter Einklappen</button>
+
+        <div class="controls">
+            <input type="text" id="searchBar" placeholder="Chats durchsuchen..." disabled>
+            <input type="file" id="fileLoader" accept=".json">
+            <label for="fileLoader" class="btn">Datei wählen</label>
+        </div>
+    </div>
+</header> 
+
+<div class="layout-wrapper">
+    
+    <!-- 1. GANZ LINKS: DIE FLEXIBLE LIVE-KONVERTER SIDEBAR -->
+    <aside id="math-converter-sidebar" class="sidebar converter-sidebar">
+        
+        <h2>🧪 Live-Konverter</h2>
+        <div class="math-popup-input-container">
+            <textarea id="math-live-input" placeholder="Formel hier hineinkopieren...&#10;Z.B. F_C = \frac{e^2}{4 \pi \epsilon_0 r^2}"></textarea>
+        </div>
+        <div class="math-popup-subheader">Vorschau:</div>
+        <div id="math-popup-body">
+            <div class="math-placeholder">Warte auf Eingabe...</div>
+        </div>
+    </aside>
+
+    <!-- 2. MITTE LINKS: INHALTSVERZEICHNIS -->
+    <aside id="sidebar" class="sidebar toc-sidebar">
+
+        <h2>Inhaltsverzeichnis</h2>
+        <div id="toc">Bitte Datei laden...</div>
+    </aside>
+
+    <!-- 3. RECHTS: CHAT -->
+
+    <div class="main-content">
+
+        <main id="root">
+            <div class="welcome-message">
+                Bitte lade deine `chat.json` über den Button oben rechts.
+            </div>
+        </main>
+    </div>
+</div>
+
+    <script src="js/parser.js"></script>
+    <script src="js/copy.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/math.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
