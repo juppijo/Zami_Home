@@ -353,6 +353,21 @@
     "title": "Kegeln",
     "links": [
       {
+        "label": "Gebrauchts-Anweisung.html",
+        "url": "https://juppijo.github.io/Kegeln/Gebrauchts-Anweisung.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Hotspot.png",
+        "url": "https://juppijo.github.io/Kegeln/Hotspot.png",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegelclub_Setup_Alle_Mitglieder.json",
+        "url": "https://juppijo.github.io/Kegeln/Kegelclub_Setup_Alle_Mitglieder.json",
+        "icon": "✨"
+      },
+      {
         "label": "Kegelhub_Links_Sicherung.json",
         "url": "https://juppijo.github.io/Kegeln/Kegelhub_Links_Sicherung.json",
         "icon": "✨"
@@ -528,8 +543,18 @@
         "icon": "✨"
       },
       {
+        "label": "Kegeln-2b/Hotspot2.png",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/Hotspot2.png",
+        "icon": "✨"
+      },
+      {
         "label": "Kegeln-2b/Install.html",
         "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/Install.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-2b/Installationsanleitung_Kegel_Server.html",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/Installationsanleitung_Kegel_Server.html",
         "icon": "✨"
       },
       {
@@ -548,6 +573,11 @@
         "icon": "✨"
       },
       {
+        "label": "Kegeln-2b/hotspot.html",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/hotspot.html",
+        "icon": "✨"
+      },
+      {
         "label": "Kegeln-2b/hotspot_starten.bat",
         "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/hotspot_starten.bat",
         "icon": "✨"
@@ -560,6 +590,11 @@
       {
         "label": "Kegeln-2b/index.html",
         "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-2b/ip_link_generator.html",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/ip_link_generator.html",
         "icon": "✨"
       },
       {
@@ -613,6 +648,11 @@
         "icon": "✨"
       },
       {
+        "label": "Kegeln-2b/starten.html",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/starten.html",
+        "icon": "✨"
+      },
+      {
         "label": "Kegeln-2b/style.css",
         "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/style.css",
         "icon": "✨"
@@ -628,6 +668,36 @@
         "icon": "✨"
       },
       {
+        "label": "Punkte-Stand/Kegelclub_Setup(18.7.26).json",
+        "url": "https://juppijo.github.io/Kegeln/Punkte-Stand/Kegelclub_Setup(18.7.26).json",
+        "icon": "✨"
+      },
+      {
+        "label": "Punkte-Stand/Kegelclub_Setup(20.6.26).json",
+        "url": "https://juppijo.github.io/Kegeln/Punkte-Stand/Kegelclub_Setup(20.6.26).json",
+        "icon": "✨"
+      },
+      {
+        "label": "Punkte-Stand/Kegelclub_Stand(18.7.26).json",
+        "url": "https://juppijo.github.io/Kegeln/Punkte-Stand/Kegelclub_Stand(18.7.26).json",
+        "icon": "✨"
+      },
+      {
+        "label": "Punkte-Stand/Kegelclub_Stand(20.6.26).json",
+        "url": "https://juppijo.github.io/Kegeln/Punkte-Stand/Kegelclub_Stand(20.6.26).json",
+        "icon": "✨"
+      },
+      {
+        "label": "Punkte-Stand/Kegelclub_Turnierstand(18.7.26).json",
+        "url": "https://juppijo.github.io/Kegeln/Punkte-Stand/Kegelclub_Turnierstand(18.7.26).json",
+        "icon": "✨"
+      },
+      {
+        "label": "Punkte-Stand/Kegelclub_Turnierstand(20.6.26).json",
+        "url": "https://juppijo.github.io/Kegeln/Punkte-Stand/Kegelclub_Turnierstand(20.6.26).json",
+        "icon": "✨"
+      },
+      {
         "label": "README.md",
         "url": "https://juppijo.github.io/Kegeln/README.md",
         "icon": "✨"
@@ -638,8 +708,23 @@
         "icon": "✨"
       },
       {
+        "label": "app.py",
+        "url": "https://juppijo.github.io/Kegeln/app.py",
+        "icon": "✨"
+      },
+      {
         "label": "index.html",
         "url": "https://juppijo.github.io/Kegeln/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "index.js",
+        "url": "https://juppijo.github.io/Kegeln/index.js",
+        "icon": "✨"
+      },
+      {
+        "label": "ip_link_generator.html",
+        "url": "https://juppijo.github.io/Kegeln/ip_link_generator.html",
         "icon": "✨"
       },
       {
@@ -650,6 +735,31 @@
       {
         "label": "kegel_hub_index.html",
         "url": "https://juppijo.github.io/Kegeln/kegel_hub_index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "package-lock.json",
+        "url": "https://juppijo.github.io/Kegeln/package-lock.json",
+        "icon": "✨"
+      },
+      {
+        "label": "package.json",
+        "url": "https://juppijo.github.io/Kegeln/package.json",
+        "icon": "✨"
+      },
+      {
+        "label": "server.js",
+        "url": "https://juppijo.github.io/Kegeln/server.js",
+        "icon": "✨"
+      },
+      {
+        "label": "start_kegeln.sh",
+        "url": "https://juppijo.github.io/Kegeln/start_kegeln.sh",
+        "icon": "✨"
+      },
+      {
+        "label": "starten.html",
+        "url": "https://juppijo.github.io/Kegeln/starten.html",
         "icon": "✨"
       }
     ]
@@ -1988,6 +2098,16 @@
         "icon": "✨"
       },
       {
+        "label": "WRZNT/WRZNT2.html",
+        "url": "https://juppijo.github.io/WRZT/WRZNT/WRZNT2.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZNT/WRZTN3.html",
+        "url": "https://juppijo.github.io/WRZT/WRZNT/WRZTN3.html",
+        "icon": "✨"
+      },
+      {
         "label": "WRZNT/curve3d-1.html",
         "url": "https://juppijo.github.io/WRZT/WRZNT/curve3d-1.html",
         "icon": "✨"
@@ -2188,6 +2308,11 @@
         "icon": "✨"
       },
       {
+        "label": "WRZT2/manifest.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT2/manifest.html",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT2/milestone-geometrie.html",
         "url": "https://juppijo.github.io/WRZT/WRZT2/milestone-geometrie.html",
         "icon": "✨"
@@ -2200,6 +2325,66 @@
       {
         "label": "WRZT2/urknall.html",
         "url": "https://juppijo.github.io/WRZT/WRZT2/urknall.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT3/WRZT_Alpha.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Alpha.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT3/WRZT_Erweitert_v2.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Erweitert_v2.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT3/WRZT_Formelsammlung_b.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Formelsammlung_b.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT3/WRZT_Herleitung_Rmin_LaTeX.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Herleitung_Rmin_LaTeX.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT3/WRZT_Interferenz.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Interferenz.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT3/WRZT_LaTeX_Katalog.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_LaTeX_Katalog.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT3/WRZT_Praezision_Katalog.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Praezision_Katalog.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT3/WRZT_Trans.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Trans.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT3/WRZT_Urknall.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Urknall.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT3/ZentriCoulomb.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/ZentriCoulomb.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT3/klassischer_elektronenradius.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/klassischer_elektronenradius.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT3/klassischer_elektronenradius_praezision.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/klassischer_elektronenradius_praezision.html",
         "icon": "✨"
       },
       {
@@ -2233,13 +2418,8 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT_Calc/physik_formeln_2026-02-17.json",
-        "url": "https://juppijo.github.io/WRZT/WRZT_Calc/physik_formeln_2026-02-17.json",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT_Calc/physik_formeln_2026-02-18.json",
-        "url": "https://juppijo.github.io/WRZT/WRZT_Calc/physik_formeln_2026-02-18.json",
+        "label": "WRZT_Calc/physik_formeln_2026-07-24.json",
+        "url": "https://juppijo.github.io/WRZT/WRZT_Calc/physik_formeln_2026-07-24.json",
         "icon": "✨"
       },
       {
@@ -2305,6 +2485,16 @@
       {
         "label": "favicon.png",
         "url": "https://juppijo.github.io/WRZT/favicon.png",
+        "icon": "✨"
+      },
+      {
+        "label": "formel_sammler.html",
+        "url": "https://juppijo.github.io/WRZT/formel_sammler.html",
+        "icon": "✨"
+      },
+      {
+        "label": "formel_sammler_pro.html",
+        "url": "https://juppijo.github.io/WRZT/formel_sammler_pro.html",
         "icon": "✨"
       },
       {
@@ -2795,6 +2985,81 @@
       {
         "label": "Bildsuche/style.css",
         "url": "https://juppijo.github.io/Zami_Home/Bildsuche/style.css",
+        "icon": "✨"
+      },
+      {
+        "label": "Chat-Blue/css/style.css",
+        "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/css/style.css",
+        "icon": "✨"
+      },
+      {
+        "label": "Chat-Blue/image_viewer.html",
+        "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/image_viewer.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Chat-Blue/index.html",
+        "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Chat-Blue/js/app.js",
+        "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/js/app.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Chat-Blue/js/copy.js",
+        "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/js/copy.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Chat-Blue/js/math.js",
+        "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/js/math.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Chat-Blue/js/parser.js",
+        "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/js/parser.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Chat-Blue/js/renderer.js",
+        "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/js/renderer.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Chat-Blue/js/search.js",
+        "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/js/search.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Chat-Blue/js/worker.js",
+        "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/js/worker.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Chat-Blue/js/wrzt.js",
+        "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/js/wrzt.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Chat-Blue/media_gallery.html",
+        "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/media_gallery.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Chat-Blue/media_gallery_named.html",
+        "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/media_gallery_named.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Chat-Blue/media_viewer.html",
+        "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/media_viewer.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Chat-Blue/player.html",
+        "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/player.html",
         "icon": "✨"
       },
       {
