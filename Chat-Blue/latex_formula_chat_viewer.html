@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LaTeX Formula Viewer</title>
+
+  <!-- MathJax Version 3 zur mathematischen Darstellung -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore',
+        processHtmlClass: 'tex2jax_process'
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --text-color: #f8fafc;
+      --accent-color: #38bdf8;
+      --border-color: #334155;
+      --success-color: #4ade80;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--accent-color);
+      margin-bottom: 1.5rem;
+    }
+
+    .upload-box {
+      background: var(--card-bg);
+      border: 2px dashed var(--accent-color);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .upload-box:hover {
+      background: #26334d;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .btn {
+      background-color: var(--accent-color);
+      color: #0f172a;
+      padding: 0.6rem 1.2rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .formula-card {
+      position: relative;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+      overflow-x: auto;
+    }
+
+    .rendered-formula {
+      margin-right: 80px; /* Platz für den Copie-Button */
+    }
+
+    .formula-card .raw-tex {
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin-top: 0.8rem;
+      border-top: 1px solid var(--border-color);
+      padding-top: 0.5rem;
+      word-break: break-all;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background-color: #334155;
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .copy-btn:hover {
+      background-color: var(--accent-color);
+      color: #0f172a;
+    }
+
+    .copy-btn.copied {
+      background-color: var(--success-color);
+      color: #0f172a;
+      border-color: var(--success-color);
+    }
+
+    .no-formulas {
+      text-align: center;
+      color: #94a3b8;
+      font-style: italic;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>LaTeX Formula Viewer</h1>
+
+    <div class="upload-box" onclick="document.getElementById('fileInput').click()">
+      <p>Klicke hier oder ziehe eine JSON-Datei herein, um Formeln anzuzeigen</p>
+      <button class="btn">JSON Datei auswählen</button>
+      <input type="file" id="fileInput" accept=".json" onchange="handleFile(this.files)">
+    </div>
+
+    <div id="output" class="tex2jax_process"></div>
+  </div>
+
+  <script>
+    function handleFile(files) {
+      if (!files.length) return;
+      const file = files[0];
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        try {
+          const json = JSON.parse(e.target.result);
+          extractAndRenderFormulas(json);
+        } catch (err) {
+          alert("Ungültiges JSON-Format!");
+        }
+      };
+
+      reader.readAsText(file);
+    }
+
+    // Rekursives Durchsuchen des JSON nach Strings mit Formeln
+    function extractAndRenderFormulas(data) {
+      const output = document.getElementById('output');
+      output.innerHTML = ''; // Vorherige Formeln leeren
+      
+      const foundFormulas = [];
+      
+      function walk(obj) {
+        if (typeof obj === 'string') {
+          // Prüfe auf LaTeX-Syntax
+          if (/(\$.*?\$|\\\(.*?\\\)|\\\[.*?\\\]|\\frac|\\approx|\\sum|\\int|_\{|\^\{)/s.test(obj)) {
+            const matches = obj.match(/(\$\$.*?\$\$|\$.*?\$|\\\(.*?\\\)|\\\[.*?\\\])/gs);
+            if (matches) {
+              matches.forEach(m => foundFormulas.push(m));
+            } else {
+              foundFormulas.push(obj);
+            }
+          }
+        } else if (Array.isArray(obj)) {
+          obj.forEach(walk);
+        } else if (typeof obj === 'object' && obj !== null) {
+          Object.values(obj).forEach(walk);
+        }
+      }
+
+      walk(data);
+
+      if (foundFormulas.length === 0) {
+        output.innerHTML = '<div class="no-formulas">Keine LaTeX-Formeln in dieser JSON-Datei gefunden.</div>';
+        return;
+      }
+
+      // Rendere jede gefundene Formel mit Copy-Button
+      foundFormulas.forEach((formula) => {
+        const card = document.createElement('div');
+        card.className = 'formula-card';
+        
+        const rendered = document.createElement('div');
+        rendered.className = 'rendered-formula';
+        rendered.innerHTML = formula;
+
+        const raw = document.createElement('div');
+        raw.className = 'raw-tex';
+        raw.textContent = formula;
+
+        // Kopier-Button erstellen
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'copy-btn';
+        copyBtn.textContent = 'Kopieren';
+        copyBtn.onclick = function() {
+          navigator.clipboard.writeText(formula).then(() => {
+            copyBtn.textContent = 'Kopiert!';
+            copyBtn.classList.add('copied');
+            setTimeout(() => {
+              copyBtn.textContent = 'Kopieren';
+              copyBtn.classList.remove('copied');
+            }, 2000);
+          });
+        };
+
+        card.appendChild(copyBtn);
+        card.appendChild(rendered);
+        card.appendChild(raw);
+        output.appendChild(card);
+      });
+
+      // Anweisungen an MathJax, die neuen Inhalte zu verarbeiten
+      if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise([output]);
+      }
+    }
+  </script>
+
+</body>
+</html>
