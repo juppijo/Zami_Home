@@ -3,23 +3,23 @@
     "title": "Autogenes-Training",
     "links": [
       {
-        "label": "autogenes-training-app_Cl.html",
-        "url": "https://juppijo.github.io/Autogenes-Training/autogenes-training-app_Cl.html",
-        "icon": "✨"
-      },
-      {
         "label": "AutogenesTraining.mp3",
         "url": "https://juppijo.github.io/Autogenes-Training/AutogenesTraining.mp3",
         "icon": "✨"
       },
       {
-        "label": "eq_emotional_intelligence_test _2.html",
-        "url": "https://juppijo.github.io/Autogenes-Training/eq_emotional_intelligence_test _2.html",
+        "label": "autogenes-training-app_Cl.html",
+        "url": "https://juppijo.github.io/Autogenes-Training/autogenes-training-app_Cl.html",
         "icon": "✨"
       },
       {
         "label": "eq_emotional_intelligence_test.html",
         "url": "https://juppijo.github.io/Autogenes-Training/eq_emotional_intelligence_test.html",
+        "icon": "✨"
+      },
+      {
+        "label": "eq_emotional_intelligence_test _2.html",
+        "url": "https://juppijo.github.io/Autogenes-Training/eq_emotional_intelligence_test _2.html",
         "icon": "✨"
       },
       {
@@ -33,6 +33,11 @@
         "icon": "✨"
       },
       {
+        "label": "Innerer-Wahrnehmungs-Test.html",
+        "url": "https://juppijo.github.io/Autogenes-Training/Innerer-Wahrnehmungs-Test.html",
+        "icon": "✨"
+      },
+      {
         "label": "LisaK.html",
         "url": "https://juppijo.github.io/Autogenes-Training/LisaK.html",
         "icon": "✨"
@@ -43,23 +48,8 @@
         "icon": "✨"
       },
       {
-        "label": "Innerer-Wahrnehmungs-Test.html",
-        "url": "https://juppijo.github.io/Autogenes-Training/Innerer-Wahrnehmungs-Test.html",
-        "icon": "✨"
-      },
-      {
         "label": "Neuro-Pfad-Trainer.html",
         "url": "https://juppijo.github.io/Autogenes-Training/Neuro-Pfad-Trainer.html",
-        "icon": "✨"
-      },
-      {
-        "label": "Neurofunktionalität.html",
-        "url": "https://juppijo.github.io/Autogenes-Training/Neurofunktionalität.html",
-        "icon": "✨"
-      },
-      {
-        "label": "ZamiZen.jpg",
-        "url": "https://juppijo.github.io/Autogenes-Training/ZamiZen.jpg",
         "icon": "✨"
       },
       {
@@ -68,13 +58,28 @@
         "icon": "✨"
       },
       {
-        "label": "ZamiZen1.jpg",
-        "url": "https://juppijo.github.io/Autogenes-Training/ZamiZen1.jpg",
+        "label": "Neurofunktionalität.html",
+        "url": "https://juppijo.github.io/Autogenes-Training/Neurofunktionalität.html",
         "icon": "✨"
       },
       {
         "label": "yout.html",
         "url": "https://juppijo.github.io/Autogenes-Training/yout.html",
+        "icon": "✨"
+      },
+      {
+        "label": "README.md",
+        "url": "https://juppijo.github.io/Autogenes-Training/README.md",
+        "icon": "✨"
+      },
+      {
+        "label": "ZamiZen.jpg",
+        "url": "https://juppijo.github.io/Autogenes-Training/ZamiZen.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "ZamiZen1.jpg",
+        "url": "https://juppijo.github.io/Autogenes-Training/ZamiZen1.jpg",
         "icon": "✨"
       },
       {
@@ -85,11 +90,6 @@
       {
         "label": "ZamiZen3.jpg",
         "url": "https://juppijo.github.io/Autogenes-Training/ZamiZen3.jpg",
-        "icon": "✨"
-      },
-      {
-        "label": "README.md",
-        "url": "https://juppijo.github.io/Autogenes-Training/README.md",
         "icon": "✨"
       },
       {
@@ -118,11 +118,6 @@
         "icon": "✨"
       },
       {
-        "label": "Buch_Konverter_Pro/index.html",
-        "url": "https://juppijo.github.io/Dashboard/Buch_Konverter_Pro/index.html",
-        "icon": "✨"
-      },
-      {
         "label": "Buch_Konverter_Pro/style.css",
         "url": "https://juppijo.github.io/Dashboard/Buch_Konverter_Pro/style.css",
         "icon": "✨"
@@ -130,6 +125,16 @@
       {
         "label": "Buch_Konverter_Pro/script.js",
         "url": "https://juppijo.github.io/Dashboard/Buch_Konverter_Pro/script.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Buch_Konverter_Pro/index.html",
+        "url": "https://juppijo.github.io/Dashboard/Buch_Konverter_Pro/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "CSS-Editor/CSS-Editor-G.html",
+        "url": "https://juppijo.github.io/Dashboard/CSS-Editor/CSS-Editor-G.html",
         "icon": "✨"
       },
       {
@@ -148,8 +153,8 @@
         "icon": "✨"
       },
       {
-        "label": "CSS-Editor/CSS-Editor-G.html",
-        "url": "https://juppijo.github.io/Dashboard/CSS-Editor/CSS-Editor-G.html",
+        "label": "CSS-Editor/mein-element-2.css",
+        "url": "https://juppijo.github.io/Dashboard/CSS-Editor/mein-element-2.css",
         "icon": "✨"
       },
       {
@@ -158,8 +163,8 @@
         "icon": "✨"
       },
       {
-        "label": "CSS-Editor/mein-element-2.css",
-        "url": "https://juppijo.github.io/Dashboard/CSS-Editor/mein-element-2.css",
+        "label": "CSS-Editor/mein-element.css",
+        "url": "https://juppijo.github.io/Dashboard/CSS-Editor/mein-element.css",
         "icon": "✨"
       },
       {
@@ -168,23 +173,8 @@
         "icon": "✨"
       },
       {
-        "label": "CSS-Editor/mein-element.css",
-        "url": "https://juppijo.github.io/Dashboard/CSS-Editor/mein-element.css",
-        "icon": "✨"
-      },
-      {
         "label": "HTML-Galerie/index.html",
         "url": "https://juppijo.github.io/Dashboard/HTML-Galerie/index.html",
-        "icon": "✨"
-      },
-      {
-        "label": "markdown-editor/index.html",
-        "url": "https://juppijo.github.io/Dashboard/markdown-editor/index.html",
-        "icon": "✨"
-      },
-      {
-        "label": "markdown-editor/script.js",
-        "url": "https://juppijo.github.io/Dashboard/markdown-editor/script.js",
         "icon": "✨"
       },
       {
@@ -193,8 +183,18 @@
         "icon": "✨"
       },
       {
-        "label": "PDF_Editor/style.css",
-        "url": "https://juppijo.github.io/Dashboard/PDF_Editor/style.css",
+        "label": "markdown-editor/script.js",
+        "url": "https://juppijo.github.io/Dashboard/markdown-editor/script.js",
+        "icon": "✨"
+      },
+      {
+        "label": "markdown-editor/index.html",
+        "url": "https://juppijo.github.io/Dashboard/markdown-editor/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "PDF_Editor/script.js",
+        "url": "https://juppijo.github.io/Dashboard/PDF_Editor/script.js",
         "icon": "✨"
       },
       {
@@ -203,8 +203,8 @@
         "icon": "✨"
       },
       {
-        "label": "PDF_Editor/script.js",
-        "url": "https://juppijo.github.io/Dashboard/PDF_Editor/script.js",
+        "label": "PDF_Editor/style.css",
+        "url": "https://juppijo.github.io/Dashboard/PDF_Editor/style.css",
         "icon": "✨"
       },
       {
@@ -238,8 +238,18 @@
         "icon": "✨"
       },
       {
+        "label": "favicon.jpg",
+        "url": "https://juppijo.github.io/Dashboard/favicon.jpg",
+        "icon": "✨"
+      },
+      {
         "label": "HTML-Editor.html",
         "url": "https://juppijo.github.io/Dashboard/HTML-Editor.html",
+        "icon": "✨"
+      },
+      {
+        "label": "README.md",
+        "url": "https://juppijo.github.io/Dashboard/README.md",
         "icon": "✨"
       },
       {
@@ -248,13 +258,8 @@
         "icon": "✨"
       },
       {
-        "label": "favicon.jpg",
-        "url": "https://juppijo.github.io/Dashboard/favicon.jpg",
-        "icon": "✨"
-      },
-      {
-        "label": "README.md",
-        "url": "https://juppijo.github.io/Dashboard/README.md",
+        "label": "test.html",
+        "url": "https://juppijo.github.io/Dashboard/test.html",
         "icon": "✨"
       },
       {
@@ -265,11 +270,6 @@
       {
         "label": "styles.css",
         "url": "https://juppijo.github.io/Dashboard/styles.css",
-        "icon": "✨"
-      },
-      {
-        "label": "test.html",
-        "url": "https://juppijo.github.io/Dashboard/test.html",
         "icon": "✨"
       }
     ]
@@ -288,13 +288,13 @@
         "icon": "✨"
       },
       {
-        "label": "GPIO-Control-2/SecretLogin.h",
-        "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control-2/SecretLogin.h",
+        "label": "GPIO-Control-2/index.html",
+        "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control-2/index.html",
         "icon": "✨"
       },
       {
-        "label": "GPIO-Control-2/index.html",
-        "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control-2/index.html",
+        "label": "GPIO-Control-2/SecretLogin.h",
+        "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control-2/SecretLogin.h",
         "icon": "✨"
       },
       {
@@ -303,8 +303,8 @@
         "icon": "✨"
       },
       {
-        "label": "MiniCon/script.js",
-        "url": "https://juppijo.github.io/ESP32-S3/MiniCon/script.js",
+        "label": "MiniCon/index.html",
+        "url": "https://juppijo.github.io/ESP32-S3/MiniCon/index.html",
         "icon": "✨"
       },
       {
@@ -313,8 +313,8 @@
         "icon": "✨"
       },
       {
-        "label": "MiniCon/index.html",
-        "url": "https://juppijo.github.io/ESP32-S3/MiniCon/index.html",
+        "label": "MiniCon/script.js",
+        "url": "https://juppijo.github.io/ESP32-S3/MiniCon/script.js",
         "icon": "✨"
       },
       {
@@ -323,23 +323,23 @@
         "icon": "✨"
       },
       {
-        "label": "esp32_2.html",
-        "url": "https://juppijo.github.io/ESP32-S3/esp32_2.html",
-        "icon": "✨"
-      },
-      {
         "label": "esp32.html",
         "url": "https://juppijo.github.io/ESP32-S3/esp32.html",
         "icon": "✨"
       },
       {
-        "label": "WRZT_LaTex.html",
-        "url": "https://juppijo.github.io/ESP32-S3/WRZT_LaTex.html",
+        "label": "esp32_2.html",
+        "url": "https://juppijo.github.io/ESP32-S3/esp32_2.html",
         "icon": "✨"
       },
       {
         "label": "README.md",
         "url": "https://juppijo.github.io/ESP32-S3/README.md",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT_LaTex.html",
+        "url": "https://juppijo.github.io/ESP32-S3/WRZT_LaTex.html",
         "icon": "✨"
       }
     ]
@@ -348,8 +348,8 @@
     "title": "Garten",
     "links": [
       {
-        "label": "favicon.jpg",
-        "url": "https://juppijo.github.io/Garten/favicon.jpg",
+        "label": "index.html",
+        "url": "https://juppijo.github.io/Garten/index.html",
         "icon": "✨"
       },
       {
@@ -358,13 +358,18 @@
         "icon": "✨"
       },
       {
-        "label": "index.html",
-        "url": "https://juppijo.github.io/Garten/index.html",
+        "label": "favicon.jpg",
+        "url": "https://juppijo.github.io/Garten/favicon.jpg",
         "icon": "✨"
       },
       {
         "label": "mein-garten.json",
         "url": "https://juppijo.github.io/Garten/mein-garten.json",
+        "icon": "✨"
+      },
+      {
+        "label": "stone-layout-planner.html",
+        "url": "https://juppijo.github.io/Garten/stone-layout-planner.html",
         "icon": "✨"
       },
       {
@@ -378,11 +383,6 @@
         "icon": "✨"
       },
       {
-        "label": "stone-layout-planner.html",
-        "url": "https://juppijo.github.io/Garten/stone-layout-planner.html",
-        "icon": "✨"
-      },
-      {
         "label": "style.css",
         "url": "https://juppijo.github.io/Garten/style.css",
         "icon": "✨"
@@ -393,18 +393,8 @@
     "title": "Kegeln",
     "links": [
       {
-        "label": "Kegeln-1/games/hausnummer.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-1/games/hausnummer.js",
-        "icon": "✨"
-      },
-      {
         "label": "Kegeln-1/games/busfahren.js",
         "url": "https://juppijo.github.io/Kegeln/Kegeln-1/games/busfahren.js",
-        "icon": "✨"
-      },
-      {
-        "label": "Kegeln-1/games/einsacken.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-1/games/einsacken.js",
         "icon": "✨"
       },
       {
@@ -413,8 +403,18 @@
         "icon": "✨"
       },
       {
+        "label": "Kegeln-1/games/einsacken.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-1/games/einsacken.js",
+        "icon": "✨"
+      },
+      {
         "label": "Kegeln-1/games/idiot.js",
         "url": "https://juppijo.github.io/Kegeln/Kegeln-1/games/idiot.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-1/games/hausnummer.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-1/games/hausnummer.js",
         "icon": "✨"
       },
       {
@@ -428,6 +428,11 @@
         "icon": "✨"
       },
       {
+        "label": "Kegeln-1/games/siebzehnundvier.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-1/games/siebzehnundvier.js",
+        "icon": "✨"
+      },
+      {
         "label": "Kegeln-1/games/sechstagerennen.js",
         "url": "https://juppijo.github.io/Kegeln/Kegeln-1/games/sechstagerennen.js",
         "icon": "✨"
@@ -438,18 +443,13 @@
         "icon": "✨"
       },
       {
-        "label": "Kegeln-1/games/siebzehnundvier.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-1/games/siebzehnundvier.js",
+        "label": "Kegeln-1/index.html",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-1/index.html",
         "icon": "✨"
       },
       {
         "label": "Kegeln-1/kegelbuch.js",
         "url": "https://juppijo.github.io/Kegeln/Kegeln-1/kegelbuch.js",
-        "icon": "✨"
-      },
-      {
-        "label": "Kegeln-1/index.html",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-1/index.html",
         "icon": "✨"
       },
       {
@@ -468,6 +468,11 @@
         "icon": "✨"
       },
       {
+        "label": "Kegeln-2/js/config.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2/js/config.js",
+        "icon": "✨"
+      },
+      {
         "label": "Kegeln-2/js/main.js",
         "url": "https://juppijo.github.io/Kegeln/Kegeln-2/js/main.js",
         "icon": "✨"
@@ -478,23 +483,18 @@
         "icon": "✨"
       },
       {
-        "label": "Kegeln-2/js/config.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-2/js/config.js",
-        "icon": "✨"
-      },
-      {
         "label": "Kegeln-2/js/storage.js",
         "url": "https://juppijo.github.io/Kegeln/Kegeln-2/js/storage.js",
         "icon": "✨"
       },
       {
-        "label": "Kegeln-2/js/ärgere-dich-nicht.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-2/js/ärgere-dich-nicht.js",
+        "label": "Kegeln-2/js/ui.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2/js/ui.js",
         "icon": "✨"
       },
       {
-        "label": "Kegeln-2/js/ui.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-2/js/ui.js",
+        "label": "Kegeln-2/js/ärgere-dich-nicht.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2/js/ärgere-dich-nicht.js",
         "icon": "✨"
       },
       {
@@ -538,23 +538,13 @@
         "icon": "✨"
       },
       {
-        "label": "Kegeln-2/Vorlage-Kegelspiele.xlsx",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-2/Vorlage-Kegelspiele.xlsx",
-        "icon": "✨"
-      },
-      {
         "label": "Kegeln-2/sw.js",
         "url": "https://juppijo.github.io/Kegeln/Kegeln-2/sw.js",
         "icon": "✨"
       },
       {
-        "label": "Kegeln-2b/js/main.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/js/main.js",
-        "icon": "✨"
-      },
-      {
-        "label": "Kegeln-2b/js/games.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/js/games.js",
+        "label": "Kegeln-2/Vorlage-Kegelspiele.xlsx",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2/Vorlage-Kegelspiele.xlsx",
         "icon": "✨"
       },
       {
@@ -563,8 +553,8 @@
         "icon": "✨"
       },
       {
-        "label": "Kegeln-2b/js/ui.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/js/ui.js",
+        "label": "Kegeln-2b/js/games.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/js/games.js",
         "icon": "✨"
       },
       {
@@ -573,8 +563,23 @@
         "icon": "✨"
       },
       {
+        "label": "Kegeln-2b/js/main.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/js/main.js",
+        "icon": "✨"
+      },
+      {
         "label": "Kegeln-2b/js/ärgere-dich-nicht.js",
         "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/js/ärgere-dich-nicht.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-2b/js/ui.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/js/ui.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Kegeln-2b/Anleitung.txt",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/Anleitung.txt",
         "icon": "✨"
       },
       {
@@ -585,11 +590,6 @@
       {
         "label": "Kegeln-2b/Base64-Konverter.html",
         "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/Base64-Konverter.html",
-        "icon": "✨"
-      },
-      {
-        "label": "Kegeln-2b/Anleitung.txt",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/Anleitung.txt",
         "icon": "✨"
       },
       {
@@ -623,13 +623,13 @@
         "icon": "✨"
       },
       {
-        "label": "Kegeln-2b/Install.html",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/Install.html",
+        "label": "Kegeln-2b/index.html",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/index.html",
         "icon": "✨"
       },
       {
-        "label": "Kegeln-2b/index.html",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/index.html",
+        "label": "Kegeln-2b/Install.html",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/Install.html",
         "icon": "✨"
       },
       {
@@ -643,13 +643,13 @@
         "icon": "✨"
       },
       {
-        "label": "Kegeln-2b/Kegelclub_Setup_Alle_Mitglieder.json",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/Kegelclub_Setup_Alle_Mitglieder.json",
+        "label": "Kegeln-2b/kegel-server-starten.bat",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/kegel-server-starten.bat",
         "icon": "✨"
       },
       {
-        "label": "Kegeln-2b/kegel-server-starten.bat",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/kegel-server-starten.bat",
+        "label": "Kegeln-2b/Kegelclub_Setup_Alle_Mitglieder.json",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/Kegelclub_Setup_Alle_Mitglieder.json",
         "icon": "✨"
       },
       {
@@ -663,13 +663,13 @@
         "icon": "✨"
       },
       {
-        "label": "Kegeln-2b/server.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/server.js",
+        "label": "Kegeln-2b/kegel_hotspot_starten_2.bat",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/kegel_hotspot_starten_2.bat",
         "icon": "✨"
       },
       {
-        "label": "Kegeln-2b/kegel_hotspot_starten_2.bat",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/kegel_hotspot_starten_2.bat",
+        "label": "Kegeln-2b/server.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/server.js",
         "icon": "✨"
       },
       {
@@ -688,23 +688,13 @@
         "icon": "✨"
       },
       {
-        "label": "Kegeln-2b/sw.js",
-        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/sw.js",
-        "icon": "✨"
-      },
-      {
         "label": "Kegeln-2b/🎳 KegelClub Master Pro 🏆.pdf",
         "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/🎳 KegelClub Master Pro 🏆.pdf",
         "icon": "✨"
       },
       {
-        "label": "Punkte-Stand/Kegelclub_Stand(20.6.26).json",
-        "url": "https://juppijo.github.io/Kegeln/Punkte-Stand/Kegelclub_Stand(20.6.26).json",
-        "icon": "✨"
-      },
-      {
-        "label": "Punkte-Stand/Kegelclub_Stand(18.7.26).json",
-        "url": "https://juppijo.github.io/Kegeln/Punkte-Stand/Kegelclub_Stand(18.7.26).json",
+        "label": "Kegeln-2b/sw.js",
+        "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/sw.js",
         "icon": "✨"
       },
       {
@@ -718,8 +708,13 @@
         "icon": "✨"
       },
       {
-        "label": "Punkte-Stand/Kegelclub_Turnierstand(20.6.26).json",
-        "url": "https://juppijo.github.io/Kegeln/Punkte-Stand/Kegelclub_Turnierstand(20.6.26).json",
+        "label": "Punkte-Stand/Kegelclub_Stand(18.7.26).json",
+        "url": "https://juppijo.github.io/Kegeln/Punkte-Stand/Kegelclub_Stand(18.7.26).json",
+        "icon": "✨"
+      },
+      {
+        "label": "Punkte-Stand/Kegelclub_Stand(20.6.26).json",
+        "url": "https://juppijo.github.io/Kegeln/Punkte-Stand/Kegelclub_Stand(20.6.26).json",
         "icon": "✨"
       },
       {
@@ -728,18 +723,23 @@
         "icon": "✨"
       },
       {
+        "label": "Punkte-Stand/Kegelclub_Turnierstand(20.6.26).json",
+        "url": "https://juppijo.github.io/Kegeln/Punkte-Stand/Kegelclub_Turnierstand(20.6.26).json",
+        "icon": "✨"
+      },
+      {
         "label": "app.py",
         "url": "https://juppijo.github.io/Kegeln/app.py",
         "icon": "✨"
       },
       {
-        "label": "Hotspot.png",
-        "url": "https://juppijo.github.io/Kegeln/Hotspot.png",
+        "label": "Gebrauchts-Anweisung.html",
+        "url": "https://juppijo.github.io/Kegeln/Gebrauchts-Anweisung.html",
         "icon": "✨"
       },
       {
-        "label": "Gebrauchts-Anweisung.html",
-        "url": "https://juppijo.github.io/Kegeln/Gebrauchts-Anweisung.html",
+        "label": "Hotspot.png",
+        "url": "https://juppijo.github.io/Kegeln/Hotspot.png",
         "icon": "✨"
       },
       {
@@ -788,8 +788,8 @@
         "icon": "✨"
       },
       {
-        "label": "server.js",
-        "url": "https://juppijo.github.io/Kegeln/server.js",
+        "label": "README.md",
+        "url": "https://juppijo.github.io/Kegeln/README.md",
         "icon": "✨"
       },
       {
@@ -798,8 +798,8 @@
         "icon": "✨"
       },
       {
-        "label": "README.md",
-        "url": "https://juppijo.github.io/Kegeln/README.md",
+        "label": "server.js",
+        "url": "https://juppijo.github.io/Kegeln/server.js",
         "icon": "✨"
       },
       {
@@ -823,13 +823,13 @@
         "icon": "✨"
       },
       {
-        "label": "images/bild_11.jpg",
-        "url": "https://juppijo.github.io/Logik_des_Universums/images/bild_11.jpg",
+        "label": "images/bild_10.jpg",
+        "url": "https://juppijo.github.io/Logik_des_Universums/images/bild_10.jpg",
         "icon": "✨"
       },
       {
-        "label": "images/bild_10.jpg",
-        "url": "https://juppijo.github.io/Logik_des_Universums/images/bild_10.jpg",
+        "label": "images/bild_11.jpg",
+        "url": "https://juppijo.github.io/Logik_des_Universums/images/bild_11.jpg",
         "icon": "✨"
       },
       {
@@ -898,11 +898,6 @@
         "icon": "✨"
       },
       {
-        "label": "images/bild_25.jpg",
-        "url": "https://juppijo.github.io/Logik_des_Universums/images/bild_25.jpg",
-        "icon": "✨"
-      },
-      {
         "label": "images/bild_24.jpg",
         "url": "https://juppijo.github.io/Logik_des_Universums/images/bild_24.jpg",
         "icon": "✨"
@@ -910,6 +905,11 @@
       {
         "label": "images/bild_26.jpg",
         "url": "https://juppijo.github.io/Logik_des_Universums/images/bild_26.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "images/bild_25.jpg",
+        "url": "https://juppijo.github.io/Logik_des_Universums/images/bild_25.jpg",
         "icon": "✨"
       },
       {
@@ -928,13 +928,13 @@
         "icon": "✨"
       },
       {
-        "label": "images/bild_5.jpg",
-        "url": "https://juppijo.github.io/Logik_des_Universums/images/bild_5.jpg",
+        "label": "images/bild_4.jpg",
+        "url": "https://juppijo.github.io/Logik_des_Universums/images/bild_4.jpg",
         "icon": "✨"
       },
       {
-        "label": "images/bild_4.jpg",
-        "url": "https://juppijo.github.io/Logik_des_Universums/images/bild_4.jpg",
+        "label": "images/bild_5.jpg",
+        "url": "https://juppijo.github.io/Logik_des_Universums/images/bild_5.jpg",
         "icon": "✨"
       },
       {
@@ -943,8 +943,8 @@
         "icon": "✨"
       },
       {
-        "label": "images/bild_7.jpg",
-        "url": "https://juppijo.github.io/Logik_des_Universums/images/bild_7.jpg",
+        "label": "images/bild_8.jpg",
+        "url": "https://juppijo.github.io/Logik_des_Universums/images/bild_8.jpg",
         "icon": "✨"
       },
       {
@@ -953,13 +953,18 @@
         "icon": "✨"
       },
       {
-        "label": "images/bild_8.jpg",
-        "url": "https://juppijo.github.io/Logik_des_Universums/images/bild_8.jpg",
+        "label": "images/bild_7.jpg",
+        "url": "https://juppijo.github.io/Logik_des_Universums/images/bild_7.jpg",
         "icon": "✨"
       },
       {
         "label": "index.html",
         "url": "https://juppijo.github.io/Logik_des_Universums/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "konverter_docx_large.py",
+        "url": "https://juppijo.github.io/Logik_des_Universums/konverter_docx_large.py",
         "icon": "✨"
       },
       {
@@ -973,8 +978,8 @@
         "icon": "✨"
       },
       {
-        "label": "konverter_docx_large.py",
-        "url": "https://juppijo.github.io/Logik_des_Universums/konverter_docx_large.py",
+        "label": "konverter_smartphone_lu.py",
+        "url": "https://juppijo.github.io/Logik_des_Universums/konverter_smartphone_lu.py",
         "icon": "✨"
       },
       {
@@ -983,8 +988,8 @@
         "icon": "✨"
       },
       {
-        "label": "konverter_smartphone_lu.py",
-        "url": "https://juppijo.github.io/Logik_des_Universums/konverter_smartphone_lu.py",
+        "label": "script-s.js",
+        "url": "https://juppijo.github.io/Logik_des_Universums/script-s.js",
         "icon": "✨"
       },
       {
@@ -998,13 +1003,8 @@
         "icon": "✨"
       },
       {
-        "label": "script-s.js",
-        "url": "https://juppijo.github.io/Logik_des_Universums/script-s.js",
-        "icon": "✨"
-      },
-      {
-        "label": "style-s.css",
-        "url": "https://juppijo.github.io/Logik_des_Universums/style-s.css",
+        "label": "smart.html",
+        "url": "https://juppijo.github.io/Logik_des_Universums/smart.html",
         "icon": "✨"
       },
       {
@@ -1013,8 +1013,8 @@
         "icon": "✨"
       },
       {
-        "label": "smart.html",
-        "url": "https://juppijo.github.io/Logik_des_Universums/smart.html",
+        "label": "style-s.css",
+        "url": "https://juppijo.github.io/Logik_des_Universums/style-s.css",
         "icon": "✨"
       },
       {
@@ -1028,23 +1028,18 @@
     "title": "Musik_Zami",
     "links": [
       {
-        "label": "Lisa/sonic_lisajous.html",
-        "url": "https://juppijo.github.io/Musik_Zami/Lisa/sonic_lisajous.html",
-        "icon": "✨"
-      },
-      {
         "label": "Lisa/Zami.jpg",
         "url": "https://juppijo.github.io/Musik_Zami/Lisa/Zami.jpg",
         "icon": "✨"
       },
       {
-        "label": "Loop/index.html",
-        "url": "https://juppijo.github.io/Musik_Zami/Loop/index.html",
+        "label": "Lisa/sonic_lisajous.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Lisa/sonic_lisajous.html",
         "icon": "✨"
       },
       {
-        "label": "Loop/script.js",
-        "url": "https://juppijo.github.io/Musik_Zami/Loop/script.js",
+        "label": "Loop/index.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Loop/index.html",
         "icon": "✨"
       },
       {
@@ -1058,8 +1053,8 @@
         "icon": "✨"
       },
       {
-        "label": "Radio/index.html",
-        "url": "https://juppijo.github.io/Musik_Zami/Radio/index.html",
+        "label": "Loop/script.js",
+        "url": "https://juppijo.github.io/Musik_Zami/Loop/script.js",
         "icon": "✨"
       },
       {
@@ -1073,6 +1068,11 @@
         "icon": "✨"
       },
       {
+        "label": "Radio/index.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Radio/index.html",
+        "icon": "✨"
+      },
+      {
         "label": "Radio/script.js",
         "url": "https://juppijo.github.io/Musik_Zami/Radio/script.js",
         "icon": "✨"
@@ -1083,13 +1083,13 @@
         "icon": "✨"
       },
       {
-        "label": "Radio/style.css",
-        "url": "https://juppijo.github.io/Musik_Zami/Radio/style.css",
+        "label": "Radio/Zami.jpg",
+        "url": "https://juppijo.github.io/Musik_Zami/Radio/Zami.jpg",
         "icon": "✨"
       },
       {
-        "label": "Radio/Zami.jpg",
-        "url": "https://juppijo.github.io/Musik_Zami/Radio/Zami.jpg",
+        "label": "Radio/style.css",
+        "url": "https://juppijo.github.io/Musik_Zami/Radio/style.css",
         "icon": "✨"
       },
       {
@@ -1133,13 +1133,13 @@
         "icon": "✨"
       },
       {
-        "label": "README.md",
-        "url": "https://juppijo.github.io/Musik_Zami/README.md",
+        "label": "script.js",
+        "url": "https://juppijo.github.io/Musik_Zami/script.js",
         "icon": "✨"
       },
       {
-        "label": "script.js",
-        "url": "https://juppijo.github.io/Musik_Zami/script.js",
+        "label": "README.md",
+        "url": "https://juppijo.github.io/Musik_Zami/README.md",
         "icon": "✨"
       },
       {
@@ -1153,6 +1153,11 @@
         "icon": "✨"
       },
       {
+        "label": "style.css",
+        "url": "https://juppijo.github.io/Musik_Zami/style.css",
+        "icon": "✨"
+      },
+      {
         "label": "ZamiKlavier.jpeg",
         "url": "https://juppijo.github.io/Musik_Zami/ZamiKlavier.jpeg",
         "icon": "✨"
@@ -1160,11 +1165,6 @@
       {
         "label": "test.html",
         "url": "https://juppijo.github.io/Musik_Zami/test.html",
-        "icon": "✨"
-      },
-      {
-        "label": "style.css",
-        "url": "https://juppijo.github.io/Musik_Zami/style.css",
         "icon": "✨"
       },
       {
@@ -1193,13 +1193,13 @@
         "icon": "✨"
       },
       {
-        "label": "LaTex-Editor/script.js",
-        "url": "https://juppijo.github.io/Rechner/LaTex-Editor/script.js",
+        "label": "LaTex-Editor/style.css",
+        "url": "https://juppijo.github.io/Rechner/LaTex-Editor/style.css",
         "icon": "✨"
       },
       {
-        "label": "LaTex-Editor/style.css",
-        "url": "https://juppijo.github.io/Rechner/LaTex-Editor/style.css",
+        "label": "LaTex-Editor/script.js",
+        "url": "https://juppijo.github.io/Rechner/LaTex-Editor/script.js",
         "icon": "✨"
       },
       {
@@ -1208,13 +1208,13 @@
         "icon": "✨"
       },
       {
-        "label": "Strom-Verbrauch-Cl/script.js",
-        "url": "https://juppijo.github.io/Rechner/Strom-Verbrauch-Cl/script.js",
+        "label": "Strom-Verbrauch-Cl/index.html",
+        "url": "https://juppijo.github.io/Rechner/Strom-Verbrauch-Cl/index.html",
         "icon": "✨"
       },
       {
-        "label": "Strom-Verbrauch-Cl/index.html",
-        "url": "https://juppijo.github.io/Rechner/Strom-Verbrauch-Cl/index.html",
+        "label": "Strom-Verbrauch-Cl/script.js",
+        "url": "https://juppijo.github.io/Rechner/Strom-Verbrauch-Cl/script.js",
         "icon": "✨"
       },
       {
@@ -1233,13 +1233,13 @@
         "icon": "✨"
       },
       {
-        "label": "editor_pro.html",
-        "url": "https://juppijo.github.io/Rechner/editor_pro.html",
+        "label": "AstroPhysCalc.html",
+        "url": "https://juppijo.github.io/Rechner/AstroPhysCalc.html",
         "icon": "✨"
       },
       {
-        "label": "AstroPhysCalc.html",
-        "url": "https://juppijo.github.io/Rechner/AstroPhysCalc.html",
+        "label": "editor_pro.html",
+        "url": "https://juppijo.github.io/Rechner/editor_pro.html",
         "icon": "✨"
       },
       {
@@ -1278,13 +1278,13 @@
         "icon": "✨"
       },
       {
-        "label": "html-fortgeschritten.html",
-        "url": "https://juppijo.github.io/Rechner/html-fortgeschritten.html",
+        "label": "html-funsion.py",
+        "url": "https://juppijo.github.io/Rechner/html-funsion.py",
         "icon": "✨"
       },
       {
-        "label": "html-funsion.py",
-        "url": "https://juppijo.github.io/Rechner/html-funsion.py",
+        "label": "html-fortgeschritten.html",
+        "url": "https://juppijo.github.io/Rechner/html-fortgeschritten.html",
         "icon": "✨"
       },
       {
@@ -1308,13 +1308,13 @@
         "icon": "✨"
       },
       {
-        "label": "lumi.png",
-        "url": "https://juppijo.github.io/Rechner/lumi.png",
+        "label": "Luminara.ttf",
+        "url": "https://juppijo.github.io/Rechner/Luminara.ttf",
         "icon": "✨"
       },
       {
-        "label": "Luminara.ttf",
-        "url": "https://juppijo.github.io/Rechner/Luminara.ttf",
+        "label": "lumi.png",
+        "url": "https://juppijo.github.io/Rechner/lumi.png",
         "icon": "✨"
       },
       {
@@ -1363,13 +1363,13 @@
         "icon": "✨"
       },
       {
-        "label": "README.md",
-        "url": "https://juppijo.github.io/Rechner/README.md",
+        "label": "Rechner_CGTP.html",
+        "url": "https://juppijo.github.io/Rechner/Rechner_CGTP.html",
         "icon": "✨"
       },
       {
-        "label": "Rechner_CGTP.html",
-        "url": "https://juppijo.github.io/Rechner/Rechner_CGTP.html",
+        "label": "README.md",
+        "url": "https://juppijo.github.io/Rechner/README.md",
         "icon": "✨"
       },
       {
@@ -1378,23 +1378,18 @@
         "icon": "✨"
       },
       {
-        "label": "Rechner_G.html",
-        "url": "https://juppijo.github.io/Rechner/Rechner_G.html",
-        "icon": "✨"
-      },
-      {
         "label": "Rechner_DS2.html",
         "url": "https://juppijo.github.io/Rechner/Rechner_DS2.html",
         "icon": "✨"
       },
       {
-        "label": "Zami_Calc.jpg",
-        "url": "https://juppijo.github.io/Rechner/Zami_Calc.jpg",
+        "label": "Rechner_G.html",
+        "url": "https://juppijo.github.io/Rechner/Rechner_G.html",
         "icon": "✨"
       },
       {
-        "label": "Schrift.html",
-        "url": "https://juppijo.github.io/Rechner/Schrift.html",
+        "label": "Thales.html",
+        "url": "https://juppijo.github.io/Rechner/Thales.html",
         "icon": "✨"
       },
       {
@@ -1403,8 +1398,13 @@
         "icon": "✨"
       },
       {
-        "label": "Thales.html",
-        "url": "https://juppijo.github.io/Rechner/Thales.html",
+        "label": "Schrift.html",
+        "url": "https://juppijo.github.io/Rechner/Schrift.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Zami_Calc.jpg",
+        "url": "https://juppijo.github.io/Rechner/Zami_Calc.jpg",
         "icon": "✨"
       }
     ]
@@ -1453,6 +1453,11 @@
         "icon": "✨"
       },
       {
+        "label": "8-Brokate/images/image1.png",
+        "url": "https://juppijo.github.io/TaiChi/8-Brokate/images/image1.png",
+        "icon": "✨"
+      },
+      {
         "label": "8-Brokate/images/image10.png",
         "url": "https://juppijo.github.io/TaiChi/8-Brokate/images/image10.png",
         "icon": "✨"
@@ -1463,18 +1468,13 @@
         "icon": "✨"
       },
       {
-        "label": "8-Brokate/images/image1.png",
-        "url": "https://juppijo.github.io/TaiChi/8-Brokate/images/image1.png",
+        "label": "8-Brokate/images/image12.png",
+        "url": "https://juppijo.github.io/TaiChi/8-Brokate/images/image12.png",
         "icon": "✨"
       },
       {
         "label": "8-Brokate/images/image13.png",
         "url": "https://juppijo.github.io/TaiChi/8-Brokate/images/image13.png",
-        "icon": "✨"
-      },
-      {
-        "label": "8-Brokate/images/image12.png",
-        "url": "https://juppijo.github.io/TaiChi/8-Brokate/images/image12.png",
         "icon": "✨"
       },
       {
@@ -1498,13 +1498,13 @@
         "icon": "✨"
       },
       {
-        "label": "8-Brokate/images/image19.png",
-        "url": "https://juppijo.github.io/TaiChi/8-Brokate/images/image19.png",
+        "label": "8-Brokate/images/image18.png",
+        "url": "https://juppijo.github.io/TaiChi/8-Brokate/images/image18.png",
         "icon": "✨"
       },
       {
-        "label": "8-Brokate/images/image18.png",
-        "url": "https://juppijo.github.io/TaiChi/8-Brokate/images/image18.png",
+        "label": "8-Brokate/images/image19.png",
+        "url": "https://juppijo.github.io/TaiChi/8-Brokate/images/image19.png",
         "icon": "✨"
       },
       {
@@ -1598,13 +1598,13 @@
         "icon": "✨"
       },
       {
-        "label": "Kum-Nye/index.html",
-        "url": "https://juppijo.github.io/TaiChi/Kum-Nye/index.html",
+        "label": "Kum-Nye/KumNye.mp3",
+        "url": "https://juppijo.github.io/TaiChi/Kum-Nye/KumNye.mp3",
         "icon": "✨"
       },
       {
-        "label": "Kum-Nye/KumNye.mp3",
-        "url": "https://juppijo.github.io/TaiChi/Kum-Nye/KumNye.mp3",
+        "label": "Kum-Nye/index.html",
+        "url": "https://juppijo.github.io/TaiChi/Kum-Nye/index.html",
         "icon": "✨"
       },
       {
@@ -1628,13 +1628,13 @@
         "icon": "✨"
       },
       {
-        "label": "index.html",
-        "url": "https://juppijo.github.io/TaiChi/index.html",
+        "label": "Gayatri Mantra.mp3",
+        "url": "https://juppijo.github.io/TaiChi/Gayatri Mantra.mp3",
         "icon": "✨"
       },
       {
-        "label": "Gayatri Mantra.mp3",
-        "url": "https://juppijo.github.io/TaiChi/Gayatri Mantra.mp3",
+        "label": "index.html",
+        "url": "https://juppijo.github.io/TaiChi/index.html",
         "icon": "✨"
       },
       {
@@ -1683,13 +1683,13 @@
         "icon": "✨"
       },
       {
-        "label": "zami_übung1.png",
-        "url": "https://juppijo.github.io/TaiChi/zami_übung1.png",
+        "label": "zami_übung2.png",
+        "url": "https://juppijo.github.io/TaiChi/zami_übung2.png",
         "icon": "✨"
       },
       {
-        "label": "zami_übung2.png",
-        "url": "https://juppijo.github.io/TaiChi/zami_übung2.png",
+        "label": "zami_übung1.png",
+        "url": "https://juppijo.github.io/TaiChi/zami_übung1.png",
         "icon": "✨"
       },
       {
@@ -1700,11 +1700,6 @@
       {
         "label": "zami_übung4.png",
         "url": "https://juppijo.github.io/TaiChi/zami_übung4.png",
-        "icon": "✨"
-      },
-      {
-        "label": "zami_übung7.png",
-        "url": "https://juppijo.github.io/TaiChi/zami_übung7.png",
         "icon": "✨"
       },
       {
@@ -1728,13 +1723,18 @@
         "icon": "✨"
       },
       {
-        "label": "zami_übungen_Titel.png",
-        "url": "https://juppijo.github.io/TaiChi/zami_übungen_Titel.png",
+        "label": "zami_übung7.png",
+        "url": "https://juppijo.github.io/TaiChi/zami_übung7.png",
         "icon": "✨"
       },
       {
         "label": "zami_übung_Z.png",
         "url": "https://juppijo.github.io/TaiChi/zami_übung_Z.png",
+        "icon": "✨"
+      },
+      {
+        "label": "zami_übungen_Titel.png",
+        "url": "https://juppijo.github.io/TaiChi/zami_übungen_Titel.png",
         "icon": "✨"
       }
     ]
@@ -1793,13 +1793,13 @@
         "icon": "✨"
       },
       {
-        "label": "zen_atem_pwa_gefuhrter_meditationsmodus (4).html",
-        "url": "https://juppijo.github.io/TNH/zen_atem_pwa_gefuhrter_meditationsmodus (4).html",
+        "label": "zen_atem_pwa_gefuhrter_meditationsmodus (2).html",
+        "url": "https://juppijo.github.io/TNH/zen_atem_pwa_gefuhrter_meditationsmodus (2).html",
         "icon": "✨"
       },
       {
-        "label": "zen_atem_pwa_gefuhrter_meditationsmodus (2).html",
-        "url": "https://juppijo.github.io/TNH/zen_atem_pwa_gefuhrter_meditationsmodus (2).html",
+        "label": "zen_atem_pwa_gefuhrter_meditationsmodus.html",
+        "url": "https://juppijo.github.io/TNH/zen_atem_pwa_gefuhrter_meditationsmodus.html",
         "icon": "✨"
       },
       {
@@ -1813,8 +1813,8 @@
         "icon": "✨"
       },
       {
-        "label": "zen_atem_pwa_gefuhrter_meditationsmodus.html",
-        "url": "https://juppijo.github.io/TNH/zen_atem_pwa_gefuhrter_meditationsmodus.html",
+        "label": "zen_atem_pwa_gefuhrter_meditationsmodus (4).html",
+        "url": "https://juppijo.github.io/TNH/zen_atem_pwa_gefuhrter_meditationsmodus (4).html",
         "icon": "✨"
       }
     ]
@@ -1822,11 +1822,6 @@
   {
     "title": "WRZT",
     "links": [
-      {
-        "label": "G-E-Welle/index.html",
-        "url": "https://juppijo.github.io/WRZT/G-E-Welle/index.html",
-        "icon": "✨"
-      },
       {
         "label": "G-E-Welle/G-E-Welle-1.html",
         "url": "https://juppijo.github.io/WRZT/G-E-Welle/G-E-Welle-1.html",
@@ -1838,13 +1833,13 @@
         "icon": "✨"
       },
       {
-        "label": "G-E-Welle/MD_Editor.html",
-        "url": "https://juppijo.github.io/WRZT/G-E-Welle/MD_Editor.html",
+        "label": "G-E-Welle/index.html",
+        "url": "https://juppijo.github.io/WRZT/G-E-Welle/index.html",
         "icon": "✨"
       },
       {
-        "label": "G-E-Welle/script.js",
-        "url": "https://juppijo.github.io/WRZT/G-E-Welle/script.js",
+        "label": "G-E-Welle/MD_Editor.html",
+        "url": "https://juppijo.github.io/WRZT/G-E-Welle/MD_Editor.html",
         "icon": "✨"
       },
       {
@@ -1853,13 +1848,8 @@
         "icon": "✨"
       },
       {
-        "label": "G-E-Welle/style.css",
-        "url": "https://juppijo.github.io/WRZT/G-E-Welle/style.css",
-        "icon": "✨"
-      },
-      {
-        "label": "G-E-Welle/Wellenfeld-Gleichung.html",
-        "url": "https://juppijo.github.io/WRZT/G-E-Welle/Wellenfeld-Gleichung.html",
+        "label": "G-E-Welle/script.js",
+        "url": "https://juppijo.github.io/WRZT/G-E-Welle/script.js",
         "icon": "✨"
       },
       {
@@ -1868,8 +1858,23 @@
         "icon": "✨"
       },
       {
+        "label": "G-E-Welle/Wellenfeld-Gleichung.html",
+        "url": "https://juppijo.github.io/WRZT/G-E-Welle/Wellenfeld-Gleichung.html",
+        "icon": "✨"
+      },
+      {
+        "label": "G-E-Welle/style.css",
+        "url": "https://juppijo.github.io/WRZT/G-E-Welle/style.css",
+        "icon": "✨"
+      },
+      {
         "label": "HT/GravitationTrägheit.html",
         "url": "https://juppijo.github.io/WRZT/HT/GravitationTrägheit.html",
+        "icon": "✨"
+      },
+      {
+        "label": "HT/index.html",
+        "url": "https://juppijo.github.io/WRZT/HT/index.html",
         "icon": "✨"
       },
       {
@@ -1880,11 +1885,6 @@
       {
         "label": "HT/photon2(2).html",
         "url": "https://juppijo.github.io/WRZT/HT/photon2(2).html",
-        "icon": "✨"
-      },
-      {
-        "label": "HT/index.html",
-        "url": "https://juppijo.github.io/WRZT/HT/index.html",
         "icon": "✨"
       },
       {
@@ -1903,23 +1903,13 @@
         "icon": "✨"
       },
       {
-        "label": "HT/photon2(3D) (3).html",
-        "url": "https://juppijo.github.io/WRZT/HT/photon2(3D) (3).html",
-        "icon": "✨"
-      },
-      {
-        "label": "HT/photon2(3D).html",
-        "url": "https://juppijo.github.io/WRZT/HT/photon2(3D).html",
-        "icon": "✨"
-      },
-      {
         "label": "HT/photon2(4).html",
         "url": "https://juppijo.github.io/WRZT/HT/photon2(4).html",
         "icon": "✨"
       },
       {
-        "label": "HT/spiral_undatron (Kopie).html",
-        "url": "https://juppijo.github.io/WRZT/HT/spiral_undatron (Kopie).html",
+        "label": "HT/photon2(3D) (3).html",
+        "url": "https://juppijo.github.io/WRZT/HT/photon2(3D) (3).html",
         "icon": "✨"
       },
       {
@@ -1928,8 +1918,13 @@
         "icon": "✨"
       },
       {
-        "label": "HT/spiral_undatron.html",
-        "url": "https://juppijo.github.io/WRZT/HT/spiral_undatron.html",
+        "label": "HT/photon2(3D).html",
+        "url": "https://juppijo.github.io/WRZT/HT/photon2(3D).html",
+        "icon": "✨"
+      },
+      {
+        "label": "HT/spiral_undatron (Kopie).html",
+        "url": "https://juppijo.github.io/WRZT/HT/spiral_undatron (Kopie).html",
         "icon": "✨"
       },
       {
@@ -1943,6 +1938,11 @@
         "icon": "✨"
       },
       {
+        "label": "HT/spiral_undatron.html",
+        "url": "https://juppijo.github.io/WRZT/HT/spiral_undatron.html",
+        "icon": "✨"
+      },
+      {
         "label": "HT/t2.html",
         "url": "https://juppijo.github.io/WRZT/HT/t2.html",
         "icon": "✨"
@@ -1953,13 +1953,13 @@
         "icon": "✨"
       },
       {
-        "label": "HT/U_Tensor.html",
-        "url": "https://juppijo.github.io/WRZT/HT/U_Tensor.html",
+        "label": "HT/Undatron_Formel.html",
+        "url": "https://juppijo.github.io/WRZT/HT/Undatron_Formel.html",
         "icon": "✨"
       },
       {
-        "label": "HT/Undatron_Formel.html",
-        "url": "https://juppijo.github.io/WRZT/HT/Undatron_Formel.html",
+        "label": "HT/U_Tensor.html",
+        "url": "https://juppijo.github.io/WRZT/HT/U_Tensor.html",
         "icon": "✨"
       },
       {
@@ -1998,8 +1998,8 @@
         "icon": "✨"
       },
       {
-        "label": "HT/wrznt_netzwerk_simulation.html",
-        "url": "https://juppijo.github.io/WRZT/HT/wrznt_netzwerk_simulation.html",
+        "label": "HT/wrzt_kapitel_gravitation_lichtgeschwindigkeit.html",
+        "url": "https://juppijo.github.io/WRZT/HT/wrzt_kapitel_gravitation_lichtgeschwindigkeit.html",
         "icon": "✨"
       },
       {
@@ -2008,18 +2008,18 @@
         "icon": "✨"
       },
       {
-        "label": "HT/wrzt_kapitel_gravitation_lichtgeschwindigkeit.html",
-        "url": "https://juppijo.github.io/WRZT/HT/wrzt_kapitel_gravitation_lichtgeschwindigkeit.html",
-        "icon": "✨"
-      },
-      {
-        "label": "HTML_Merge_Studio/index.html",
-        "url": "https://juppijo.github.io/WRZT/HTML_Merge_Studio/index.html",
+        "label": "HT/wrznt_netzwerk_simulation.html",
+        "url": "https://juppijo.github.io/WRZT/HT/wrznt_netzwerk_simulation.html",
         "icon": "✨"
       },
       {
         "label": "HTML_Merge_Studio/style.css",
         "url": "https://juppijo.github.io/WRZT/HTML_Merge_Studio/style.css",
+        "icon": "✨"
+      },
+      {
+        "label": "HTML_Merge_Studio/index.html",
+        "url": "https://juppijo.github.io/WRZT/HTML_Merge_Studio/index.html",
         "icon": "✨"
       },
       {
@@ -2033,13 +2033,13 @@
         "icon": "✨"
       },
       {
-        "label": "Plasmafrequenz/Wirbelströme.html",
-        "url": "https://juppijo.github.io/WRZT/Plasmafrequenz/Wirbelströme.html",
+        "label": "Plasmafrequenz/Screenshot 2026-07-18 152341.png",
+        "url": "https://juppijo.github.io/WRZT/Plasmafrequenz/Screenshot 2026-07-18 152341.png",
         "icon": "✨"
       },
       {
-        "label": "Plasmafrequenz/Screenshot 2026-07-18 152341.png",
-        "url": "https://juppijo.github.io/WRZT/Plasmafrequenz/Screenshot 2026-07-18 152341.png",
+        "label": "Plasmafrequenz/Wirbelströme.html",
+        "url": "https://juppijo.github.io/WRZT/Plasmafrequenz/Wirbelströme.html",
         "icon": "✨"
       },
       {
@@ -2093,13 +2093,18 @@
         "icon": "✨"
       },
       {
-        "label": "WRZNT/WRZNT.html",
-        "url": "https://juppijo.github.io/WRZT/WRZNT/WRZNT.html",
+        "label": "WRZNT/Rmin_Kurve_G3.html",
+        "url": "https://juppijo.github.io/WRZT/WRZNT/Rmin_Kurve_G3.html",
         "icon": "✨"
       },
       {
-        "label": "WRZNT/Rmin_Kurve_G3.html",
-        "url": "https://juppijo.github.io/WRZT/WRZNT/Rmin_Kurve_G3.html",
+        "label": "WRZNT/sinus-cube-3d.html",
+        "url": "https://juppijo.github.io/WRZT/WRZNT/sinus-cube-3d.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZNT/WRZNT.html",
+        "url": "https://juppijo.github.io/WRZT/WRZNT/WRZNT.html",
         "icon": "✨"
       },
       {
@@ -2113,8 +2118,8 @@
         "icon": "✨"
       },
       {
-        "label": "WRZNT/sinus-cube-3d.html",
-        "url": "https://juppijo.github.io/WRZT/WRZNT/sinus-cube-3d.html",
+        "label": "WRZNT_C/script (Kopie).js",
+        "url": "https://juppijo.github.io/WRZT/WRZNT_C/script (Kopie).js",
         "icon": "✨"
       },
       {
@@ -2125,11 +2130,6 @@
       {
         "label": "WRZNT_C/script.js",
         "url": "https://juppijo.github.io/WRZT/WRZNT_C/script.js",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZNT_C/script (Kopie).js",
-        "url": "https://juppijo.github.io/WRZT/WRZNT_C/script (Kopie).js",
         "icon": "✨"
       },
       {
@@ -2158,6 +2158,11 @@
         "icon": "✨"
       },
       {
+        "label": "WRZT2/Latex-Rechner-Cl/script.js",
+        "url": "https://juppijo.github.io/WRZT/WRZT2/Latex-Rechner-Cl/script.js",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT2/Latex-Rechner-Cl/index.html",
         "url": "https://juppijo.github.io/WRZT/WRZT2/Latex-Rechner-Cl/index.html",
         "icon": "✨"
@@ -2165,11 +2170,6 @@
       {
         "label": "WRZT2/Latex-Rechner-Cl/style.css",
         "url": "https://juppijo.github.io/WRZT/WRZT2/Latex-Rechner-Cl/style.css",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT2/Latex-Rechner-Cl/script.js",
-        "url": "https://juppijo.github.io/WRZT/WRZT2/Latex-Rechner-Cl/script.js",
         "icon": "✨"
       },
       {
@@ -2198,11 +2198,6 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT2/Lichtbrechung.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT2/Lichtbrechung.html",
-        "icon": "✨"
-      },
-      {
         "label": "WRZT2/Kopplung des Elektrons.html",
         "url": "https://juppijo.github.io/WRZT/WRZT2/Kopplung des Elektrons.html",
         "icon": "✨"
@@ -2223,6 +2218,11 @@
         "icon": "✨"
       },
       {
+        "label": "WRZT2/Lichtbrechung.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT2/Lichtbrechung.html",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT2/Lorenz.md",
         "url": "https://juppijo.github.io/WRZT/WRZT2/Lorenz.md",
         "icon": "✨"
@@ -2233,13 +2233,13 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT2/Lorenz_Trigo.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT2/Lorenz_Trigo.html",
+        "label": "WRZT2/Magnetische-Feldkonstante.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT2/Magnetische-Feldkonstante.html",
         "icon": "✨"
       },
       {
-        "label": "WRZT2/Magnetische-Feldkonstante.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT2/Magnetische-Feldkonstante.html",
+        "label": "WRZT2/Lorenz_Trigo.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT2/Lorenz_Trigo.html",
         "icon": "✨"
       },
       {
@@ -2253,11 +2253,6 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT2/Raumzeit-Feldwirbel.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT2/Raumzeit-Feldwirbel.html",
-        "icon": "✨"
-      },
-      {
         "label": "WRZT2/milestone-geometrie.html",
         "url": "https://juppijo.github.io/WRZT/WRZT2/milestone-geometrie.html",
         "icon": "✨"
@@ -2268,13 +2263,18 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT2/Topologischer-3D-Raumwirbel.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT2/Topologischer-3D-Raumwirbel.html",
+        "label": "WRZT2/Raumzeit-Feldwirbel.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT2/Raumzeit-Feldwirbel.html",
         "icon": "✨"
       },
       {
         "label": "WRZT2/Spin-Herleitungen-2.html",
         "url": "https://juppijo.github.io/WRZT/WRZT2/Spin-Herleitungen-2.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT2/Topologischer-3D-Raumwirbel.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT2/Topologischer-3D-Raumwirbel.html",
         "icon": "✨"
       },
       {
@@ -2293,11 +2293,6 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT3/WRZT-Sections/3D-Netzwerkmodell-section.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/3D-Netzwerkmodell-section.html",
-        "icon": "✨"
-      },
-      {
         "label": "WRZT3/WRZT-Sections/W1 - Kopie.html",
         "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/W1 - Kopie.html",
         "icon": "✨"
@@ -2305,6 +2300,11 @@
       {
         "label": "WRZT3/WRZT-Sections/W1.html",
         "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/W1.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT3/WRZT-Sections/3D-Netzwerkmodell-section.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/3D-Netzwerkmodell-section.html",
         "icon": "✨"
       },
       {
@@ -2378,11 +2378,6 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v312.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v312.html",
-        "icon": "✨"
-      },
-      {
         "label": "WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v312.md",
         "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v312.md",
         "icon": "✨"
@@ -2390,6 +2385,11 @@
       {
         "label": "WRZT3/WRZT-Sections/WRZT-v303.html",
         "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/WRZT-v303.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v312.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v312.html",
         "icon": "✨"
       },
       {
@@ -2408,13 +2408,13 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT3/WRZT-Sections/wrzt_sektionen_editor.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/wrzt_sektionen_editor.html",
+        "label": "WRZT3/WRZT-Sections/WRZT_Vers_3.03_Einheits_Manifest.md",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/WRZT_Vers_3.03_Einheits_Manifest.md",
         "icon": "✨"
       },
       {
-        "label": "WRZT3/WRZT-Sections/WRZT_Vers_3.03_Einheits_Manifest.md",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/WRZT_Vers_3.03_Einheits_Manifest.md",
+        "label": "WRZT3/WRZT-Sections/wrzt_sektionen_editor.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/wrzt_sektionen_editor.html",
         "icon": "✨"
       },
       {
@@ -2508,18 +2508,13 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT3/WRZT_Einheits_Manifest.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Einheits_Manifest.html",
-        "icon": "✨"
-      },
-      {
         "label": "WRZT3/WRZT_Fiat_Lux.html",
         "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Fiat_Lux.html",
         "icon": "✨"
       },
       {
-        "label": "WRZT3/WRZT_Final_Edition_v3.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Final_Edition_v3.html",
+        "label": "WRZT3/WRZT_Einheits_Manifest.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Einheits_Manifest.html",
         "icon": "✨"
       },
       {
@@ -2528,18 +2523,23 @@
         "icon": "✨"
       },
       {
+        "label": "WRZT3/WRZT_Final_Edition_v3.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Final_Edition_v3.html",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT3/WRZT_Formelsammlung_b.html",
         "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Formelsammlung_b.html",
         "icon": "✨"
       },
       {
-        "label": "WRZT3/WRZT_Gitter_Simulation.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Gitter_Simulation.html",
+        "label": "WRZT3/WRZT_Herleitung_Rmin_LaTeX.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Herleitung_Rmin_LaTeX.html",
         "icon": "✨"
       },
       {
-        "label": "WRZT3/WRZT_Herleitung_Rmin_LaTeX.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Herleitung_Rmin_LaTeX.html",
+        "label": "WRZT3/WRZT_Gitter_Simulation.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Gitter_Simulation.html",
         "icon": "✨"
       },
       {
@@ -2558,13 +2558,13 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT3/WRZT_Sim.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Sim.html",
+        "label": "WRZT3/WRZT_Trans.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Trans.html",
         "icon": "✨"
       },
       {
-        "label": "WRZT3/WRZT_Urknall.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Urknall.html",
+        "label": "WRZT3/WRZT_Sim.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Sim.html",
         "icon": "✨"
       },
       {
@@ -2573,18 +2573,18 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT3/WRZT_Trans.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Trans.html",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT4/Fiat_Lux/images/image1.jpg",
-        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/images/image1.jpg",
+        "label": "WRZT3/WRZT_Urknall.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Urknall.html",
         "icon": "✨"
       },
       {
         "label": "WRZT4/Fiat_Lux/images/image10.jpg",
         "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/images/image10.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/images/image1.jpg",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/images/image1.jpg",
         "icon": "✨"
       },
       {
@@ -2618,6 +2618,16 @@
         "icon": "✨"
       },
       {
+        "label": "WRZT4/Fiat_Lux/images/image6.jpg",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/images/image6.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/images/image9.jpg",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/images/image9.jpg",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT4/Fiat_Lux/images/image8.jpg",
         "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/images/image8.jpg",
         "icon": "✨"
@@ -2628,18 +2638,13 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT4/Fiat_Lux/images/image9.jpg",
-        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/images/image9.jpg",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT4/Fiat_Lux/images/image6.jpg",
-        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/images/image6.jpg",
-        "icon": "✨"
-      },
-      {
         "label": "WRZT4/Fiat_Lux/index.html",
         "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/WRZT_Gesamtmanifest.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT_Gesamtmanifest.html",
         "icon": "✨"
       },
       {
@@ -2648,18 +2653,23 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT4/HTML‑Werkstatt/HTML-Tools/HTML-Tools-Test.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT4/HTML‑Werkstatt/HTML-Tools/HTML-Tools-Test.html",
-        "icon": "✨"
-      },
-      {
         "label": "WRZT4/HTML‑Werkstatt/HTML-Tools/prompt.txt",
         "url": "https://juppijo.github.io/WRZT/WRZT4/HTML‑Werkstatt/HTML-Tools/prompt.txt",
         "icon": "✨"
       },
       {
+        "label": "WRZT4/HTML‑Werkstatt/HTML-Tools/HTML-Tools-Test.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/HTML‑Werkstatt/HTML-Tools/HTML-Tools-Test.html",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT4/HTML‑Werkstatt/HTML-Tools/Zaminia_HTML5_Studio.html",
         "url": "https://juppijo.github.io/WRZT/WRZT4/HTML‑Werkstatt/HTML-Tools/Zaminia_HTML5_Studio.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/HTML‑Werkstatt/index.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/HTML‑Werkstatt/index.html",
         "icon": "✨"
       },
       {
@@ -2670,11 +2680,6 @@
       {
         "label": "WRZT4/HTML‑Werkstatt/script.js",
         "url": "https://juppijo.github.io/WRZT/WRZT4/HTML‑Werkstatt/script.js",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT4/HTML‑Werkstatt/index.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT4/HTML‑Werkstatt/index.html",
         "icon": "✨"
       },
       {
@@ -2693,6 +2698,11 @@
         "icon": "✨"
       },
       {
+        "label": "WRZT4/arc.jpg",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/arc.jpg",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT4/arc.html",
         "url": "https://juppijo.github.io/WRZT/WRZT4/arc.html",
         "icon": "✨"
@@ -2700,11 +2710,6 @@
       {
         "label": "WRZT4/elektron_wirbel.html",
         "url": "https://juppijo.github.io/WRZT/WRZT4/elektron_wirbel.html",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT4/arc.jpg",
-        "url": "https://juppijo.github.io/WRZT/WRZT4/arc.jpg",
         "icon": "✨"
       },
       {
@@ -2728,13 +2733,13 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT4/Sonnenfinsternis_cl.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT4/Sonnenfinsternis_cl.html",
+        "label": "WRZT4/Sonnenfinsternis3.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Sonnenfinsternis3.html",
         "icon": "✨"
       },
       {
-        "label": "WRZT4/Sonnenfinsternis3.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT4/Sonnenfinsternis3.html",
+        "label": "WRZT4/Sonnenfinsternis_cl.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Sonnenfinsternis_cl.html",
         "icon": "✨"
       },
       {
@@ -2743,13 +2748,13 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT4/Torus_2.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT4/Torus_2.html",
+        "label": "WRZT4/Torus.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Torus.html",
         "icon": "✨"
       },
       {
-        "label": "WRZT4/Torus.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT4/Torus.html",
+        "label": "WRZT4/Torus_2.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Torus_2.html",
         "icon": "✨"
       },
       {
@@ -2758,23 +2763,18 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT4/WRZTv4.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT4/WRZTv4.html",
-        "icon": "✨"
-      },
-      {
         "label": "WRZT4/Torus_R.html",
         "url": "https://juppijo.github.io/WRZT/WRZT4/Torus_R.html",
         "icon": "✨"
       },
       {
-        "label": "WRZT4/WRZT_Fiat_Lux_v4.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT4/WRZT_Fiat_Lux_v4.html",
+        "label": "WRZT4/WRZTv4.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/WRZTv4.html",
         "icon": "✨"
       },
       {
-        "label": "WRZT4/WRZT_Final_Edition_v4.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT4/WRZT_Final_Edition_v4.html",
+        "label": "WRZT4/WRZT_Fiat_Lux_v4.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/WRZT_Fiat_Lux_v4.html",
         "icon": "✨"
       },
       {
@@ -2788,8 +2788,8 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT_Calc/alpha-Formeln.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT_Calc/alpha-Formeln.html",
+        "label": "WRZT4/WRZT_Final_Edition_v4.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/WRZT_Final_Edition_v4.html",
         "icon": "✨"
       },
       {
@@ -2798,13 +2798,13 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT_Calc/index.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT_Calc/index.html",
+        "label": "WRZT_Calc/alpha-Formeln.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT_Calc/alpha-Formeln.html",
         "icon": "✨"
       },
       {
-        "label": "WRZT_Calc/logo.png",
-        "url": "https://juppijo.github.io/WRZT/WRZT_Calc/logo.png",
+        "label": "WRZT_Calc/index.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT_Calc/index.html",
         "icon": "✨"
       },
       {
@@ -2818,8 +2818,18 @@
         "icon": "✨"
       },
       {
+        "label": "WRZT_Calc/logo.png",
+        "url": "https://juppijo.github.io/WRZT/WRZT_Calc/logo.png",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT_Calc/readme.md",
         "url": "https://juppijo.github.io/WRZT/WRZT_Calc/readme.md",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT_Calc/script.js",
+        "url": "https://juppijo.github.io/WRZT/WRZT_Calc/script.js",
         "icon": "✨"
       },
       {
@@ -2833,18 +2843,13 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT_Calc/script.js",
-        "url": "https://juppijo.github.io/WRZT/WRZT_Calc/script.js",
+        "label": "3Rmin.html",
+        "url": "https://juppijo.github.io/WRZT/3Rmin.html",
         "icon": "✨"
       },
       {
         "label": "astro_physform.html",
         "url": "https://juppijo.github.io/WRZT/astro_physform.html",
-        "icon": "✨"
-      },
-      {
-        "label": "3Rmin.html",
-        "url": "https://juppijo.github.io/WRZT/3Rmin.html",
         "icon": "✨"
       },
       {
@@ -2868,13 +2873,13 @@
         "icon": "✨"
       },
       {
-        "label": "formel_sammler.html",
-        "url": "https://juppijo.github.io/WRZT/formel_sammler.html",
+        "label": "files.zip",
+        "url": "https://juppijo.github.io/WRZT/files.zip",
         "icon": "✨"
       },
       {
-        "label": "files.zip",
-        "url": "https://juppijo.github.io/WRZT/files.zip",
+        "label": "formel_sammler.html",
+        "url": "https://juppijo.github.io/WRZT/formel_sammler.html",
         "icon": "✨"
       },
       {
@@ -2908,18 +2913,13 @@
         "icon": "✨"
       },
       {
-        "label": "Kugel(5).html",
-        "url": "https://juppijo.github.io/WRZT/Kugel(5).html",
-        "icon": "✨"
-      },
-      {
         "label": "Lisa.html",
         "url": "https://juppijo.github.io/WRZT/Lisa.html",
         "icon": "✨"
       },
       {
-        "label": "Lorentz-Wand(2).html",
-        "url": "https://juppijo.github.io/WRZT/Lorentz-Wand(2).html",
+        "label": "Kugel(5).html",
+        "url": "https://juppijo.github.io/WRZT/Kugel(5).html",
         "icon": "✨"
       },
       {
@@ -2930,6 +2930,11 @@
       {
         "label": "Lorentz-Wand.html",
         "url": "https://juppijo.github.io/WRZT/Lorentz-Wand.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Lorentz-Wand(2).html",
+        "url": "https://juppijo.github.io/WRZT/Lorentz-Wand(2).html",
         "icon": "✨"
       },
       {
@@ -3038,13 +3043,13 @@
         "icon": "✨"
       },
       {
-        "label": "wrznt_netzwerk_simulation.html",
-        "url": "https://juppijo.github.io/WRZT/wrznt_netzwerk_simulation.html",
+        "label": "wrznt_ladund.html",
+        "url": "https://juppijo.github.io/WRZT/wrznt_ladund.html",
         "icon": "✨"
       },
       {
-        "label": "wrznt_ladund.html",
-        "url": "https://juppijo.github.io/WRZT/wrznt_ladund.html",
+        "label": "wrznt_netzwerk_simulation.html",
+        "url": "https://juppijo.github.io/WRZT/wrznt_netzwerk_simulation.html",
         "icon": "✨"
       },
       {
@@ -3058,13 +3063,13 @@
         "icon": "✨"
       },
       {
-        "label": "wrztbugwelle.html",
-        "url": "https://juppijo.github.io/WRZT/wrztbugwelle.html",
+        "label": "WRZTNetz.html",
+        "url": "https://juppijo.github.io/WRZT/WRZTNetz.html",
         "icon": "✨"
       },
       {
-        "label": "WRZTNetz.html",
-        "url": "https://juppijo.github.io/WRZT/WRZTNetz.html",
+        "label": "wrztbugwelle.html",
+        "url": "https://juppijo.github.io/WRZT/wrztbugwelle.html",
         "icon": "✨"
       },
       {
@@ -3093,13 +3098,18 @@
         "icon": "✨"
       },
       {
-        "label": "wrzt_rmin3.html",
-        "url": "https://juppijo.github.io/WRZT/wrzt_rmin3.html",
+        "label": "wrzt_rmin1.html",
+        "url": "https://juppijo.github.io/WRZT/wrzt_rmin1.html",
         "icon": "✨"
       },
       {
-        "label": "wrzt_rmin1.html",
-        "url": "https://juppijo.github.io/WRZT/wrzt_rmin1.html",
+        "label": "wrzt_theorie_2.html",
+        "url": "https://juppijo.github.io/WRZT/wrzt_theorie_2.html",
+        "icon": "✨"
+      },
+      {
+        "label": "wrzt_rmin3.html",
+        "url": "https://juppijo.github.io/WRZT/wrzt_rmin3.html",
         "icon": "✨"
       },
       {
@@ -3113,16 +3123,6 @@
         "icon": "✨"
       },
       {
-        "label": "wrzt_theorie_2.html",
-        "url": "https://juppijo.github.io/WRZT/wrzt_theorie_2.html",
-        "icon": "✨"
-      },
-      {
-        "label": "W_Formeln_A.html",
-        "url": "https://juppijo.github.io/WRZT/W_Formeln_A.html",
-        "icon": "✨"
-      },
-      {
         "label": "WRZT_Theorie_JZ.html",
         "url": "https://juppijo.github.io/WRZT/WRZT_Theorie_JZ.html",
         "icon": "✨"
@@ -3130,6 +3130,11 @@
       {
         "label": "yout.html",
         "url": "https://juppijo.github.io/WRZT/yout.html",
+        "icon": "✨"
+      },
+      {
+        "label": "W_Formeln_A.html",
+        "url": "https://juppijo.github.io/WRZT/W_Formeln_A.html",
         "icon": "✨"
       },
       {
@@ -3143,13 +3148,13 @@
     "title": "zaminia",
     "links": [
       {
-        "label": "bilder/kunst1.jpg",
-        "url": "https://juppijo.github.io/zaminia/bilder/kunst1.jpg",
+        "label": "bilder/kunst2.jpg",
+        "url": "https://juppijo.github.io/zaminia/bilder/kunst2.jpg",
         "icon": "✨"
       },
       {
-        "label": "bilder/kunst2.jpg",
-        "url": "https://juppijo.github.io/zaminia/bilder/kunst2.jpg",
+        "label": "bilder/kunst1.jpg",
+        "url": "https://juppijo.github.io/zaminia/bilder/kunst1.jpg",
         "icon": "✨"
       },
       {
@@ -3163,23 +3168,23 @@
         "icon": "✨"
       },
       {
-        "label": "BilderView/dia.php",
-        "url": "https://juppijo.github.io/zaminia/BilderView/dia.php",
-        "icon": "✨"
-      },
-      {
-        "label": "BilderView/diaff.php",
-        "url": "https://juppijo.github.io/zaminia/BilderView/diaff.php",
-        "icon": "✨"
-      },
-      {
         "label": "BilderView/diaf.php",
         "url": "https://juppijo.github.io/zaminia/BilderView/diaf.php",
         "icon": "✨"
       },
       {
+        "label": "BilderView/dia.php",
+        "url": "https://juppijo.github.io/zaminia/BilderView/dia.php",
+        "icon": "✨"
+      },
+      {
         "label": "BilderView/index.php",
         "url": "https://juppijo.github.io/zaminia/BilderView/index.php",
+        "icon": "✨"
+      },
+      {
+        "label": "BilderView/diaff.php",
+        "url": "https://juppijo.github.io/zaminia/BilderView/diaff.php",
         "icon": "✨"
       },
       {
@@ -3193,6 +3198,11 @@
         "icon": "✨"
       },
       {
+        "label": "3A.html",
+        "url": "https://juppijo.github.io/zaminia/3A.html",
+        "icon": "✨"
+      },
+      {
         "label": "3A-Gem.html",
         "url": "https://juppijo.github.io/zaminia/3A-Gem.html",
         "icon": "✨"
@@ -3203,18 +3213,13 @@
         "icon": "✨"
       },
       {
-        "label": "3A.html",
-        "url": "https://juppijo.github.io/zaminia/3A.html",
+        "label": "AutogenesTraining.mp3",
+        "url": "https://juppijo.github.io/zaminia/AutogenesTraining.mp3",
         "icon": "✨"
       },
       {
         "label": "autogenes-training-app_Cl.html",
         "url": "https://juppijo.github.io/zaminia/autogenes-training-app_Cl.html",
-        "icon": "✨"
-      },
-      {
-        "label": "AutogenesTraining.mp3",
-        "url": "https://juppijo.github.io/zaminia/AutogenesTraining.mp3",
         "icon": "✨"
       },
       {
@@ -3233,13 +3238,13 @@
         "icon": "✨"
       },
       {
-        "label": "Healing.html",
-        "url": "https://juppijo.github.io/zaminia/Healing.html",
+        "label": "Heilungpromt.txt",
+        "url": "https://juppijo.github.io/zaminia/Heilungpromt.txt",
         "icon": "✨"
       },
       {
-        "label": "Heilungpromt.txt",
-        "url": "https://juppijo.github.io/zaminia/Heilungpromt.txt",
+        "label": "Healing.html",
+        "url": "https://juppijo.github.io/zaminia/Healing.html",
         "icon": "✨"
       },
       {
@@ -3258,13 +3263,13 @@
         "icon": "✨"
       },
       {
-        "label": "README.md",
-        "url": "https://juppijo.github.io/zaminia/README.md",
+        "label": "LisaK.html",
+        "url": "https://juppijo.github.io/zaminia/LisaK.html",
         "icon": "✨"
       },
       {
-        "label": "LisaK.html",
-        "url": "https://juppijo.github.io/zaminia/LisaK.html",
+        "label": "README.md",
+        "url": "https://juppijo.github.io/zaminia/README.md",
         "icon": "✨"
       },
       {
@@ -3273,8 +3278,8 @@
         "icon": "✨"
       },
       {
-        "label": "style.css",
-        "url": "https://juppijo.github.io/zaminia/style.css",
+        "label": "stil_trainer.html",
+        "url": "https://juppijo.github.io/zaminia/stil_trainer.html",
         "icon": "✨"
       },
       {
@@ -3283,8 +3288,8 @@
         "icon": "✨"
       },
       {
-        "label": "stil_trainer.html",
-        "url": "https://juppijo.github.io/zaminia/stil_trainer.html",
+        "label": "style.css",
+        "url": "https://juppijo.github.io/zaminia/style.css",
         "icon": "✨"
       },
       {
@@ -3323,13 +3328,13 @@
         "icon": "✨"
       },
       {
-        "label": "zen-links.json",
-        "url": "https://juppijo.github.io/zaminia/zen-links.json",
+        "label": "ZamiZen4.jpg",
+        "url": "https://juppijo.github.io/zaminia/ZamiZen4.jpg",
         "icon": "✨"
       },
       {
-        "label": "ZamiZen4.jpg",
-        "url": "https://juppijo.github.io/zaminia/ZamiZen4.jpg",
+        "label": "zen-links.json",
+        "url": "https://juppijo.github.io/zaminia/zen-links.json",
         "icon": "✨"
       },
       {
@@ -3363,23 +3368,23 @@
         "icon": "✨"
       },
       {
-        "label": "GITALL.html",
-        "url": "https://juppijo.github.io/Zaminia-Zen-Theme/GITALL.html",
-        "icon": "✨"
-      },
-      {
         "label": "favicon.jpg",
         "url": "https://juppijo.github.io/Zaminia-Zen-Theme/favicon.jpg",
         "icon": "✨"
       },
       {
-        "label": "index.html",
-        "url": "https://juppijo.github.io/Zaminia-Zen-Theme/index.html",
+        "label": "GITALL.html",
+        "url": "https://juppijo.github.io/Zaminia-Zen-Theme/GITALL.html",
         "icon": "✨"
       },
       {
         "label": "GSheet.html",
         "url": "https://juppijo.github.io/Zaminia-Zen-Theme/GSheet.html",
+        "icon": "✨"
+      },
+      {
+        "label": "index.html",
+        "url": "https://juppijo.github.io/Zaminia-Zen-Theme/index.html",
         "icon": "✨"
       },
       {
@@ -3403,6 +3408,11 @@
         "icon": "✨"
       },
       {
+        "label": "Zami.jpg",
+        "url": "https://juppijo.github.io/Zaminia-Zen-Theme/Zami.jpg",
+        "icon": "✨"
+      },
+      {
         "label": "README.md",
         "url": "https://juppijo.github.io/Zaminia-Zen-Theme/README.md",
         "icon": "✨"
@@ -3415,11 +3425,6 @@
       {
         "label": "style.css",
         "url": "https://juppijo.github.io/Zaminia-Zen-Theme/style.css",
-        "icon": "✨"
-      },
-      {
-        "label": "Zami.jpg",
-        "url": "https://juppijo.github.io/Zaminia-Zen-Theme/Zami.jpg",
         "icon": "✨"
       }
     ]
@@ -3448,13 +3453,13 @@
         "icon": "✨"
       },
       {
-        "label": "Kunst_des_einfühlsamen_Zuhörens/images/bild_4.jpg",
-        "url": "https://juppijo.github.io/Zami_Buecher/Kunst_des_einfühlsamen_Zuhörens/images/bild_4.jpg",
+        "label": "Kunst_des_einfühlsamen_Zuhörens/images/bild_2.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/Kunst_des_einfühlsamen_Zuhörens/images/bild_2.jpg",
         "icon": "✨"
       },
       {
-        "label": "Kunst_des_einfühlsamen_Zuhörens/images/bild_2.jpg",
-        "url": "https://juppijo.github.io/Zami_Buecher/Kunst_des_einfühlsamen_Zuhörens/images/bild_2.jpg",
+        "label": "Kunst_des_einfühlsamen_Zuhörens/images/bild_4.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/Kunst_des_einfühlsamen_Zuhörens/images/bild_4.jpg",
         "icon": "✨"
       },
       {
@@ -3463,18 +3468,13 @@
         "icon": "✨"
       },
       {
-        "label": "Kunst_des_einfühlsamen_Zuhörens/images/bild_7.jpg",
-        "url": "https://juppijo.github.io/Zami_Buecher/Kunst_des_einfühlsamen_Zuhörens/images/bild_7.jpg",
-        "icon": "✨"
-      },
-      {
         "label": "Kunst_des_einfühlsamen_Zuhörens/images/bild_6.jpg",
         "url": "https://juppijo.github.io/Zami_Buecher/Kunst_des_einfühlsamen_Zuhörens/images/bild_6.jpg",
         "icon": "✨"
       },
       {
-        "label": "Kunst_des_einfühlsamen_Zuhörens/images/bild_9.jpg",
-        "url": "https://juppijo.github.io/Zami_Buecher/Kunst_des_einfühlsamen_Zuhörens/images/bild_9.jpg",
+        "label": "Kunst_des_einfühlsamen_Zuhörens/images/bild_7.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/Kunst_des_einfühlsamen_Zuhörens/images/bild_7.jpg",
         "icon": "✨"
       },
       {
@@ -3483,13 +3483,13 @@
         "icon": "✨"
       },
       {
-        "label": "Kunst_des_einfühlsamen_Zuhörens/index.html",
-        "url": "https://juppijo.github.io/Zami_Buecher/Kunst_des_einfühlsamen_Zuhörens/index.html",
+        "label": "Kunst_des_einfühlsamen_Zuhörens/images/bild_9.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/Kunst_des_einfühlsamen_Zuhörens/images/bild_9.jpg",
         "icon": "✨"
       },
       {
-        "label": "Kunst_des_einfühlsamen_Zuhörens/script-s.js",
-        "url": "https://juppijo.github.io/Zami_Buecher/Kunst_des_einfühlsamen_Zuhörens/script-s.js",
+        "label": "Kunst_des_einfühlsamen_Zuhörens/index.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/Kunst_des_einfühlsamen_Zuhörens/index.html",
         "icon": "✨"
       },
       {
@@ -3498,13 +3498,13 @@
         "icon": "✨"
       },
       {
-        "label": "Kunst_des_einfühlsamen_Zuhörens/style.css",
-        "url": "https://juppijo.github.io/Zami_Buecher/Kunst_des_einfühlsamen_Zuhörens/style.css",
+        "label": "Kunst_des_einfühlsamen_Zuhörens/smart.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/Kunst_des_einfühlsamen_Zuhörens/smart.html",
         "icon": "✨"
       },
       {
-        "label": "Kunst_des_einfühlsamen_Zuhörens/smart.html",
-        "url": "https://juppijo.github.io/Zami_Buecher/Kunst_des_einfühlsamen_Zuhörens/smart.html",
+        "label": "Kunst_des_einfühlsamen_Zuhörens/script-s.js",
+        "url": "https://juppijo.github.io/Zami_Buecher/Kunst_des_einfühlsamen_Zuhörens/script-s.js",
         "icon": "✨"
       },
       {
@@ -3513,13 +3513,18 @@
         "icon": "✨"
       },
       {
-        "label": "Shambala_Luminia/images/bild_1.jpg",
-        "url": "https://juppijo.github.io/Zami_Buecher/Shambala_Luminia/images/bild_1.jpg",
+        "label": "Kunst_des_einfühlsamen_Zuhörens/style.css",
+        "url": "https://juppijo.github.io/Zami_Buecher/Kunst_des_einfühlsamen_Zuhörens/style.css",
         "icon": "✨"
       },
       {
         "label": "Shambala_Luminia/images/bild_2.jpg",
         "url": "https://juppijo.github.io/Zami_Buecher/Shambala_Luminia/images/bild_2.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "Shambala_Luminia/images/bild_1.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/Shambala_Luminia/images/bild_1.jpg",
         "icon": "✨"
       },
       {
@@ -3543,13 +3548,13 @@
         "icon": "✨"
       },
       {
-        "label": "Zaminia-und-die-Schattenkrieger/Bild2.jpg",
-        "url": "https://juppijo.github.io/Zami_Buecher/Zaminia-und-die-Schattenkrieger/Bild2.jpg",
+        "label": "Zaminia-und-die-Schattenkrieger/Bild3.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/Zaminia-und-die-Schattenkrieger/Bild3.jpg",
         "icon": "✨"
       },
       {
-        "label": "Zaminia-und-die-Schattenkrieger/Bild3.jpg",
-        "url": "https://juppijo.github.io/Zami_Buecher/Zaminia-und-die-Schattenkrieger/Bild3.jpg",
+        "label": "Zaminia-und-die-Schattenkrieger/Bild2.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/Zaminia-und-die-Schattenkrieger/Bild2.jpg",
         "icon": "✨"
       },
       {
@@ -3558,13 +3563,13 @@
         "icon": "✨"
       },
       {
-        "label": "Zaminia-und-die-Schattenkrieger/Bild5.jpg",
-        "url": "https://juppijo.github.io/Zami_Buecher/Zaminia-und-die-Schattenkrieger/Bild5.jpg",
+        "label": "Zaminia-und-die-Schattenkrieger/Zaminia-und-die-Schattenkrieger.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/Zaminia-und-die-Schattenkrieger/Zaminia-und-die-Schattenkrieger.html",
         "icon": "✨"
       },
       {
-        "label": "Zaminia-und-die-Schattenkrieger/Zaminia-und-die-Schattenkrieger.html",
-        "url": "https://juppijo.github.io/Zami_Buecher/Zaminia-und-die-Schattenkrieger/Zaminia-und-die-Schattenkrieger.html",
+        "label": "Zaminia-und-die-Schattenkrieger/Bild5.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/Zaminia-und-die-Schattenkrieger/Bild5.jpg",
         "icon": "✨"
       },
       {
@@ -3573,13 +3578,13 @@
         "icon": "✨"
       },
       {
-        "label": "ZanimiasWeltreise/images/bild_11.jpg",
-        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_11.jpg",
+        "label": "ZanimiasWeltreise/images/bild_10.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_10.jpg",
         "icon": "✨"
       },
       {
-        "label": "ZanimiasWeltreise/images/bild_10.jpg",
-        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_10.jpg",
+        "label": "ZanimiasWeltreise/images/bild_11.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_11.jpg",
         "icon": "✨"
       },
       {
@@ -3593,11 +3598,6 @@
         "icon": "✨"
       },
       {
-        "label": "ZanimiasWeltreise/images/bild_15.jpg",
-        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_15.jpg",
-        "icon": "✨"
-      },
-      {
         "label": "ZanimiasWeltreise/images/bild_14.jpg",
         "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_14.jpg",
         "icon": "✨"
@@ -3605,6 +3605,11 @@
       {
         "label": "ZanimiasWeltreise/images/bild_16.jpg",
         "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_16.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "ZanimiasWeltreise/images/bild_15.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_15.jpg",
         "icon": "✨"
       },
       {
@@ -3628,13 +3633,13 @@
         "icon": "✨"
       },
       {
-        "label": "ZanimiasWeltreise/images/bild_21.jpg",
-        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_21.jpg",
+        "label": "ZanimiasWeltreise/images/bild_20.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_20.jpg",
         "icon": "✨"
       },
       {
-        "label": "ZanimiasWeltreise/images/bild_20.jpg",
-        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_20.jpg",
+        "label": "ZanimiasWeltreise/images/bild_21.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_21.jpg",
         "icon": "✨"
       },
       {
@@ -3688,13 +3693,13 @@
         "icon": "✨"
       },
       {
-        "label": "ZanimiasWeltreise/images/bild_4.jpg",
-        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_4.jpg",
+        "label": "ZanimiasWeltreise/images/bild_31.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_31.jpg",
         "icon": "✨"
       },
       {
-        "label": "ZanimiasWeltreise/images/bild_31.jpg",
-        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_31.jpg",
+        "label": "ZanimiasWeltreise/images/bild_4.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_4.jpg",
         "icon": "✨"
       },
       {
@@ -3703,18 +3708,13 @@
         "icon": "✨"
       },
       {
-        "label": "ZanimiasWeltreise/images/bild_6.jpg",
-        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_6.jpg",
-        "icon": "✨"
-      },
-      {
         "label": "ZanimiasWeltreise/images/bild_8.jpg",
         "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_8.jpg",
         "icon": "✨"
       },
       {
-        "label": "ZanimiasWeltreise/images/bild_7.jpg",
-        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_7.jpg",
+        "label": "ZanimiasWeltreise/images/bild_6.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_6.jpg",
         "icon": "✨"
       },
       {
@@ -3723,13 +3723,13 @@
         "icon": "✨"
       },
       {
-        "label": "ZanimiasWeltreise/index-s.html",
-        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/index-s.html",
+        "label": "ZanimiasWeltreise/images/bild_7.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/images/bild_7.jpg",
         "icon": "✨"
       },
       {
-        "label": "ZanimiasWeltreise/index.html",
-        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/index.html",
+        "label": "ZanimiasWeltreise/index-s.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/index-s.html",
         "icon": "✨"
       },
       {
@@ -3738,8 +3738,8 @@
         "icon": "✨"
       },
       {
-        "label": "ZanimiasWeltreise/konverter_smart_ZW.py",
-        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/konverter_smart_ZW.py",
+        "label": "ZanimiasWeltreise/index.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/index.html",
         "icon": "✨"
       },
       {
@@ -3748,13 +3748,13 @@
         "icon": "✨"
       },
       {
-        "label": "ZanimiasWeltreise/script.js",
-        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/script.js",
+        "label": "ZanimiasWeltreise/konverter_smart_ZW.py",
+        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/konverter_smart_ZW.py",
         "icon": "✨"
       },
       {
-        "label": "ZanimiasWeltreise/style-s.css",
-        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/style-s.css",
+        "label": "ZanimiasWeltreise/script.js",
+        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/script.js",
         "icon": "✨"
       },
       {
@@ -3763,8 +3763,18 @@
         "icon": "✨"
       },
       {
+        "label": "ZanimiasWeltreise/style-s.css",
+        "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/style-s.css",
+        "icon": "✨"
+      },
+      {
         "label": "docx_to_html.py",
         "url": "https://juppijo.github.io/Zami_Buecher/docx_to_html.py",
+        "icon": "✨"
+      },
+      {
+        "label": "HomeL.jpeg",
+        "url": "https://juppijo.github.io/Zami_Buecher/HomeL.jpeg",
         "icon": "✨"
       },
       {
@@ -3773,8 +3783,8 @@
         "icon": "✨"
       },
       {
-        "label": "HomeL.jpeg",
-        "url": "https://juppijo.github.io/Zami_Buecher/HomeL.jpeg",
+        "label": "Index2.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/Index2.html",
         "icon": "✨"
       },
       {
@@ -3788,13 +3798,8 @@
         "icon": "✨"
       },
       {
-        "label": "Index2.html",
-        "url": "https://juppijo.github.io/Zami_Buecher/Index2.html",
-        "icon": "✨"
-      },
-      {
-        "label": "konverter_smartphone.py",
-        "url": "https://juppijo.github.io/Zami_Buecher/konverter_smartphone.py",
+        "label": "README.md",
+        "url": "https://juppijo.github.io/Zami_Buecher/README.md",
         "icon": "✨"
       },
       {
@@ -3803,8 +3808,8 @@
         "icon": "✨"
       },
       {
-        "label": "README.md",
-        "url": "https://juppijo.github.io/Zami_Buecher/README.md",
+        "label": "konverter_smartphone.py",
+        "url": "https://juppijo.github.io/Zami_Buecher/konverter_smartphone.py",
         "icon": "✨"
       }
     ]
@@ -3828,16 +3833,6 @@
         "icon": "✨"
       },
       {
-        "label": "Bildsuche-Pro/style.css",
-        "url": "https://juppijo.github.io/Zami_Home/Bildsuche-Pro/style.css",
-        "icon": "✨"
-      },
-      {
-        "label": "Bildsuche-Pro/app.js",
-        "url": "https://juppijo.github.io/Zami_Home/Bildsuche-Pro/app.js",
-        "icon": "✨"
-      },
-      {
         "label": "Bildsuche-Pro/index.html",
         "url": "https://juppijo.github.io/Zami_Home/Bildsuche-Pro/index.html",
         "icon": "✨"
@@ -3845,6 +3840,16 @@
       {
         "label": "Bildsuche-Pro/thumbcache.js",
         "url": "https://juppijo.github.io/Zami_Home/Bildsuche-Pro/thumbcache.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Bildsuche-Pro/style.css",
+        "url": "https://juppijo.github.io/Zami_Home/Bildsuche-Pro/style.css",
+        "icon": "✨"
+      },
+      {
+        "label": "Bildsuche-Pro/app.js",
+        "url": "https://juppijo.github.io/Zami_Home/Bildsuche-Pro/app.js",
         "icon": "✨"
       },
       {
@@ -3868,18 +3873,13 @@
         "icon": "✨"
       },
       {
-        "label": "Chat-Blue/js/parser.js",
-        "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/js/parser.js",
-        "icon": "✨"
-      },
-      {
-        "label": "Chat-Blue/js/search.js",
-        "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/js/search.js",
-        "icon": "✨"
-      },
-      {
         "label": "Chat-Blue/js/renderer.js",
         "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/js/renderer.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Chat-Blue/js/parser.js",
+        "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/js/parser.js",
         "icon": "✨"
       },
       {
@@ -3890,6 +3890,11 @@
       {
         "label": "Chat-Blue/js/wrzt.js",
         "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/js/wrzt.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Chat-Blue/js/search.js",
+        "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/js/search.js",
         "icon": "✨"
       },
       {
@@ -3908,6 +3913,11 @@
         "icon": "✨"
       },
       {
+        "label": "Chat-Blue/media_gallery.html",
+        "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/media_gallery.html",
+        "icon": "✨"
+      },
+      {
         "label": "Chat-Blue/media_viewer.html",
         "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/media_viewer.html",
         "icon": "✨"
@@ -3918,23 +3928,8 @@
         "icon": "✨"
       },
       {
-        "label": "Chat-Blue/media_gallery.html",
-        "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/media_gallery.html",
-        "icon": "✨"
-      },
-      {
         "label": "Chat-Blue/player.html",
         "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/player.html",
-        "icon": "✨"
-      },
-      {
-        "label": "GitHubRespo/index.html",
-        "url": "https://juppijo.github.io/Zami_Home/GitHubRespo/index.html",
-        "icon": "✨"
-      },
-      {
-        "label": "GitHubRespo/style.css",
-        "url": "https://juppijo.github.io/Zami_Home/GitHubRespo/style.css",
         "icon": "✨"
       },
       {
@@ -3943,8 +3938,13 @@
         "icon": "✨"
       },
       {
-        "label": "GitHub_Desktop/index.html",
-        "url": "https://juppijo.github.io/Zami_Home/GitHub_Desktop/index.html",
+        "label": "GitHubRespo/style.css",
+        "url": "https://juppijo.github.io/Zami_Home/GitHubRespo/style.css",
+        "icon": "✨"
+      },
+      {
+        "label": "GitHubRespo/index.html",
+        "url": "https://juppijo.github.io/Zami_Home/GitHubRespo/index.html",
         "icon": "✨"
       },
       {
@@ -3953,13 +3953,13 @@
         "icon": "✨"
       },
       {
-        "label": "GitHub_Desktop/style.css",
-        "url": "https://juppijo.github.io/Zami_Home/GitHub_Desktop/style.css",
+        "label": "GitHub_Desktop/index.html",
+        "url": "https://juppijo.github.io/Zami_Home/GitHub_Desktop/index.html",
         "icon": "✨"
       },
       {
-        "label": "html2doc/html-to-docx-converter-pro.html",
-        "url": "https://juppijo.github.io/Zami_Home/html2doc/html-to-docx-converter-pro.html",
+        "label": "GitHub_Desktop/style.css",
+        "url": "https://juppijo.github.io/Zami_Home/GitHub_Desktop/style.css",
         "icon": "✨"
       },
       {
@@ -3970,6 +3970,11 @@
       {
         "label": "html2doc/index.html",
         "url": "https://juppijo.github.io/Zami_Home/html2doc/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "html2doc/html-to-docx-converter-pro.html",
+        "url": "https://juppijo.github.io/Zami_Home/html2doc/html-to-docx-converter-pro.html",
         "icon": "✨"
       },
       {
@@ -4003,13 +4008,13 @@
         "icon": "✨"
       },
       {
-        "label": "Icon.html",
-        "url": "https://juppijo.github.io/Zami_Home/Icon.html",
+        "label": "icon-creator.html",
+        "url": "https://juppijo.github.io/Zami_Home/icon-creator.html",
         "icon": "✨"
       },
       {
-        "label": "icon-creator.html",
-        "url": "https://juppijo.github.io/Zami_Home/icon-creator.html",
+        "label": "Icon.html",
+        "url": "https://juppijo.github.io/Zami_Home/Icon.html",
         "icon": "✨"
       },
       {
@@ -4043,11 +4048,6 @@
         "icon": "✨"
       },
       {
-        "label": "json_vergleich.py",
-        "url": "https://juppijo.github.io/Zami_Home/json_vergleich.py",
-        "icon": "✨"
-      },
-      {
         "label": "linkhub.html",
         "url": "https://juppijo.github.io/Zami_Home/linkhub.html",
         "icon": "✨"
@@ -4058,13 +4058,18 @@
         "icon": "✨"
       },
       {
-        "label": "linksg.json",
-        "url": "https://juppijo.github.io/Zami_Home/linksg.json",
+        "label": "json_vergleich.py",
+        "url": "https://juppijo.github.io/Zami_Home/json_vergleich.py",
         "icon": "✨"
       },
       {
         "label": "links2.json",
         "url": "https://juppijo.github.io/Zami_Home/links2.json",
+        "icon": "✨"
+      },
+      {
+        "label": "linksg.json",
+        "url": "https://juppijo.github.io/Zami_Home/linksg.json",
         "icon": "✨"
       },
       {
@@ -4083,18 +4088,13 @@
         "icon": "✨"
       },
       {
-        "label": "script.js",
-        "url": "https://juppijo.github.io/Zami_Home/script.js",
-        "icon": "✨"
-      },
-      {
         "label": "README.md",
         "url": "https://juppijo.github.io/Zami_Home/README.md",
         "icon": "✨"
       },
       {
-        "label": "style.css",
-        "url": "https://juppijo.github.io/Zami_Home/style.css",
+        "label": "script.js",
+        "url": "https://juppijo.github.io/Zami_Home/script.js",
         "icon": "✨"
       },
       {
@@ -4103,13 +4103,18 @@
         "icon": "✨"
       },
       {
-        "label": "Zami-Bild.html",
-        "url": "https://juppijo.github.io/Zami_Home/Zami-Bild.html",
+        "label": "style.css",
+        "url": "https://juppijo.github.io/Zami_Home/style.css",
         "icon": "✨"
       },
       {
         "label": "Zami_Welt.mp4",
         "url": "https://juppijo.github.io/Zami_Home/Zami_Welt.mp4",
+        "icon": "✨"
+      },
+      {
+        "label": "Zami-Bild.html",
+        "url": "https://juppijo.github.io/Zami_Home/Zami-Bild.html",
         "icon": "✨"
       }
     ]
@@ -4128,13 +4133,13 @@
         "icon": "✨"
       },
       {
-        "label": "Steinverlegung/2025-11-17_22-15.png",
-        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/2025-11-17_22-15.png",
+        "label": "Steinverlegung/2025-11-17_22-18.png",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/2025-11-17_22-18.png",
         "icon": "✨"
       },
       {
-        "label": "Steinverlegung/2025-11-17_22-18.png",
-        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/2025-11-17_22-18.png",
+        "label": "Steinverlegung/2025-11-17_22-15.png",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/2025-11-17_22-15.png",
         "icon": "✨"
       },
       {
@@ -4153,11 +4158,6 @@
         "icon": "✨"
       },
       {
-        "label": "Steinverlegung/stone-layout-planner.html",
-        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/stone-layout-planner.html",
-        "icon": "✨"
-      },
-      {
         "label": "Steinverlegung/2025-11-17_22-32.png",
         "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/2025-11-17_22-32.png",
         "icon": "✨"
@@ -4165,6 +4165,11 @@
       {
         "label": "Steinverlegung/2025-11-17_22-40.png",
         "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/2025-11-17_22-40.png",
+        "icon": "✨"
+      },
+      {
+        "label": "Steinverlegung/stone-layout-planner.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/stone-layout-planner.html",
         "icon": "✨"
       },
       {
@@ -4188,13 +4193,13 @@
         "icon": "✨"
       },
       {
-        "label": "index.html",
-        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/index.html",
+        "label": "p1.jpeg",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/p1.jpeg",
         "icon": "✨"
       },
       {
-        "label": "p1.jpeg",
-        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/p1.jpeg",
+        "label": "index.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/index.html",
         "icon": "✨"
       },
       {
@@ -4218,23 +4223,23 @@
         "icon": "✨"
       },
       {
-        "label": "WTS.html",
-        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/WTS.html",
-        "icon": "✨"
-      },
-      {
         "label": "Zami-mp3-editor.html",
         "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Zami-mp3-editor.html",
         "icon": "✨"
       },
       {
-        "label": "ZAMI.jpeg",
-        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/ZAMI.jpeg",
+        "label": "WTS.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/WTS.html",
         "icon": "✨"
       },
       {
         "label": "Zamis-zen-music-player.html",
         "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Zamis-zen-music-player.html",
+        "icon": "✨"
+      },
+      {
+        "label": "ZAMI.jpeg",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/ZAMI.jpeg",
         "icon": "✨"
       }
     ]
