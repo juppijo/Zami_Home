@@ -165,6 +165,23 @@ input[type=radio], input[type=checkbox]{accent-color:var(--accent);}
 .file-row .ftag{flex:none; font-size:11px; padding:2px 8px; border-radius:6px; background:var(--panel2); color:var(--text-dim);}
 .file-row .ftag.A{color:var(--accent2); border:1px solid var(--accent-dim);}
 .file-row .ftag.B{color:#7fb8e6; border:1px solid #2c5978;}
+.file-row{cursor:pointer;}
+.file-row:hover{background:var(--panel2);}
+.file-row .fpath{flex:1;}
+.row-actions{display:flex; gap:6px; flex:none;}
+.row-btn{
+  border:1px solid var(--border); background:var(--panel); color:var(--text-dim);
+  border-radius:6px; padding:4px 8px; font-size:11px; font-family:'Barlow'; font-weight:600;
+  cursor:pointer; transition:.15s;
+}
+.row-btn:hover{border-color:var(--accent); color:var(--accent2);}
+.toast{
+  position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
+  background:var(--panel); border:1px solid var(--accent); color:var(--text);
+  padding:10px 18px; border-radius:8px; font-size:14px; box-shadow:var(--shadow);
+  opacity:0; pointer-events:none; transition:.25s ease; z-index:200;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
 
 .empty{
   text-align:center; padding:60px 20px; color:var(--text-dim);
@@ -453,15 +470,80 @@ function renderResults(groups, mode){
         </div>
       </div>
       <div class="group-body">
-        ${g.entries.map(e => `
-          <div class="file-row">
+        ${g.entries.map((e, j) => `
+          <div class="file-row" data-gi="${i}" data-ei="${j}" title="Klicken zum Öffnen">
             <span class="fpath">${escapeHtml(e.path)}</span>
             <span class="ftag ${e.source}">Verzeichnis ${e.source}</span>
+            <div class="row-actions">
+              <button class="row-btn" data-action="open" data-gi="${i}" data-ei="${j}">📄 Öffnen</button>
+              <button class="row-btn" data-action="copy" data-gi="${i}" data-ei="${j}">📋 Pfad</button>
+            </div>
           </div>`).join('')}
       </div>`;
     div.querySelector('.group-head').addEventListener('click', ()=> div.classList.toggle('open'));
     container.appendChild(div);
   });
+
+  container.querySelectorAll('.row-btn').forEach(btn=>{
+    btn.addEventListener('click', async (e)=>{
+      e.stopPropagation();
+      const gi = +btn.dataset.gi, ei = +btn.dataset.ei;
+      const entry = groups[gi].entries[ei];
+      if(btn.dataset.action === 'open') await openFileEntry(entry);
+      else copyPathEntry(entry);
+    });
+  });
+  container.querySelectorAll('.file-row').forEach(row=>{
+    row.addEventListener('click', async ()=>{
+      const gi = +row.dataset.gi, ei = +row.dataset.ei;
+      const entry = groups[gi].entries[ei];
+      await openFileEntry(entry);
+    });
+  });
+}
+
+function fullPathOf(entry){
+  const root = entry.source === 'A' ? (dirA ? dirA.name : 'A') : (dirB ? dirB.name : 'B');
+  return root + '/' + entry.path;
+}
+
+async function openFileEntry(entry){
+  try{
+    const file = await entry.handle.getFile();
+    const url = URL.createObjectURL(file);
+    const win = window.open(url, '_blank');
+    if(!win){
+      showToast('Popup blockiert – bitte Popups für diese Seite erlauben.');
+    }
+    setTimeout(()=>URL.revokeObjectURL(url), 60000);
+  }catch(err){
+    console.error(err);
+    showToast('Datei konnte nicht geöffnet werden.');
+  }
+}
+
+function copyPathEntry(entry){
+  const p = fullPathOf(entry);
+  navigator.clipboard.writeText(p).then(()=>{
+    showToast('Pfad kopiert: ' + p);
+  }).catch(()=>{
+    showToast('Kopieren nicht möglich.');
+  });
+}
+
+let toastTimer;
+function showToast(msg){
+  let toast = document.getElementById('toast');
+  if(!toast){
+    toast = document.createElement('div');
+    toast.id = 'toast';
+    toast.className = 'toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>toast.classList.remove('show'), 3000);
 }
 
 function escapeHtml(s){
