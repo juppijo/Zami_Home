@@ -87,21 +87,22 @@
       align-items: center;
     }
 
-    button, .btn-select {
+    button, .btn-action {
       background-color: var(--accent);
       color: #ffffff;
       border: none;
-      padding: 0.6rem 1.2rem;
+      padding: 0.5rem 1rem;
       border-radius: 8px;
       font-weight: 500;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
+      font-size: 0.85rem;
       box-shadow: 0 2px 4px var(--shadow);
     }
 
-    button:hover, .btn-select:hover {
+    button:hover, .btn-action:hover {
       background-color: var(--accent-hover);
     }
 
@@ -228,7 +229,7 @@
 
     .duplicate-header {
       padding: 0.75rem 1rem;
-      background-color: rgba(0, 0, 0, 0.1);
+      background-color: rgba(0, 0, 0, 0.15);
       font-weight: 600;
       display: flex;
       justify-content: space-between;
@@ -242,12 +243,14 @@
     }
 
     .file-item {
-      padding: 0.6rem 1rem;
+      padding: 0.75rem 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid var(--border);
       font-size: 0.88rem;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
 
     .file-item:last-child {
@@ -258,11 +261,20 @@
       display: flex;
       flex-direction: column;
       gap: 0.2rem;
+      flex: 1;
+      min-width: 250px;
     }
 
     .file-path {
       color: var(--text-muted);
       font-size: 0.8rem;
+      word-break: break-all;
+    }
+
+    .file-actions {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
     }
 
     .badge {
@@ -279,6 +291,73 @@
       text-align: center;
       padding: 3rem 1rem;
       color: var(--text-muted);
+    }
+
+    /* Modal for File Preview */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.75);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .modal-content {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      max-width: 900px;
+      width: 100%;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .modal-header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+      overflow-y: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 200px;
+    }
+
+    .modal-body img {
+      max-width: 100%;
+      max-height: 60vh;
+      object-fit: contain;
+    }
+
+    .modal-body iframe {
+      width: 100%;
+      height: 60vh;
+      border: none;
+    }
+
+    .modal-body pre {
+      white-space: pre-wrap;
+      word-break: break-all;
+      background-color: var(--bg-primary);
+      padding: 1rem;
+      border-radius: 6px;
+      width: 100%;
+      max-height: 60vh;
+      overflow-y: auto;
     }
 
     @media (max-width: 600px) {
@@ -346,6 +425,17 @@
     </div>
   </main>
 
+  <!-- Modal für Dateivorschau -->
+  <div id="previewModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">Dateivorschau</h3>
+        <button id="closeModalBtn" class="btn-secondary">Schließen</button>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+    </div>
+  </div>
+
   <script>
     const themes = ['dark', 'light', 'emerald'];
     let currentThemeIdx = 0;
@@ -368,6 +458,11 @@
     const resultsList = document.getElementById('resultsList');
     const resultsCount = document.getElementById('resultsCount');
 
+    const previewModal = document.getElementById('previewModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+
     // Theme Switcher
     themeBtn.addEventListener('click', () => {
       currentThemeIdx = (currentThemeIdx + 1) % themes.length;
@@ -381,6 +476,11 @@
       } else {
         document.exitFullscreen();
       }
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+      previewModal.style.display = 'none';
+      modalBody.innerHTML = '';
     });
 
     // Directory Pickers
@@ -408,7 +508,6 @@
       scanBtn.disabled = !(dirHandle1 && dirHandle2);
     }
 
-    // Recursive directory reader
     async function collectFiles(dirHandle, path = '', filesList = []) {
       for await (const entry of dirHandle.values()) {
         const entryPath = path ? `${path}/${entry.name}` : entry.name;
@@ -421,7 +520,6 @@
       return filesList;
     }
 
-    // Hash computation for file content comparison
     async function computeHash(file) {
       const buffer = await file.arrayBuffer();
       const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
@@ -463,10 +561,6 @@
 
         for (const fileObj of allFiles) {
           const file = await fileObj.handle.getFile();
-          
-          // Schneller Vorab-Check über Dateigröße, um Berechnungen zu sparen
-          const fileKey = `${file.size}`;
-          
           const hash = await computeHash(file);
           const fullKey = `${hash}_${file.size}`;
 
@@ -495,10 +589,6 @@
       let duplicateGroupsCount = 0;
 
       hashMap.forEach((group, hash) => {
-        // Filter: Zeige nur Gruppen mit mindestens 2 Dateien an,
-        // und idealerweise solchen, die in beiden Verzeichnissen vorkommen
-        const origins = new Set(group.files.map(f => f.origin));
-
         if (group.files.length >= 2) {
           duplicateGroupsCount++;
 
@@ -515,7 +605,7 @@
           const listEl = document.createElement('ul');
           listEl.className = 'file-list';
 
-          group.files.forEach(f => {
+          group.files.forEach((f, idx) => {
             const itemEl = document.createElement('li');
             itemEl.className = 'file-item';
 
@@ -524,12 +614,30 @@
 
             itemEl.innerHTML = `
               <div class="file-info">
-                <strong>${f.handle.name}</strong>
+                <div>
+                  <strong>${f.handle.name}</strong>
+                  <span class="badge ${badgeClass}" style="margin-left: 0.5rem;">${f.origin}</span>
+                </div>
                 <span class="file-path">${f.path}</span>
               </div>
-              <span class="badge ${badgeClass}">${f.origin}</span>
+              <div class="file-actions">
+                <button class="btn-action btn-secondary" onclick="copyPath('${f.path.replace(/'/g, "\\'")}')">
+                  📋 Pfad kopieren
+                </button>
+                <button class="btn-action" id="openBtn_${hash}_${idx}">
+                  👁️ Öffnen
+                </button>
+              </div>
             `;
             listEl.appendChild(itemEl);
+
+            // Dynamischer Event-Listener für das Öffnen über den FileHandle
+            setTimeout(() => {
+              const btn = document.getElementById(`openBtn_${hash}_${idx}`);
+              if (btn) {
+                btn.addEventListener('click', () => openFile(f.handle));
+              }
+            }, 0);
           });
 
           groupEl.appendChild(headerEl);
@@ -548,6 +656,53 @@
       } else {
         resultsCount.textContent = `${duplicateGroupsCount} Gruppe(n) doppelter Dateien gefunden`;
       }
+    }
+
+    async function openFile(fileHandle) {
+      try {
+        const file = await fileHandle.getFile();
+        const url = URL.createObjectURL(file);
+        
+        modalTitle.textContent = file.name;
+        modalBody.innerHTML = '';
+
+        if (file.type.startsWith('image/')) {
+          const img = document.createElement('img');
+          img.src = url;
+          modalBody.appendChild(img);
+        } else if (file.type === 'application/pdf') {
+          const iframe = document.createElement('iframe');
+          iframe.src = url;
+          modalBody.appendChild(iframe);
+        } else if (file.type.startsWith('text/') || file.name.endsWith('.json') || file.name.endsWith('.js') || file.name.endsWith('.css')) {
+          const text = await file.text();
+          const pre = document.createElement('pre');
+          pre.textContent = text;
+          modalBody.appendChild(pre);
+        } else {
+          // Fallback für sonstige Formate: Download anbieten
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = file.name;
+          a.className = 'btn-action';
+          a.style.fontSize = '1rem';
+          a.style.padding = '1rem 2rem';
+          a.textContent = '💾 Datei herunterladen / lokal öffnen';
+          modalBody.appendChild(a);
+        }
+
+        previewModal.style.display = 'flex';
+      } catch (err) {
+        alert('Datei konnte nicht geöffnet werden: ' + err.message);
+      }
+    }
+
+    function copyPath(path) {
+      navigator.clipboard.writeText(path).then(() => {
+        alert('Pfad in Zwischenablage kopiert:\n' + path);
+      }).catch(err => {
+        alert('Kopieren fehlgeschlagen: ' + err.message);
+      });
     }
   </script>
 </body>
