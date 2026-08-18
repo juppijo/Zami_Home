@@ -1028,6 +1028,11 @@
     "title": "Musik_Zami",
     "links": [
       {
+        "label": "Gate gate Paragate.mp3",
+        "url": "https://juppijo.github.io/Musik_Zami/Gate%20gate%20Paragate.mp3",
+        "icon": "✨"
+      },
+      {
         "label": "Lisa/Zami.jpg",
         "url": "https://juppijo.github.io/Musik_Zami/Lisa/Zami.jpg",
         "icon": "✨"
@@ -1098,6 +1103,16 @@
         "icon": "✨"
       },
       {
+        "label": "ZAMI.jpeg",
+        "url": "https://juppijo.github.io/Musik_Zami/ZAMI.jpeg",
+        "icon": "✨"
+      },
+      {
+        "label": "Zami-mp3-editor.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Zami-mp3-editor.html",
+        "icon": "✨"
+      },
+      {
         "label": "ZamiKlavier.jpeg",
         "url": "https://juppijo.github.io/Musik_Zami/ZamiKlavier.jpeg",
         "icon": "✨"
@@ -1110,6 +1125,11 @@
       {
         "label": "Zaminia-Chord-Interface_1.html",
         "url": "https://juppijo.github.io/Musik_Zami/Zaminia-Chord-Interface_1.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Zamis-zen-music-player.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Zamis-zen-music-player.html",
         "icon": "✨"
       },
       {
@@ -1128,8 +1148,8 @@
         "icon": "✨"
       },
       {
-        "label": "markdown-preview.pdf",
-        "url": "https://juppijo.github.io/Musik_Zami/markdown-preview.pdf",
+        "label": "markdown-preview.html",
+        "url": "https://juppijo.github.io/Musik_Zami/markdown-preview.html",
         "icon": "✨"
       },
       {
@@ -1155,6 +1175,11 @@
       {
         "label": "script.js",
         "url": "https://juppijo.github.io/Musik_Zami/script.js",
+        "icon": "✨"
+      },
+      {
+        "label": "soundfont-touch-player-doc.html",
+        "url": "https://juppijo.github.io/Musik_Zami/soundfont-touch-player-doc.html",
         "icon": "✨"
       },
       {
@@ -1437,11 +1462,6 @@
   {
     "title": "TaiChi",
     "links": [
-      {
-        "label": "8 Brokate.docx",
-        "url": "https://juppijo.github.io/TaiChi/8%20Brokate.docx",
-        "icon": "✨"
-      },
       {
         "label": "8-Brokate/8Brokate.html",
         "url": "https://juppijo.github.io/TaiChi/8-Brokate/8Brokate.html",
@@ -2153,11 +2173,6 @@
         "icon": "✨"
       },
       {
-        "label": "WRZNT/images/image1.png",
-        "url": "https://juppijo.github.io/WRZT/WRZNT/images/image1.png",
-        "icon": "✨"
-      },
-      {
         "label": "WRZNT/index.html",
         "url": "https://juppijo.github.io/WRZT/WRZNT/index.html",
         "icon": "✨"
@@ -2310,11 +2325,6 @@
       {
         "label": "WRZT2/dreieck.html",
         "url": "https://juppijo.github.io/WRZT/WRZT2/dreieck.html",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT2/favicon.png",
-        "url": "https://juppijo.github.io/WRZT/WRZT2/favicon.png",
         "icon": "✨"
       },
       {
@@ -4068,11 +4078,6 @@
     "title": "ZenZamiSpiele-Co",
     "links": [
       {
-        "label": "Gate gate Paragate.mp3",
-        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Gate%20gate%20Paragate.mp3",
-        "icon": "✨"
-      },
-      {
         "label": "Gem_farben (4).html",
         "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Gem_farben%20(4).html",
         "icon": "✨"
@@ -4155,21 +4160,6 @@
       {
         "label": "WTS.html",
         "url": "https://juppijo.github.io/ZenZamiSpiele-Co/WTS.html",
-        "icon": "✨"
-      },
-      {
-        "label": "ZAMI.jpeg",
-        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/ZAMI.jpeg",
-        "icon": "✨"
-      },
-      {
-        "label": "Zami-mp3-editor.html",
-        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Zami-mp3-editor.html",
-        "icon": "✨"
-      },
-      {
-        "label": "Zamis-zen-music-player.html",
-        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Zamis-zen-music-player.html",
         "icon": "✨"
       },
       {
