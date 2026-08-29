@@ -193,6 +193,11 @@
         "icon": "✨"
       },
       {
+        "label": "PDF_Editor/PDF-Struktur-Viewer.html",
+        "url": "https://juppijo.github.io/Dashboard/PDF_Editor/PDF-Struktur-Viewer.html",
+        "icon": "✨"
+      },
+      {
         "label": "PDF_Editor/index.html",
         "url": "https://juppijo.github.io/Dashboard/PDF_Editor/index.html",
         "icon": "✨"
@@ -2128,11 +2133,6 @@
         "icon": "✨"
       },
       {
-        "label": "WRZNT .pdf",
-        "url": "https://juppijo.github.io/WRZT/WRZNT%20.pdf",
-        "icon": "✨"
-      },
-      {
         "label": "WRZNT/Quanten-Spin-Raumwirbel-3d.html",
         "url": "https://juppijo.github.io/WRZT/WRZNT/Quanten-Spin-Raumwirbel-3d.html",
         "icon": "✨"
@@ -2593,13 +2593,43 @@
         "icon": "✨"
       },
       {
+        "label": "WRZT4/Fiat_Lux/Annihilation-Kollaps-2.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/Annihilation-Kollaps-2.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/Annihilation-Kollaps.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/Annihilation-Kollaps.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/Annihilation-Sim.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/Annihilation-Sim.html",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT4/Fiat_Lux/Inhaltsverzeichnis.html",
         "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/Inhaltsverzeichnis.html",
         "icon": "✨"
       },
       {
+        "label": "WRZT4/Fiat_Lux/Text_Layout.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/Text_Layout.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/WRZT-Annihilation.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT-Annihilation.html",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT4/Fiat_Lux/WRZT-Logik.html",
         "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT-Logik.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/WRZT_4.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT_4.html",
         "icon": "✨"
       },
       {
@@ -2643,6 +2673,16 @@
         "icon": "✨"
       },
       {
+        "label": "WRZT4/Fiat_Lux/elektron-positron-annihilation.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/elektron-positron-annihilation.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/elektron-positron.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/elektron-positron.html",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT4/Fiat_Lux/favicon.png",
         "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/favicon.png",
         "icon": "✨"
@@ -2673,6 +2713,11 @@
         "icon": "✨"
       },
       {
+        "label": "WRZT4/Fiat_Lux/kurve.py",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/kurve.py",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT4/Fiat_Lux/sinuswelle_3d.html",
         "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/sinuswelle_3d.html",
         "icon": "✨"
@@ -2680,6 +2725,16 @@
       {
         "label": "WRZT4/Fiat_Lux/sinuswelle_kreis_feder_schwerependel.html",
         "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/sinuswelle_kreis_feder_schwerependel.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/style.css",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/style.css",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/wrzt_tangential_sinus_kollaps.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/wrzt_tangential_sinus_kollaps.html",
         "icon": "✨"
       },
       {
