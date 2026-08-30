@@ -100,6 +100,21 @@
     ]
   },
   {
+    "title": "Bilder",
+    "links": [
+      {
+        "label": "README.md",
+        "url": "https://juppijo.github.io/Bilder/README.md",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT/image1.jpg",
+        "url": "https://juppijo.github.io/Bilder/WRZT/image1.jpg",
+        "icon": "✨"
+      }
+    ]
+  },
+  {
     "title": "Dashboard",
     "links": [
       {
@@ -2613,6 +2628,11 @@
         "icon": "✨"
       },
       {
+        "label": "WRZT4/Fiat_Lux/Inhaltsverzeichnis_Cl.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/Inhaltsverzeichnis_Cl.html",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT4/Fiat_Lux/Text_Layout.html",
         "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/Text_Layout.html",
         "icon": "✨"
@@ -2625,6 +2645,11 @@
       {
         "label": "WRZT4/Fiat_Lux/WRZT-Logik.html",
         "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT-Logik.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/WRZT-Quellenangaben.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT-Quellenangaben.html",
         "icon": "✨"
       },
       {
@@ -2665,6 +2690,11 @@
       {
         "label": "WRZT4/Fiat_Lux/WRZT_T1.html",
         "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT_T1.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/bild.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/bild.html",
         "icon": "✨"
       },
       {
