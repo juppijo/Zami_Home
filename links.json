@@ -2483,11 +2483,6 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT3/WRZT-Sections/W1.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/W1.html",
-        "icon": "✨"
-      },
-      {
         "label": "WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v305.html",
         "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v305.html",
         "icon": "✨"
@@ -2853,6 +2848,11 @@
         "icon": "✨"
       },
       {
+        "label": "WRZT4/Fiat_Lux/positronium-bugwelle.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/positronium-bugwelle.html",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT4/Fiat_Lux/positronium-simulation.html",
         "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/positronium-simulation.html",
         "icon": "✨"
@@ -2880,6 +2880,11 @@
       {
         "label": "WRZT4/Fiat_Lux/torus_elektron.html",
         "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/torus_elektron.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/wrzt_bugwellen_simulation.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/wrzt_bugwellen_simulation.html",
         "icon": "✨"
       },
       {
@@ -3258,6 +3263,76 @@
     "title": "Zami_Buecher",
     "links": [
       {
+        "label": "Die_Schattenkrieger/Die Schattenkrieger-01.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/Die_Schattenkrieger/Die%20Schattenkrieger-01.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "Die_Schattenkrieger/Die Schattenkrieger-02.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/Die_Schattenkrieger/Die%20Schattenkrieger-02.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "Die_Schattenkrieger/Die Schattenkrieger-03.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/Die_Schattenkrieger/Die%20Schattenkrieger-03.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "Die_Schattenkrieger/Die Schattenkrieger-04.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/Die_Schattenkrieger/Die%20Schattenkrieger-04.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "Die_Schattenkrieger/Die Schattenkrieger-05.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/Die_Schattenkrieger/Die%20Schattenkrieger-05.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "Die_Schattenkrieger/Die Schattenkrieger-06.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/Die_Schattenkrieger/Die%20Schattenkrieger-06.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "Die_Schattenkrieger/Die Schattenkrieger-07.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/Die_Schattenkrieger/Die%20Schattenkrieger-07.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "Die_Schattenkrieger/Die Schattenkrieger-08.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/Die_Schattenkrieger/Die%20Schattenkrieger-08.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "Die_Schattenkrieger/Die Schattenkrieger-09.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/Die_Schattenkrieger/Die%20Schattenkrieger-09.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "Die_Schattenkrieger/Die Schattenkrieger-10.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/Die_Schattenkrieger/Die%20Schattenkrieger-10.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "Die_Schattenkrieger/Die Schattenkrieger-11.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/Die_Schattenkrieger/Die%20Schattenkrieger-11.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "Die_Schattenkrieger/Die Schattenkrieger-12.jpg",
+        "url": "https://juppijo.github.io/Zami_Buecher/Die_Schattenkrieger/Die%20Schattenkrieger-12.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "Die_Schattenkrieger/Die_Schattenkrieger.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/Die_Schattenkrieger/Die_Schattenkrieger.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Die_Schattenkrieger_g.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/Die_Schattenkrieger_g.html",
+        "icon": "✨"
+      },
+      {
         "label": "Home.jpeg",
         "url": "https://juppijo.github.io/Zami_Buecher/Home.jpeg",
         "icon": "✨"
@@ -3373,6 +3448,11 @@
         "icon": "✨"
       },
       {
+        "label": "Schattenkrieger.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/Schattenkrieger.html",
+        "icon": "✨"
+      },
+      {
         "label": "Shambala_Luminia/images/bild_1.jpg",
         "url": "https://juppijo.github.io/Zami_Buecher/Shambala_Luminia/images/bild_1.jpg",
         "icon": "✨"
@@ -3425,6 +3505,11 @@
       {
         "label": "Zaminia-und-die-Schattenkrieger/Zaminia-und-die-Schattenkrieger.html",
         "url": "https://juppijo.github.io/Zami_Buecher/Zaminia-und-die-Schattenkrieger/Zaminia-und-die-Schattenkrieger.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Zaminia.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/Zaminia.html",
         "icon": "✨"
       },
       {
@@ -3623,6 +3708,16 @@
         "icon": "✨"
       },
       {
+        "label": "buch_viewer_g.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/buch_viewer_g.html",
+        "icon": "✨"
+      },
+      {
+        "label": "buch_viewer_pro.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/buch_viewer_pro.html",
+        "icon": "✨"
+      },
+      {
         "label": "buchbinder_Cl.html",
         "url": "https://juppijo.github.io/Zami_Buecher/buchbinder_Cl.html",
         "icon": "✨"
@@ -3655,6 +3750,11 @@
       {
         "label": "konverter_smartphone.py",
         "url": "https://juppijo.github.io/Zami_Buecher/konverter_smartphone.py",
+        "icon": "✨"
+      },
+      {
+        "label": "pdf-konverter-cl.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/pdf-konverter-cl.html",
         "icon": "✨"
       }
     ]
@@ -4015,11 +4115,6 @@
       {
         "label": "Heilungpromt2.txt",
         "url": "https://juppijo.github.io/zaminia/Heilungpromt2.txt",
-        "icon": "✨"
-      },
-      {
-        "label": "Kochen/Schéma.pdf",
-        "url": "https://juppijo.github.io/zaminia/Kochen/Sch%C3%A9ma.pdf",
         "icon": "✨"
       },
       {
