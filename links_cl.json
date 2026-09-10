@@ -118,6 +118,16 @@
         "icon": "✨"
       },
       {
+        "label": "WRZT/1.jpg",
+        "url": "https://juppijo.github.io/Bilder/WRZT/1.jpg",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT/2.jpg",
+        "url": "https://juppijo.github.io/Bilder/WRZT/2.jpg",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT/Doppel-Wirbel.jpg",
         "url": "https://juppijo.github.io/Bilder/WRZT/Doppel-Wirbel.jpg",
         "icon": "✨"
@@ -1280,11 +1290,6 @@
       {
         "label": "style.css",
         "url": "https://juppijo.github.io/Musik_Zami/style.css",
-        "icon": "✨"
-      },
-      {
-        "label": "test.html",
-        "url": "https://juppijo.github.io/Musik_Zami/test.html",
         "icon": "✨"
       }
     ]
@@ -3338,6 +3343,16 @@
         "icon": "✨"
       },
       {
+        "label": "Gate-buch.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/Gate-buch.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Gate_gate.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/Gate_gate.html",
+        "icon": "✨"
+      },
+      {
         "label": "Home.jpeg",
         "url": "https://juppijo.github.io/Zami_Buecher/Home.jpeg",
         "icon": "✨"
@@ -3710,6 +3725,11 @@
       {
         "label": "ZanimiasWeltreise/style.css",
         "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/style.css",
+        "icon": "✨"
+      },
+      {
+        "label": "book-style.css",
+        "url": "https://juppijo.github.io/Zami_Buecher/book-style.css",
         "icon": "✨"
       },
       {
