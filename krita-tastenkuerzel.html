@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Krita — Tastenkürzel</title>
+<style>
+  :root{
+    --bg: #17140f;
+    --bg-panel: #1f1b14;
+    --wood: #2a251c;
+    --key-face: #292319;
+    --key-face-hi: #332c1f;
+    --key-border: #4a4030;
+    --ink: #ece3d1;
+    --ink-dim: #a99d84;
+    --accent: #e2793a;      /* Kadmiumorange, Grundfarbe im Pinselfach */
+    --accent-dim: #7a4527;
+    --modifier: #5f9083;    /* gedämpftes Grünspan-Teal */
+    --modifier-dim: #2c433c;
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse at 20% -10%, #241f16 0%, transparent 55%),
+      var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    padding: 40px 24px 64px;
+    min-height: 100vh;
+  }
+
+  .wrap{
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  header{
+    margin-bottom: 34px;
+    border-bottom: 1px solid var(--key-border);
+    padding-bottom: 22px;
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  h1{
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 2.4rem;
+    margin: 0 0 6px;
+    color: var(--ink);
+    letter-spacing: 0.2px;
+  }
+  h1 em{
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  header p{
+    margin:0;
+    color: var(--ink-dim);
+    font-size: 0.95rem;
+    max-width: 46ch;
+    line-height: 1.5;
+  }
+
+  .search-box{
+    position: relative;
+    width: 280px;
+  }
+  .search-box input{
+    width: 100%;
+    background: var(--bg-panel);
+    border: 1px solid var(--key-border);
+    color: var(--ink);
+    padding: 11px 14px;
+    border-radius: 3px;
+    font-size: 0.95rem;
+    font-family: var(--sans);
+  }
+  .search-box input::placeholder{ color: var(--ink-dim); }
+  .search-box input:focus{ outline: none; border-color: var(--accent); }
+
+  .layout{
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 28px;
+    align-items: start;
+  }
+
+  @media (max-width: 900px){
+    .layout{ grid-template-columns: 1fr; }
+  }
+
+  /* --- Modifier rack --- */
+  .modrack{
+    display:flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .mod-btn{
+    flex:1;
+    background: var(--key-face);
+    border: 1px solid var(--key-border);
+    color: var(--ink-dim);
+    padding: 12px 0;
+    text-align:center;
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background .12s ease, color .12s ease, border-color .12s ease, transform .06s ease;
+    user-select:none;
+  }
+  .mod-btn small{
+    display:block;
+    color: var(--ink-dim);
+    font-size: 0.68rem;
+    margin-top: 2px;
+  }
+  .mod-btn.active{
+    background: var(--modifier-dim);
+    border-color: var(--modifier);
+    color: var(--ink);
+  }
+  .mod-btn:active{ transform: translateY(1px); }
+
+  /* --- Keyboard --- */
+  .keyboard{
+    background: var(--wood);
+    border: 1px solid var(--key-border);
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 20px 50px -25px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
+  }
+  .row{
+    display:flex;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+  .row:last-child{ margin-bottom:0; }
+
+  .key{
+    position:relative;
+    background: var(--key-face);
+    border: 1px solid var(--key-border);
+    border-bottom-width: 3px;
+    border-radius: 4px;
+    color: var(--ink);
+    font-size: 0.78rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height: 46px;
+    cursor: pointer;
+    user-select:none;
+    transition: background .1s ease, border-color .1s ease, transform .05s ease;
+  }
+  .key:hover{ background: var(--key-face-hi); }
+  .key:active{ transform: translateY(1px); border-bottom-width: 2px; }
+
+  .key.has-shortcut::after{
+    content:"";
+    position:absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent-dim);
+  }
+  .key.matches{
+    background: var(--accent-dim);
+    border-color: var(--accent);
+    color: #fff2e8;
+  }
+  .key.matches::after{ background: var(--accent); }
+  .key.selected{
+    background: var(--accent);
+    border-color: #f6a06a;
+    color: #201203;
+    font-weight: 600;
+  }
+  .key.selected::after{ display:none; }
+
+  .k-w1{ flex: 1; }
+  .k-w15{ flex: 1.5; }
+  .k-w2{ flex: 2; }
+  .k-w25{ flex: 2.5; }
+  .k-w6{ flex: 6.2; }
+
+  .keycap-label{ pointer-events:none; }
+  .keycap-sub{
+    font-size: 0.6rem;
+    color: var(--ink-dim);
+    display:block;
+    text-align:center;
+  }
+
+  .gap{ width: 16px; flex: 0 0 16px; }
+
+  /* --- Side panel --- */
+  .panel{
+    background: var(--bg-panel);
+    border: 1px solid var(--key-border);
+    border-radius: 10px;
+    padding: 20px;
+    position: sticky;
+    top: 24px;
+    max-height: calc(100vh - 48px);
+    display:flex;
+    flex-direction:column;
+  }
+  .panel h2{
+    font-family: var(--serif);
+    font-weight:400;
+    font-size: 1.15rem;
+    margin: 0 0 4px;
+    color: var(--accent);
+  }
+  .panel .combo-display{
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 1.05rem;
+    color: var(--ink);
+    margin-bottom: 14px;
+    min-height: 1.4em;
+    letter-spacing: 0.02em;
+  }
+  .panel .hint{
+    color: var(--ink-dim);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .result-list{
+    list-style:none;
+    margin: 8px 0 0;
+    padding:0;
+    overflow-y:auto;
+    flex:1;
+  }
+  .result-list li{
+    padding: 10px 0;
+    border-top: 1px solid var(--key-border);
+    font-size: 0.88rem;
+  }
+  .result-list li:first-child{ border-top:none; }
+  .result-list .combo{
+    display:inline-block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: var(--accent);
+    background: var(--accent-dim);
+    padding: 1px 7px;
+    border-radius: 3px;
+    font-size: 0.78rem;
+    margin-right: 8px;
+    white-space:nowrap;
+  }
+  .result-list .action{ color: var(--ink); }
+  .result-list .none{
+    color: var(--ink-dim);
+    font-style: italic;
+    font-size: 0.85rem;
+  }
+
+  .result-list::-webkit-scrollbar{ width: 6px; }
+  .result-list::-webkit-scrollbar-thumb{ background: var(--key-border); border-radius: 3px; }
+
+  .count-badge{
+    color: var(--ink-dim);
+    font-size: 0.78rem;
+    margin-bottom: 2px;
+  }
+
+  footer{
+    max-width: 1180px;
+    margin: 30px auto 0;
+    color: var(--ink-dim);
+    font-size: 0.8rem;
+    text-align:center;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1>Krita <em>Tastenkürzel</em></h1>
+      <p>Modifikator-Tasten wählen, dann eine Taste auf der Tastatur berühren oder anklicken — der Aktionsname erscheint rechts. Ein Punkt auf der Taste zeigt, dass ihr überhaupt ein Kürzel zugeordnet ist.</p>
+    </div>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Aktion durchsuchen …">
+    </div>
+  </header>
+
+  <div class="layout">
+    <div>
+      <div class="modrack">
+        <div class="mod-btn" data-mod="Ctrl">Strg<small>Ctrl</small></div>
+        <div class="mod-btn" data-mod="Alt">Alt<small>Alt</small></div>
+        <div class="mod-btn" data-mod="Shift">Umschalt<small>Shift</small></div>
+      </div>
+
+      <div class="keyboard" id="keyboard">
+        <div class="row">
+          <div class="key k-w1" data-key="Esc">Esc</div>
+          <div class="gap"></div>
+          <div class="key k-w1" data-key="F1">F1</div>
+          <div class="key k-w1" data-key="F2">F2</div>
+          <div class="key k-w1" data-key="F3">F3</div>
+          <div class="key k-w1" data-key="F4">F4</div>
+          <div class="key k-w1" data-key="F5">F5</div>
+          <div class="key k-w1" data-key="F6">F6</div>
+        </div>
+
+        <div class="row">
+          <div class="key k-w1" data-key="1">1</div>
+          <div class="key k-w1" data-key="2">2</div>
+          <div class="key k-w1" data-key="3">3</div>
+          <div class="key k-w1" data-key="4">4</div>
+          <div class="key k-w1" data-key="5">5</div>
+          <div class="key k-w1" data-key="6">6</div>
+          <div class="key k-w1" data-key="7">7</div>
+          <div class="key k-w1" data-key="8">8</div>
+          <div class="key k-w1" data-key="9">9</div>
+          <div class="key k-w1" data-key="0">0</div>
+          <div class="key k-w1" data-key="-">−</div>
+          <div class="key k-w1" data-key="+">+</div>
+          <div class="key k-w2" data-key="Backspace">⌫ Rückschritt</div>
+        </div>
+
+        <div class="row">
+          <div class="key k-w15" data-key="Tab">⇥ Tab</div>
+          <div class="key k-w1" data-key="Q">Q</div>
+          <div class="key k-w1" data-key="W">W</div>
+          <div class="key k-w1" data-key="E">E</div>
+          <div class="key k-w1" data-key="R">R</div>
+          <div class="key k-w1" data-key="T">T</div>
+          <div class="key k-w1" data-key="Y">Y</div>
+          <div class="key k-w1" data-key="U">U</div>
+          <div class="key k-w1" data-key="I">I</div>
+          <div class="key k-w1" data-key="O">O</div>
+          <div class="key k-w1" data-key="P">P</div>
+          <div class="key k-w1" data-key="[">[</div>
+          <div class="key k-w1" data-key="]">]</div>
+          <div class="key k-w1" data-key="\">\</div>
+        </div>
+
+        <div class="row">
+          <div class="key k-w2" data-key="CapsLock">Feststell</div>
+          <div class="key k-w1" data-key="A">A</div>
+          <div class="key k-w1" data-key="S">S</div>
+          <div class="key k-w1" data-key="D">D</div>
+          <div class="key k-w1" data-key="F">F</div>
+          <div class="key k-w1" data-key="G">G</div>
+          <div class="key k-w1" data-key="H">H</div>
+          <div class="key k-w1" data-key="J">J</div>
+          <div class="key k-w1" data-key="K">K</div>
+          <div class="key k-w1" data-key="L">L</div>
+          <div class="key k-w1" data-key=";">;</div>
+          <div class="key k-w1" data-key="'">'</div>
+          <div class="key k-w2" data-key="Enter">⏎ Eingabe</div>
+        </div>
+
+        <div class="row">
+          <div class="key k-w25" data-key="Ins">Umschalt<span class="keycap-sub">(links)</span></div>
+          <div class="key k-w1" data-key="Z">Z</div>
+          <div class="key k-w1" data-key="X">X</div>
+          <div class="key k-w1" data-key="C">C</div>
+          <div class="key k-w1" data-key="V">V</div>
+          <div class="key k-w1" data-key="B">B</div>
+          <div class="key k-w1" data-key="N">N</div>
+          <div class="key k-w1" data-key="M">M</div>
+          <div class="key k-w1" data-key=",">,</div>
+          <div class="key k-w1" data-key=".">.</div>
+          <div class="key k-w1" data-key="/">/</div>
+          <div class="key k-w25" data-key="ShiftR">Umschalt<span class="keycap-sub">(rechts)</span></div>
+        </div>
+
+        <div class="row">
+          <div class="key k-w6" data-key="Space">Leertaste</div>
+          <div class="key k-w1" data-key="Ins">Einfg</div>
+          <div class="key k-w1" data-key="Del">Entf</div>
+          <div class="key k-w1" data-key="PgUp">Bild↑</div>
+          <div class="key k-w1" data-key="PgDown">Bild↓</div>
+        </div>
+
+        <div class="row">
+          <div class="key k-w1" data-key="Left">←</div>
+          <div class="key k-w1" data-key="Up">↑</div>
+          <div class="key k-w1" data-key="Down">↓</div>
+          <div class="key k-w1" data-key="Right">→</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2 id="panelTitle">Kein Kürzel gewählt</h2>
+      <div class="combo-display" id="comboDisplay">—</div>
+      <div class="hint" id="hintText">Wähle links Modifikatoren aus und klicke dann auf eine Taste. Oder tippe oben rechts einen Aktionsnamen, um zu suchen.</div>
+      <div class="count-badge" id="countBadge"></div>
+      <ul class="result-list" id="resultList"></ul>
+    </div>
+  </div>
+</div>
+
+<footer>Aus den Krita-Kurzbefehlen (tasten.pdf) zusammengestellt — nur Aktionen mit einem hinterlegten Kürzel sind aufgeführt.</footer>
+
+<script>
+// ---- Datensatz: Tastenkombination -> Aktion(en) ----
+const SHORTCUTS = [
+  ["U","Allgemeine Farben anzeigen"],
+  ["Ctrl+Shift+I","Auswahl umkehren"],
+  ["H","Farbverlauf anzeigen"],
+  ["Shift+I","Farbwähler anzeigen"],
+  ["Shift+N","Minimalen Farbtonwähler anzeigen"],
+  ["Shift+M","MyPaint Formenauswahl anzeigen"],
+  ["F6","Pinsel-Voreinstellungen anzeigen"],
+  ["F5","Pinseleditor anzeigen"],
+  ["Ctrl+Enter","Search Actions"],
+  ["Ctrl+Shift+T","Tablett-Debugger ein-/ausschalten"],
+  ["\\","Werkzeugoptionen anzeigen"],
+  ["Shift+Ins","Vektorebene hinzufügen"],
+  ["F2","Aktuelle Ebene umbenennen"],
+  ["Ctrl+Shift+J","Auswahl auf neue Ebene ausschneiden"],
+  ["Ctrl+Alt+J","Auswahl auf neue Ebene kopieren"],
+  ["Ctrl+J","Ebene oder Maske duplizieren"],
+  ["Shift+Del","Ebene entfernen"],
+  ["Ctrl+PgUp","Ebene oder Maske nach oben bewegen"],
+  ["Ctrl+PgDown","Ebene oder Maske nach unten bewegen"],
+  ["Ctrl+Shift+E","Ebenen zusammenführen"],
+  ["Ctrl+Alt+G","Gruppierung schnell aufheben"],
+  ["Ctrl+E","In untere Ebene einfügen"],
+  ["Ins","Malebene hinzufügen"],
+  ["Ins","Punkt einfügen (Pfad bearbeiten)"],
+  ["PgUp","Nächste Ebene aktivieren"],
+  ["F3","Eigenschaften (Properties)"],
+  ["Ctrl+Shift+G","Quick Clipping Group"],
+  ["Ctrl+G","Schnellgruppierung"],
+  [";","Vorher ausgewählte Ebene aktivieren"],
+  ["PgDown","Vorherige Ebene aktivieren"],
+  ["Ctrl+B","Farbabgleich"],
+  ["Ctrl+B","Fett (Text)"],
+  ["Ctrl+B","Break at selection (Pfad)"],
+  ["Ctrl+M","Farbanpassungskurven"],
+  ["Ctrl+U","HSV-Anpassung"],
+  ["Ctrl+U","Unterstrichen (Text)"],
+  ["Ctrl+I","Invertieren"],
+  ["Ctrl+I","Kursiv (Text)"],
+  ["Ctrl+Shift+U","Sättigung vermindern"],
+  ["Ctrl+L","Stufen"],
+  ["Ctrl+L","Light (Textstil)"],
+  ["I","Deckkraft verringern"],
+  ["Ctrl+Shift+L","Einrasten an Assistenzwerkzeug ein/aus"],
+  ["O","Deckkraft erhöhen"],
+  ["Ctrl+Backspace","Mit Hintergrundfarbe füllen (Deckkraft)"],
+  ["Ctrl+Shift+Backspace","Mit Vordergrundfarbe füllen (Deckkraft)"],
+  [",","Nächste bevorzugte Voreinstellung"],
+  ["K","Pinselfarbe dunkler einstellen"],
+  ["L","Pinselfarbe heller einstellen"],
+  ["]","Pinselgröße vergrößern"],
+  ["[","Pinselgröße verkleinern"],
+  ["Shift+Z","Polygon-Auswahlpunkte rückgängig machen"],
+  ["E","Radiermodus einstellen"],
+  ["D","Vorder-/Hintergrundfarbe auf Schwarz/Weiß setzen"],
+  ["X","Vorder-/Hintergrundfarbe tauschen"],
+  [".","Vorige bevorzugte Voreinstellung"],
+  ["/","Zur vorigen Voreinstellung wechseln"],
+  ["Alt+Shift+G","Aufhellen-Verlaufmodus auswählen"],
+  ["Alt+Shift+G","Glyph Palette öffnen"],
+  ["Alt+Shift+C","Farb-Verlaufmodus auswählen"],
+  ["Alt+Shift+B","Farbbrand-Verlaufmodus auswählen"],
+  ["Alt+Shift+U","Farbton-Verlaufmodus auswählen"],
+  ["Alt+Shift+Q","Hinter-Verlaufmodus auswählen"],
+  ["Alt+Shift+Y","Leuchtkraft-Verlaufmodus auswählen"],
+  ["Alt+Shift++","Nächster Verlaufmodus"],
+  ["Alt+Shift+N","Normalen Verlaufmodus auswählen"],
+  ["Alt+Shift+T","Sättigungs-Verlaufmodus auswählen"],
+  ["Alt+Shift+R","Sauberen Verlaufmodus auswählen"],
+  ["Alt+Shift+D","Aufhellen-Modus (Color Dodge)"],
+  ["Alt+Shift+E","Differenz-Modus"],
+  ["Alt+Shift+X","Ausschluss-Modus"],
+  ["Alt+Shift+H","Hartes Licht"],
+  ["Alt+Shift+L","Harte Mischung"],
+  ["Alt+Shift+P","Hartes Überlagern"],
+  ["Alt+Shift+W","Lineares Aufhellen"],
+  ["Alt+Shift+J","Lineares Licht"],
+  ["Alt+Shift+O","Überlagern-Modus"],
+  ["Alt+Shift+Z","Nadelpunkt-Licht"],
+  ["Alt+Shift+S","Bildschirm-Modus"],
+  ["Alt+Shift+F","Weiches Licht"],
+  ["Alt+Shift+V","Kräftiges Licht"],
+  ["Alt+Shift+K","Verdunkeln-Verlaufmodus auswählen"],
+  ["Alt+Shift+I","Verflüssigen-Verlaufmodus auswählen"],
+  ["Alt+Shift+A","Lineares Brennen"],
+  ["Alt+Shift+M","Vervielfältigen-Verlaufmodus auswählen"],
+  ["Alt+Shift+-","Vorheriger Verlaufmodus"],
+  ["Shift+O","Breitgamut-Farbwähler anzeigen"],
+  ["Ctrl+Shift+Y","„Außerhalb des Farbraums“-Warnung"],
+  ["Ctrl+Shift+;","An Gitter ausrichten"],
+  ["Alt+M","Ansicht an Cursor spiegeln"],
+  ["M","Ansicht spiegeln"],
+  ["Ctrl+Y","Druckprobe"],
+  ["Ctrl+Shift+'","Gitter anzeigen"],
+  ["Ctrl+[","Leinwand nach links drehen"],
+  ["Ctrl+]","Leinwand nach rechts drehen"],
+  ["Tab","Nur Leinwand anzeigen"],
+  ["Shift+L","Schnellvorschaumodus"],
+  ["Shift+S","Einrastoptionen anzeigen"],
+  ["Shift+W","Textumfluss-Modus"],
+  ["Ctrl++","Vergrößern"],
+  ["Ctrl+-","Verkleinern"],
+  ["Ctrl+Shift+F","Vollbildmodus"],
+  ["Ctrl+0","Auf 100% zoomen"],
+  ["Ctrl+A","Alles auswählen"],
+  ["Ctrl+H","Auswahl anzeigen"],
+  ["Ctrl+Shift+A","Auswahl aufheben"],
+  ["Ctrl+Shift+D","Erneut auswählen"],
+  ["Shift+F6","Feder-Auswahl"],
+  ["Ctrl+Shift+Z","Wiederherstellen (Redo)"],
+  ["Ctrl+Shift+N","Als neues Bild einfügen"],
+  ["Ctrl+Shift+R","Als Referenzbild einfügen"],
+  ["Ctrl+Alt+V","Am Cursor einfügen"],
+  ["Ctrl+X","Ausschneiden"],
+  ["Ctrl+V","Einfügen"],
+  ["Ctrl+Shift+V","In aktive Ebene einfügen"],
+  ["Ctrl+C","Kopieren"],
+  ["Del","Löschen"],
+  ["Backspace","Mit Hintergrundfarbe füllen"],
+  ["Backspace","Punkt entfernen (Pfad bearbeiten)"],
+  ["Shift+Backspace","Mit Vordergrundfarbe füllen"],
+  ["Ctrl+Z","Rückgängig (Undo)"],
+  ["Ctrl+Shift+C","Zusammengefügtes Kopieren"],
+  ["Ctrl+Alt+I","Bild auf neue Größe skalieren"],
+  ["Ctrl+Alt+C","Leinwandgröße ändern"],
+  ["Ctrl+Alt+C","Zentriert (Text)"],
+  ["Ctrl+Shift+W","Alle schließen"],
+  ["Ctrl+Q","Beenden"],
+  ["F4","Inkrementelle Sicherung speichern"],
+  ["Ctrl+Alt+S","Inkrementelle Version speichern"],
+  ["Ctrl+N","Neu"],
+  ["Ctrl+O","Öffnen"],
+  ["Ctrl+W","Schließen"],
+  ["Ctrl+S","Speichern"],
+  ["Ctrl+Shift+S","Speichern unter"],
+  ["Ctrl+F","Filter erneut anwenden"],
+  ["F1","Handbuch zu Krita"],
+  ["Ctrl+Alt+Shift+M","Mutate"],
+  ["Ctrl+Alt+0","Pinselvoreinstellung 0 aktivieren"],
+  ["Ctrl+Alt+1","Pinselvoreinstellung 1 aktivieren"],
+  ["Ctrl+Alt+2","Pinselvoreinstellung 2 aktivieren"],
+  ["Ctrl+Alt+3","Pinselvoreinstellung 3 aktivieren"],
+  ["Ctrl+Alt+4","Pinselvoreinstellung 4 aktivieren"],
+  ["Ctrl+Alt+5","Pinselvoreinstellung 5 aktivieren"],
+  ["Ctrl+Alt+6","Pinselvoreinstellung 6 aktivieren"],
+  ["Ctrl+Alt+7","Pinselvoreinstellung 7 aktivieren"],
+  ["Ctrl+Alt+8","Pinselvoreinstellung 8 aktivieren"],
+  ["Ctrl+Alt+9","Pinselvoreinstellung 9 aktivieren"],
+  ["Ctrl+Shift+1","Skript 1 ausführen"],
+  ["Ctrl+Shift+2","Skript 2 ausführen"],
+  ["Ctrl+Shift+3","Skript 3 ausführen"],
+  ["Ctrl+Shift+4","Skript 4 ausführen"],
+  ["Ctrl+Shift+5","Skript 5 ausführen"],
+  ["Ctrl+Shift+6","Skript 6 ausführen"],
+  ["Ctrl+Shift+7","Skript 7 ausführen"],
+  ["Ctrl+Shift+8","Skript 8 ausführen"],
+  ["Ctrl+Shift+9","Skript 9 ausführen"],
+  ["Ctrl+Shift+0","Skript 10 ausführen"],
+  ["Ctrl+Alt+R","Blocksatz"],
+  ["Ctrl+Alt+R","Rechtsbündig (Text)"],
+  ["Ctrl+Shift+P","Hochstellen"],
+  ["Ctrl+>","Schrift vergrößern"],
+  ["Ctrl+<","Schriftgröße verkleinern"],
+  ["Ctrl+Shift+B","Tiefstellen"],
+  ["Ctrl+Alt+[","Nach hinten"],
+  ["Ctrl+Shift+[","Nach hinten stellen"],
+  ["Ctrl+Alt+]","Nach vorne"],
+  ["Ctrl+Shift+]","Nach vorne holen"],
+  ["Shift+J","Werkzeug: Ellipsen"],
+  ["J","Werkzeug: Elliptische Auswahl"],
+  ["J","Mit Segment verbinden (Pfad)"],
+  ["P","Werkzeug: Farbwähler"],
+  ["P","Zu Pfad"],
+  ["B","Werkzeug: Freihandpinsel"],
+  ["F","Füllen"],
+  ["F","Segment zu Linie (Pfad)"],
+  ["Q","Werkzeug: Multipinsel"],
+  ["Ctrl+R","Werkzeug: Rechteck-Auswahl"],
+  ["Shift+R","Werkzeug: Rechtecke"],
+  ["Ctrl+T","Werkzeug: Transformieren"],
+  ["G","Werkzeug: Verlauf"],
+  ["T","Werkzeug: Verschieben"],
+  ["C","Werkzeug: Zuschneiden"],
+  ["Ctrl+Alt+Shift+C","Koordinaten anzeigen (Pfad)"],
+  ["Left","Punkt nach links bewegen (Pfad)"],
+  ["Up","Punkt nach oben bewegen (Pfad)"],
+  ["Right","Punkt nach rechts bewegen (Pfad)"],
+  ["Down","Punkt nach unten bewegen (Pfad)"],
+  ["Shift+Left","Punkt weiter nach links bewegen (Pfad)"],
+  ["Shift+Up","Punkt weiter nach oben bewegen (Pfad)"],
+  ["Shift+Right","Punkt weiter nach rechts bewegen (Pfad)"],
+  ["Shift+Down","Punkt weiter nach unten bewegen (Pfad)"],
+  ["Shift+C","Segment zu Kurve (Pfad)"]
+];
+
+// Kombination normalisieren: Reihenfolge Ctrl -> Alt -> Shift -> Taste
+function normalizeCombo(combo){
+  const parts = combo.split("+");
+  const key = parts[parts.length-1];
+  const mods = parts.slice(0,-1);
+  const order = ["Ctrl","Alt","Shift"];
+  const sorted = order.filter(m => mods.includes(m));
+  return [...sorted, key].join("+");
+}
+
+const byCombo = {};
+SHORTCUTS.forEach(([combo, action]) => {
+  const norm = normalizeCombo(combo);
+  if(!byCombo[norm]) byCombo[norm] = [];
+  byCombo[norm].push(action);
+});
+
+// Set aller Grundtasten, die IRGENDEIN Kürzel besitzen (für den Punkt-Indikator)
+const keysWithAnyShortcut = new Set(
+  Object.keys(byCombo).map(c => c.split("+").pop())
+);
+
+// ---- UI-Logik ----
+const state = { Ctrl:false, Alt:false, Shift:false };
+const modButtons = document.querySelectorAll(".mod-btn");
+const keys = document.querySelectorAll(".key");
+const panelTitle = document.getElementById("panelTitle");
+const comboDisplay = document.getElementById("comboDisplay");
+const hintText = document.getElementById("hintText");
+const resultList = document.getElementById("resultList");
+const countBadge = document.getElementById("countBadge");
+const searchInput = document.getElementById("searchInput");
+
+let selectedKeyEl = null;
+
+function currentModString(){
+  const order = ["Ctrl","Alt","Shift"];
+  return order.filter(m => state[m]);
+}
+
+function markKeyIndicators(){
+  keys.forEach(k => {
+    const base = k.dataset.key;
+    k.classList.toggle("has-shortcut", keysWithAnyShortcut.has(base));
+  });
+}
+
+function highlightMatchesForCurrentMods(){
+  const mods = currentModString();
+  keys.forEach(k => {
+    const base = k.dataset.key;
+    const combo = [...mods, base].join("+");
+    const norm = normalizeCombo(combo);
+    const exists = !!byCombo[norm];
+    k.classList.toggle("matches", exists && k !== selectedKeyEl);
+  });
+}
+
+function showComboResult(combo){
+  const norm = normalizeCombo(combo);
+  const actions = byCombo[norm];
+  comboDisplay.textContent = norm.split("+").join(" + ");
+  resultList.innerHTML = "";
+  if(actions && actions.length){
+    panelTitle.textContent = actions.length > 1 ? "Mehrere Aktionen" : "Zugeordnete Aktion";
+    hintText.style.display = "none";
+    countBadge.textContent = "";
+    actions.forEach(a => {
+      const li = document.createElement("li");
+      li.innerHTML = `<span class="action">${a}</span>`;
+      resultList.appendChild(li);
+    });
+  } else {
+    panelTitle.textContent = "Kein Kürzel belegt";
+    hintText.style.display = "none";
+    countBadge.textContent = "";
+    const li = document.createElement("li");
+    li.innerHTML = `<span class="none">Für diese Kombination ist in Krita kein Kürzel hinterlegt.</span>`;
+    resultList.appendChild(li);
+  }
+}
+
+function resetPanelToIdle(){
+  panelTitle.textContent = "Kein Kürzel gewählt";
+  comboDisplay.textContent = "—";
+  hintText.style.display = "block";
+  countBadge.textContent = "";
+  resultList.innerHTML = "";
+}
+
+modButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const mod = btn.dataset.mod;
+    state[mod] = !state[mod];
+    btn.classList.toggle("active", state[mod]);
+    highlightMatchesForCurrentMods();
+    if(selectedKeyEl){
+      const combo = [...currentModString(), selectedKeyEl.dataset.key].join("+");
+      showComboResult(combo);
+    }
+  });
+});
+
+keys.forEach(k => {
+  k.addEventListener("mouseenter", () => {
+    if(selectedKeyEl) return; // Klick hat Vorrang vor Hover
+    const combo = [...currentModString(), k.dataset.key].join("+");
+    showComboResult(combo);
+  });
+  k.addEventListener("mouseleave", () => {
+    if(selectedKeyEl) return;
+    resetPanelToIdle();
+  });
+  k.addEventListener("click", () => {
+    if(selectedKeyEl) selectedKeyEl.classList.remove("selected");
+    if(selectedKeyEl === k){
+      selectedKeyEl = null;
+      resetPanelToIdle();
+      highlightMatchesForCurrentMods();
+      return;
+    }
+    selectedKeyEl = k;
+    k.classList.add("selected");
+    const combo = [...currentModString(), k.dataset.key].join("+");
+    showComboResult(combo);
+    highlightMatchesForCurrentMods();
+  });
+});
+
+// ---- Suche ----
+const allEntries = Object.entries(byCombo).flatMap(([combo, actions]) =>
+  actions.map(action => ({ combo, action }))
+);
+
+searchInput.addEventListener("input", () => {
+  const q = searchInput.value.trim().toLowerCase();
+  if(!q){
+    resetPanelToIdle();
+    return;
+  }
+  if(selectedKeyEl){
+    selectedKeyEl.classList.remove("selected");
+    selectedKeyEl = null;
+    highlightMatchesForCurrentMods();
+  }
+  const matches = allEntries.filter(e => e.action.toLowerCase().includes(q));
+  panelTitle.textContent = "Suchergebnisse";
+  comboDisplay.textContent = `„${searchInput.value.trim()}“`;
+  hintText.style.display = "none";
+  resultList.innerHTML = "";
+  countBadge.textContent = matches.length + (matches.length === 1 ? " Treffer" : " Treffer");
+  if(matches.length === 0){
+    const li = document.createElement("li");
+    li.innerHTML = `<span class="none">Keine passende Aktion gefunden.</span>`;
+    resultList.appendChild(li);
+  } else {
+    matches.forEach(m => {
+      const li = document.createElement("li");
+      li.innerHTML = `<span class="combo">${m.combo.split("+").join(" + ")}</span><span class="action">${m.action}</span>`;
+      resultList.appendChild(li);
+    });
+  }
+});
+
+markKeyIndicators();
+highlightMatchesForCurrentMods();
+</script>
+</body>
+</html>
