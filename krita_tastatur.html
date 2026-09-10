@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krita 5.3.3 - Interaktive Tastatur & Kürzel-Finder</title>
+    <style>
+        :root {
+            --bg-color: #1e1e24;
+            --panel-bg: #2b2b36;
+            --key-bg: #3b3b4a;
+            --key-active: #4a6fa5;
+            --key-mod: #d97706;
+            --accent: #60a5fa;
+            --text-color: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border-radius: 6px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-bottom: 5px;
+            font-weight: 400;
+            color: var(--accent);
+        }
+
+        p.sub {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: var(--border-radius);
+            border: 1px solid #4b5563;
+            background-color: var(--panel-bg);
+            color: #fff;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--accent);
+        }
+
+        /* Tastatur Container */
+        .keyboard-container {
+            background-color: var(--panel-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            max-width: 950px;
+            width: 100%;
+            margin-bottom: 25px;
+            box-sizing: border-box;
+        }
+
+        .keyboard-row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 8px;
+            gap: 6px;
+        }
+
+        .key {
+            background-color: var(--key-bg);
+            color: var(--text-color);
+            border: 1px solid #4b5563;
+            border-radius: var(--border-radius);
+            min-width: 40px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.15s ease;
+            box-shadow: 0 3px 0 #1f2937;
+        }
+
+        .key:hover {
+            background-color: #4b5563;
+            transform: translateY(-1px);
+        }
+
+        .key:active, .key.pressed {
+            transform: translateY(2px);
+            box-shadow: none;
+            background-color: var(--key-active);
+        }
+
+        .key.mod-active {
+            background-color: var(--key-mod);
+            border-color: #f59e0b;
+        }
+
+        /* Spezifische Tastenbreiten */
+        .key.w-15 { min-width: 60px; }
+        .key.w-20 { min-width: 80px; }
+        .key.w-25 { min-width: 100px; }
+        .key.space { min-width: 250px; }
+
+        /* Ergebnisse & Listen */
+        .results-container {
+            width: 100%;
+            max-width: 950px;
+            background-color: var(--panel-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .results-header {
+            font-size: 18px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .shortcut-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .shortcut-card {
+            background: #23232d;
+            padding: 10px 14px;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--accent);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .shortcut-card .title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .shortcut-card .key-badge {
+            align-self: flex-start;
+            background: var(--key-bg);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            color: var(--accent);
+            border: 1px solid #4b5563;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--panel-bg); }
+        ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+    <h1>Krita 5.3.3 Tastatur-Kürzel Übersicht</h1>
+    <p class="sub">Klicke Tasten an oder nutze die Suche, um Befehle zu finden</p>
+
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Suche nach Befehl (z.B. Pinsel, Ebene, Auswahl, Transparenz)...">
+    </div>
+
+    <!-- Visuelle Tastatur -->
+    <div class="keyboard-container">
+        <!-- Reihe 1 (Fn Tasten) -->
+        <div class="keyboard-row">
+            <div class="key" data-key="Esc">Esc</div>
+            <div class="key" data-key="F1">F1</div>
+            <div class="key" data-key="F2">F2</div>
+            <div class="key" data-key="F3">F3</div>
+            <div class="key" data-key="F4">F4</div>
+            <div class="key" data-key="F5">F5</div>
+            <div class="key" data-key="F6">F6</div>
+            <div class="key" data-key="F7">F7</div>
+            <div class="key" data-key="F8">F8</div>
+            <div class="key" data-key="F9">F9</div>
+            <div class="key" data-key="F10">F10</div>
+            <div class="key" data-key="F11">F11</div>
+            <div class="key" data-key="F12">F12</div>
+        </div>
+        <!-- Reihe 2 (Zahlen) -->
+        <div class="keyboard-row">
+            <div class="key" data-key="^">^</div>
+            <div class="key" data-key="1">1</div>
+            <div class="key" data-key="2">2</div>
+            <div class="key" data-key="3">3</div>
+            <div class="key" data-key="4">4</div>
+            <div class="key" data-key="5">5</div>
+            <div class="key" data-key="6">6</div>
+            <div class="key" data-key="7">7</div>
+            <div class="key" data-key="8">8</div>
+            <div class="key" data-key="9">9</div>
+            <div class="key" data-key="0">0</div>
+            <div class="key" data-key="ß">ß</div>
+            <div class="key" data-key="`">`</div>
+            <div class="key w-15" data-key="Backspace">⌫</div>
+        </div>
+        <!-- Reihe 3 (QWERTZ) -->
+        <div class="keyboard-row">
+            <div class="key w-15" data-key="Tab">Tab</div>
+            <div class="key" data-key="Q">Q</div>
+            <div class="key" data-key="W">W</div>
+            <div class="key" data-key="E">E</div>
+            <div class="key" data-key="R">R</div>
+            <div class="key" data-key="T">T</div>
+            <div class="key" data-key="Z">Z</div>
+            <div class="key" data-key="U">U</div>
+            <div class="key" data-key="I">I</div>
+            <div class="key" data-key="O">O</div>
+            <div class="key" data-key="P">P</div>
+            <div class="key" data-key="Ü">Ü</div>
+            <div class="key" data-key="+">+</div>
+            <div class="key w-15" data-key="Return">Enter</div>
+        </div>
+        <!-- Reihe 4 (ASDF) -->
+        <div class="keyboard-row">
+            <div class="key w-20" data-key="Caps">Caps</div>
+            <div class="key" data-key="A">A</div>
+            <div class="key" data-key="S">S</div>
+            <div class="key" data-key="D">D</div>
+            <div class="key" data-key="F">F</div>
+            <div class="key" data-key="G">G</div>
+            <div class="key" data-key="H">H</div>
+            <div class="key" data-key="J">J</div>
+            <div class="key" data-key="K">K</div>
+            <div class="key" data-key="L">L</div>
+            <div class="key" data-key="Ö">Ö</div>
+            <div class="key" data-key="Ä">Ä</div>
+            <div class="key" data-key="#">#</div>
+        </div>
+        <!-- Reihe 5 (YXCV) -->
+        <div class="keyboard-row">
+            <div class="key w-25" id="btn-shift" data-key="Shift">Shift</div>
+            <div class="key" data-key="<">&lt;</div>
+            <div class="key" data-key="Y">Y</div>
+            <div class="key" data-key="X">X</div>
+            <div class="key" data-key="C">C</div>
+            <div class="key" data-key="V">V</div>
+            <div class="key" data-key="B">B</div>
+            <div class="key" data-key="N">N</div>
+            <div class="key" data-key="M">M</div>
+            <div class="key" data-key=",">,</div>
+            <div class="key" data-key=".">.</div>
+            <div class="key" data-key="-">-</div>
+            <div class="key w-25" id="btn-shift-r" data-key="Shift">Shift</div>
+        </div>
+        <!-- Reihe 6 (Modifiers / Space) -->
+        <div class="keyboard-row">
+            <div class="key w-15" id="btn-ctrl" data-key="Ctrl">Ctrl</div>
+            <div class="key w-15" id="btn-alt" data-key="Alt">Alt</div>
+            <div class="key space" data-key="Space">Leertaste</div>
+            <div class="key w-15" data-key="AltGr">AltGr</div>
+            <div class="key" data-key="Del">Entf</div>
+            <div class="key" data-key="Ins">Einfg</div>
+        </div>
+    </div>
+
+    <!-- Ergebnisliste -->
+    <div class="results-container">
+        <div class="results-header">
+            <span id="resultsTitle">Gefundene Kurzbefehle</span>
+            <span id="resultsCount" style="color: var(--text-muted); font-size: 14px;">0 Aktionen</span>
+        </div>
+        <div class="shortcut-list" id="shortcutList">
+            <!-- Dynamischer Inhalt via Javascript -->
+        </div>
+    </div>
+
+<script>
+    // Alle Krita Kurzbefehle aus deinem PDF extrahiert & strukturiert:
+    const shortcuts = [
+        { name: "Freihandpinsel", key: "B" },
+        { name: "Radiermodus einstellen", key: "E" },
+        { name: "Füllen", key: "F" },
+        { name: "Verlauf", key: "G" },
+        { name: "Verschieben", key: "T" },
+        { name: "Transformieren", key: "Ctrl+T" },
+        { name: "Farbwähler", key: "P" },
+        { name: "Zuschneiden", key: "C" },
+        { name: "Rechteck-Auswahl", key: "Ctrl+R" },
+        { name: "Rechtecke", key: "Shift+R" },
+        { name: "Elliptische Auswahl", key: "J" },
+        { name: "Ellipsen", key: "Shift+J" },
+        { name: "Multipinsel", key: "Q" },
+        { name: "Allgemeine Farben anzeigen", key: "U" },
+        { name: "Farbverlauf anzeigen", key: "H" },
+        { name: "Farbwähler anzeigen", key: "Shift+I" },
+        { name: "Minimalen Farbtonwähler anzeigen", key: "Shift+N" },
+        { name: "MyPaint Formenauswahl anzeigen", key: "Shift+M" },
+        { name: "Pinsel-Voreinstellungen anzeigen", key: "F6" },
+        { name: "Pinseleditor anzeigen", key: "F5" },
+        { name: "Search Actions", key: "Ctrl+Return" },
+        { name: "Tablett-Debugger ein-/ausschalten", key: "Ctrl+Shift+T" },
+        { name: "Add Vector Layer", key: "Shift+Ins" },
+        { name: "Aktuelle Ebene umbenennen", key: "F2" },
+        { name: "Auswahl auf neue Ebene ausschneiden", key: "Ctrl+Shift+J" },
+        { name: "Auswahl auf neue Ebene kopieren", key: "Ctrl+Alt+J" },
+        { name: "Duplizieren der Ebene oder Maske", key: "Ctrl+J" },
+        { name: "Ebene entfernen", key: "Shift+Del" },
+        { name: "Ebene oder Maske nach oben bewegen", key: "Ctrl+PgUp" },
+        { name: "Ebene oder Maske nach unten bewegen", key: "Ctrl+PgDown" },
+        { name: "Ebenen zusammenführen", key: "Ctrl+Shift+E" },
+        { name: "Schnellgruppierung", key: "Ctrl+G" },
+        { name: "Gruppierung schnell aufheben", key: "Ctrl+Shift+G" },
+        { name: "Quick Clipping Group", key: "Ctrl+Alt+G" },
+        { name: "Vorher ausgewählte Ebene aktivieren", key: ";" },
+        { name: "Vorherige Ebene aktivieren", key: "PgDown" },
+        { name: "Nächste Ebene aktivieren", key: "PgUp" },
+        { name: "Malebene hinzufügen", key: "Ins" },
+        { name: "In untere Ebene einfügen", key: "Ctrl+E" },
+        { name: "Farbanpassungskurven...", key: "Ctrl+M" },
+        { name: "HSV-Anpassung...", key: "Ctrl+U" },
+        { name: "Invertieren", key: "Ctrl+I" },
+        { name: "Sättigung vermindern", key: "Ctrl+Shift+U" },
+        { name: "Stufen", key: "Ctrl+L" },
+        { name: "Farbabgleich....", key: "Ctrl+B" },
+        { name: "Decrease Opacity", key: "I" },
+        { name: "Increase Opacity", key: "O" },
+        { name: "Einrasten an Assistenzwerkzeug an/aus", key: "Ctrl+Shift+L" },
+        { name: "Mit Hintergrundfarbe füllen (Deckkraft)", key: "Ctrl+Backspace" },
+        { name: "Mit Vordergrundfarbe füllen (Deckkraft)", key: "Ctrl+Shift+Backspace" },
+        { name: "Nächste bevorzugte Voreinstellung", key: "," },
+        { name: "Pinselfarbe dunkler einstellen", key: "K" },
+        { name: "Pinselfarbe heller einstellen", key: "L" },
+        { name: "Pinselgröße vergrößern", key: "]" },
+        { name: "Pinselgröße verkleinern", key: "[" },
+        { name: "Polygon-Auswahlpunkte rückgängig machen", key: "Shift+Z" },
+        { name: "Set Foreground and Background to B/W", key: "D" },
+        { name: "Swap Foreground and Background Colors", key: "X" },
+        { name: "Zur vorigen Voreinstellung wechseln", key: "/" },
+        { name: "Ansicht an Cursor spiegeln", key: "Alt+M" },
+        { name: "Ansicht spiegeln", key: "M" },
+        { name: "Druckprobe", key: "Ctrl+Y" },
+        { name: "Gitter anzeigen", key: "Ctrl+Shift+'" },
+        { name: "An Gitter ausrichten", key: "Ctrl+Shift+;" },
+        { name: "Leinwand nach links drehen", key: "Ctrl+[" },
+        { name: "Leinwand nach rechts drehen", key: "Ctrl+]" },
+        { name: "Nur Leinwand anzeigen", key: "Tab" },
+        { name: "Schnellvorschaumodus", key: "Shift+L" },
+        { name: "Show Snap Options Popup", key: "Shift+S" },
+        { name: "Textumfluss-Modus", key: "Shift+W" },
+        { name: "Vergrößern", key: "Ctrl+=" },
+        { name: "Verkleinern", key: "Ctrl+-" },
+        { name: "Vollbildmodus", key: "Ctrl+Shift+F" },
+        { name: "Zoom to 100%", key: "Ctrl+0" },
+        { name: "Alles auswählen", key: "Ctrl+A" },
+        { name: "Auswahl anzeigen", key: "Ctrl+H" },
+        { name: "Auswahl aufheben", key: "Ctrl+Shift+A" },
+        { name: "Erneut auswählen", key: "Ctrl+Shift+D" },
+        { name: "Feder-Auswahl....", key: "Shift+F6" },
+        { name: "Wiederherstellen", key: "Ctrl+Shift+Z" },
+        { name: "Rückgängig (Opacity / Normal)", key: "Ctrl+Z" },
+        { name: "Ausschneiden", key: "Ctrl+X" },
+        { name: "Kopieren", key: "Ctrl+C" },
+        { name: "Einfügen", key: "Ctrl+V" },
+        { name: "In aktive Ebene einfügen", key: "Ctrl+Shift+V" },
+        { name: "Als neues Bild einfügen", key: "Ctrl+Shift+N" },
+        { name: "Als Referenzbild einfügen", key: "Ctrl+Shift+R" },
+        { name: "Am Cursor einfügen", key: "Ctrl+Alt+V" },
+        { name: "Löschen", key: "Del" },
+        { name: "Mit Hintergrundfarbe füllen", key: "Backspace" },
+        { name: "Mit Vordergrundfarbe füllen", key: "Shift+Backspace" },
+        { name: "Zusammengefügtes Kopieren", key: "Ctrl+Shift+C" },
+        { name: "Bild auf neue Größe skalieren ...", key: "Ctrl+Alt+I" },
+        { name: "Leinwandgröße ändern...", key: "Ctrl+Alt+C" },
+        { name: "Neu", key: "Ctrl+N" },
+        { name: "Öffnen...", key: "Ctrl+O" },
+        { name: "Speichern", key: "Ctrl+S" },
+        { name: "Speichern unter...", key: "Ctrl+Shift+S" },
+        { name: "Schließen", key: "Ctrl+W" },
+        { name: "Alle schließen", key: "Ctrl+Shift+W" },
+        { name: "Beenden", key: "Ctrl+Q" },
+        { name: "Inkrementelle Sicherung speichern", key: "F4" },
+        { name: "Inkrementelle Version speichern", key: "Ctrl+Alt+S" },
+        { name: "Filter erneut anwenden", key: "Ctrl+F" },
+        { name: "Handbuch zu Krita", key: "F1" }
+    ];
+
+    // Modifier Zustände
+    let activeMods = {
+        Ctrl: false,
+        Alt: false,
+        Shift: false
+    };
+
+    const searchInput = document.getElementById('searchInput');
+    const shortcutList = document.getElementById('shortcutList');
+    const resultsTitle = document.getElementById('resultsTitle');
+    const resultsCount = document.getElementById('resultsCount');
+
+    // Rendert die Befehls-Karten
+    function renderShortcuts(items, title = "Gefundene Kurzbefehle") {
+        shortcutList.innerHTML = '';
+        resultsTitle.innerText = title;
+        resultsCount.innerText = `${items.length} Aktion(en)`;
+
+        if(items.length === 0) {
+            shortcutList.innerHTML = '<div style="color: var(--text-muted); grid-column: 1/-1;">Keine Kurzbefehle gefunden.</div>';
+            return;
+        }
+
+        items.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'shortcut-card';
+            card.innerHTML = `
+                <div class="title">${item.name}</div>
+                <div class="key-badge">${item.key}</div>
+            `;
+            shortcutList.appendChild(card);
+        });
+    }
+
+    // Filter-Logik
+    function filterResults() {
+        const query = searchInput.value.toLowerCase().trim();
+        
+        let filtered = shortcuts.filter(s => {
+            const matchQuery = s.name.toLowerCase().includes(query) || s.key.toLowerCase().includes(query);
+            return matchQuery;
+        });
+
+        renderShortcuts(filtered, query ? `Suchergebnisse für "${query}"` : "Alle Tastatur-Kürzel");
+    }
+
+    // Event-Listener für Modifier-Buttons
+    ['ctrl', 'alt', 'shift'].forEach(mod => {
+        const btn = document.getElementById(`btn-${mod}`);
+        if(btn) {
+            btn.addEventListener('click', () => {
+                const keyName = mod.charAt(0).toUpperCase() + mod.slice(1);
+                activeMods[keyName] = !activeMods[keyName];
+                btn.classList.toggle('mod-active', activeMods[keyName]);
+                
+                // Falls R-Shift auch existiert
+                if(mod === 'shift') {
+                    document.getElementById('btn-shift-r').classList.toggle('mod-active', activeMods.Shift);
+                }
+                
+                filterByKeyboard();
+            });
+        }
+    });
+
+    // Klick auf Tasten
+    document.querySelectorAll('.key').forEach(keyEl => {
+        keyEl.addEventListener('click', (e) => {
+            const key = keyEl.getAttribute('data-key');
+            if(['Ctrl', 'Alt', 'Shift'].includes(key)) return; // Modifier werden getrennt behandelt
+
+            // Generiere erwarteten Schlüssel-String
+            let combination = [];
+            if(activeMods.Ctrl) combination.push('Ctrl');
+            if(activeMods.Alt) combination.push('Alt');
+            if(activeMods.Shift) combination.push('Shift');
+            combination.push(key);
+
+            const targetKeyStr = combination.join('+').toLowerCase();
+
+            // Suchen
+            const matches = shortcuts.filter(s => s.key.toLowerCase() === targetKeyStr);
+            renderShortcuts(matches, `Kürzel für Taste: [ ${combination.join(' + ')} ]`);
+        });
+    });
+
+    function filterByKeyboard() {
+        let activeComb = [];
+        if(activeMods.Ctrl) activeComb.push('Ctrl');
+        if(activeMods.Alt) activeComb.push('Alt');
+        if(activeMods.Shift) activeComb.push('Shift');
+
+        if(activeComb.length === 0) {
+            renderShortcuts(shortcuts, "Alle Tastatur-Kürzel");
+            return;
+        }
+
+        const prefix = activeComb.join('+').toLowerCase();
+        const matches = shortcuts.filter(s => s.key.toLowerCase().startsWith(prefix));
+        renderShortcuts(matches, `Befehle mit [ ${activeComb.join(' + ')}... ]`);
+    }
+
+    searchInput.addEventListener('input', filterResults);
+
+    // Initiales Rendern
+    renderShortcuts(shortcuts, "Alle Tastatur-Kürzel");
+
+</script>
+</body>
+</html>
