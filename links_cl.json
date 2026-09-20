@@ -1233,6 +1233,21 @@
         "icon": "✨"
       },
       {
+        "label": "Stimmgerät/index.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Stimmger%C3%A4t/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Stimmgerät/script.js",
+        "url": "https://juppijo.github.io/Musik_Zami/Stimmger%C3%A4t/script.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Stimmgerät/style.css",
+        "url": "https://juppijo.github.io/Musik_Zami/Stimmger%C3%A4t/style.css",
+        "icon": "✨"
+      },
+      {
         "label": "ZAMI.jpeg",
         "url": "https://juppijo.github.io/Musik_Zami/ZAMI.jpeg",
         "icon": "✨"
@@ -2328,28 +2343,8 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v305.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v305.html",
-        "icon": "✨"
-      },
-      {
         "label": "WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v306.html",
         "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v306.html",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v307.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v307.html",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v308.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v308.html",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v309.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v309.html",
         "icon": "✨"
       },
       {
@@ -2375,11 +2370,6 @@
       {
         "label": "WRZT3/WRZT-Sections/WRZT-v304.html",
         "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/WRZT-v304.html",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT3/WRZT-Sections/WRZT_Formeln.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/WRZT_Formeln.html",
         "icon": "✨"
       },
       {
@@ -2585,6 +2575,11 @@
       {
         "label": "WRZT4/Fiat_Lux/WRZT_Fiat_Lux_v4-4.html",
         "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT_Fiat_Lux_v4-4.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/WRZT_Formeln.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT_Formeln.html",
         "icon": "✨"
       },
       {
@@ -2948,11 +2943,6 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT5/wrzt_dokumentation.json",
-        "url": "https://juppijo.github.io/WRZT/WRZT5/wrzt_dokumentation.json",
-        "icon": "✨"
-      },
-      {
         "label": "WRZT5/wrzt_proton_dreiquark_knoten.svg",
         "url": "https://juppijo.github.io/WRZT/WRZT5/wrzt_proton_dreiquark_knoten.svg",
         "icon": "✨"
@@ -2990,11 +2980,6 @@
       {
         "label": "WRZT_Calc/style.css",
         "url": "https://juppijo.github.io/WRZT/WRZT_Calc/style.css",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT_Calc/wrzt_zusammenfassung.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT_Calc/wrzt_zusammenfassung.html",
         "icon": "✨"
       },
       {
@@ -3103,6 +3088,26 @@
         "icon": "✨"
       },
       {
+        "label": "WRZT_O/WRZT-Fachbegriffe-v305.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT_O/WRZT-Fachbegriffe-v305.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT_O/WRZT-Fachbegriffe-v307.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT_O/WRZT-Fachbegriffe-v307.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT_O/WRZT-Fachbegriffe-v308.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT_O/WRZT-Fachbegriffe-v308.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT_O/WRZT-Fachbegriffe-v309.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT_O/WRZT-Fachbegriffe-v309.html",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT_O/WRZTN3.html",
         "url": "https://juppijo.github.io/WRZT/WRZT_O/WRZTN3.html",
         "icon": "✨"
@@ -3190,6 +3195,11 @@
       {
         "label": "WRZT_O/wrzt_theorie_2.html",
         "url": "https://juppijo.github.io/WRZT/WRZT_O/wrzt_theorie_2.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT_O/wrzt_zusammenfassung.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT_O/wrzt_zusammenfassung.html",
         "icon": "✨"
       },
       {
