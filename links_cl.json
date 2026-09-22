@@ -1248,6 +1248,36 @@
         "icon": "✨"
       },
       {
+        "label": "Ukulele/index.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Ukulele/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Ukulele/script.js",
+        "url": "https://juppijo.github.io/Musik_Zami/Ukulele/script.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Ukulele/style.css",
+        "url": "https://juppijo.github.io/Musik_Zami/Ukulele/style.css",
+        "icon": "✨"
+      },
+      {
+        "label": "Ukulele_Cl/index.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Ukulele_Cl/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Ukulele_Cl/script.js",
+        "url": "https://juppijo.github.io/Musik_Zami/Ukulele_Cl/script.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Ukulele_Cl/style.css",
+        "url": "https://juppijo.github.io/Musik_Zami/Ukulele_Cl/style.css",
+        "icon": "✨"
+      },
+      {
         "label": "ZAMI.jpeg",
         "url": "https://juppijo.github.io/Musik_Zami/ZAMI.jpeg",
         "icon": "✨"
@@ -1983,8 +2013,13 @@
     "title": "WRZT",
     "links": [
       {
-        "label": "Fiat_lux.html",
-        "url": "https://juppijo.github.io/WRZT/Fiat_lux.html",
+        "label": "Ekin_Epot.py",
+        "url": "https://juppijo.github.io/WRZT/Ekin_Epot.py",
+        "icon": "✨"
+      },
+      {
+        "label": "Energie.py",
+        "url": "https://juppijo.github.io/WRZT/Energie.py",
         "icon": "✨"
       },
       {
@@ -2198,6 +2233,11 @@
         "icon": "✨"
       },
       {
+        "label": "WRZT-Energie.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT-Energie.html",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT.html",
         "url": "https://juppijo.github.io/WRZT/WRZT.html",
         "icon": "✨"
@@ -2283,11 +2323,6 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT2/klassischer_elektronenradius.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT2/klassischer_elektronenradius.html",
-        "icon": "✨"
-      },
-      {
         "label": "WRZT2/logo.svg",
         "url": "https://juppijo.github.io/WRZT/WRZT2/logo.svg",
         "icon": "✨"
@@ -2303,28 +2338,8 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT3/Fz=Fc-Eph_2.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/Fz%3DFc-Eph_2.html",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT3/Kreisbewegung_Fundamentale_Wechselwirkungen.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/Kreisbewegung_Fundamentale_Wechselwirkungen.html",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT3/Rmin_neu.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/Rmin_neu.html",
-        "icon": "✨"
-      },
-      {
         "label": "WRZT3/Undatron.html",
         "url": "https://juppijo.github.io/WRZT/WRZT3/Undatron.html",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT3/WRZNT-Konstanten.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/WRZNT-Konstanten.html",
         "icon": "✨"
       },
       {
@@ -2463,18 +2478,8 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT3/elektron-photon-radius-3.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/elektron-photon-radius-3.html",
-        "icon": "✨"
-      },
-      {
         "label": "WRZT3/favicon.png",
         "url": "https://juppijo.github.io/WRZT/WRZT3/favicon.png",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT3/klassischer_elektronenradius.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/klassischer_elektronenradius.html",
         "icon": "✨"
       },
       {
@@ -2483,18 +2488,8 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT3/section-universum.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/section-universum.html",
-        "icon": "✨"
-      },
-      {
         "label": "WRZT3/wellenraumzeit_rmin_a.html",
         "url": "https://juppijo.github.io/WRZT/WRZT3/wellenraumzeit_rmin_a.html",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT3/wrznt.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT3/wrznt.html",
         "icon": "✨"
       },
       {
@@ -2503,8 +2498,28 @@
         "icon": "✨"
       },
       {
+        "label": "WRZT4/Fiat_Lux/Annihilation-Kollaps-2.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/Annihilation-Kollaps-2.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/Annihilation-Kollaps.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/Annihilation-Kollaps.html",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT4/Fiat_Lux/Annihilation-Sim.html",
         "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/Annihilation-Sim.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/Ekin_Epot.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/Ekin_Epot.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/Fiat_lux.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/Fiat_lux.html",
         "icon": "✨"
       },
       {
@@ -2550,6 +2565,11 @@
       {
         "label": "WRZT4/Fiat_Lux/WRZT.html",
         "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/WRZT_4.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT_4.html",
         "icon": "✨"
       },
       {
@@ -2673,6 +2693,11 @@
         "icon": "✨"
       },
       {
+        "label": "WRZT4/Fiat_Lux/positronium-3d.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/positronium-3d.html",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT4/Fiat_Lux/positronium-bugwelle.html",
         "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/positronium-bugwelle.html",
         "icon": "✨"
@@ -2680,6 +2705,21 @@
       {
         "label": "WRZT4/Fiat_Lux/positronium-simulation.html",
         "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/positronium-simulation.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/positronium_3d_simulation.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/positronium_3d_simulation.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/positronium_3d_wave_interference.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/positronium_3d_wave_interference.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/positronium_3d_wave_interference_bugw.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/positronium_3d_wave_interference_bugw.html",
         "icon": "✨"
       },
       {
@@ -3003,16 +3043,6 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT_O/Annihilation-Kollaps-2.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT_O/Annihilation-Kollaps-2.html",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT_O/Annihilation-Kollaps.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT_O/Annihilation-Kollaps.html",
-        "icon": "✨"
-      },
-      {
         "label": "WRZT_O/Elektrodynamische-Kopplung.html",
         "url": "https://juppijo.github.io/WRZT/WRZT_O/Elektrodynamische-Kopplung.html",
         "icon": "✨"
@@ -3023,8 +3053,18 @@
         "icon": "✨"
       },
       {
+        "label": "WRZT_O/Fz=Fc-Eph_2.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT_O/Fz%3DFc-Eph_2.html",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT_O/GravitationTrägheit.html",
         "url": "https://juppijo.github.io/WRZT/WRZT_O/GravitationTr%C3%A4gheit.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT_O/Kreisbewegung_Fundamentale_Wechselwirkungen.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT_O/Kreisbewegung_Fundamentale_Wechselwirkungen.html",
         "icon": "✨"
       },
       {
@@ -3063,6 +3103,11 @@
         "icon": "✨"
       },
       {
+        "label": "WRZT_O/Rmin_neu.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT_O/Rmin_neu.html",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT_O/Traegheit.html",
         "url": "https://juppijo.github.io/WRZT/WRZT_O/Traegheit.html",
         "icon": "✨"
@@ -3080,6 +3125,11 @@
       {
         "label": "WRZT_O/Urknall2.html",
         "url": "https://juppijo.github.io/WRZT/WRZT_O/Urknall2.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT_O/WRZNT-Konstanten.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT_O/WRZNT-Konstanten.html",
         "icon": "✨"
       },
       {
@@ -3118,11 +3168,6 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT_O/WRZT_4.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT_O/WRZT_4.html",
-        "icon": "✨"
-      },
-      {
         "label": "WRZT_O/WRZT_CGTP.html",
         "url": "https://juppijo.github.io/WRZT/WRZT_O/WRZT_CGTP.html",
         "icon": "✨"
@@ -3148,6 +3193,11 @@
         "icon": "✨"
       },
       {
+        "label": "WRZT_O/elektron-photon-radius-3.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT_O/elektron-photon-radius-3.html",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT_O/kurven_formeln.xlsx",
         "url": "https://juppijo.github.io/WRZT/WRZT_O/kurven_formeln.xlsx",
         "icon": "✨"
@@ -3158,6 +3208,11 @@
         "icon": "✨"
       },
       {
+        "label": "WRZT_O/section-universum.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT_O/section-universum.html",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT_O/urknall-LKM.html",
         "url": "https://juppijo.github.io/WRZT/WRZT_O/urknall-LKM.html",
         "icon": "✨"
@@ -3165,6 +3220,11 @@
       {
         "label": "WRZT_O/urknall.html",
         "url": "https://juppijo.github.io/WRZT/WRZT_O/urknall.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT_O/wrznt.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT_O/wrznt.html",
         "icon": "✨"
       },
       {
@@ -3225,6 +3285,11 @@
       {
         "label": "data.js",
         "url": "https://juppijo.github.io/WRZT/data.js",
+        "icon": "✨"
+      },
+      {
+        "label": "design-studio-theme.json",
+        "url": "https://juppijo.github.io/WRZT/design-studio-theme.json",
         "icon": "✨"
       },
       {
@@ -4478,6 +4543,11 @@
     "title": "ZenZamiSpiele-Co",
     "links": [
       {
+        "label": "Frosch_Spiel.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Frosch_Spiel.html",
+        "icon": "✨"
+      },
+      {
         "label": "Gem_farben (4).html",
         "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Gem_farben%20(4).html",
         "icon": "✨"
@@ -4580,6 +4650,11 @@
       {
         "label": "chat_farben (3).html",
         "url": "https://juppijo.github.io/ZenZamiSpiele-Co/chat_farben%20(3).html",
+        "icon": "✨"
+      },
+      {
+        "label": "huepf-frosch.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/huepf-frosch.html",
         "icon": "✨"
       },
       {
