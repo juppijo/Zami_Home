@@ -1163,6 +1163,86 @@
         "icon": "✨"
       },
       {
+        "label": "Handpan/Cl_Melodie.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/Cl_Melodie.json",
+        "icon": "✨"
+      },
+      {
+        "label": "Handpan/Frère_Jacques.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/Fr%C3%A8re_Jacques.json",
+        "icon": "✨"
+      },
+      {
+        "label": "Handpan/Hallelujah.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/Hallelujah.json",
+        "icon": "✨"
+      },
+      {
+        "label": "Handpan/Hey_Jude.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/Hey_Jude.json",
+        "icon": "✨"
+      },
+      {
+        "label": "Handpan/Hänschen_klein.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/H%C3%A4nschen_klein.json",
+        "icon": "✨"
+      },
+      {
+        "label": "Handpan/Lieder_Promt_Handpan.txt",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/Lieder_Promt_Handpan.txt",
+        "icon": "✨"
+      },
+      {
+        "label": "Handpan/hallelujah_melodie.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/hallelujah_melodie.json",
+        "icon": "✨"
+      },
+      {
+        "label": "Handpan/handpan-synth.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/handpan-synth.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Handpan/handpan_Cl.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/handpan_Cl.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Handpan/handpan_melodie.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/handpan_melodie.json",
+        "icon": "✨"
+      },
+      {
+        "label": "Handpan/handpan_preset_classic.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/handpan_preset_classic.json",
+        "icon": "✨"
+      },
+      {
+        "label": "Handpan/handpan_preset_space.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/handpan_preset_space.json",
+        "icon": "✨"
+      },
+      {
+        "label": "Handpan/handpan_simulator.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/handpan_simulator.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Handpan/handpan_synthesizer.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/handpan_synthesizer.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Handpan/je_m_en_fus_cueillir_la_rose.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/je_m_en_fus_cueillir_la_rose.json",
+        "icon": "✨"
+      },
+      {
+        "label": "Handpan/over-the-raibow.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/over-the-raibow.json",
+        "icon": "✨"
+      },
+      {
         "label": "Lisa/Zami.jpg",
         "url": "https://juppijo.github.io/Musik_Zami/Lisa/Zami.jpg",
         "icon": "✨"
@@ -1190,6 +1270,26 @@
       {
         "label": "Loop/style.css",
         "url": "https://juppijo.github.io/Musik_Zami/Loop/style.css",
+        "icon": "✨"
+      },
+      {
+        "label": "Noten/Notenprogramm.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Noten/Notenprogramm.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Noten/d_kurd_handpan_transkriptor.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Noten/d_kurd_handpan_transkriptor.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Noten/handpan_noten_studio.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Noten/handpan_noten_studio.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Noten/notenblatt_zu_json_konverter.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Noten/notenblatt_zu_json_konverter.html",
         "icon": "✨"
       },
       {
@@ -1253,6 +1353,11 @@
         "icon": "✨"
       },
       {
+        "label": "Ukulele/over_the_rainbow_ukulele.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Ukulele/over_the_rainbow_ukulele.json",
+        "icon": "✨"
+      },
+      {
         "label": "Ukulele/script.js",
         "url": "https://juppijo.github.io/Musik_Zami/Ukulele/script.js",
         "icon": "✨"
@@ -1260,6 +1365,11 @@
       {
         "label": "Ukulele/style.css",
         "url": "https://juppijo.github.io/Musik_Zami/Ukulele/style.css",
+        "icon": "✨"
+      },
+      {
+        "label": "Ukulele/ukulele_songbook_playalong.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Ukulele/ukulele_songbook_playalong.html",
         "icon": "✨"
       },
       {
@@ -1273,8 +1383,18 @@
         "icon": "✨"
       },
       {
+        "label": "Ukulele_Cl/somewhere-over-the-rainbow.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Ukulele_Cl/somewhere-over-the-rainbow.json",
+        "icon": "✨"
+      },
+      {
         "label": "Ukulele_Cl/style.css",
         "url": "https://juppijo.github.io/Musik_Zami/Ukulele_Cl/style.css",
+        "icon": "✨"
+      },
+      {
+        "label": "Ukulele_Cl/ukulele-app.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Ukulele_Cl/ukulele-app.html",
         "icon": "✨"
       },
       {
@@ -2573,6 +2693,11 @@
         "icon": "✨"
       },
       {
+        "label": "WRZT4/Fiat_Lux/WRZT_Bugwelle.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT_Bugwelle.html",
+        "icon": "✨"
+      },
+      {
         "label": "WRZT4/Fiat_Lux/WRZT_Einfach_Erklaert.html",
         "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT_Einfach_Erklaert.html",
         "icon": "✨"
@@ -2750,6 +2875,16 @@
       {
         "label": "WRZT4/Fiat_Lux/wrzt_bugwellen_simulation.html",
         "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/wrzt_bugwellen_simulation.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/wrzt_simulation_bugwelle.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/wrzt_simulation_bugwelle.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT4/Fiat_Lux/wrzt_simulation_bugwelle_3d.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/wrzt_simulation_bugwelle_3d.html",
         "icon": "✨"
       },
       {
