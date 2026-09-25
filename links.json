@@ -1163,6 +1163,21 @@
         "icon": "✨"
       },
       {
+        "label": "Handpan/Adele – Someone Like You.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/Adele%20%E2%80%93%20Someone%20Like%20You.json",
+        "icon": "✨"
+      },
+      {
+        "label": "Handpan/Akkordfolge.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/Akkordfolge.json",
+        "icon": "✨"
+      },
+      {
+        "label": "Handpan/Archer & Tripp – A Musing.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/Archer%20%26%20Tripp%20%E2%80%93%20A%20Musing.json",
+        "icon": "✨"
+      },
+      {
         "label": "Handpan/Cl_Melodie.json",
         "url": "https://juppijo.github.io/Musik_Zami/Handpan/Cl_Melodie.json",
         "icon": "✨"
@@ -1178,6 +1193,16 @@
         "icon": "✨"
       },
       {
+        "label": "Handpan/Handpan_Akkorde.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/Handpan_Akkorde.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Handpan/Hang In Balance.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/Hang%20In%20Balance.json",
+        "icon": "✨"
+      },
+      {
         "label": "Handpan/Hey_Jude.json",
         "url": "https://juppijo.github.io/Musik_Zami/Handpan/Hey_Jude.json",
         "icon": "✨"
@@ -1188,8 +1213,23 @@
         "icon": "✨"
       },
       {
+        "label": "Handpan/Kabeção–Compassion.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/Kabe%C3%A7%C3%A3o%E2%80%93Compassion.json",
+        "icon": "✨"
+      },
+      {
         "label": "Handpan/Lieder_Promt_Handpan.txt",
         "url": "https://juppijo.github.io/Musik_Zami/Handpan/Lieder_Promt_Handpan.txt",
+        "icon": "✨"
+      },
+      {
+        "label": "Handpan/Malte Marten – First Flight.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/Malte%20Marten%20%E2%80%93%20First%20Flight.json",
+        "icon": "✨"
+      },
+      {
+        "label": "Handpan/The Beatles – Let It Be.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/The%20Beatles%20%E2%80%93%20Let%20It%20Be.json",
         "icon": "✨"
       },
       {
@@ -1238,6 +1278,11 @@
         "icon": "✨"
       },
       {
+        "label": "Handpan/over-the-raibow-n.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Handpan/over-the-raibow-n.json",
+        "icon": "✨"
+      },
+      {
         "label": "Handpan/over-the-raibow.json",
         "url": "https://juppijo.github.io/Musik_Zami/Handpan/over-the-raibow.json",
         "icon": "✨"
@@ -1273,8 +1318,58 @@
         "icon": "✨"
       },
       {
+        "label": "Noten/Hey Jude.mid",
+        "url": "https://juppijo.github.io/Musik_Zami/Noten/Hey%20Jude.mid",
+        "icon": "✨"
+      },
+      {
+        "label": "Noten/Hey_Jude2.mid",
+        "url": "https://juppijo.github.io/Musik_Zami/Noten/Hey_Jude2.mid",
+        "icon": "✨"
+      },
+      {
+        "label": "Noten/JSON-MIDI-Konverter.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Noten/JSON-MIDI-Konverter.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Noten/JSON-zu-MIDI-Konverter.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Noten/JSON-zu-MIDI-Konverter.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Noten/Let It Be.mid",
+        "url": "https://juppijo.github.io/Musik_Zami/Noten/Let%20It%20Be.mid",
+        "icon": "✨"
+      },
+      {
         "label": "Noten/Notenprogramm.html",
         "url": "https://juppijo.github.io/Musik_Zami/Noten/Notenprogramm.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Noten/Someone Like You.mid",
+        "url": "https://juppijo.github.io/Musik_Zami/Noten/Someone%20Like%20You.mid",
+        "icon": "✨"
+      },
+      {
+        "label": "Noten/Someone Like You2.mid",
+        "url": "https://juppijo.github.io/Musik_Zami/Noten/Someone%20Like%20You2.mid",
+        "icon": "✨"
+      },
+      {
+        "label": "Noten/Zaminia-Chord-Interface-g.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Noten/Zaminia-Chord-Interface-g.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Noten/Zaminia-Chord-Interface-g2.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Noten/Zaminia-Chord-Interface-g2.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Noten/Zaminia-Chord-Interface-g3.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Noten/Zaminia-Chord-Interface-g3.html",
         "icon": "✨"
       },
       {
@@ -1288,8 +1383,33 @@
         "icon": "✨"
       },
       {
+        "label": "Noten/midi-editor.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Noten/midi-editor.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Noten/midi-projekt.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Noten/midi-projekt.json",
+        "icon": "✨"
+      },
+      {
         "label": "Noten/notenblatt_zu_json_konverter.html",
         "url": "https://juppijo.github.io/Musik_Zami/Noten/notenblatt_zu_json_konverter.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Noten/sleek_blue_midi_piano_roll_editor.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Noten/sleek_blue_midi_piano_roll_editor.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Noten/sleek_blue_midi_piano_roll_editor_pro.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Noten/sleek_blue_midi_piano_roll_editor_pro.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Noten/zaminia_composition.mid",
+        "url": "https://juppijo.github.io/Musik_Zami/Noten/zaminia_composition.mid",
         "icon": "✨"
       },
       {
@@ -1425,6 +1545,21 @@
       {
         "label": "Zamis-zen-music-player.html",
         "url": "https://juppijo.github.io/Musik_Zami/Zamis-zen-music-player.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Zungentrommel/Over the Rainbow.json",
+        "url": "https://juppijo.github.io/Musik_Zami/Zungentrommel/Over%20the%20Rainbow.json",
+        "icon": "✨"
+      },
+      {
+        "label": "Zungentrommel/fazley_tongue_drum.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Zungentrommel/fazley_tongue_drum.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Zungentrommel/fazley_tongue_drum_td12_studio.html",
+        "url": "https://juppijo.github.io/Musik_Zami/Zungentrommel/fazley_tongue_drum_td12_studio.html",
         "icon": "✨"
       },
       {
