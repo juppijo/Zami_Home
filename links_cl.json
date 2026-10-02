@@ -1683,6 +1683,11 @@
         "icon": "✨"
       },
       {
+        "label": "Gleichungen2.html",
+        "url": "https://juppijo.github.io/Rechner/Gleichungen2.html",
+        "icon": "✨"
+      },
+      {
         "label": "Gleichungs_Systeme.html",
         "url": "https://juppijo.github.io/Rechner/Gleichungs_Systeme.html",
         "icon": "✨"
@@ -1730,6 +1735,16 @@
       {
         "label": "Pythagoras.html",
         "url": "https://juppijo.github.io/Rechner/Pythagoras.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Python-Editor-Cl.html",
+        "url": "https://juppijo.github.io/Rechner/Python-Editor-Cl.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Python_in_HTML.html",
+        "url": "https://juppijo.github.io/Rechner/Python_in_HTML.html",
         "icon": "✨"
       },
       {
@@ -1843,6 +1858,16 @@
         "icon": "✨"
       },
       {
+        "label": "grafik.html",
+        "url": "https://juppijo.github.io/Rechner/grafik.html",
+        "icon": "✨"
+      },
+      {
+        "label": "grafik.svg",
+        "url": "https://juppijo.github.io/Rechner/grafik.svg",
+        "icon": "✨"
+      },
+      {
         "label": "html-fortgeschritten.html",
         "url": "https://juppijo.github.io/Rechner/html-fortgeschritten.html",
         "icon": "✨"
@@ -1865,6 +1890,11 @@
       {
         "label": "index.html",
         "url": "https://juppijo.github.io/Rechner/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "interactive_visual.html",
+        "url": "https://juppijo.github.io/Rechner/interactive_visual.html",
         "icon": "✨"
       },
       {
@@ -1900,6 +1930,51 @@
       {
         "label": "physcalc_pro.html",
         "url": "https://juppijo.github.io/Rechner/physcalc_pro.html",
+        "icon": "✨"
+      },
+      {
+        "label": "python_live_editor_plotter.html",
+        "url": "https://juppijo.github.io/Rechner/python_live_editor_plotter.html",
+        "icon": "✨"
+      },
+      {
+        "label": "python_live_editor_pro.html",
+        "url": "https://juppijo.github.io/Rechner/python_live_editor_pro.html",
+        "icon": "✨"
+      },
+      {
+        "label": "skript.py",
+        "url": "https://juppijo.github.io/Rechner/skript.py",
+        "icon": "✨"
+      },
+      {
+        "label": "skript2.py",
+        "url": "https://juppijo.github.io/Rechner/skript2.py",
+        "icon": "✨"
+      },
+      {
+        "label": "skript3.py",
+        "url": "https://juppijo.github.io/Rechner/skript3.py",
+        "icon": "✨"
+      },
+      {
+        "label": "skript4.py",
+        "url": "https://juppijo.github.io/Rechner/skript4.py",
+        "icon": "✨"
+      },
+      {
+        "label": "svg-editor-cl.html",
+        "url": "https://juppijo.github.io/Rechner/svg-editor-cl.html",
+        "icon": "✨"
+      },
+      {
+        "label": "svg_editor_g.html",
+        "url": "https://juppijo.github.io/Rechner/svg_editor_g.html",
+        "icon": "✨"
+      },
+      {
+        "label": "svg_editor_g2.html",
+        "url": "https://juppijo.github.io/Rechner/svg_editor_g2.html",
         "icon": "✨"
       }
     ]
