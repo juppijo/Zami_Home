@@ -508,6 +508,16 @@
     "title": "Kegeln",
     "links": [
       {
+        "label": "Anleitung.html",
+        "url": "https://juppijo.github.io/Kegeln/Anleitung.html",
+        "icon": "✨"
+      },
+      {
+        "label": "DirektLink.html",
+        "url": "https://juppijo.github.io/Kegeln/DirektLink.html",
+        "icon": "✨"
+      },
+      {
         "label": "Gebrauchts-Anweisung.html",
         "url": "https://juppijo.github.io/Kegeln/Gebrauchts-Anweisung.html",
         "icon": "✨"
@@ -878,6 +888,11 @@
         "icon": "✨"
       },
       {
+        "label": "gebrauchsanweisung_qr.png",
+        "url": "https://juppijo.github.io/Kegeln/gebrauchsanweisung_qr.png",
+        "icon": "✨"
+      },
+      {
         "label": "index.html",
         "url": "https://juppijo.github.io/Kegeln/index.html",
         "icon": "✨"
@@ -910,6 +925,11 @@
       {
         "label": "package.json",
         "url": "https://juppijo.github.io/Kegeln/package.json",
+        "icon": "✨"
+      },
+      {
+        "label": "qr.py",
+        "url": "https://juppijo.github.io/Kegeln/qr.py",
         "icon": "✨"
       },
       {
