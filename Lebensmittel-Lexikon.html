@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="salbei">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lebensmittel-Lexikon</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#eef3ec;--card:#fff;--ink:#1d2b22;--mut:#5b6b60;--acc:#2f6b4f;--line:#d4ddd3;--on:#fff}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+[data-theme=meer]{--bg:#e6f0f5;--ink:#10252f;--mut:#516570;--acc:#1c6a8a;--line:#cfdde5}
+[data-theme=beere]{--bg:#f6eef2;--ink:#2c1a26;--mut:#77606f;--acc:#8e2f62;--line:#e6d5de}
+[data-theme=nacht]{--bg:#12161d;--card:#1b212b;--ink:#e6eaf0;--mut:#93a0b2;--acc:#6fb3d9;--line:#2a3240;--on:#0b1118}
+*,*:before,*:after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Georgia,"Times New Roman",serif;min-height:100vh}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 16px}
+h1{margin:0 0 10px;font-size:1.5rem;letter-spacing:.01em}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button,select,input,textarea{font:inherit;color:var(--ink)}
+button,select{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:7px 12px;cursor:pointer}
+button:hover{border-color:var(--acc)}
+button.p{background:var(--acc);color:var(--on);border-color:var(--acc)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+#q{flex:1 1 220px;min-width:0;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chip{border-radius:99px;padding:3px 12px;font-size:.9rem}
+.chip[style]{border-color:var(--c);border-width:2px}.chip.on{background:var(--c,var(--acc));color:#fff;border-color:var(--c,var(--acc))}
+main{padding:16px;max-width:1400px;margin:0 auto}
+#cnt{color:var(--mut);margin:0 0 12px;font-size:.9rem}
+#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.card{position:relative;overflow:hidden;background:color-mix(in srgb,var(--e1) 9%,var(--card));border:1px solid color-mix(in srgb,var(--e1) 35%,var(--line));border-radius:10px;padding:14px 14px 14px 22px;text-align:left;display:block;width:100%}
+.card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;background:linear-gradient(var(--e1),var(--e2))}
+.dot{display:inline-block;width:.7em;height:.7em;border-radius:50%;margin-right:4px}
+.full h1{display:none}.full header{padding:8px 16px}.full main{max-width:none}
+.card h3{margin:0 0 4px;font-size:1.1rem}
+.kcal{font-size:1.8rem;color:var(--acc);line-height:1.1}
+.kcal small{font-size:.8rem;color:var(--mut)}
+.sub{color:var(--mut);font-size:.88rem;margin-top:6px}
+dialog{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:20px;width:min(680px,94vw);max-height:90vh}
+dialog::backdrop{background:rgba(0,0,0,.5)}
+dl{margin:12px 0}
+dt{font-weight:bold;color:var(--acc);margin-top:10px;font-size:.92rem}
+dd{margin:2px 0 0}
+label{display:block;margin-top:10px;font-size:.9rem;color:var(--mut)}
+label input,label textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:7px 10px}
+.row{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
+.empty{color:var(--mut);padding:30px 0;text-align:center}
+</style>
+</head>
+<body>
+<header>
+  <h1>Lebensmittel-Lexikon</h1>
+  <div class="bar">
+    <input id="q" type="search" placeholder="Lebensmittel suchen …" aria-label="Suche">
+    <select id="sort" aria-label="Sortierung"><option value="n">A–Z</option><option value="ka">Kalorien ↑</option><option value="kd">Kalorien ↓</option></select>
+    <button class="p" id="add">+ Neu</button>
+    <button id="save">Speichern</button>
+    <button id="load">Laden</button>
+    <button id="theme">Stil: Salbei</button>
+    <button id="fs">Vollbild</button>
+    <input id="file" type="file" accept=".json,application/json" hidden>
+  </div>
+  <div class="chips" id="chips"></div>
+</header>
+<main><p id="cnt"></p><div id="grid"></div></main>
+<dialog id="dlg"></dialog>
+<script>
+const D0=[
+["Apfel (roh)","52 kcal, 14 g KH, 0,3 g Protein, 0,2 g Fett","Vitamin C (ca. 5 mg), K1, wenig B-Vitamine","Kalium (ca. 107 mg), wenig Kalzium, Eisen, Magnesium","0 mg Cholesterin, sehr fettarm; Pektin kann LDL leicht senken","Erde, kühl, süß-sauer","+ Ballaststoffe (Pektin), sättigend, Polyphenole; – Fruktose und Säure bei empfindlichem Magen"],
+["Banane","89 kcal, 23 g KH, 1,1 g Protein, 0,3 g Fett","B6 (ca. 0,4 mg), C (ca. 9 mg), Folat","Kalium (ca. 360 mg), Magnesium (ca. 27 mg), Mangan","0 mg Cholesterin, fettarm; LDL neutral","Erde, kühl bis kalt, süß","+ Kalium für Blutdruck und Muskeln, schnelle Energie; – hoher Zuckergehalt"],
+["Orange","47 kcal, 12 g KH, 0,9 g Protein, 0,1 g Fett","C (ca. 53 mg), Folat, B1","Kalium (ca. 181 mg), Kalzium (ca. 40 mg)","0 mg Cholesterin, fettfrei; Pektin und Flavonoide leicht LDL-senkend","Holz/Erde, kühl, süß-sauer","+ Immunsystem, bessere Eisenaufnahme; – Säure bei Reflux und für den Zahnschmelz"],
+["Blaubeere","57 kcal, 14 g KH, 0,7 g Protein, 0,3 g Fett","C (ca. 10 mg), K1 (ca. 19 µg), E","Mangan (ca. 0,3 mg), Kalium (ca. 77 mg)","0 mg Cholesterin; Anthocyane reduzieren LDL-Oxidation","Holz/Wasser, neutral bis kühl, süß-sauer","+ viele Antioxidantien, gut für Gefäße und Gehirn; – Vitamin K bei Blutverdünnern beachten"],
+["Karotte (roh)","41 kcal, 10 g KH, 0,9 g Protein, 0,2 g Fett","Beta-Carotin/A (ca. 835 µg RAE), K1, B6","Kalium (ca. 320 mg), Mangan","0 mg Cholesterin; lösliche Ballaststoffe leicht LDL-senkend","Erde, neutral, süß","+ Augen, Haut, Immunsystem; mit Fett besser aufnehmbar; – sehr hohe Mengen färben die Haut gelblich (harmlos)"],
+["Brokkoli","34 kcal, 7 g KH, 2,8 g Protein, 0,4 g Fett","C (ca. 89 mg), K1 (ca. 100 µg), Folat (ca. 63 µg)","Kalium (ca. 316 mg), Kalzium (ca. 47 mg), Eisen (ca. 0,7 mg)","0 mg Cholesterin; Ballaststoffe binden Gallensäuren, können LDL senken","Holz/Erde, kühl, süß-bitter","+ Sulforaphan, Zellschutz, Verdauung; – Blähungen, Jodaufnahme-Hemmung nur bei großen Rohmengen und Jodmangel"],
+["Spinat (roh)","23 kcal, 3,6 g KH, 2,9 g Protein, 0,4 g Fett","K1 (ca. 480 µg), A (ca. 470 µg RAE), Folat (ca. 194 µg), C","Eisen (ca. 2,7 mg), Magnesium (ca. 79 mg), Kalium (ca. 558 mg)","0 mg Cholesterin; neutral bis leicht günstig für LDL","Holz, kühl, süß","+ Augen, Knochen, Blutbildung; – Oxalsäure (Nierensteine, hemmt Kalzium und Eisen), Vitamin K bei Blutverdünnern"],
+["Tomate","18 kcal, 3,9 g KH, 0,9 g Protein, 0,2 g Fett","C (ca. 14 mg), A, K1, Folat","Kalium (ca. 237 mg), wenig Magnesium und Eisen","0 mg Cholesterin; Lycopin kann LDL leicht senken","Holz/Erde, kühl, süß-sauer","+ Lycopin (Herz-Kreislauf), erhitzt mit Öl besser aufnehmbar; – Säure kann Reflux auslösen"],
+["Kartoffel (roh)","77 kcal, 17 g KH, 2 g Protein, 0,1 g Fett","C (ca. 20 mg), B6, Folat","Kalium (ca. 420 mg), Magnesium, Phosphor","0 mg Cholesterin, fettfrei; Zubereitung bestimmt die Fettqualität","Erde, neutral, süß","+ sättigend, kaliumreich, abgekühlt resistente Stärke; – hoher GI bei Püree/Pommes, grüne Stellen enthalten Solanin"],
+["Vollkornreis (gekocht)","112 kcal, 23 g KH, 2,3 g Protein, 0,8 g Fett","B1, B3 (ca. 1,5 mg), B6","Magnesium (ca. 43 mg), Mangan (ca. 0,9 mg), Phosphor, Selen","0 mg Cholesterin; Ballaststoffe leicht LDL-senkend","Erde, neutral, süß","+ Ballaststoffe, stabilerer Blutzucker als Weißreis; – Spuren von Arsen, Phytinsäure"],
+["Haferflocken","372 kcal, 59 g KH, 13 g Protein, 7 g Fett","B1 (ca. 0,5 mg), Folat, B5","Magnesium (ca. 130 mg), Eisen (ca. 4,5 mg), Zink (ca. 4 mg), Mangan","0 mg Cholesterin; ca. 1,2 g gesättigt; Beta-Glucan senkt nachweislich LDL","Erde, warm, süß","+ Beta-Glucan (Cholesterin, Blutzucker), lange Sättigung; – Gluten-Kontamination möglich, Phytinsäure"],
+["Vollkornbrot (Richtwert)","ca. 220 kcal, 41 g KH, 7 g Protein, 1,5 g Fett","B1, B3, B6, Folat, E","Magnesium, Eisen, Zink, Selen, Phosphor","0 mg Cholesterin; Ballaststoffe leicht LDL-senkend","Feuer/Erde, kühl bis neutral, süß","+ Ballaststoffe, Sättigung, Darmgesundheit; – Gluten, Salzgehalt je nach Sorte"],
+["Hühnerbrust (gegart)","165 kcal, 0 g KH, 31 g Protein, 3,6 g Fett","B3 (ca. 10 mg), B6, B12, B5","Phosphor (ca. 228 mg), Selen, Kalium, Zink","ca. 85 mg Cholesterin; ca. 1 g gesättigt; geringer LDL-Einfluss","Erde, warm, süß","+ mageres Protein, Muskelerhalt; – Salmonellen bei zu wenig Garen, Panade und Frittieren verschlechtern das Profil"],
+["Rindfleisch (mager, roh)","ca. 130 kcal, 0 g KH, 21 g Protein, 4–5 g Fett","B12 (ca. 2 µg), B3, B6, B2","Häm-Eisen (ca. 2,2 mg), Zink (ca. 4,5 mg), Selen, Phosphor","ca. 60 mg Cholesterin; ca. 2 g gesättigt; fettreiche Stücke erhöhen LDL stärker","Erde, neutral, süß","+ gut verfügbares Eisen und Zink, B12; – viel rotes/verarbeitetes Fleisch: erhöhtes Darmkrebsrisiko"],
+["Lachs (Zucht, roh)","208 kcal, 0 g KH, 20 g Protein, 13 g Fett","D (ca. 11 µg), B12 (ca. 3 µg), B3, B6","Selen, Kalium, Phosphor, Jod","ca. 55 mg Cholesterin; ca. 3 g gesättigt, ca. 2 g Omega-3; günstig für Triglyceride","Erde/Wasser, warm, süß","+ Herz-Kreislauf, Gehirn, entzündungshemmend; – Schadstoffe (Quecksilber, Dioxine), Parasiten bei Rohverzehr"],
+["Hühnerei (ganz)","143 kcal, 0,7 g KH, 12,6 g Protein, 9,5 g Fett","D (ca. 2 µg), B12, A, Cholin (ca. 250 mg), B2","Selen, Eisen (ca. 1,8 mg), Jod, Phosphor, Zink","ca. 370 mg Cholesterin; ca. 3,1 g gesättigt; LDL-Einfluss meist gering","Erde, neutral, süß","+ vollständiges Protein, Cholin, Lutein; – Salmonellen bei Rohverzehr, bei Hypercholesterinämie moderat"],
+["Vollmilch (3,5 %)","64 kcal, 4,8 g KH, 3,3 g Protein, 3,6 g Fett","B2, B12, A, etwas D","Kalzium (ca. 120 mg), Phosphor, Kalium, Jod","ca. 11 mg Cholesterin; ca. 2,3 g gesättigt; kann LDL leicht erhöhen","Erde, kühl, süß","+ Kalzium, hochwertiges Protein; – Laktoseintoleranz, Milcheiweißallergie, gesättigte Fette"],
+["Naturjoghurt (3,5 %)","ca. 65 kcal, 4,5 g KH, 3,5 g Protein, 3,5 g Fett","B2, B12, A, B5","Kalzium (ca. 120 mg), Phosphor, Kalium, Jod","ca. 13 mg Cholesterin; ca. 2,3 g gesättigt; LDL gering bis neutral","Erde, kühl, süß-sauer","+ Probiotika, Darmflora, oft verträglicher als Milch; – Laktose, gezuckerte Sorten"],
+["Gouda (Richtwert)","ca. 356 kcal, 2 g KH, 25 g Protein, 27 g Fett","B12, A, B2, K2","Kalzium (ca. 740 mg), Phosphor, Zink, Natrium (ca. 800 mg)","ca. 114 mg Cholesterin; ca. 17 g gesättigt; kann LDL erhöhen","Erde, neutral bis kühl, süß-salzig","+ sehr kalziumreich, Protein; – viel gesättigtes Fett und Salz, kalorienreich"],
+["Linsen (gekocht)","116 kcal, 20 g KH, 9 g Protein, 0,4 g Fett","Folat (ca. 181 µg), B1, B6","Eisen (ca. 3,3 mg), Kalium (ca. 369 mg), Magnesium, Zink","0 mg Cholesterin; lösliche Ballaststoffe senken LDL","Erde/Wasser, neutral, süß","+ Ballaststoffe, pflanzliches Protein, stabiler Blutzucker; – Blähungen, Purine bei Gicht"],
+["Mandeln","579 kcal, 22 g KH (ca. 12 g Ballaststoffe), 21 g Protein, 50 g Fett","E (ca. 25 mg), B2, B3","Magnesium (ca. 270 mg), Kalzium (ca. 270 mg), Kalium (ca. 733 mg), Mangan","0 mg Cholesterin; ca. 4 g gesättigt, überwiegend einfach ungesättigt; LDL-senkend","Metall, neutral bis leicht warm, süß","+ Herzgesundheit, Sättigung, Vitamin E; – sehr kalorienreich, Nussallergie, bittere Mandeln mit Blausäure-Vorstufen"],
+["Olivenöl (nativ extra)","884 kcal, 0 g KH, 0 g Protein, 100 g Fett","E (ca. 14 mg), K1 (ca. 60 µg)","praktisch keine relevanten Mengen","0 mg Cholesterin; ca. 14 g gesättigt, 73 g einfach, 11 g mehrfach ungesättigt; senkt LDL im Austausch gegen gesättigte Fette","Holz, neutral, süß-sauer","+ Polyphenole, Herz-Kreislauf-Schutz; – sehr energiedicht, Qualitätsverlust bei starkem Erhitzen"],
+["Tofu (Natur, Richtwert)","ca. 125 kcal, 2 g KH, 13 g Protein, 7 g Fett","Folat, B1, wenig K","Kalzium (bis ca. 350 mg), Eisen (ca. 2,7 mg), Magnesium, Mangan","0 mg Cholesterin; ca. 1 g gesättigt; Sojaprotein senkt LDL leicht","Erde, kühl, süß","+ vollständiges pflanzliches Protein, Isoflavone; – Sojaallergie, bei Schilddrüsenerkrankung ärztlich abklären"],
+["Knoblauch","149 kcal, 33 g KH, 6,4 g Protein, 0,5 g Fett","B6 (ca. 1,2 mg), C (ca. 31 mg)","Mangan (ca. 1,7 mg), Selen, Kalium (ca. 401 mg), Kalzium","0 mg Cholesterin; Allicin kann LDL und Blutdruck leicht senken","Metall, heiß, scharf","+ antimikrobiell, Gefäßschutz; – Mundgeruch, Magenreizung, Blutungsneigung bei hohen Mengen (Blutverdünner)"],
+["Avocado","160 kcal, 9 g KH (ca. 7 g Ballaststoffe), 2 g Protein, 15 g Fett","K1 (ca. 21 µg), Folat (ca. 81 µg), E, B5, C","Kalium (ca. 485 mg), Magnesium (ca. 29 mg)","0 mg Cholesterin; ca. 2 g gesättigt, 10 g einfach ungesättigt; senkt LDL im Austausch gegen gesättigte Fette","Erde, kühl, süß","+ Herzgesundheit, Ballaststoffe, bessere Aufnahme fettlöslicher Vitamine; – energiedicht, Latex-Frucht-Syndrom"],
+["Salatgurke","15 kcal, 3,6 g KH, 0,7 g Protein, 0,1 g Fett","K1 (ca. 16 µg), C (ca. 3 mg)","Kalium (ca. 147 mg), wenig Magnesium und Kalzium","0 mg Cholesterin, fettfrei; kein LDL-Einfluss","Wasser/Erde, kühl bis kalt, süß","+ wasserreich, kalorienarm, entwässernd; – bei Kälteempfindlichkeit (TCM) in Maßen"],
+["Zwiebel","40 kcal, 9 g KH, 1,1 g Protein, 0,1 g Fett","C (ca. 7 mg), B6, Folat","Kalium (ca. 146 mg), Mangan, wenig Kalzium","0 mg Cholesterin; Quercetin kann LDL leicht günstig beeinflussen","Metall, warm, scharf","+ Quercetin, antientzündlich, Präbiotika (Inulin); – Blähungen (FODMAPs), Reizdarm"],
+["Birne","57 kcal, 15 g KH, 0,4 g Protein, 0,1 g Fett","C (ca. 4 mg), K1 (ca. 4 µg)","Kalium (ca. 116 mg), Kupfer","0 mg Cholesterin; Pektin leicht LDL-senkend","Metall, kühl, süß-sauer","+ Ballaststoffe, befeuchtend; – Fruktose und Sorbit bei Reizdarm"],
+["Erdbeere","32 kcal, 7,7 g KH, 0,7 g Protein, 0,3 g Fett","C (ca. 59 mg), Folat (ca. 24 µg)","Mangan (ca. 0,4 mg), Kalium (ca. 153 mg)","0 mg Cholesterin, fettarm","Holz/Erde, kühl, süß-sauer","+ Antioxidantien, wenig Zucker; – häufige Allergie bzw. Pseudoallergie"],
+["Weintraube","69 kcal, 18 g KH, 0,7 g Protein, 0,2 g Fett","K1 (ca. 15 µg), C, B6","Kalium (ca. 191 mg), Kupfer","0 mg Cholesterin, fettarm","Erde, neutral, süß-sauer","+ Polyphenole (Resveratrol in der Schale); – viel Fruchtzucker"],
+["Zitrone","29 kcal, 9 g KH, 1,1 g Protein, 0,3 g Fett","C (ca. 53 mg), B6","Kalium (ca. 138 mg), Kalzium","0 mg Cholesterin, fettarm","Holz, kühl, sauer","+ Vitamin C, fördert Eisenaufnahme; – Säure belastet Zahnschmelz und Magen"],
+["Kiwi","61 kcal, 15 g KH, 1,1 g Protein, 0,5 g Fett","C (ca. 93 mg), K1 (ca. 40 µg), E","Kalium (ca. 312 mg), Kupfer","0 mg Cholesterin, fettarm","Holz/Erde, kalt, süß-sauer","+ Immunsystem, Verdauung (Actinidin); – Allergie, Latex-Kreuzallergie"],
+["Wassermelone","30 kcal, 7,6 g KH, 0,6 g Protein, 0,2 g Fett","C (ca. 8 mg), A, Lycopin","Kalium (ca. 112 mg), Magnesium (ca. 10 mg)","0 mg Cholesterin, fettfrei","Wasser, kalt, süß","+ sehr wasserreich, Lycopin; – hoher GI, bei Kälteempfindlichkeit in Maßen"],
+["Paprika (rot)","31 kcal, 6 g KH, 1 g Protein, 0,3 g Fett","C (ca. 128 mg), A (ca. 157 µg RAE), B6","Kalium (ca. 211 mg)","0 mg Cholesterin, fettarm","Erde/Feuer, neutral bis warm, süß","+ sehr viel Vitamin C, Carotinoide; – Nachtschattengewächs, bei Reizmagen manchmal unverträglich"],
+["Zucchini","17 kcal, 3,1 g KH, 1,2 g Protein, 0,3 g Fett","C (ca. 18 mg), B6, K1","Kalium (ca. 261 mg), Mangan","0 mg Cholesterin, fettarm","Erde, kühl, süß","+ kalorienarm, gut verträglich; – Bitterstoffe (Cucurbitacine) bei bitterem Geschmack meiden"],
+["Blumenkohl","25 kcal, 5 g KH, 1,9 g Protein, 0,3 g Fett","C (ca. 48 mg), K1 (ca. 16 µg), Folat (ca. 57 µg)","Kalium (ca. 299 mg), Mangan","0 mg Cholesterin, fettarm","Metall/Erde, neutral, süß","+ Glucosinolate, kalorienarm; – Blähungen, Purine"],
+["Süßkartoffel","86 kcal, 20 g KH, 1,6 g Protein, 0,1 g Fett","A (ca. 709 µg RAE), C, B6","Kalium (ca. 337 mg), Mangan","0 mg Cholesterin, fettarm","Erde, neutral, süß","+ Beta-Carotin, Ballaststoffe; – GI hängt stark von der Zubereitung ab, Oxalat"],
+["Kürbis","26 kcal, 6,5 g KH, 1 g Protein, 0,1 g Fett","A (ca. 426 µg RAE), C (ca. 9 mg)","Kalium (ca. 340 mg)","0 mg Cholesterin, fettfrei","Erde, warm, süß","+ Carotinoide, leicht verdaulich; – kaum Nachteile"],
+["Rote Bete","43 kcal, 10 g KH, 1,6 g Protein, 0,2 g Fett","Folat (ca. 109 µg), C","Kalium (ca. 325 mg), Mangan","0 mg Cholesterin, fettarm","Erde/Wasser, neutral, süß","+ Nitrat (Blutdruck, Ausdauer), Betalaine; – Oxalat, färbt Urin und Stuhl rot (harmlos)"],
+["Weißkohl","25 kcal, 5,8 g KH, 1,3 g Protein, 0,1 g Fett","K1 (ca. 76 µg), C (ca. 36 mg), Folat","Kalium (ca. 170 mg)","0 mg Cholesterin, fettfrei","Erde, neutral, süß","+ Glucosinolate, Vitamin K, Sauerkraut mit Probiotika; – Blähungen"],
+["Ingwer (frisch)","80 kcal, 18 g KH, 1,8 g Protein, 0,8 g Fett","B6, C (ca. 5 mg)","Kalium (ca. 415 mg), Magnesium (ca. 43 mg)","0 mg Cholesterin, fettarm","Metall, warm, scharf","+ gegen Übelkeit, verdauungsfördernd; – Magenreizung, bei Blutverdünnern vorsichtig"],
+["Champignons","22 kcal, 3,3 g KH, 3,1 g Protein, 0,3 g Fett","B2 (ca. 0,4 mg), B3 (ca. 3,6 mg), B5","Kalium (ca. 318 mg), Selen, Kupfer","0 mg Cholesterin, fettarm","Erde, neutral bis kühl, süß","+ Selen, B-Vitamine, kalorienarm; – Purine, nicht roh in großen Mengen"],
+["Aubergine","25 kcal, 6 g KH, 1 g Protein, 0,2 g Fett","K1, B6, C","Kalium (ca. 229 mg), Mangan","0 mg Cholesterin; saugt beim Braten viel Fett auf","Holz, kühl, süß","+ Ballaststoffe, Nasunin in der Schale; – Nachtschattengewächs, Solanin"],
+["Quinoa (gekocht)","120 kcal, 21 g KH, 4,4 g Protein, 1,9 g Fett","Folat (ca. 42 µg), B2","Magnesium (ca. 64 mg), Eisen (ca. 1,5 mg), Mangan","0 mg Cholesterin; überwiegend ungesättigt","Erde, neutral, süß","+ vollständiges Protein, glutenfrei; – Saponine (vorher spülen), Oxalat"],
+["Kichererbsen (gekocht)","164 kcal, 27 g KH, 8,9 g Protein, 2,6 g Fett","Folat (ca. 172 µg), B6, K1","Eisen (ca. 2,9 mg), Magnesium (ca. 48 mg), Zink (ca. 1,5 mg)","0 mg Cholesterin; Ballaststoffe senken LDL","Erde, neutral, süß","+ Ballaststoffe, pflanzliches Protein, Sättigung; – Blähungen, Purine"],
+["Vollkornnudeln (gekocht)","124 kcal, 25 g KH, 5,3 g Protein, 0,5 g Fett","B1, B3","Magnesium, Mangan, Selen","0 mg Cholesterin, fettarm","Erde, neutral, süß","+ Ballaststoffe, lange Sättigung; – Gluten, Portionsgröße beachten"],
+["Thunfisch (Dose, im eigenen Saft)","116 kcal, 0 g KH, 26 g Protein, 1 g Fett","B12 (ca. 2,2 µg), B3, D","Selen (ca. 80 µg), Jod, Phosphor","ca. 40 mg Cholesterin; kaum gesättigte Fette","Erde, neutral, süß","+ sehr mageres Protein, Selen; – Quecksilber (nicht täglich), Salzgehalt"],
+["Garnelen (gegart)","99 kcal, 0,2 g KH, 24 g Protein, 0,3 g Fett","B12 (ca. 1,1 µg), B3","Selen (ca. 38 µg), Jod, Zink","ca. 189 mg Cholesterin; sehr wenig gesättigtes Fett","Wasser, warm, süß-salzig","+ mageres Protein, Jod; – Krustentier-Allergie, Purine"],
+["Schweinefilet (roh)","120 kcal, 0 g KH, 21 g Protein, 3,5 g Fett","B1 (ca. 1 mg), B6, B12, B3","Zink (ca. 2 mg), Selen, Phosphor","ca. 60 mg Cholesterin; ca. 1,2 g gesättigt","Wasser, neutral bis kühl, süß-salzig","+ viel Vitamin B1, mageres Protein; – Purine, Wurstwaren deutlich ungünstiger, durchgaren"],
+["Putenbrust (gegart)","135 kcal, 0 g KH, 30 g Protein, 1 g Fett","B3 (ca. 11 mg), B6, B12","Selen (ca. 32 µg), Phosphor, Zink","ca. 70 mg Cholesterin; wenig gesättigt","Erde, neutral, süß","+ sehr mageres Protein; – Aufschnitt oft salzreich, Salmonellen bei zu wenig Garen"],
+["Walnüsse","654 kcal, 14 g KH (ca. 7 g Ballaststoffe), 15 g Protein, 65 g Fett","B6 (ca. 0,5 mg), Folat (ca. 98 µg), E (Gamma-Tocopherol)","Magnesium (ca. 158 mg), Kupfer, Mangan","0 mg Cholesterin; ca. 6 g gesättigt, viel Omega-3 (ALA); LDL-senkend","Wasser, warm, süß","+ Herz-Kreislauf, Gehirn; – sehr kalorienreich, Nussallergie"],
+["Leinsamen","534 kcal, 29 g KH (ca. 27 g Ballaststoffe), 18 g Protein, 42 g Fett","B1 (ca. 1,6 mg), B6","Magnesium (ca. 392 mg), Phosphor, Mangan","0 mg Cholesterin; ca. 3,7 g gesättigt, viel Omega-3 (ALA); senkt LDL","Erde, neutral, süß","+ Ballaststoffe, Lignane, Omega-3; – geschrotet essen, viel trinken, Blähungen"],
+["Chiasamen","486 kcal, 42 g KH (ca. 34 g Ballaststoffe), 17 g Protein, 31 g Fett","B1, B3","Kalzium (ca. 631 mg), Magnesium (ca. 335 mg), Phosphor","0 mg Cholesterin; viel Omega-3 (ALA)","Wasser, neutral, süß","+ Ballaststoffe, Omega-3, Kalzium; – quellen stark, immer eingeweicht und mit Flüssigkeit essen"],
+["Kürbiskerne","559 kcal, 11 g KH, 30 g Protein, 49 g Fett","K1, B2, E","Magnesium (ca. 592 mg), Zink (ca. 7,8 mg), Eisen (ca. 8,8 mg)","0 mg Cholesterin; ca. 8,7 g gesättigt, überwiegend mehrfach ungesättigt","Wasser, neutral, süß","+ Magnesium, Zink, Eisen; – sehr kalorienreich"],
+["Magerquark","67 kcal, 4 g KH, 12 g Protein, 0,3 g Fett","B12 (ca. 0,9 µg), B2","Kalzium (ca. 100 mg), Phosphor, Jod","ca. 3 mg Cholesterin; fast fettfrei","Erde, kühl, süß-sauer","+ viel Protein, kaum Fett; – Laktose, Milcheiweißallergie"],
+["Mozzarella","254 kcal, 1 g KH, 18 g Protein, 19 g Fett","B12, A, B2","Kalzium (ca. 400 mg), Phosphor, Natrium","ca. 60 mg Cholesterin; ca. 12 g gesättigt; kann LDL erhöhen","Erde, kühl, süß","+ Kalzium, Protein; – gesättigte Fette, Salz"],
+["Honig","304 kcal, 82 g KH, 0,3 g Protein, 0 g Fett","nur Spuren von Vitaminen","Kalium (ca. 52 mg), Spuren","0 mg Cholesterin, fettfrei","Erde, neutral, süß","+ enthält Enzyme und Polyphenole; – im Grunde Zucker, Karies, nicht für Babys unter 1 Jahr"],
+["Dunkle Schokolade (70–85 %)","598 kcal, 46 g KH (ca. 24 g Zucker, 11 g Ballaststoffe), 7,8 g Protein, 43 g Fett","B2, E, Spuren K","Magnesium (ca. 228 mg), Eisen (ca. 12 mg), Kupfer, Mangan","ca. 3 mg Cholesterin; ca. 24 g gesättigt","Feuer, warm, süß-bitter","+ Flavanole, Magnesium; – kalorienreich, Theobromin/Koffein, Spuren von Kadmium und Blei"],
+["Butter","717 kcal, 0,1 g KH, 0,9 g Protein, 81 g Fett","A (ca. 684 µg RAE), E, K2","kaum relevante Mengen","ca. 215 mg Cholesterin; ca. 51 g gesättigt; erhöht LDL","Erde, warm, süß","+ Vitamin A, Geschmack; – sehr viel gesättigtes Fett, sparsam verwenden"],
+["Goji-Beeren","349 kcal, 77 g KH, 14,3 g Protein, 0,4 g Fett","A, C, B2","Eisen, Zink","0 mg Cholesterin, fettarm","Holz/Wasser, neutral, süß-säuerlich; Organe: Niere, Leber, Augen","+ nährt Leber- und Nieren-Yin, stärkt die Sehkraft; – sehr zuckerreich, bei Blutverdünnern (Cumarine) Rücksprache"],
+["Chili","40 kcal, 8,8 g KH, 1,9 g Protein, 0,4 g Fett","A, C, E","Eisen, Kalium","0 mg Cholesterin, fettarm","Metall, heiß, scharf; Organe: Herz, Lunge","+ regt die Blutzirkulation stark an, vertreibt Kälte; – Magen- und Darmreizung, bei Reflux ungünstig"],
+["Grüner Tee","1 kcal, 0 g KH, 0,2 g Protein, 0 g Fett","C, B2, EGCG","Mangan, Fluorid","0 mg Cholesterin, fettfrei","Feuer, kühl, bitter; Organe: Herz, Magen","+ klärt Hitze, stärkt den Herz-Geist, antioxidativ; – Koffein, hemmt Eisenaufnahme bei Verzehr zu den Mahlzeiten"],
+["Schwarze Bohnen","341 kcal, 62,4 g KH, 21,6 g Protein, 1,4 g Fett","B1, Folat","Magnesium, Eisen, Zink","0 mg Cholesterin, fettarm; Ballaststoffe senken LDL","Wasser, neutral, süß; Organe: Niere, Blase","+ klassisches Tonikum für die Nieren-Essenz, Ballaststoffe; – roh giftig (Lektine), Blähungen, Purine"],
+["Zimt","247 kcal, 81 g KH, 4 g Protein, 1,2 g Fett","K, C","Kalzium, Eisen","0 mg Cholesterin, fettarm","Feuer/Metall, heiß, scharf-süß; Organe: Herz, Niere, Milz","+ stärkt das Yang-Feuer, kann den Blutzucker regulieren; – Cassia-Zimt enthält Cumarin, nur kleine Mengen"],
+["Kurkuma","354 kcal, 65 g KH, 7,8 g Protein, 10 g Fett","C, B6, Curcumin","Eisen, Mangan","0 mg Cholesterin","Feuer, warm, bitter-scharf; Organe: Herz, Leber","+ entzündungshemmend, bewegt Stagnationen; – Curcumin wird mit Pfeffer und Fett besser aufgenommen, bei Gallensteinen und Blutverdünnern vorsichtig"],
+["Shiitake-Pilze","34 kcal, 6,8 g KH, 2,2 g Protein, 0,5 g Fett","D, B-Komplex","Kupfer, Zink","0 mg Cholesterin, fettarm","Erde, neutral, süß; Organe: Milz, Magen","+ immunmodulierend, stärkt das Abwehr-Qi; – nur gegart essen, selten Hautreaktionen"],
+["Sesam (schwarz)","573 kcal, 23,4 g KH, 17,7 g Protein, 49,7 g Fett","E, B1","Kalzium, Magnesium, Eisen","0 mg Cholesterin; überwiegend ungesättigte Fette","Wasser, neutral, süß; Organe: Niere, Leber","+ stärkt Knochen, traditionell gegen vorzeitiges Ergrauen; – kalorienreich, Sesamallergie"],
+["Fenchel","31 kcal, 7,3 g KH, 1,2 g Protein, 0,2 g Fett","C, ätherische Öle","Kalium, Kalzium","0 mg Cholesterin, fettarm","Erde/Metall, warm, süß-scharf; Organe: Magen, Milz","+ entspannt Blähungen, entkrampft den Bauch; – Allergie (Korbblütler), ätherische Öle in großen Mengen meiden"],
+["Cranberry","46 kcal, 12,2 g KH, 0,4 g Protein, 0,1 g Fett","C, Proanthocyanidine","Mangan","0 mg Cholesterin, fettfrei","Wasser, kühl, sauer-bitter; Organe: Blase, Niere","+ schützt die Blase, verhindert Bakterienanhaftung; – Säure, getrocknet oft stark gezuckert, bei Blutverdünnern Rücksprache"],
+["Datteln","282 kcal, 75 g KH, 2,5 g Protein, 0,4 g Fett","B6, B3","Kalium, Magnesium","0 mg Cholesterin, fettarm","Erde, warm, süß; Organe: Milz, Magen, Herz","+ schnelle Energie, nährt Qi und Blut, Ballaststoffe; – sehr zuckerreich und kalorienreich, klebt an den Zähnen"],
+["Matcha-Pulver","300 kcal, 40 g KH, 30 g Protein, 5 g Fett","A, C, E, Catechine","Kalium, Kalzium","0 mg Cholesterin, fettarm","Feuer, kalt, bitter; Organe: Herz, Leber","+ fokussiert den Geist, viele Antioxidantien; – viel Koffein, Schadstoffgehalt der Qualität beachten"],
+["Ziegenkäse","364 kcal, 0,1 g KH, 22 g Protein, 30 g Fett","A, B2","Kalzium, Phosphor","ca. 79 mg Cholesterin; viel gesättigtes Fett, kann LDL erhöhen","Feuer, warm, scharf-sauer; Organe: Niere, Herz","+ oft leichter verträglich als Kuhmilch, wärmend; – kalorien-, fett- und salzreich"],
+["Meerrettich","48 kcal, 11 g KH, 1,2 g Protein, 0,7 g Fett","C, Senöle","Kalium, Kalzium","0 mg Cholesterin, fettarm","Metall, heiß, scharf; Organe: Lunge, Magen","+ befreit die Atemwege, löst tiefen Schleim; – reizt Magen und Schleimhäute, nur kleine Mengen"],
+["Grapefruit","42 kcal, 10,7 g KH, 0,8 g Protein, 0,1 g Fett","C, Naringin","Kalium","0 mg Cholesterin, fettfrei","Holz, kalt, bitter-sauer; Organe: Leber, Magen","+ regt die Entgiftung an, kann den Blutdruck senken; – Wechselwirkung mit vielen Medikamenten (Statine, Blutdruckmittel), Säure"]
+];
+const F=[["n","Lebensmittel"],["k","Kalorien & Makronährstoffe (pro 100 g)"],["v","Wichtige Vitamine"],["m","Wichtige Mineralien"],["c","Cholesterin & Fette"],["t","Chinesische 5-Elemente-Lehre"],["h","Gesundheitlicher Einfluss"]];
+const EL=["Holz","Feuer","Erde","Metall","Wasser"],TH=["salbei","meer","beere","nacht"],TN=["Salbei","Meer","Beere","Nacht"];
+const $=s=>document.querySelector(s);
+let data,el=null,ti=0,sel=null;
+try{data=JSON.parse(localStorage.getItem("lexikon"));ti=+localStorage.getItem("lexTheme")||0}catch(e){}
+if(!Array.isArray(data)||!data.length)data=D0.map(a=>Object.fromEntries(F.map((f,i)=>[f[0],a[i]])));
+const persist=()=>{try{localStorage.setItem("lexikon",JSON.stringify(data))}catch(e){}};
+try{if(localStorage.getItem("lexV")!="3"){const have=new Set(data.map(o=>o.n));D0.forEach(a=>{if(!have.has(a[0]))data.push(Object.fromEntries(F.map((f,i)=>[f[0],a[i]])))});persist();localStorage.setItem("lexV","3")}}catch(e){}
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const kc=o=>{const m=(o.k||"").match(/\d+/);return m?+m[0]:0};
+function setTheme(i){ti=i%TH.length;document.documentElement.dataset.theme=TH[ti];$("#theme").textContent="Stil: "+TN[ti];try{localStorage.setItem("lexTheme",ti)}catch(e){}}
+const EC={Holz:"#3f9150",Feuer:"#d94b32",Erde:"#c4912b",Metall:"#7d8c9c",Wasser:"#2f7bc4"};
+const els=o=>EL.filter(e=>(o.t||"").includes(e));
+const cs=o=>{const c=els(o).map(e=>EC[e]),a=c[0]||"var(--acc)";return `--e1:${a};--e2:${c[1]||a}`};
+const dots=o=>els(o).map(e=>`<span class="dot" style="background:${EC[e]}"></span>`).join("");
+function chips(){$("#chips").innerHTML=["Alle",...EL].map(e=>`<button class="chip ${(el||"Alle")===e?"on":""}" data-e="${e}" ${EC[e]?`style="--c:${EC[e]}"`:""}>${e}</button>`).join("")}
+function render(){
+  const q=$("#q").value.toLowerCase().trim(),s=$("#sort").value;
+  let l=data.map((o,i)=>[o,i]).filter(([o])=>(!q||F.some(f=>(o[f[0]]||"").toLowerCase().includes(q)))&&(!el||(o.t||"").includes(el)));
+  l.sort((a,b)=>s=="n"?a[0].n.localeCompare(b[0].n,"de"):s=="ka"?kc(a[0])-kc(b[0]):kc(b[0])-kc(a[0]));
+  $("#cnt").textContent=l.length+" von "+data.length+" Lebensmitteln";
+  $("#grid").innerHTML=l.length?l.map(([o,i])=>`<button class="card" data-i="${i}" style="${cs(o)}"><h3>${esc(o.n)}</h3><div class="kcal">${kc(o)} <small>kcal / 100 g</small></div><div class="sub">${esc(o.k)}</div><div class="sub">${dots(o)}${esc(o.t)}</div></button>`).join(""):`<div class="empty">Nichts gefunden. Mit „+ Neu“ legst du ein Lebensmittel an.</div>`;
+  chips();
+}
+function detail(i){
+  const o=data[i],d=$("#dlg");
+  d.innerHTML=`<h2 style="margin:0">${esc(o.n)}</h2><dl>${F.slice(1).map(f=>`<dt>${f[1]}</dt><dd>${esc(o[f[0]])}</dd>`).join("")}</dl><div class="row"><button id="del">Löschen</button><button id="ed">Bearbeiten</button><button class="p" id="cl">Schließen</button></div>`;
+  d.showModal();
+  $("#cl").onclick=()=>d.close();
+  $("#ed").onclick=()=>form(i);
+  $("#del").onclick=()=>{if(confirm(o.n+" wirklich löschen?")){data.splice(i,1);persist();render();d.close()}};
+}
+function form(i){
+  const o=i==null?{}:data[i],d=$("#dlg");
+  d.innerHTML=`<h2 style="margin:0">${i==null?"Neues Lebensmittel":"Bearbeiten"}</h2><form id="f" method="dialog">${F.map(f=>`<label>${f[1]}<textarea name="${f[0]}" rows="${f[0]=="n"?1:2}" ${f[0]=="n"?"required":""}>${esc(o[f[0]])}</textarea></label>`).join("")}<div class="row"><button type="button" id="cl">Abbrechen</button><button class="p" type="submit">Speichern</button></div></form>`;
+  if(!d.open)d.showModal();
+  $("#cl").onclick=()=>d.close();
+  $("#f").onsubmit=e=>{e.preventDefault();const n={};F.forEach(f=>n[f[0]]=e.target[f[0]].value.trim());if(i==null)data.push(n);else data[i]=n;persist();render();d.close()};
+}
+$("#grid").onclick=e=>{const c=e.target.closest(".card");if(c)detail(+c.dataset.i)};
+$("#chips").onclick=e=>{const c=e.target.closest(".chip");if(c){el=c.dataset.e=="Alle"?null:c.dataset.e;render()}};
+$("#q").oninput=render;$("#sort").onchange=render;
+$("#add").onclick=()=>form(null);
+$("#theme").onclick=()=>setTheme(ti+1);
+let pf=false;
+const fsLabel=()=>$("#fs").textContent=(document.fullscreenElement||pf)?"Vollbild beenden":"Vollbild";
+$("#fs").onclick=async()=>{
+  if(document.fullscreenElement){await document.exitFullscreen();return}
+  if(pf){pf=false;document.body.classList.remove("full");fsLabel();return}
+  try{await document.documentElement.requestFullscreen()}catch(e){pf=true;document.body.classList.add("full");fsLabel()}
+};
+document.onfullscreenchange=fsLabel;
+$("#save").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:"application/json"}));a.download="lebensmittel-lexikon.json";a.click();URL.revokeObjectURL(a.href)};
+$("#load").onclick=()=>$("#file").click();
+$("#file").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const j=JSON.parse(r.result);if(!Array.isArray(j)||!j.every(o=>o&&typeof o.n=="string"))throw 0;if(confirm(j.length+" Einträge laden? Die aktuelle Liste wird ersetzt.")){data=j;persist();render()}}catch(x){alert("Die Datei ist keine gültige Lexikon-Datei (JSON).")}};r.readAsText(f);e.target.value=""};
+setTheme(ti);render();
+</script>
+</body>
+</html>

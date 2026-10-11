@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tabellen-Editor</title>
+<style>
+:root{--bg:#f4f5f8;--panel:#fff;--ink:#14161c;--mut:#667085;--line:#e1e4ea;--acc:#4f46e5;--accfg:#fff;--stage:#e9ecf2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1115;--panel:#181b22;--ink:#e8eaf0;--mut:#9aa3b2;--line:#2a2f3a;--acc:#818cf8;--accfg:#10121a;--stage:#0b0d11}}
+:root[data-theme="dark"]{--bg:#0f1115;--panel:#181b22;--ink:#e8eaf0;--mut:#9aa3b2;--line:#2a2f3a;--acc:#818cf8;--accfg:#10121a;--stage:#0b0d11}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.app{min-height:100vh;display:flex;flex-direction:column;background:var(--bg)}
+.app.pfs{position:fixed;inset:0;z-index:50;overflow:auto}
+header.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 14px;background:var(--panel);border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+h1{font-size:16px;margin:0 8px 0 0;font-weight:700}
+.sp{flex:1}
+button,.btn,summary{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 11px;cursor:pointer;list-style:none;white-space:nowrap}
+button:hover,summary:hover{border-color:var(--acc)}
+button.pri{background:var(--acc);color:var(--accfg);border-color:var(--acc)}
+summary::-webkit-details-marker{display:none}
+summary::after{content:" ▾";font-size:11px;color:var(--mut)}
+details.menu{position:relative}
+details.menu .items{position:absolute;right:0;top:calc(100% + 4px);min-width:200px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:5px;box-shadow:0 8px 24px rgba(0,0,0,.18);z-index:20;display:flex;flex-direction:column;gap:2px}
+details.menu .items button{border:0;text-align:left;width:100%}
+details.menu .items button:hover{background:var(--bg)}
+main{display:grid;grid-template-columns:290px 1fr;gap:14px;padding:14px;flex:1;align-items:start}
+@media (max-width:820px){main{grid-template-columns:1fr}}
+aside{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:9px}
+aside h2{margin:4px 0 0;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.row label{color:var(--ink)}
+.row input[type=color]{width:38px;height:26px;padding:0;border:1px solid var(--line);border-radius:6px;background:none}
+.row input[type=range]{width:120px}
+.row select{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:4px}
+.rv{color:var(--mut);width:24px;text-align:right}
+.work{display:grid;gap:10px;min-width:0}
+.tools{display:flex;flex-wrap:wrap;gap:6px}
+.stage{background:var(--stage);border:1px solid var(--line);border-radius:12px;padding:20px;overflow:auto;min-height:260px}
+.stage.drop{outline:2px dashed var(--acc)}
+#t td:focus,#t th:focus{outline:2px solid #6366f1;outline-offset:-2px}
+#t td,#t th{white-space:pre-wrap;word-break:break-word}
+.hint{color:var(--mut);font-size:12px}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:99}
+#toast.on{opacity:1}
+dialog{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:12px;width:min(560px,92vw)}
+dialog textarea{width:100%;height:220px;font:12px/1.4 ui-monospace,monospace;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px}
+dialog .tools{justify-content:flex-end;margin-top:10px}
+</style>
+<style id="tstyle"></style>
+</head>
+<body>
+<div class="app" id="app">
+<header class="bar">
+  <h1>Tabellen-Editor</h1>
+  <button id="bLoad">Datei laden</button>
+  <button id="bPaste">Text einfügen</button>
+  <span class="sp"></span>
+  <details class="menu"><summary>Kopieren</summary><div class="items">
+    <button data-copy="rich">Als Tabelle (Word/Mail)</button>
+    <button data-copy="tsv">Zellen (Excel, Tab)</button>
+    <button data-copy="html">HTML-Code + Style</button>
+    <button data-copy="md">Markdown</button>
+    <button data-copy="csv">CSV</button>
+    <button data-copy="json">JSON</button>
+  </div></details>
+  <details class="menu"><summary>Speichern</summary><div class="items">
+    <button data-save="html">HTML-Datei (.html)</button>
+    <button data-save="csv">CSV (.csv)</button>
+    <button data-save="md">Markdown (.md)</button>
+    <button data-save="json">JSON (.json)</button>
+    <button data-save="txt">Text, Tab (.txt)</button>
+  </div></details>
+  <button id="bFs" class="pri">Vollbild</button>
+</header>
+<main>
+  <aside id="side"></aside>
+  <section class="work">
+    <div class="tools">
+      <button data-op="rowA">+ Zeile unten</button>
+      <button data-op="rowB">+ Zeile oben</button>
+      <button data-op="colA">+ Spalte rechts</button>
+      <button data-op="colB">+ Spalte links</button>
+      <button data-op="rowD">Zeile löschen</button>
+      <button data-op="colD">Spalte löschen</button>
+      <button data-op="up">Zeile ↑</button>
+      <button data-op="down">Zeile ↓</button>
+      <button data-op="sort">Spalte A–Z</button>
+      <button data-op="clear">Leeren</button>
+    </div>
+    <div class="stage" id="stage"><table id="t" class="tbl"></table></div>
+    <div class="hint">Zellen direkt anklicken und tippen. Dateien (CSV, TSV, HTML, Markdown, JSON) lassen sich auch per Drag &amp; Drop auf die Tabelle laden.</div>
+  </section>
+</main>
+</div>
+<input type="file" id="file" hidden accept=".csv,.tsv,.txt,.html,.htm,.md,.json">
+<dialog id="dlg"><b>Text einfügen</b><p class="hint">CSV, Tab-getrennt (aus Excel), HTML-Tabelle, Markdown oder JSON.</p><textarea id="ta"></textarea>
+<div class="tools"><button id="dC">Abbrechen</button><button id="dOk" class="pri">Importieren</button></div></dialog>
+<div id="toast"></div>
+
+<script>
+const $=s=>document.querySelector(s), T=$('#t');
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const toast=m=>{const e=$('#toast');e.textContent=m;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),2200)};
+
+/* ---------- Style ---------- */
+const PRESETS={
+ modern:{headBg:'#2563eb',headFg:'#ffffff',bodyBg:'#ffffff',altBg:'#f1f5f9',text:'#0f172a',border:'#e2e8f0',mode:'h',bw:1,radius:10,pad:12,fs:15,zebra:true,hover:true,shadow:true,firstBold:true},
+ klassisch:{headBg:'#e5e7eb',headFg:'#111827',bodyBg:'#ffffff',altBg:'#ffffff',text:'#111827',border:'#6b7280',mode:'all',bw:1,radius:0,pad:8,fs:15,zebra:false,hover:false,shadow:false,firstBold:false},
+ dunkel:{headBg:'#0ea5e9',headFg:'#04121c',bodyBg:'#111827',altBg:'#1f2937',text:'#e5e7eb',border:'#374151',mode:'h',bw:1,radius:10,pad:12,fs:15,zebra:true,hover:true,shadow:false,firstBold:true},
+ minimal:{headBg:'#ffffff',headFg:'#111827',bodyBg:'#ffffff',altBg:'#ffffff',text:'#374151',border:'#d1d5db',mode:'h',bw:1,radius:0,pad:10,fs:15,zebra:false,hover:false,shadow:false,firstBold:false},
+ natur:{headBg:'#3f6212',headFg:'#fefce8',bodyBg:'#fefce8',altBg:'#ecfccb',text:'#1a2e05',border:'#bef264',mode:'all',bw:1,radius:8,pad:12,fs:15,zebra:true,hover:true,shadow:true,firstBold:true},
+ neon:{headBg:'#a855f7',headFg:'#ffffff',bodyBg:'#0b0b14',altBg:'#14142a',text:'#e9d5ff',border:'#6d28d9',mode:'all',bw:1,radius:12,pad:12,fs:15,zebra:true,hover:true,shadow:true,firstBold:true}
+};
+const FONTS=[['system-ui,-apple-system,"Segoe UI",Roboto,sans-serif','System'],['Georgia,"Times New Roman",serif','Serif'],['ui-monospace,Consolas,monospace','Monospace'],['"Trebuchet MS",Verdana,sans-serif','Trebuchet'],['"Courier New",monospace','Courier']];
+const CTRL=[
+ ['preset','Vorlage','sel',Object.keys(PRESETS).map(k=>[k,k[0].toUpperCase()+k.slice(1)])],
+ ['h','Farben'],
+ ['headBg','Kopfzeile','color'],['headFg','Kopfzeile Text','color'],['bodyBg','Zellen','color'],['altBg','Streifen','color'],['text','Textfarbe','color'],['border','Linien','color'],
+ ['h','Form'],
+ ['mode','Linien','sel',[['all','Alle'],['h','Horizontal'],['none','Keine']]],
+ ['bw','Linienstärke','range',0,6],['radius','Rundung','range',0,28],['pad','Zellabstand','range',2,30],
+ ['h','Text'],
+ ['font','Schrift','sel',FONTS],['fs','Größe','range',10,30],['align','Ausrichtung','sel',[['left','Links'],['center','Zentriert'],['right','Rechts']]],
+ ['h','Optionen'],
+ ['header','Kopfzeile','chk'],['zebra','Zebra-Streifen','chk'],['hover','Hover-Effekt','chk'],['shadow','Schatten','chk'],['firstBold','Erste Spalte fett','chk'],['full','Volle Breite','chk']
+];
+let S=Object.assign({preset:'modern',font:FONTS[0][0],align:'left',header:true,full:true},PRESETS.modern);
+try{const o=JSON.parse(localStorage.getItem('tbl-style')||'null');if(o)Object.assign(S,o)}catch(e){}
+
+function css(sel){
+ const bc=S.border, w=S.mode==='none'||+S.bw===0?0:+S.bw, ln=w?`${w}px solid ${bc}`:'0';
+ let c=`${sel}{border-collapse:separate;border-spacing:0;width:${S.full?'100%':'auto'};font:${S.fs}px/1.5 ${S.font};color:${S.text};background:${S.bodyBg};border-radius:${S.radius}px;overflow:hidden;${S.shadow?'box-shadow:0 6px 22px rgba(0,0,0,.18);':''}${S.mode==='all'&&w?`border-top:${ln};border-left:${ln};`:''}}\n`;
+ c+=`${sel} th,${sel} td{padding:${S.pad}px ${S.pad+5}px;text-align:${S.align};vertical-align:top;${S.mode==='all'?`border-right:${ln};border-bottom:${ln};`:S.mode==='h'?`border-bottom:${ln};`:''}}\n`;
+ c+=`${sel} th{background:${S.headBg};color:${S.headFg};font-weight:700}\n`;
+ if(S.zebra)c+=`${sel} tbody tr:nth-child(even) td{background:${S.altBg}}\n`;
+ if(S.firstBold)c+=`${sel} tbody td:first-child{font-weight:600}\n`;
+ if(S.hover)c+=`${sel} tbody tr:hover td{background-image:linear-gradient(rgba(128,128,128,.18),rgba(128,128,128,.18))}\n`;
+ if(S.mode==='h'&&w)c+=`${sel} tbody tr:last-child td{border-bottom:0}\n`;
+ return c;
+}
+const applyStyle=()=>{$('#tstyle').textContent=css('#t');try{localStorage.setItem('tbl-style',JSON.stringify(S))}catch(e){}};
+
+function buildSide(){
+ const a=$('#side');a.innerHTML='';
+ for(const [k,l,t,x,y] of CTRL){
+  if(k==='h'){a.insertAdjacentHTML('beforeend',`<h2>${l}</h2>`);continue}
+  const r=document.createElement('div');r.className='row';
+  r.innerHTML=`<label for="c_${k}">${l}</label>`;
+  let inp;
+  if(t==='sel'){inp=document.createElement('select');x.forEach(([v,n])=>inp.add(new Option(n,v)));inp.value=S[k]}
+  else{inp=document.createElement('input');inp.type=t==='chk'?'checkbox':t;
+   if(t==='range'){inp.min=x;inp.max=y}
+   if(t==='chk')inp.checked=!!S[k];else inp.value=S[k]}
+  inp.id='c_'+k;
+  const ev=t==='sel'||t==='chk'?'change':'input';
+  inp.addEventListener(ev,()=>{
+   const v=t==='chk'?inp.checked:inp.value;
+   if(k==='preset'){Object.assign(S,PRESETS[v],{preset:v});buildSide();applyStyle();return}
+   S[k]=t==='range'?+v:v;
+   if(k==='header'){render(read())}
+   if(t==='range')rv.textContent=v;
+   applyStyle();
+  });
+  r.append(inp);
+  let rv;if(t==='range'){rv=document.createElement('span');rv.className='rv';rv.textContent=S[k];r.append(rv)}
+  a.append(r);
+ }
+}
+
+/* ---------- Daten ---------- */
+let cur=null;
+const norm=rows=>{rows=rows.filter(r=>r.length);if(!rows.length)rows=[['']];const n=Math.max(...rows.map(r=>r.length));return rows.map(r=>Object.assign(Array(n).fill(''),r))};
+function render(rows){
+ rows=norm(rows);T.innerHTML='';cur=null;
+ const mk=(tag,txt)=>{const c=document.createElement(tag);c.contentEditable='true';c.textContent=txt;return c};
+ const tb=T.createTBody();
+ rows.forEach((r,i)=>{
+  if(i===0&&S.header){const h=T.createTHead().insertRow();r.forEach(x=>h.append(mk('th',x)))}
+  else{const tr=tb.insertRow();r.forEach(x=>tr.append(mk('td',x)))}
+ });
+}
+const read=()=>[...T.rows].map(r=>[...r.cells].map(c=>c.innerText.replace(/\n+$/,'')));
+document.addEventListener('focusin',e=>{const c=e.target.closest&&e.target.closest('#t td,#t th');if(c)cur=c});
+
+function op(k){
+ let rows=read(),ri=cur?cur.parentElement.rowIndex:rows.length-1,ci=cur?cur.cellIndex:rows[0].length-1,n=rows[0].length;
+ const minR=S.header?1:0;
+ if(k==='rowA')rows.splice(ri+1,0,Array(n).fill(''));
+ else if(k==='rowB')rows.splice(Math.max(ri,minR),0,Array(n).fill(''));
+ else if(k==='colA')rows.forEach(r=>r.splice(ci+1,0,''));
+ else if(k==='colB')rows.forEach(r=>r.splice(ci,0,''));
+ else if(k==='rowD'){if(rows.length>1)rows.splice(ri,1)}
+ else if(k==='colD'){if(n>1)rows.forEach(r=>r.splice(ci,1))}
+ else if(k==='up'&&ri>minR){[rows[ri-1],rows[ri]]=[rows[ri],rows[ri-1]];ri--}
+ else if(k==='down'&&ri>=minR&&ri<rows.length-1){[rows[ri+1],rows[ri]]=[rows[ri],rows[ri+1]];ri++}
+ else if(k==='sort'){const h=S.header?[rows.shift()]:[];rows.sort((a,b)=>(a[ci]||'').localeCompare(b[ci]||'','de',{numeric:true}));rows=h.concat(rows)}
+ else if(k==='clear'){if(!confirm('Alle Inhalte löschen?'))return;rows=rows.map(r=>r.map(()=>''))}
+ render(rows);
+ const t=T.rows[Math.min(ri,T.rows.length-1)];if(t)t.cells[Math.min(ci,t.cells.length-1)].focus();
+}
+
+/* ---------- Export-Formate ---------- */
+const cellH=c=>esc(c).replace(/\n/g,'<br>');
+function tableHTML(){
+ const r=read();let h='<table class="tbl">\n';
+ if(S.header)h+='<thead><tr>'+r[0].map(c=>`<th>${cellH(c)}</th>`).join('')+'</tr></thead>\n';
+ h+='<tbody>\n'+r.slice(S.header?1:0).map(x=>'<tr>'+x.map(c=>`<td>${cellH(c)}</td>`).join('')+'</tr>').join('\n')+'\n</tbody>\n</table>';
+ return h;
+}
+const fullHTML=()=>`<!doctype html>\n<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tabelle</title>\n<style>body{margin:24px;font-family:system-ui,sans-serif}\n${css('.tbl')}</style></head>\n<body>\n${tableHTML()}\n</body></html>`;
+const snippet=()=>`<style>\n${css('.tbl')}</style>\n${tableHTML()}`;
+const q=(v,d)=>/[\n"]/.test(v)||v.includes(d)?'"'+v.replace(/"/g,'""')+'"':v;
+const toDelim=(d)=>read().map(r=>r.map(c=>q(c,d)).join(d)).join('\n');
+function toMD(){
+ const r=read().map(x=>x.map(c=>c.replace(/\|/g,'\\|').replace(/\n/g,'<br>')));
+ const head=S.header?r[0]:r[0].map(()=>' '),body=r.slice(S.header?1:0);
+ return '| '+head.join(' | ')+' |\n|'+head.map(()=>' --- |').join('')+'\n'+body.map(x=>'| '+x.join(' | ')+' |').join('\n');
+}
+const toJSON=()=>{const r=read();if(S.header){const h=r[0].map((x,i)=>x||'Spalte '+(i+1));return JSON.stringify(r.slice(1).map(x=>Object.fromEntries(h.map((k,i)=>[k,x[i]]))),null,2)}return JSON.stringify(r,null,2)};
+function inlineClone(){
+ const cl=T.cloneNode(true),src=[T,...T.querySelectorAll('*')],dst=[cl,...cl.querySelectorAll('*')];
+ const P=['backgroundColor','color','fontFamily','fontSize','fontWeight','lineHeight','textAlign','verticalAlign','paddingTop','paddingRight','paddingBottom','paddingLeft'];
+ ['Top','Right','Bottom','Left'].forEach(s=>['Width','Style','Color'].forEach(p=>P.push('border'+s+p)));
+ src.forEach((e,i)=>{const cs=getComputedStyle(e),d=dst[i];d.removeAttribute('contenteditable');d.removeAttribute('id');
+  if(e.tagName==='TABLE'){d.style.borderCollapse='separate';d.style.borderSpacing='0';d.style.width=cs.width;d.style.borderRadius=cs.borderRadius;d.style.boxShadow='none'}
+  if(['TABLE','TH','TD'].includes(e.tagName))P.forEach(p=>d.style[p]=cs[p])});
+ return cl;
+}
+function legacyCopy(txt){const a=document.createElement('textarea');a.value=txt;a.style.cssText='position:fixed;opacity:0';document.body.append(a);a.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}a.remove();return ok}
+async function copy(kind){
+ try{
+  if(kind==='rich'){
+   const cl=inlineClone(),html=cl.outerHTML,txt=toDelim('\t');
+   if(window.ClipboardItem&&navigator.clipboard?.write){
+    await navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([txt],{type:'text/plain'})})]);
+   }else{const r=document.createRange();r.selectNodeContents(T);const s=getSelection();s.removeAllRanges();s.addRange(r);if(!document.execCommand('copy'))throw 0;s.removeAllRanges()}
+  }else{
+   const txt={tsv:()=>toDelim('\t'),html:snippet,md:toMD,csv:()=>toDelim(';'),json:toJSON}[kind]();
+   try{await navigator.clipboard.writeText(txt)}catch(e){if(!legacyCopy(txt))throw e}
+  }
+  toast('In die Zwischenablage kopiert');
+ }catch(e){toast('Kopieren wurde vom Browser blockiert')}
+}
+async function save(kind){
+ const map={html:[fullHTML,'text/html','tabelle.html'],csv:[()=>'\ufeff'+toDelim(';'),'text/csv','tabelle.csv'],md:[toMD,'text/markdown','tabelle.md'],json:[toJSON,'application/json','tabelle.json'],txt:[()=>toDelim('\t'),'text/plain','tabelle.txt']};
+ const [fn,type,name]=map[kind],blob=new Blob([fn()],{type});
+ try{
+  const dl=window.claude&&await claude.use('downloads');
+  if(dl){await dl.save({filename:name,data:blob});toast('Gespeichert');return}
+ }catch(e){if(e&&e.code==='declined')return}
+ const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),2000);toast('Download gestartet');
+}
+
+/* ---------- Import ---------- */
+function parseDelim(t){
+ const first=t.split('\n')[0],d=first.includes('\t')?'\t':(first.split(';').length>=first.split(',').length?';':',');
+ const rows=[];let row=[],f='',inq=false;
+ for(let i=0;i<t.length;i++){const c=t[i];
+  if(inq){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else inq=false}else f+=c}
+  else if(c==='"'&&!f)inq=true;
+  else if(c===d){row.push(f);f=''}
+  else if(c==='\n'){row.push(f);rows.push(row);row=[];f=''}
+  else if(c!=='\r')f+=c}
+ row.push(f);if(row.length>1||row[0]!=='')rows.push(row);
+ return rows;
+}
+const parseMD=t=>t.split('\n').filter(l=>l.includes('|')&&!/^[\s|:\-]+$/.test(l)).map(l=>l.trim().replace(/^\||\|$/g,'').split(/(?<!\\)\|/).map(c=>c.trim().replace(/\\\|/g,'|').replace(/<br\s*\/?>/gi,'\n')));
+function parseHTML(t){
+ const tb=new DOMParser().parseFromString(t,'text/html').querySelector('table');if(!tb)return null;
+ return [...tb.rows].map(r=>[...r.cells].map(c=>{c.querySelectorAll('br').forEach(b=>b.replaceWith('\n'));return c.textContent.trim()}));
+}
+function parseJSON(t){
+ const j=JSON.parse(t);if(!Array.isArray(j))return null;
+ if(j.length&&Array.isArray(j[0]))return j.map(r=>r.map(String));
+ const keys=[...new Set(j.flatMap(o=>Object.keys(o)))];
+ return [keys,...j.map(o=>keys.map(k=>o[k]==null?'':String(o[k])))];
+}
+function importText(t,name=''){
+ t=t.replace(/^\ufeff/,'').trim();let rows=null;
+ try{
+  if(/\.html?$/i.test(name)||/^<(!doctype|html|table|style)/i.test(t))rows=parseHTML(t);
+  else if(/^[\[{]/.test(t))rows=parseJSON(t.startsWith('{')?'['+t+']':t);
+  else if(/^\s*\|.*\|/m.test(t)&&/\n\s*\|?[\s:\-|]+\|/.test(t))rows=parseMD(t);
+  else rows=parseDelim(t);
+ }catch(e){rows=null}
+ if(!rows||!rows.length){toast('Keine Tabelle erkannt');return}
+ render(rows);toast(`${rows.length} Zeilen importiert`);
+}
+const readFile=f=>{const r=new FileReader();r.onload=()=>importText(String(r.result),f.name);r.readAsText(f)};
+
+/* ---------- Vollbild ---------- */
+const app=$('#app'),bFs=$('#bFs');let pfs=false;
+const fsOn=()=>!!document.fullscreenElement||pfs;
+const fsLabel=()=>bFs.textContent=fsOn()?'Vollbild beenden':'Vollbild';
+bFs.onclick=async()=>{
+ if(document.fullscreenElement){await document.exitFullscreen();return}
+ if(pfs){pfs=false;app.classList.remove('pfs');fsLabel();return}
+ try{await app.requestFullscreen()}catch(e){pfs=true;app.classList.add('pfs');fsLabel()}
+};
+document.addEventListener('fullscreenchange',fsLabel);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&pfs){pfs=false;app.classList.remove('pfs');fsLabel()}});
+
+/* ---------- Verdrahtung ---------- */
+$('#bLoad').onclick=()=>$('#file').click();
+$('#file').onchange=e=>{if(e.target.files[0])readFile(e.target.files[0]);e.target.value=''};
+$('#bPaste').onclick=()=>{$('#ta').value='';$('#dlg').showModal()};
+$('#dC').onclick=()=>$('#dlg').close();
+$('#dOk').onclick=()=>{importText($('#ta').value);$('#dlg').close()};
+document.querySelectorAll('[data-op]').forEach(b=>b.onclick=()=>op(b.dataset.op));
+document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=()=>{copy(b.dataset.copy);b.closest('details').open=false});
+document.querySelectorAll('[data-save]').forEach(b=>b.onclick=()=>{save(b.dataset.save);b.closest('details').open=false});
+document.addEventListener('click',e=>document.querySelectorAll('details.menu[open]').forEach(d=>{if(!d.contains(e.target))d.open=false}));
+const st=$('#stage');
+st.addEventListener('dragover',e=>{e.preventDefault();st.classList.add('drop')});
+st.addEventListener('dragleave',()=>st.classList.remove('drop'));
+st.addEventListener('drop',e=>{e.preventDefault();st.classList.remove('drop');const f=e.dataTransfer.files[0];if(f)readFile(f)});
+T.addEventListener('paste',e=>{const t=e.clipboardData.getData('text/plain');if(/[\t\n]/.test(t.trim())){e.preventDefault();importText(t)}});
+
+const SAMPLE=[
+['Kategorie','Daten / Information'],
+['Lebensmittel','Eier (Hühnerei, ganztags)'],
+['Kalorien & Makronährstoffe','ca. 155 kcal'],
+['Wichtige Vitamine','Vitamin A (ca. 160 µg), Vitamin D (ca. 2 µg), Vitamin E, Vitamin B2 (Riboflavin), Vitamin B12'],
+['Wichtige Mineralien','Eisen, Zink, Calcium, Phosphor, Selen'],
+['Cholesterin & Fette','Cholesteringehalt: ca. 370–400 mg pro 100 g; Anteil gesättigter Fettsäuren (ca. 3,1 g) überwiegend ausgeglichen durch ungesättigte Fettsäuren; moderater LDL-Einfluss bei gesunden Menschen (Phospholipide/Lecithin hemmen teilweise die Cholesterinaufnahme)'],
+['Chinesische 5-Elemente-Lehre','Element: Erde (Eigelb) / Wasser (Eiweiß); Thermische Wirkung: neutral bis leicht kühlend (Eiweiß kühlend, Eigelb neutral); Geschmack: süß, salzig'],
+['Gesundheitlicher Einfluss','Positiv: Hervorragende biologische Wertigkeit des Proteins, fördert Muskelaufbau und Sättigung, enthält Cholin (unterstützt Gehirnfunktion und Leberstoffwechsel), reich an Antioxidantien (Lutein/Zeaxanthin für die Augen). Negativ: Hoher Cholesteringehalt kann bei bestimmten Stoffwechseltypen (Hyperrespondern) den LDL-Spiegel ungünstig beeinflussen; Risiko bei mangelnder Hygiene/Frische (Salmonellen).']
+];
+buildSide();applyStyle();render(SAMPLE);
+</script>
+</body>
+</html>

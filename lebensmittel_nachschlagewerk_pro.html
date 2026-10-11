@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lebensmittel-Nachschlagewerk & 5-Elemente-Guide</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            element: {
+              holz: {
+                bg: 'rgba(16, 185, 129, 0.15)',
+                text: '#059669',
+                border: 'rgba(16, 185, 129, 0.4)'
+              },
+              feuer: {
+                bg: 'rgba(244, 63, 94, 0.15)',
+                text: '#e11d48',
+                border: 'rgba(244, 63, 94, 0.4)'
+              },
+              erde: {
+                bg: 'rgba(245, 158, 11, 0.15)',
+                text: '#d97706',
+                border: 'rgba(245, 158, 11, 0.4)'
+              },
+              metall: {
+                bg: 'rgba(100, 116, 139, 0.18)',
+                text: '#475569',
+                border: 'rgba(100, 116, 139, 0.4)'
+              },
+              wasser: {
+                bg: 'rgba(14, 165, 233, 0.15)',
+                text: '#0284c7',
+                border: 'rgba(14, 165, 233, 0.4)'
+              },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; transition: background-color 0.3s, color 0.3s; }
+    
+    /* Custom Themes */
+    body.theme-violet {
+        background-color: #0f172a;
+        color: #f8fafc;
+    }
+    body.theme-violet .card-bg { background-color: #1e293b; border-color: #334155; }
+    body.theme-violet .input-bg { background-color: #0f172a; color: #f8fafc; border-color: #475569; }
+    
+    body.theme-light {
+        background-color: #f1f5f9;
+        color: #0f172a;
+    }
+    body.theme-light .card-bg { background-color: #ffffff; border-color: #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    body.theme-light .input-bg { background-color: #f8fafc; color: #0f172a; border-color: #cbd5e1; }
+    
+    body.theme-cyber {
+        background-color: #05050a;
+        color: #00ffcc;
+    }
+    body.theme-cyber .card-bg { background-color: #0d0e1b; border-color: #00ffcc44; box-shadow: 0 0 10px rgba(0,255,204,0.1); }
+    body.theme-cyber .input-bg { background-color: #05050a; color: #00ffcc; border-color: #00ffcc88; }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+    ::-webkit-scrollbar-thumb { background: rgba(100,116,139,0.5); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(100,116,139,0.8); }
+    
+    /* Element Badges Styling */
+    .badge-element-holz { background-color: rgba(16, 185, 129, 0.18); color: #059669; border: 1px solid rgba(16, 185, 129, 0.35); }
+    .badge-element-feuer { background-color: rgba(244, 63, 94, 0.18); color: #e11d48; border: 1px solid rgba(244, 63, 94, 0.35); }
+    .badge-element-erde { background-color: rgba(245, 158, 11, 0.18); color: #d97706; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .badge-element-metall { background-color: rgba(148, 163, 184, 0.22); color: #475569; border: 1px solid rgba(148, 163, 184, 0.4); }
+    .badge-element-wasser { background-color: rgba(14, 165, 233, 0.18); color: #0284c7; border: 1px solid rgba(14, 165, 233, 0.35); }
+    
+    .dark .badge-element-holz { color: #34d399; }
+    .dark .badge-element-feuer { color: #fb7185; }
+    .dark .badge-element-erde { color: #fbbf24; }
+    .dark .badge-element-metall { color: #cbd5e1; }
+    .dark .badge-element-wasser { color: #38bdf8; }
+  </style>
+</head>
+<body class="theme-violet min-h-screen flex flex-col antialiased selection:bg-purple-500 selection:text-white">
+
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-opacity-80 border-b border-slate-700/50 card-bg px-4 py-3 shadow-lg">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3">
+        <div class="p-2.5 bg-gradient-to-tr from-purple-600 to-indigo-500 rounded-xl shadow-md text-white">
+          <i class="fa-solid font-bold fa-apple-whole text-2xl"></i>
+        </div>
+        <div>
+          <h1 class="text-xl font-bold tracking-tight bg-gradient-to-r from-purple-400 to-indigo-300 bg-clip-text text-transparent">
+            NutriBase & 5-Elemente
+          </h1>
+          <p class="text-xs text-slate-400">Ernährungswissen & Chinesische Organlehre</p>
+        </div>
+      </div>
+
+      <!-- Controls Header -->
+      <div class="flex items-center flex-wrap gap-2">
+        <!-- Theme Switcher -->
+        <div class="flex items-center rounded-lg p-1 bg-slate-800/60 border border-slate-700 text-xs">
+          <button onclick="setTheme('violet')" id="btn-theme-violet" class="px-2 py-1 rounded-md transition hover:bg-slate-700">🔮 Dark</button>
+          <button onclick="setTheme('light')" id="btn-theme-light" class="px-2 py-1 rounded-md transition hover:bg-slate-700">☀️ Light</button>
+          <button onclick="setTheme('cyber')" id="btn-theme-cyber" class="px-2 py-1 rounded-md transition hover:bg-slate-700">⚡ Cyber</button>
+        </div>
+
+        <!-- View Switcher -->
+        <div class="flex items-center rounded-lg p-1 bg-slate-800/60 border border-slate-700 text-xs">
+          <button onclick="setView('table')" id="btn-view-table" class="px-2.5 py-1 rounded-md bg-purple-600 text-white font-medium transition">
+            <i class="fa-solid fa-table-list mr-1"></i> Tabelle
+          </button>
+          <button onclick="setView('grid')" id="btn-view-grid" class="px-2.5 py-1 rounded-md hover:bg-slate-700 transition">
+            <i class="fa-solid fa-grip mr-1"></i> Karten
+          </button>
+        </div>
+
+        <!-- Action Buttons -->
+        <button onclick="openModal('modal-add')" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg shadow flex items-center gap-1 transition">
+          <i class="fa-solid fa-plus"></i> Neu
+        </button>
+
+        <div class="relative group inline-block">
+          <!-- Button mit etwas Padding nach unten als Brücke -->
+          <button class="px-3 py-1.5 pb-2.5 bg-slate-700 hover:bg-slate-600 text-xs rounded-lg shadow flex items-center gap-1 transition">
+            <i class="fa-solid fa-file-export"></i> Daten
+          </button>
+
+          <!-- Das Container-Div deckt den Zwischenraum ab (pt-1 statt mt-1) -->
+          <div class="absolute right-0 top-full pt-1 w-36 hidden group-hover:block z-50">
+            <div class="bg-slate-800 border border-slate-700 rounded-lg shadow-xl p-1">
+              <button onclick="exportJSON()" class="w-full text-left px-3 py-1.5 text-xs hover:bg-slate-700 rounded flex items-center gap-2">
+                <i class="fa-solid fa-code text-amber-400"></i> Export JSON
+              </button>
+              <button onclick="exportCSV()" class="w-full text-left px-3 py-1.5 text-xs hover:bg-slate-700 rounded flex items-center gap-2">
+                <i class="fa-solid fa-file-csv text-green-400"></i> Export CSV
+              </button>
+              <label class="w-full text-left px-3 py-1.5 text-xs hover:bg-slate-700 rounded flex items-center gap-2 cursor-pointer">
+                <i class="fa-solid fa-file-import text-blue-400"></i> Import JSON
+                <input type="file" id="import-file" accept=".json" onchange="importJSON(event)" class="hidden">
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="toggleFullscreen()" class="p-1.5 bg-slate-700 hover:bg-slate-600 text-xs rounded-lg transition" title="Vollbild">
+          <i class="fa-solid fa-expand"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto w-full px-4 py-6 flex-grow space-y-6">
+
+    <!-- Filters & Search Toolbar -->
+    <section class="card-bg p-4 rounded-2xl border flex flex-col md:flex-row gap-4 justify-between items-center shadow-md">
+      <!-- Search -->
+      <div class="relative w-full md:w-80">
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+        <input type="text" id="search-input" oninput="applyFilters()" placeholder="Lebensmittel, Vitamine, Organ..." class="w-full pl-9 pr-4 py-2 text-sm rounded-xl input-bg focus:outline-none focus:ring-2 focus:ring-purple-500 transition">
+      </div>
+
+      <!-- Category & Thermic Filter -->
+      <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
+        <div>
+          <select id="filter-category" onchange="applyFilters()" class="px-3 py-2 text-sm rounded-xl input-bg focus:outline-none focus:ring-2 focus:ring-purple-500">
+            <option value="">Alle Kategorien</option>
+            <option value="Gemüse">Gemüse</option>
+            <option value="Obst">Obst</option>
+            <option value="Getreide">Getreide & Hülsenfrüchte</option>
+            <option value="Nüsse">Nüsse & Samen</option>
+            <option value="Tierisch">Fleisch, Fisch & Ei</option>
+            <option value="Milch">Milchprodukte</option>
+            <option value="Gewürze">Gewürze & Sonstiges</option>
+          </select>
+        </div>
+
+        <div>
+          <select id="filter-element" onchange="applyFilters()" class="px-3 py-2 text-sm rounded-xl input-bg focus:outline-none focus:ring-2 focus:ring-purple-500">
+            <option value="">Alle 5-Elemente</option>
+            <option value="Holz">🪵 Holz (Grün)</option>
+            <option value="Feuer">🔥 Feuer (Rot)</option>
+            <option value="Erde">🌾 Erde (Gelb)</option>
+            <option value="Metall">⚔️ Metall (Silber)</option>
+            <option value="Wasser">💧 Wasser (Blau)</option>
+          </select>
+        </div>
+
+        <div>
+          <select id="filter-thermik" onchange="applyFilters()" class="px-3 py-2 text-sm rounded-xl input-bg focus:outline-none focus:ring-2 focus:ring-purple-500">
+            <option value="">Alle Thermiken</option>
+            <option value="Heiß">Heiß</option>
+            <option value="Warm">Warm</option>
+            <option value="Neutral">Neutral</option>
+            <option value="Erhitzend">Erhitzend</option>
+            <option value="Kühl">Kühl</option>
+            <option value="Kalt">Kalt</option>
+          </select>
+        </div>
+
+        <!-- Portion Calculator Input -->
+        <div class="flex items-center bg-purple-900/30 border border-purple-500/40 rounded-xl px-3 py-1.5 gap-2">
+          <span class="text-xs font-semibold text-purple-300">Portion:</span>
+          <input type="number" id="portion-weight" value="100" min="1" max="2000" onchange="renderData()" onkeyup="renderData()" class="w-16 px-1.5 py-0.5 text-xs text-center rounded bg-slate-900/80 text-purple-200 border border-purple-500/50 focus:outline-none">
+          <span class="text-xs text-slate-400">g</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Element Legend Banner -->
+    <section class="card-bg p-3 rounded-xl border flex flex-wrap items-center justify-between gap-2 text-xs">
+      <span class="font-semibold text-slate-400 uppercase tracking-wider">5-Elemente Farbcode:</span>
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="px-2.5 py-1 rounded-full badge-element-holz font-medium">🪵 Holz (Grün/Smaragd)</span>
+        <span class="px-2.5 py-1 rounded-full badge-element-feuer font-medium">🔥 Feuer (Rot/Koralle)</span>
+        <span class="px-2.5 py-1 rounded-full badge-element-erde font-medium">🌾 Erde (Gelb/Amber)</span>
+        <span class="px-2.5 py-1 rounded-full badge-element-metall font-medium">⚔️ Metall (Silber/Grau)</span>
+        <span class="px-2.5 py-1 rounded-full badge-element-wasser font-medium">💧 Wasser (Blau/Indigo)</span>
+      </div>
+    </section>
+
+    <div id="view-table-container" class="card-bg rounded-2xl border overflow-hidden shadow-xl transition-all">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="border-b border-slate-700/60 bg-slate-800/40 text-xs font-semibold uppercase tracking-wider text-slate-400">
+              <th class="p-3.5 cursor-pointer hover:text-purple-400" onclick="sortTable('name')">Lebensmittel <i class="fa-solid fa-sort"></i></th>
+              <th class="p-3.5 cursor-pointer hover:text-purple-400" onclick="sortTable('kcal')">Energie (kcal) <i class="fa-solid fa-sort"></i></th>
+              <th class="p-3.5">Makros (P/C/F)</th>
+              <th class="p-3.5">Mikronährstoffe</th>
+              <th class="p-3.5 cursor-pointer hover:text-purple-400" onclick="sortTable('element')">5-Elemente (TCM) <i class="fa-solid fa-sort"></i></th>
+              <th class="p-3.5">Thermik & Geschmack</th>
+              <th class="p-3.5">Gesundheits-Fokus</th>
+              <th class="p-3.5 text-right">Aktionen</th>
+            </tr>
+          </thead>
+          <tbody id="table-body" class="divide-y divide-slate-700/40 text-sm">
+            <!-- Filled by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="view-grid-container" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <!-- Filled by JS -->
+    </div>
+
+  </main>
+
+  <!-- Detail Modal -->
+  <div id="modal-detail" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="card-bg border border-slate-700 max-w-2xl w-full rounded-2xl p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-start border-b border-slate-700 pb-3">
+        <div>
+          <h3 id="modal-title" class="text-2xl font-bold text-purple-400"></h3>
+          <span id="modal-category" class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300"></span>
+        </div>
+        <button onclick="closeModal('modal-detail')" class="text-slate-400 hover:text-white text-xl p-1"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div id="modal-content" class="space-y-4 text-sm">
+        <!-- Dynamic Content -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Add/Edit Modal -->
+  <div id="modal-add" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="card-bg border border-slate-700 max-w-xl w-full rounded-2xl p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center border-b border-slate-700 pb-3">
+        <h3 id="form-modal-title" class="text-xl font-bold text-purple-400">Neues Lebensmittel hinzufügen</h3>
+        <button onclick="closeModal('modal-add')" class="text-slate-400 hover:text-white text-xl p-1"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <form id="food-form" onsubmit="saveFood(event)" class="space-y-3 text-xs">
+        <input type="hidden" id="food-id">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block mb-1 font-medium">Name</label>
+            <input type="text" id="form-name" required class="w-full p-2 rounded input-bg">
+          </div>
+          <div>
+            <label class="block mb-1 font-medium">Kategorie</label>
+            <select id="form-category" required class="w-full p-2 rounded input-bg">
+              <option value="Gemüse">Gemüse</option>
+              <option value="Obst">Obst</option>
+              <option value="Getreide">Getreide & Hülsenfrüchte</option>
+              <option value="Nüsse">Nüsse & Samen</option>
+              <option value="Tierisch">Fleisch, Fisch & Ei</option>
+              <option value="Milch">Milchprodukte</option>
+              <option value="Gewürze">Gewürze & Sonstiges</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-4 gap-2">
+          <div>
+            <label class="block mb-1 font-medium">kcal/100g</label>
+            <input type="number" step="0.1" id="form-kcal" required class="w-full p-2 rounded input-bg">
+          </div>
+          <div>
+            <label class="block mb-1 font-medium">Eiweiß (g)</label>
+            <input type="number" step="0.1" id="form-protein" required class="w-full p-2 rounded input-bg">
+          </div>
+          <div>
+            <label class="block mb-1 font-medium">Carbs (g)</label>
+            <input type="number" step="0.1" id="form-carbs" required class="w-full p-2 rounded input-bg">
+          </div>
+          <div>
+            <label class="block mb-1 font-medium">Fett (g)</label>
+            <input type="number" step="0.1" id="form-fat" required class="w-full p-2 rounded input-bg">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block mb-1 font-medium">Vitamine</label>
+            <input type="text" id="form-vitamins" placeholder="z.B. Vitamin C, B6" class="w-full p-2 rounded input-bg">
+          </div>
+          <div>
+            <label class="block mb-1 font-medium">Mineralstoffe</label>
+            <input type="text" id="form-minerals" placeholder="z.B. Magnesium, Kalium" class="w-full p-2 rounded input-bg">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-2">
+          <div>
+            <label class="block mb-1 font-medium">5-Element (TCM)</label>
+            <select id="form-element" required class="w-full p-2 rounded input-bg">
+              <option value="Holz">Holz</option>
+              <option value="Feuer">Feuer</option>
+              <option value="Erde">Erde</option>
+              <option value="Metall">Metall</option>
+              <option value="Wasser">Wasser</option>
+              <option value="Holz / Erde">Holz / Erde</option>
+              <option value="Erde / Wasser">Erde / Wasser</option>
+              <option value="Metall / Erde">Metall / Erde</option>
+            </select>
+          </div>
+          <div>
+            <label class="block mb-1 font-medium">Thermik</label>
+            <select id="form-thermik" required class="w-full p-2 rounded input-bg">
+              <option value="Heiß">Heiß</option>
+              <option value="Warm">Warm</option>
+              <option value="Neutral">Neutral</option>
+              <option value="Kühl">Kühl</option>
+              <option value="Kalt">Kalt</option>
+            </select>
+          </div>
+          <div>
+            <label class="block mb-1 font-medium">Geschmack</label>
+            <input type="text" id="form-taste" placeholder="z.B. süß, sauer" class="w-full p-2 rounded input-bg">
+          </div>
+        </div>
+
+        <div>
+          <label class="block mb-1 font-medium">Organbezug / Wirkung</label>
+          <input type="text" id="form-organs" placeholder="z.B. Milz, Magen stärken" class="w-full p-2 rounded input-bg">
+        </div>
+
+        <div>
+          <label class="block mb-1 font-medium">Gesundheitlicher Einfluss</label>
+          <textarea id="form-health" rows="2" class="w-full p-2 rounded input-bg"></textarea>
+        </div>
+
+        <div class="flex justify-end gap-2 pt-3 border-t border-slate-700">
+          <button type="button" onclick="closeModal('modal-add')" class="px-4 py-2 bg-slate-700 rounded hover:bg-slate-600">Abbrechen</button>
+          <button type="submit" class="px-4 py-2 bg-purple-600 rounded hover:bg-purple-500 font-semibold text-white">Speichern</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Initial Dataset (Over 40 Foods)
+    const defaultFoods = [{
+        id: 1,
+        name: "Brokkoli",
+        category: "Gemüse",
+        kcal: 34,
+        protein: 2.8,
+        carbs: 7,
+        fat: 0.4,
+        vitamins: "Vit C, K, Folat",
+        minerals: "Kalium, Calcium, Magnesium",
+        cholesterol: 0,
+        element: "Holz",
+        thermik: "Kühl",
+        taste: "Bitter, Süß",
+        organs: "Leber, Augen, Magen",
+        health: "Unterstützt Entgiftung und Leber-Qi, zellschützend."
+      },
+      {
+        id: 2,
+        name: "Ingwer",
+        category: "Gewürze",
+        kcal: 80,
+        protein: 1.8,
+        carbs: 18,
+        fat: 0.8,
+        vitamins: "Vit C, B6",
+        minerals: "Kalium, Magnesium",
+        cholesterol: 0,
+        element: "Metall",
+        thermik: "Heiß",
+        taste: "Scharf",
+        organs: "Lunge, Magen, Milz",
+        health: "Wärmt die Mitte, vertreibt Kälte, stärkt Immunsystem."
+      },
+      {
+        id: 3,
+        name: "Kürbis (Hokkaido)",
+        category: "Gemüse",
+        kcal: 26,
+        protein: 1.0,
+        carbs: 6,
+        fat: 0.1,
+        vitamins: "Beta-Carotin, Vit C, E",
+        minerals: "Kalium, Zink",
+        cholesterol: 0,
+        element: "Erde",
+        thermik: "Warm",
+        taste: "Süß",
+        organs: "Milz, Magen",
+        health: "Stärkt das Verdauungs-Qi, entwässert sanft."
+      },
+      {
+        id: 4,
+        name: "Lachs",
+        category: "Tierisch",
+        kcal: 208,
+        protein: 20.0,
+        carbs: 0,
+        fat: 13.0,
+        vitamins: "Vit D, B12, B6",
+        minerals: "Jod, Selen",
+        cholesterol: 60,
+        element: "Wasser",
+        thermik: "Warm",
+        taste: "Süß",
+        organs: "Niere, Leber",
+        health: "Nährt Blut und Essenz, Omega-3-reich für Herz und Gehirn."
+      },
+      {
+        id: 5,
+        name: "Goji-Beeren",
+        category: "Obst",
+        kcal: 349,
+        protein: 14.3,
+        carbs: 77,
+        fat: 0.4,
+        vitamins: "Vit A, C, Riboflavin",
+        minerals: "Eisen, Zink",
+        cholesterol: 0,
+        element: "Holz / Wasser",
+        thermik: "Neutral",
+        taste: "Süß, Säuerlich",
+        organs: "Niere, Leber, Augen",
+        health: "Nährt Leber- und Nieren-Yin, stärkt die Sehkraft."
+      },
+      {
+        id: 6,
+        name: "Haferflocken",
+        category: "Getreide",
+        kcal: 368,
+        protein: 13.5,
+        carbs: 58.7,
+        fat: 7.0,
+        vitamins: "Vit B1, B5, B6",
+        minerals: "Magnesium, Zink, Eisen",
+        cholesterol: 0,
+        element: "Erde",
+        thermik: "Warm",
+        taste: "Süß",
+        organs: "Milz, Magen",
+        health: "Stärkt Milz-Qi, senkt Cholesterin durch Beta-Glucan."
+      },
+      {
+        id: 7,
+        name: "Walnüsse",
+        category: "Nüsse",
+        kcal: 654,
+        protein: 15.2,
+        carbs: 13.7,
+        fat: 65.2,
+        vitamins: "Vit E, B6, Folsäure",
+        minerals: "Magnesium, Kupfe",
+        cholesterol: 0,
+        element: "Wasser",
+        thermik: "Warm",
+        taste: "Süß",
+        organs: "Niere, Lunge, Gehirn",
+        health: "Stärkt Nieren-Yang, unterstützt Gehirn-Funktion."
+      },
+      {
+        id: 8,
+        name: "Zitrone",
+        category: "Obst",
+        kcal: 29,
+        protein: 1.1,
+        carbs: 9.3,
+        fat: 0.3,
+        vitamins: "Vit C, Flavonoide",
+        minerals: "Kalium, Calcium",
+        cholesterol: 0,
+        element: "Holz",
+        thermik: "Kühl",
+        taste: "Sauer",
+        organs: "Leber, Gallenblase",
+        health: "Bewegt Leber-Qi, fördert Verdauungssäfte."
+      },
+      {
+        id: 9,
+        name: "Chili",
+        category: "Gewürze",
+        kcal: 40,
+        protein: 1.9,
+        carbs: 8.8,
+        fat: 0.4,
+        vitamins: "Vit A, C, E",
+        minerals: "Eisen, Kalium",
+        cholesterol: 0,
+        element: "Metall",
+        thermik: "Heiß",
+        taste: "Scharf",
+        organs: "Herz, Lunge",
+        health: "Regt Blutzirkulation stark an, vertreibt Kälte."
+      },
+      {
+        id: 10,
+        name: "Heidelbeeren",
+        category: "Obst",
+        kcal: 57,
+        protein: 0.7,
+        carbs: 14.5,
+        fat: 0.3,
+        vitamins: "Vit C, K, Anthocyane",
+        minerals: "Mangan",
+        cholesterol: 0,
+        element: "Wasser",
+        thermik: "Kühl",
+        taste: "Süß, Sauer",
+        organs: "Niere, Leber",
+        health: "Antioxidativ, schützt Gefäße, stärkt Nieren-Yin."
+      },
+      {
+        id: 11,
+        name: "Rindfleisch (mager)",
+        category: "Tierisch",
+        kcal: 250,
+        protein: 26.0,
+        carbs: 0,
+        fat: 15.0,
+        vitamins: "Vit B12, B3, B6",
+        minerals: "Eisen, Zink",
+        cholesterol: 70,
+        element: "Erde",
+        thermik: "Warm",
+        taste: "Süß",
+        organs: "Milz, Magen",
+        health: "Stärkt Blut und Qi, hilft bei Erschöpfung."
+      },
+      {
+        id: 12,
+        name: "Grüner Tee",
+        category: "Gewürze",
+        kcal: 1,
+        protein: 0.2,
+        carbs: 0,
+        fat: 0,
+        vitamins: "Vit C, B2, EGCG",
+        minerals: "Mangan, Fluorid",
+        cholesterol: 0,
+        element: "Feuer",
+        thermik: "Kühl",
+        taste: "Bitter",
+        organs: "Herz, Magen",
+        health: "Klärt Hitze, stärkt Herz-Geist, entgiftend."
+      },
+      {
+        id: 13,
+        name: "Knoblauch",
+        category: "Gewürze",
+        kcal: 149,
+        protein: 6.4,
+        carbs: 33,
+        fat: 0.5,
+        vitamins: "Vit C, B6, Allicin",
+        minerals: "Selen, Mangan",
+        cholesterol: 0,
+        element: "Metall",
+        thermik: "Warm",
+        taste: "Scharf",
+        organs: "Lunge, Dickdarm",
+        health: "Löst Schleim, wirkt antibakteriell und immunstärkend."
+      },
+      {
+        id: 14,
+        name: "Äpfel",
+        category: "Obst",
+        kcal: 52,
+        protein: 0.3,
+        carbs: 13.8,
+        fat: 0.2,
+        vitamins: "Vit C, Pektin",
+        minerals: "Kalium",
+        cholesterol: 0,
+        element: "Holz / Erde",
+        thermik: "Kühl",
+        taste: "Süß, Sauer",
+        organs: "Magen, Lunge",
+        health: "Befeuchtet Trockenheit, harmoniert die Verdauung."
+      },
+      {
+        id: 15,
+        name: "Rote Bete",
+        category: "Gemüse",
+        kcal: 43,
+        protein: 1.6,
+        carbs: 9.6,
+        fat: 0.2,
+        vitamins: "Folat, Vit C",
+        minerals: "Eisen, Kalium, Betain",
+        cholesterol: 0,
+        element: "Feuer / Holz",
+        thermik: "Neutral",
+        taste: "Süß",
+        organs: "Herz, Leber",
+        health: "Baut Blut auf, regt Leberentgiftung an."
+      },
+      {
+        id: 16,
+        name: "Spinat",
+        category: "Gemüse",
+        kcal: 23,
+        protein: 2.9,
+        carbs: 3.6,
+        fat: 0.4,
+        vitamins: "Vit A, C, K, Folat",
+        minerals: "Eisen, Magnesium",
+        cholesterol: 0,
+        element: "Holz",
+        thermik: "Kühl",
+        taste: "Süß",
+        organs: "Leber, Dickdarm",
+        health: "Befeuchtet Darm, nährt Blut und Säfte."
+      },
+      {
+        id: 17,
+        name: "Schwarze Bohnen",
+        category: "Getreide",
+        kcal: 341,
+        protein: 21.6,
+        carbs: 62.4,
+        fat: 1.4,
+        vitamins: "Vit B1, Folat",
+        minerals: "Magnesium, Eisen, Zink",
+        cholesterol: 0,
+        element: "Wasser",
+        thermik: "Neutral",
+        taste: "Süß",
+        organs: "Niere, Blase",
+        health: "Klassisches Tonikum für die Nieren-Essenz."
+      },
+      {
+        id: 18,
+        name: "Mandeln",
+        category: "Nüsse",
+        kcal: 579,
+        protein: 21.2,
+        carbs: 21.6,
+        fat: 49.9,
+        vitamins: "Vit E, B2",
+        minerals: "Magnesium, Calcium",
+        cholesterol: 0,
+        element: "Metall",
+        thermik: "Neutral",
+        taste: "Süß",
+        organs: "Lunge, Dickdarm",
+        health: "Befeuchtet die Lunge, lindert Husten."
+      },
+      {
+        id: 19,
+        name: "Zimt",
+        category: "Gewürze",
+        kcal: 247,
+        protein: 4.0,
+        carbs: 81,
+        fat: 1.2,
+        vitamins: "Vit K, C",
+        minerals: "Calcium, Eisen",
+        cholesterol: 0,
+        element: "Feuer / Metall",
+        thermik: "Heiß",
+        taste: "Scharf, Süß",
+        organs: "Herz, Niere, Milz",
+        health: "Stärkt das Yang-Feuer, regelt Blutzuckerspiegel."
+      },
+      {
+        id: 20,
+        name: "Hähnchenbrust",
+        category: "Tierisch",
+        kcal: 165,
+        protein: 31.0,
+        carbs: 0,
+        fat: 3.6,
+        vitamins: "Vit B3, B6",
+        minerals: "Phosphor, Selen",
+        cholesterol: 85,
+        element: "Erde",
+        thermik: "Warm",
+        taste: "Süß",
+        organs: "Milz, Magen",
+        health: "Leicht verdauliches Eiweiß zur Qi-Stärkung."
+      },
+      {
+        id: 21,
+        name: "Karotten",
+        category: "Gemüse",
+        kcal: 41,
+        protein: 0.9,
+        carbs: 9.6,
+        fat: 0.2,
+        vitamins: "Beta-Carotin, Vit K",
+        minerals: "Kalium",
+        cholesterol: 0,
+        element: "Erde",
+        thermik: "Neutral",
+        taste: "Süß",
+        organs: "Milz, Magen, Leber",
+        health: "Stärkt Sehkraft, fördert gesunde Verdauung."
+      },
+      {
+        id: 22,
+        name: "Avocado",
+        category: "Obst",
+        kcal: 160,
+        protein: 2.0,
+        carbs: 8.5,
+        fat: 14.7,
+        vitamins: "Vit E, K, B6",
+        minerals: "Kalium",
+        cholesterol: 0,
+        element: "Erde",
+        thermik: "Neutral",
+        taste: "Süß",
+        organs: "Leber, Milz",
+        health: "Liefert gesunde Fette, nährt Gewebe und Haut."
+      },
+      {
+        id: 23,
+        name: "Kurkuma",
+        category: "Gewürze",
+        kcal: 354,
+        protein: 7.8,
+        carbs: 65,
+        fat: 10.0,
+        vitamins: "Vit C, B6, Curcumin",
+        minerals: "Eisen, Mangan",
+        cholesterol: 0,
+        element: "Feuer",
+        thermik: "Warm",
+        taste: "Bitter, Scharf",
+        organs: "Herz, Leber",
+        health: "Entzündungshemmend, bewegt Stagnationen."
+      },
+      {
+        id: 24,
+        name: "Naturjoghurt",
+        category: "Milch",
+        kcal: 61,
+        protein: 3.5,
+        carbs: 4.7,
+        fat: 3.3,
+        vitamins: "Vit B2, B12",
+        minerals: "Calcium, Phosphor",
+        cholesterol: 13,
+        element: "Holz",
+        thermik: "Kühl",
+        taste: "Sauer",
+        organs: "Magen, Dickdarm",
+        health: "Befeuchtet Trockenheit, unterstützt Darmflora."
+      },
+      {
+        id: 25,
+        name: "Shiitake-Pilze",
+        category: "Gemüse",
+        kcal: 34,
+        protein: 2.2,
+        carbs: 6.8,
+        fat: 0.5,
+        vitamins: "Vit D, B-Komplex",
+        minerals: "Kupfer, Zink",
+        cholesterol: 0,
+        element: "Erde",
+        thermik: "Neutral",
+        taste: "Süß",
+        organs: "Milz, Magen",
+        health: "Immunmodulierend, stärkt Abwehr-Qi."
+      },
+      {
+        id: 26,
+        name: "Sesam (Schwarz)",
+        category: "Nüsse",
+        kcal: 573,
+        protein: 17.7,
+        carbs: 23.4,
+        fat: 49.7,
+        vitamins: "Vit E, B1",
+        minerals: "Calcium, Magnesium, Eisen",
+        cholesterol: 0,
+        element: "Wasser",
+        thermik: "Neutral",
+        taste: "Süß",
+        organs: "Niere, Leber",
+        health: "Schützt vor vorzeitigem Ergrauen, stärkt Knochen."
+      },
+      {
+        id: 27,
+        name: "Reis (Vollkorn)",
+        category: "Getreide",
+        kcal: 370,
+        protein: 7.9,
+        carbs: 77.2,
+        fat: 2.9,
+        vitamins: "Vit B1, B3",
+        minerals: "Magnesium, Phosphor",
+        cholesterol: 0,
+        element: "Erde",
+        thermik: "Neutral",
+        taste: "Süß",
+        organs: "Milz, Magen",
+        health: "Basis-Nahrung zur Sanierung der Verdauung."
+      },
+      {
+        id: 28,
+        name: "Fenchel",
+        category: "Gemüse",
+        kcal: 31,
+        protein: 1.2,
+        carbs: 7.3,
+        fat: 0.2,
+        vitamins: "Vit C, Ätherische Öle",
+        minerals: "Kalium, Calcium",
+        cholesterol: 0,
+        element: "Erde / Metall",
+        thermik: "Warm",
+        taste: "Süß, Scharf",
+        organs: "Magen, Milz",
+        health: "Entspannte Blähungen, entkrampft den Bauch."
+      },
+      {
+        id: 29,
+        name: "Birne",
+        category: "Obst",
+        kcal: 57,
+        protein: 0.4,
+        carbs: 15.2,
+        fat: 0.1,
+        vitamins: "Vit C, K",
+        minerals: "Kupfer, Kalium",
+        cholesterol: 0,
+        element: "Metall",
+        thermik: "Kühl",
+        taste: "Süß, Sauer",
+        organs: "Lunge, Magen",
+        health: "Befeuchtet Lungen-Yin, lindert trockenen Husten."
+      },
+      {
+        id: 30,
+        name: "Cranberry",
+        category: "Obst",
+        kcal: 46,
+        protein: 0.4,
+        carbs: 12.2,
+        fat: 0.1,
+        vitamins: "Vit C, Proanthocyanidine",
+        minerals: "Mangan",
+        cholesterol: 0,
+        element: "Wasser",
+        thermik: "Kühl",
+        taste: "Sauer, Bitter",
+        organs: "Blase, Niere",
+        health: "Schützt Blase, verhindert Bakterienanhaftung."
+      },
+      {
+        id: 31,
+        name: "Zucchini",
+        category: "Gemüse",
+        kcal: 17,
+        protein: 1.2,
+        carbs: 3.1,
+        fat: 0.3,
+        vitamins: "Vit C, A",
+        minerals: "Kalium",
+        cholesterol: 0,
+        element: "Erde",
+        thermik: "Kühl",
+        taste: "Süß",
+        organs: "Magen, Dünndarm",
+        health: "Leicht verdaulich, leitet Feuchtigkeit ab."
+      },
+      {
+        id: 32,
+        name: "Kichererbsen",
+        category: "Getreide",
+        kcal: 364,
+        protein: 19.3,
+        carbs: 60.7,
+        fat: 6.0,
+        vitamins: "Folat, Vit B6",
+        minerals: "Eisen, Magnesium",
+        cholesterol: 0,
+        element: "Erde",
+        thermik: "Neutral",
+        taste: "Süß",
+        organs: "Milz, Magen",
+        health: "Sättigender Ballaststoff- und Proteinlieferant."
+      },
+      {
+        id: 33,
+        name: "Garnelen",
+        category: "Tierisch",
+        kcal: 99,
+        protein: 24.0,
+        carbs: 0.2,
+        fat: 0.3,
+        vitamins: "Vit B12, D",
+        minerals: "Jod, Selen",
+        cholesterol: 189,
+        element: "Wasser",
+        thermik: "Warm",
+        taste: "Süß, Salzig",
+        organs: "Niere",
+        health: "Stärkt Nieren-Yang und Sexualenergie."
+      },
+      {
+        id: 34,
+        name: "Datteln",
+        category: "Obst",
+        kcal: 282,
+        protein: 2.5,
+        carbs: 75.0,
+        fat: 0.4,
+        vitamins: "Vit B6, B3",
+        minerals: "Kalium, Magnesium",
+        cholesterol: 0,
+        element: "Erde",
+        thermik: "Warm",
+        taste: "Süß",
+        organs: "Milz, Magen, Herz",
+        health: "Schnelle Energie, nährt Qi und Blut."
+      },
+      {
+        id: 35,
+        name: "Matcha-Pulver",
+        category: "Gewürze",
+        kcal: 300,
+        protein: 30.0,
+        carbs: 40.0,
+        fat: 5.0,
+        vitamins: "Vit A, C, E, Catechine",
+        minerals: "Kalium, Calcium",
+        cholesterol: 0,
+        element: "Feuer",
+        thermik: "Kalt",
+        taste: "Bitter",
+        organs: "Herz, Leber",
+        health: "Fokussiert den Geist, hoher Antioxidantien-Schutz."
+      },
+      {
+        id: 36,
+        name: "Ziegenkäse",
+        category: "Milch",
+        kcal: 364,
+        protein: 22.0,
+        carbs: 0.1,
+        fat: 30.0,
+        vitamins: "Vit A, B2",
+        minerals: "Calcium, Phosphor",
+        cholesterol: 79,
+        element: "Feuer",
+        thermik: "Warm",
+        taste: "Scharf, Sauer",
+        organs: "Niere, Herz",
+        health: "Leichter verdaulich als Kuhmilch, wärmend."
+      },
+      {
+        id: 37,
+        name: "Meerrettich",
+        category: "Gewürze",
+        kcal: 48,
+        protein: 1.2,
+        carbs: 11.0,
+        fat: 0.7,
+        vitamins: "Vit C, Senföle",
+        minerals: "Kalium, Calcium",
+        cholesterol: 0,
+        element: "Metall",
+        thermik: "Heiß",
+        taste: "Scharf",
+        organs: "Lunge, Magen",
+        health: "Befreit Atemwege, löst tiefen Schleim."
+      },
+      {
+        id: 38,
+        name: "Olivenöl (Nativ)",
+        category: "Gewürze",
+        kcal: 884,
+        protein: 0,
+        carbs: 0,
+        fat: 100,
+        vitamins: "Vit E",
+        minerals: "Traces",
+        cholesterol: 0,
+        element: "Holz",
+        thermik: "Neutral",
+        taste: "Süß",
+        organs: "Leber, Gallenblase",
+        health: "Schützt Gefäße, fördert Gallefluss."
+      },
+      {
+        id: 39,
+        name: "Paprika (Rot)",
+        category: "Gemüse",
+        kcal: 31,
+        protein: 1.0,
+        carbs: 6.0,
+        fat: 0.3,
+        vitamins: "Vit C (hoher Wert)",
+        minerals: "Kalium",
+        cholesterol: 0,
+        element: "Feuer",
+        thermik: "Warm",
+        taste: "Süß, Scharf",
+        organs: "Herz, Magen",
+        health: "Stärkt Herzkreislauf, immunisierend."
+      },
+      {
+        id: 40,
+        name: "Grapefruit",
+        category: "Obst",
+        kcal: 42,
+        protein: 0.8,
+        carbs: 10.7,
+        fat: 0.1,
+        vitamins: "Vit C, Naringin",
+        minerals: "Kalium",
+        cholesterol: 0,
+        element: "Holz",
+        thermik: "Kalt",
+        taste: "Bitter, Sauer",
+        organs: "Leber, Magen",
+        health: "Regt Entgiftung an, senkt Blutdruck."
+      },
+      {
+        id: 41,
+        name: "Chia-Samen",
+        category: "Nüsse",
+        kcal: 486,
+        protein: 16.5,
+        carbs: 42.1,
+        fat: 30.7,
+        vitamins: "Vit B3, E",
+        minerals: "Calcium, Magnesium",
+        cholesterol: 0,
+        element: "Wasser",
+        thermik: "Kühl",
+        taste: "Süß",
+        organs: "Niere, Dickdarm",
+        health: "Befeuchtet Darm, reich an Omega-3."
+      },
+      {
+        id: 42,
+        name: "Quinoa",
+        category: "Getreide",
+        kcal: 368,
+        protein: 14.1,
+        carbs: 64.2,
+        fat: 6.1,
+        vitamins: "Vit B-Komplex, Vit E",
+        minerals: "Eisen, Magnesium, Zink",
+        cholesterol: 0,
+        element: "Erde",
+        thermik: "Warm",
+        taste: "Süß",
+        organs: "Milz, Niere",
+        health: "Glutenfreies Pseudogetreide mit allen Aminosäuren."
+      }
+    ];
+
+    // App State
+    let foods = JSON.parse(localStorage.getItem('nutri_foods_data')) || defaultFoods;
+    let activeView = 'table';
+    let sortKey = 'name';
+    let sortAsc = true;
+
+    // Save State
+    function persistData() {
+      localStorage.setItem('nutri_foods_data', JSON.stringify(foods));
+    }
+
+    // Helper: Get Color Badge CSS for Elements
+    function getElementBadgeHTML(elementStr) {
+      const elements = elementStr.split('/').map(e => e.trim());
+
+      return elements.map(el => {
+        let badgeClass = "badge-element-erde";
+        let icon = "🌾";
+
+        if (el.includes("Holz")) {
+          badgeClass = "badge-element-holz";
+          icon = "🪵";
+        } else if (el.includes("Feuer")) {
+          badgeClass = "badge-element-feuer";
+          icon = "🔥";
+        } else if (el.includes("Erde")) {
+          badgeClass = "badge-element-erde";
+          icon = "🌾";
+        } else if (el.includes("Metall")) {
+          badgeClass = "badge-element-metall";
+          icon = "⚔️";
+        } else if (el.includes("Wasser")) {
+          badgeClass = "badge-element-wasser";
+          icon = "💧";
+        }
+
+        return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold shadow-sm ${badgeClass}">
+                            <span>${icon}</span> ${el}
+                        </span>`;
+      }).join(" ");
+    }
+
+    // Thermik Badge Color
+    function getThermikBadgeHTML(thermik) {
+      let color = "bg-slate-700 text-slate-200";
+      if (thermik === "Heiß" || thermik === "Warm") color = "bg-rose-900/40 text-rose-300 border border-rose-700/50";
+      if (thermik === "Kühl" || thermik === "Kalt") color = "bg-cyan-900/40 text-cyan-300 border border-cyan-700/50";
+      return `<span class="px-2 py-0.5 rounded text-xs font-medium ${color}">${thermik}</span>`;
+    }
+
+    // Get Filtered Data
+    function getFilteredData() {
+      const search = document.getElementById('search-input').value.toLowerCase();
+      const cat = document.getElementById('filter-category').value;
+      const elem = document.getElementById('filter-element').value;
+      const therm = document.getElementById('filter-thermik').value;
+
+      return foods.filter(item => {
+        const matchSearch = item.name.toLowerCase().includes(search) ||
+          item.vitamins.toLowerCase().includes(search) ||
+          item.minerals.toLowerCase().includes(search) ||
+          item.organs.toLowerCase().includes(search);
+        const matchCat = !cat || item.category === cat;
+        const matchElem = !elem || item.element.includes(elem);
+        const matchTherm = !therm || item.thermik === therm;
+
+        return matchSearch && matchCat && matchElem && matchTherm;
+      }).sort((a, b) => {
+        let valA = a[sortKey];
+        let valB = b[sortKey];
+        if (typeof valA === 'string') {
+          return sortAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+        }
+        return sortAsc ? valA - valB : valB - valA;
+      });
+    }
+
+    // Render Data in Table/Grid
+    function renderData() {
+      const data = getFilteredData();
+      const portionFactor = (parseFloat(document.getElementById('portion-weight').value) || 100) / 100;
+
+      // Render Table
+      const tbody = document.getElementById('table-body');
+      tbody.innerHTML = '';
+
+      if (data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="text-center py-8 text-slate-400">Keine Lebensmittel gefunden.</td></tr>`;
+      } else {
+        data.forEach(f => {
+          const tr = document.createElement('tr');
+          tr.className = "hover:bg-slate-800/50 transition cursor-pointer";
+          tr.onclick = (e) => {
+            if (!e.target.closest('button')) showDetail(f.id);
+          };
+
+          const calcKcal = Math.round(f.kcal * portionFactor);
+          const calcP = (f.protein * portionFactor).toFixed(1);
+          const calcC = (f.carbs * portionFactor).toFixed(1);
+          const calcF = (f.fat * portionFactor).toFixed(1);
+
+          tr.innerHTML = `
+                        <td class="p-3.5 font-semibold text-purple-300 flex items-center justify-between">
+                            <span>${f.name}</span>
+                            <span class="text-[10px] text-slate-400 font-normal px-1.5 py-0.5 rounded bg-slate-800 ml-2">${f.category}</span>
+                        </td>
+                        <td class="p-3.5 font-mono text-amber-400">${calcKcal} kcal</td>
+                        <td class="p-3.5 text-xs font-mono">
+                            <span class="text-emerald-400" title="Eiweiß">${calcP}p</span> / 
+                            <span class="text-blue-400" title="Kohlenhydrate">${calcC}c</span> / 
+                            <span class="text-rose-400" title="Fett">${calcF}f</span>
+                        </td>
+                        <td class="p-3.5 text-xs text-slate-300 max-w-xs truncate" title="${f.vitamins}, ${f.minerals}">
+                            <span class="text-indigo-300">${f.vitamins}</span>
+                        </td>
+                        <td class="p-3.5">${getElementBadgeHTML(f.element)}</td>
+                        <td class="p-3.5 text-xs space-x-1">
+                            ${getThermikBadgeHTML(f.thermik)}
+                            <span class="text-slate-400">${f.taste}</span>
+                        </td>
+                        <td class="p-3.5 text-xs text-slate-300 max-w-xs truncate" title="${f.health}">
+                            <span class="text-purple-300 font-medium">${f.organs}</span>
+                        </td>
+                        <td class="p-3.5 text-right space-x-1">
+                            <button onclick="editFood(${f.id})" class="p-1.5 text-slate-400 hover:text-amber-400 rounded"><i class="fa-solid fa-pen"></i></button>
+                            <button onclick="deleteFood(${f.id})" class="p-1.5 text-slate-400 hover:text-rose-400 rounded"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      // Render Grid
+      const gridContainer = document.getElementById('view-grid-container');
+      gridContainer.innerHTML = '';
+
+      data.forEach(f => {
+        const calcKcal = Math.round(f.kcal * portionFactor);
+        const card = document.createElement('div');
+        card.className = "card-bg rounded-2xl p-4 border shadow-md flex flex-col justify-between hover:border-purple-500/50 transition cursor-pointer";
+        card.onclick = (e) => {
+          if (!e.target.closest('button')) showDetail(f.id);
+        };
+
+        card.innerHTML = `
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="font-bold text-lg text-purple-300">${f.name}</h4>
+                                <span class="text-xs text-slate-400">${f.category}</span>
+                            </div>
+                            <span class="font-mono text-sm px-2 py-1 rounded bg-amber-500/10 text-amber-400 border border-amber-500/30 font-bold">${calcKcal} kcal</span>
+                        </div>
+
+                        <div class="flex flex-wrap gap-1">
+                            ${getElementBadgeHTML(f.element)}
+                            ${getThermikBadgeHTML(f.thermik)}
+                        </div>
+
+                        <div class="text-xs space-y-1 pt-2 border-t border-slate-700/50">
+                            <div><strong class="text-slate-400">Mikronährstoffe:</strong> <span class="text-slate-200">${f.vitamins}</span></div>
+                            <div><strong class="text-slate-400">Organbezug:</strong> <span class="text-purple-300">${f.organs}</span></div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center pt-3 mt-3 border-t border-slate-700/50 text-xs">
+                        <span class="text-slate-400">Spezifischer Geschmack: ${f.taste}</span>
+                        <div class="space-x-1">
+                            <button onclick="editFood(${f.id})" class="p-1 text-slate-400 hover:text-amber-400"><i class="fa-solid fa-pen"></i></button>
+                            <button onclick="deleteFood(${f.id})" class="p-1 text-slate-400 hover:text-rose-400"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                `;
+        gridContainer.appendChild(card);
+      });
+    }
+
+    // Apply Filters
+    function applyFilters() {
+      renderData();
+    }
+
+    // Sort Table
+    function sortTable(key) {
+      if (sortKey === key) {
+        sortAsc = !sortAsc;
+      } else {
+        sortKey = key;
+        sortAsc = true;
+      }
+      renderData();
+    }
+
+    // Toggle View Mode
+    function setView(mode) {
+      activeView = mode;
+      const tblBtn = document.getElementById('btn-view-table');
+      const gridBtn = document.getElementById('btn-view-grid');
+      const tblCont = document.getElementById('view-table-container');
+      const gridCont = document.getElementById('view-grid-container');
+
+      if (mode === 'table') {
+        tblCont.classList.remove('hidden');
+        gridCont.classList.add('hidden');
+        tblBtn.className = "px-2.5 py-1 rounded-md bg-purple-600 text-white font-medium transition";
+        gridBtn.className = "px-2.5 py-1 rounded-md hover:bg-slate-700 transition";
+      } else {
+        tblCont.classList.add('hidden');
+        gridCont.classList.remove('hidden');
+        gridBtn.className = "px-2.5 py-1 rounded-md bg-purple-600 text-white font-medium transition";
+        tblBtn.className = "px-2.5 py-1 rounded-md hover:bg-slate-700 transition";
+      }
+    }
+
+    // Show Detail Modal
+    function showDetail(id) {
+      const food = foods.find(f => f.id === id);
+      if (!food) return;
+
+      const portionFactor = (parseFloat(document.getElementById('portion-weight').value) || 100) / 100;
+
+      document.getElementById('modal-title').innerText = food.name;
+      document.getElementById('modal-category').innerText = food.category;
+
+      const content = document.getElementById('modal-content');
+      content.innerHTML = `
+                <div class="grid grid-cols-2 gap-4 bg-slate-800/50 p-3 rounded-xl border border-slate-700">
+                    <div>
+                        <span class="text-xs text-slate-400">Energie (${Math.round(100 * portionFactor)}g):</span>
+                        <p class="text-xl font-bold font-mono text-amber-400">${Math.round(food.kcal * portionFactor)} kcal</p>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-400">Makronährstoffe:</span>
+                        <p class="font-mono text-xs mt-1">
+                            Eiweiß: <span class="text-emerald-400 font-bold">${(food.protein * portionFactor).toFixed(1)}g</span><br>
+                            Kohlenhydrate: <span class="text-blue-400 font-bold">${(food.carbs * portionFactor).toFixed(1)}g</span><br>
+                            Fett: <span class="text-rose-400 font-bold">${(food.fat * portionFactor).toFixed(1)}g</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <h5 class="font-semibold text-purple-300 border-b border-slate-700 pb-1">TCM & 5-Elemente-Lehre</h5>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-slate-400">Element-Zuordnung:</span>
+                        ${getElementBadgeHTML(food.element)}
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-slate-400">Thermik & Geschmack:</span>
+                        ${getThermikBadgeHTML(food.thermik)}
+                        <span class="text-xs text-slate-200">${food.taste}</span>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-400">Organbezug:</span>
+                        <p class="text-purple-200 font-medium">${food.organs}</p>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <h5 class="font-semibold text-purple-300 border-b border-slate-700 pb-1">Nährwert-Profil</h5>
+                    <p><strong>Vitamine:</strong> ${food.vitamins}</p>
+                    <p><strong>Mineralstoffe:</strong> ${food.minerals}</p>
+                    <p><strong>Cholesterin (pro 100g):</strong> ${food.cholesterol} mg</p>
+                </div>
+
+                <div class="space-y-1 bg-purple-950/30 p-3 rounded-xl border border-purple-800/40">
+                    <h5 class="font-semibold text-purple-300">Gesundheitlicher Nutzen</h5>
+                    <p class="text-slate-300 leading-relaxed text-xs">${food.health}</p>
+                </div>
+            `;
+
+      openModal('modal-detail');
+    }
+
+    // Open/Close Modals
+    function openModal(id) {
+      document.getElementById(id).classList.remove('hidden');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden');
+    }
+
+    // Edit Food Form
+    function editFood(id) {
+      const food = foods.find(f => f.id === id);
+      if (!food) return;
+
+      document.getElementById('form-modal-title').innerText = "Lebensmittel bearbeiten";
+      document.getElementById('food-id').value = food.id;
+      document.getElementById('form-name').value = food.name;
+      document.getElementById('form-category').value = food.category;
+      document.getElementById('form-kcal').value = food.kcal;
+      document.getElementById('form-protein').value = food.protein;
+      document.getElementById('form-carbs').value = food.carbs;
+      document.getElementById('form-fat').value = food.fat;
+      document.getElementById('form-vitamins').value = food.vitamins;
+      document.getElementById('form-minerals').value = food.minerals;
+      document.getElementById('form-element').value = food.element;
+      document.getElementById('form-thermik').value = food.thermik;
+      document.getElementById('form-taste').value = food.taste;
+      document.getElementById('form-organs').value = food.organs;
+      document.getElementById('form-health').value = food.health;
+
+      openModal('modal-add');
+    }
+
+    // Save / Add Food
+    function saveFood(e) {
+      e.preventDefault();
+      const id = document.getElementById('food-id').value;
+      const newFood = {
+        id: id ? parseInt(id) : Date.now(),
+        name: document.getElementById('form-name').value,
+        category: document.getElementById('form-category').value,
+        kcal: parseFloat(document.getElementById('form-kcal').value),
+        protein: parseFloat(document.getElementById('form-protein').value),
+        carbs: parseFloat(document.getElementById('form-carbs').value),
+        fat: parseFloat(document.getElementById('form-fat').value),
+        vitamins: document.getElementById('form-vitamins').value,
+        minerals: document.getElementById('form-minerals').value,
+        cholesterol: 0,
+        element: document.getElementById('form-element').value,
+        thermik: document.getElementById('form-thermik').value,
+        taste: document.getElementById('form-taste').value,
+        organs: document.getElementById('form-organs').value,
+        health: document.getElementById('form-health').value
+      };
+
+      if (id) {
+        const idx = foods.findIndex(f => f.id === parseInt(id));
+        foods[idx] = newFood;
+      } else {
+        foods.push(newFood);
+      }
+
+      persistData();
+      renderData();
+      closeModal('modal-add');
+      document.getElementById('food-form').reset();
+      document.getElementById('food-id').value = '';
+    }
+
+    // Delete Food
+    function deleteFood(id) {
+      if (confirm("Möchtest du dieses Lebensmittel wirklich löschen?")) {
+        foods = foods.filter(f => f.id !== id);
+        persistData();
+        renderData();
+      }
+    }
+
+    // Theme Switcher
+    function setTheme(theme) {
+      document.body.className = `theme-${theme} min-h-screen flex flex-col antialiased selection:bg-purple-500 selection:text-white`;
+      if (theme === 'light') {
+        document.documentElement.classList.remove('dark');
+      } else {
+        document.documentElement.classList.add('dark');
+      }
+    }
+
+    // Fullscreen Toggle
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => alert("Vollbild nicht unterstützt."));
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    // Export JSON
+    function exportJSON() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(foods, null, 2));
+      const dlAnchorElem = document.createElement('a');
+      dlAnchorElem.setAttribute("href", dataStr);
+      dlAnchorElem.setAttribute("download", "lebensmittel_5_elemente.json");
+      dlAnchorElem.click();
+    }
+
+    // Export CSV
+    function exportCSV() {
+      let csvContent = "data:text/csv;charset=utf-8,ID;Name;Kategorie;Kcal;Eiweiß;Carbs;Fett;5-Element;Thermik;Wirkung\n";
+      foods.forEach(f => {
+        csvContent += `${f.id};"${f.name}";"${f.category}";${f.kcal};${f.protein};${f.carbs};${f.fat};"${f.element}";"${f.thermik}";"${f.organs}"\n`;
+      });
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "lebensmittel_daten.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Import JSON
+    function importJSON(event) {
+      const fileReader = new FileReader();
+      fileReader.onload = function(e) {
+        try {
+          const importedData = JSON.parse(e.target.result);
+          if (Array.isArray(importedData)) {
+            foods = importedData;
+            persistData();
+            renderData();
+            alert("Daten erfolgreich importiert!");
+          }
+        } catch (err) {
+          alert("Ungültiges JSON-Format.");
+        }
+      };
+      fileReader.readAsText(event.target.files[0]);
+    }
+
+    // Init App on Window Load
+    window.onload = function() {
+      renderData();
+    };
+  </script>
+</body>
+</html>
