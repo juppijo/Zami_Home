@@ -2603,8 +2603,13 @@
         "icon": "✨"
       },
       {
-        "label": "Vergleich_html.html",
-        "url": "https://juppijo.github.io/WRZT/Vergleich_html.html",
+        "label": "Vergleich_html_cl.html",
+        "url": "https://juppijo.github.io/WRZT/Vergleich_html_cl.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Vergleich_html_g.html",
+        "url": "https://juppijo.github.io/WRZT/Vergleich_html_g.html",
         "icon": "✨"
       },
       {
@@ -4563,8 +4568,18 @@
         "icon": "✨"
       },
       {
+        "label": "Lebensmittel-Lexikon.html",
+        "url": "https://juppijo.github.io/Zami_Home/Lebensmittel-Lexikon.html",
+        "icon": "✨"
+      },
+      {
         "label": "README.md",
         "url": "https://juppijo.github.io/Zami_Home/README.md",
+        "icon": "✨"
+      },
+      {
+        "label": "Tabellen-Editor.html",
+        "url": "https://juppijo.github.io/Zami_Home/Tabellen-Editor.html",
         "icon": "✨"
       },
       {
@@ -4640,6 +4655,16 @@
       {
         "label": "krita_tastatur.html",
         "url": "https://juppijo.github.io/Zami_Home/krita_tastatur.html",
+        "icon": "✨"
+      },
+      {
+        "label": "lebensmittel_5_elemente.json",
+        "url": "https://juppijo.github.io/Zami_Home/lebensmittel_5_elemente.json",
+        "icon": "✨"
+      },
+      {
+        "label": "lebensmittel_nachschlagewerk_pro.html",
+        "url": "https://juppijo.github.io/Zami_Home/lebensmittel_nachschlagewerk_pro.html",
         "icon": "✨"
       },
       {
@@ -4770,6 +4795,11 @@
       {
         "label": "Kopfschmerzen.html",
         "url": "https://juppijo.github.io/zaminia/Kopfschmerzen.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Lebensmittel.html",
+        "url": "https://juppijo.github.io/zaminia/Lebensmittel.html",
         "icon": "✨"
       },
       {
