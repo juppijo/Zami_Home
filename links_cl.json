@@ -333,6 +333,81 @@
         "icon": "✨"
       },
       {
+        "label": "HTML‑Werkstatt/CSS-Style-Editor.html",
+        "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/CSS-Style-Editor.html",
+        "icon": "✨"
+      },
+      {
+        "label": "HTML‑Werkstatt/CSS_Editor.html",
+        "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/CSS_Editor.html",
+        "icon": "✨"
+      },
+      {
+        "label": "HTML‑Werkstatt/Duplicate-Finder.html",
+        "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/Duplicate-Finder.html",
+        "icon": "✨"
+      },
+      {
+        "label": "HTML‑Werkstatt/HTML-Tools/Zaminia_HTML5_Studio.html",
+        "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/HTML-Tools/Zaminia_HTML5_Studio.html",
+        "icon": "✨"
+      },
+      {
+        "label": "HTML‑Werkstatt/HTML-Tools/html_link_box_generator.html",
+        "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/HTML-Tools/html_link_box_generator.html",
+        "icon": "✨"
+      },
+      {
+        "label": "HTML‑Werkstatt/HTML-Tools/prompt.txt",
+        "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/HTML-Tools/prompt.txt",
+        "icon": "✨"
+      },
+      {
+        "label": "HTML‑Werkstatt/Test .html",
+        "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/Test%20.html",
+        "icon": "✨"
+      },
+      {
+        "label": "HTML‑Werkstatt/Test .md",
+        "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/Test%20.md",
+        "icon": "✨"
+      },
+      {
+        "label": "HTML‑Werkstatt/css-werkstatt.html",
+        "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/css-werkstatt.html",
+        "icon": "✨"
+      },
+      {
+        "label": "HTML‑Werkstatt/duplikate-finder-cl.html",
+        "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/duplikate-finder-cl.html",
+        "icon": "✨"
+      },
+      {
+        "label": "HTML‑Werkstatt/icon-creator.html",
+        "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/icon-creator.html",
+        "icon": "✨"
+      },
+      {
+        "label": "HTML‑Werkstatt/image-scaler.html",
+        "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/image-scaler.html",
+        "icon": "✨"
+      },
+      {
+        "label": "HTML‑Werkstatt/index.html",
+        "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "HTML‑Werkstatt/script.js",
+        "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/script.js",
+        "icon": "✨"
+      },
+      {
+        "label": "HTML‑Werkstatt/style.css",
+        "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/style.css",
+        "icon": "✨"
+      },
+      {
         "label": "PDF_Editor/PDF-Struktur-Viewer.html",
         "url": "https://juppijo.github.io/Dashboard/PDF_Editor/PDF-Struktur-Viewer.html",
         "icon": "✨"
@@ -3218,51 +3293,6 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT4/HTML‑Werkstatt/HTML-Tools/Zaminia_HTML5_Studio.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT4/HTML%E2%80%91Werkstatt/HTML-Tools/Zaminia_HTML5_Studio.html",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT4/HTML‑Werkstatt/HTML-Tools/html_link_box_generator.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT4/HTML%E2%80%91Werkstatt/HTML-Tools/html_link_box_generator.html",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT4/HTML‑Werkstatt/HTML-Tools/prompt.txt",
-        "url": "https://juppijo.github.io/WRZT/WRZT4/HTML%E2%80%91Werkstatt/HTML-Tools/prompt.txt",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT4/HTML‑Werkstatt/Test .html",
-        "url": "https://juppijo.github.io/WRZT/WRZT4/HTML%E2%80%91Werkstatt/Test%20.html",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT4/HTML‑Werkstatt/Test .md",
-        "url": "https://juppijo.github.io/WRZT/WRZT4/HTML%E2%80%91Werkstatt/Test%20.md",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT4/HTML‑Werkstatt/image-scaler.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT4/HTML%E2%80%91Werkstatt/image-scaler.html",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT4/HTML‑Werkstatt/index.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT4/HTML%E2%80%91Werkstatt/index.html",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT4/HTML‑Werkstatt/script.js",
-        "url": "https://juppijo.github.io/WRZT/WRZT4/HTML%E2%80%91Werkstatt/script.js",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT4/HTML‑Werkstatt/style.css",
-        "url": "https://juppijo.github.io/WRZT/WRZT4/HTML%E2%80%91Werkstatt/style.css",
-        "icon": "✨"
-      },
-      {
         "label": "WRZT4/Logo4.jpg",
         "url": "https://juppijo.github.io/WRZT/WRZT4/Logo4.jpg",
         "icon": "✨"
@@ -4518,11 +4548,6 @@
         "icon": "✨"
       },
       {
-        "label": "Duplicate-Finder.html",
-        "url": "https://juppijo.github.io/Zami_Home/Duplicate-Finder.html",
-        "icon": "✨"
-      },
-      {
         "label": "GitHub Repository Index - GITALL.csv",
         "url": "https://juppijo.github.io/Zami_Home/GitHub%20Repository%20Index%20-%20GITALL.csv",
         "icon": "✨"
@@ -4613,11 +4638,6 @@
         "icon": "✨"
       },
       {
-        "label": "duplikate-finder-cl.html",
-        "url": "https://juppijo.github.io/Zami_Home/duplikate-finder-cl.html",
-        "icon": "✨"
-      },
-      {
         "label": "favicon.jpg",
         "url": "https://juppijo.github.io/Zami_Home/favicon.jpg",
         "icon": "✨"
@@ -4640,11 +4660,6 @@
       {
         "label": "html2doc/index.html",
         "url": "https://juppijo.github.io/Zami_Home/html2doc/index.html",
-        "icon": "✨"
-      },
-      {
-        "label": "icon-creator.html",
-        "url": "https://juppijo.github.io/Zami_Home/icon-creator.html",
         "icon": "✨"
       },
       {
