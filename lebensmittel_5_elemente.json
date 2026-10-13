@@ -712,5 +712,22 @@
     "taste": "Süß",
     "organs": "Milz, Niere",
     "health": "Glutenfreies Pseudogetreide mit allen Aminosäuren."
+  },
+  {
+    "id": 1791898127749,
+    "name": "Eier (Hühnerei, ganztags)",
+    "category": "Tierisch",
+    "kcal": 155,
+    "protein": 9,
+    "carbs": 380,
+    "fat": 3.1,
+    "vitamins": "\tVitamin A (ca. 160 µg), Vitamin D (ca. 2 µg), Vitamin E, Vitamin B2 (Riboflavin), Vitamin B12",
+    "minerals": "\tEisen, Zink, Calcium, Phosphor, Selen",
+    "cholesterol": 0,
+    "element": "Erde / Wasser",
+    "thermik": "Neutral",
+    "taste": " süß, salzig",
+    "organs": "Muskelaufbau, reich an Antioxidantien",
+    "health": "Positiv: Hervorragende biologische Wertigkeit des Proteins, fördert Muskelaufbau und Sättigung, enthält Cholin (unterstützt Gehirnfunktion und Leberstoffwechsel), reich an Antioxidantien (Lutein/Zeaxanthin für die Augen). Negativ: Hoher Cholesteringehalt kann bei bestimmten Stoffwechseltypen (Hyperrespondern) den LDL-Spiegel ungünstig beeinflussen; Risiko bei mangelnder Hygiene/Frische (Salmonellen). \n\nCholesteringehalt: ca. 370–400 mg pro 100 g; Anteil gesättigter Fettsäuren (ca. 3,1 g) überwiegend ausgeglichen durch ungesättigte Fettsäuren; moderater LDL-Einfluss bei gesunden Menschen (Phospholipide/Lecithin hemmen teilweise die Cholesterinaufnahme)"
   }
 ]
