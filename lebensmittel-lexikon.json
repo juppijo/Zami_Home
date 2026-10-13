@@ -1,0 +1,677 @@
+[
+  {
+    "n": "Apfel (roh)",
+    "k": "52 kcal, 14 g KH, 0,3 g Protein, 0,2 g Fett",
+    "v": "Vitamin C (ca. 5 mg), K1, wenig B-Vitamine",
+    "m": "Kalium (ca. 107 mg), wenig Kalzium, Eisen, Magnesium",
+    "c": "0 mg Cholesterin, sehr fettarm; Pektin kann LDL leicht senken",
+    "t": "Erde, kühl, süß-sauer",
+    "h": "+ Ballaststoffe (Pektin), sättigend, Polyphenole; – Fruktose und Säure bei empfindlichem Magen"
+  },
+  {
+    "n": "Banane",
+    "k": "89 kcal, 23 g KH, 1,1 g Protein, 0,3 g Fett",
+    "v": "B6 (ca. 0,4 mg), C (ca. 9 mg), Folat",
+    "m": "Kalium (ca. 360 mg), Magnesium (ca. 27 mg), Mangan",
+    "c": "0 mg Cholesterin, fettarm; LDL neutral",
+    "t": "Erde, kühl bis kalt, süß",
+    "h": "+ Kalium für Blutdruck und Muskeln, schnelle Energie; – hoher Zuckergehalt"
+  },
+  {
+    "n": "Orange",
+    "k": "47 kcal, 12 g KH, 0,9 g Protein, 0,1 g Fett",
+    "v": "C (ca. 53 mg), Folat, B1",
+    "m": "Kalium (ca. 181 mg), Kalzium (ca. 40 mg)",
+    "c": "0 mg Cholesterin, fettfrei; Pektin und Flavonoide leicht LDL-senkend",
+    "t": "Holz/Erde, kühl, süß-sauer",
+    "h": "+ Immunsystem, bessere Eisenaufnahme; – Säure bei Reflux und für den Zahnschmelz"
+  },
+  {
+    "n": "Blaubeere",
+    "k": "57 kcal, 14 g KH, 0,7 g Protein, 0,3 g Fett",
+    "v": "C (ca. 10 mg), K1 (ca. 19 µg), E",
+    "m": "Mangan (ca. 0,3 mg), Kalium (ca. 77 mg)",
+    "c": "0 mg Cholesterin; Anthocyane reduzieren LDL-Oxidation",
+    "t": "Holz/Wasser, neutral bis kühl, süß-sauer",
+    "h": "+ viele Antioxidantien, gut für Gefäße und Gehirn; – Vitamin K bei Blutverdünnern beachten"
+  },
+  {
+    "n": "Karotte (roh)",
+    "k": "41 kcal, 10 g KH, 0,9 g Protein, 0,2 g Fett",
+    "v": "Beta-Carotin/A (ca. 835 µg RAE), K1, B6",
+    "m": "Kalium (ca. 320 mg), Mangan",
+    "c": "0 mg Cholesterin; lösliche Ballaststoffe leicht LDL-senkend",
+    "t": "Erde, neutral, süß",
+    "h": "+ Augen, Haut, Immunsystem; mit Fett besser aufnehmbar; – sehr hohe Mengen färben die Haut gelblich (harmlos)"
+  },
+  {
+    "n": "Brokkoli",
+    "k": "34 kcal, 7 g KH, 2,8 g Protein, 0,4 g Fett",
+    "v": "C (ca. 89 mg), K1 (ca. 100 µg), Folat (ca. 63 µg)",
+    "m": "Kalium (ca. 316 mg), Kalzium (ca. 47 mg), Eisen (ca. 0,7 mg)",
+    "c": "0 mg Cholesterin; Ballaststoffe binden Gallensäuren, können LDL senken",
+    "t": "Holz/Erde, kühl, süß-bitter",
+    "h": "+ Sulforaphan, Zellschutz, Verdauung; – Blähungen, Jodaufnahme-Hemmung nur bei großen Rohmengen und Jodmangel"
+  },
+  {
+    "n": "Spinat (roh)",
+    "k": "23 kcal, 3,6 g KH, 2,9 g Protein, 0,4 g Fett",
+    "v": "K1 (ca. 480 µg), A (ca. 470 µg RAE), Folat (ca. 194 µg), C",
+    "m": "Eisen (ca. 2,7 mg), Magnesium (ca. 79 mg), Kalium (ca. 558 mg)",
+    "c": "0 mg Cholesterin; neutral bis leicht günstig für LDL",
+    "t": "Holz, kühl, süß",
+    "h": "+ Augen, Knochen, Blutbildung; – Oxalsäure (Nierensteine, hemmt Kalzium und Eisen), Vitamin K bei Blutverdünnern"
+  },
+  {
+    "n": "Tomate",
+    "k": "18 kcal, 3,9 g KH, 0,9 g Protein, 0,2 g Fett",
+    "v": "C (ca. 14 mg), A, K1, Folat",
+    "m": "Kalium (ca. 237 mg), wenig Magnesium und Eisen",
+    "c": "0 mg Cholesterin; Lycopin kann LDL leicht senken",
+    "t": "Holz/Erde, kühl, süß-sauer",
+    "h": "+ Lycopin (Herz-Kreislauf), erhitzt mit Öl besser aufnehmbar; – Säure kann Reflux auslösen"
+  },
+  {
+    "n": "Kartoffel (roh)",
+    "k": "77 kcal, 17 g KH, 2 g Protein, 0,1 g Fett",
+    "v": "C (ca. 20 mg), B6, Folat",
+    "m": "Kalium (ca. 420 mg), Magnesium, Phosphor",
+    "c": "0 mg Cholesterin, fettfrei; Zubereitung bestimmt die Fettqualität",
+    "t": "Erde, neutral, süß",
+    "h": "+ sättigend, kaliumreich, abgekühlt resistente Stärke; – hoher GI bei Püree/Pommes, grüne Stellen enthalten Solanin"
+  },
+  {
+    "n": "Vollkornreis (gekocht)",
+    "k": "112 kcal, 23 g KH, 2,3 g Protein, 0,8 g Fett",
+    "v": "B1, B3 (ca. 1,5 mg), B6",
+    "m": "Magnesium (ca. 43 mg), Mangan (ca. 0,9 mg), Phosphor, Selen",
+    "c": "0 mg Cholesterin; Ballaststoffe leicht LDL-senkend",
+    "t": "Erde, neutral, süß",
+    "h": "+ Ballaststoffe, stabilerer Blutzucker als Weißreis; – Spuren von Arsen, Phytinsäure"
+  },
+  {
+    "n": "Haferflocken",
+    "k": "372 kcal, 59 g KH, 13 g Protein, 7 g Fett",
+    "v": "B1 (ca. 0,5 mg), Folat, B5",
+    "m": "Magnesium (ca. 130 mg), Eisen (ca. 4,5 mg), Zink (ca. 4 mg), Mangan",
+    "c": "0 mg Cholesterin; ca. 1,2 g gesättigt; Beta-Glucan senkt nachweislich LDL",
+    "t": "Erde, warm, süß",
+    "h": "+ Beta-Glucan (Cholesterin, Blutzucker), lange Sättigung; – Gluten-Kontamination möglich, Phytinsäure"
+  },
+  {
+    "n": "Vollkornbrot (Richtwert)",
+    "k": "ca. 220 kcal, 41 g KH, 7 g Protein, 1,5 g Fett",
+    "v": "B1, B3, B6, Folat, E",
+    "m": "Magnesium, Eisen, Zink, Selen, Phosphor",
+    "c": "0 mg Cholesterin; Ballaststoffe leicht LDL-senkend",
+    "t": "Feuer/Erde, kühl bis neutral, süß",
+    "h": "+ Ballaststoffe, Sättigung, Darmgesundheit; – Gluten, Salzgehalt je nach Sorte"
+  },
+  {
+    "n": "Hühnerbrust (gegart)",
+    "k": "165 kcal, 0 g KH, 31 g Protein, 3,6 g Fett",
+    "v": "B3 (ca. 10 mg), B6, B12, B5",
+    "m": "Phosphor (ca. 228 mg), Selen, Kalium, Zink",
+    "c": "ca. 85 mg Cholesterin; ca. 1 g gesättigt; geringer LDL-Einfluss",
+    "t": "Erde, warm, süß",
+    "h": "+ mageres Protein, Muskelerhalt; – Salmonellen bei zu wenig Garen, Panade und Frittieren verschlechtern das Profil"
+  },
+  {
+    "n": "Rindfleisch (mager, roh)",
+    "k": "ca. 130 kcal, 0 g KH, 21 g Protein, 4–5 g Fett",
+    "v": "B12 (ca. 2 µg), B3, B6, B2",
+    "m": "Häm-Eisen (ca. 2,2 mg), Zink (ca. 4,5 mg), Selen, Phosphor",
+    "c": "ca. 60 mg Cholesterin; ca. 2 g gesättigt; fettreiche Stücke erhöhen LDL stärker",
+    "t": "Erde, neutral, süß",
+    "h": "+ gut verfügbares Eisen und Zink, B12; – viel rotes/verarbeitetes Fleisch: erhöhtes Darmkrebsrisiko"
+  },
+  {
+    "n": "Lachs (Zucht, roh)",
+    "k": "208 kcal, 0 g KH, 20 g Protein, 13 g Fett",
+    "v": "D (ca. 11 µg), B12 (ca. 3 µg), B3, B6",
+    "m": "Selen, Kalium, Phosphor, Jod",
+    "c": "ca. 55 mg Cholesterin; ca. 3 g gesättigt, ca. 2 g Omega-3; günstig für Triglyceride",
+    "t": "Erde/Wasser, warm, süß",
+    "h": "+ Herz-Kreislauf, Gehirn, entzündungshemmend; – Schadstoffe (Quecksilber, Dioxine), Parasiten bei Rohverzehr"
+  },
+  {
+    "n": "Hühnerei (ganz)",
+    "k": "143 kcal, 0,7 g KH, 12,6 g Protein, 9,5 g Fett",
+    "v": "D (ca. 2 µg), B12, A, Cholin (ca. 250 mg), B2",
+    "m": "Selen, Eisen (ca. 1,8 mg), Jod, Phosphor, Zink",
+    "c": "ca. 370 mg Cholesterin; ca. 3,1 g gesättigt; LDL-Einfluss meist gering",
+    "t": "Erde, neutral, süß",
+    "h": "+ vollständiges Protein, Cholin, Lutein; – Salmonellen bei Rohverzehr, bei Hypercholesterinämie moderat"
+  },
+  {
+    "n": "Vollmilch (3,5 %)",
+    "k": "64 kcal, 4,8 g KH, 3,3 g Protein, 3,6 g Fett",
+    "v": "B2, B12, A, etwas D",
+    "m": "Kalzium (ca. 120 mg), Phosphor, Kalium, Jod",
+    "c": "ca. 11 mg Cholesterin; ca. 2,3 g gesättigt; kann LDL leicht erhöhen",
+    "t": "Erde, kühl, süß",
+    "h": "+ Kalzium, hochwertiges Protein; – Laktoseintoleranz, Milcheiweißallergie, gesättigte Fette"
+  },
+  {
+    "n": "Naturjoghurt (3,5 %)",
+    "k": "ca. 65 kcal, 4,5 g KH, 3,5 g Protein, 3,5 g Fett",
+    "v": "B2, B12, A, B5",
+    "m": "Kalzium (ca. 120 mg), Phosphor, Kalium, Jod",
+    "c": "ca. 13 mg Cholesterin; ca. 2,3 g gesättigt; LDL gering bis neutral",
+    "t": "Erde, kühl, süß-sauer",
+    "h": "+ Probiotika, Darmflora, oft verträglicher als Milch; – Laktose, gezuckerte Sorten"
+  },
+  {
+    "n": "Gouda (Richtwert)",
+    "k": "ca. 356 kcal, 2 g KH, 25 g Protein, 27 g Fett",
+    "v": "B12, A, B2, K2",
+    "m": "Kalzium (ca. 740 mg), Phosphor, Zink, Natrium (ca. 800 mg)",
+    "c": "ca. 114 mg Cholesterin; ca. 17 g gesättigt; kann LDL erhöhen",
+    "t": "Erde, neutral bis kühl, süß-salzig",
+    "h": "+ sehr kalziumreich, Protein; – viel gesättigtes Fett und Salz, kalorienreich"
+  },
+  {
+    "n": "Linsen (gekocht)",
+    "k": "116 kcal, 20 g KH, 9 g Protein, 0,4 g Fett",
+    "v": "Folat (ca. 181 µg), B1, B6",
+    "m": "Eisen (ca. 3,3 mg), Kalium (ca. 369 mg), Magnesium, Zink",
+    "c": "0 mg Cholesterin; lösliche Ballaststoffe senken LDL",
+    "t": "Erde/Wasser, neutral, süß",
+    "h": "+ Ballaststoffe, pflanzliches Protein, stabiler Blutzucker; – Blähungen, Purine bei Gicht"
+  },
+  {
+    "n": "Mandeln",
+    "k": "579 kcal, 22 g KH (ca. 12 g Ballaststoffe), 21 g Protein, 50 g Fett",
+    "v": "E (ca. 25 mg), B2, B3",
+    "m": "Magnesium (ca. 270 mg), Kalzium (ca. 270 mg), Kalium (ca. 733 mg), Mangan",
+    "c": "0 mg Cholesterin; ca. 4 g gesättigt, überwiegend einfach ungesättigt; LDL-senkend",
+    "t": "Metall, neutral bis leicht warm, süß",
+    "h": "+ Herzgesundheit, Sättigung, Vitamin E; – sehr kalorienreich, Nussallergie, bittere Mandeln mit Blausäure-Vorstufen"
+  },
+  {
+    "n": "Olivenöl (nativ extra)",
+    "k": "884 kcal, 0 g KH, 0 g Protein, 100 g Fett",
+    "v": "E (ca. 14 mg), K1 (ca. 60 µg)",
+    "m": "praktisch keine relevanten Mengen",
+    "c": "0 mg Cholesterin; ca. 14 g gesättigt, 73 g einfach, 11 g mehrfach ungesättigt; senkt LDL im Austausch gegen gesättigte Fette",
+    "t": "Holz, neutral, süß-sauer",
+    "h": "+ Polyphenole, Herz-Kreislauf-Schutz; – sehr energiedicht, Qualitätsverlust bei starkem Erhitzen"
+  },
+  {
+    "n": "Tofu (Natur, Richtwert)",
+    "k": "ca. 125 kcal, 2 g KH, 13 g Protein, 7 g Fett",
+    "v": "Folat, B1, wenig K",
+    "m": "Kalzium (bis ca. 350 mg), Eisen (ca. 2,7 mg), Magnesium, Mangan",
+    "c": "0 mg Cholesterin; ca. 1 g gesättigt; Sojaprotein senkt LDL leicht",
+    "t": "Erde, kühl, süß",
+    "h": "+ vollständiges pflanzliches Protein, Isoflavone; – Sojaallergie, bei Schilddrüsenerkrankung ärztlich abklären"
+  },
+  {
+    "n": "Knoblauch",
+    "k": "149 kcal, 33 g KH, 6,4 g Protein, 0,5 g Fett",
+    "v": "B6 (ca. 1,2 mg), C (ca. 31 mg)",
+    "m": "Mangan (ca. 1,7 mg), Selen, Kalium (ca. 401 mg), Kalzium",
+    "c": "0 mg Cholesterin; Allicin kann LDL und Blutdruck leicht senken",
+    "t": "Metall, heiß, scharf",
+    "h": "+ antimikrobiell, Gefäßschutz; – Mundgeruch, Magenreizung, Blutungsneigung bei hohen Mengen (Blutverdünner)"
+  },
+  {
+    "n": "Avocado",
+    "k": "160 kcal, 9 g KH (ca. 7 g Ballaststoffe), 2 g Protein, 15 g Fett",
+    "v": "K1 (ca. 21 µg), Folat (ca. 81 µg), E, B5, C",
+    "m": "Kalium (ca. 485 mg), Magnesium (ca. 29 mg)",
+    "c": "0 mg Cholesterin; ca. 2 g gesättigt, 10 g einfach ungesättigt; senkt LDL im Austausch gegen gesättigte Fette",
+    "t": "Erde, kühl, süß",
+    "h": "+ Herzgesundheit, Ballaststoffe, bessere Aufnahme fettlöslicher Vitamine; – energiedicht, Latex-Frucht-Syndrom"
+  },
+  {
+    "n": "Salatgurke",
+    "k": "15 kcal, 3,6 g KH, 0,7 g Protein, 0,1 g Fett",
+    "v": "K1 (ca. 16 µg), C (ca. 3 mg)",
+    "m": "Kalium (ca. 147 mg), wenig Magnesium und Kalzium",
+    "c": "0 mg Cholesterin, fettfrei; kein LDL-Einfluss",
+    "t": "Wasser/Erde, kühl bis kalt, süß",
+    "h": "+ wasserreich, kalorienarm, entwässernd; – bei Kälteempfindlichkeit (TCM) in Maßen"
+  },
+  {
+    "n": "Zwiebel",
+    "k": "40 kcal, 9 g KH, 1,1 g Protein, 0,1 g Fett",
+    "v": "C (ca. 7 mg), B6, Folat",
+    "m": "Kalium (ca. 146 mg), Mangan, wenig Kalzium",
+    "c": "0 mg Cholesterin; Quercetin kann LDL leicht günstig beeinflussen",
+    "t": "Metall, warm, scharf",
+    "h": "+ Quercetin, antientzündlich, Präbiotika (Inulin); – Blähungen (FODMAPs), Reizdarm"
+  },
+  {
+    "n": "Birne",
+    "k": "57 kcal, 15 g KH, 0,4 g Protein, 0,1 g Fett",
+    "v": "C (ca. 4 mg), K1 (ca. 4 µg)",
+    "m": "Kalium (ca. 116 mg), Kupfer",
+    "c": "0 mg Cholesterin; Pektin leicht LDL-senkend",
+    "t": "Metall, kühl, süß-sauer",
+    "h": "+ Ballaststoffe, befeuchtend; – Fruktose und Sorbit bei Reizdarm"
+  },
+  {
+    "n": "Erdbeere",
+    "k": "32 kcal, 7,7 g KH, 0,7 g Protein, 0,3 g Fett",
+    "v": "C (ca. 59 mg), Folat (ca. 24 µg)",
+    "m": "Mangan (ca. 0,4 mg), Kalium (ca. 153 mg)",
+    "c": "0 mg Cholesterin, fettarm",
+    "t": "Holz/Erde, kühl, süß-sauer",
+    "h": "+ Antioxidantien, wenig Zucker; – häufige Allergie bzw. Pseudoallergie"
+  },
+  {
+    "n": "Weintraube",
+    "k": "69 kcal, 18 g KH, 0,7 g Protein, 0,2 g Fett",
+    "v": "K1 (ca. 15 µg), C, B6",
+    "m": "Kalium (ca. 191 mg), Kupfer",
+    "c": "0 mg Cholesterin, fettarm",
+    "t": "Erde, neutral, süß-sauer",
+    "h": "+ Polyphenole (Resveratrol in der Schale); – viel Fruchtzucker"
+  },
+  {
+    "n": "Zitrone",
+    "k": "29 kcal, 9 g KH, 1,1 g Protein, 0,3 g Fett",
+    "v": "C (ca. 53 mg), B6",
+    "m": "Kalium (ca. 138 mg), Kalzium",
+    "c": "0 mg Cholesterin, fettarm",
+    "t": "Holz, kühl, sauer",
+    "h": "+ Vitamin C, fördert Eisenaufnahme; – Säure belastet Zahnschmelz und Magen"
+  },
+  {
+    "n": "Kiwi",
+    "k": "61 kcal, 15 g KH, 1,1 g Protein, 0,5 g Fett",
+    "v": "C (ca. 93 mg), K1 (ca. 40 µg), E",
+    "m": "Kalium (ca. 312 mg), Kupfer",
+    "c": "0 mg Cholesterin, fettarm",
+    "t": "Holz/Erde, kalt, süß-sauer",
+    "h": "+ Immunsystem, Verdauung (Actinidin); – Allergie, Latex-Kreuzallergie"
+  },
+  {
+    "n": "Wassermelone",
+    "k": "30 kcal, 7,6 g KH, 0,6 g Protein, 0,2 g Fett",
+    "v": "C (ca. 8 mg), A, Lycopin",
+    "m": "Kalium (ca. 112 mg), Magnesium (ca. 10 mg)",
+    "c": "0 mg Cholesterin, fettfrei",
+    "t": "Wasser, kalt, süß",
+    "h": "+ sehr wasserreich, Lycopin; – hoher GI, bei Kälteempfindlichkeit in Maßen"
+  },
+  {
+    "n": "Paprika (rot)",
+    "k": "31 kcal, 6 g KH, 1 g Protein, 0,3 g Fett",
+    "v": "C (ca. 128 mg), A (ca. 157 µg RAE), B6",
+    "m": "Kalium (ca. 211 mg)",
+    "c": "0 mg Cholesterin, fettarm",
+    "t": "Erde/Feuer, neutral bis warm, süß",
+    "h": "+ sehr viel Vitamin C, Carotinoide; – Nachtschattengewächs, bei Reizmagen manchmal unverträglich"
+  },
+  {
+    "n": "Zucchini",
+    "k": "17 kcal, 3,1 g KH, 1,2 g Protein, 0,3 g Fett",
+    "v": "C (ca. 18 mg), B6, K1",
+    "m": "Kalium (ca. 261 mg), Mangan",
+    "c": "0 mg Cholesterin, fettarm",
+    "t": "Erde, kühl, süß",
+    "h": "+ kalorienarm, gut verträglich; – Bitterstoffe (Cucurbitacine) bei bitterem Geschmack meiden"
+  },
+  {
+    "n": "Blumenkohl",
+    "k": "25 kcal, 5 g KH, 1,9 g Protein, 0,3 g Fett",
+    "v": "C (ca. 48 mg), K1 (ca. 16 µg), Folat (ca. 57 µg)",
+    "m": "Kalium (ca. 299 mg), Mangan",
+    "c": "0 mg Cholesterin, fettarm",
+    "t": "Metall/Erde, neutral, süß",
+    "h": "+ Glucosinolate, kalorienarm; – Blähungen, Purine"
+  },
+  {
+    "n": "Süßkartoffel",
+    "k": "86 kcal, 20 g KH, 1,6 g Protein, 0,1 g Fett",
+    "v": "A (ca. 709 µg RAE), C, B6",
+    "m": "Kalium (ca. 337 mg), Mangan",
+    "c": "0 mg Cholesterin, fettarm",
+    "t": "Erde, neutral, süß",
+    "h": "+ Beta-Carotin, Ballaststoffe; – GI hängt stark von der Zubereitung ab, Oxalat"
+  },
+  {
+    "n": "Kürbis",
+    "k": "26 kcal, 6,5 g KH, 1 g Protein, 0,1 g Fett",
+    "v": "A (ca. 426 µg RAE), C (ca. 9 mg)",
+    "m": "Kalium (ca. 340 mg)",
+    "c": "0 mg Cholesterin, fettfrei",
+    "t": "Erde, warm, süß",
+    "h": "+ Carotinoide, leicht verdaulich; – kaum Nachteile"
+  },
+  {
+    "n": "Rote Bete",
+    "k": "43 kcal, 10 g KH, 1,6 g Protein, 0,2 g Fett",
+    "v": "Folat (ca. 109 µg), C",
+    "m": "Kalium (ca. 325 mg), Mangan",
+    "c": "0 mg Cholesterin, fettarm",
+    "t": "Erde/Wasser, neutral, süß",
+    "h": "+ Nitrat (Blutdruck, Ausdauer), Betalaine; – Oxalat, färbt Urin und Stuhl rot (harmlos)"
+  },
+  {
+    "n": "Weißkohl",
+    "k": "25 kcal, 5,8 g KH, 1,3 g Protein, 0,1 g Fett",
+    "v": "K1 (ca. 76 µg), C (ca. 36 mg), Folat",
+    "m": "Kalium (ca. 170 mg)",
+    "c": "0 mg Cholesterin, fettfrei",
+    "t": "Erde, neutral, süß",
+    "h": "+ Glucosinolate, Vitamin K, Sauerkraut mit Probiotika; – Blähungen"
+  },
+  {
+    "n": "Ingwer (frisch)",
+    "k": "80 kcal, 18 g KH, 1,8 g Protein, 0,8 g Fett",
+    "v": "B6, C (ca. 5 mg)",
+    "m": "Kalium (ca. 415 mg), Magnesium (ca. 43 mg)",
+    "c": "0 mg Cholesterin, fettarm",
+    "t": "Metall, warm, scharf",
+    "h": "+ gegen Übelkeit, verdauungsfördernd; – Magenreizung, bei Blutverdünnern vorsichtig"
+  },
+  {
+    "n": "Champignons",
+    "k": "22 kcal, 3,3 g KH, 3,1 g Protein, 0,3 g Fett",
+    "v": "B2 (ca. 0,4 mg), B3 (ca. 3,6 mg), B5",
+    "m": "Kalium (ca. 318 mg), Selen, Kupfer",
+    "c": "0 mg Cholesterin, fettarm",
+    "t": "Erde, neutral bis kühl, süß",
+    "h": "+ Selen, B-Vitamine, kalorienarm; – Purine, nicht roh in großen Mengen"
+  },
+  {
+    "n": "Aubergine",
+    "k": "25 kcal, 6 g KH, 1 g Protein, 0,2 g Fett",
+    "v": "K1, B6, C",
+    "m": "Kalium (ca. 229 mg), Mangan",
+    "c": "0 mg Cholesterin; saugt beim Braten viel Fett auf",
+    "t": "Holz, kühl, süß",
+    "h": "+ Ballaststoffe, Nasunin in der Schale; – Nachtschattengewächs, Solanin"
+  },
+  {
+    "n": "Quinoa (gekocht)",
+    "k": "120 kcal, 21 g KH, 4,4 g Protein, 1,9 g Fett",
+    "v": "Folat (ca. 42 µg), B2",
+    "m": "Magnesium (ca. 64 mg), Eisen (ca. 1,5 mg), Mangan",
+    "c": "0 mg Cholesterin; überwiegend ungesättigt",
+    "t": "Erde, neutral, süß",
+    "h": "+ vollständiges Protein, glutenfrei; – Saponine (vorher spülen), Oxalat"
+  },
+  {
+    "n": "Kichererbsen (gekocht)",
+    "k": "164 kcal, 27 g KH, 8,9 g Protein, 2,6 g Fett",
+    "v": "Folat (ca. 172 µg), B6, K1",
+    "m": "Eisen (ca. 2,9 mg), Magnesium (ca. 48 mg), Zink (ca. 1,5 mg)",
+    "c": "0 mg Cholesterin; Ballaststoffe senken LDL",
+    "t": "Erde, neutral, süß",
+    "h": "+ Ballaststoffe, pflanzliches Protein, Sättigung; – Blähungen, Purine"
+  },
+  {
+    "n": "Vollkornnudeln (gekocht)",
+    "k": "124 kcal, 25 g KH, 5,3 g Protein, 0,5 g Fett",
+    "v": "B1, B3",
+    "m": "Magnesium, Mangan, Selen",
+    "c": "0 mg Cholesterin, fettarm",
+    "t": "Erde, neutral, süß",
+    "h": "+ Ballaststoffe, lange Sättigung; – Gluten, Portionsgröße beachten"
+  },
+  {
+    "n": "Thunfisch (Dose, im eigenen Saft)",
+    "k": "116 kcal, 0 g KH, 26 g Protein, 1 g Fett",
+    "v": "B12 (ca. 2,2 µg), B3, D",
+    "m": "Selen (ca. 80 µg), Jod, Phosphor",
+    "c": "ca. 40 mg Cholesterin; kaum gesättigte Fette",
+    "t": "Erde, neutral, süß",
+    "h": "+ sehr mageres Protein, Selen; – Quecksilber (nicht täglich), Salzgehalt"
+  },
+  {
+    "n": "Garnelen (gegart)",
+    "k": "99 kcal, 0,2 g KH, 24 g Protein, 0,3 g Fett",
+    "v": "B12 (ca. 1,1 µg), B3",
+    "m": "Selen (ca. 38 µg), Jod, Zink",
+    "c": "ca. 189 mg Cholesterin; sehr wenig gesättigtes Fett",
+    "t": "Wasser, warm, süß-salzig",
+    "h": "+ mageres Protein, Jod; – Krustentier-Allergie, Purine"
+  },
+  {
+    "n": "Schweinefilet (roh)",
+    "k": "120 kcal, 0 g KH, 21 g Protein, 3,5 g Fett",
+    "v": "B1 (ca. 1 mg), B6, B12, B3",
+    "m": "Zink (ca. 2 mg), Selen, Phosphor",
+    "c": "ca. 60 mg Cholesterin; ca. 1,2 g gesättigt",
+    "t": "Wasser, neutral bis kühl, süß-salzig",
+    "h": "+ viel Vitamin B1, mageres Protein; – Purine, Wurstwaren deutlich ungünstiger, durchgaren"
+  },
+  {
+    "n": "Putenbrust (gegart)",
+    "k": "135 kcal, 0 g KH, 30 g Protein, 1 g Fett",
+    "v": "B3 (ca. 11 mg), B6, B12",
+    "m": "Selen (ca. 32 µg), Phosphor, Zink",
+    "c": "ca. 70 mg Cholesterin; wenig gesättigt",
+    "t": "Erde, neutral, süß",
+    "h": "+ sehr mageres Protein; – Aufschnitt oft salzreich, Salmonellen bei zu wenig Garen"
+  },
+  {
+    "n": "Walnüsse",
+    "k": "654 kcal, 14 g KH (ca. 7 g Ballaststoffe), 15 g Protein, 65 g Fett",
+    "v": "B6 (ca. 0,5 mg), Folat (ca. 98 µg), E (Gamma-Tocopherol)",
+    "m": "Magnesium (ca. 158 mg), Kupfer, Mangan",
+    "c": "0 mg Cholesterin; ca. 6 g gesättigt, viel Omega-3 (ALA); LDL-senkend",
+    "t": "Wasser, warm, süß",
+    "h": "+ Herz-Kreislauf, Gehirn; – sehr kalorienreich, Nussallergie"
+  },
+  {
+    "n": "Leinsamen",
+    "k": "534 kcal, 29 g KH (ca. 27 g Ballaststoffe), 18 g Protein, 42 g Fett",
+    "v": "B1 (ca. 1,6 mg), B6",
+    "m": "Magnesium (ca. 392 mg), Phosphor, Mangan",
+    "c": "0 mg Cholesterin; ca. 3,7 g gesättigt, viel Omega-3 (ALA); senkt LDL",
+    "t": "Erde, neutral, süß",
+    "h": "+ Ballaststoffe, Lignane, Omega-3; – geschrotet essen, viel trinken, Blähungen"
+  },
+  {
+    "n": "Chiasamen",
+    "k": "486 kcal, 42 g KH (ca. 34 g Ballaststoffe), 17 g Protein, 31 g Fett",
+    "v": "B1, B3",
+    "m": "Kalzium (ca. 631 mg), Magnesium (ca. 335 mg), Phosphor",
+    "c": "0 mg Cholesterin; viel Omega-3 (ALA)",
+    "t": "Wasser, neutral, süß",
+    "h": "+ Ballaststoffe, Omega-3, Kalzium; – quellen stark, immer eingeweicht und mit Flüssigkeit essen"
+  },
+  {
+    "n": "Kürbiskerne",
+    "k": "559 kcal, 11 g KH, 30 g Protein, 49 g Fett",
+    "v": "K1, B2, E",
+    "m": "Magnesium (ca. 592 mg), Zink (ca. 7,8 mg), Eisen (ca. 8,8 mg)",
+    "c": "0 mg Cholesterin; ca. 8,7 g gesättigt, überwiegend mehrfach ungesättigt",
+    "t": "Wasser, neutral, süß",
+    "h": "+ Magnesium, Zink, Eisen; – sehr kalorienreich"
+  },
+  {
+    "n": "Magerquark",
+    "k": "67 kcal, 4 g KH, 12 g Protein, 0,3 g Fett",
+    "v": "B12 (ca. 0,9 µg), B2",
+    "m": "Kalzium (ca. 100 mg), Phosphor, Jod",
+    "c": "ca. 3 mg Cholesterin; fast fettfrei",
+    "t": "Erde, kühl, süß-sauer",
+    "h": "+ viel Protein, kaum Fett; – Laktose, Milcheiweißallergie"
+  },
+  {
+    "n": "Mozzarella",
+    "k": "254 kcal, 1 g KH, 18 g Protein, 19 g Fett",
+    "v": "B12, A, B2",
+    "m": "Kalzium (ca. 400 mg), Phosphor, Natrium",
+    "c": "ca. 60 mg Cholesterin; ca. 12 g gesättigt; kann LDL erhöhen",
+    "t": "Erde, kühl, süß",
+    "h": "+ Kalzium, Protein; – gesättigte Fette, Salz"
+  },
+  {
+    "n": "Honig",
+    "k": "304 kcal, 82 g KH, 0,3 g Protein, 0 g Fett",
+    "v": "nur Spuren von Vitaminen",
+    "m": "Kalium (ca. 52 mg), Spuren",
+    "c": "0 mg Cholesterin, fettfrei",
+    "t": "Erde, neutral, süß",
+    "h": "+ enthält Enzyme und Polyphenole; – im Grunde Zucker, Karies, nicht für Babys unter 1 Jahr"
+  },
+  {
+    "n": "Dunkle Schokolade (70–85 %)",
+    "k": "598 kcal, 46 g KH (ca. 24 g Zucker, 11 g Ballaststoffe), 7,8 g Protein, 43 g Fett",
+    "v": "B2, E, Spuren K",
+    "m": "Magnesium (ca. 228 mg), Eisen (ca. 12 mg), Kupfer, Mangan",
+    "c": "ca. 3 mg Cholesterin; ca. 24 g gesättigt",
+    "t": "Feuer, warm, süß-bitter",
+    "h": "+ Flavanole, Magnesium; – kalorienreich, Theobromin/Koffein, Spuren von Kadmium und Blei"
+  },
+  {
+    "n": "Butter",
+    "k": "717 kcal, 0,1 g KH, 0,9 g Protein, 81 g Fett",
+    "v": "A (ca. 684 µg RAE), E, K2",
+    "m": "kaum relevante Mengen",
+    "c": "ca. 215 mg Cholesterin; ca. 51 g gesättigt; erhöht LDL",
+    "t": "Erde, warm, süß",
+    "h": "+ Vitamin A, Geschmack; – sehr viel gesättigtes Fett, sparsam verwenden"
+  },
+  {
+    "n": "Goji-Beeren",
+    "k": "349 kcal, 77 g KH, 14,3 g Protein, 0,4 g Fett",
+    "v": "A, C, B2",
+    "m": "Eisen, Zink",
+    "c": "0 mg Cholesterin, fettarm",
+    "t": "Holz/Wasser, neutral, süß-säuerlich; Organe: Niere, Leber, Augen",
+    "h": "+ nährt Leber- und Nieren-Yin, stärkt die Sehkraft; – sehr zuckerreich, bei Blutverdünnern (Cumarine) Rücksprache"
+  },
+  {
+    "n": "Chili",
+    "k": "40 kcal, 8,8 g KH, 1,9 g Protein, 0,4 g Fett",
+    "v": "A, C, E",
+    "m": "Eisen, Kalium",
+    "c": "0 mg Cholesterin, fettarm",
+    "t": "Metall, heiß, scharf; Organe: Herz, Lunge",
+    "h": "+ regt die Blutzirkulation stark an, vertreibt Kälte; – Magen- und Darmreizung, bei Reflux ungünstig"
+  },
+  {
+    "n": "Grüner Tee",
+    "k": "1 kcal, 0 g KH, 0,2 g Protein, 0 g Fett",
+    "v": "C, B2, EGCG",
+    "m": "Mangan, Fluorid",
+    "c": "0 mg Cholesterin, fettfrei",
+    "t": "Feuer, kühl, bitter; Organe: Herz, Magen",
+    "h": "+ klärt Hitze, stärkt den Herz-Geist, antioxidativ; – Koffein, hemmt Eisenaufnahme bei Verzehr zu den Mahlzeiten"
+  },
+  {
+    "n": "Schwarze Bohnen",
+    "k": "341 kcal, 62,4 g KH, 21,6 g Protein, 1,4 g Fett",
+    "v": "B1, Folat",
+    "m": "Magnesium, Eisen, Zink",
+    "c": "0 mg Cholesterin, fettarm; Ballaststoffe senken LDL",
+    "t": "Wasser, neutral, süß; Organe: Niere, Blase",
+    "h": "+ klassisches Tonikum für die Nieren-Essenz, Ballaststoffe; – roh giftig (Lektine), Blähungen, Purine"
+  },
+  {
+    "n": "Zimt",
+    "k": "247 kcal, 81 g KH, 4 g Protein, 1,2 g Fett",
+    "v": "K, C",
+    "m": "Kalzium, Eisen",
+    "c": "0 mg Cholesterin, fettarm",
+    "t": "Feuer/Metall, heiß, scharf-süß; Organe: Herz, Niere, Milz",
+    "h": "+ stärkt das Yang-Feuer, kann den Blutzucker regulieren; – Cassia-Zimt enthält Cumarin, nur kleine Mengen"
+  },
+  {
+    "n": "Kurkuma",
+    "k": "354 kcal, 65 g KH, 7,8 g Protein, 10 g Fett",
+    "v": "C, B6, Curcumin",
+    "m": "Eisen, Mangan",
+    "c": "0 mg Cholesterin",
+    "t": "Feuer, warm, bitter-scharf; Organe: Herz, Leber",
+    "h": "+ entzündungshemmend, bewegt Stagnationen; – Curcumin wird mit Pfeffer und Fett besser aufgenommen, bei Gallensteinen und Blutverdünnern vorsichtig"
+  },
+  {
+    "n": "Shiitake-Pilze",
+    "k": "34 kcal, 6,8 g KH, 2,2 g Protein, 0,5 g Fett",
+    "v": "D, B-Komplex",
+    "m": "Kupfer, Zink",
+    "c": "0 mg Cholesterin, fettarm",
+    "t": "Erde, neutral, süß; Organe: Milz, Magen",
+    "h": "+ immunmodulierend, stärkt das Abwehr-Qi; – nur gegart essen, selten Hautreaktionen"
+  },
+  {
+    "n": "Sesam (schwarz)",
+    "k": "573 kcal, 23,4 g KH, 17,7 g Protein, 49,7 g Fett",
+    "v": "E, B1",
+    "m": "Kalzium, Magnesium, Eisen",
+    "c": "0 mg Cholesterin; überwiegend ungesättigte Fette",
+    "t": "Wasser, neutral, süß; Organe: Niere, Leber",
+    "h": "+ stärkt Knochen, traditionell gegen vorzeitiges Ergrauen; – kalorienreich, Sesamallergie"
+  },
+  {
+    "n": "Fenchel",
+    "k": "31 kcal, 7,3 g KH, 1,2 g Protein, 0,2 g Fett",
+    "v": "C, ätherische Öle",
+    "m": "Kalium, Kalzium",
+    "c": "0 mg Cholesterin, fettarm",
+    "t": "Erde/Metall, warm, süß-scharf; Organe: Magen, Milz",
+    "h": "+ entspannt Blähungen, entkrampft den Bauch; – Allergie (Korbblütler), ätherische Öle in großen Mengen meiden"
+  },
+  {
+    "n": "Cranberry",
+    "k": "46 kcal, 12,2 g KH, 0,4 g Protein, 0,1 g Fett",
+    "v": "C, Proanthocyanidine",
+    "m": "Mangan",
+    "c": "0 mg Cholesterin, fettfrei",
+    "t": "Wasser, kühl, sauer-bitter; Organe: Blase, Niere",
+    "h": "+ schützt die Blase, verhindert Bakterienanhaftung; – Säure, getrocknet oft stark gezuckert, bei Blutverdünnern Rücksprache"
+  },
+  {
+    "n": "Datteln",
+    "k": "282 kcal, 75 g KH, 2,5 g Protein, 0,4 g Fett",
+    "v": "B6, B3",
+    "m": "Kalium, Magnesium",
+    "c": "0 mg Cholesterin, fettarm",
+    "t": "Erde, warm, süß; Organe: Milz, Magen, Herz",
+    "h": "+ schnelle Energie, nährt Qi und Blut, Ballaststoffe; – sehr zuckerreich und kalorienreich, klebt an den Zähnen"
+  },
+  {
+    "n": "Matcha-Pulver",
+    "k": "300 kcal, 40 g KH, 30 g Protein, 5 g Fett",
+    "v": "A, C, E, Catechine",
+    "m": "Kalium, Kalzium",
+    "c": "0 mg Cholesterin, fettarm",
+    "t": "Feuer, kalt, bitter; Organe: Herz, Leber",
+    "h": "+ fokussiert den Geist, viele Antioxidantien; – viel Koffein, Schadstoffgehalt der Qualität beachten"
+  },
+  {
+    "n": "Ziegenkäse",
+    "k": "364 kcal, 0,1 g KH, 22 g Protein, 30 g Fett",
+    "v": "A, B2",
+    "m": "Kalzium, Phosphor",
+    "c": "ca. 79 mg Cholesterin; viel gesättigtes Fett, kann LDL erhöhen",
+    "t": "Feuer, warm, scharf-sauer; Organe: Niere, Herz",
+    "h": "+ oft leichter verträglich als Kuhmilch, wärmend; – kalorien-, fett- und salzreich"
+  },
+  {
+    "n": "Meerrettich",
+    "k": "48 kcal, 11 g KH, 1,2 g Protein, 0,7 g Fett",
+    "v": "C, Senöle",
+    "m": "Kalium, Kalzium",
+    "c": "0 mg Cholesterin, fettarm",
+    "t": "Metall, heiß, scharf; Organe: Lunge, Magen",
+    "h": "+ befreit die Atemwege, löst tiefen Schleim; – reizt Magen und Schleimhäute, nur kleine Mengen"
+  },
+  {
+    "n": "Grapefruit",
+    "k": "42 kcal, 10,7 g KH, 0,8 g Protein, 0,1 g Fett",
+    "v": "C, Naringin",
+    "m": "Kalium",
+    "c": "0 mg Cholesterin, fettfrei",
+    "t": "Holz, kalt, bitter-sauer; Organe: Leber, Magen",
+    "h": "+ regt die Entgiftung an, kann den Blutdruck senken; – Wechselwirkung mit vielen Medikamenten (Statine, Blutdruckmittel), Säure"
+  },
+  {
+    "n": "Eier (Hühnerei, ganztags)",
+    "k": "ca. 155 kcal",
+    "v": "Vitamin A (ca. 160 µg), Vitamin D (ca. 2 µg), Vitamin E, Vitamin B2 (Riboflavin), Vitamin B12",
+    "m": "Eisen, Zink, Calcium, Phosphor, Selen",
+    "c": "Cholesteringehalt: ca. 370–400 mg pro 100 g; Anteil gesättigter Fettsäuren (ca. 3,1 g) überwiegend ausgeglichen durch ungesättigte Fettsäuren; moderater LDL-Einfluss bei gesunden Menschen (Phospholipide/Lecithin hemmen teilweise die Cholesterinaufnahme)",
+    "t": "Element: Erde (Eigelb) / Wasser (Eiweiß); Thermische Wirkung: neutral bis leicht kühlend (Eiweiß kühlend, Eigelb neutral); Geschmack: süß, salzig",
+    "h": "Positiv: Hervorragende biologische Wertigkeit des Proteins, fördert Muskelaufbau und Sättigung, enthält Cholin (unterstützt Gehirnfunktion und Leberstoffwechsel), reich an Antioxidantien (Lutein/Zeaxanthin für die Augen). Negativ: Hoher Cholesteringehalt kann bei bestimmten Stoffwechseltypen (Hyperrespondern) den LDL-Spiegel ungünstig beeinflussen; Risiko bei mangelnder Hygiene/Frische (Salmonellen)."
+  }
+]
