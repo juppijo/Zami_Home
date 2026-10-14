@@ -408,6 +408,11 @@
         "icon": "✨"
       },
       {
+        "label": "HTML‑Werkstatt/js_werkstatt.html",
+        "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/js_werkstatt.html",
+        "icon": "✨"
+      },
+      {
         "label": "HTML‑Werkstatt/script.js",
         "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/script.js",
         "icon": "✨"
@@ -415,6 +420,26 @@
       {
         "label": "HTML‑Werkstatt/style.css",
         "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/style.css",
+        "icon": "✨"
+      },
+      {
+        "label": "PDF_Buch_Konverter_Cl/index.html",
+        "url": "https://juppijo.github.io/Dashboard/PDF_Buch_Konverter_Cl/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "PDF_Buch_Konverter_Cl/script.js",
+        "url": "https://juppijo.github.io/Dashboard/PDF_Buch_Konverter_Cl/script.js",
+        "icon": "✨"
+      },
+      {
+        "label": "PDF_Buch_Konverter_Cl/style.css",
+        "url": "https://juppijo.github.io/Dashboard/PDF_Buch_Konverter_Cl/style.css",
+        "icon": "✨"
+      },
+      {
+        "label": "PDF_Buch_Konverter_G/B_Conv.html",
+        "url": "https://juppijo.github.io/Dashboard/PDF_Buch_Konverter_G/B_Conv.html",
         "icon": "✨"
       },
       {
@@ -445,6 +470,11 @@
       {
         "label": "Test.md",
         "url": "https://juppijo.github.io/Dashboard/Test.md",
+        "icon": "✨"
+      },
+      {
+        "label": "add_page_breaks.py",
+        "url": "https://juppijo.github.io/Dashboard/add_page_breaks.py",
         "icon": "✨"
       },
       {
@@ -490,6 +520,21 @@
       {
         "label": "markdown-editor/style.css",
         "url": "https://juppijo.github.io/Dashboard/markdown-editor/style.css",
+        "icon": "✨"
+      },
+      {
+        "label": "pdf_to_docx_converter.py",
+        "url": "https://juppijo.github.io/Dashboard/pdf_to_docx_converter.py",
+        "icon": "✨"
+      },
+      {
+        "label": "pdf_to_txt_converter.py",
+        "url": "https://juppijo.github.io/Dashboard/pdf_to_txt_converter.py",
+        "icon": "✨"
+      },
+      {
+        "label": "pdf_zu_docx_konverter.html",
+        "url": "https://juppijo.github.io/Dashboard/pdf_zu_docx_konverter.html",
         "icon": "✨"
       },
       {
@@ -4698,6 +4743,11 @@
         "icon": "✨"
       },
       {
+        "label": "lebensmittel-lexikon.json",
+        "url": "https://juppijo.github.io/Zami_Home/lebensmittel-lexikon.json",
+        "icon": "✨"
+      },
+      {
         "label": "lebensmittel_5_elemente.json",
         "url": "https://juppijo.github.io/Zami_Home/lebensmittel_5_elemente.json",
         "icon": "✨"
@@ -5113,6 +5163,16 @@
         "icon": "✨"
       },
       {
+        "label": "Rubik's Cube Lab.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Rubik's%20Cube%20Lab.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Rubik's Tangle + Solver.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Rubik's%20Tangle%20%2B%20Solver.html",
+        "icon": "✨"
+      },
+      {
         "label": "Steinverlegung/2025-11-17_22-07.png",
         "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/2025-11-17_22-07.png",
         "icon": "✨"
@@ -5168,6 +5228,11 @@
         "icon": "✨"
       },
       {
+        "label": "Tangle – Kachelpuzzle mit Solver.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Tangle%20%E2%80%93%20Kachelpuzzle%20mit%20Solver.html",
+        "icon": "✨"
+      },
+      {
         "label": "WT.html",
         "url": "https://juppijo.github.io/ZenZamiSpiele-Co/WT.html",
         "icon": "✨"
@@ -5215,6 +5280,26 @@
       {
         "label": "rettungsmission_erde_escape_game.html",
         "url": "https://juppijo.github.io/ZenZamiSpiele-Co/rettungsmission_erde_escape_game.html",
+        "icon": "✨"
+      },
+      {
+        "label": "rubik_s_tangle_1990_replica.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/rubik_s_tangle_1990_replica.html",
+        "icon": "✨"
+      },
+      {
+        "label": "rubik_s_tangle_puzzle.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/rubik_s_tangle_puzzle.html",
+        "icon": "✨"
+      },
+      {
+        "label": "rubiks_algos.json",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/rubiks_algos.json",
+        "icon": "✨"
+      },
+      {
+        "label": "rubiks_cube.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/rubiks_cube.html",
         "icon": "✨"
       },
       {
