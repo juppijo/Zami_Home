@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Einfache Stoppuhr mit High-Speed Takt-Zähler & PC-Leistung</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .stopwatch-container {
+            background: #ffffff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 420px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        .status {
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .time-display {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-family: monospace;
+        }
+        .tick-display {
+            font-size: 1.1rem;
+            color: #e67e22;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-family: monospace;
+        }
+        .perf-panel {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            color: #495057;
+            display: flex;
+            justify-content: space-around;
+            font-family: monospace;
+        }
+        .perf-item span {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            color: white;
+            transition: background 0.2s;
+        }
+        button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        #startBtn { background-color: #2ecc71; grid-column: span 2; }
+        #startBtn:hover:not(:disabled) { background-color: #27ae60; }
+
+        #pauseBtn { background-color: #f39c12; }
+        #pauseBtn:hover:not(:disabled) { background-color: #d68910; }
+
+        #stopBtn { background-color: #e74c3c; }
+        #stopBtn:hover:not(:disabled) { background-color: #c0392b; }
+
+        #resetBtn { background-color: #95a5a6; }
+        #resetBtn:hover:not(:disabled) { background-color: #7f8c8d; }
+
+        #btn10 { background-color: #3498db; }
+        #btn10:hover:not(:disabled) { background-color: #2980b9; }
+
+        #fullBtn { background-color: #34495e; grid-column: span 2; }
+        #fullBtn:hover { background-color: #2c3e50; }
+
+        .hold-info {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            min-height: 20px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stopwatch-container">
+        <h1>Stoppuhr</h1>
+        <div id="status" class="status">Bereit</div>
+        <div id="display" class="time-display">00:00:00</div>
+        <div id="tickDisplay" class="tick-display">Takt : 0</div>
+        
+        <!-- PC Leistungs-Panel -->
+        <div class="perf-panel">
+            <div class="perf-item">Speed: <span id="perfSpeed">0</span> M/s</div>
+            <div class="perf-item">CPU-Kern: <span id="perfCores">-</span></div>
+            <div class="perf-item">FPS: <span id="perfFps">60</span></div>
+        </div>
+
+        <div class="button-group">
+            <button id="startBtn" onclick="startTimer()">Start</button>
+            <button id="pauseBtn" onclick="pauseTimer()" disabled>Pause</button>
+            <button id="stopBtn" onclick="stopTimer()" disabled>Stopp</button>
+            <button id="resetBtn" onclick="resetTimer()">Reset</button>
+            <button id="btn10" onclick="start10Seconds()">10 Sek.</button>
+            <button id="fullBtn" onclick="toggleFullScreen()">Vollbild</button>
+        </div>
+        <div id="holdInfo" class="hold-info"></div>
+    </div>
+
+    <script>
+        let seconds = 0;
+        let timerInterval = null;
+        let worker = null;
+        let lastN = 0;
+        let state = "idle"; 
+        let isTimedMode = false;
+        let startTime = 0;
+        let elapsedMilliseconds = 0;
+
+        // Hardware-Infos direkt beim Start auslesen (falls verfügbar)
+        if (navigator.hardwareConcurrency) {
+            document.getElementById('perfCores').innerText = navigator.hardwareConcurrency + " Threads";
+        }
+
+        // FPS Messung via requestAnimationFrame
+        let frameCount = 0;
+        let lastFpsUpdate = performance.now();
+        function measureFps() {
+            frameCount++;
+            const now = performance.now();
+            if (now - lastFpsUpdate >= 1000) {
+                document.getElementById('perfFps').innerText = frameCount;
+                frameCount = 0;
+                lastFpsUpdate = now;
+            }
+            requestAnimationFrame(measureFps);
+        }
+        requestAnimationFrame(measureFps);
+
+        // High-Speed Zähl-Engine im Web Worker mit Leistungs-Messung (Millionen Takte pro Sekunde)
+        const workerCode = `
+            let n = 0, running = false, lastCheck = 0, lastNCount = 0;
+            const ch = new MessageChannel();
+            ch.port1.onmessage = loop;
+
+            function loop() {
+                if (!running) return;
+                const t0 = performance.now();
+                let t = t0;
+                do {
+                    for (let i = 0; i < 20000; i++) n++;
+                    t = performance.now();
+                } while (t - t0 < 8);
+                
+                // Berechne Millionen Takte pro Sekunde (M/s)
+                if (t - lastCheck >= 500) {
+                    const diffN = n - lastNCount;
+                    const diffTime = (t - lastCheck) / 1000;
+                    const mps = (diffN / diffTime / 1000000).toFixed(1);
+                    lastCheck = t;
+                    lastNCount = n;
+                    postMessage({ n: n, mps: mps });
+                } else {
+                    postMessage({ n: n });
+                }
+
+                ch.port2.postMessage(0);
+            }
+
+            onmessage = function(ev) {
+                if (ev.data.cmd === 'start') {
+                    if (running) return;
+                    running = true;
+                    lastCheck = performance.now();
+                    lastNCount = n;
+                    ch.port2.postMessage(0);
+                } else if (ev.data.cmd === 'halt') {
+                    running = false;
+                    postMessage({ held: true, n: n });
+                } else if (ev.data.cmd === 'reset') {
+                    running = false;
+                    n = 0;
+                }
+            };
+        `;
+
+        const blob = new Blob([workerCode], { type: 'application/javascript' });
+        const workerUrl = URL.createObjectURL(blob);
+
+        if (window.Worker) {
+            worker = new Worker(workerUrl);
+            worker.onmessage = function(e) {
+                if (e.data.held) return;
+                lastN = e.data.n;
+                document.getElementById('tickDisplay').innerText = `Takt : ${e.data.n.toLocaleString("de-DE")}`;
+                if (e.data.mps) {
+                    document.getElementById('perfSpeed').innerText = e.data.mps;
+                }
+            };
+        }
+
+        function formatTime(totalSeconds) {
+            const hrs = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+            const mins = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+            const secs = String(totalSeconds % 60).padStart(2, '0');
+            return `${hrs}:${mins}:${secs}`;
+        }
+
+        function updateUIState() {
+            const statusNames = { idle: "Bereit", running: "Läuft", paused: "Pausiert", stopped: "Gestoppt" };
+            document.getElementById('status').innerText = statusNames[state] + (isTimedMode ? " (10 Sek.)" : "");
+            
+            document.getElementById('startBtn').disabled = (state === "running");
+            document.getElementById('startBtn').innerText = (state === "paused") ? "Weiter" : "Start";
+            document.getElementById('pauseBtn').disabled = (state !== "running");
+            document.getElementById('stopBtn').disabled = (state !== "running" && state !== "paused");
+            document.getElementById('btn10').disabled = (state === "running");
+        }
+
+        function clearAllData() {
+            if (worker) worker.postMessage({ cmd: 'reset' });
+            lastN = 0;
+            seconds = 0;
+            elapsedMilliseconds = 0;
+            isTimedMode = false;
+            document.getElementById('display').innerText = "00:00:00";
+            document.getElementById('tickDisplay').innerText = "Takt : 0";
+            document.getElementById('perfSpeed').innerText = "0";
+            document.getElementById('holdInfo').innerText = "";
+        }
+
+        function startTimer() {
+            if (state === "stopped") {
+                clearAllData();
+            }
+
+            state = "running";
+            updateUIState();
+
+            startTime = performance.now() - elapsedMilliseconds;
+          
+            timerInterval = setInterval(() => {
+                const currentElapsed = performance.now() - startTime;
+              
+                if (isTimedMode){
+                	document.getElementById('holdInfo').innerText = "10 Sec Activ ! stand: "+ 	lastN.toLocaleString("de-DE");
+                }
+                    
+                if (isTimedMode && currentElapsed >= 10000) {
+                    stopTimer10Sec();
+                    return;
+                }
+
+                seconds = Math.floor(currentElapsed / 1000);
+                document.getElementById('display').innerText = formatTime(seconds);
+              	document.getElementById('holdInfo').innerText = "10 Sec Activ = " + isTimedMode + " ! stand: " + 	lastN.toLocaleString("de-DE");
+              
+              
+            }, 30);
+
+            if (worker) {
+                worker.postMessage({ cmd: 'start' });
+            }
+        }
+
+        function pauseTimer() {
+            if (state !== "running") return;
+            clearInterval(timerInterval);
+            timerInterval = null;
+            elapsedMilliseconds = performance.now() - startTime;
+            state = "paused";
+            updateUIState();
+            if (worker) {
+                worker.postMessage({ cmd: 'halt' });
+            }
+            document.getElementById('holdInfo').innerText = "Stand bei Pause: " + lastN.toLocaleString("de-DE");
+        }
+
+        function stopTimer() {
+            if (state !== "running" && state !== "paused") return;
+            clearInterval(timerInterval);
+            timerInterval = null;
+            state = "stopped";
+            updateUIState();
+            if (worker) {
+                worker.postMessage({ cmd: 'halt' });
+            }
+            document.getElementById('holdInfo').innerText = "Stand bei Stopp: " + lastN.toLocaleString("de-DE");
+        }
+
+        function stopTimer10Sec() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            seconds = 10;
+            document.getElementById('display').innerText = formatTime(seconds);
+            state = "stopped";
+            updateUIState();
+            if (worker) {
+                worker.postMessage({ cmd: 'halt' });
+            }
+            document.getElementById('holdInfo').innerText = "10 Sek. erreicht – Stand: " + lastN.toLocaleString("de-DE");
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            state = "idle";
+            clearAllData();
+            updateUIState();
+        }
+
+        function start10Seconds() {
+            if (state === "running") return;
+          	state = "idle";
+            clearAllData();
+            isTimedMode = true;
+            startTimer();
+        }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {});
+                document.getElementById('fullBtn').innerText = "Vollbild aus";
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                    document.getElementById('fullBtn').innerText = "Vollbild";
+                }
+            }
+        }
+
+        updateUIState();
+    </script>
+
+</body>
+</html>
