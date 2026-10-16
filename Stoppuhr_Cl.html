@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stoppuhr</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0c0a;
+    --surface: #17150f;
+    --border: #3a3320;
+    --text: #efe6cf;
+    --muted: #8f8668;
+    --gold: #d4a937;
+    --gold-strong: #f0c24d;
+    --on-gold: #1a1405;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #faf6ea; --surface: #fffdf6; --border: #dccfa6;
+      --text: #2a2410; --muted: #7a6f4c; --gold: #a67c00; --gold-strong: #8a6500; --on-gold: #fffdf6;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #faf6ea; --surface: #fffdf6; --border: #dccfa6;
+    --text: #2a2410; --muted: #7a6f4c; --gold: #a67c00; --gold-strong: #8a6500; --on-gold: #fffdf6;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    margin: 0; min-height: 100vh; background: var(--bg); color: var(--text);
+    font-family: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+    display: flex; align-items: center; justify-content: center; padding: 20px;
+  }
+  .card {
+    width: 100%; max-width: 420px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 16px; padding: 28px 22px; text-align: center;
+  }
+  .status { font-size: 13px; letter-spacing: .25em; text-transform: uppercase; color: var(--muted); }
+  .status.run { color: var(--gold-strong); }
+  .time {
+    font-family: "Bebas Neue", Impact, "Arial Narrow", sans-serif;
+    font-size: clamp(72px, 22vw, 104px); line-height: 1; color: var(--gold);
+    font-variant-numeric: tabular-nums; margin: 6px 0 2px;
+  }
+  .time small { font-size: .4em; color: var(--muted); }
+  .secs { font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 24px 0; }
+  button {
+    font-family: "Bebas Neue", Impact, sans-serif; font-size: 24px; letter-spacing: .08em;
+    padding: 12px 0; border-radius: 10px; cursor: pointer;
+    border: 1px solid var(--gold); background: transparent; color: var(--gold);
+  }
+  button.primary { background: var(--gold); color: var(--on-gold); }
+  button:hover:not(:disabled) { filter: brightness(1.15); }
+  button:disabled { opacity: .3; cursor: not-allowed; }
+  .ticks { border-top: 1px solid var(--border); padding-top: 18px; }
+  .label { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+  .count {
+    font-family: "Bebas Neue", Impact, sans-serif; font-size: clamp(34px, 10vw, 48px);
+    color: var(--text); font-variant-numeric: tabular-nums; word-break: break-all;
+  }
+  .hold { min-height: 20px; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .log { list-style: none; margin: 10px 0 0; padding: 0; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .log li { display: flex; justify-content: space-between; padding: 3px 0; }
+  .info { border-top: 1px solid var(--border); margin-top: 18px; padding-top: 18px; text-align: left; }
+  .speed { font-family: "Bebas Neue", Impact, sans-serif; font-size: 26px; letter-spacing: .06em; color: var(--gold-strong); font-variant-numeric: tabular-nums; }
+  .info .label { text-align: center; margin-bottom: 10px; }
+  .info dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; margin: 0; font-size: 14px; }
+  .info dt { color: var(--muted); }
+  .info dd { margin: 0; text-align: right; color: var(--text); font-variant-numeric: tabular-nums; word-break: break-word; }
+  .info dd.live { color: var(--gold-strong); }
+  .info .note { margin-top: 10px; font-size: 11px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="status" id="status">Bereit</div>
+  <div class="time" id="time">00:00<small>.0</small></div>
+  <div class="secs" id="secs">0 Sekunden</div>
+
+  <div class="buttons">
+    <button class="primary" id="btnStart">Start</button>
+    <button id="btnPause" disabled>Pause</button>
+    <button id="btnStop" disabled>Stopp</button>
+    <button id="btnReset">Reset</button>
+    <button id="btn10">10 Sek.</button>
+    <button id="btnFull">Vollbild</button>
+  </div>
+
+  <div class="ticks">
+    <div class="label">Takte (n++) bei voller Sekunde</div>
+    <div class="count" id="count">0</div>
+    <div class="speed" id="speed">0.0 M/s</div>
+    <div class="hold" id="hold"></div>
+    <ul class="log" id="log"></ul>
+  </div>
+
+  <div class="info">
+    <div class="label">PC-Info &amp; Leistung</div>
+    <dl id="info"></dl>
+    <div class="note">Browser geben aus Datenschutzgründen nur grobe Werte preis.</div>
+  </div>
+</main>
+
+<script>
+/* Zähl-Engine: läuft so schnell wie möglich (n++), gibt bei jeder vollen Sekunde
+   (nur Laufzeit, ohne Pausen) den Zählerstand aus. Läuft im Worker, sonst im Hauptthread. */
+function makeEngine(post) {
+  let n = 0, running = false, elapsed = 0, last = 0, secDone = 0, limit = 0;
+  const ch = new MessageChannel();
+  ch.port1.onmessage = loop;
+  function loop() {
+    if (!running) return;
+    const t0 = performance.now();
+    let t = t0;
+    do {
+      for (let i = 0; i < 20000; i++) n++;
+      t = performance.now();
+    } while (t - t0 < 8 && (!limit || elapsed + (t - last) < limit));
+    elapsed += t - last; last = t;
+    let done = false;
+    if (limit && elapsed >= limit) { elapsed = limit; done = true; running = false; }
+    const s = Math.floor(elapsed / 1000);
+    if (s > secDone || done) { if (s > secDone) secDone = s; post({ sec: s, n: n, done: done }); }
+    if (!done) ch.port2.postMessage(0);
+  }
+  return {
+    start(l) { if (running) return; limit = l || 0; running = true; last = performance.now(); ch.port2.postMessage(0); },
+    halt() { if (running) { elapsed += performance.now() - last; running = false; } post({ held: true, n: n }); },
+    reset() { running = false; n = 0; elapsed = 0; secDone = 0; limit = 0; }
+  };
+}
+
+const $ = id => document.getElementById(id);
+const fmt = v => v.toLocaleString("de-DE");
+let engine, worker = null;
+
+function onEngineMsg(m) {
+  if (m.held) { $("hold").textContent = "Stand bei Pause/Stopp: " + fmt(m.n); return; }
+  $("count").textContent = fmt(m.n);
+  $("hold").textContent = "";
+  const li = document.createElement("li");
+  const prev = lastN; lastN = m.n;
+  const rate = $("iRate");
+  if (m.sec > 0) {
+    const txt = ((m.n - prev) / 1e6).toFixed(1) + " M/s";
+    $("speed").textContent = txt;
+    if (rate) rate.textContent = txt;
+  }
+  li.innerHTML = "<span>" + m.sec + " s</span><span>" + fmt(m.n) + "</span>";
+  const log = $("log"); log.prepend(li);
+  while (log.children.length > 5) log.lastChild.remove();
+  if (m.done) finishTimed(m.sec);
+}
+let lastN = 0;
+
+try {
+  const src = "const e=(" + makeEngine.toString() + ")(m=>postMessage(m));onmessage=ev=>e[ev.data.cmd](ev.data.arg);";
+  worker = new Worker(URL.createObjectURL(new Blob([src], { type: "text/javascript" })));
+  worker.onmessage = ev => onEngineMsg(ev.data);
+  worker.onerror = () => { worker = null; engine = makeEngine(onEngineMsg); };
+  engine = { start: l => worker.postMessage({ cmd: "start", arg: l }), halt: () => worker.postMessage({ cmd: "halt" }), reset: () => worker.postMessage({ cmd: "reset" }) };
+} catch (err) {
+  worker = null; engine = makeEngine(onEngineMsg);
+}
+
+/* Stoppuhr-Anzeige */
+let state = "idle"; // idle | running | paused | stopped
+let elapsed = 0, startT = 0, raf = 0, runLimit = 0;
+
+function render() {
+  let total = elapsed + (state === "running" ? performance.now() - startT : 0);
+  if (runLimit && total > runLimit) total = runLimit;
+  const s = Math.floor(total / 1000);
+  const mm = String(Math.floor(s / 60)).padStart(2, "0");
+  const ss = String(s % 60).padStart(2, "0");
+  $("time").innerHTML = mm + ":" + ss + "<small>." + Math.floor((total % 1000) / 100) + "</small>";
+  $("secs").textContent = s + (s === 1 ? " Sekunde" : " Sekunden");
+  if (state === "running") raf = requestAnimationFrame(render);
+}
+
+function setUI() {
+  const names = { idle: "Bereit", running: "Läuft", paused: "Pausiert", stopped: "Gestoppt" };
+  $("status").textContent = names[state] + (runLimit ? " · 10 s" : "");
+  $("status").classList.toggle("run", state === "running");
+  $("btnStart").disabled = state === "running";
+  $("btn10").disabled = state === "running";
+  $("btnPause").disabled = state !== "running";
+  $("btnStop").disabled = state !== "running" && state !== "paused";
+  $("btnStart").textContent = state === "paused" ? "Weiter" : "Start";
+}
+
+function clearAll() {
+  engine.reset(); lastN = 0; elapsed = 0;
+  $("count").textContent = "0"; $("hold").textContent = ""; $("log").innerHTML = "";
+  $("speed").textContent = "0.0 M/s";
+  if ($("iRate")) $("iRate").textContent = "–";
+}
+
+$("btnStart").onclick = () => {
+  if (state === "stopped") { clearAll(); state = "idle"; }
+  if (state === "idle") { clearAll(); runLimit = 0; }
+  startT = performance.now(); state = "running";
+  engine.start(runLimit); setUI(); render();
+};
+$("btnPause").onclick = () => {
+  elapsed += performance.now() - startT; state = "paused";
+  cancelAnimationFrame(raf); engine.halt(); setUI(); render();
+};
+$("btnStop").onclick = () => {
+  if (state === "running") elapsed += performance.now() - startT;
+  state = "stopped"; cancelAnimationFrame(raf); engine.halt(); setUI(); render();
+};
+$("btnReset").onclick = () => {
+  cancelAnimationFrame(raf); state = "idle"; runLimit = 0; clearAll(); setUI(); render();
+};
+
+/* Exakt 10 Sekunden: Lauf startet bei null und stoppt automatisch */
+$("btn10").onclick = () => {
+  if (state === "running") return;
+  cancelAnimationFrame(raf);
+  clearAll(); runLimit = 10000;
+  startT = performance.now(); state = "running";
+  engine.start(runLimit); setUI(); render();
+};
+function finishTimed(sec) {
+  cancelAnimationFrame(raf);
+  elapsed = sec * 1000; state = "stopped";
+  setUI(); render();
+}
+
+/* Vollbild */
+$("btnFull").onclick = () => {
+  try {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else document.documentElement.requestFullscreen();
+  } catch (err) {}
+};
+document.addEventListener("fullscreenchange", () => {
+  $("btnFull").textContent = document.fullscreenElement ? "Beenden" : "Vollbild";
+});
+setUI();
+
+/* PC-Info */
+(function () {
+  const items = [
+    ["Takte pro Sekunde", "iRate", true], ["Bildrate (FPS)", "iFps", true], ["JS-Speicher", "iHeap", true],
+    ["CPU-Kerne", "iCores"], ["Arbeitsspeicher", "iRam"], ["Grafik", "iGpu"], ["Bildschirm", "iScr"],
+    ["System", "iSys"], ["Netzwerk", "iNet"], ["Akku", "iBat"]
+  ];
+  const dl = $("info");
+  items.forEach(([label, id, live]) => {
+    const dt = document.createElement("dt"); dt.textContent = label;
+    const dd = document.createElement("dd"); dd.id = id; dd.textContent = "–";
+    if (live) dd.className = "live";
+    dl.append(dt, dd);
+  });
+  const set = (id, v) => { $(id).textContent = v; };
+  const nav = navigator;
+
+  set("iCores", nav.hardwareConcurrency ? nav.hardwareConcurrency + " logische Kerne" : "nicht verfügbar");
+  set("iRam", nav.deviceMemory ? "ca. " + nav.deviceMemory + " GB (Browser-Wert, max. 8)" : "nicht verfügbar");
+  set("iScr", screen.width + "×" + screen.height + " px @ " + (window.devicePixelRatio || 1) + "x");
+
+  let sys = (nav.userAgentData && nav.userAgentData.platform) || nav.platform || "unbekannt";
+  if (nav.userAgentData && nav.userAgentData.brands) {
+    const b = nav.userAgentData.brands.filter(x => !/not.?a.?brand/i.test(x.brand)).pop();
+    if (b) sys += " · " + b.brand + " " + b.version;
+  }
+  set("iSys", sys);
+
+  try {
+    const gl = document.createElement("canvas").getContext("webgl");
+    const ext = gl && gl.getExtension("WEBGL_debug_renderer_info");
+    set("iGpu", gl ? (ext ? gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER)) : "nicht verfügbar");
+  } catch (e) { set("iGpu", "nicht verfügbar"); }
+
+  const c = nav.connection;
+  set("iNet", (nav.onLine ? "online" : "offline") + (c && c.effectiveType ? ", " + c.effectiveType + (c.downlink ? ", ~" + c.downlink + " Mbit/s" : "") : ""));
+
+  if (nav.getBattery) {
+    nav.getBattery().then(b => set("iBat", Math.round(b.level * 100) + " %" + (b.charging ? " (lädt)" : "")))
+      .catch(() => set("iBat", "nicht verfügbar"));
+  } else set("iBat", "nicht verfügbar");
+
+  /* Live: FPS und JS-Speicher */
+  let frames = 0, t0 = performance.now();
+  function fpsLoop(t) {
+    frames++;
+    if (t - t0 >= 500) {
+      set("iFps", Math.round(frames * 1000 / (t - t0)) + " FPS");
+      frames = 0; t0 = t;
+      const pm = performance.memory;
+      set("iHeap", pm ? (pm.usedJSHeapSize / 1048576).toFixed(1) + " MB" : "nicht verfügbar");
+    }
+    requestAnimationFrame(fpsLoop);
+  }
+  requestAnimationFrame(fpsLoop);
+})();
+</script>
+</body>
+</html>
