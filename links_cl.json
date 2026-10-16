@@ -4673,6 +4673,16 @@
         "icon": "✨"
       },
       {
+        "label": "StoppUhr.html",
+        "url": "https://juppijo.github.io/Zami_Home/StoppUhr.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Stoppuhr_Cl.html",
+        "url": "https://juppijo.github.io/Zami_Home/Stoppuhr_Cl.html",
+        "icon": "✨"
+      },
+      {
         "label": "Tabellen-Editor.html",
         "url": "https://juppijo.github.io/Zami_Home/Tabellen-Editor.html",
         "icon": "✨"
@@ -5295,6 +5305,11 @@
       {
         "label": "rubiks_algos.json",
         "url": "https://juppijo.github.io/ZenZamiSpiele-Co/rubiks_algos.json",
+        "icon": "✨"
+      },
+      {
+        "label": "rubiks_algos_cl.json",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/rubiks_algos_cl.json",
         "icon": "✨"
       },
       {
