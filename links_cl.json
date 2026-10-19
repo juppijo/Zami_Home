@@ -1938,6 +1938,16 @@
         "icon": "✨"
       },
       {
+        "label": "MathPad_Export.json",
+        "url": "https://juppijo.github.io/Rechner/MathPad_Export.json",
+        "icon": "✨"
+      },
+      {
+        "label": "Mathe-Notizbuch.html",
+        "url": "https://juppijo.github.io/Rechner/Mathe-Notizbuch.html",
+        "icon": "✨"
+      },
+      {
         "label": "Mathematische-Formelsammlung-Kompakt.html",
         "url": "https://juppijo.github.io/Rechner/Mathematische-Formelsammlung-Kompakt.html",
         "icon": "✨"
@@ -2125,6 +2135,11 @@
       {
         "label": "mathe_spickzettel_kompakt.html",
         "url": "https://juppijo.github.io/Rechner/mathe_spickzettel_kompakt.html",
+        "icon": "✨"
+      },
+      {
+        "label": "mathematik_notiz_app.html",
+        "url": "https://juppijo.github.io/Rechner/mathematik_notiz_app.html",
         "icon": "✨"
       },
       {
@@ -3630,6 +3645,11 @@
       {
         "label": "WRZT_O/3Rmin.html",
         "url": "https://juppijo.github.io/WRZT/WRZT_O/3Rmin.html",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT_O/4×4 Cube Lab.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT_O/4%C3%974%20Cube%20Lab.html",
         "icon": "✨"
       },
       {
@@ -5160,6 +5180,21 @@
       {
         "label": "2×2 Cube Lab.html",
         "url": "https://juppijo.github.io/ZenZamiSpiele-Co/2%C3%972%20Cube%20Lab.html",
+        "icon": "✨"
+      },
+      {
+        "label": "3D-Apfelmännchen.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/3D-Apfelm%C3%A4nnchen.html",
+        "icon": "✨"
+      },
+      {
+        "label": "3d_2d_apfelm_nnchen_visualizer.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/3d_2d_apfelm_nnchen_visualizer.html",
+        "icon": "✨"
+      },
+      {
+        "label": "4_4_Cube_Lab.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/4_4_Cube_Lab.html",
         "icon": "✨"
       },
       {
