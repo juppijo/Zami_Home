@@ -3648,11 +3648,6 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT_O/4×4 Cube Lab.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT_O/4%C3%974%20Cube%20Lab.html",
-        "icon": "✨"
-      },
-      {
         "label": "WRZT_O/Elektrodynamische-Kopplung.html",
         "url": "https://juppijo.github.io/WRZT/WRZT_O/Elektrodynamische-Kopplung.html",
         "icon": "✨"
@@ -4200,6 +4195,16 @@
       {
         "label": "Markdown-HTML-Konverter.html",
         "url": "https://juppijo.github.io/Zami_Buecher/Markdown-HTML-Konverter.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Mirjam_ha-Magdalit/Mirjam_Foto_Link.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/Mirjam_ha-Magdalit/Mirjam_Foto_Link.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Mirjam_ha-Magdalit/Mirjam_ha-Magdalit.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/Mirjam_ha-Magdalit/Mirjam_ha-Magdalit.html",
         "icon": "✨"
       },
       {
@@ -5198,6 +5203,26 @@
         "icon": "✨"
       },
       {
+        "label": "4_4_Cube_Lab_S.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/4_4_Cube_Lab_S.html",
+        "icon": "✨"
+      },
+      {
+        "label": "4x4_cube_input.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/4x4_cube_input.html",
+        "icon": "✨"
+      },
+      {
+        "label": "4x4_rubiks_cube_state.json",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/4x4_rubiks_cube_state.json",
+        "icon": "✨"
+      },
+      {
+        "label": "4×4 Würfel-Solver.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/4%C3%974%20W%C3%BCrfel-Solver.html",
+        "icon": "✨"
+      },
+      {
         "label": "Escapespiel-Erde.html",
         "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Escapespiel-Erde.html",
         "icon": "✨"
@@ -5240,6 +5265,11 @@
       {
         "label": "Rubik's Tangle + Solver.html",
         "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Rubik's%20Tangle%20%2B%20Solver.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Solver_Cl.json",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Solver_Cl.json",
         "icon": "✨"
       },
       {
@@ -5378,8 +5408,18 @@
         "icon": "✨"
       },
       {
+        "label": "rubiks_algos_cl2.json",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/rubiks_algos_cl2.json",
+        "icon": "✨"
+      },
+      {
         "label": "rubiks_cube.html",
         "url": "https://juppijo.github.io/ZenZamiSpiele-Co/rubiks_cube.html",
+        "icon": "✨"
+      },
+      {
+        "label": "rubiks_solver.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/rubiks_solver.html",
         "icon": "✨"
       },
       {
