@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jupp's Link Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0d0d14;--bg2:#12121c;--bg3:#1a1a28;--bg4:#222234;
+      --text:#e2e2f0;--text2:#8888aa;--border:#252538;
+      --shadow:rgba(0,0,0,.6);--modal:#161624;--input:#0d0d18;
+      --hh:56px;--fh:42px;--r:8px;
+    }
+    [data-theme=light]{
+      --bg:#eeeef8;--bg2:#fff;--bg3:#e4e4f2;--bg4:#d8d8ec;
+      --text:#141428;--text2:#5a5a78;--border:#cccce0;
+      --shadow:rgba(0,0,0,.1);--modal:#f6f6ff;--input:#ededf8;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--text);font-size:12px;transition:background .25s,color .25s}
+    
+    /* ── HEADER ─────────────────────────────────────── */
+    #topbar{
+      position:sticky;top:0;z-index:200;
+      height:var(--hh);background:var(--bg2);
+      border-bottom:1px solid var(--border);
+      display:flex;align-items:center;gap:8px;padding:0 14px;
+    }
+    .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;letter-spacing:-.5px;white-space:nowrap;user-select:none}
+    .logo b{color:#818cf8}
+    .srchw{flex:1;max-width:360px;position:relative}
+    .srchw input{
+      width:100%;background:var(--input);border:1px solid var(--border);
+      border-radius:6px;padding:5px 10px 5px 28px;
+      color:var(--text);font-family:'DM Mono',monospace;font-size:11px;outline:none;
+      transition:border-color .15s;
+    }
+    .srchw input:focus{border-color:#818cf8}
+    .srchw input::placeholder{color:var(--text2)}
+    .srchw::before{content:'⌕';position:absolute;left:8px;top:50%;transform:translateY(-50%);color:var(--text2);font-size:14px;pointer-events:none}
+    #statsBar{font-size:10px;color:var(--text2);white-space:nowrap}
+    .topbtns{display:flex;gap:5px;margin-left:auto;flex-shrink:0}
+    .ib{
+      background:var(--bg3);border:1px solid var(--border);border-radius:6px;
+      padding:4px 8px;cursor:pointer;color:var(--text2);font-size:13px;
+      line-height:1;transition:all .15s;display:flex;align-items:center;gap:4px;
+    }
+    .ib:hover{color:var(--text);border-color:#818cf8}
+    .ib .t{font-size:10px;font-family:'DM Mono',monospace}
+    .ib.green{color:#4ade80;border-color:rgba(74,222,128,.3)}
+    .ib.green:hover{border-color:#4ade80}
+    .ib.blue{color:#38bdf8;border-color:rgba(56,189,248,.3)}
+    .ib.blue:hover{border-color:#38bdf8}
+    .ib.red{color:#ef4444;border-color:rgba(239,68,68,.2)}
+    .ib.red:hover{border-color:#ef4444}
+    .btn-new{background:#818cf8;color:#fff;border:none;border-radius:6px;padding:4px 10px;font-size:10px;font-family:'DM Mono',monospace;cursor:pointer;transition:background .15s;white-space:nowrap}
+    .btn-new:hover{background:#6366f1}
+    
+    /* ── FILTER BAR ──────────────────────────────────── */
+    #filterbar{
+      position:sticky;top:var(--hh);z-index:190;
+      height:var(--fh);background:var(--bg2);
+      border-bottom:1px solid var(--border);
+      display:flex;align-items:center;gap:6px;
+      padding:0 14px;overflow-x:auto;
+    }
+    #filterbar::-webkit-scrollbar{height:3px}
+    #filterbar::-webkit-scrollbar-thumb{background:var(--border)}
+    .fsep{width:1px;height:18px;background:var(--border);flex-shrink:0}
+    .ftoggle{
+      border:1px solid var(--border);border-radius:5px;
+      padding:3px 9px;cursor:pointer;font-size:10px;
+      background:var(--bg3);color:var(--text2);
+      white-space:nowrap;transition:all .15s;flex-shrink:0;
+      font-family:'DM Mono',monospace;
+    }
+    .ftoggle:hover{border-color:#818cf8;color:var(--text)}
+    .ftoggle.on{background:#818cf8;color:#fff;border-color:#818cf8}
+    .flag-dot{
+      display:inline-block;width:10px;height:10px;border-radius:50%;
+      border:2px solid transparent;cursor:pointer;flex-shrink:0;
+      transition:all .15s;
+    }
+    .flag-dot.on{border-color:var(--text)!important}
+    .flag-dot:hover{transform:scale(1.3)}
+    .ftag{
+      border:1px solid var(--border);border-radius:4px;
+      padding:2px 7px;cursor:pointer;font-size:9px;
+      background:var(--bg3);color:var(--text2);
+      white-space:nowrap;transition:all .15s;flex-shrink:0;
+    }
+    .ftag:hover{border-color:#818cf8;color:var(--text)}
+    .ftag.on{background:#818cf8;color:#fff;border-color:#818cf8}
+    .flbl{font-size:9px;color:var(--text2);white-space:nowrap;flex-shrink:0}
+    
+    /* ── MAIN ────────────────────────────────────────── */
+    #main{padding:16px 16px 40px;max-width:1800px;margin:0 auto}
+    
+    /* ── CATEGORY ────────────────────────────────────── */
+    .cats{margin-bottom:20px}
+    .cats.drag-over-cat > .cat-hdr{background:rgba(129,140,248,.08)!important;border-radius:var(--r)}
+    .cat-hdr{
+      display:flex;align-items:center;gap:7px;
+      margin-bottom:0;padding:6px 4px;
+      border-bottom:2px solid var(--cc,#818cf8);
+      cursor:pointer;user-select:none;
+      transition:background .15s;border-radius:var(--r) var(--r) 0 0;
+    }
+    .cat-hdr:hover{background:rgba(128,128,200,.04)}
+    .drag-handle{color:var(--text2);font-size:12px;cursor:grab;padding:0 2px;flex-shrink:0}
+    .drag-handle:active{cursor:grabbing}
+    .cat-ico{font-size:16px;line-height:1;flex-shrink:0}
+    .cat-name{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--cc,#818cf8)}
+    .cat-count{font-size:9px;color:var(--text2);background:var(--bg3);padding:1px 6px;border-radius:10px}
+    .cat-arrow{font-size:11px;color:var(--text2);transition:transform .2s;flex-shrink:0}
+    .cats.collapsed .cat-arrow{transform:rotate(-90deg)}
+    .cats.collapsed .cat-grid{display:none}
+    .cat-actions{margin-left:auto;display:flex;gap:5px}
+    .cat-btn{
+      border-radius:4px;padding:2px 8px;font-size:9px;cursor:pointer;
+      font-family:'DM Mono',monospace;transition:all .15s;
+    }
+    .cat-btn-add{background:transparent;border:1px solid var(--cc,#818cf8);color:var(--cc,#818cf8)}
+    .cat-btn-add:hover{background:var(--cc,#818cf8);color:#0d0d14}
+    .cat-btn-del{background:transparent;border:1px solid var(--border);color:var(--text2)}
+    .cat-btn-del:hover{border-color:#ef4444;color:#ef4444}
+    
+    /* ── CARD GRID ───────────────────────────────────── */
+    .cat-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
+      gap:6px;padding-top:8px;
+    }
+    .cat-grid.drag-over-grid{
+      outline:2px dashed var(--cc,#818cf8);
+      outline-offset:3px;border-radius:var(--r);
+    }
+    
+    /* ── CARD ────────────────────────────────────────── */
+    .card{
+      position:relative;
+      background: color-mix(in srgb, var(--cc, #818cf8) 70%, black);
+      border:1px solid var(--border);
+      border-left:3px solid var(--cc,#818cf8);
+      border-radius:var(--r);
+      padding:8px 9px 8px 10px;
+      cursor:pointer;
+      display:flex;flex-direction:column;gap:3px;
+      min-height:54px;overflow:hidden;
+      transition:transform .12s,box-shadow .12s,border-color .12s,opacity .2s;
+    }
+    .card::after{content:'';position:absolute;inset:0;background:var(--cc,#818cf8);opacity:0;transition:opacity .12s;pointer-events:none}
+    .card:hover{border-color:var(--cc,#818cf8);transform:translateY(-1px);box-shadow:0 4px 18px var(--shadow)}
+    .card:hover::after{opacity:.04}
+    .card.drag-source{opacity:.4;transform:scale(.97)}
+    .card.drag-over{outline:2px solid var(--cc,#818cf8);outline-offset:2px}
+    .card.hidden-card{opacity:.35}
+    .card.hidden-card::before{content:'👁';position:absolute;top:3px;left:3px;font-size:9px;opacity:.7}
+    /* indicators */
+    .card-flag{position:absolute;top:5px;right:5px;width:7px;height:7px;border-radius:50%;z-index:1}
+    .card-fav{position:absolute;top:5px;right:15px;font-size:9px;z-index:1;opacity:.8}
+    /* content */
+    .card-ico{font-size:24px;line-height:1}
+    .card-lbl{font-size:10.5px;color:var(--text);word-break:break-word;line-height:1.3;padding-right:14px}
+    .card-comment{font-size:9px;color:rgba(255,255,255,0.75);font-style:italic;word-break:break-word;margin-top:1px;line-height:1.2}
+    .card-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:2px}
+    .ctag{font-size:8px;background:var(--bg4);color:var(--text2);border-radius:3px;padding:1px 4px}
+    /* hover buttons */
+    .card-acts{
+      position:absolute;bottom:5px;right:5px;
+      display:flex;gap:3px;opacity:0;transition:opacity .12s;z-index:2;
+    }
+    .card:hover .card-acts{opacity:1}
+    .card-act{
+      background:var(--bg3);border:1px solid var(--border);border-radius:3px;
+      padding:2px 5px;font-size:9px;cursor:pointer;color:var(--text2);
+      font-family:'DM Mono',monospace;transition:all .12s;
+    }
+    .card-act:hover{color:var(--text);border-color:#818cf8}
+    
+    /* ── MODALS ──────────────────────────────────────── */
+    .ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:500;align-items:center;justify-content:center;backdrop-filter:blur(5px)}
+    .ov.on{display:flex}
+    .modal{background:var(--modal);border:1px solid var(--border);border-radius:12px;padding:22px;min-width:340px;max-width:460px;width:92%;box-shadow:0 24px 70px rgba(0,0,0,.5);animation:mIn .2s ease}
+    @keyframes mIn{from{transform:scale(.95) translateY(8px);opacity:0}to{transform:none;opacity:1}}
+    .modal h3{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:14px;color:var(--text)}
+    .fg{margin-bottom:10px}
+    .fg label{display:block;font-size:9px;color:var(--text2);margin-bottom:3px;text-transform:uppercase;letter-spacing:.6px}
+    .fg input,.fg select,.fg textarea{
+      width:100%;background:var(--input);border:1px solid var(--border);
+      border-radius:5px;padding:7px 9px;color:var(--text);
+      font-family:'DM Mono',monospace;font-size:11px;outline:none;
+      transition:border-color .15s;
+    }
+    .fg textarea{resize:vertical;min-height:40px}
+    .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:#818cf8}
+    .fg select option{background:var(--modal)}
+    .fg input[type=color]{height:32px;cursor:pointer;padding:2px 5px}
+    .fg-row{display:flex;gap:8px;align-items:center}
+    .fg-row label{margin-bottom:0;white-space:nowrap}
+    /* flag selector in modal */
+    .flag-sel{display:flex;gap:8px;align-items:center;margin-top:4px}
+    .flag-opt{width:14px;height:14px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .15s;flex-shrink:0}
+    .flag-opt:hover{transform:scale(1.3)}
+    .flag-opt.sel{border-color:white!important}
+    /* fav toggle */
+    .fav-toggle{
+      display:flex;align-items:center;gap:6px;cursor:pointer;
+      font-size:10px;color:var(--text2);padding:5px 9px;
+      background:var(--bg3);border:1px solid var(--border);border-radius:5px;
+      transition:all .15s;user-select:none;
+    }
+    .fav-toggle:hover{border-color:#fbbf24;color:var(--text)}
+    .fav-toggle.on{border-color:#fbbf24;color:#fbbf24;background:rgba(251,191,36,.1)}
+    /* hide toggle */
+    .hide-toggle{
+      display:flex;align-items:center;gap:6px;cursor:pointer;
+      font-size:10px;color:var(--text2);padding:5px 9px;
+      background:var(--bg3);border:1px solid var(--border);border-radius:5px;
+      transition:all .15s;user-select:none;
+    }
+    .hide-toggle:hover{border-color:#818cf8;color:var(--text)}
+    .hide-toggle.on{border-color:#818cf8;color:#818cf8;background:rgba(129,140,248,.1)}
+    /* modal actions */
+    .mact{display:flex;gap:7px;margin-top:16px;justify-content:flex-end;flex-wrap:wrap}
+    .mprim{background:#818cf8;color:#fff;border:none;border-radius:5px;padding:7px 14px;font-size:11px;font-family:'DM Mono',monospace;cursor:pointer;transition:background .15s}
+    .mprim:hover{background:#6366f1}
+    .mcanc{background:var(--bg3);color:var(--text2);border:1px solid var(--border);border-radius:5px;padding:7px 14px;font-size:11px;font-family:'DM Mono',monospace;cursor:pointer;transition:all .15s}
+    .mcanc:hover{color:var(--text)}
+    .mdang{background:transparent;color:#ef4444;border:1px solid #ef4444;border-radius:5px;padding:7px 14px;font-size:11px;font-family:'DM Mono',monospace;cursor:pointer;transition:all .15s;margin-right:auto}
+    .mdang:hover{background:#ef4444;color:#fff}
+    
+    /* ── TOAST ───────────────────────────────────────── */
+    .toast{position:fixed;bottom:18px;right:18px;background:var(--bg3);border:1px solid #818cf8;color:var(--text);border-radius:7px;padding:8px 14px;font-size:11px;z-index:999;transform:translateY(60px);opacity:0;transition:all .3s cubic-bezier(.34,1.56,.64,1);pointer-events:none;font-family:'DM Mono',monospace}
+    .toast.on{transform:none;opacity:1}
+    
+    /* ── SCROLLBAR ───────────────────────────────────── */
+    ::-webkit-scrollbar{width:5px;height:5px}
+    ::-webkit-scrollbar-track{background:var(--bg)}
+    ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+    ::-webkit-scrollbar-thumb:hover{background:#444}
+    
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media(max-width:640px){
+      #topbar{padding:0 8px;gap:5px}
+      #statsBar{display:none}
+      #main{padding:10px 10px 30px}
+      .cat-grid{grid-template-columns:repeat(auto-fill,minmax(115px,1fr))}
+      .ib .t{display:none}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div id="topbar">
+    <div class="logo">L<b>H</b></div>
+    <div class="srchw">
+      <input id="qinput" type="text" placeholder="Suchen …" autocomplete="off" oninput="applyFilters()">
+    </div>
+    <span id="statsBar"></span>
+    <div class="topbtns">
+      <button class="btn-new" onclick="openAddCat()">＋ Kategorie</button>
+      <button class="ib" onclick="openAddLink()" title="Link hinzufügen">＋ <span class="t">Link</span></button>
+      <button class="ib" id="filterToggleBtn" onclick="toggleFilterBar()" title="Filter">⊟ <span class="t">Filter</span></button>
+      <button class="ib" onclick="toggleTheme()" id="themeBtn" title="Hell/Dunkel">☀️</button>
+      <button class="ib" onclick="toggleFS()" id="fsBtn" title="Vollbild">⛶</button>
+      <button class="ib green" onclick="triggerLoad()" title="JSON laden">↑ <span class="t">Laden</span></button>
+      <button class="ib blue" onclick="doSave()" title="JSON speichern">↓ <span class="t">Speichern</span></button>
+      <button class="ib red" onclick="doReset()" title="Zurücksetzen">↺</button>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div id="filterbar" style="display:none">
+    <span class="flbl">Filter:</span>
+    <button class="ftoggle" id="fFav" onclick="toggleF('fav')">⭐ Favoriten</button>
+    <button class="ftoggle" id="fHidden" onclick="toggleF('hidden')">👁 Versteckte</button>
+    <div class="fsep"></div>
+    <span class="flbl">Flag:</span>
+    <span class="flag-dot" id="fd-red" style="background:#ef4444" title="Rot" onclick="toggleFlag('red')"></span>
+    <span class="flag-dot" id="fd-yellow" style="background:#fbbf24" title="Gelb" onclick="toggleFlag('yellow')"></span>
+    <span class="flag-dot" id="fd-green" style="background:#4ade80" title="Grün" onclick="toggleFlag('green')"></span>
+    <span class="flag-dot" id="fd-blue" style="background:#38bdf8" title="Blau" onclick="toggleFlag('blue')"></span>
+    <span class="flag-dot" id="fd-purple" style="background:#a78bfa" title="Lila" onclick="toggleFlag('purple')"></span>
+    <span class="flag-dot" id="fd-orange" style="background:#f97316" title="Orange" onclick="toggleFlag('orange')"></span>
+    <div class="fsep"></div>
+    <span class="flbl">Typ:</span>
+    <button class="ftoggle" id="ft-html" onclick="toggleType('html')">🌐 html</button>
+    <button class="ftoggle" id="ft-js" onclick="toggleType('js')">⚡ js</button>
+    <button class="ftoggle" id="ft-css" onclick="toggleType('css')">🎨 css</button>
+    <button class="ftoggle" id="ft-json" onclick="toggleType('json')">📋 json</button>
+    <button class="ftoggle" id="ft-md" onclick="toggleType('md')">📝 md</button>
+    <button class="ftoggle" id="ft-py" onclick="toggleType('py')">🐍 py</button>
+    <button class="ftoggle" id="ft-img" onclick="toggleType('img')">🖼 img</button>
+    <button class="ftoggle" id="ft-media" onclick="toggleType('media')">🎵 media</button>
+    <button class="ftoggle" id="ft-pdf" onclick="toggleType('pdf')">📄 pdf</button>
+    <div class="fsep"></div>
+    <span class="flbl">Tags:</span>
+    <div id="tagChips" style="display:flex;gap:4px;flex-shrink:0"></div>
+    <button class="ftoggle" onclick="clearFilters()" style="margin-left:8px;border-color:#ef4444;color:#ef4444">✕ Reset</button>
+  </div>
+
+  <div id="main"></div>
+
+  <!-- Edit Modal -->
+  <div class="ov" id="editMod" onclick="bgClose(event,'editMod')">
+    <div class="modal">
+      <h3>✏️ Link bearbeiten</h3>
+      <div class="fg"><label>Icon (Emoji)</label><input id="eIco" maxlength="8" placeholder="✨"></div>
+      <div class="fg"><label>Label</label><input id="eLbl"></div>
+      <div class="fg"><label>URL</label><input id="eUrl"></div>
+      <div class="fg"><label>Kommentar</label><input id="eComment" placeholder="Optionaler Kommentar"></div>
+      <div class="fg-row" style="margin-bottom:10px">
+        <div class="fg" style="flex:1;margin-bottom:0">
+          <label>Kategorie</label>
+          <select id="eCat"></select>
+        </div>
+      </div>
+      <div class="fg-row" style="gap:10px;margin-bottom:10px">
+        <div class="fav-toggle" id="eFavTgl" onclick="toggleEditFav()">⭐ Favorit</div>
+        <div class="hide-toggle" id="eHideTgl" onclick="toggleEditHide()">👁 Verstecken</div>
+      </div>
+      <div class="fg">
+        <label>Flag-Farbe</label>
+        <div class="flag-sel">
+          <span class="flag-opt" id="fo-none" style="background:var(--bg4);border-color:var(--border)" onclick="setEditFlag(null)" title="Kein Flag">✕</span>
+          <span class="flag-opt" id="fo-red" style="background:#ef4444" onclick="setEditFlag('red')"></span>
+          <span class="flag-opt" id="fo-yellow" style="background:#fbbf24" onclick="setEditFlag('yellow')"></span>
+          <span class="flag-opt" id="fo-green" style="background:#4ade80" onclick="setEditFlag('green')"></span>
+          <span class="flag-opt" id="fo-blue" style="background:#38bdf8" onclick="setEditFlag('blue')"></span>
+          <span class="flag-opt" id="fo-purple" style="background:#a78bfa" onclick="setEditFlag('purple')"></span>
+          <span class="flag-opt" id="fo-orange" style="background:#f97316" onclick="setEditFlag('orange')"></span>
+        </div>
+      </div>
+      <div class="fg">
+        <label>Tags (kommagetrennt)</label>
+        <input id="eTags" placeholder="formeln, buch, neu …">
+      </div>
+      <div class="mact">
+        <button class="mdang" onclick="doDeleteLink()">🗑 Löschen</button>
+        <button class="mcanc" onclick="closeOv('editMod')">Abbrechen</button>
+        <button class="mprim" onclick="saveEdit()">Speichern</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Link Modal -->
+  <div class="ov" id="addLinkMod" onclick="bgClose(event,'addLinkMod')">
+    <div class="modal">
+      <h3>➕ Link hinzufügen</h3>
+      <div class="fg"><label>Kategorie</label><select id="alCat"></select></div>
+      <div class="fg"><label>Icon</label><input id="alIco" maxlength="8" placeholder="✨"></div>
+      <div class="fg"><label>Label</label><input id="alLbl" placeholder="mein-tool.html"></div>
+      <div class="fg"><label>URL</label><input id="alUrl" placeholder="https://…"></div>
+      <div class="fg"><label>Kommentar</label><input id="alComment" placeholder="Optionaler Kommentar"></div>
+      <div class="fg"><label>Tags</label><input id="alTags" placeholder="optional, kommagetrennt"></div>
+      <div class="mact">
+        <button class="mcanc" onclick="closeOv('addLinkMod')">Abbrechen</button>
+        <button class="mprim" onclick="saveAddLink()">Hinzufügen</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Category Modal -->
+  <div class="ov" id="addCatMod" onclick="bgClose(event,'addCatMod')">
+    <div class="modal">
+      <h3>📁 Neue Kategorie</h3>
+      <div class="fg"><label>Name</label><input id="ncName" placeholder="MeineKategorie"></div>
+      <div class="fg"><label>Icon</label><input id="ncIco" maxlength="4" placeholder="📁"></div>
+      <div class="fg"><label>Farbe</label><input type="color" id="ncColor" value="#818cf8"></div>
+      <div class="mact">
+        <button class="mcanc" onclick="closeOv('addCatMod')">Abbrechen</button>
+        <button class="mprim" onclick="saveAddCat()">Erstellen</button>
+      </div>
+    </div>
+  </div>
+
+  <input type="file" id="fileInp" accept=".json" style="display:none" onchange="loadFile(event)">
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ── EMBEDDED DEFAULT DATA ─────────────────────────────────────────────────
+    const DFLT = [{
+      "title": "Autogenes-Training",
+      "links": [{
+        "icon": "✨",
+        "label": "autogenes-training-app_Cl.html",
+        "url": "https://juppijo.github.io/Autogenes-Training/autogenes-training-app_Cl.html",
+        "fav": false,
+        "flag": null,
+        "tags": []
+      }, {
+        "icon": "✨",
+        "label": "4_4_Cube_Lab.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/4_4_Cube_Lab.html",
+        "fav": true,
+        "flag": null,
+        "tags": []
+      }]
+    }];
+
+    // ── CATEGORY THEMES ───────────────────────────────────────────────────────
+    const CTHEME = {
+      'Autogenes-Training': { icon: '🧘', color: '#2dd4bf' },
+      'Dashboard': { icon: '📊', color: '#60a5fa' },
+      'ESP32-S3': { icon: '🔧', color: '#f97316' },
+      'Garten': { icon: '🌿', color: '#4ade80' },
+      'Logik_des_Universums': { icon: '🌌', color: '#c084fc' },
+      'Musik_Zami': { icon: '🎵', color: '#f472b6' },
+      'Rechner': { icon: '🔢', color: '#38bdf8' },
+      'robbie': { icon: '🤖', color: '#fde047' },
+      'TaiChi': { icon: '☯️', color: '#86efac' },
+      'TNH': { icon: '🌬️', color: '#fb923c' },
+      'WRZT': { icon: '⚛️', color: '#818cf8' },
+      'WRZT_Theorie': { icon: '📐', color: '#e879f9' },
+      'Zami_Buecher': { icon: '📚', color: '#f9a8d4' },
+      'Zami_Home': { icon: '🏠', color: '#7dd3fc' },
+      'zaminia': { icon: '🌟', color: '#f87171' },
+      'Zaminia-Zen-Theme': { icon: '🎋', color: '#fbbf24' },
+      'ZenZamiSpiele-Co': { icon: '🎮', color: '#a3e635' },
+    };
+
+    const FLAG_C = { red: '#ef4444', yellow: '#fbbf24', green: '#4ade80', blue: '#38bdf8', purple: '#a78bfa', orange: '#f97316' };
+
+    const EXT_MAP = {
+      html:'html', htm:'html', js:'js', ts:'js', mjs:'js', css:'css', json:'json',
+      md:'md', txt:'md', py:'py', jpg:'img', jpeg:'img', png:'img', gif:'img',
+      svg:'img', webp:'img', ico:'img', bmp:'img', mp3:'media', wav:'media',
+      ogg:'media', mp4:'media', mkv:'media', avi:'media', mid:'media', pdf:'pdf',
+      docx:'office', doc:'office', xlsx:'office', xls:'office', pptx:'office',
+      ppt:'office', ino:'code', h:'code', c:'code', cpp:'code', php:'code'
+    };
+    const TYPE_ICO = { html:'🌐', js:'⚡', css:'🎨', json:'📋', md:'📝', py:'🐍', img:'🖼', media:'🎵', pdf:'📄', office:'📊', code:'🔩', other:'📎' };
+
+    // ── STATE ─────────────────────────────────────────────────────────────────
+    const LS_D = 'lh_data_v3', LS_T = 'lh_cat_theme', LS_THEME = 'lh_theme';
+    let data = [];
+    let catMeta = {};
+    let F = { q:'', fav:false, hidden:false, flags:new Set(), types:new Set(), tags:new Set() };
+    let editState = null;
+    let editFav = false, editHide = false, editFlag = null;
+    let drag = null;
+    let filterOpen = false;
+
+    // ── HELPERS ───────────────────────────────────────────────────────────────
+    function getExt(label) { const m = label.match(/\.([^./\\]+)$/); return m ? m[1].toLowerCase() : ''; }
+    function getType(label) { return EXT_MAP[getExt(label)] || 'other'; }
+    function getCatMeta(title) {
+      const m = catMeta[title];
+      const d = CTHEME[title] || { icon: '📁', color: '#818cf8' };
+      return { icon: m?.icon || d.icon, color: m?.color || d.color, collapsed: m?.collapsed || false };
+    }
+    function shortLabel(label) {
+      const p = label.split('/');
+      let n = p[p.length - 1];
+      if (n.length > 30) n = n.slice(0, 28) + '…';
+      return n;
+    }
+    function prefix(label) {
+      const p = label.split('/');
+      return p.length > 1 ? p.slice(0, -1).join('/') + '/ ' : '';
+    }
+    function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    function escA(s) { return String(s).replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+
+    function allTags() {
+      const s = new Set();
+      data.forEach(c => c.links.forEach(l => (l.tags || []).forEach(t => s.add(t))));
+      return [...s].sort();
+    }
+
+    function matchesFilter(link, cat) {
+      const q = F.q.toLowerCase();
+      if (q && !link.label.toLowerCase().includes(q) && !link.url.toLowerCase().includes(q) && !cat.title.toLowerCase().includes(q) && !(link.tags || []).some(t => t.toLowerCase().includes(q)) && !(link.comment && link.comment.toLowerCase().includes(q))) return false;
+      if (F.fav && !link.fav) return false;
+      if (!F.hidden && link.hidden) return false;
+      if (F.flags.size > 0 && !F.flags.has(link.flag)) return false;
+      if (F.types.size > 0 && !F.types.has(getType(link.label))) return false;
+      if (F.tags.size > 0 && ![...(link.tags || [])].some(t => F.tags.has(t))) return false;
+      return true;
+    }
+
+    // ── LOAD/SAVE ─────────────────────────────────────────────────────────────
+    function loadData() {
+      try {
+        const s = localStorage.getItem(LS_D);
+        data = s ? JSON.parse(s) : JSON.parse(JSON.stringify(DFLT));
+      } catch (e) { data = JSON.parse(JSON.stringify(DFLT)); }
+      try {
+        const s = localStorage.getItem(LS_T);
+        catMeta = s ? JSON.parse(s) : {};
+      } catch (e) { catMeta = {}; }
+    }
+
+    function saveData() {
+      localStorage.setItem(LS_D, JSON.stringify(data));
+      localStorage.setItem(LS_T, JSON.stringify(catMeta));
+    }
+
+    function triggerLoad() {
+      document.getElementById('fileInp').value = '';
+      document.getElementById('fileInp').click();
+    }
+
+    function loadFile(e) {
+      const f = e.target.files[0];
+      if (!f) return;
+      const r = new FileReader();
+      r.onload = ev => {
+        try {
+          const p = JSON.parse(ev.target.result);
+          if (!Array.isArray(p)) throw new Error('Kein Array');
+          p.forEach(c => { if (!c.links) c.links = []; });
+          data = p;
+          saveData();
+          render();
+          showToast(`✅ "${f.name}" geladen — ${data.length} Kategorien`);
+        } catch (err) { showToast('❌ ' + err.message); }
+      };
+      r.readAsText(f, 'UTF-8');
+    }
+
+    function doSave() {
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'links_cl.json';
+      a.click();
+      showToast('💾 links_cl.json gespeichert');
+    }
+
+    function doReset() {
+      if (!confirm('Alles zurücksetzen auf Original?')) return;
+      localStorage.removeItem(LS_D);
+      localStorage.removeItem(LS_T);
+      data = JSON.parse(JSON.stringify(DFLT));
+      catMeta = {};
+      saveData();
+      render();
+      showToast('↺ Zurückgesetzt');
+    }
+
+    // ── RENDER ────────────────────────────────────────────────────────────────
+    function render() {
+      renderTagChips();
+      const main = document.getElementById('main');
+      main.innerHTML = '';
+      let totalCats = 0, totalLinks = 0, visLinks = 0;
+      const q = F.q;
+
+      data.forEach((cat, ci) => {
+        const { icon, color, collapsed } = getCatMeta(cat.title);
+        const cards = cat.links.map((link, li) => {
+          if (!matchesFilter(link, cat)) return null;
+          visLinks++; totalLinks++;
+          const type = getType(link.label);
+          const ico = (link.icon && link.icon !== '✨') ? link.icon : TYPE_ICO[type] || '📎';
+          const sl = shortLabel(link.label);
+          const pre = prefix(link.label);
+          const flagStyle = link.flag ? `background:${FLAG_C[link.flag]}` : 'background:transparent;border:1px solid var(--border)';
+          const tags = (link.tags || []).map(t => `<span class="ctag">#${esc(t)}</span>`).join('');
+          const hideCls = link.hidden ? ' hidden-card' : '';
+          const commentHtml = link.comment ? `<div class="card-comment">${esc(link.comment)}</div>` : '';
+          const tooltip = `${escA(link.label)}${link.comment ? '\n' + escA(link.comment) : ''}\n${escA(link.url)}`;
+          
+          return `<div class="card${hideCls}" draggable="true"
+        onclick="cardClick(event,${ci},${li})"
+        ondragstart="dsDragCard(event,${ci},${li})"
+        ondragover="dvDragOver(event,${ci},${li})"
+        ondragleave="dlDragLeave(event)"
+        ondrop="dpDropCard(event,${ci},${li})"
+        ondragend="deDragEnd(event)"
+        style="--cc:${color}"
+        title="${tooltip}">
+        ${link.flag?`<span class="card-flag" style="${flagStyle}"></span>`:''}
+        ${link.fav?'<span class="card-fav">⭐</span>':''}
+        <div class="card-ico">${ico}</div>
+        <div class="card-lbl">${pre?`<span style="opacity:.45;font-size:9px">${esc(pre)}</span>`:''}${esc(sl)}</div>
+        ${commentHtml}
+        ${tags?`<div class="card-tags">${tags}</div>`:''}
+        <div class="card-acts">
+          <button class="card-act" onclick="openEdit(event,${ci},${li})">✏</button>
+          <button class="card-act" onclick="toggleHide(event,${ci},${li})">${link.hidden?'👁':'🙈'}</button>
+        </div>
+      </div>`;
+        }).filter(Boolean);
+
+        if (cards.length === 0 && (q || F.fav || F.flags.size || F.types.size || F.tags.size)) return;
+        totalCats++;
+
+        const section = document.createElement('div');
+        section.className = 'cats' + (collapsed ? ' collapsed' : '');
+        section.dataset.ci = ci;
+        section.style.setProperty('--cc', color);
+        section.ondragover = ev => dvDragCat(ev, ci);
+        section.ondragleave = ev => ev.currentTarget.classList.remove('drag-over-cat');
+        section.ondrop = ev => dpDropCat(ev, ci);
+
+        section.innerHTML = `
+      <div class="cat-hdr" onclick="toggleCat(${ci})"
+           ondragover="ev=>{ev.preventDefault()}"
+           ondrop="dpDropCat2(event,${ci})">
+        <span class="drag-handle" draggable="true"
+              ondragstart="dsDragCat(event,${ci})"
+              onclick="ev=>ev.stopPropagation()">⠿</span>
+        <span class="cat-ico">${icon}</span>
+        <span class="cat-name">${esc(cat.title)}</span>
+        <span class="cat-count">${cards.length}/${cat.links.length}</span>
+        <span class="cat-arrow">▾</span>
+        <div class="cat-actions" onclick="ev=>ev.stopPropagation()">
+          <button class="cat-btn cat-btn-add" onclick="openAddLink(${ci})">＋</button>
+          <button class="cat-btn cat-btn-del" onclick="deleteCat(${ci})">✕</button>
+        </div>
+      </div>
+      <div class="cat-grid"
+           ondragover="dvDragGrid(event,${ci})"
+           ondragleave="ev=>ev.currentTarget.classList.remove('drag-over-grid')"
+           ondrop="dpDropGrid(event,${ci})">
+        ${cards.join('')}
+      </div>`;
+        main.appendChild(section);
+      });
+
+      const s = document.getElementById('statsBar');
+      if (F.q || F.fav || F.flags.size || F.types.size || F.tags.size || F.hidden)
+        s.textContent = `${visLinks} Treffer`;
+      else
+        s.textContent = `${totalCats} Kat · ${data.reduce((a,c)=>a+c.links.length,0)} Links`;
+    }
+
+    function renderTagChips() {
+      const c = document.getElementById('tagChips');
+      c.innerHTML = allTags().map(t => `<span class="ftag${F.tags.has(t)?' on':''}" onclick="toggleTag('${escA(t)}')">#${esc(t)}</span>`).join('');
+    }
+
+    // ── FILTER ────────────────────────────────────────────────────────────────
+    function applyFilters() {
+      F.q = document.getElementById('qinput').value.trim();
+      render();
+    }
+
+    function toggleF(k) {
+      F[k] = !F[k];
+      document.getElementById('fFav').classList.toggle('on', F.fav);
+      document.getElementById('fHidden').classList.toggle('on', F.hidden);
+      render();
+    }
+
+    function toggleFlag(c) {
+      if (F.flags.has(c)) F.flags.delete(c); else F.flags.add(c);
+      document.getElementById('fd-'+c).classList.toggle('on', F.flags.has(c));
+      render();
+    }
+
+    function toggleType(t) {
+      if (F.types.has(t)) F.types.delete(t); else F.types.add(t);
+      document.getElementById('ft-'+t).classList.toggle('on', F.types.has(t));
+      render();
+    }
+
+    function toggleTag(t) {
+      if (F.tags.has(t)) F.tags.delete(t); else F.tags.add(t);
+      render();
+    }
+
+    function clearFilters() {
+      F = { q:'', fav:false, hidden:false, flags:new Set(), types:new Set(), tags:new Set() };
+      document.getElementById('qinput').value = '';
+      document.querySelectorAll('.ftoggle.on,.flag-dot.on,.ftag.on').forEach(el => el.classList.remove('on'));
+      render();
+    }
+
+    function toggleFilterBar() {
+      filterOpen = !filterOpen;
+      document.getElementById('filterbar').style.display = filterOpen ? 'flex' : 'none';
+      document.getElementById('filterToggleBtn').classList.toggle('on', filterOpen);
+      if (filterOpen) renderTagChips();
+    }
+
+    // ── CATEGORY COLLAPSE ────────────────────────────────────────────────────
+    function toggleCat(ci) {
+      const m = catMeta[data[ci].title] || {};
+      m.collapsed = !m.collapsed;
+      catMeta[data[ci].title] = m;
+      saveData();
+      const el = document.querySelector(`.cats[data-ci="${ci}"]`);
+      if (el) el.classList.toggle('collapsed');
+    }
+
+    // ── CARD CLICK ────────────────────────────────────────────────────────────
+    function cardClick(e, ci, li) {
+      if (e.target.closest('.card-acts')) return;
+      window.open(data[ci].links[li].url, '_blank', 'noopener');
+    }
+
+    function toggleHide(e, ci, li) {
+      e.stopPropagation();
+      data[ci].links[li].hidden = !data[ci].links[li].hidden;
+      saveData();
+      render();
+    }
+
+    // ── EDIT LINK ─────────────────────────────────────────────────────────────
+    function openEdit(e, ci, li) {
+      e.stopPropagation();
+      editState = {ci, li};
+      const l = data[ci].links[li];
+      document.getElementById('eIco').value = l.icon || '';
+      document.getElementById('eLbl').value = l.label;
+      document.getElementById('eUrl').value = l.url;
+      document.getElementById('eComment').value = l.comment || '';
+      document.getElementById('eTags').value = (l.tags || []).join(', ');
+      
+      const sel = document.getElementById('eCat');
+      sel.innerHTML = data.map((c, i) => `<option value="${i}"${i===ci?' selected':''}>${esc(c.title)}</option>`).join('');
+      editFav = !!l.fav;
+      editHide = !!l.hidden;
+      editFlag = l.flag || null;
+      updateEditToggles();
+      openOv('editMod');
+    }
+
+    function updateEditToggles() {
+      document.getElementById('eFavTgl').classList.toggle('on', editFav);
+      document.getElementById('eHideTgl').classList.toggle('on', editHide);
+      document.querySelectorAll('.flag-opt').forEach(el => el.classList.remove('sel'));
+      const id = editFlag ? 'fo-' + editFlag : 'fo-none';
+      const el = document.getElementById(id);
+      if (el) el.classList.add('sel');
+    }
+
+    function toggleEditFav() { editFav = !editFav; updateEditToggles(); }
+    function toggleEditHide() { editHide = !editHide; updateEditToggles(); }
+    function setEditFlag(c) { editFlag = c; updateEditToggles(); }
+
+    function saveEdit() {
+      if (!editState) return;
+      const {ci, li} = editState;
+      const newCi = parseInt(document.getElementById('eCat').value);
+      const link = data[ci].links[li];
+      link.icon = document.getElementById('eIco').value.trim() || '✨';
+      link.label = document.getElementById('eLbl').value.trim();
+      link.url = document.getElementById('eUrl').value.trim();
+      link.comment = document.getElementById('eComment').value.trim() || undefined;
+      link.fav = editFav;
+      link.hidden = editHide;
+      link.flag = editFlag;
+      link.tags = document.getElementById('eTags').value.split(',').map(t => t.trim()).filter(Boolean);
+      
+      // Clean up empty comment property if blank
+      if (!link.comment) delete link.comment;
+
+      if (newCi !== ci) {
+        data[ci].links.splice(li, 1);
+        data[newCi].links.push(link);
+      }
+      saveData();
+      render();
+      closeOv('editMod');
+      showToast('✅ Gespeichert');
+    }
+
+    function doDeleteLink() {
+      if (!editState) return;
+      const {ci, li} = editState;
+      if (!confirm(`Link "${data[ci].links[li].label}" löschen?`)) return;
+      data[ci].links.splice(li, 1);
+      saveData();
+      render();
+      closeOv('editMod');
+      showToast('🗑 Gelöscht');
+    }
+
+    // ── ADD LINK ──────────────────────────────────────────────────────────────
+    function openAddLink(ci) {
+      const sel = document.getElementById('alCat');
+      sel.innerHTML = data.map((c, i) => `<option value="${i}"${i===ci?' selected':''}>${esc(c.title)}</option>`).join('');
+      ['alIco', 'alLbl', 'alUrl', 'alComment', 'alTags'].forEach(id => document.getElementById(id).value = '');
+      openOv('addLinkMod');
+    }
+
+    function saveAddLink() {
+      const ci = parseInt(document.getElementById('alCat').value);
+      const ico = document.getElementById('alIco').value.trim() || '✨';
+      const lbl = document.getElementById('alLbl').value.trim();
+      const url = document.getElementById('alUrl').value.trim();
+      const comment = document.getElementById('alComment').value.trim();
+      const tags = document.getElementById('alTags').value.split(',').map(t => t.trim()).filter(Boolean);
+      
+      if (!lbl || !url) {
+        showToast('⚠ Label & URL erforderlich');
+        return;
+      }
+      
+      const newLink = {
+        icon: ico,
+        label: lbl,
+        url,
+        fav: false,
+        flag: null,
+        tags,
+        hidden: false
+      };
+      if (comment) newLink.comment = comment;
+
+      data[ci].links.push(newLink);
+      saveData();
+      render();
+      closeOv('addLinkMod');
+      showToast('✅ Link hinzugefügt');
+    }
+
+    // ── ADD CATEGORY ──────────────────────────────────────────────────────────
+    function openAddCat() {
+      ['ncName', 'ncIco'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('ncColor').value = '#818cf8';
+      openOv('addCatMod');
+    }
+
+    function saveAddCat() {
+      const name = document.getElementById('ncName').value.trim();
+      const ico = document.getElementById('ncIco').value.trim() || '📁';
+      const color = document.getElementById('ncColor').value;
+      if (!name) { showToast('⚠ Name erforderlich'); return; }
+      data.push({ title: name, links: [] });
+      catMeta[name] = { icon: ico, color };
+      saveData();
+      render();
+      closeOv('addCatMod');
+      showToast('✅ Kategorie erstellt');
+    }
+
+    function deleteCat(ci) {
+      const cat = data[ci];
+      if (!confirm(`"${cat.title}" mit ${cat.links.length} Links löschen?`)) return;
+      data.splice(ci, 1);
+      saveData();
+      render();
+      showToast('🗑 Kategorie gelöscht');
+    }
+
+    // ── DRAG & DROP — CARDS ───────────────────────────────────────────────────
+    function dsDragCard(e, ci, li) {
+      drag = {type:'card', ci, li};
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', 'card');
+      setTimeout(() => {
+        const card = e.target.closest('.card');
+        if (card) card.classList.add('drag-source');
+      }, 0);
+      e.stopPropagation();
+    }
+
+    function dvDragOver(e, ci, li) {
+      if (!drag || drag.type !== 'card') return;
+      e.preventDefault();
+      e.stopPropagation();
+      e.dataTransfer.dropEffect = 'move';
+      document.querySelectorAll('.card.drag-over').forEach(c => c.classList.remove('drag-over'));
+      e.target.closest('.card')?.classList.add('drag-over');
+    }
+
+    function dlDragLeave(e) {
+      e.target.closest('.card')?.classList.remove('drag-over');
+    }
+
+    function dpDropCard(e, toCi, toLi) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (!drag || drag.type !== 'card') return;
+      const {ci: fromCi, li: fromLi} = drag;
+      if (fromCi === toCi && fromLi === toLi) { drag = null; return; }
+      const link = data[fromCi].links.splice(fromLi, 1)[0];
+      let adj = toLi;
+      if (fromCi === toCi && fromLi < toLi) adj = Math.max(0, toLi - 1);
+      data[toCi].links.splice(adj, 0, link);
+      drag = null;
+      saveData();
+      render();
+    }
+
+    function deDragEnd(e) {
+      document.querySelectorAll('.card.drag-source,.card.drag-over').forEach(c => {
+        c.classList.remove('drag-source', 'drag-over');
+      });
+      document.querySelectorAll('.cat-grid.drag-over-grid').forEach(g => g.classList.remove('drag-over-grid'));
+      drag = null;
+    }
+
+    function dvDragGrid(e, ci) {
+      if (!drag || drag.type !== 'card') return;
+      e.preventDefault();
+      e.currentTarget.classList.add('drag-over-grid');
+    }
+
+    function dpDropGrid(e, ci) {
+      e.preventDefault();
+      e.currentTarget.classList.remove('drag-over-grid');
+      if (!drag || drag.type !== 'card') return;
+      const {ci: fromCi, li: fromLi} = drag;
+      if (fromCi === ci && data[ci].links.length === 1) { drag = null; return; }
+      const link = data[fromCi].links.splice(fromLi, 1)[0];
+      data[ci].links.push(link);
+      drag = null;
+      saveData();
+      render();
+    }
+
+    // ── DRAG & DROP — CATEGORIES ──────────────────────────────────────────────
+    function dsDragCat(e, ci) {
+      drag = {type:'cat', ci};
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', 'cat');
+      e.stopPropagation();
+    }
+
+    function dvDragCat(e, ci) {
+      if (!drag || drag.type !== 'cat' || drag.ci === ci) return;
+      e.preventDefault();
+      document.querySelectorAll('.cats.drag-over-cat').forEach(s => s.classList.remove('drag-over-cat'));
+      e.currentTarget.classList.add('drag-over-cat');
+    }
+
+    function dpDropCat(e, ci) {
+      e.currentTarget.classList.remove('drag-over-cat');
+      if (!drag || drag.type !== 'cat' || drag.ci === ci) return;
+      e.preventDefault();
+      const fromCi = drag.ci;
+      const [removed] = data.splice(fromCi, 1);
+      const insertAt = fromCi < ci ? ci - 1 : ci;
+      data.splice(insertAt, 0, removed);
+      drag = null;
+      saveData();
+      render();
+    }
+
+    function dpDropCat2(e, ci) {
+      e.preventDefault();
+      document.querySelectorAll('.cats.drag-over-cat').forEach(s => s.classList.remove('drag-over-cat'));
+      if (!drag || drag.type !== 'card') return;
+      const {ci: fromCi, li: fromLi} = drag;
+      if (fromCi === ci) { drag = null; return; }
+      const link = data[fromCi].links.splice(fromLi, 1)[0];
+      data[ci].links.push(link);
+      drag = null;
+      saveData();
+      render();
+    }
+
+    // ── THEME / FULLSCREEN ────────────────────────────────────────────────────
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      document.getElementById('themeBtn').textContent = isDark ? '🌙' : '☀️';
+      localStorage.setItem(LS_THEME, isDark ? 'light' : 'dark');
+    }
+
+    function loadTheme() {
+      const t = localStorage.getItem(LS_THEME) || 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+      document.getElementById('themeBtn').textContent = t === 'dark' ? '☀️' : '🌙';
+    }
+
+    function toggleFS() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(()=>{});
+        document.getElementById('fsBtn').textContent = '⊠';
+      } else {
+        document.exitFullscreen();
+        document.getElementById('fsBtn').textContent = '⛶';
+      }
+    }
+    document.addEventListener('fullscreenchange', () => document.getElementById('fsBtn').textContent = document.fullscreenElement ? '⊠' : '⛶');
+
+    // ── MODAL ─────────────────────────────────────────────────────────────────
+    function openOv(id) { document.getElementById(id).classList.add('on'); }
+    function closeOv(id) { document.getElementById(id).classList.remove('on'); }
+    function bgClose(e, id) { if (e.target === e.currentTarget) closeOv(id); }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') document.querySelectorAll('.ov.on').forEach(m => m.classList.remove('on'));
+      if ((e.ctrlKey || e.metaKey) && e.key === 'f') { e.preventDefault(); document.getElementById('qinput').focus(); }
+    });
+
+    // ── TOAST ─────────────────────────────────────────────────────────────────
+    let _tt;
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('on');
+      clearTimeout(_tt);
+      _tt = setTimeout(() => t.classList.remove('on'), 2300);
+    }
+
+    // ── BOOT ──────────────────────────────────────────────────────────────────
+    loadData();
+    loadTheme();
+    render();
+  </script>
+</body>
+</html>

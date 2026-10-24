@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON-Kategori</title>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [
+          ['$', '$'],
+          ['\\(', '\\)']
+        ],
+        displayMath: [
+          ['$$', '$$'],
+          ['\\[', '\\]']
+        ]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 40px;
+      color: #112255;
+      background: #ededfd;
+      max-width : 1000px;
+      text-align: justify;
+      padding : auto;
+      margin  : auto;
+      }
+      h1 {
+        color: #112299;
+      }
+      .button-container {
+        display: flex;
+        justify-content: flex-end; 
+        padding: 10px 15px; 
+        gap: 10px; 
+      }
+      .link-box-button {
+        justify-content: flex-end;
+        padding: 10px 18px;
+        background: #112299;
+        color: #eeddff;
+        font-size: 13px;
+        font-weight: 600;
+        border-radius: 8px;
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition: opacity 0.2s ease;
+        cursor: pointer; 
+      }
+      .link-box-button:hover {
+        background: #666688;
+        padding: 10px 19px;
+      }
+  </style>
+</head>
+<body>
+  <div class="button-container">
+    <button class="link-box-button" onclick="toggleFullscreen()">⛶</button>
+  </div>
+  <h1>JSON-Kategorie</h1>
+
+  <p>Ich habe alle 1101 Links aus 18 Gruppen mit <code>flag</code>, <code>tags</code> (maximal 3) und einem neuen Feld <code>comment</code> versehen. Die Datei ist links_g2_neu.json. <code>url</code>, <code>label</code>, <code>icon</code>, <code>fav</code> und <code>hidden</code> sind unverändert; fehlende <code>fav</code>/<code>hidden</code>-Felder habe ich mit <code>false</code> ergänzt.</p>
+  <pre><code class="language-json">{
+  &quot;label&quot;: &quot;Buch_Werkstatt.html&quot;,
+  &quot;url&quot;: &quot;https://juppijo.github.io/Logik_des_Universums/Buch_Werkstatt.html&quot;,
+  &quot;icon&quot;: &quot;✨&quot;,
+  &quot;fav&quot;: false,
+  &quot;hidden&quot;: false,
+  &quot;flag&quot;: &quot;blue&quot;,
+  &quot;tags&quot;: [&quot;Buch&quot;, &quot;Editor&quot;],
+  &quot;comment&quot;: &quot;Werkstatt – Editor für das Buch&quot;
+}
+</code></pre>
+  <p><strong>Verteilung:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Farbe</th>
+        <th>Anzahl</th>
+        <th>Beispiele</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Lila</td>
+        <td>314</td>
+        <td>WRZT-Theorie, Rechner, ESP32, Buchtext „Logik des Universums“</td>
+      </tr>
+      <tr>
+        <td>Gelb</td>
+        <td>271</td>
+        <td>alle Bild- und Grafikdateien (jpg, png, svg, ico), Fotoalben, Bücher-Geschichten</td>
+      </tr>
+      <tr>
+        <td>Orange</td>
+        <td>216</td>
+        <td>Kegel-Apps, Handpan, Ukulele, Noten, Radio, Spiele</td>
+      </tr>
+      <tr>
+        <td>Blau</td>
+        <td>168</td>
+        <td>HTML-/CSS-/PDF-/Markdown-Editoren, Konverter, GitHub-Werkzeuge</td>
+      </tr>
+      <tr>
+        <td>Rot</td>
+        <td>94</td>
+        <td>Autogenes Training, EQ- und Persönlichkeitstests, TNH, Tai Chi, Qi Gong, Meditation</td>
+      </tr>
+      <tr>
+        <td>Grün</td>
+        <td>38</td>
+        <td>Garten, Steinverlegung, Krims-Kram-Inventar, Lebensmittel, Stromverbrauch</td>
+      </tr>
+    </tbody>
+  </table>
+  <p><strong>Entscheidungen, die du kennen solltest:</strong></p>
+  <ul>
+    <li><strong>Bilddateien:</strong> Sie sind überall gelb, auch wenn sie in einem Themenordner liegen (z. B. die Tai-Chi-Übungsbilder). Das Thema steht dann im Tag.</li>
+    <li><strong><code>Buch_Werkstatt.html</code>:</strong> In deinem Beispiel war sie rot. Nach deinen Regeln ist sie ein Editor und damit blau, so habe ich sie eingeordnet.</li>
+    <li><strong>Buch-Dateien in „Logik des Universums“:</strong> Der Buchtext ist lila, Editoren und Konverter sind blau.</li>
+    <li><strong>Geschichten und Bücher</strong> in Zami_Buecher sind gelb, die Buch-Konverter und Viewer blau. „Kunst des einfühlsamen Zuhörens“ habe ich als Kommunikation/Psychologie rot gesetzt.</li>
+    <li><strong>Tai Chi, Qi Gong, Kum Nye und Meditationen</strong> sind rot (Entspannung/Mental Health).</li>
+    <li><strong>robbie:</strong> Ich konnte die Dateien nicht öffnen und habe die Gruppe nur geraten, lila. Bitte prüf sie.</li>
+    <li><strong>Kommentare:</strong> Sie sind regelbasiert aus Dateiname, Ordner und Typ erzeugt, nicht Datei für Datei gelesen. Bei Varianten steht z. B. „(KI-Variante)“ oder „(weitere Version)“. Sie sind eher grob als exakt, besonders bei den vielen WRZT-Dateien.</li>
+  </ul>
+  <p>Wenn dir bei einer Gruppe die Zuordnung nicht passt, sag mir, welche Gruppe und welche Farbe, dann ändere ich sie gezielt.</p>
+
+
+  <script>
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          alert("Fehler beim Aktivieren des Vollbildmodus!");
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+  </script>
+</body>
+</html>
