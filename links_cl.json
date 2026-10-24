@@ -498,6 +498,11 @@
         "icon": "✨"
       },
       {
+        "label": "Zuhause/Electronic Projecte.ods",
+        "url": "https://juppijo.github.io/Dashboard/Zuhause/Electronic%20Projecte.ods",
+        "icon": "✨"
+      },
+      {
         "label": "Zuhause/Elektronikteile_Inventar.csv",
         "url": "https://juppijo.github.io/Dashboard/Zuhause/Elektronikteile_Inventar.csv",
         "icon": "✨"
@@ -518,8 +523,23 @@
         "icon": "✨"
       },
       {
+        "label": "Zuhause/konvertiere_inventar.py",
+        "url": "https://juppijo.github.io/Dashboard/Zuhause/konvertiere_inventar.py",
+        "icon": "✨"
+      },
+      {
+        "label": "Zuhause/konvertiere_inventar2.py",
+        "url": "https://juppijo.github.io/Dashboard/Zuhause/konvertiere_inventar2.py",
+        "icon": "✨"
+      },
+      {
         "label": "Zuhause/krims_kram_backup_2026-10-22.json",
         "url": "https://juppijo.github.io/Dashboard/Zuhause/krims_kram_backup_2026-10-22.json",
+        "icon": "✨"
+      },
+      {
+        "label": "Zuhause/krims_kram_inventar.json",
+        "url": "https://juppijo.github.io/Dashboard/Zuhause/krims_kram_inventar.json",
         "icon": "✨"
       },
       {
@@ -540,11 +560,6 @@
       {
         "label": "Zuhause/krimskram_app_t.html",
         "url": "https://juppijo.github.io/Dashboard/Zuhause/krimskram_app_t.html",
-        "icon": "✨"
-      },
-      {
-        "label": "Zuhause/tpl.html",
-        "url": "https://juppijo.github.io/Dashboard/Zuhause/tpl.html",
         "icon": "✨"
       },
       {
@@ -1198,6 +1213,11 @@
         "icon": "✨"
       },
       {
+        "label": "Buch_Werkstatt.html",
+        "url": "https://juppijo.github.io/Logik_des_Universums/Buch_Werkstatt.html",
+        "icon": "✨"
+      },
+      {
         "label": "Logik_des_Universums.html",
         "url": "https://juppijo.github.io/Logik_des_Universums/Logik_des_Universums.html",
         "icon": "✨"
@@ -1215,6 +1235,11 @@
       {
         "label": "Sort_html.py",
         "url": "https://juppijo.github.io/Logik_des_Universums/Sort_html.py",
+        "icon": "✨"
+      },
+      {
+        "label": "buch.md",
+        "url": "https://juppijo.github.io/Logik_des_Universums/buch.md",
         "icon": "✨"
       },
       {
@@ -1385,6 +1410,11 @@
       {
         "label": "konverter_smartphone_lu2.py",
         "url": "https://juppijo.github.io/Logik_des_Universums/konverter_smartphone_lu2.py",
+        "icon": "✨"
+      },
+      {
+        "label": "logik_des_universums_studio.html",
+        "url": "https://juppijo.github.io/Logik_des_Universums/logik_des_universums_studio.html",
         "icon": "✨"
       },
       {
@@ -3890,6 +3920,11 @@
       {
         "label": "WRZT_O/kurven_formeln.xlsx",
         "url": "https://juppijo.github.io/WRZT/WRZT_O/kurven_formeln.xlsx",
+        "icon": "✨"
+      },
+      {
+        "label": "WRZT_O/logik_des_universums_5_0_studio.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT_O/logik_des_universums_5_0_studio.html",
         "icon": "✨"
       },
       {
