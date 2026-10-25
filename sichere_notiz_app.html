@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sicheres Notizbuch (Single-File App)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        sepia: {
+                            base: '#f4ecd8',
+                            card: '#fff8ee',
+                            text: '#433422',
+                            border: '#e5d5bc',
+                            accent: '#b45309',
+                            hover: '#92400e',
+                            input: '#fef3c7'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Styles & CSS Variable Fallbacks */
+        .theme-sepia {
+            background-color: var(--sepia-base, #f4ecd8) !important;
+            color: var(--sepia-text, #433422) !important;
+        }
+        .theme-sepia .card {
+            background-color: var(--sepia-card, #fff8ee) !important;
+            border-color: var(--sepia-border, #e5d5bc) !important;
+        }
+        .theme-sepia input, .theme-sepia textarea {
+            background-color: var(--sepia-input, #fef3c7) !important;
+            border-color: var(--sepia-border, #e5d5bc) !important;
+            color: var(--sepia-text, #433422) !important;
+        }
+        .theme-sepia .btn-accent {
+            background-color: var(--sepia-accent, #b45309) !important;
+            color: #ffffff !important;
+        }
+        .theme-sepia .btn-accent:hover {
+            background-color: var(--sepia-hover, #92400e) !important;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen transition-colors duration-300 antialiased font-sans" id="appBody">
+
+    <!-- Auth View Container -->
+    <div id="authOverlay" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md">
+        <div class="card bg-slate-800 border border-slate-700 p-8 rounded-2xl max-w-md w-full shadow-2xl space-y-6">
+            <div class="text-center space-y-2">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-sky-500/10 text-sky-400 mb-2">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                </div>
+                <h2 id="authTitle" class="text-2xl font-bold tracking-tight text-slate-100">Sicheres Notizbuch</h2>
+                <p id="authSubtitle" class="text-sm text-slate-400">Bitte erstelle ein Master-Passwort zum Schutz deiner Daten.</p>
+            </div>
+
+            <form id="authForm" onsubmit="handleAuthSubmit(event)" class="space-y-4">
+                <div>
+                    <label for="passwordInput" class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Master-Passwort / PIN</label>
+                    <input type="password" id="passwordInput" required autofocus class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition text-slate-100 placeholder-slate-500" placeholder="••••••••">
+                </div>
+                <div id="confirmPasswordGroup" class="hidden">
+                    <label for="confirmPasswordInput" class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Passwort bestätigen</label>
+                    <input type="password" id="confirmPasswordInput" class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition text-slate-100 placeholder-slate-500" placeholder="••••••••">
+                </div>
+                <div id="authError" class="text-red-400 text-xs hidden text-center font-medium"></div>
+                <button type="submit" id="authSubmitBtn" class="btn-accent w-full py-3 bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-xl shadow-lg transition duration-200">
+                    Einrichten
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main App Container (Hidden until authenticated) -->
+    <div id="mainApp" class="hidden min-h-screen flex flex-col max-w-5xl mx-auto px-4 py-6 sm:px-6 lg:px-8 space-y-6">
+        
+        <!-- Header & Toolbar -->
+        <header class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+            <div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight flex items-center gap-2">
+                    <span>📝</span> Mein Notizbuch
+                </h1>
+                <p class="text-xs text-slate-400 mt-1">Ende-zu-Ende verschlüsselte lokale Speicherung</p>
+            </div>
+            
+            <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+                <button onclick="toggleTheme()" title="Design wechseln" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-sm font-medium transition flex items-center gap-1.5">
+                    <span>🎨</span> <span class="hidden md:inline">Design</span>
+                </button>
+                <button onclick="toggleFullscreen()" title="Vollbild" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-sm font-medium transition flex items-center gap-1.5">
+                    <span>⛶</span> <span class="hidden md:inline">Vollbild</span>
+                </button>
+                <button onclick="openSettingsModal()" title="Einstellungen" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-sm font-medium transition flex items-center gap-1.5">
+                    <span>⚙️</span> <span class="hidden md:inline">Passwort</span>
+                </button>
+                <button onclick="logout()" title="Abmelden" class="px-3 py-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 rounded-lg text-sm font-medium transition flex items-center gap-1.5">
+                    <span>🔒</span> <span>Sperren</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Search & Actions Bar -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+            <div class="md:col-span-2 relative">
+                <input type="text" id="searchInput" oninput="renderNotes()" placeholder="Notizen durchsuchen..." class="w-full pl-10 pr-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition text-sm">
+                <svg class="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </div>
+            <div class="flex items-center gap-2 justify-end">
+                <button onclick="exportNotes()" class="w-1/2 md:w-auto px-4 py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl text-xs font-semibold uppercase tracking-wider transition flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> Export
+                </button>
+                <label class="w-1/2 md:w-auto px-4 py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl text-xs font-semibold uppercase tracking-wider cursor-pointer transition flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg> Import
+                    <input type="file" id="importFile" accept=".json" onchange="importNotes(event)" class="hidden">
+                </label>
+            </div>
+        </div>
+
+        <!-- Create Note Card -->
+        <div class="card bg-slate-800 border border-slate-700 rounded-2xl p-5 shadow-lg space-y-3">
+            <h2 class="text-lg font-semibold text-slate-200">Neue Notiz erstellen</h2>
+            <input type="text" id="noteTitle" placeholder="Titel..." class="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition text-sm">
+            <textarea id="noteContent" rows="3" placeholder="Inhalt oder kurze Informationen..." class="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition text-sm resize-y"></textarea>
+            <button onclick="saveNote()" class="btn-accent w-full sm:w-auto px-6 py-2.5 bg-sky-500 hover:bg-sky-600 font-medium text-white rounded-lg shadow transition text-sm flex items-center justify-center gap-2">
+                <span>+</span> Notiz speichern
+            </button>
+        </div>
+
+        <!-- Notes List Container -->
+        <main class="space-y-4 flex-grow">
+            <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-400">Gespeicherte Notizen</h2>
+            <div id="notesList" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Notes rendering target -->
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="pt-6 border-t border-slate-800 text-center text-xs text-slate-500">
+            Sicheres Single-File Notizbuch • Verschlüsselt im Browser-Speicher
+        </footer>
+    </div>
+
+    <!-- Modal: Settings / Change Password -->
+    <div id="settingsModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+        <div class="card bg-slate-800 border border-slate-700 p-6 rounded-2xl max-w-md w-full shadow-2xl space-y-4">
+            <h3 class="text-xl font-bold text-slate-100">Passwort ändern</h3>
+            <form onsubmit="handleChangePassword(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Aktuelles Passwort</label>
+                    <input type="password" id="currentPassword" required class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg outline-none text-sm focus:ring-2 focus:ring-sky-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Neues Passwort</label>
+                    <input type="password" id="newPassword" required class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg outline-none text-sm focus:ring-2 focus:ring-sky-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Neues Passwort bestätigen</label>
+                    <input type="password" id="confirmNewPassword" required class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg outline-none text-sm focus:ring-2 focus:ring-sky-500">
+                </div>
+                <div id="settingsError" class="text-red-400 text-xs hidden font-medium"></div>
+                <div id="settingsSuccess" class="text-emerald-400 text-xs hidden font-medium"></div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeSettingsModal()" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg text-sm font-medium">Abbrechen</button>
+                    <button type="submit" class="btn-accent px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white rounded-lg text-sm font-medium">Speichern</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-4 right-4 bg-slate-800 border border-slate-700 text-slate-100 px-4 py-3 rounded-xl shadow-xl transition-all duration-300 opacity-0 transform translate-y-4 pointer-events-none z-50 text-sm flex items-center gap-2">
+        <span id="toastIcon">✨</span>
+        <span id="toastMessage">Benachrichtigung</span>
+    </div>
+
+    <script>
+        // --- State Management ---
+        let masterPassword = null;
+        let decryptedNotes = [];
+        let currentTheme = localStorage.getItem('app_theme') || 'dark';
+
+        // STORAGE KEYS
+        const STORAGE_KEY_AUTH = 'safe_notes_auth_v1';
+        const STORAGE_KEY_NOTES = 'safe_notes_data_v1';
+
+        // --- Crypto Helpers (Web Crypto API) ---
+        async function deriveKey(password, salt) {
+            const encoder = new TextEncoder();
+            const keyMaterial = await crypto.subtle.importKey(
+                'raw', encoder.encode(password), 'PBKDF2', false, ['deriveKey']
+            );
+            return crypto.subtle.deriveKey(
+                {
+                    name: 'PBKDF2',
+                    salt: salt,
+                    iterations: 100000,
+                    hash: 'SHA-256'
+                },
+                keyMaterial,
+                { name: 'AES-GCM', length: 256 },
+                false,
+                ['encrypt', 'decrypt']
+            );
+        }
+
+        async function encryptData(dataString, password) {
+            const encoder = new TextEncoder();
+            const salt = crypto.getRandomValues(new Uint8Array(16));
+            const iv = crypto.getRandomValues(new Uint8Array(12));
+            const key = await deriveKey(password, salt);
+
+            const encryptedContent = await crypto.subtle.encrypt(
+                { name: 'AES-GCM', iv: iv },
+                key,
+                encoder.encode(dataString)
+            );
+
+            return {
+                salt: Array.from(salt),
+                iv: Array.from(iv),
+                cipherText: Array.from(new Uint8Array(encryptedContent))
+            };
+        }
+
+        async function decryptData(encryptedObj, password) {
+            try {
+                const decoder = new TextDecoder();
+                const salt = new Uint8Array(encryptedObj.salt);
+                const iv = new Uint8Array(encryptedObj.iv);
+                const cipherText = new Uint8Array(encryptedObj.cipherText);
+
+                const key = await deriveKey(password, salt);
+                const decryptedContent = await crypto.subtle.decrypt(
+                    { name: 'AES-GCM', iv: iv },
+                    key,
+                    cipherText
+                );
+
+                return decoder.decode(decryptedContent);
+            } catch (e) {
+                return null;
+            }
+        }
+
+        // --- App Initialization ---
+        window.onload = function() {
+            applyTheme(currentTheme);
+            checkAuthStatus();
+        };
+
+        function checkAuthStatus() {
+            const authRecord = localStorage.getItem(STORAGE_KEY_AUTH);
+            const authTitle = document.getElementById('authTitle');
+            const authSubtitle = document.getElementById('authSubtitle');
+            const confirmGroup = document.getElementById('confirmPasswordGroup');
+            const authSubmitBtn = document.getElementById('authSubmitBtn');
+
+            if (!authRecord) {
+                // Initial Setup Mode
+                authTitle.textContent = 'Passwort Festlegen';
+                authSubtitle.textContent = 'Erstelle ein Master-Passwort zum Schutz deiner Notizen.';
+                confirmGroup.classList.remove('hidden');
+                authSubmitBtn.textContent = 'Passwort Speichern & Starten';
+            } else {
+                // Login Mode
+                authTitle.textContent = 'Willkommen Zurück';
+                authSubtitle.textContent = 'Gib dein Master-Passwort ein, um deine Notizen zu entschlüsseln.';
+                confirmGroup.classList.add('hidden');
+                authSubmitBtn.textContent = 'Entschlüsseln & Öffnen';
+            }
+        }
+
+        // --- Authentication Flow ---
+        async function handleAuthSubmit(event) {
+            event.preventDefault();
+            const password = document.getElementById('passwordInput').value;
+            const confirmPassword = document.getElementById('confirmPasswordInput').value;
+            const errorDiv = document.getElementById('authError');
+            const authRecord = localStorage.getItem(STORAGE_KEY_AUTH);
+
+            errorDiv.classList.add('hidden');
+
+            if (!authRecord) {
+                // Setting up password for the first time
+                if (password.length < 4) {
+                    showAuthError('Das Passwort muss mindestens 4 Zeichen lang sein.');
+                    return;
+                }
+                if (password !== confirmPassword) {
+                    showAuthError('Die Passwörter stimmen nicht überein.');
+                    return;
+                }
+
+                // Verify marker to validate password later
+                const authCheck = await encryptData('VERIFIED_AUTH_TOKEN', password);
+                localStorage.setItem(STORAGE_KEY_AUTH, JSON.stringify(authCheck));
+                
+                masterPassword = password;
+                decryptedNotes = [];
+                await saveNotesEncrypted();
+                unlockApp();
+            } else {
+                // Logging in
+                const parsedAuth = JSON.parse(authRecord);
+                const verification = await decryptData(parsedAuth, password);
+
+                if (verification === 'VERIFIED_AUTH_TOKEN') {
+                    masterPassword = password;
+                    await loadAndDecryptNotes();
+                    unlockApp();
+                } else {
+                    showAuthError('Falsches Passwort. Bitte erneut versuchen.');
+                }
+            }
+        }
+
+        function showAuthError(msg) {
+            const errorDiv = document.getElementById('authError');
+            errorDiv.textContent = msg;
+            errorDiv.classList.remove('hidden');
+        }
+
+        function unlockApp() {
+            document.getElementById('authOverlay').classList.add('hidden');
+            document.getElementById('mainApp').classList.remove('hidden');
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('confirmPasswordInput').value = '';
+            renderNotes();
+            showToast('Erfolgreich entsperrt 🔓');
+        }
+
+        function logout() {
+            masterPassword = null;
+            decryptedNotes = [];
+            document.getElementById('mainApp').classList.add('hidden');
+            document.getElementById('authOverlay').classList.remove('hidden');
+            checkAuthStatus();
+            showToast('App gesperrt 🔒');
+        }
+
+        // --- Note Data & Persistence ---
+        async function loadAndDecryptNotes() {
+            const rawStored = localStorage.getItem(STORAGE_KEY_NOTES);
+            if (!rawStored) {
+                decryptedNotes = [];
+                return;
+            }
+            try {
+                const encryptedObj = JSON.parse(rawStored);
+                const decryptedJson = await decryptData(encryptedObj, masterPassword);
+                decryptedNotes = decryptedJson ? JSON.parse(decryptedJson) : [];
+            } catch (e) {
+                decryptedNotes = [];
+                showToast('Fehler beim Entschlüsseln der Notizen', '⚠️');
+            }
+        }
+
+        async function saveNotesEncrypted() {
+            if (!masterPassword) return;
+            const jsonString = JSON.stringify(decryptedNotes);
+            const encryptedObj = await encryptData(jsonString, masterPassword);
+            localStorage.setItem(STORAGE_KEY_NOTES, JSON.stringify(encryptedObj));
+        }
+
+        // --- Note CRUD Actions ---
+        async function saveNote() {
+            const titleInput = document.getElementById('noteTitle');
+            const contentInput = document.getElementById('noteContent');
+
+            const title = titleInput.value.trim();
+            const content = contentInput.value.trim();
+
+            if (!title && !content) {
+                showToast('Bitte gib ein Titel oder Inhalt ein.', '⚠️');
+                return;
+            }
+
+            const newNote = {
+                id: Date.now(),
+                title: title || 'Unbenannte Notiz',
+                content: content,
+                date: new Date().toLocaleString('de-DE', { dateStyle: 'medium', timeStyle: 'short' })
+            };
+
+            decryptedNotes.unshift(newNote);
+            await saveNotesEncrypted();
+            renderNotes();
+
+            titleInput.value = '';
+            contentInput.value = '';
+            showToast('Notiz gespeichert ✨');
+        }
+
+        async function deleteNote(id) {
+            decryptedNotes = decryptedNotes.filter(n => n.id !== id);
+            await saveNotesEncrypted();
+            renderNotes();
+            showToast('Notiz gelöscht 🗑️');
+        }
+
+        function renderNotes() {
+            const container = document.getElementById('notesList');
+            const searchQuery = (document.getElementById('searchInput').value || '').toLowerCase();
+
+            const filteredNotes = decryptedNotes.filter(n => 
+                n.title.toLowerCase().includes(searchQuery) || 
+                n.content.toLowerCase().includes(searchQuery)
+            );
+
+            if (filteredNotes.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-12 text-slate-500 space-y-2">
+                        <p class="text-base">${searchQuery ? 'Keine passende Notiz gefunden.' : 'Noch keine Notizen vorhanden.'}</p>
+                        <p class="text-xs opacity-75">${searchQuery ? 'Versuche einen anderen Suchbegriff.' : 'Erstelle oben deine erste verschlüsselte Notiz.'}</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filteredNotes.map(note => `
+                <div class="card bg-slate-800 border border-slate-700 rounded-xl p-5 shadow flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="flex items-start justify-between gap-2">
+                            <h3 class="font-bold text-slate-100 break-words">${escapeHtml(note.title)}</h3>
+                            <span class="text-[10px] text-slate-400 whitespace-nowrap bg-slate-900/50 px-2 py-1 rounded-md border border-slate-700/50">${note.date}</span>
+                        </div>
+                        <p class="text-sm text-slate-300 whitespace-pre-wrap leading-relaxed break-words">${escapeHtml(note.content)}</p>
+                    </div>
+                    <div class="flex justify-end pt-2 border-t border-slate-700/50">
+                        <button onclick="deleteNote(${note.id})" class="text-xs text-rose-400 hover:text-rose-300 px-2 py-1 rounded hover:bg-rose-500/10 transition">
+                            Löschen
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- Export & Import ---
+        function exportNotes() {
+            if (decryptedNotes.length === 0) {
+                showToast('Keine Notizen zum Exportieren vorhanden.', '⚠️');
+                return;
+            }
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(decryptedNotes, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `notizen_backup_${new Date().toISOString().slice(0,10)}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+            showToast('Notizen exportiert 📥');
+        }
+
+        function importNotes(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    if (Array.isArray(importedData)) {
+                        // Merge and avoid duplicate IDs
+                        const existingIds = new Set(decryptedNotes.map(n => n.id));
+                        let addedCount = 0;
+
+                        importedData.forEach(item => {
+                            if (item.title && item.content) {
+                                if (existingIds.has(item.id)) {
+                                    item.id = Date.now() + Math.floor(Math.random() * 1000);
+                                }
+                                decryptedNotes.unshift(item);
+                                addedCount++;
+                            }
+                        });
+
+                        await saveNotesEncrypted();
+                        renderNotes();
+                        showToast(`${addedCount} Notizen importiert 📤`);
+                    } else {
+                        showToast('Ungültiges Dateiformat.', '⚠️');
+                    }
+                } catch (err) {
+                    showToast('Fehler beim Importieren der Datei.', '⚠️');
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        }
+
+        // --- Password Change Modal ---
+        function openSettingsModal() {
+            document.getElementById('settingsModal').classList.remove('hidden');
+            document.getElementById('settingsError').classList.add('hidden');
+            document.getElementById('settingsSuccess').classList.add('hidden');
+        }
+
+        function closeSettingsModal() {
+            document.getElementById('settingsModal').classList.add('hidden');
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmNewPassword').value = '';
+        }
+
+        async function handleChangePassword(event) {
+            event.preventDefault();
+            const current = document.getElementById('currentPassword').value;
+            const newPass = document.getElementById('newPassword').value;
+            const confirmNew = document.getElementById('confirmNewPassword').value;
+
+            const errorDiv = document.getElementById('settingsError');
+            const successDiv = document.getElementById('settingsSuccess');
+            errorDiv.classList.add('hidden');
+            successDiv.classList.add('hidden');
+
+            if (current !== masterPassword) {
+                errorDiv.textContent = 'Das aktuelle Passwort ist falsch.';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            if (newPass.length < 4) {
+                errorDiv.textContent = 'Das neue Passwort muss mindestens 4 Zeichen haben.';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            if (newPass !== confirmNew) {
+                errorDiv.textContent = 'Die neuen Passwörter stimmen nicht überein.';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            masterPassword = newPass;
+            
+            // Re-encrypt auth verification and notes
+            const authCheck = await encryptData('VERIFIED_AUTH_TOKEN', masterPassword);
+            localStorage.setItem(STORAGE_KEY_AUTH, JSON.stringify(authCheck));
+            await saveNotesEncrypted();
+
+            successDiv.textContent = 'Passwort erfolgreich geändert!';
+            successDiv.classList.remove('hidden');
+            setTimeout(() => {
+                closeSettingsModal();
+                showToast('Passwort geändert 🔑');
+            }, 1200);
+        }
+
+        // --- UI Utilities ---
+        function toggleTheme() {
+            if (currentTheme === 'dark') {
+                currentTheme = 'light';
+            } else if (currentTheme === 'light') {
+                currentTheme = 'sepia';
+            } else {
+                currentTheme = 'dark';
+            }
+            applyTheme(currentTheme);
+            localStorage.setItem('app_theme', currentTheme);
+        }
+
+        function applyTheme(theme) {
+            const body = document.getElementById('appBody');
+            body.classList.remove('dark', 'theme-sepia', 'bg-slate-900', 'text-slate-100', 'bg-slate-100', 'text-slate-900');
+            
+            if (theme === 'dark') {
+                body.classList.add('dark', 'bg-slate-900', 'text-slate-100');
+            } else if (theme === 'light') {
+                body.classList.add('bg-slate-100', 'text-slate-900');
+            } else if (theme === 'sepia') {
+                body.classList.add('theme-sepia');
+            }
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(() => {
+                    showToast('Vollbildmodus nicht verfügbar.', '⚠️');
+                });
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen();
+            }
+        }
+
+        function showToast(msg, icon = '✨') {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = msg;
+            document.getElementById('toastIcon').textContent = icon;
+            
+            toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+            }, 3000);
+        }
+
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>
