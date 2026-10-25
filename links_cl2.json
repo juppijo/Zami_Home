@@ -12438,7 +12438,14 @@
       {
         "label": "JSON-Kategorie.html",
         "url": "https://juppijo.github.io/Zami_Home/JSON-Kategorie.html",
-        "icon": "✨"
+        "icon": "✨",
+        "fav": false,
+        "hidden": false,
+        "flag": "blue",
+        "tags": [
+          "Erklärung"
+        ],
+        "comment": "JSON-Kategorie Links"
       },
       {
         "label": "JSON_Pro_Max_Vergleicher_Dashboard.html",
@@ -12469,7 +12476,14 @@
       {
         "label": "JSON_Update.py",
         "url": "https://juppijo.github.io/Zami_Home/JSON_Update.py",
-        "icon": "✨"
+        "icon": "✨",
+        "comment": "JSON_Update LinksCl + LinksCl2 -> LinksCln",
+        "fav": false,
+        "hidden": false,
+        "flag": "blue",
+        "tags": [
+          "Phython"
+        ]
       },
       {
         "label": "Lebensmittel-Lexikon.html",
@@ -12771,7 +12785,15 @@
       {
         "label": "linkhub_2.html",
         "url": "https://juppijo.github.io/Zami_Home/linkhub_2.html",
-        "icon": "✨"
+        "icon": "✨",
+        "comment": "Link-Verwaltung / Linkhub ohne Daten",
+        "fav": false,
+        "hidden": false,
+        "flag": "blue",
+        "tags": [
+          "Links",
+          "Verwaltung"
+        ]
       },
       {
         "label": "links.json",
@@ -12815,7 +12837,15 @@
       {
         "label": "links_cl2.json",
         "url": "https://juppijo.github.io/Zami_Home/links_cl2.json",
-        "icon": "✨"
+        "icon": "✨",
+        "comment": "JSON-Werkzeug (Vergleichen/Bearbeiten) (KI-Variante)",
+        "fav": false,
+        "hidden": false,
+        "flag": "blue",
+        "tags": [
+          "JSON",
+          "Tools"
+        ]
       },
       {
         "label": "linksg.json",
@@ -12846,17 +12876,38 @@
       {
         "label": "meine-notizen-wiki.html",
         "url": "https://juppijo.github.io/Zami_Home/meine-notizen-wiki.html",
-        "icon": "✨"
+        "icon": "✨",
+        "comment": "Online Notizen",
+        "fav": false,
+        "hidden": false,
+        "flag": "blue",
+        "tags": [
+          "Notizen"
+        ]
       },
       {
         "label": "notizwerk-sicherung-2026-10-25.json",
         "url": "https://juppijo.github.io/Zami_Home/notizwerk-sicherung-2026-10-25.json",
-        "icon": "✨"
+        "icon": "✨",
+        "comment": "Notizen Daten",
+        "fav": false,
+        "hidden": false,
+        "flag": "blue",
+        "tags": [
+          "Notizen"
+        ]
       },
       {
         "label": "notizwerk.html",
         "url": "https://juppijo.github.io/Zami_Home/notizwerk.html",
-        "icon": "✨"
+        "icon": "✨",
+        "comment": "Online Notizen",
+        "fav": false,
+        "hidden": false,
+        "flag": "blue",
+        "tags": [
+          "Notizen"
+        ]
       },
       {
         "label": "script.js",
