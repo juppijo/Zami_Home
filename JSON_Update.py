@@ -104,8 +104,8 @@ def update_json_file(file_base, file_source, output_path):
 
 if __name__ == "__main__":
     file1 = 'links_cl.json'   # Deine bestehende Datei
-    file2 = 'links_cl2.json'  # Die Datei mit den Attributen
-    output = 'links_cl3.json'
+    file2 = 'links_cl3.json'  # Die Datei mit den Attributen
+    output = 'links_cln.json'
 
     print("Starte präzise Zusammenführung ohne Duplikate...")
     update_json_file(file1, file2, output)

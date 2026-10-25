@@ -12436,6 +12436,11 @@
         "comment": "Icon-Ansicht/Icon-Tool"
       },
       {
+        "label": "JSON-Kategorie.html",
+        "url": "https://juppijo.github.io/Zami_Home/JSON-Kategorie.html",
+        "icon": "✨"
+      },
+      {
         "label": "JSON_Pro_Max_Vergleicher_Dashboard.html",
         "url": "https://juppijo.github.io/Zami_Home/JSON_Pro_Max_Vergleicher_Dashboard.html",
         "icon": "✨",
@@ -12460,6 +12465,11 @@
           "Tool"
         ],
         "comment": "JSON-Werkzeug (Vergleichen/Bearbeiten)"
+      },
+      {
+        "label": "JSON_Update.py",
+        "url": "https://juppijo.github.io/Zami_Home/JSON_Update.py",
+        "icon": "✨"
       },
       {
         "label": "Lebensmittel-Lexikon.html",
@@ -12759,6 +12769,11 @@
         "comment": "Link-Verwaltung / Linkhub"
       },
       {
+        "label": "linkhub_2.html",
+        "url": "https://juppijo.github.io/Zami_Home/linkhub_2.html",
+        "icon": "✨"
+      },
+      {
         "label": "links.json",
         "url": "https://juppijo.github.io/Zami_Home/links.json",
         "icon": "✨",
@@ -12798,6 +12813,11 @@
         "comment": "JSON-Werkzeug (Vergleichen/Bearbeiten) (KI-Variante)"
       },
       {
+        "label": "links_cl2.json",
+        "url": "https://juppijo.github.io/Zami_Home/links_cl2.json",
+        "icon": "✨"
+      },
+      {
         "label": "linksg.json",
         "url": "https://juppijo.github.io/Zami_Home/linksg.json",
         "icon": "✨",
@@ -12822,6 +12842,21 @@
           "Verwaltung"
         ],
         "comment": "Link-Verwaltung / Linkhub (Pro-Version)"
+      },
+      {
+        "label": "meine-notizen-wiki.html",
+        "url": "https://juppijo.github.io/Zami_Home/meine-notizen-wiki.html",
+        "icon": "✨"
+      },
+      {
+        "label": "notizwerk-sicherung-2026-10-25.json",
+        "url": "https://juppijo.github.io/Zami_Home/notizwerk-sicherung-2026-10-25.json",
+        "icon": "✨"
+      },
+      {
+        "label": "notizwerk.html",
+        "url": "https://juppijo.github.io/Zami_Home/notizwerk.html",
+        "icon": "✨"
       },
       {
         "label": "script.js",
