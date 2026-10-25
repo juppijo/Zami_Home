@@ -76,6 +76,8 @@ dialog h3{margin:.2rem 0 .6rem}
 .pl small,.hint{color:var(--mute)}
 .row{display:flex;gap:.5rem;flex-wrap:wrap}
 .end{justify-content:flex-end;margin-top:1rem}
+.tabs button{flex:1}
+.tabs .on{background:var(--acc);color:var(--accink);border-color:var(--acc)}
 @media(max-width:820px){
  #app{grid-template-columns:minmax(0,1fr)}
  #side{display:none}
@@ -90,11 +92,13 @@ dialog h3{margin:.2rem 0 .6rem}
 <div id="lock" hidden>
  <form id="lf">
   <h1>Notizwerk</h1>
+  <div class="row tabs"><button type="button" id="tabin">Anmelden</button><button type="button" id="tabup">Neu einrichten</button></div>
   <p id="lmsg"></p>
   <label>Passwort<input type="password" id="p1" autocomplete="current-password"></label>
   <label id="l2" hidden>Passwort wiederholen<input type="password" id="p2" autocomplete="new-password"></label>
   <p class="err" id="lerr"></p>
   <button class="pri" id="lbtn">Öffnen</button>
+  <button type="button" id="limp">Sicherung laden …</button>
  </form>
 </div>
 
@@ -115,10 +119,12 @@ dialog h3{margin:.2rem 0 .6rem}
  <main id="story"></main>
 </div>
 <dialog id="dlg"></dialog>
+<script id="store" type="application/json"></script>
 <input type="file" id="file" accept=".json,application/json" hidden>
 
 <script>
 (()=>{
+const SRC=document.documentElement.outerHTML;
 const $=s=>document.querySelector(s),enc=new TextEncoder(),dec=new TextDecoder();
 const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const KEY='notizwerk_v1',TK='notizwerk_stil';
@@ -140,7 +146,7 @@ const on=id=>!!S&&S.plugins[id]!==false;
 
 /* Verschlüsselung: PBKDF2 → AES-GCM */
 async function derive(pw,s){const k=await crypto.subtle.importKey('raw',enc.encode(pw),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt:s,iterations:250000,hash:'SHA-256'},k,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
-async function seal(data,k,s){const iv=crypto.getRandomValues(new Uint8Array(12));const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},k,enc.encode(JSON.stringify(data)));return{v:1,salt:b64(s),iv:b64(iv),data:b64(new Uint8Array(ct))}}
+async function seal(data,k,s){const iv=crypto.getRandomValues(new Uint8Array(12));const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},k,enc.encode(JSON.stringify(data)));return{v:1,t:Date.now(),salt:b64(s),iv:b64(iv),data:b64(new Uint8Array(ct))}}
 async function unseal(b,k){return JSON.parse(dec.decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:unb(b.iv)},k,unb(b.data))))}
 function stat(m){const s=$('#st');s.textContent=m;clearTimeout(stt);stt=setTimeout(()=>s.textContent='',2200)}
 function save(){clearTimeout(t0);t0=setTimeout(flush,350)}
@@ -229,6 +235,7 @@ document.addEventListener('click',async e=>{
  else if(a==='del'){if(confirm('Diese Notiz endgültig löschen?')){S.notes=S.notes.filter(x=>x!==n);openIds=openIds.filter(x=>x!==id);editing.delete(id);save();drawAll()}}
  else if(a==='close'){openIds=openIds.filter(x=>x!==id);editing.delete(id);drawAll()}
  else if(a==='export'){const bl=new Blob([JSON.stringify(await seal(S,key,salt),null,1)],{type:'application/json'}),l=document.createElement('a');l.href=URL.createObjectURL(bl);l.download='notizwerk-sicherung-'+new Date().toISOString().slice(0,10)+'.json';l.click();setTimeout(()=>URL.revokeObjectURL(l.href),4000)}
+ else if(a==='exporthtml'){const j=JSON.stringify(await seal(S,key,salt)),i=SRC.indexOf('<scr'+'ipt id="store"'),st=SRC.indexOf('>',i)+1,en=SRC.indexOf('<'+'/script>',st),bl=new Blob(['<!DOCTYPE html>\n'+SRC.slice(0,st)+j+SRC.slice(en)],{type:'text/html'}),l=document.createElement('a');l.href=URL.createObjectURL(bl);l.download='notizwerk.html';l.click();setTimeout(()=>URL.revokeObjectURL(l.href),4000)}
  else if(a==='import')$('#file').click();
  else if(a==='chpw')ask('Passwort ändern',['Neues Passwort (mindestens 6 Zeichen)','Neues Passwort wiederholen'],async v=>{if(v[0].length<6)return 'Mindestens 6 Zeichen.';if(v[0]!==v[1])return 'Die Passwörter stimmen nicht überein.';salt=crypto.getRandomValues(new Uint8Array(16));key=await derive(v[0],salt);await flush();return null});
 });
@@ -251,7 +258,7 @@ $('#lockb').onclick=async()=>{await flush();S=null;key=null;openIds=[];editing.c
 /* Dialoge */
 $('#plug').onclick=()=>{
  const d=$('#dlg');
- d.innerHTML='<form method="dialog"><h3>Plugins</h3>'+PLUGINS.map(p=>`<label class="pl"><input type="checkbox" data-p="${p.id}" ${on(p.id)?'checked':''}><span><b>${p.name}</b><br><small>${p.desc}</small></span></label>`).join('')+'<h3>Daten und Passwort</h3><div class="row"><button type="button" data-a="export">Sicherung speichern</button><button type="button" data-a="import">Sicherung laden</button><button type="button" data-a="chpw">Passwort ändern</button></div><p class="hint">Die Notizen sind mit AES-256 verschlüsselt. Das Passwort lässt sich nicht zurücksetzen, auch nicht für Sicherungen.</p><div class="row end"><button class="pri">Schließen</button></div></form>';
+ d.innerHTML='<form method="dialog"><h3>Plugins</h3>'+PLUGINS.map(p=>`<label class="pl"><input type="checkbox" data-p="${p.id}" ${on(p.id)?'checked':''}><span><b>${p.name}</b><br><small>${p.desc}</small></span></label>`).join('')+'<h3>Daten und Passwort</h3><div class="row"><button type="button" data-a="exporthtml">Als HTML-Datei speichern</button><button type="button" data-a="export">Sicherung speichern</button><button type="button" data-a="import">Sicherung laden</button><button type="button" data-a="chpw">Passwort ändern</button></div><p class="hint">Die Notizen sind mit AES-256 verschlüsselt. „Als HTML-Datei speichern“ erzeugt eine Kopie dieser Seite mit allen Notizen darin, die du auf jedem PC öffnen kannst. Das Passwort lässt sich nicht zurücksetzen, auch nicht für Sicherungen.</p><div class="row end"><button class="pri">Schließen</button></div></form>';
  if(!d.open)d.showModal()
 };
 function ask(title,labels,ok){
@@ -263,6 +270,7 @@ function ask(title,labels,ok){
 $('#file').onchange=async e=>{
  const f=e.target.files[0];e.target.value='';if(!f)return;
  const txt=await f.text();
+ if(!S){try{const b=JSON.parse(txt);salt=unb(b.salt);key=await derive($('#p1').value,salt);S=await unseal(b,key);S.plugins=S.plugins||{};await flush();enter()}catch(x){key=null;S=null;$('#lerr').textContent='Passwort falsch oder Datei ungültig. Gib oben zuerst das Passwort der Sicherung ein.'}return}
  ask('Sicherung laden',['Passwort dieser Sicherung'],async v=>{
   try{const b=JSON.parse(txt),d=await unseal(b,await derive(v[0],unb(b.salt)));
    if(!confirm('Aktuelle Notizen durch die Sicherung ersetzen?'))return 'Abgebrochen.';
@@ -272,29 +280,38 @@ $('#file').onchange=async e=>{
 };
 
 /* Start und Sperrbildschirm */
-function boot(){
- const setup=!localStorage.getItem(KEY);
- $('#l2').hidden=!setup;
- $('#lmsg').textContent=setup?'Lege ein Passwort fest. Es schützt alle Notizen und lässt sich nicht zurücksetzen.':'Gib dein Passwort ein, um die Notizen zu öffnen.';
- $('#lbtn').textContent=setup?'Passwort festlegen':'Öffnen';
- $('#lerr').textContent='';$('#p1').value=$('#p2').value='';
- $('#app').hidden=true;$('#lock').hidden=false;$('#p1').focus()
+const blobs=()=>{let l=null,e=null;try{l=JSON.parse(localStorage.getItem(KEY))}catch(x){}try{e=JSON.parse($('#store').textContent)}catch(x){}return[l,e]};
+function best(){const[l,e]=blobs();return l&&(!e||(l.t||0)>=(e.t||0))?l:(e||l)}
+let mode='in';
+function setMode(m){
+ mode=m;const has=!!best();
+ $('#tabin').classList.toggle('on',m==='in');$('#tabup').classList.toggle('on',m==='up');
+ $('#l2').hidden=m!=='up';
+ $('#lmsg').textContent=m==='up'?(has?'Achtung: Neu einrichten ersetzt die Notizen, die auf diesem Gerät gespeichert sind.':'Lege ein Passwort fest. Es schützt alle Notizen und lässt sich nicht zurücksetzen.'):(has?'Gib dein Passwort ein, um die Notizen zu öffnen.':'Auf diesem Gerät gibt es noch keine Notizen. Lade eine Sicherung oder richte neu ein.');
+ $('#lbtn').textContent=m==='up'?'Passwort festlegen':'Öffnen';
+ $('#lerr').textContent='';$('#p1').focus()
 }
+function boot(){$('#p1').value=$('#p2').value='';$('#app').hidden=true;$('#lock').hidden=false;setMode(best()?'in':'up')}
+$('#tabin').onclick=()=>setMode('in');
+$('#tabup').onclick=()=>setMode('up');
+$('#limp').onclick=()=>$('#file').click();
+function enter(){$('#lock').hidden=true;$('#app').hidden=false;const first=S.notes.find(n=>n.pinned)||S.notes[0];openIds=first?[first.id]:[];drawAll()}
 $('#lf').onsubmit=async e=>{
  e.preventDefault();
- const err=m=>$('#lerr').textContent=m,p=$('#p1').value,raw=localStorage.getItem(KEY);
+ const err=m=>$('#lerr').textContent=m,p=$('#p1').value,b=best();
  if(!(window.crypto&&crypto.subtle))return err('Dieser Browser unterstützt die Verschlüsselung nicht.');
  try{
-  if(!raw){
+  if(mode==='up'){
    if(p.length<6)return err('Mindestens 6 Zeichen.');
    if(p!==$('#p2').value)return err('Die Passwörter stimmen nicht überein.');
-   salt=crypto.getRandomValues(new Uint8Array(16));key=await derive(p,salt);S=fresh();await flush()
+   if(b&&!confirm('Die vorhandenen Notizen auf diesem Gerät werden ersetzt. Fortfahren?'))return;
+   salt=crypto.getRandomValues(new Uint8Array(16));key=await derive(p,salt);S=fresh()
   }else{
-   const b=JSON.parse(raw);salt=unb(b.salt);key=await derive(p,salt);S=await unseal(b,key);S.plugins=S.plugins||{}
+   if(!b)return err('Hier gibt es noch keine Notizen. Lade eine Sicherung oder wähle „Neu einrichten“.');
+   salt=unb(b.salt);key=await derive(p,salt);S=await unseal(b,key);S.plugins=S.plugins||{}
   }
  }catch(x){key=null;S=null;return err('Falsches Passwort.')}
- $('#lock').hidden=true;$('#app').hidden=false;
- const first=S.notes.find(n=>n.pinned)||S.notes[0];openIds=first?[first.id]:[];drawAll()
+ await flush();enter()
 };
 try{const t=localStorage.getItem(TK);if(t)document.documentElement.dataset.theme=t}catch(e){}
 boot();
