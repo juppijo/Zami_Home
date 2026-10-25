@@ -41,19 +41,25 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
+        html {
+            height: 100%;
+        }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
             min-height: 100vh;
+            min-height: 100dvh;
             padding: 2rem 1rem;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
         }
 
         .container {
             width: 100%;
             max-width: 800px;
+            margin: 0 auto;
         }
 
         header {
@@ -103,6 +109,7 @@
             padding: 2.5rem;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
             text-align: center;
+            margin-top: 2rem;
         }
 
         .auth-card h2 {
@@ -267,7 +274,7 @@
     <div class="container">
 
         <!-- 1. AUTH-VIEW (Login / Registrierung / Import) -->
-        <div id="authView" class="auth-card" style="display: none;">
+        <div id="authView" class="auth-card" style="display: block;">
             <h2 id="authTitle">✨ Ersteinrichtung</h2>
             <p id="authDesc">Erstelle ein neues Master-Passwort zum Schutz deiner Notizen:</p>
             
@@ -282,7 +289,7 @@
         </div>
 
         <!-- 2. MAIN-APP-VIEW (Notizen & Tools) -->
-        <div id="appView" class="app-view" style="display: block;">
+        <div id="appView" class="app-view" style="display: none;">
             <header>
                 <h1>📝 Mein Sicheres Wiki</h1>
                 <div class="toolbar">
@@ -306,67 +313,7 @@
             </div>
 
             <!-- Notiz-Liste -->
-            <div id="notesContainer" class="note-list">
-                <div class="note-item">
-                    <div class="note-header">
-                        <div class="note-title">Test Notiz</div>
-                        <div class="note-date">25.10.2026, 14:03:18</div>
-                    </div>
-                    <div class="note-body"># 📖 Gebrauchsanweisung: Sicheres Notiz-Wiki
-
-Herzlichen Glückwunsch! Du hast eine vollkommen autarke, verschlüsselte Notiz-App, die komplett in einer **einzigen HTML-Datei** lebt. Es wird kein Server, kein Internet und keine externe Datenbank benötigt. Alle Daten bleiben absolut privat bei dir.
-
----
-
-## 1. Erster Start &amp; Registrierung
-
-1. Doppelklicke auf deine `index.html`-Datei, um sie in einem beliebigen Browser (Chrome, Firefox, Edge, Safari etc.) zu öffnen.
-2. Beim ersten Öffnen siehst du den Bildschirm **„Willkommen!“**.
-3. Gib ein sicheres **Master-Passwort** ein und klicke auf **[ Passwort festlegen ]**.
-&gt; ⚠️ **Wichtig:** Merke dir dieses Passwort gut! Es gibt keinen "Passwort vergessen"-Button, da die App deine Daten mit hochmoderner AES-256-Bit-Verschlüsselung schützt. Niemand (auch kein Server) kennt dein Passwort.
-
-
-
----
-
-## 2. Notizen verwalten
-
-* **Notiz erstellen:** Gib oben einen Titel und deinen Text ein und klicke auf **[ Notiz speichern ]**. Deine Notiz erscheint sofort in der Liste darunter.
-* **Suchen:** Nutze das Suchfeld mit der Lupe, um in Echtzeit nach Titeln oder Stichwörtern in all deinen Notizen zu filtern.
-* **Löschen:** Jede Notiz hat einen roten **[ Löschen ]**-Button. Nach einer kurzen Sicherheitsabfrage wird sie entfernt.
-
----
-
-## 3. Die Werkzeugleiste (Oben rechts)
-
-* **[ 💾 HTML-Datei sichern ] (Der wichtigste Button!):**
-Weil die App autark ist, speichert sie neue Notizen zunächst im Arbeitsspeicher. Wenn du auf diesen Button klickst, nimmt die App **alle deine aktuellen Notizen**, verschlüsselt sie mit deinem Passwort und lädt eine komplett aktualisierte `.html`-Datei (z. B. `meine-notizen.html`) auf deinen PC herunter.
-* *Nutzung:* Diese heruntergeladene Datei ist ab sofort dein neuer, aktueller Stand! Du kannst sie auf einen USB-Stick ziehen, per E-Mail an dich selbst senden oder auf GitHub hochladen.
-
-
-* **[ 🎨 Design ]:** Schaltet das Farbschema der App durch (Dunkelmodus ➔ Heller Clean-Look ➔ Gemütlicher Sepia/Papier-Look).
-* **[ ⛶ Vollbild ]:** Schaltet den echten Vollbildmodus deines Browsers ein und aus.
-* **[ 🔒 Sperren ]:** Beendet deine aktuelle Sitzung und sperrt das Wiki sofort mit einem Passwort-Schloss. Perfekt, wenn du den Arbeitsplatz kurz verlässt.
-
----
-
-## 4. Nutzung auf einem anderen PC oder in einem anderen Browser
-
-Wenn du deine Notizen auf einem zweiten Computer oder einem USB-Stick öffnen möchtest:
-
-1. Nimm die zuletzt mit **[ 💾 HTML-Datei sichern ]** heruntergeladene `.html`-Datei.
-2. Öffne sie auf dem neuen PC.
-3. Die App erkennt sofort, dass verschlüsselte Daten vorhanden sind, und fragt nach deinem **Master-Passwort**. Nach der Eingabe sind alle Notizen sofort wieder da!
-4. Alternativ kannst du über den Button **[ 📂 Backup / Fremde HTML laden ]** auf dem Startbildschirm auch manuell jede gesicherte Datei auswählen.
-
----
-
-*Viel Freude mit deinem persönlichen, absolut sicheren und tragbaren Notiz-Wiki! 🥰*</div>
-                    <div class="note-footer">
-                        <button class="btn btn-danger" onclick="deleteNote(1792933398929)">Löschen</button>
-                    </div>
-                </div>
-            </div>
+            <div id="notesContainer" class="note-list"></div>
         </div>
 
     </div>
@@ -2029,7 +1976,7 @@ Wenn du deine Notizen auf einem zweiten Computer oder einem USB-Stick öffnen m�
     8,
     194,
     156,
-    111,
+    116,
     16,
     177,
     134,
