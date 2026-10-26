@@ -3117,7 +3117,16 @@
       {
         "label": "Buch_Studio.html",
         "url": "https://juppijo.github.io/Logik_des_Universums/Buch_Studio.html",
-        "icon": "✨"
+        "icon": "✨",
+        "fav": false,
+        "hidden": false,
+        "flag": null,
+        "tags": [
+          "Buch",
+          "Editor",
+          "Studio"
+        ],
+        "comment": "Werkstatt – Editor für das Buch Studio"
       },
       {
         "label": "Buch_Werkstatt.html",
