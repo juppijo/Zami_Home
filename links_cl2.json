@@ -11962,22 +11962,59 @@
       {
         "label": "html2md/Heilung2.md",
         "url": "https://juppijo.github.io/Zami_Buecher/html2md/Heilung2.md",
-        "icon": "✨"
+        "icon": "✨",
+        "comment": "HTML, MD, Mark Down",
+        "fav": false,
+        "hidden": false,
+        "flag": null,
+        "tags": [
+          "HTML",
+          "MD",
+          "Mark Down"
+        ]
       },
       {
         "label": "html2md/Mirjam_ha-Magdalit.md",
         "url": "https://juppijo.github.io/Zami_Buecher/html2md/Mirjam_ha-Magdalit.md",
-        "icon": "✨"
+        "icon": "✨",
+        "comment": "HTML, MD, Mark Down",
+        "fav": false,
+        "hidden": false,
+        "flag": null,
+        "tags": [
+          "HTML",
+          "MD",
+          "Mark Down"
+        ]
       },
       {
         "label": "html2md/Zaminia-und-die-Schattenkrieger.md",
         "url": "https://juppijo.github.io/Zami_Buecher/html2md/Zaminia-und-die-Schattenkrieger.md",
-        "icon": "✨"
+        "icon": "✨",
+        "comment": "HTML, MD, Mark Down",
+        "fav": false,
+        "hidden": false,
+        "flag": null,
+        "tags": [
+          "HTML",
+          "MD",
+          "Mark Down"
+        ]
       },
       {
         "label": "html2md/html_zu_md.py",
         "url": "https://juppijo.github.io/Zami_Buecher/html2md/html_zu_md.py",
-        "icon": "✨"
+        "icon": "✨",
+        "comment": "Konverter, HTML, MD, Mark Down",
+        "fav": false,
+        "hidden": false,
+        "flag": null,
+        "tags": [
+          "Konverter",
+          "HTML",
+          "MD",
+          "Mark Down"
+        ]
       },
       {
         "label": "index.html",
