@@ -33,6 +33,11 @@
         "icon": "✨"
       },
       {
+        "label": "Heilung2.html",
+        "url": "https://juppijo.github.io/Autogenes-Training/Heilung2.html",
+        "icon": "✨"
+      },
+      {
         "label": "Innerer-Wahrnehmungs-Test.html",
         "url": "https://juppijo.github.io/Autogenes-Training/Innerer-Wahrnehmungs-Test.html",
         "icon": "✨"
@@ -1213,6 +1218,11 @@
         "icon": "✨"
       },
       {
+        "label": "Buch_Studio.html",
+        "url": "https://juppijo.github.io/Logik_des_Universums/Buch_Studio.html",
+        "icon": "✨"
+      },
+      {
         "label": "Buch_Werkstatt.html",
         "url": "https://juppijo.github.io/Logik_des_Universums/Buch_Werkstatt.html",
         "icon": "✨"
@@ -1420,11 +1430,6 @@
       {
         "label": "konverter_smartphone_lu2.py",
         "url": "https://juppijo.github.io/Logik_des_Universums/konverter_smartphone_lu2.py",
-        "icon": "✨"
-      },
-      {
-        "label": "logik_des_universums_studio.html",
-        "url": "https://juppijo.github.io/Logik_des_Universums/logik_des_universums_studio.html",
         "icon": "✨"
       },
       {
@@ -4655,6 +4660,26 @@
       {
         "label": "html-to-md-converter.html",
         "url": "https://juppijo.github.io/Zami_Buecher/html-to-md-converter.html",
+        "icon": "✨"
+      },
+      {
+        "label": "html2md/Heilung2.md",
+        "url": "https://juppijo.github.io/Zami_Buecher/html2md/Heilung2.md",
+        "icon": "✨"
+      },
+      {
+        "label": "html2md/Mirjam_ha-Magdalit.md",
+        "url": "https://juppijo.github.io/Zami_Buecher/html2md/Mirjam_ha-Magdalit.md",
+        "icon": "✨"
+      },
+      {
+        "label": "html2md/Zaminia-und-die-Schattenkrieger.md",
+        "url": "https://juppijo.github.io/Zami_Buecher/html2md/Zaminia-und-die-Schattenkrieger.md",
+        "icon": "✨"
+      },
+      {
+        "label": "html2md/html_zu_md.py",
+        "url": "https://juppijo.github.io/Zami_Buecher/html2md/html_zu_md.py",
         "icon": "✨"
       },
       {

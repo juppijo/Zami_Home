@@ -81,6 +81,11 @@
         "comment": "Haltungstest zur Selbsteinschätzung"
       },
       {
+        "label": "Heilung2.html",
+        "url": "https://juppijo.github.io/Autogenes-Training/Heilung2.html",
+        "icon": "✨"
+      },
+      {
         "label": "Innerer-Wahrnehmungs-Test.html",
         "url": "https://juppijo.github.io/Autogenes-Training/Innerer-Wahrnehmungs-Test.html",
         "icon": "✨",
@@ -3110,6 +3115,11 @@
         "comment": "Konverter für Buch-Dateien (Word/HTML) (Pro-Version)"
       },
       {
+        "label": "Buch_Studio.html",
+        "url": "https://juppijo.github.io/Logik_des_Universums/Buch_Studio.html",
+        "icon": "✨"
+      },
+      {
         "label": "Buch_Werkstatt.html",
         "url": "https://juppijo.github.io/Logik_des_Universums/Buch_Werkstatt.html",
         "icon": "✨",
@@ -3655,19 +3665,6 @@
         "comment": "Konverter für Buch-Dateien (Word/HTML) (weitere Version)"
       },
       {
-        "label": "logik_des_universums_studio.html",
-        "url": "https://juppijo.github.io/Logik_des_Universums/logik_des_universums_studio.html",
-        "icon": "✨",
-        "fav": false,
-        "hidden": false,
-        "flag": "blue",
-        "tags": [
-          "Buch",
-          "Editor"
-        ],
-        "comment": "Studio – HTML-Editor für das Buch"
-      },
-      {
         "label": "script-s.js",
         "url": "https://juppijo.github.io/Logik_des_Universums/script-s.js",
         "icon": "✨",
@@ -3731,6 +3728,19 @@
           "Buch"
         ],
         "comment": "Layout/Design der App „Logik des Universums“ (Buch „Logik des Universums“)"
+      },
+      {
+        "label": "logik_des_universums_studio.html",
+        "url": "https://juppijo.github.io/Logik_des_Universums/logik_des_universums_studio.html",
+        "icon": "✨",
+        "fav": false,
+        "hidden": false,
+        "flag": "blue",
+        "tags": [
+          "Buch",
+          "Editor"
+        ],
+        "comment": "Studio – HTML-Editor für das Buch"
       }
     ]
   },
@@ -11948,6 +11958,26 @@
           "Buch"
         ],
         "comment": "Konverter für Buch-Dateien"
+      },
+      {
+        "label": "html2md/Heilung2.md",
+        "url": "https://juppijo.github.io/Zami_Buecher/html2md/Heilung2.md",
+        "icon": "✨"
+      },
+      {
+        "label": "html2md/Mirjam_ha-Magdalit.md",
+        "url": "https://juppijo.github.io/Zami_Buecher/html2md/Mirjam_ha-Magdalit.md",
+        "icon": "✨"
+      },
+      {
+        "label": "html2md/Zaminia-und-die-Schattenkrieger.md",
+        "url": "https://juppijo.github.io/Zami_Buecher/html2md/Zaminia-und-die-Schattenkrieger.md",
+        "icon": "✨"
+      },
+      {
+        "label": "html2md/html_zu_md.py",
+        "url": "https://juppijo.github.io/Zami_Buecher/html2md/html_zu_md.py",
+        "icon": "✨"
       },
       {
         "label": "index.html",
