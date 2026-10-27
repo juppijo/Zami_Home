@@ -273,12 +273,15 @@
     </div>
   </div>
 
-  <!-- FILTER BAR -->
-  <div id="filterbar" style="display:none">
+<!-- FILTER BAR -->
+<div id="filterbar" style="display:none">
+    
     <span class="flbl">Filter:</span>
     <button class="ftoggle" id="fFav" onclick="toggleF('fav')">⭐ Favoriten</button>
     <button class="ftoggle" id="fHidden" onclick="toggleF('hidden')">👁 Versteckte</button>
+    
     <div class="fsep"></div>
+    
     <span class="flbl">Flag:</span>
     <span class="flag-dot" id="fd-red" style="background:#ef4444" title="Rot" onclick="toggleFlag('red')"></span>
     <span class="flag-dot" id="fd-yellow" style="background:#fbbf24" title="Gelb" onclick="toggleFlag('yellow')"></span>
@@ -286,7 +289,9 @@
     <span class="flag-dot" id="fd-blue" style="background:#38bdf8" title="Blau" onclick="toggleFlag('blue')"></span>
     <span class="flag-dot" id="fd-purple" style="background:#a78bfa" title="Lila" onclick="toggleFlag('purple')"></span>
     <span class="flag-dot" id="fd-orange" style="background:#f97316" title="Orange" onclick="toggleFlag('orange')"></span>
+    
     <div class="fsep"></div>
+    
     <span class="flbl">Typ:</span>
     <button class="ftoggle" id="ft-html" onclick="toggleType('html')">🌐 html</button>
     <button class="ftoggle" id="ft-js" onclick="toggleType('js')">⚡ js</button>
@@ -297,13 +302,49 @@
     <button class="ftoggle" id="ft-img" onclick="toggleType('img')">🖼 img</button>
     <button class="ftoggle" id="ft-media" onclick="toggleType('media')">🎵 media</button>
     <button class="ftoggle" id="ft-pdf" onclick="toggleType('pdf')">📄 pdf</button>
+    
     <div class="fsep"></div>
+        
+    <!-- Button zum Öffnen des Fensters -->
     <span class="flbl">Tags:</span>
-    <div id="tagChips" style="display:flex;gap:4px;flex-shrink:0"></div>
-    <button class="ftoggle" onclick="clearFilters()" style="margin-left:8px;border-color:#ef4444;color:#ef4444">✕ Reset</button>
-  </div>
+    <button class="ftoggle" onclick="openTagModal()" style="border-color:#c9a227; color:#c9a227;">🏷️ Tags wählen</button>
+    
+    <button class="ftoggle" onclick="clearFilters()" style="margin-left:8px; border-color:#ef4444; color:#ef4444">✕ Reset</button>
+</div>
 
-  <div id="main"></div>
+<!-- SEPARATES MODAL-FENSTER FÜR TAGS -->
+<dialog id="tagModal" style="background:#141414; color:#e8e8e4; border:1px solid #2a2a2a; border-radius:10px; padding:20px; max-width:450px; width:100%; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:1px solid #2a2a2a; padding-bottom:8px;">
+        <h3 style="margin:0; color:#c9a227; font-size:16px;">Tags filtern</h3>
+        <button onclick="closeTagModal()" style="background:none; border:none; color:#e8e8e4; cursor:pointer; font-size:18px;">✕</button>
+    </div>
+    
+    <!-- Hier landen deine dynamischen Tag-Chips -->
+    <div id="tagChips" style="display:flex; gap:6px; flex-wrap:wrap; max-height:250px; overflow-y:auto; padding:4px 0;"></div>
+    
+    <div style="margin-top:20px; text-align:right;">
+        <button onclick="closeTagModal()" style="background:#c9a227; border:none; color:#141414; padding:8px 16px; border-radius:6px; cursor:pointer; font-weight:600;">Fertig</button>
+    </div>
+</dialog>
+
+<div id="main"></div>
+
+<script>
+// JavaScript für das Modal-Fenster
+function openTagModal() {
+    const modal = document.getElementById('tagModal');
+    if (modal.showModal) {
+        modal.showModal();
+    }
+}
+
+function closeTagModal() {
+    const modal = document.getElementById('tagModal');
+    if (modal.close) {
+        modal.close();
+    }
+}
+</script>
 
   <!-- Edit Modal -->
   <div class="ov" id="editMod" onclick="bgClose(event,'editMod')">
