@@ -2788,6 +2788,11 @@
         "icon": "✨"
       },
       {
+        "label": "Galaxie 3D mit schwarzem Loch.html",
+        "url": "https://juppijo.github.io/WRZT/Galaxie%203D%20mit%20schwarzem%20Loch.html",
+        "icon": "✨"
+      },
+      {
         "label": "HT/index.html",
         "url": "https://juppijo.github.io/WRZT/HT/index.html",
         "icon": "✨"
@@ -3768,11 +3773,6 @@
         "icon": "✨"
       },
       {
-        "label": "WRZT_O/Dreieck.jpg",
-        "url": "https://juppijo.github.io/WRZT/WRZT_O/Dreieck.jpg",
-        "icon": "✨"
-      },
-      {
         "label": "WRZT_O/Elektrodynamische-Kopplung.html",
         "url": "https://juppijo.github.io/WRZT/WRZT_O/Elektrodynamische-Kopplung.html",
         "icon": "✨"
@@ -3835,11 +3835,6 @@
       {
         "label": "WRZT_O/Rmin_neu.html",
         "url": "https://juppijo.github.io/WRZT/WRZT_O/Rmin_neu.html",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT_O/Tannenbaum.jpg",
-        "url": "https://juppijo.github.io/WRZT/WRZT_O/Tannenbaum.jpg",
         "icon": "✨"
       },
       {
@@ -3935,11 +3930,6 @@
       {
         "label": "WRZT_O/kurven_formeln.xlsx",
         "url": "https://juppijo.github.io/WRZT/WRZT_O/kurven_formeln.xlsx",
-        "icon": "✨"
-      },
-      {
-        "label": "WRZT_O/logik_des_universums_5_0_studio.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT_O/logik_des_universums_5_0_studio.html",
         "icon": "✨"
       },
       {
@@ -4115,6 +4105,11 @@
       {
         "label": "wrznt_netzwerk_simulation_3d.html",
         "url": "https://juppijo.github.io/WRZT/wrznt_netzwerk_simulation_3d.html",
+        "icon": "✨"
+      },
+      {
+        "label": "wrzt_galaxienentstehung.html",
+        "url": "https://juppijo.github.io/WRZT/wrzt_galaxienentstehung.html",
         "icon": "✨"
       },
       {
@@ -4680,6 +4675,11 @@
       {
         "label": "html2md/html_zu_md.py",
         "url": "https://juppijo.github.io/Zami_Buecher/html2md/html_zu_md.py",
+        "icon": "✨"
+      },
+      {
+        "label": "html2md/ticktick-und-krack-drive.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/html2md/ticktick-und-krack-drive.html",
         "icon": "✨"
       },
       {
@@ -5645,11 +5645,6 @@
       {
         "label": "rubiks_solver.html",
         "url": "https://juppijo.github.io/ZenZamiSpiele-Co/rubiks_solver.html",
-        "icon": "✨"
-      },
-      {
-        "label": "ticktick-und-krack-drive.html",
-        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/ticktick-und-krack-drive.html",
         "icon": "✨"
       }
     ]

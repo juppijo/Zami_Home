@@ -7143,6 +7143,19 @@
         "comment": "Wellenfeld und Wellenraumzeit"
       },
       {
+        "label": "Galaxie 3D mit schwarzem Loch.html",
+        "url": "https://juppijo.github.io/WRZT/Galaxie%203D%20mit%20schwarzem%20Loch.html",
+        "icon": "✨",
+        "comment": "Galaxie Simulation 3D",
+        "fav": false,
+        "hidden": false,
+        "flag": null,
+        "tags": [
+          "3D",
+          "Simulation"
+        ]
+      },
+      {
         "label": "HT/index.html",
         "url": "https://juppijo.github.io/WRZT/HT/index.html",
         "icon": "✨",
@@ -9665,19 +9678,6 @@
         "comment": "Herleitung des Mindestradius R_min"
       },
       {
-        "label": "WRZT_O/Dreieck.jpg",
-        "url": "https://juppijo.github.io/WRZT/WRZT_O/Dreieck.jpg",
-        "icon": "✨",
-        "fav": false,
-        "hidden": false,
-        "flag": "yellow",
-        "tags": [
-          "Bild",
-          "WRZT"
-        ],
-        "comment": "Grafik zur Theorie: Dreieck"
-      },
-      {
         "label": "WRZT_O/Elektrodynamische-Kopplung.html",
         "url": "https://juppijo.github.io/WRZT/WRZT_O/Elektrodynamische-Kopplung.html",
         "icon": "✨",
@@ -9843,19 +9843,6 @@
           "Herleitung"
         ],
         "comment": "Herleitung des Mindestradius R_min"
-      },
-      {
-        "label": "WRZT_O/Tannenbaum.jpg",
-        "url": "https://juppijo.github.io/WRZT/WRZT_O/Tannenbaum.jpg",
-        "icon": "✨",
-        "fav": false,
-        "hidden": false,
-        "flag": "yellow",
-        "tags": [
-          "Bild",
-          "WRZT"
-        ],
-        "comment": "Grafik zur Theorie: Tannenbaum"
       },
       {
         "label": "WRZT_O/Traegheit.html",
@@ -10098,19 +10085,6 @@
           "Formeln"
         ],
         "comment": "Excel-Tabelle mit Kurvenformeln"
-      },
-      {
-        "label": "WRZT_O/logik_des_universums_5_0_studio.html",
-        "url": "https://juppijo.github.io/WRZT/WRZT_O/logik_des_universums_5_0_studio.html",
-        "icon": "✨",
-        "fav": false,
-        "hidden": false,
-        "flag": "blue",
-        "tags": [
-          "Buch",
-          "Editor"
-        ],
-        "comment": "Studio-Editor für „Logik des Universums 5.0“"
       },
       {
         "label": "WRZT_O/manifest.html",
@@ -10561,6 +10535,11 @@
         "comment": "Wellen-Netzwerk-Simulation"
       },
       {
+        "label": "wrzt_galaxienentstehung.html",
+        "url": "https://juppijo.github.io/WRZT/wrzt_galaxienentstehung.html",
+        "icon": "✨"
+      },
+      {
         "label": "wrztbugwelle.html",
         "url": "https://juppijo.github.io/WRZT/wrztbugwelle.html",
         "icon": "✨",
@@ -10585,6 +10564,45 @@
           "Daten"
         ],
         "comment": "Link-Sammlung (JSON)"
+      },
+      {
+        "label": "WRZT_O/Dreieck.jpg",
+        "url": "https://juppijo.github.io/WRZT/WRZT_O/Dreieck.jpg",
+        "icon": "✨",
+        "fav": false,
+        "hidden": false,
+        "flag": "yellow",
+        "tags": [
+          "Bild",
+          "WRZT"
+        ],
+        "comment": "Grafik zur Theorie: Dreieck"
+      },
+      {
+        "label": "WRZT_O/Tannenbaum.jpg",
+        "url": "https://juppijo.github.io/WRZT/WRZT_O/Tannenbaum.jpg",
+        "icon": "✨",
+        "fav": false,
+        "hidden": false,
+        "flag": "yellow",
+        "tags": [
+          "Bild",
+          "WRZT"
+        ],
+        "comment": "Grafik zur Theorie: Tannenbaum"
+      },
+      {
+        "label": "WRZT_O/logik_des_universums_5_0_studio.html",
+        "url": "https://juppijo.github.io/WRZT/WRZT_O/logik_des_universums_5_0_studio.html",
+        "icon": "✨",
+        "fav": false,
+        "hidden": false,
+        "flag": "blue",
+        "tags": [
+          "Buch",
+          "Editor"
+        ],
+        "comment": "Studio-Editor für „Logik des Universums 5.0“"
       }
     ]
   },
@@ -12026,6 +12044,11 @@
         ]
       },
       {
+        "label": "html2md/ticktick-und-krack-drive.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/html2md/ticktick-und-krack-drive.html",
+        "icon": "✨"
+      },
+      {
         "label": "index.html",
         "url": "https://juppijo.github.io/Zami_Buecher/index.html",
         "icon": "✨",
@@ -12076,6 +12099,11 @@
           "Buch"
         ],
         "comment": "Konverter für Buch-Dateien (KI-Variante)"
+      },
+      {
+        "label": "html2md/ticktick-und-krack.md",
+        "url": "https://juppijo.github.io/Zami_Buecher/html2md/ticktick-und-krack.md",
+        "icon": "✨"
       }
     ]
   },
