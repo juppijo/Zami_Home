@@ -11164,6 +11164,26 @@
         "comment": "Mirjam ha-Magdalit (Buch/Texte)"
       },
       {
+        "label": "PDF/jpg_zu_pdf_cl.py",
+        "url": "https://juppijo.github.io/Zami_Buecher/PDF/jpg_zu_pdf_cl.py",
+        "icon": "✨"
+      },
+      {
+        "label": "PDF/jpg_zu_pdf_g.py",
+        "url": "https://juppijo.github.io/Zami_Buecher/PDF/jpg_zu_pdf_g.py",
+        "icon": "✨"
+      },
+      {
+        "label": "PDF/pdf_einfuegen_cl.py",
+        "url": "https://juppijo.github.io/Zami_Buecher/PDF/pdf_einfuegen_cl.py",
+        "icon": "✨"
+      },
+      {
+        "label": "PDF/pdf_einfuegen_g.py",
+        "url": "https://juppijo.github.io/Zami_Buecher/PDF/pdf_einfuegen_g.py",
+        "icon": "✨"
+      },
+      {
         "label": "README.md",
         "url": "https://juppijo.github.io/Zami_Buecher/README.md",
         "icon": "✨",
@@ -13703,6 +13723,11 @@
         "comment": "Projektbeschreibung (Zaminia Zen Theme) (Zen-Theme)"
       },
       {
+        "label": "RGB_Farbkanäle_Pro.html",
+        "url": "https://juppijo.github.io/Zaminia-Zen-Theme/RGB_Farbkan%C3%A4le_Pro.html",
+        "icon": "✨"
+      },
+      {
         "label": "Zami.jpg",
         "url": "https://juppijo.github.io/Zaminia-Zen-Theme/Zami.jpg",
         "icon": "✨",
@@ -13764,6 +13789,11 @@
           "Style"
         ],
         "comment": "Layout für die Tabellen-Ansicht"
+      },
+      {
+        "label": "rgb_studio_farb_analysator_pro.html",
+        "url": "https://juppijo.github.io/Zaminia-Zen-Theme/rgb_studio_farb_analysator_pro.html",
+        "icon": "✨"
       },
       {
         "label": "script.js",
