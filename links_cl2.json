@@ -13911,6 +13911,11 @@
         "comment": "Apfelmännchen (Fraktal) in 2D/3D"
       },
       {
+        "label": "3d_go_game.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/3d_go_game.html",
+        "icon": "✨"
+      },
+      {
         "label": "4_4_Cube_Lab.html",
         "url": "https://juppijo.github.io/ZenZamiSpiele-Co/4_4_Cube_Lab.html",
         "icon": "✨",
@@ -13976,6 +13981,11 @@
         "comment": "Zauberwürfel-Lab / Solver"
       },
       {
+        "label": "Direktchat–WebRTC.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Direktchat%E2%80%93WebRTC.html",
+        "icon": "✨"
+      },
+      {
         "label": "Dreieck-Duell.html",
         "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Dreieck-Duell.html",
         "icon": "✨",
@@ -14038,6 +14048,11 @@
           "Design"
         ],
         "comment": "Farben-Spiel / Farbwähler (weitere Version)"
+      },
+      {
+        "label": "Go–Das_Brettspiel.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Go%E2%80%93Das_Brettspiel.html",
+        "icon": "✨"
       },
       {
         "label": "Puzzle_JO(ABC).html",
@@ -14528,6 +14543,11 @@
           "Puzzle"
         ],
         "comment": "Zauberwürfel-Lab / Solver"
+      },
+      {
+        "label": "webrtc_p2p_messenger.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/webrtc_p2p_messenger.html",
+        "icon": "✨"
       }
     ]
   }
