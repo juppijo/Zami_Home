@@ -7020,6 +7020,11 @@
     "title": "WRZT",
     "links": [
       {
+        "label": "Einzelphotonen-Labor.html",
+        "url": "https://juppijo.github.io/WRZT/Einzelphotonen-Labor.html",
+        "icon": "✨"
+      },
+      {
         "label": "Ekin_Epot.py",
         "url": "https://juppijo.github.io/WRZT/Ekin_Epot.py",
         "icon": "✨",
@@ -7421,6 +7426,16 @@
           "WRZT"
         ],
         "comment": "Physiker"
+      },
+      {
+        "label": "Polarisationsfilter-Labor.html",
+        "url": "https://juppijo.github.io/WRZT/Polarisationsfilter-Labor.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Polarisationsfilter.html",
+        "url": "https://juppijo.github.io/WRZT/Polarisationsfilter.html",
+        "icon": "✨"
       },
       {
         "label": "QW.png",
@@ -10397,6 +10412,11 @@
         "icon": "✨"
       },
       {
+        "label": "phasenverschiebung_3d.html",
+        "url": "https://juppijo.github.io/WRZT/phasenverschiebung_3d.html",
+        "icon": "✨"
+      },
+      {
         "label": "physik_formel_editor.html",
         "url": "https://juppijo.github.io/WRZT/physik_formel_editor.html",
         "icon": "✨",
@@ -11321,6 +11341,11 @@
       {
         "label": "Wahre_Liebe.html",
         "url": "https://juppijo.github.io/Zami_Buecher/Wahre_Liebe.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Wahre_Liebe.md",
+        "url": "https://juppijo.github.io/Zami_Buecher/Wahre_Liebe.md",
         "icon": "✨"
       },
       {
