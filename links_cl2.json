@@ -10321,6 +10321,11 @@
         "comment": "astro physform"
       },
       {
+        "label": "bbo_simulation.html",
+        "url": "https://juppijo.github.io/WRZT/bbo_simulation.html",
+        "icon": "✨"
+      },
+      {
         "label": "data.js",
         "url": "https://juppijo.github.io/WRZT/data.js",
         "icon": "✨",
@@ -10588,6 +10593,11 @@
           "3D",
           "Simulation"
         ]
+      },
+      {
+        "label": "wrzt_undatron_3d_wave_simulation.html",
+        "url": "https://juppijo.github.io/WRZT/wrzt_undatron_3d_wave_simulation.html",
+        "icon": "✨"
       },
       {
         "label": "wrztbugwelle.html",
