@@ -10792,6 +10792,16 @@
         "comment": "Illustration aus „Die Schattenkrieger“ (Die Schattenkrieger 12)"
       },
       {
+        "label": "EPUB/EPUB-Reader-G.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/EPUB/EPUB-Reader-G.html",
+        "icon": "✨"
+      },
+      {
+        "label": "EPUB/epub_studio.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/EPUB/epub_studio.html",
+        "icon": "✨"
+      },
+      {
         "label": "Foto-Karussell.html",
         "url": "https://juppijo.github.io/Zami_Buecher/Foto-Karussell.html",
         "icon": "✨",
@@ -13458,6 +13468,11 @@
         "comment": "Künstlerisches Bild / Portrait: ZamiZen4"
       },
       {
+        "label": "Zaminia.md",
+        "url": "https://juppijo.github.io/zaminia/Zaminia.md",
+        "icon": "✨"
+      },
+      {
         "label": "ZaminiasKunstwelt.html",
         "url": "https://juppijo.github.io/zaminia/ZaminiasKunstwelt.html",
         "icon": "✨",
@@ -14195,6 +14210,31 @@
           "Puzzle"
         ],
         "comment": "Zauberwürfel-Lab / Solver"
+      },
+      {
+        "label": "Shambala_Luminia/config.js",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Shambala_Luminia/config.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Shambala_Luminia/game.js",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Shambala_Luminia/game.js",
+        "icon": "✨"
+      },
+      {
+        "label": "Shambala_Luminia/index.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Shambala_Luminia/index.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Shambala_Luminia/shambala_luminia_zaminias_pfad_der_weisheit.html",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Shambala_Luminia/shambala_luminia_zaminias_pfad_der_weisheit.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Shambala_Luminia/style.css",
+        "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Shambala_Luminia/style.css",
+        "icon": "✨"
       },
       {
         "label": "Solver_Cl.json",
