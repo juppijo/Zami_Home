@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="ocean">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>HTML-Katalog Manager – Edit, Suche & Sortierung</title>
+  <style>
+    /* ==========================================================================
+       THEME-VARIABLEN (3 Style-Modi: Ocean Dark, Zen Light, Midnight Contrast)
+       ========================================================================== */
+    :root,
+    [data-theme="ocean"] {
+      --theme-name: "Deep Ocean";
+      --bg-body: #091322;
+      --bg-surface: #0f1f38;
+      --bg-surface-2: #15294a;
+      --bg-surface-hover: #1b345e;
+      --bg-input: #08101d;
+      --border-color: #243f6b;
+      --border-focus: #38bdf8;
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --accent: #38bdf8;
+      --accent-hover: #0ea5e9;
+      --accent-text: #041322;
+      --badge-bg: rgba(56, 189, 248, 0.14);
+      --badge-text: #7dd3fc;
+      --subbadge-bg: rgba(168, 85, 247, 0.16);
+      --subbadge-text: #d8b4fe;
+      --danger: #f87171;
+      --danger-bg: rgba(248, 113, 113, 0.14);
+      --success: #34d399;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    [data-theme="zen"] {
+      --theme-name: "Zen Papier";
+      --bg-body: #f5f3ee;
+      --bg-surface: #ffffff;
+      --bg-surface-2: #edeae2;
+      --bg-surface-hover: #e4e0d5;
+      --bg-input: #faf9f6;
+      --border-color: #d6d0c4;
+      --border-focus: #2b6cb0;
+      --text-main: #1e293b;
+      --text-muted: #475569;
+      --text-dim: #64748b;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-text: #ffffff;
+      --badge-bg: rgba(37, 99, 235, 0.1);
+      --badge-text: #1d4ed8;
+      --subbadge-bg: rgba(13, 148, 136, 0.12);
+      --subbadge-text: #0f766e;
+      --danger: #dc2626;
+      --danger-bg: rgba(220, 38, 38, 0.1);
+      --success: #059669;
+      --shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+    }
+
+    [data-theme="contrast"] {
+      --theme-name: "Kontrast";
+      --bg-body: #000000;
+      --bg-surface: #111111;
+      --bg-surface-2: #1c1c1c;
+      --bg-surface-hover: #262626;
+      --bg-input: #050505;
+      --border-color: #3a3a3a;
+      --border-focus: #facc15;
+      --text-main: #ffffff;
+      --text-muted: #d4d4d8;
+      --text-dim: #a1a1aa;
+      --accent: #facc15;
+      --accent-hover: #eab308;
+      --accent-text: #000000;
+      --badge-bg: rgba(250, 204, 21, 0.18);
+      --badge-text: #fde047;
+      --subbadge-bg: rgba(52, 211, 153, 0.18);
+      --subbadge-text: #6ee7b7;
+      --danger: #ff5555;
+      --danger-bg: rgba(255, 85, 85, 0.18);
+      --success: #4ade80;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+    }
+
+    /* ==========================================================================
+       GRUNDLAYOUT & RESET
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface-2);
+      border-radius: 8px;
+      padding: 0.5rem 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    button:hover {
+      background: var(--bg-surface-hover);
+      border-color: var(--accent);
+    }
+
+    button.primary {
+      background: var(--accent);
+      color: var(--accent-text);
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+
+    button.primary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+
+    button.danger {
+      color: var(--danger);
+      border-color: transparent;
+      background: var(--danger-bg);
+    }
+
+    button.danger:hover {
+      border-color: var(--danger);
+    }
+
+    button.icon-only {
+      padding: 0.45rem 0.6rem;
+    }
+
+    input, select, textarea {
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.52rem 0.75rem;
+      font-size: 0.92rem;
+      width: 100%;
+      transition: border-color 0.15s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--border-focus);
+    }
+
+    /* ==========================================================================
+       HEADER & TOOLBAR
+       ========================================================================== */
+    header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.85rem 1.25rem;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      box-shadow: var(--shadow);
+    }
+
+    .header-top {
+      max-width: 1500px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .brand h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .stats-pill {
+      font-size: 0.78rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      font-weight: 600;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .controls-bar {
+      max-width: 1500px;
+      margin: 0.85rem auto 0;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr auto;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    .search-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-wrap input {
+      padding-left: 2.1rem;
+      padding-right: 2rem;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.7rem;
+      color: var(--text-dim);
+      pointer-events: none;
+      font-size: 0.9rem;
+    }
+
+    .clear-search {
+      position: absolute;
+      right: 0.45rem;
+      background: transparent;
+      border: none;
+      padding: 0.2rem 0.4rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .view-toggle {
+      display: inline-flex;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 2px;
+    }
+
+    .view-toggle button {
+      border: none;
+      background: transparent;
+      padding: 0.38rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.84rem;
+    }
+
+    .view-toggle button.active {
+      background: var(--accent);
+      color: var(--accent-text);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       MAIN CONTAINER & EMPTY STATE (OHNE BEISPIELDATEN)
+       ========================================================================== */
+    main {
+      flex: 1;
+      max-width: 1500px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.25rem;
+    }
+
+    .empty-state {
+      border: 2px dashed var(--border-color);
+      background: var(--bg-surface);
+      border-radius: 16px;
+      padding: 3.5rem 1.5rem;
+      text-align: center;
+      max-width: 640px;
+      margin: 2.5rem auto;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .empty-state.dragover {
+      border-color: var(--accent);
+      background: var(--bg-surface-2);
+    }
+
+    .empty-icon {
+      font-size: 2.8rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .empty-state h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .empty-state p {
+      color: var(--text-muted);
+      font-size: 0.94rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .empty-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    /* ==========================================================================
+       RASTER-ANSICHT (GRID)
+       ========================================================================== */
+    .grid-view {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.75rem;
+      transition: transform 0.12s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+    }
+
+    .card-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .badge {
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 0.18rem 0.55rem;
+      border-radius: 6px;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+    }
+
+    .badge.sub {
+      background: var(--subbadge-bg);
+      color: var(--subbadge-text);
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      word-break: break-word;
+      margin-bottom: 0.25rem;
+    }
+
+    .card-path {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.76rem;
+      color: var(--text-dim);
+      word-break: break-all;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding-top: 0.65rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    /* ==========================================================================
+       LISTEN-ANSICHT (TABELLE / KOMPAKT)
+       ========================================================================== */
+    .list-view {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.89rem;
+    }
+
+    th {
+      background: var(--bg-surface-2);
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.75rem 0.9rem;
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 0.7rem 0.9rem;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: middle;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background: var(--bg-surface-hover);
+    }
+
+    .td-file {
+      font-weight: 600;
+      word-break: break-word;
+      min-width: 180px;
+    }
+
+    .td-path {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      word-break: break-all;
+    }
+
+    .td-desc {
+      color: var(--text-muted);
+      min-width: 220px;
+    }
+
+    .td-actions {
+      white-space: nowrap;
+      text-align: right;
+    }
+
+    /* ==========================================================================
+       MODAL DIALOG (BEARBEITEN / NEU ANLEGEN)
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.68);
+      backdrop-filter: blur(3px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 100;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      width: 100%;
+      max-width: 560px;
+      max-height: 92vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow);
+      padding: 1.35rem;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .modal-header h2 {
+      font-size: 1.1rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.6rem;
+      margin-top: 1.25rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* ==========================================================================
+       TOAST BENACHRICHTIGUNG
+       ========================================================================== */
+    .toast {
+      position: fixed;
+      bottom: 1.25rem;
+      right: 1.25rem;
+      background: var(--bg-surface-2);
+      border: 1px solid var(--accent);
+      color: var(--text-main);
+      padding: 0.65rem 1rem;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: all 0.2s ease;
+      z-index: 200;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==========================================================================
+       SMARTPHONE & TABLET RESPONSIVE ANPASSUNGEN
+       ========================================================================== */
+    @media (max-width: 960px) {
+      .controls-bar {
+        grid-template-columns: 1fr 1fr;
+      }
+      .search-wrap {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 0.75rem 0.9rem;
+      }
+      .brand h1 {
+        font-size: 1rem;
+      }
+      .toolbar-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .toolbar-actions button {
+        padding: 0.45rem 0.6rem;
+        font-size: 0.82rem;
+      }
+      .controls-bar {
+        grid-template-columns: 1fr;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      main {
+        padding: 0.85rem;
+      }
+      .grid-view {
+        grid-template-columns: 1fr;
+      }
+      /* Smartphone-freundliche Karten-Tabelle in der Listenansicht */
+      .list-view table,
+      .list-view thead,
+      .list-view tbody,
+      .list-view th,
+      .list-view td,
+      .list-view tr {
+        display: block;
+      }
+      .list-view thead {
+        display: none;
+      }
+      .list-view tr {
+        padding: 0.75rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .list-view td {
+        border: none;
+        padding: 0.2rem 0;
+        min-width: 0;
+      }
+      .td-actions {
+        text-align: left;
+        margin-top: 0.5rem;
+        display: flex;
+        gap: 0.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Versteckter File-Input zum Laden der JSON-Datei -->
+  <input type="file" id="fileInput" accept=".json,application/json" style="display:none" />
+
+  <header>
+    <div class="header-top">
+      <div class="brand">
+        <h1>📂 HTML-Katalog</h1>
+        <span class="stats-pill" id="statsBadge">0 Dateien</span>
+      </div>
+
+      <div class="toolbar-actions">
+        <button type="button" id="btnLoad" title="JSON-Datei laden">📂 Laden</button>
+        <button type="button" id="btnSave" class="primary" title="Als sortierte JSON-Datei speichern">💾 Speichern</button>
+        <button type="button" id="btnNew" title="Neuen Eintrag anlegen">➕ Neu</button>
+        <button type="button" id="btnTheme" title="Farbschema wechseln">🎨 Style: Deep Ocean</button>
+        <button type="button" id="btnFullscreen" class="icon-only" title="Vollbild umschalten">⛶</button>
+        <button type="button" id="btnClearAll" class="danger icon-only" title="Alle Daten leeren" style="display:none">🗑️</button>
+      </div>
+    </div>
+
+    <div class="controls-bar" id="controlsBar" style="display:none">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="search" id="searchInput" placeholder="Suche nach Dateiname, Bereich, Pfad oder Verwendung..." />
+        <button type="button" class="clear-search" id="btnClearSearch" title="Suche löschen" style="display:none">✕</button>
+      </div>
+
+      <select id="filterBereich" aria-label="Bereich filtern">
+        <option value="">Alle Bereiche</option>
+      </select>
+
+      <select id="filterUnterbereich" aria-label="Unterbereich filtern">
+        <option value="">Alle Unterbereiche</option>
+      </select>
+
+      <select id="sortSelect" aria-label="Sortierung wählen">
+        <option value="hierarchy">Sortierung: Bereich → Unterbereich → Name</option>
+        <option value="name_asc">Dateiname (A → Z)</option>
+        <option value="name_desc">Dateiname (Z → A)</option>
+        <option value="bereich_asc">Bereich (A → Z)</option>
+        <option value="desc_asc">Verwendung (A → Z)</option>
+      </select>
+
+      <div class="view-toggle" role="group" aria-label="Ansicht wechseln">
+        <button type="button" id="btnViewGrid" class="active" title="Raster-Ansicht">⊞ Raster</button>
+        <button type="button" id="btnViewList" title="Listen-Ansicht">☰ Liste</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="mainDropZone">
+    <!-- Leerer Startzustand ohne Beispieldaten -->
+    <section class="empty-state" id="emptyState">
+      <span class="empty-icon">📄</span>
+      <h2>Noch keine JSON-Daten geladen</h2>
+      <p>
+        Lade deine bestehende <code>.json</code>-Datei (unterstützt das hierarchische Bereichs-Format sowie <code>links_cl2.json</code>) per Klick oder Drag &amp; Drop, oder beginne mit einem neuen leeren Eintrag.
+      </p>
+      <div class="empty-actions">
+        <button type="button" class="primary" id="btnEmptyLoad">📂 JSON-Datei auswählen</button>
+        <button type="button" id="btnEmptyNew">➕ Ersten Eintrag erstellen</button>
+      </div>
+    </section>
+
+    <!-- Keine Suchtreffer -->
+    <section class="empty-state" id="noResultsState" style="display:none">
+      <span class="empty-icon">🔎</span>
+      <h2>Keine passenden Einträge gefunden</h2>
+      <p>Passe deinen Suchbegriff oder die gewählten Bereichs-Filter an.</p>
+      <div class="empty-actions">
+        <button type="button" id="btnResetFilters">Filter zurücksetzen</button>
+      </div>
+    </section>
+
+    <!-- Ausgabebereich -->
+    <div id="itemsContainer" class="grid-view"></div>
+  </main>
+
+  <!-- Modal zum Bearbeiten / Hinzufügen -->
+  <div class="modal-backdrop" id="editModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modalTitle">Eintrag bearbeiten</h2>
+        <button type="button" class="icon-only" id="btnCloseModal" aria-label="Schließen">✕</button>
+      </div>
+
+      <form id="editForm" class="form-grid">
+        <input type="hidden" id="editId" />
+
+        <div class="form-group">
+          <label for="editBereich">Bereich (Repository) *</label>
+          <input type="text" id="editBereich" list="listBereiche" required placeholder="z. B. WRZT" />
+          <datalist id="listBereiche"></datalist>
+        </div>
+
+        <div class="form-group">
+          <label for="editUnterbereich">Unterbereich (Ordner) *</label>
+          <input type="text" id="editUnterbereich" list="listUnterbereiche" required placeholder="Hauptverzeichnis" />
+          <datalist id="listUnterbereiche"></datalist>
+        </div>
+
+        <div class="form-group">
+          <label for="editDateiname">Dateiname (.html) *</label>
+          <input type="text" id="editDateiname" required placeholder="z. B. index.html" />
+        </div>
+
+        <div class="form-group">
+          <label for="editPfad">Relativer Pfad *</label>
+          <input type="text" id="editPfad" required placeholder="z. B. WRZT5/neutrino.html" />
+        </div>
+
+        <div class="form-group full">
+          <label for="editUrl">URL</label>
+          <input type="url" id="editUrl" placeholder="https://juppijo.github.io/..." />
+        </div>
+
+        <div class="form-group full">
+          <label for="editVerwendung">Verwendung / Bemerkung</label>
+          <textarea id="editVerwendung" rows="3" placeholder="Kurze Beschreibung der Datei..."></textarea>
+        </div>
+
+        <div class="modal-footer full">
+          <button type="button" id="btnCancelModal">Abbrechen</button>
+          <button type="submit" class="primary">Übernehmen</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    (() => {
+      // =========================================================================
+      // ZUSTAND & KONFIGURATION (KEINE BEISPIELDATEN)
+      // =========================================================================
+      const STORAGE_KEY = "juppijo_html_katalog_v1";
+      const THEME_KEY = "juppijo_html_katalog_theme";
+      const VIEW_KEY = "juppijo_html_katalog_view";
+
+      const THEMES = [
+        { id: "ocean", label: "Deep Ocean" },
+        { id: "zen", label: "Zen Papier" },
+        { id: "contrast", label: "Kontrast" }
+      ];
+
+      let items = []; // Flache Arbeitsliste: { id, bereich, unterbereich, dateiname, pfad, url, verwendung }
+      let loadedMeta = null;
+      let currentThemeIndex = 0;
+      let currentView = "grid"; // "grid" | "list"
+
+      // DOM-Referenzen
+      const el = {
+        fileInput: document.getElementById("fileInput"),
+        statsBadge: document.getElementById("statsBadge"),
+        btnLoad: document.getElementById("btnLoad"),
+        btnSave: document.getElementById("btnSave"),
+        btnNew: document.getElementById("btnNew"),
+        btnTheme: document.getElementById("btnTheme"),
+        btnFullscreen: document.getElementById("btnFullscreen"),
+        btnClearAll: document.getElementById("btnClearAll"),
+        controlsBar: document.getElementById("controlsBar"),
+        searchInput: document.getElementById("searchInput"),
+        btnClearSearch: document.getElementById("btnClearSearch"),
+        filterBereich: document.getElementById("filterBereich"),
+        filterUnterbereich: document.getElementById("filterUnterbereich"),
+        sortSelect: document.getElementById("sortSelect"),
+        btnViewGrid: document.getElementById("btnViewGrid"),
+        btnViewList: document.getElementById("btnViewList"),
+        mainDropZone: document.getElementById("mainDropZone"),
+        emptyState: document.getElementById("emptyState"),
+        noResultsState: document.getElementById("noResultsState"),
+        btnEmptyLoad: document.getElementById("btnEmptyLoad"),
+        btnEmptyNew: document.getElementById("btnEmptyNew"),
+        btnResetFilters: document.getElementById("btnResetFilters"),
+        itemsContainer: document.getElementById("itemsContainer"),
+        editModal: document.getElementById("editModal"),
+        modalTitle: document.getElementById("modalTitle"),
+        btnCloseModal: document.getElementById("btnCloseModal"),
+        btnCancelModal: document.getElementById("btnCancelModal"),
+        editForm: document.getElementById("editForm"),
+        editId: document.getElementById("editId"),
+        editBereich: document.getElementById("editBereich"),
+        editUnterbereich: document.getElementById("editUnterbereich"),
+        editDateiname: document.getElementById("editDateiname"),
+        editPfad: document.getElementById("editPfad"),
+        editUrl: document.getElementById("editUrl"),
+        editVerwendung: document.getElementById("editVerwendung"),
+        listBereiche: document.getElementById("listBereiche"),
+        listUnterbereiche: document.getElementById("listUnterbereiche"),
+        toast: document.getElementById("toast")
+      };
+
+      // =========================================================================
+      // HILFSFUNKTIONEN
+      // =========================================================================
+      function uid() {
+        return "id_" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+      }
+
+      function showToast(msg) {
+        el.toast.textContent = msg;
+        el.toast.classList.add("show");
+        clearTimeout(showToast._t);
+        showToast._t = setTimeout(() => el.toast.classList.remove("show"), 2800);
+      }
+
+      function escapeHtml(str) {
+        return String(str ?? "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function compareText(a, b) {
+        return String(a || "").localeCompare(String(b || ""), "de", { sensitivity: "base", numeric: true });
+      }
+
+      function saveToLocalStorage() {
+        try {
+          if (items.length === 0) {
+            localStorage.removeItem(STORAGE_KEY);
+          } else {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({ meta: loadedMeta, items }));
+          }
+        } catch (e) {
+          // Ignorieren falls Speicher voll
+        }
+      }
+
+      function loadFromLocalStorage() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return;
+          const parsed = JSON.parse(raw);
+          if (parsed && Array.isArray(parsed.items)) {
+            items = parsed.items;
+            loadedMeta = parsed.meta || null;
+          }
+        } catch (e) {
+          items = [];
+        }
+      }
+
+      // =========================================================================
+      // JSON IMPORT-PARSER (UNTERSTÜTZT BEIDE FORMATE)
+      // =========================================================================
+      function parseImportedJson(data) {
+        const result = [];
+
+        // Format A: Ziel-JSON { meta?: {...}, bereiche: [ { bereich, unterbereiche: [ { unterbereich, dateien: [...] } ] } ] }
+        if (data && typeof data === "object" && Array.isArray(data.bereiche)) {
+          loadedMeta = data.meta || null;
+          for (const b of data.bereiche) {
+            const bereichName = (b.bereich || "Unbekannt").trim();
+            const ubs = Array.isArray(b.unterbereiche) ? b.unterbereiche : [];
+            for (const ub of ubs) {
+              const unterbereichName = (ub.unterbereich || "Hauptverzeichnis").trim();
+              const dateien = Array.isArray(ub.dateien) ? ub.dateien : [];
+              for (const d of dateien) {
+                result.push({
+                  id: uid(),
+                  bereich: bereichName,
+                  unterbereich: unterbereichName,
+                  dateiname: (d.dateiname || "").trim(),
+                  pfad: (d.pfad || d.dateiname || "").trim(),
+                  url: (d.url || "").trim(),
+                  verwendung: (d.verwendung || "").trim()
+                });
+              }
+            }
+          }
+          return result;
+        }
+
+        // Format B: Einzelnes Bereichs-Objekt { bereich: "WRZT", unterbereiche: [...] }
+        if (data && typeof data === "object" && typeof data.bereich === "string" && Array.isArray(data.unterbereiche)) {
+          return parseImportedJson({ bereiche: [data] });
+        }
+
+        // Format C: Ursprüngliches links_cl2.json Format [ { title: "Repo", links: [ { label, url, comment } ] } ]
+        if (Array.isArray(data)) {
+          for (const sec of data) {
+            const bereichName = (sec.title || sec.bereich || "Unbekannt").trim();
+            const links = Array.isArray(sec.links) ? sec.links : [];
+            for (const l of links) {
+              const label = (l.label || "").trim();
+              const url = (l.url || "").trim();
+              if (!label.toLowerCase().endsWith(".html") && !url.toLowerCase().endsWith(".html")) continue;
+              const parts = label.split("/");
+              const dateiname = parts[parts.length - 1];
+              const unterbereichName = parts.length > 1 ? parts.slice(0, -1).join("/") : "Hauptverzeichnis";
+              result.push({
+                id: uid(),
+                bereich: bereichName,
+                unterbereich: unterbereichName,
+                dateiname,
+                pfad: label,
+                url,
+                verwendung: (l.comment || "").trim()
+              });
+            }
+          }
+          return result;
+        }
+
+        throw new Error("Unbekannte JSON-Struktur.");
+      }
+
+      // =========================================================================
+      // JSON EXPORT-GENERATOR (HIERARCHISCH SORTIERT)
+      // =========================================================================
+      function buildExportJson() {
+        // Kopie sortieren: Bereich -> Unterbereich (Hauptverzeichnis zuerst) -> Dateiname
+        const sorted = [...items].sort((a, b) => {
+          const cmpB = compareText(a.bereich, b.bereich);
+          if (cmpB !== 0) return cmpB;
+
+          const ubA = a.unterbereich === "Hauptverzeichnis" ? "" : a.unterbereich;
+          const ubB = b.unterbereich === "Hauptverzeichnis" ? "" : b.unterbereich;
+          const cmpU = compareText(ubA, ubB);
+          if (cmpU !== 0) return cmpU;
+
+          return compareText(a.dateiname, b.dateiname);
+        });
+
+        const bereichMap = new Map();
+
+        for (const item of sorted) {
+          const bKey = item.bereich || "Unbekannt";
+          const uKey = item.unterbereich || "Hauptverzeichnis";
+
+          if (!bereichMap.has(bKey)) {
+            bereichMap.set(bKey, new Map());
+          }
+          const ubMap = bereichMap.get(bKey);
+          if (!ubMap.has(uKey)) {
+            ubMap.set(uKey, []);
+          }
+          ubMap.get(uKey).push({
+            dateiname: item.dateiname,
+            pfad: item.pfad,
+            url: item.url,
+            verwendung: item.verwendung
+          });
+        }
+
+        const bereicheArr = [];
+        for (const [bereichName, ubMap] of bereichMap.entries()) {
+          const unterbereicheArr = [];
+          for (const [unterbereichName, dateienArr] of ubMap.entries()) {
+            unterbereicheArr.push({
+              unterbereich: unterbereichName,
+              dateien: dateienArr
+            });
+          }
+          bereicheArr.push({
+            bereich: bereichName,
+            unterbereiche: unterbereicheArr
+          });
+        }
+
+        return {
+          meta: {
+            quelle: (loadedMeta && loadedMeta.quelle) || "HTML-Katalog Manager",
+            aktualisiert_am: new Date().toISOString().slice(0, 10),
+            gesamtanzahl_bereiche: bereicheArr.length,
+            gesamtanzahl_html_dateien: sorted.length,
+            sortierung: "Bereich -> Unterbereich -> Alphabetisch (Dateiname)"
+          },
+          bereiche: bereicheArr
+        };
+      }
+
+      // =========================================================================
+      // FILTER, SORTIERUNG & RENDERING
+      // =========================================================================
+      function updateFilterDropdowns() {
+        const prevBereich = el.filterBereich.value;
+        const prevUnterbereich = el.filterUnterbereich.value;
+
+        const bereiche = [...new Set(items.map(i => i.bereich).filter(Boolean))].sort(compareText);
+        el.filterBereich.innerHTML = `<option value="">Alle Bereiche (${bereiche.length})</option>` +
+          bereiche.map(b => `<option value="${escapeHtml(b)}">${escapeHtml(b)}</option>`).join("");
+
+        if (bereiche.includes(prevBereich)) {
+          el.filterBereich.value = prevBereich;
+        }
+
+        const activeBereich = el.filterBereich.value;
+        const relevantItems = activeBereich ? items.filter(i => i.bereich === activeBereich) : items;
+        const unterbereiche = [...new Set(relevantItems.map(i => i.unterbereich).filter(Boolean))].sort((a, b) => {
+          if (a === "Hauptverzeichnis") return -1;
+          if (b === "Hauptverzeichnis") return 1;
+          return compareText(a, b);
+        });
+
+        el.filterUnterbereich.innerHTML = `<option value="">Alle Unterbereiche (${unterbereiche.length})</option>` +
+          unterbereiche.map(u => `<option value="${escapeHtml(u)}">${escapeHtml(u)}</option>`).join("");
+
+        if (unterbereiche.includes(prevUnterbereich)) {
+          el.filterUnterbereich.value = prevUnterbereich;
+        }
+
+        // Datalists für Editor-Autovervollständigung füllen
+        el.listBereiche.innerHTML = bereiche.map(b => `<option value="${escapeHtml(b)}"></option>`).join("");
+        const allUb = [...new Set(items.map(i => i.unterbereich).filter(Boolean))].sort(compareText);
+        el.listUnterbereiche.innerHTML = allUb.map(u => `<option value="${escapeHtml(u)}"></option>`).join("");
+      }
+
+      function getFilteredAndSortedItems() {
+        const q = el.searchInput.value.trim().toLowerCase();
+        const fB = el.filterBereich.value;
+        const fU = el.filterUnterbereich.value;
+        const sortMode = el.sortSelect.value;
+
+        const filtered = items.filter(item => {
+          if (fB && item.bereich !== fB) return false;
+          if (fU && item.unterbereich !== fU) return false;
+          if (!q) return true;
+          return (
+            item.dateiname.toLowerCase().includes(q) ||
+            item.bereich.toLowerCase().includes(q) ||
+            item.unterbereich.toLowerCase().includes(q) ||
+            item.pfad.toLowerCase().includes(q) ||
+            item.verwendung.toLowerCase().includes(q)
+          );
+        });
+
+        filtered.sort((a, b) => {
+          switch (sortMode) {
+            case "name_asc":
+              return compareText(a.dateiname, b.dateiname);
+            case "name_desc":
+              return compareText(b.dateiname, a.dateiname);
+            case "bereich_asc": {
+              const c = compareText(a.bereich, b.bereich);
+              return c !== 0 ? c : compareText(a.dateiname, b.dateiname);
+            }
+            case "desc_asc": {
+              const c = compareText(a.verwendung, b.verwendung);
+              return c !== 0 ? c : compareText(a.dateiname, b.dateiname);
+            }
+            case "hierarchy":
+            default: {
+              const cmpB = compareText(a.bereich, b.bereich);
+              if (cmpB !== 0) return cmpB;
+              const ubA = a.unterbereich === "Hauptverzeichnis" ? "" : a.unterbereich;
+              const ubB = b.unterbereich === "Hauptverzeichnis" ? "" : b.unterbereich;
+              const cmpU = compareText(ubA, ubB);
+              if (cmpU !== 0) return cmpU;
+              return compareText(a.dateiname, b.dateiname);
+            }
+          }
+        });
+
+        return filtered;
+      }
+
+      function render() {
+        saveToLocalStorage();
+        const hasItems = items.length > 0;
+
+        el.controlsBar.style.display = hasItems ? "grid" : "none";
+        el.btnClearAll.style.display = hasItems ? "inline-flex" : "none";
+        el.btnClearSearch.style.display = el.searchInput.value ? "inline-flex" : "none";
+
+        if (!hasItems) {
+          el.emptyState.style.display = "block";
+          el.noResultsState.style.display = "none";
+          el.itemsContainer.innerHTML = "";
+          el.statsBadge.textContent = "0 Dateien";
+          return;
+        }
+
+        el.emptyState.style.display = "none";
+        const visible = getFilteredAndSortedItems();
+
+        el.statsBadge.textContent = visible.length === items.length
+          ? `${items.length} Dateien`
+          : `${visible.length} von ${items.length} Dateien`;
+
+        if (visible.length === 0) {
+          el.noResultsState.style.display = "block";
+          el.itemsContainer.innerHTML = "";
+          return;
+        }
+
+        el.noResultsState.style.display = "none";
+
+        if (currentView === "grid") {
+          el.itemsContainer.className = "grid-view";
+          el.itemsContainer.innerHTML = visible.map(item => `
+            <article class="card" data-id="${item.id}">
+              <div>
+                <div class="card-badges">
+                  <span class="badge">${escapeHtml(item.bereich)}</span>
+                  <span class="badge sub">${escapeHtml(item.unterbereich)}</span>
+                </div>
+                <div class="card-title">${escapeHtml(item.dateiname)}</div>
+                <div class="card-path">${escapeHtml(item.pfad)}</div>
+                <p class="card-desc">${escapeHtml(item.verwendung || "Keine Beschreibung hinterlegt.")}</p>
+              </div>
+              <div class="card-footer">
+                ${item.url
+                  ? `<a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">↗ Öffnen</a>`
+                  : `<span style="color:var(--text-dim);font-size:0.8rem">Keine URL</span>`}
+                <div class="card-actions">
+                  <button type="button" class="icon-only" data-action="edit" data-id="${item.id}" title="Bearbeiten">✏️</button>
+                  <button type="button" class="icon-only" data-action="duplicate" data-id="${item.id}" title="Duplizieren">📋</button>
+                  <button type="button" class="danger icon-only" data-action="delete" data-id="${item.id}" title="Löschen">🗑️</button>
+                </div>
+              </div>
+            </article>
+          `).join("");
+        } else {
+          el.itemsContainer.className = "list-view";
+          el.itemsContainer.innerHTML = `
+            <table>
+              <thead>
+                <tr>
+                  <th>Bereich</th>
+                  <th>Unterbereich</th>
+                  <th>Dateiname &amp; Pfad</th>
+                  <th>Verwendung</th>
+                  <th style="text-align:right">Aktionen</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${visible.map(item => `
+                  <tr data-id="${item.id}">
+                    <td><span class="badge">${escapeHtml(item.bereich)}</span></td>
+                    <td><span class="badge sub">${escapeHtml(item.unterbereich)}</span></td>
+                    <td class="td-file">
+                      <div>${escapeHtml(item.dateiname)}</div>
+                      <div class="td-path">${escapeHtml(item.pfad)}</div>
+                    </td>
+                    <td class="td-desc">${escapeHtml(item.verwendung || "—")}</td>
+                    <td class="td-actions">
+                      ${item.url ? `<a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer" style="margin-right:0.5rem">↗ Öffnen</a>` : ""}
+                      <button type="button" class="icon-only" data-action="edit" data-id="${item.id}" title="Bearbeiten">✏️</button>
+                      <button type="button" class="icon-only" data-action="duplicate" data-id="${item.id}" title="Duplizieren">📋</button>
+                      <button type="button" class="danger icon-only" data-action="delete" data-id="${item.id}" title="Löschen">🗑️</button>
+                    </td>
+                  </tr>
+                `).join("")}
+              </tbody>
+            </table>
+          `;
+        }
+      }
+
+      // =========================================================================
+      // MODAL LOGIK (NEU / BEARBEITEN)
+      // =========================================================================
+      function openModal(item = null) {
+        updateFilterDropdowns();
+        if (item) {
+          el.modalTitle.textContent = "Eintrag bearbeiten";
+          el.editId.value = item.id;
+          el.editBereich.value = item.bereich;
+          el.editUnterbereich.value = item.unterbereich;
+          el.editDateiname.value = item.dateiname;
+          el.editPfad.value = item.pfad;
+          el.editUrl.value = item.url;
+          el.editVerwendung.value = item.verwendung;
+        } else {
+          el.modalTitle.textContent = "Neuen Eintrag erstellen";
+          el.editId.value = "";
+          el.editBereich.value = el.filterBereich.value || "";
+          el.editUnterbereich.value = el.filterUnterbereich.value || "Hauptverzeichnis";
+          el.editDateiname.value = "";
+          el.editPfad.value = "";
+          el.editUrl.value = "";
+          el.editVerwendung.value = "";
+        }
+        el.editModal.classList.add("open");
+        el.editBereich.focus();
+      }
+
+      function closeModal() {
+        el.editModal.classList.remove("open");
+      }
+
+      // Automatische Pfad- und URL-Vorschläge beim Tippen eines neuen Eintrags
+      function autoFillPathAndUrl() {
+        if (el.editId.value) return; // Bestehende Einträge nicht ungewollt überschreiben
+        const b = el.editBereich.value.trim();
+        const u = el.editUnterbereich.value.trim();
+        const f = el.editDateiname.value.trim();
+        if (!f) return;
+
+        const relPath = (!u || u === "Hauptverzeichnis") ? f : `${u}/${f}`;
+        el.editPfad.value = relPath;
+        if (b) {
+          el.editUrl.value = `https://juppijo.github.io/${encodeURI(b)}/${encodeURI(relPath)}`;
+        }
+      }
+
+      el.editBereich.addEventListener("input", autoFillPathAndUrl);
+      el.editUnterbereich.addEventListener("input", autoFillPathAndUrl);
+      el.editDateiname.addEventListener("input", autoFillPathAndUrl);
+
+      el.editForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const id = el.editId.value;
+        const entry = {
+          id: id || uid(),
+          bereich: el.editBereich.value.trim() || "Unbekannt",
+          unterbereich: el.editUnterbereich.value.trim() || "Hauptverzeichnis",
+          dateiname: el.editDateiname.value.trim(),
+          pfad: el.editPfad.value.trim() || el.editDateiname.value.trim(),
+          url: el.editUrl.value.trim(),
+          verwendung: el.editVerwendung.value.trim()
+        };
+
+        if (id) {
+          const idx = items.findIndex(i => i.id === id);
+          if (idx !== -1) items[idx] = entry;
+          showToast("Eintrag aktualisiert.");
+        } else {
+          items.push(entry);
+          showToast("Neuer Eintrag hinzugefügt.");
+        }
+
+        closeModal();
+        updateFilterDropdowns();
+        render();
+      });
+
+      // =========================================================================
+      // DATEI LADEN & SPEICHERN
+      // =========================================================================
+      function handleFileObject(file) {
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          try {
+            const parsed = JSON.parse(ev.target.result);
+            const imported = parseImportedJson(parsed);
+            if (imported.length === 0) {
+              showToast("Keine HTML-Einträge in der JSON-Datei gefunden.");
+              return;
+            }
+            items = imported;
+            el.searchInput.value = "";
+            el.filterBereich.value = "";
+            el.filterUnterbereich.value = "";
+            updateFilterDropdowns();
+            render();
+            showToast(`${items.length} Einträge erfolgreich geladen.`);
+          } catch (err) {
+            alert("Fehler beim Lesen der JSON-Datei:\n" + err.message);
+          }
+        };
+        reader.readAsText(file, "utf-8");
+      }
+
+      el.fileInput.addEventListener("change", (e) => {
+        handleFileObject(e.target.files[0]);
+        el.fileInput.value = "";
+      });
+
+      function triggerSaveJson() {
+        if (items.length === 0) {
+          showToast("Keine Daten zum Speichern vorhanden.");
+          return;
+        }
+        const exportObj = buildExportJson();
+        const jsonString = JSON.stringify(exportObj, null, 2);
+        const blob = new Blob([jsonString], { type: "application/json;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `html_katalog_${new Date().toISOString().slice(0, 10)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast(`JSON gespeichert (${items.length} Einträge).`);
+      }
+
+      // Drag & Drop auf der Seite
+      ["dragenter", "dragover"].forEach(evt => {
+        el.mainDropZone.addEventListener(evt, (e) => {
+          e.preventDefault();
+          el.emptyState.classList.add("dragover");
+        });
+      });
+
+      ["dragleave", "drop"].forEach(evt => {
+        el.mainDropZone.addEventListener(evt, (e) => {
+          e.preventDefault();
+          el.emptyState.classList.remove("dragover");
+        });
+      });
+
+      el.mainDropZone.addEventListener("drop", (e) => {
+        const file = e.dataTransfer?.files?.[0];
+        if (file) handleFileObject(file);
+      });
+
+      // =========================================================================
+      // STYLE-MODUS, ANSICHT & VOLLBILD
+      // =========================================================================
+      function applyTheme(index) {
+        currentThemeIndex = index % THEMES.length;
+        const theme = THEMES[currentThemeIndex];
+        document.documentElement.setAttribute("data-theme", theme.id);
+        el.btnTheme.textContent = `🎨 Style: ${theme.label}`;
+        localStorage.setItem(THEME_KEY, String(currentThemeIndex));
+      }
+
+      function applyView(view) {
+        currentView = view === "list" ? "list" : "grid";
+        el.btnViewGrid.classList.toggle("active", currentView === "grid");
+        el.btnViewList.classList.toggle("active", currentView === "list");
+        localStorage.setItem(VIEW_KEY, currentView);
+        render();
+      }
+
+      function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen?.().catch(() => {
+            showToast("Vollbild wird von diesem Browser blockiert.");
+          });
+        } else {
+          document.exitFullscreen?.();
+        }
+      }
+
+      document.addEventListener("fullscreenchange", () => {
+        el.btnFullscreen.textContent = document.fullscreenElement ? "🗗" : "⛶";
+      });
+
+      // =========================================================================
+      // EVENT-LISTENER
+      // =========================================================================
+      el.btnLoad.addEventListener("click", () => el.fileInput.click());
+      el.btnEmptyLoad.addEventListener("click", () => el.fileInput.click());
+      el.btnSave.addEventListener("click", triggerSaveJson);
+      el.btnNew.addEventListener("click", () => openModal(null));
+      el.btnEmptyNew.addEventListener("click", () => openModal(null));
+      el.btnTheme.addEventListener("click", () => applyTheme(currentThemeIndex + 1));
+      el.btnFullscreen.addEventListener("click", toggleFullscreen);
+
+      el.btnClearAll.addEventListener("click", () => {
+        if (confirm("Möchtest du wirklich alle geladenen Einträge aus der Ansicht entfernen?")) {
+          items = [];
+          loadedMeta = null;
+          updateFilterDropdowns();
+          render();
+          showToast("Alle Einträge geleert.");
+        }
+      });
+
+      el.searchInput.addEventListener("input", render);
+      el.btnClearSearch.addEventListener("click", () => {
+        el.searchInput.value = "";
+        render();
+        el.searchInput.focus();
+      });
+
+      el.filterBereich.addEventListener("change", () => {
+        el.filterUnterbereich.value = "";
+        updateFilterDropdowns();
+        render();
+      });
+
+      el.filterUnterbereich.addEventListener("change", render);
+      el.sortSelect.addEventListener("change", render);
+
+      el.btnResetFilters.addEventListener("click", () => {
+        el.searchInput.value = "";
+        el.filterBereich.value = "";
+        el.filterUnterbereich.value = "";
+        updateFilterDropdowns();
+        render();
+      });
+
+      el.btnViewGrid.addEventListener("click", () => applyView("grid"));
+      el.btnViewList.addEventListener("click", () => applyView("list"));
+
+      // Karten- & Tabellen-Aktionen (Delegation)
+      el.itemsContainer.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-action]");
+        if (!btn) return;
+        const id = btn.dataset.id;
+        const action = btn.dataset.action;
+        const item = items.find(i => i.id === id);
+        if (!item) return;
+
+        if (action === "edit") {
+          openModal(item);
+        } else if (action === "duplicate") {
+          const copy = {
+            ...item,
+            id: uid(),
+            dateiname: item.dateiname.replace(/(\.html)$/i, "_kopie$1")
+          };
+          items.push(copy);
+          updateFilterDropdowns();
+          render();
+          showToast("Eintrag dupliziert.");
+        } else if (action === "delete") {
+          if (confirm(`Eintrag „${item.dateiname}“ wirklich löschen?`)) {
+            items = items.filter(i => i.id !== id);
+            updateFilterDropdowns();
+            render();
+            showToast("Eintrag gelöscht.");
+          }
+        }
+      });
+
+      el.btnCloseModal.addEventListener("click", closeModal);
+      el.btnCancelModal.addEventListener("click", closeModal);
+      el.editModal.addEventListener("click", (e) => {
+        if (e.target === el.editModal) closeModal();
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && el.editModal.classList.contains("open")) {
+          closeModal();
+        }
+      });
+
+      // =========================================================================
+      // INITIALISIERUNG
+      // =========================================================================
+      const savedTheme = parseInt(localStorage.getItem(THEME_KEY) || "0", 10);
+      applyTheme(isNaN(savedTheme) ? 0 : savedTheme);
+
+      const savedView = localStorage.getItem(VIEW_KEY) || "grid";
+      currentView = savedView === "list" ? "list" : "grid";
+      el.btnViewGrid.classList.toggle("active", currentView === "grid");
+      el.btnViewList.classList.toggle("active", currentView === "list");
+
+      loadFromLocalStorage();
+      updateFilterDropdowns();
+      render();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HTML Inventar & Struktur Manager</title>
+    <style>
+        :root {
+            /* Light Theme */
+            --bg-body: #f1f5f9;
+            --bg-surface: #ffffff;
+            --bg-surface-hover: #f8fafc;
+            --bg-header: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+            --accent: #0284c7;
+            --accent-hover: #0369a1;
+            --accent-soft: rgba(2, 132, 199, 0.12);
+            --danger: #dc2626;
+            --danger-soft: rgba(220, 38, 38, 0.12);
+            --success: #059669;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --radius: 12px;
+        }
+
+        [data-theme="dark"] {
+            /* Deep Ocean Dark Theme */
+            --bg-body: #09111e;
+            --bg-surface: #111d32;
+            --bg-surface-hover: #172744;
+            --bg-header: #0d172a;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border-color: #1e293b;
+            --accent: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --accent-soft: rgba(56, 189, 248, 0.15);
+            --danger: #f87171;
+            --danger-soft: rgba(248, 113, 113, 0.15);
+            --success: #34d399;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.5;
+            transition: background-color 0.25s, color 0.25s;
+            padding-bottom: 4rem;
+        }
+
+        /* Header & Toolbar */
+        header {
+            background-color: var(--bg-header);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0.85rem 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .header-top {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .brand h1 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .badge-count {
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 0.15rem 0.55rem;
+            border-radius: 999px;
+        }
+
+        .toolbar-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            align-items: center;
+        }
+
+        /* Buttons */
+        button, .btn-label {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            background-color: var(--bg-surface);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.5rem 0.8rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            user-select: none;
+            min-height: 38px;
+        }
+
+        button:hover, .btn-label:hover {
+            background-color: var(--bg-surface-hover);
+            border-color: var(--accent);
+        }
+
+        button.primary {
+            background-color: var(--accent);
+            color: #09111e;
+            border-color: var(--accent);
+            font-weight: 600;
+        }
+
+        [data-theme="light"] button.primary {
+            color: #ffffff;
+        }
+
+        button.primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        button.active-toggle {
+            background-color: var(--accent-soft);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        button.danger {
+            color: var(--danger);
+            border-color: transparent;
+            background: transparent;
+            padding: 0.35rem 0.5rem;
+            min-height: auto;
+        }
+
+        button.danger:hover {
+            background-color: var(--danger-soft);
+        }
+
+        button.icon-only {
+            padding: 0.5rem;
+            width: 38px;
+        }
+
+        svg {
+            width: 17px;
+            height: 17px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+
+        /* Filter & Search Bar */
+        .controls-container {
+            max-width: 1400px;
+            margin: 1rem auto 0;
+            padding: 0 1rem;
+        }
+
+        .controls-bar {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 0.85rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 0.75rem;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+
+        .search-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-wrapper svg {
+            position: absolute;
+            left: 0.75rem;
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        input[type="text"], select, textarea {
+            width: 100%;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.55rem 0.75rem;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.15s;
+        }
+
+        .search-wrapper input {
+            padding-left: 2.3rem;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--accent);
+        }
+
+        .view-switcher {
+            display: flex;
+            gap: 0.3rem;
+        }
+
+        /* Content Area */
+        main {
+            max-width: 1400px;
+            margin: 1.25rem auto 0;
+            padding: 0 1rem;
+        }
+
+        .meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Grid View */
+        .items-container.grid-view {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            gap: 1rem;
+        }
+
+        /* List View */
+        .items-container.list-view {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        /* Card Styles */
+        .card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 1rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 0.75rem;
+            transition: transform 0.15s, border-color 0.15s;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+        }
+
+        .list-view .card {
+            flex-direction: row;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            gap: 1rem;
+        }
+
+        .card-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .badge {
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.2rem 0.55rem;
+            border-radius: 6px;
+            background-color: var(--accent-soft);
+            color: var(--accent);
+        }
+
+        .badge.sub {
+            background-color: var(--bg-body);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: var(--text-main);
+            word-break: break-all;
+        }
+
+        .card-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-top: 0.35rem;
+        }
+
+        .list-view .card-main {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 240px 260px 1fr;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .list-view .card-badges {
+            margin-bottom: 0;
+        }
+
+        .list-view .card-desc {
+            margin-top: 0;
+        }
+
+        .card-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.35rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 0.65rem;
+        }
+
+        .list-view .card-actions {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        /* Modal */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(3px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            z-index: 200;
+        }
+
+        .modal-backdrop.open {
+            display: flex;
+        }
+
+        .modal {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 520px;
+            padding: 1.25rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+            animation: popIn 0.18s ease-out;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.96); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 0.9rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--text-muted);
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.6rem;
+            margin-top: 1.25rem;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 1.25rem;
+            right: 1.25rem;
+            background-color: var(--bg-surface);
+            color: var(--text-main);
+            border: 1px solid var(--accent);
+            border-left: 4px solid var(--accent);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            font-size: 0.88rem;
+            z-index: 300;
+            opacity: 0;
+            transform: translateY(15px);
+            pointer-events: none;
+            transition: all 0.25s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-muted);
+            background: var(--bg-surface);
+            border: 1px dashed var(--border-color);
+            border-radius: var(--radius);
+        }
+
+        /* Responsive Breakpoints (Tablet & Smartphone) */
+        @media (max-width: 960px) {
+            .controls-bar {
+                grid-template-columns: 1fr 1fr;
+            }
+            .search-wrapper {
+                grid-column: 1 / -1;
+            }
+            .list-view .card-main {
+                grid-template-columns: 1fr;
+                gap: 0.35rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header-top {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .toolbar-actions {
+                justify-content: space-between;
+            }
+            .toolbar-actions button span.btn-text,
+            .toolbar-actions label span.btn-text {
+                display: none;
+            }
+            .controls-bar {
+                grid-template-columns: 1fr;
+            }
+            .list-view .card {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .list-view .card-actions {
+                border-top: 1px solid var(--border-color);
+                padding-top: 0.65rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-top">
+        <div class="brand">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            <h1>HTML Inventar</h1>
+            <span class="badge-count" id="totalCount">0</span>
+        </div>
+
+        <div class="toolbar-actions">
+            <label class="btn-label" title="JSON-Datei laden">
+                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span class="btn-text">JSON Laden</span>
+                <input type="file" id="fileInput" accept=".json,application/json" hidden>
+            </label>
+
+            <button onclick="exportJSON()" title="Als JSON speichern">
+                <svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                <span class="btn-text">Speichern</span>
+            </button>
+
+            <button class="primary" onclick="openModal()" title="Neuen Eintrag hinzufügen">
+                <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span class="btn-text">Neu</span>
+            </button>
+
+            <button class="icon-only" onclick="toggleTheme()" id="themeBtn" title="Hell / Dunkel umschalten">
+                <svg id="themeIcon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            </button>
+
+            <button class="icon-only" onclick="toggleFullscreen()" title="Vollbild umschalten">
+                <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<section class="controls-container">
+    <div class="controls-bar">
+        <div class="search-wrapper">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="searchInput" placeholder="Suche nach Dateiname, Bereich, Unterbereich oder Bemerkung..." oninput="render()">
+        </div>
+
+        <select id="categoryFilter" onchange="render()">
+            <option value="">Alle Bereiche</option>
+        </select>
+
+        <select id="sortSelect" onchange="render()">
+            <option value="hierarchy">Sortierung: Bereich &rarr; Unterbereich &rarr; A-Z</option>
+            <option value="name-asc">Dateiname: A &rarr; Z</option>
+            <option value="name-desc">Dateiname: Z &rarr; A</option>
+            <option value="desc-asc">Bemerkung: A &rarr; Z</option>
+        </select>
+
+        <div class="view-switcher">
+            <button id="gridViewBtn" class="icon-only active-toggle" onclick="setView('grid')" title="Raster-Ansicht">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </button>
+            <button id="listViewBtn" class="icon-only" onclick="setView('list')" title="Listen-Ansicht">
+                <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            </button>
+        </div>
+    </div>
+</section>
+
+<main>
+    <div class="meta-bar">
+        <span id="repoLabel">Quelle: https://github.com/juppijo</span>
+        <span id="filterStats">Zeige alle Einträge</span>
+    </div>
+
+    <div id="itemsContainer" class="items-container grid-view"></div>
+</main>
+
+<!-- Edit / Add Modal -->
+<div class="modal-backdrop" id="editModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 id="modalTitle" style="font-size: 1.1rem;">Eintrag bearbeiten</h2>
+            <button class="icon-only" onclick="closeModal()" style="border:none;">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <form id="editForm" onsubmit="saveEntry(event)">
+            <input type="hidden" id="editId">
+
+            <div class="form-group">
+                <label for="fieldDatei">HTML-Dateiname *</label>
+                <input type="text" id="fieldDatei" required placeholder="z.B. buch_werkstatt.html">
+            </div>
+
+            <div class="form-group">
+                <label for="fieldBereich">Bereich *</label>
+                <input type="text" id="fieldBereich" list="bereicheList" required placeholder="z.B. Audio, Musik & Akustik">
+                <datalist id="bereicheList"></datalist>
+            </div>
+
+            <div class="form-group">
+                <label for="fieldUnterbereich">Unterbereich *</label>
+                <input type="text" id="fieldUnterbereich" list="unterbereicheList" required placeholder="z.B. Klanginstrumente">
+                <datalist id="unterbereicheList"></datalist>
+            </div>
+
+            <div class="form-group">
+                <label for="fieldBemerkung">Verwendungs-Bemerkung *</label>
+                <textarea id="fieldBemerkung" rows="3" required placeholder="Kurze Beschreibung des Zwecks der Datei..."></textarea>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" onclick="closeModal()">Abbrechen</button>
+                <button type="submit" class="primary">Übernehmen</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+    // Initiale Beispieldaten (deine Struktur)
+    const defaultData = {
+        "github_repository": "https://github.com/juppijo",
+        "struktur": {
+            "Audio, Musik & Akustik": {
+                "Klanginstrumente": [
+                    {
+                        "datei": "handpan_tongue_drum_mapper.html",
+                        "bereich": "Audio, Musik & Akustik",
+                        "unterbereich": "Klanginstrumente",
+                        "verwendungs_bemerkung": "Interaktive Benutzeroberfläche zur Skalierung und Akkord-Arpeggio-Mapping speziell optimiert für D-Minor Kurd Handpan und C-Dur Tongue Drum."
+                    }
+                ],
+                "Musikproduktion": [
+                    {
+                        "datei": "midi_daw_sequencer.html",
+                        "bereich": "Audio, Musik & Akustik",
+                        "unterbereich": "Musikproduktion",
+                        "verwendungs_bemerkung": "Zero-Dependency MIDI Digital Audio Workstation (DAW) mit nativem JavaScript-MIDI-Encoder und Dateikomprimierungs-Pipeline."
+                    }
+                ]
+            },
+            "Gesundheit & Lebensstil": {
+                "Entspannung & Erholung": [
+                    {
+                        "datei": "pmr_timer_tracker.html",
+                        "bereich": "Gesundheit & Lebensstil",
+                        "unterbereich": "Entspannung & Erholung",
+                        "verwendungs_bemerkung": "Digitale Tracking-Timer und geführte Ablaufsteuerung für die Progressive Muskelrelaxation (PMR) nach Edmund Jacobson (4-, 7- und 16-Muskelgruppen-Routinen)."
+                    }
+                ]
+            },
+            "Haushalt & Verwaltung": {
+                "Inventar & Logistik": [
+                    {
+                        "datei": "electronic_components_inventory.html",
+                        "bereich": "Haushalt & Verwaltung",
+                        "unterbereich": "Inventar & Logistik",
+                        "verwendungs_bemerkung": "Umfassendes Datenbank-Tool zur Verwaltung und Kategorisierung elektronischer Bauteile nach Räumen, Schränken, Boxen und Kategorien."
+                    }
+                ]
+            },
+            "Kreatives Schreiben & Dokumentation": {
+                "Autorentools": [
+                    {
+                        "datei": "buch_werkstatt.html",
+                        "bereich": "Kreatives Schreiben & Dokumentation",
+                        "unterbereich": "Autorentools",
+                        "verwendungs_bemerkung": "Lokale Web-Markdown-Authoring-Arbeitsumgebung mit Side-by-Side-Splitscreen, Live-Vorschau und scroll-synchronisierter Navigation für das Buchprojekt 'Logik des Universums'."
+                    }
+                ],
+                "Geschichten & Erzählungen": [
+                    {
+                        "datei": "kindergeschichten_editor.html",
+                        "bereich": "Kreatives Schreiben & Dokumentation",
+                        "unterbereich": "Geschichten & Erzählungen",
+                        "verwendungs_bemerkung": "Kreativumgebung zum Verfassen und Strukturieren von personalisierten Gutenachtgeschichten mit anthropomorphen Charakteren wie Uhu, Ticktick und Krack."
+                    }
+                ]
+            },
+            "Simulation, Physik & Mathematik": {
+                "Fraktale & Visualisierung": [
+                    {
+                        "datei": "mandelbulb_raymarching_viewer.html",
+                        "bereich": "Simulation, Physik & Mathematik",
+                        "unterbereich": "Fraktale & Visualisierung",
+                        "verwendungs_bemerkung": "Echtzeit-3D-Mandelbulb-Raymarching-Fraktalviewer zur Untersuchung komplexer geometrischer Raumstrukturen."
+                    }
+                ],
+                "Physikalische Simulationen": [
+                    {
+                        "datei": "webrtc_go_engine_3d.html",
+                        "bereich": "Simulation, Physik & Mathematik",
+                        "unterbereich": "Physikalische Simulationen",
+                        "verwendungs_bemerkung": "3D-WebRTC-Peer-to-Peer-Multiplayer-Go-Engine mit bikonvexen Spielsteinen und direktem Netzwerk-Sync."
+                    }
+                ]
+            }
+        }
+    };
+
+    let items = [];
+    let metaHeader = { github_repository: "https://github.com/juppijo" };
+    let currentView = localStorage.getItem('htmlInv_view') || 'grid';
+
+    // App Initialisierung
+    function init() {
+        const savedTheme = localStorage.getItem('htmlInv_theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+
+        setView(currentView, false);
+
+        const cached = localStorage.getItem('htmlInv_data');
+        if (cached) {
+            try {
+                parseNestedJSON(JSON.parse(cached));
+            } catch (e) {
+                parseNestedJSON(defaultData);
+            }
+        } else {
+            parseNestedJSON(defaultData);
+        }
+
+        document.getElementById('fileInput').addEventListener('change', handleFileUpload);
+    }
+
+    // Verschachteltes JSON in flache Arbeitsliste umwandeln
+    function parseNestedJSON(jsonObj) {
+        items = [];
+        metaHeader = {};
+
+        for (const key of Object.keys(jsonObj)) {
+            if (key !== 'struktur') {
+                metaHeader[key] = jsonObj[key];
+            }
+        }
+
+        const repoText = metaHeader.github_repository || metaHeader.basis_verzeichnis || 'Lokales Inventar';
+        document.getElementById('repoLabel').textContent = `Quelle: ${repoText}`;
+
+        const struktur = jsonObj.struktur || jsonObj;
+        let idCounter = 1;
+
+        for (const [bereich, unterbereiche] of Object.entries(struktur)) {
+            if (typeof unterbereiche !== 'object' || unterbereiche === null) continue;
+            for (const [unterbereich, fileList] of Object.entries(unterbereiche)) {
+                if (!Array.isArray(fileList)) continue;
+                fileList.forEach(entry => {
+                    items.push({
+                        id: idCounter++,
+                        datei: entry.datei || 'unbenannt.html',
+                        bereich: entry.bereich || bereich,
+                        unterbereich: entry.unterbereich || unterbereich,
+                        verwendungs_bemerkung: entry.verwendungs_bemerkung || '',
+                        extra: Object.fromEntries(
+                            Object.entries(entry).filter(([k]) => !['datei', 'bereich', 'unterbereich', 'verwendungs_bemerkung'].includes(k))
+                        )
+                    });
+                });
+            }
+        }
+
+        persistToLocal();
+        updateFilters();
+        render();
+    }
+
+    // Flache Arbeitsliste zurück in das sortierte JSON-Format bauen
+    function buildNestedJSON() {
+        const struktur = {};
+
+        // Sortieren nach Bereich -> Unterbereich -> Dateiname
+        const sorted = [...items].sort((a, b) => {
+            return a.bereich.localeCompare(b.bereich, 'de', { sensitivity: 'base' }) ||
+                   a.unterbereich.localeCompare(b.unterbereich, 'de', { sensitivity: 'base' }) ||
+                   a.datei.localeCompare(b.datei, 'de', { sensitivity: 'base' });
+        });
+
+        sorted.forEach(item => {
+            if (!struktur[item.bereich]) struktur[item.bereich] = {};
+            if (!struktur[item.bereich][item.unterbereich]) struktur[item.bereich][item.unterbereich] = [];
+
+            const cleanEntry = {
+                datei: item.datei,
+                bereich: item.bereich,
+                unterbereich: item.unterbereich,
+                verwendungs_bemerkung: item.verwendungs_bemerkung,
+                ...(item.extra || {})
+            };
+            struktur[item.bereich][item.unterbereich].push(cleanEntry);
+        });
+
+        return {
+            ...metaHeader,
+            struktur
+        };
+    }
+
+    function persistToLocal() {
+        localStorage.setItem('htmlInv_data', JSON.stringify(buildNestedJSON()));
+    }
+
+    // Datei Upload
+    function handleFileUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const parsed = JSON.parse(e.target.result);
+                parseNestedJSON(parsed);
+                showToast(`"${file.name}" erfolgreich geladen (${items.length} Dateien).`);
+            } catch (err) {
+                alert('Fehler beim Lesen der JSON-Datei: ' + err.message);
+            }
+            event.target.value = '';
+        };
+        reader.readAsText(file);
+    }
+
+    // JSON Download
+    function exportJSON() {
+        const dataObj = buildNestedJSON();
+        const jsonString = JSON.stringify(dataObj, null, 2);
+        const blob = new Blob([jsonString], { type: 'application/json;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'html_struktur.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        showToast('JSON-Datei wurde gespeichert.');
+    }
+
+    // Filter-Dropdowns und Datalists aktualisieren
+    function updateFilters() {
+        const filterSelect = document.getElementById('categoryFilter');
+        const currentSelection = filterSelect.value;
+
+        const bereiche = [...new Set(items.map(i => i.bereich))].sort((a, b) => a.localeCompare(b, 'de'));
+        const unterbereiche = [...new Set(items.map(i => i.unterbereich))].sort((a, b) => a.localeCompare(b, 'de'));
+
+        filterSelect.innerHTML = '<option value="">Alle Bereiche</option>';
+        bereiche.forEach(b => {
+            const opt = document.createElement('option');
+            opt.value = b;
+            opt.textContent = b;
+            filterSelect.appendChild(opt);
+        });
+
+        if (bereiche.includes(currentSelection)) {
+            filterSelect.value = currentSelection;
+        }
+
+        // Autovervollständigung im Modal füllen
+        document.getElementById('bereicheList').innerHTML = bereiche.map(b => `<option value="${escapeHtml(b)}">`).join('');
+        document.getElementById('unterbereicheList').innerHTML = unterbereiche.map(u => `<option value="${escapeHtml(u)}">`).join('');
+    }
+
+    // Darstellung rendern
+    function render() {
+        const container = document.getElementById('itemsContainer');
+        const query = document.getElementById('searchInput').value.trim().toLowerCase();
+        const selectedCategory = document.getElementById('categoryFilter').value;
+        const sortMode = document.getElementById('sortSelect').value;
+
+        let filtered = items.filter(item => {
+            const matchesCategory = !selectedCategory || item.bereich === selectedCategory;
+            const matchesQuery = !query ||
+                item.datei.toLowerCase().includes(query) ||
+                item.bereich.toLowerCase().includes(query) ||
+                item.unterbereich.toLowerCase().includes(query) ||
+                item.verwendungs_bemerkung.toLowerCase().includes(query);
+            return matchesCategory && matchesQuery;
+        });
+
+        // Sortierung anwenden
+        filtered.sort((a, b) => {
+            if (sortMode === 'name-asc') {
+                return a.datei.localeCompare(b.datei, 'de', { sensitivity: 'base' });
+            } else if (sortMode === 'name-desc') {
+                return b.datei.localeCompare(a.datei, 'de', { sensitivity: 'base' });
+            } else if (sortMode === 'desc-asc') {
+                return a.verwendungs_bemerkung.localeCompare(b.verwendungs_bemerkung, 'de', { sensitivity: 'base' });
+            } else {
+                return a.bereich.localeCompare(b.bereich, 'de', { sensitivity: 'base' }) ||
+                       a.unterbereich.localeCompare(b.unterbereich, 'de', { sensitivity: 'base' }) ||
+                       a.datei.localeCompare(b.datei, 'de', { sensitivity: 'base' });
+            }
+        });
+
+        document.getElementById('totalCount').textContent = items.length;
+        document.getElementById('filterStats').textContent =
+            filtered.length === items.length
+                ? `${items.length} Dateien gesamt`
+                : `${filtered.length} von ${items.length} Dateien gefiltert`;
+
+        if (filtered.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state" style="grid-column: 1 / -1;">
+                    <p style="font-size: 1.05rem; margin-bottom: 0.5rem;">Keine passenden HTML-Dateien gefunden.</p>
+                    <p style="font-size: 0.85rem;">Passe deine Suchbegriffe an oder lege über „+ Neu“ einen Eintrag an.</p>
+                </div>`;
+            return;
+        }
+
+        container.innerHTML = filtered.map(item => `
+            <article class="card">
+                <div class="card-main">
+                    <div>
+                        <div class="card-badges">
+                            <span class="badge">${escapeHtml(item.bereich)}</span>
+                            <span class="badge sub">${escapeHtml(item.unterbereich)}</span>
+                        </div>
+                    </div>
+                    <div class="card-title">${escapeHtml(item.datei)}</div>
+                    <p class="card-desc">${escapeHtml(item.verwendungs_bemerkung)}</p>
+                </div>
+                <div class="card-actions">
+                    <button onclick="openModal(${item.id})" title="Bearbeiten">
+                        <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        <span>Edit</span>
+                    </button>
+                    <button class="danger" onclick="deleteEntry(${item.id})" title="Löschen">
+                        <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    </button>
+                </div>
+            </article>
+        `).join('');
+    }
+
+    // Modal Steuerung (Neu & Bearbeiten)
+    function openModal(id = null) {
+        const modal = document.getElementById('editModal');
+        const title = document.getElementById('modalTitle');
+
+        if (id) {
+            const item = items.find(i => i.id === id);
+            if (!item) return;
+            title.textContent = 'Eintrag bearbeiten';
+            document.getElementById('editId').value = item.id;
+            document.getElementById('fieldDatei').value = item.datei;
+            document.getElementById('fieldBereich').value = item.bereich;
+            document.getElementById('fieldUnterbereich').value = item.unterbereich;
+            document.getElementById('fieldBemerkung').value = item.verwendungs_bemerkung;
+        } else {
+            title.textContent = 'Neue HTML-Datei hinzufügen';
+            document.getElementById('editForm').reset();
+            document.getElementById('editId').value = '';
+        }
+
+        modal.classList.add('open');
+        document.getElementById('fieldDatei').focus();
+    }
+
+    function closeModal() {
+        document.getElementById('editModal').classList.remove('open');
+    }
+
+    function saveEntry(event) {
+        event.preventDefault();
+        const idVal = document.getElementById('editId').value;
+        let datei = document.getElementById('fieldDatei').value.trim();
+        if (datei && !datei.toLowerCase().endsWith('.html')) {
+            datei += '.html';
+        }
+        const bereich = document.getElementById('fieldBereich').value.trim();
+        const unterbereich = document.getElementById('fieldUnterbereich').value.trim();
+        const bemerkung = document.getElementById('fieldBemerkung').value.trim();
+
+        if (idVal) {
+            const idx = items.findIndex(i => i.id === Number(idVal));
+            if (idx > -1) {
+                items[idx] = {
+                    ...items[idx],
+                    datei,
+                    bereich,
+                    unterbereich,
+                    verwendungs_bemerkung: bemerkung
+                };
+                showToast('Eintrag aktualisiert.');
+            }
+        } else {
+            const nextId = items.length ? Math.max(...items.map(i => i.id)) + 1 : 1;
+            items.push({
+                id: nextId,
+                datei,
+                bereich,
+                unterbereich,
+                verwendungs_bemerkung: bemerkung
+            });
+            showToast('Neuer Eintrag hinzugefügt.');
+        }
+
+        persistToLocal();
+        updateFilters();
+        render();
+        closeModal();
+    }
+
+    function deleteEntry(id) {
+        const item = items.find(i => i.id === id);
+        if (!item) return;
+        if (confirm(`Möchtest du "${item.datei}" wirklich aus der Liste entfernen?`)) {
+            items = items.filter(i => i.id !== id);
+            persistToLocal();
+            updateFilters();
+            render();
+            showToast(`"${item.datei}" gelöscht.`);
+        }
+    }
+
+    // Ansicht umschalten (Raster / Liste)
+    function setView(view, save = true) {
+        currentView = view;
+        const container = document.getElementById('itemsContainer');
+        const gridBtn = document.getElementById('gridViewBtn');
+        const listBtn = document.getElementById('listViewBtn');
+
+        if (view === 'list') {
+            container.classList.remove('grid-view');
+            container.classList.add('list-view');
+            listBtn.classList.add('active-toggle');
+            gridBtn.classList.remove('active-toggle');
+        } else {
+            container.classList.remove('list-view');
+            container.classList.add('grid-view');
+            gridBtn.classList.add('active-toggle');
+            listBtn.classList.remove('active-toggle');
+        }
+
+        if (save) localStorage.setItem('htmlInv_view', view);
+    }
+
+    // Style-Modus (Dark / Light)
+    function toggleTheme() {
+        const current = document.documentElement.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('htmlInv_theme', next);
+        updateThemeIcon(next);
+    }
+
+    function updateThemeIcon(theme) {
+        const icon = document.getElementById('themeIcon');
+        if (theme === 'dark') {
+            icon.innerHTML = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+        } else {
+            icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+        }
+    }
+
+    // Vollbild Modus
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(() => {
+                showToast('Vollbild wird von diesem Browser-Kontext blockiert.');
+            });
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+    }
+
+    // Hilfsfunktionen
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    let toastTimeout;
+    function showToast(msg) {
+        const toast = document.getElementById('toast');
+        toast.textContent = msg;
+        toast.classList.add('show');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => toast.classList.remove('show'), 2800);
+    }
+
+    // Modal per Klick auf Hintergrund schließen
+    document.getElementById('editModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+
+    init();
+</script>
+</body>
+</html>

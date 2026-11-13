@@ -1,0 +1,4185 @@
+{
+  "meta": {
+    "quelle": "links_cl2.json (https://github.com/juppijo)",
+    "gesamtanzahl_repositories": 18,
+    "gesamtanzahl_html_dateien": 610,
+    "sortierung": "Bereich -> Unterbereich -> Alphabetisch (Dateiname)"
+  },
+  "bereiche": [
+    {
+      "bereich": "Autogenes-Training",
+      "unterbereiche": [
+        {
+          "unterbereich": "Hauptverzeichnis",
+          "dateien": [
+            {
+              "dateiname": "assertivitaetstest.html",
+              "pfad": "assertivitaetstest.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/assertivitaetstest.html",
+              "verwendung": "Selbstsicherheits-Test"
+            },
+            {
+              "dateiname": "autogenes-training-app_Cl.html",
+              "pfad": "autogenes-training-app_Cl.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/autogenes-training-app_Cl.html",
+              "verwendung": "Autogenes Training (Anleitung/App) (KI-Variante)"
+            },
+            {
+              "dateiname": "Big-Five-G.html",
+              "pfad": "Big-Five-G.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/Big-Five-G.html",
+              "verwendung": "Big-Five-Persönlichkeitstest (KI-Variante)"
+            },
+            {
+              "dateiname": "Big-Five-Persönlichkeitstest.html",
+              "pfad": "Big-Five-Persönlichkeitstest.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/Big-Five-Pers%C3%B6nlichkeitstest.html",
+              "verwendung": "Big-Five-Persönlichkeitstest"
+            },
+            {
+              "dateiname": "eq_emotional_intelligence_test _2.html",
+              "pfad": "eq_emotional_intelligence_test _2.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/eq_emotional_intelligence_test%20_2.html",
+              "verwendung": "EQ-Test (Emotionale Intelligenz) (weitere Version)"
+            },
+            {
+              "dateiname": "eq_emotional_intelligence_test.html",
+              "pfad": "eq_emotional_intelligence_test.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/eq_emotional_intelligence_test.html",
+              "verwendung": "EQ-Test (Emotionale Intelligenz)"
+            },
+            {
+              "dateiname": "eq_test.html",
+              "pfad": "eq_test.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/eq_test.html",
+              "verwendung": "EQ-Test (Emotionale Intelligenz)"
+            },
+            {
+              "dateiname": "eq_test_g.html",
+              "pfad": "eq_test_g.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/eq_test_g.html",
+              "verwendung": "EQ-Test (Emotionale Intelligenz) (KI-Variante)"
+            },
+            {
+              "dateiname": "eq-test-cl.html",
+              "pfad": "eq-test-cl.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/eq-test-cl.html",
+              "verwendung": "EQ-Test (Emotionale Intelligenz) (KI-Variante)"
+            },
+            {
+              "dateiname": "Haltungstest.html",
+              "pfad": "Haltungstest.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/Haltungstest.html",
+              "verwendung": "Haltungstest zur Selbsteinschätzung"
+            },
+            {
+              "dateiname": "HaltungsTestTabelle.html",
+              "pfad": "HaltungsTestTabelle.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/HaltungsTestTabelle.html",
+              "verwendung": "Haltungstest zur Selbsteinschätzung"
+            },
+            {
+              "dateiname": "Heilung2.html",
+              "pfad": "Heilung2.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/Heilung2.html",
+              "verwendung": "Seite zur Heilung (Autogenes Training)"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "index.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/index.html",
+              "verwendung": "Startseite Autogenes Training"
+            },
+            {
+              "dateiname": "Innerer-Wahrnehmungs-Test.html",
+              "pfad": "Innerer-Wahrnehmungs-Test.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/Innerer-Wahrnehmungs-Test.html",
+              "verwendung": "Test zur inneren Wahrnehmung"
+            },
+            {
+              "dateiname": "LisaK.html",
+              "pfad": "LisaK.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/LisaK.html",
+              "verwendung": "Persönliche Seite (Lisa K.)"
+            },
+            {
+              "dateiname": "Nasen-Bauchatmung-App-Cl.html",
+              "pfad": "Nasen-Bauchatmung-App-Cl.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/Nasen-Bauchatmung-App-Cl.html",
+              "verwendung": "Nasen- und Bauchatmung (KI-Variante)"
+            },
+            {
+              "dateiname": "Nasen-Bauchatmung.html",
+              "pfad": "Nasen-Bauchatmung.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/Nasen-Bauchatmung.html",
+              "verwendung": "Nasen- und Bauchatmung"
+            },
+            {
+              "dateiname": "neuro_test.html",
+              "pfad": "neuro_test.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/neuro_test.html",
+              "verwendung": "Neuro-Test"
+            },
+            {
+              "dateiname": "Neurofunktionalität.html",
+              "pfad": "Neurofunktionalität.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/Neurofunktionalit%C3%A4t.html",
+              "verwendung": "Erklärung zur Neurofunktionalität"
+            },
+            {
+              "dateiname": "Neuro-Pfad-Trainer-Pro.html",
+              "pfad": "Neuro-Pfad-Trainer-Pro.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/Neuro-Pfad-Trainer-Pro.html",
+              "verwendung": "Neuro-Pfad-Trainer (Pro-Version)"
+            },
+            {
+              "dateiname": "Neuro-Pfad-Trainer.html",
+              "pfad": "Neuro-Pfad-Trainer.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/Neuro-Pfad-Trainer.html",
+              "verwendung": "Neuro-Pfad-Trainer"
+            },
+            {
+              "dateiname": "pmr_entspannung.html",
+              "pfad": "pmr_entspannung.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/pmr_entspannung.html",
+              "verwendung": "Progressive Muskelentspannung"
+            },
+            {
+              "dateiname": "PMR.html",
+              "pfad": "PMR.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/PMR.html",
+              "verwendung": "Progressive Muskelentspannung"
+            },
+            {
+              "dateiname": "Resonanz-Test.html",
+              "pfad": "Resonanz-Test.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/Resonanz-Test.html",
+              "verwendung": "Resonanz-Test"
+            },
+            {
+              "dateiname": "yout.html",
+              "pfad": "yout.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/yout.html",
+              "verwendung": "YouTube-Link-Seite zu Entspannung"
+            },
+            {
+              "dateiname": "zaminia_nasen_bauchatmung.html",
+              "pfad": "zaminia_nasen_bauchatmung.html",
+              "url": "https://juppijo.github.io/Autogenes-Training/zaminia_nasen_bauchatmung.html",
+              "verwendung": "Nasen- und Bauchatmung"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bereich": "Bilder",
+      "unterbereiche": [
+        {
+          "unterbereich": "Hauptverzeichnis",
+          "dateien": [
+            {
+              "dateiname": "bildergalerie.html",
+              "pfad": "bildergalerie.html",
+              "url": "https://juppijo.github.io/Bilder/bildergalerie.html",
+              "verwendung": "Bildergalerie der Theorie-Grafiken"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bereich": "Dashboard",
+      "unterbereiche": [
+        {
+          "unterbereich": "Hauptverzeichnis",
+          "dateien": [
+            {
+              "dateiname": "code-editor.html",
+              "pfad": "code-editor.html",
+              "url": "https://juppijo.github.io/Dashboard/code-editor.html",
+              "verwendung": "Code-Editor im Browser"
+            },
+            {
+              "dateiname": "Dashboard.html",
+              "pfad": "Dashboard.html",
+              "url": "https://juppijo.github.io/Dashboard/Dashboard.html",
+              "verwendung": "Dashboard mit allen Links"
+            },
+            {
+              "dateiname": "Dashboard2.html",
+              "pfad": "Dashboard2.html",
+              "url": "https://juppijo.github.io/Dashboard/Dashboard2.html",
+              "verwendung": "Dashboard mit allen Links (weitere Version)"
+            },
+            {
+              "dateiname": "HTML-Editor.html",
+              "pfad": "HTML-Editor.html",
+              "url": "https://juppijo.github.io/Dashboard/HTML-Editor.html",
+              "verwendung": "HTML-Werkstatt / HTML-Editor"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "index.html",
+              "url": "https://juppijo.github.io/Dashboard/index.html",
+              "verwendung": "Startseite: Dashboard"
+            },
+            {
+              "dateiname": "pdf_zu_docx_konverter.html",
+              "pfad": "pdf_zu_docx_konverter.html",
+              "url": "https://juppijo.github.io/Dashboard/pdf_zu_docx_konverter.html",
+              "verwendung": "Konverter für Dokumente"
+            },
+            {
+              "dateiname": "test.html",
+              "pfad": "test.html",
+              "url": "https://juppijo.github.io/Dashboard/test.html",
+              "verwendung": "Testseite im Dashboard"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Buch_Konverter",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "Buch_Konverter/index.html",
+              "url": "https://juppijo.github.io/Dashboard/Buch_Konverter/index.html",
+              "verwendung": "Konverter für Dokumente"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Buch_Konverter_Pro",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "Buch_Konverter_Pro/index.html",
+              "url": "https://juppijo.github.io/Dashboard/Buch_Konverter_Pro/index.html",
+              "verwendung": "Konverter für Dokumente (Pro-Version)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "CSS-Editor",
+          "dateien": [
+            {
+              "dateiname": "css-editor.html",
+              "pfad": "CSS-Editor/css-editor.html",
+              "url": "https://juppijo.github.io/Dashboard/CSS-Editor/css-editor.html",
+              "verwendung": "CSS-Editor / Style-Editor"
+            },
+            {
+              "dateiname": "CSS-Editor-G.html",
+              "pfad": "CSS-Editor/CSS-Editor-G.html",
+              "url": "https://juppijo.github.io/Dashboard/CSS-Editor/CSS-Editor-G.html",
+              "verwendung": "CSS-Editor / Style-Editor (KI-Variante)"
+            },
+            {
+              "dateiname": "css-preview.html",
+              "pfad": "CSS-Editor/css-preview.html",
+              "url": "https://juppijo.github.io/Dashboard/CSS-Editor/css-preview.html",
+              "verwendung": "CSS-Editor / Style-Editor (Vorschau)"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "CSS-Editor/index.html",
+              "url": "https://juppijo.github.io/Dashboard/CSS-Editor/index.html",
+              "verwendung": "CSS-Editor / Style-Editor (Startseite)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "HTML-Galerie",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "HTML-Galerie/index.html",
+              "url": "https://juppijo.github.io/Dashboard/HTML-Galerie/index.html",
+              "verwendung": "HTML-Galerie / Übersicht"
+            }
+          ]
+        },
+        {
+          "unterbereich": "HTML-Werkstatt",
+          "dateien": [
+            {
+              "dateiname": "CSS_Editor.html",
+              "pfad": "HTML‑Werkstatt/CSS_Editor.html",
+              "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/CSS_Editor.html",
+              "verwendung": "CSS-Editor / Style-Editor"
+            },
+            {
+              "dateiname": "CSS-Style-Editor.html",
+              "pfad": "HTML‑Werkstatt/CSS-Style-Editor.html",
+              "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/CSS-Style-Editor.html",
+              "verwendung": "CSS-Editor / Style-Editor"
+            },
+            {
+              "dateiname": "css-werkstatt.html",
+              "pfad": "HTML‑Werkstatt/css-werkstatt.html",
+              "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/css-werkstatt.html",
+              "verwendung": "CSS-Editor / Style-Editor"
+            },
+            {
+              "dateiname": "Duplicate-Finder.html",
+              "pfad": "HTML‑Werkstatt/Duplicate-Finder.html",
+              "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/Duplicate-Finder.html",
+              "verwendung": "HTML-Werkstatt / Duplikate-Finder"
+            },
+            {
+              "dateiname": "duplikate-finder-cl.html",
+              "pfad": "HTML‑Werkstatt/duplikate-finder-cl.html",
+              "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/duplikate-finder-cl.html",
+              "verwendung": "HTML-Werkstatt / Duplikate-Finder (KI-Variante)"
+            },
+            {
+              "dateiname": "html_werkstatt_ide.html",
+              "pfad": "HTML‑Werkstatt/html_werkstatt_ide.html",
+              "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/html_werkstatt_ide.html",
+              "verwendung": "HTML-Werkstatt / IDE"
+            },
+            {
+              "dateiname": "icon-creator.html",
+              "pfad": "HTML‑Werkstatt/icon-creator.html",
+              "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/icon-creator.html",
+              "verwendung": "HTML-Werkstatt / Icon-Creator"
+            },
+            {
+              "dateiname": "image-scaler.html",
+              "pfad": "HTML‑Werkstatt/image-scaler.html",
+              "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/image-scaler.html",
+              "verwendung": "HTML-Werkstatt / Bild-Skalierer"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "HTML‑Werkstatt/index.html",
+              "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/index.html",
+              "verwendung": "HTML-Werkstatt / Startseite"
+            },
+            {
+              "dateiname": "js_werkstatt.html",
+              "pfad": "HTML‑Werkstatt/js_werkstatt.html",
+              "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/js_werkstatt.html",
+              "verwendung": "JavaScript-Werkstatt"
+            },
+            {
+              "dateiname": "Test .html",
+              "pfad": "HTML‑Werkstatt/Test .html",
+              "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/Test%20.html",
+              "verwendung": "HTML-Werkstatt / Testdatei"
+            },
+            {
+              "dateiname": "Werkstatt-HTML-Editor.html",
+              "pfad": "HTML‑Werkstatt/Werkstatt-HTML-Editor.html",
+              "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/Werkstatt-HTML-Editor.html",
+              "verwendung": "HTML-Werkstatt / HTML-Editor"
+            }
+          ]
+        },
+        {
+          "unterbereich": "HTML-Werkstatt/HTML-Tools",
+          "dateien": [
+            {
+              "dateiname": "html_link_box_generator.html",
+              "pfad": "HTML‑Werkstatt/HTML-Tools/html_link_box_generator.html",
+              "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/HTML-Tools/html_link_box_generator.html",
+              "verwendung": "HTML-Link-Box-Generator"
+            },
+            {
+              "dateiname": "Zaminia_HTML5_Studio.html",
+              "pfad": "HTML‑Werkstatt/HTML-Tools/Zaminia_HTML5_Studio.html",
+              "url": "https://juppijo.github.io/Dashboard/HTML%E2%80%91Werkstatt/HTML-Tools/Zaminia_HTML5_Studio.html",
+              "verwendung": "Zaminia HTML5 Studio"
+            }
+          ]
+        },
+        {
+          "unterbereich": "markdown-editor",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "markdown-editor/index.html",
+              "url": "https://juppijo.github.io/Dashboard/markdown-editor/index.html",
+              "verwendung": "Markdown-Editor"
+            }
+          ]
+        },
+        {
+          "unterbereich": "PDF_Buch_Konverter_Cl",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "PDF_Buch_Konverter_Cl/index.html",
+              "url": "https://juppijo.github.io/Dashboard/PDF_Buch_Konverter_Cl/index.html",
+              "verwendung": "Konverter für Dokumente (KI-Variante)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "PDF_Buch_Konverter_G",
+          "dateien": [
+            {
+              "dateiname": "B_Conv.html",
+              "pfad": "PDF_Buch_Konverter_G/B_Conv.html",
+              "url": "https://juppijo.github.io/Dashboard/PDF_Buch_Konverter_G/B_Conv.html",
+              "verwendung": "Konverter für Dokumente (KI-Variante)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "PDF_Editor",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "PDF_Editor/index.html",
+              "url": "https://juppijo.github.io/Dashboard/PDF_Editor/index.html",
+              "verwendung": "PDF-Editor / PDF-Werkzeug"
+            },
+            {
+              "dateiname": "PDF-Struktur-Viewer.html",
+              "pfad": "PDF_Editor/PDF-Struktur-Viewer.html",
+              "url": "https://juppijo.github.io/Dashboard/PDF_Editor/PDF-Struktur-Viewer.html",
+              "verwendung": "PDF-Struktur-Viewer"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Zuhause",
+          "dateien": [
+            {
+              "dateiname": "Krims Kram – Elektronik-Lager.html",
+              "pfad": "Zuhause/Krims Kram – Elektronik-Lager.html",
+              "url": "https://juppijo.github.io/Dashboard/Zuhause/Krims%20Kram%20%E2%80%93%20Elektronik-Lager.html",
+              "verwendung": "Krims-Kram: Elektronik-Lager verwalten"
+            },
+            {
+              "dateiname": "krimskram_app.html",
+              "pfad": "Zuhause/krimskram_app.html",
+              "url": "https://juppijo.github.io/Dashboard/Zuhause/krimskram_app.html",
+              "verwendung": "Krims-Kram: Elektronik-Lager verwalten"
+            },
+            {
+              "dateiname": "krimskram_app_pro.html",
+              "pfad": "Zuhause/krimskram_app_pro.html",
+              "url": "https://juppijo.github.io/Dashboard/Zuhause/krimskram_app_pro.html",
+              "verwendung": "Krims-Kram: Elektronik-Lager verwalten (Pro-Version)"
+            },
+            {
+              "dateiname": "krimskram_app_t.html",
+              "pfad": "Zuhause/krimskram_app_t.html",
+              "url": "https://juppijo.github.io/Dashboard/Zuhause/krimskram_app_t.html",
+              "verwendung": "Krims-Kram: Elektronik-Lager verwalten"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bereich": "ESP32-S3",
+      "unterbereiche": [
+        {
+          "unterbereich": "Hauptverzeichnis",
+          "dateien": [
+            {
+              "dateiname": "esp32.html",
+              "pfad": "esp32.html",
+              "url": "https://juppijo.github.io/ESP32-S3/esp32.html",
+              "verwendung": "ESP32-S3 Steuerseite (weitere Version)"
+            },
+            {
+              "dateiname": "esp32_2.html",
+              "pfad": "esp32_2.html",
+              "url": "https://juppijo.github.io/ESP32-S3/esp32_2.html",
+              "verwendung": "ESP32-S3 Steuerseite (weitere Version)"
+            },
+            {
+              "dateiname": "WRZT_LaTex.html",
+              "pfad": "WRZT_LaTex.html",
+              "url": "https://juppijo.github.io/ESP32-S3/WRZT_LaTex.html",
+              "verwendung": "LaTeX-Formeln zur Theorie"
+            }
+          ]
+        },
+        {
+          "unterbereich": "GPIO-Control",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "GPIO-Control/index.html",
+              "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control/index.html",
+              "verwendung": "GPIO-Steuerung per Web-Oberfläche (GPIO Control)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "GPIO-Control-2",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "GPIO-Control-2/index.html",
+              "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control-2/index.html",
+              "verwendung": "GPIO-Steuerung per Web-Oberfläche (GPIO Control 2)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "GPIO-Control-3",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "GPIO-Control-3/index.html",
+              "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control-3/index.html",
+              "verwendung": "GPIO-Steuerung per Web-Oberfläche (GPIO Control 3)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "MiniCon",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "MiniCon/index.html",
+              "url": "https://juppijo.github.io/ESP32-S3/MiniCon/index.html",
+              "verwendung": "Mini-Controller-Oberfläche"
+            }
+          ]
+        },
+        {
+          "unterbereich": "RGB_LED",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "RGB_LED/index.html",
+              "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/index.html",
+              "verwendung": "RGB-LED-Steuerung"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bereich": "Garten",
+      "unterbereiche": [
+        {
+          "unterbereich": "Hauptverzeichnis",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "index.html",
+              "url": "https://juppijo.github.io/Garten/index.html",
+              "verwendung": "Startseite: Garten"
+            },
+            {
+              "dateiname": "stone-layout-planner.html",
+              "pfad": "stone-layout-planner.html",
+              "url": "https://juppijo.github.io/Garten/stone-layout-planner.html",
+              "verwendung": "Steinverlegungs-Planer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bereich": "Kegeln",
+      "unterbereiche": [
+        {
+          "unterbereich": "Hauptverzeichnis",
+          "dateien": [
+            {
+              "dateiname": "Anleitung.html",
+              "pfad": "Anleitung.html",
+              "url": "https://juppijo.github.io/Kegeln/Anleitung.html",
+              "verwendung": "Bedienungsanleitung der Kegel-App"
+            },
+            {
+              "dateiname": "DirektLink.html",
+              "pfad": "DirektLink.html",
+              "url": "https://juppijo.github.io/Kegeln/DirektLink.html",
+              "verwendung": "Kegel-App: DirektLink"
+            },
+            {
+              "dateiname": "Gebrauchts-Anweisung.html",
+              "pfad": "Gebrauchts-Anweisung.html",
+              "url": "https://juppijo.github.io/Kegeln/Gebrauchts-Anweisung.html",
+              "verwendung": "Bedienungsanleitung der Kegel-App"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "index.html",
+              "url": "https://juppijo.github.io/Kegeln/index.html",
+              "verwendung": "Startseite: Kegeln"
+            },
+            {
+              "dateiname": "ip_link_generator.html",
+              "pfad": "ip_link_generator.html",
+              "url": "https://juppijo.github.io/Kegeln/ip_link_generator.html",
+              "verwendung": "IP-Link/QR-Link-Generator für den Server"
+            },
+            {
+              "dateiname": "kegel_hub_index.html",
+              "pfad": "kegel_hub_index.html",
+              "url": "https://juppijo.github.io/Kegeln/kegel_hub_index.html",
+              "verwendung": "Kegel-Hub – Übersicht der Apps"
+            },
+            {
+              "dateiname": "starten.html",
+              "pfad": "starten.html",
+              "url": "https://juppijo.github.io/Kegeln/starten.html",
+              "verwendung": "Start des Kegel-Servers"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Kegeln-1",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "Kegeln-1/index.html",
+              "url": "https://juppijo.github.io/Kegeln/Kegeln-1/index.html",
+              "verwendung": "Startseite: Kegeln 1"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Kegeln-2",
+          "dateien": [
+            {
+              "dateiname": "gebrauchsanweisung.html",
+              "pfad": "Kegeln-2/gebrauchsanweisung.html",
+              "url": "https://juppijo.github.io/Kegeln/Kegeln-2/gebrauchsanweisung.html",
+              "verwendung": "Bedienungsanleitung der Kegel-App"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "Kegeln-2/index.html",
+              "url": "https://juppijo.github.io/Kegeln/Kegeln-2/index.html",
+              "verwendung": "Startseite: Kegeln 2"
+            },
+            {
+              "dateiname": "kegelspiel_17_und_4_regelnl.html",
+              "pfad": "Kegeln-2/kegelspiel_17_und_4_regelnl.html",
+              "url": "https://juppijo.github.io/Kegeln/Kegeln-2/kegelspiel_17_und_4_regelnl.html",
+              "verwendung": "Regeln: 17 und 4"
+            },
+            {
+              "dateiname": "kegelspiel_fuchsjagd_regeln.html",
+              "pfad": "Kegeln-2/kegelspiel_fuchsjagd_regeln.html",
+              "url": "https://juppijo.github.io/Kegeln/Kegeln-2/kegelspiel_fuchsjagd_regeln.html",
+              "verwendung": "Regeln: Fuchsjagd"
+            },
+            {
+              "dateiname": "kegelspiel_hausnummer_regeln.html",
+              "pfad": "Kegeln-2/kegelspiel_hausnummer_regeln.html",
+              "url": "https://juppijo.github.io/Kegeln/Kegeln-2/kegelspiel_hausnummer_regeln.html",
+              "verwendung": "Regeln: Hausnummer"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Kegeln-2b",
+          "dateien": [
+            {
+              "dateiname": "base64-bild-konverter.html",
+              "pfad": "Kegeln-2b/base64-bild-konverter.html",
+              "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/base64-bild-konverter.html",
+              "verwendung": "Bild -> Base64 Konverter"
+            },
+            {
+              "dateiname": "Base64-Konverter.html",
+              "pfad": "Kegeln-2b/Base64-Konverter.html",
+              "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/Base64-Konverter.html",
+              "verwendung": "Bild -> Base64 Konverter"
+            },
+            {
+              "dateiname": "Gebrauchts-Anweisung.html",
+              "pfad": "Kegeln-2b/Gebrauchts-Anweisung.html",
+              "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/Gebrauchts-Anweisung.html",
+              "verwendung": "Bedienungsanleitung der Kegel-App"
+            },
+            {
+              "dateiname": "hotspot.html",
+              "pfad": "Kegeln-2b/hotspot.html",
+              "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/hotspot.html",
+              "verwendung": "WLAN-Hotspot für die Kegel-App"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "Kegeln-2b/index.html",
+              "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/index.html",
+              "verwendung": "Startseite: Kegeln 2b"
+            },
+            {
+              "dateiname": "Install.html",
+              "pfad": "Kegeln-2b/Install.html",
+              "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/Install.html",
+              "verwendung": "Installationsanleitung Kegel-Server"
+            },
+            {
+              "dateiname": "Installationsanleitung_Kegel_Server.html",
+              "pfad": "Kegeln-2b/Installationsanleitung_Kegel_Server.html",
+              "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/Installationsanleitung_Kegel_Server.html",
+              "verwendung": "Installationsanleitung Kegel-Server"
+            },
+            {
+              "dateiname": "ip_link_generator.html",
+              "pfad": "Kegeln-2b/ip_link_generator.html",
+              "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/ip_link_generator.html",
+              "verwendung": "IP-Link/QR-Link-Generator für den Server"
+            },
+            {
+              "dateiname": "starten.html",
+              "pfad": "Kegeln-2b/starten.html",
+              "url": "https://juppijo.github.io/Kegeln/Kegeln-2b/starten.html",
+              "verwendung": "Start des Kegel-Servers"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bereich": "Logik_des_Universums",
+      "unterbereiche": [
+        {
+          "unterbereich": "Hauptverzeichnis",
+          "dateien": [
+            {
+              "dateiname": "Buch_Konverter_Pro.html",
+              "pfad": "Buch_Konverter_Pro.html",
+              "url": "https://juppijo.github.io/Logik_des_Universums/Buch_Konverter_Pro.html",
+              "verwendung": "Konverter für Buch-Dateien (Word/HTML) (Pro-Version)"
+            },
+            {
+              "dateiname": "Buch_Studio.html",
+              "pfad": "Buch_Studio.html",
+              "url": "https://juppijo.github.io/Logik_des_Universums/Buch_Studio.html",
+              "verwendung": "Werkstatt – Editor für das Buch Studio"
+            },
+            {
+              "dateiname": "Buch_Werkstatt.html",
+              "pfad": "Buch_Werkstatt.html",
+              "url": "https://juppijo.github.io/Logik_des_Universums/Buch_Werkstatt.html",
+              "verwendung": "Werkstatt – Editor für das Buch"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "index.html",
+              "url": "https://juppijo.github.io/Logik_des_Universums/index.html",
+              "verwendung": "Startseite: Logik des Universums"
+            },
+            {
+              "dateiname": "Logik_des_Universums.html",
+              "pfad": "Logik_des_Universums.html",
+              "url": "https://juppijo.github.io/Logik_des_Universums/Logik_des_Universums.html",
+              "verwendung": "Buchtext „Logik des Universums“"
+            },
+            {
+              "dateiname": "Logik_des_Universums_Cl5.html",
+              "pfad": "Logik_des_Universums_Cl5.html",
+              "url": "https://juppijo.github.io/Logik_des_Universums/Logik_des_Universums_Cl5.html",
+              "verwendung": "Buchtext „Logik des Universums“ (KI-Variante)"
+            },
+            {
+              "dateiname": "Logik_des_Universums_V5.html",
+              "pfad": "Logik_des_Universums_V5.html",
+              "url": "https://juppijo.github.io/Logik_des_Universums/Logik_des_Universums_V5.html",
+              "verwendung": "Buchtext „Logik des Universums“ (weitere Version)"
+            },
+            {
+              "dateiname": "smart.html",
+              "pfad": "smart.html",
+              "url": "https://juppijo.github.io/Logik_des_Universums/smart.html",
+              "verwendung": "Smartphone-Ansicht des Buchs"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bereich": "Musik_Zami",
+      "unterbereiche": [
+        {
+          "unterbereich": "Hauptverzeichnis",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "index.html",
+              "url": "https://juppijo.github.io/Musik_Zami/index.html",
+              "verwendung": "Startseite: Musik Zami"
+            },
+            {
+              "dateiname": "markdown-preview.html",
+              "pfad": "markdown-preview.html",
+              "url": "https://juppijo.github.io/Musik_Zami/markdown-preview.html",
+              "verwendung": "Markdown-Vorschau"
+            },
+            {
+              "dateiname": "midi-soundfont_instr.html",
+              "pfad": "midi-soundfont_instr.html",
+              "url": "https://juppijo.github.io/Musik_Zami/midi-soundfont_instr.html",
+              "verwendung": "Soundfont-Touch-Player"
+            },
+            {
+              "dateiname": "Musiklink.html",
+              "pfad": "Musiklink.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Musiklink.html",
+              "verwendung": "Musik-Link-Seite"
+            },
+            {
+              "dateiname": "musik-touch-pro.html",
+              "pfad": "musik-touch-pro.html",
+              "url": "https://juppijo.github.io/Musik_Zami/musik-touch-pro.html",
+              "verwendung": "Touch-Musikinstrument (Pro-Version)"
+            },
+            {
+              "dateiname": "musik-touch.html",
+              "pfad": "musik-touch.html",
+              "url": "https://juppijo.github.io/Musik_Zami/musik-touch.html",
+              "verwendung": "Touch-Musikinstrument"
+            },
+            {
+              "dateiname": "soundfont-touch-player-doc.html",
+              "pfad": "soundfont-touch-player-doc.html",
+              "url": "https://juppijo.github.io/Musik_Zami/soundfont-touch-player-doc.html",
+              "verwendung": "Soundfont-Touch-Player (Doku)"
+            },
+            {
+              "dateiname": "soundfont-touch.html",
+              "pfad": "soundfont-touch.html",
+              "url": "https://juppijo.github.io/Musik_Zami/soundfont-touch.html",
+              "verwendung": "Soundfont-Touch-Player"
+            },
+            {
+              "dateiname": "Zami-mp3-editor.html",
+              "pfad": "Zami-mp3-editor.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Zami-mp3-editor.html",
+              "verwendung": "MP3-Editor"
+            },
+            {
+              "dateiname": "Zaminia-Chord-Interface.html",
+              "pfad": "Zaminia-Chord-Interface.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Zaminia-Chord-Interface.html",
+              "verwendung": "Akkord-Oberfläche (Zaminia Chord Interface)"
+            },
+            {
+              "dateiname": "Zaminia-Chord-Interface_1.html",
+              "pfad": "Zaminia-Chord-Interface_1.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Zaminia-Chord-Interface_1.html",
+              "verwendung": "Akkord-Oberfläche (Zaminia Chord Interface) (weitere Version)"
+            },
+            {
+              "dateiname": "Zamis-zen-music-player.html",
+              "pfad": "Zamis-zen-music-player.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Zamis-zen-music-player.html",
+              "verwendung": "Zen-Musikplayer"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Gitarre",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "Gitarre/index.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Gitarre/index.html",
+              "verwendung": "Startseite: Gitarre"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Gitarre_G",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "Gitarre_G/index.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Gitarre_G/index.html",
+              "verwendung": "Startseite: Gitarre G"
+            },
+            {
+              "dateiname": "interactive_guitar_ukulele_tuner.html",
+              "pfad": "Gitarre_G/interactive_guitar_ukulele_tuner.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Gitarre_G/interactive_guitar_ukulele_tuner.html",
+              "verwendung": "Interaktives Gitarre-/Ukulele-Stimmgerät"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Handpan",
+          "dateien": [
+            {
+              "dateiname": "Handpan_Akkorde.html",
+              "pfad": "Handpan/Handpan_Akkorde.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Handpan/Handpan_Akkorde.html",
+              "verwendung": "Handpan-Akkorde"
+            },
+            {
+              "dateiname": "handpan_Cl.html",
+              "pfad": "Handpan/handpan_Cl.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Handpan/handpan_Cl.html",
+              "verwendung": "Handpan-App (KI-Variante)"
+            },
+            {
+              "dateiname": "handpan_simulator.html",
+              "pfad": "Handpan/handpan_simulator.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Handpan/handpan_simulator.html",
+              "verwendung": "Handpan-Simulator"
+            },
+            {
+              "dateiname": "handpan_synthesizer.html",
+              "pfad": "Handpan/handpan_synthesizer.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Handpan/handpan_synthesizer.html",
+              "verwendung": "Handpan-Synthesizer"
+            },
+            {
+              "dateiname": "handpan-synth.html",
+              "pfad": "Handpan/handpan-synth.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Handpan/handpan-synth.html",
+              "verwendung": "Handpan-Synthesizer"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Lisa",
+          "dateien": [
+            {
+              "dateiname": "sonic_lisajous.html",
+              "pfad": "Lisa/sonic_lisajous.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Lisa/sonic_lisajous.html",
+              "verwendung": "Sonic Lisajous (Klang-Visualisierung)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Loop",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "Loop/index.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Loop/index.html",
+              "verwendung": "Startseite: Loop-Matrix"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Noten",
+          "dateien": [
+            {
+              "dateiname": "d_kurd_handpan_transkriptor.html",
+              "pfad": "Noten/d_kurd_handpan_transkriptor.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Noten/d_kurd_handpan_transkriptor.html",
+              "verwendung": "D-Kurd Handpan-Transkriptor"
+            },
+            {
+              "dateiname": "handpan_noten_studio.html",
+              "pfad": "Noten/handpan_noten_studio.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Noten/handpan_noten_studio.html",
+              "verwendung": "Handpan-Noten-Studio"
+            },
+            {
+              "dateiname": "JSON-MIDI-Konverter.html",
+              "pfad": "Noten/JSON-MIDI-Konverter.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Noten/JSON-MIDI-Konverter.html",
+              "verwendung": "Konverter zwischen Noten-Formaten (JSON/MIDI)"
+            },
+            {
+              "dateiname": "JSON-zu-MIDI-Konverter.html",
+              "pfad": "Noten/JSON-zu-MIDI-Konverter.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Noten/JSON-zu-MIDI-Konverter.html",
+              "verwendung": "Konverter zwischen Noten-Formaten (JSON -> MIDI)"
+            },
+            {
+              "dateiname": "midi-editor.html",
+              "pfad": "Noten/midi-editor.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Noten/midi-editor.html",
+              "verwendung": "MIDI-Editor / Piano Roll"
+            },
+            {
+              "dateiname": "notenblatt_zu_json_konverter.html",
+              "pfad": "Noten/notenblatt_zu_json_konverter.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Noten/notenblatt_zu_json_konverter.html",
+              "verwendung": "Konverter Notenblatt -> JSON"
+            },
+            {
+              "dateiname": "Notenprogramm.html",
+              "pfad": "Noten/Notenprogramm.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Noten/Notenprogramm.html",
+              "verwendung": "Notenprogramm / Noten-Studio"
+            },
+            {
+              "dateiname": "sleek_blue_midi_piano_roll_editor.html",
+              "pfad": "Noten/sleek_blue_midi_piano_roll_editor.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Noten/sleek_blue_midi_piano_roll_editor.html",
+              "verwendung": "MIDI-Editor / Piano Roll"
+            },
+            {
+              "dateiname": "sleek_blue_midi_piano_roll_editor_pro.html",
+              "pfad": "Noten/sleek_blue_midi_piano_roll_editor_pro.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Noten/sleek_blue_midi_piano_roll_editor_pro.html",
+              "verwendung": "MIDI-Editor / Piano Roll (Pro-Version)"
+            },
+            {
+              "dateiname": "Zaminia-Chord-Interface-g.html",
+              "pfad": "Noten/Zaminia-Chord-Interface-g.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Noten/Zaminia-Chord-Interface-g.html",
+              "verwendung": "Akkord-Oberfläche (Zaminia Chord Interface) (KI-Variante)"
+            },
+            {
+              "dateiname": "Zaminia-Chord-Interface-g2.html",
+              "pfad": "Noten/Zaminia-Chord-Interface-g2.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Noten/Zaminia-Chord-Interface-g2.html",
+              "verwendung": "Akkord-Oberfläche (Zaminia Chord Interface) (KI-Variante)"
+            },
+            {
+              "dateiname": "Zaminia-Chord-Interface-g3.html",
+              "pfad": "Noten/Zaminia-Chord-Interface-g3.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Noten/Zaminia-Chord-Interface-g3.html",
+              "verwendung": "Akkord-Oberfläche (Zaminia Chord Interface) (KI-Variante)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Radio",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "Radio/index.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Radio/index.html",
+              "verwendung": "Startseite: Web-Radio"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Stimmgerät",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "Stimmgerät/index.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Stimmger%C3%A4t/index.html",
+              "verwendung": "Startseite: Stimmgerät"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Ukulele",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "Ukulele/index.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Ukulele/index.html",
+              "verwendung": "Startseite: Ukulele"
+            },
+            {
+              "dateiname": "ukulele_songbook_playalong.html",
+              "pfad": "Ukulele/ukulele_songbook_playalong.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Ukulele/ukulele_songbook_playalong.html",
+              "verwendung": "Ukulele-Songbook & Playalong"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Ukulele_Cl",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "Ukulele_Cl/index.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Ukulele_Cl/index.html",
+              "verwendung": "Startseite: Ukulele Cl"
+            },
+            {
+              "dateiname": "ukulele-app.html",
+              "pfad": "Ukulele_Cl/ukulele-app.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Ukulele_Cl/ukulele-app.html",
+              "verwendung": "Ukulele-App (KI-Variante)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Zungentrommel",
+          "dateien": [
+            {
+              "dateiname": "fazley_tongue_drum.html",
+              "pfad": "Zungentrommel/fazley_tongue_drum.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Zungentrommel/fazley_tongue_drum.html",
+              "verwendung": "Zungentrommel (Tongue Drum) – Fazley"
+            },
+            {
+              "dateiname": "fazley_tongue_drum_td12_studio.html",
+              "pfad": "Zungentrommel/fazley_tongue_drum_td12_studio.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Zungentrommel/fazley_tongue_drum_td12_studio.html",
+              "verwendung": "Zungentrommel (Tongue Drum) – Fazley TD12 Studio"
+            },
+            {
+              "dateiname": "handpan_tongue_drum_synthesizer.html",
+              "pfad": "Zungentrommel/handpan_tongue_drum_synthesizer.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Zungentrommel/handpan_tongue_drum_synthesizer.html",
+              "verwendung": "Handpan- & Zungentrommel-Synthesizer"
+            },
+            {
+              "dateiname": "handpan_tongue_synthesizer_pro.html",
+              "pfad": "Zungentrommel/handpan_tongue_synthesizer_pro.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Zungentrommel/handpan_tongue_synthesizer_pro.html",
+              "verwendung": "Handpan- & Zungentrommel-Synthesizer (Pro)"
+            },
+            {
+              "dateiname": "Ton.html",
+              "pfad": "Zungentrommel/Ton.html",
+              "url": "https://juppijo.github.io/Musik_Zami/Zungentrommel/Ton.html",
+              "verwendung": "Zungentrommel (Tongue Drum) – Tonübersicht"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bereich": "Rechner",
+      "unterbereiche": [
+        {
+          "unterbereich": "Hauptverzeichnis",
+          "dateien": [
+            {
+              "dateiname": "2_Geraden.html",
+              "pfad": "2_Geraden.html",
+              "url": "https://juppijo.github.io/Rechner/2_Geraden.html",
+              "verwendung": "Mathe-Aufgaben/-Rechner (2 Geraden)"
+            },
+            {
+              "dateiname": "2_Geraden_Pro.html",
+              "pfad": "2_Geraden_Pro.html",
+              "url": "https://juppijo.github.io/Rechner/2_Geraden_Pro.html",
+              "verwendung": "Mathe-Aufgaben/-Rechner (Pro-Version)"
+            },
+            {
+              "dateiname": "AstroPhysCalc.html",
+              "pfad": "AstroPhysCalc.html",
+              "url": "https://juppijo.github.io/Rechner/AstroPhysCalc.html",
+              "verwendung": "Physik-/Astro-Rechner"
+            },
+            {
+              "dateiname": "bewegungsaufgabe_interaktiv.html",
+              "pfad": "bewegungsaufgabe_interaktiv.html",
+              "url": "https://juppijo.github.io/Rechner/bewegungsaufgabe_interaktiv.html",
+              "verwendung": "Interaktive Bewegungsaufgabe (Mathe/Physik)"
+            },
+            {
+              "dateiname": "editor_pro.html",
+              "pfad": "editor_pro.html",
+              "url": "https://juppijo.github.io/Rechner/editor_pro.html",
+              "verwendung": "HTML-Lernen / HTML-Werkzeug (Pro-Version)"
+            },
+            {
+              "dateiname": "einheiten-rechner-pro.html",
+              "pfad": "einheiten-rechner-pro.html",
+              "url": "https://juppijo.github.io/Rechner/einheiten-rechner-pro.html",
+              "verwendung": "Einheiten-Rechner (Pro-Version)"
+            },
+            {
+              "dateiname": "einheiten-rechner.html",
+              "pfad": "einheiten-rechner.html",
+              "url": "https://juppijo.github.io/Rechner/einheiten-rechner.html",
+              "verwendung": "Einheiten-Rechner"
+            },
+            {
+              "dateiname": "favorites_dashboard.html",
+              "pfad": "favorites_dashboard.html",
+              "url": "https://juppijo.github.io/Rechner/favorites_dashboard.html",
+              "verwendung": "Favoriten-Dashboard / HTML-Werkzeug"
+            },
+            {
+              "dateiname": "font-editor.html",
+              "pfad": "font-editor.html",
+              "url": "https://juppijo.github.io/Rechner/font-editor.html",
+              "verwendung": "Grafik-/Schrift-Werkzeug (SVG, Fonts)"
+            },
+            {
+              "dateiname": "formelsammlung_pruefung_juni_2026.html",
+              "pfad": "formelsammlung_pruefung_juni_2026.html",
+              "url": "https://juppijo.github.io/Rechner/formelsammlung_pruefung_juni_2026.html",
+              "verwendung": "Mathematische Formelsammlung (Prüfung Juni 2026)"
+            },
+            {
+              "dateiname": "fritz-und-max.html",
+              "pfad": "fritz-und-max.html",
+              "url": "https://juppijo.github.io/Rechner/fritz-und-max.html",
+              "verwendung": "Mathe-Textaufgabe (Fritz und Max)"
+            },
+            {
+              "dateiname": "Gleichung2.html",
+              "pfad": "Gleichung2.html",
+              "url": "https://juppijo.github.io/Rechner/Gleichung2.html",
+              "verwendung": "Mathe-Aufgaben/-Rechner (weitere Version)"
+            },
+            {
+              "dateiname": "Gleichungen.html",
+              "pfad": "Gleichungen.html",
+              "url": "https://juppijo.github.io/Rechner/Gleichungen.html",
+              "verwendung": "Mathe-Aufgaben/-Rechner"
+            },
+            {
+              "dateiname": "Gleichungen2.html",
+              "pfad": "Gleichungen2.html",
+              "url": "https://juppijo.github.io/Rechner/Gleichungen2.html",
+              "verwendung": "Mathe-Aufgaben/-Rechner (weitere Version)"
+            },
+            {
+              "dateiname": "Gleichungs_Systeme.html",
+              "pfad": "Gleichungs_Systeme.html",
+              "url": "https://juppijo.github.io/Rechner/Gleichungs_Systeme.html",
+              "verwendung": "Mathe-Aufgaben/-Rechner (Gleichungssysteme)"
+            },
+            {
+              "dateiname": "grafik.html",
+              "pfad": "grafik.html",
+              "url": "https://juppijo.github.io/Rechner/grafik.html",
+              "verwendung": "Grafik-/Schrift-Werkzeug (SVG, Fonts)"
+            },
+            {
+              "dateiname": "html-fortgeschritten.html",
+              "pfad": "html-fortgeschritten.html",
+              "url": "https://juppijo.github.io/Rechner/html-fortgeschritten.html",
+              "verwendung": "HTML-Lernen für Fortgeschrittene"
+            },
+            {
+              "dateiname": "html-lernen.html",
+              "pfad": "html-lernen.html",
+              "url": "https://juppijo.github.io/Rechner/html-lernen.html",
+              "verwendung": "HTML-Lernkurs / Grundlagen"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "index.html",
+              "url": "https://juppijo.github.io/Rechner/index.html",
+              "verwendung": "Startseite: Rechner"
+            },
+            {
+              "dateiname": "interactive_visual.html",
+              "pfad": "interactive_visual.html",
+              "url": "https://juppijo.github.io/Rechner/interactive_visual.html",
+              "verwendung": "Interaktive Visualisierung"
+            },
+            {
+              "dateiname": "Luft-Rechner.html",
+              "pfad": "Luft-Rechner.html",
+              "url": "https://juppijo.github.io/Rechner/Luft-Rechner.html",
+              "verwendung": "Physik-/Astro-Rechner (Luft/Atmosphäre)"
+            },
+            {
+              "dateiname": "mathe_formelsammlung.html",
+              "pfad": "mathe_formelsammlung.html",
+              "url": "https://juppijo.github.io/Rechner/mathe_formelsammlung.html",
+              "verwendung": "Mathematische Formelsammlung / Spickzettel"
+            },
+            {
+              "dateiname": "mathe_spickzettel_kompakt.html",
+              "pfad": "mathe_spickzettel_kompakt.html",
+              "url": "https://juppijo.github.io/Rechner/mathe_spickzettel_kompakt.html",
+              "verwendung": "Mathematischer Spickzettel (kompakt)"
+            },
+            {
+              "dateiname": "mathematik_notiz_app.html",
+              "pfad": "mathematik_notiz_app.html",
+              "url": "https://juppijo.github.io/Rechner/mathematik_notiz_app.html",
+              "verwendung": "Notizen-App (Mathe/Allgemein)"
+            },
+            {
+              "dateiname": "Mathe-Notizbuch.html",
+              "pfad": "Mathe-Notizbuch.html",
+              "url": "https://juppijo.github.io/Rechner/Mathe-Notizbuch.html",
+              "verwendung": "Notizen-App (Mathe/Allgemein)"
+            },
+            {
+              "dateiname": "Mathematische-Formelsammlung-Kompakt.html",
+              "pfad": "Mathematische-Formelsammlung-Kompakt.html",
+              "url": "https://juppijo.github.io/Rechner/Mathematische-Formelsammlung-Kompakt.html",
+              "verwendung": "Mathematische Formelsammlung (kompakt)"
+            },
+            {
+              "dateiname": "Mathematische-Formelsammlung.html",
+              "pfad": "Mathematische-Formelsammlung.html",
+              "url": "https://juppijo.github.io/Rechner/Mathematische-Formelsammlung.html",
+              "verwendung": "Mathematische Formelsammlung / Spickzettel"
+            },
+            {
+              "dateiname": "notizen_mobile.html",
+              "pfad": "notizen_mobile.html",
+              "url": "https://juppijo.github.io/Rechner/notizen_mobile.html",
+              "verwendung": "Notizen-App (Mobile Ansicht)"
+            },
+            {
+              "dateiname": "notizen_pro.html",
+              "pfad": "notizen_pro.html",
+              "url": "https://juppijo.github.io/Rechner/notizen_pro.html",
+              "verwendung": "Notizen-App (Pro-Version)"
+            },
+            {
+              "dateiname": "physcalc_pro.html",
+              "pfad": "physcalc_pro.html",
+              "url": "https://juppijo.github.io/Rechner/physcalc_pro.html",
+              "verwendung": "Physik-/Astro-Rechner (Pro-Version)"
+            },
+            {
+              "dateiname": "Pythagoras.html",
+              "pfad": "Pythagoras.html",
+              "url": "https://juppijo.github.io/Rechner/Pythagoras.html",
+              "verwendung": "Mathe-Aufgaben/-Rechner (Satz des Pythagoras)"
+            },
+            {
+              "dateiname": "Python_in_HTML.html",
+              "pfad": "Python_in_HTML.html",
+              "url": "https://juppijo.github.io/Rechner/Python_in_HTML.html",
+              "verwendung": "Python-Editor im Browser (mit Plot)"
+            },
+            {
+              "dateiname": "python_live_editor_plotter.html",
+              "pfad": "python_live_editor_plotter.html",
+              "url": "https://juppijo.github.io/Rechner/python_live_editor_plotter.html",
+              "verwendung": "Python-Live-Editor im Browser (mit Plot)"
+            },
+            {
+              "dateiname": "python_live_editor_pro.html",
+              "pfad": "python_live_editor_pro.html",
+              "url": "https://juppijo.github.io/Rechner/python_live_editor_pro.html",
+              "verwendung": "Python-Live-Editor im Browser (Pro-Version)"
+            },
+            {
+              "dateiname": "Python-Editor-Cl.html",
+              "pfad": "Python-Editor-Cl.html",
+              "url": "https://juppijo.github.io/Rechner/Python-Editor-Cl.html",
+              "verwendung": "Python-Editor im Browser (KI-Variante)"
+            },
+            {
+              "dateiname": "Rechner_CGTP.html",
+              "pfad": "Rechner_CGTP.html",
+              "url": "https://juppijo.github.io/Rechner/Rechner_CGTP.html",
+              "verwendung": "Rechner (KI-Variante)"
+            },
+            {
+              "dateiname": "Rechner_DS.html",
+              "pfad": "Rechner_DS.html",
+              "url": "https://juppijo.github.io/Rechner/Rechner_DS.html",
+              "verwendung": "Rechner (KI-Variante)"
+            },
+            {
+              "dateiname": "Rechner_DS2.html",
+              "pfad": "Rechner_DS2.html",
+              "url": "https://juppijo.github.io/Rechner/Rechner_DS2.html",
+              "verwendung": "Rechner (KI-Variante)"
+            },
+            {
+              "dateiname": "Rechner_G.html",
+              "pfad": "Rechner_G.html",
+              "url": "https://juppijo.github.io/Rechner/Rechner_G.html",
+              "verwendung": "Rechner (KI-Variante)"
+            },
+            {
+              "dateiname": "Schrift.html",
+              "pfad": "Schrift.html",
+              "url": "https://juppijo.github.io/Rechner/Schrift.html",
+              "verwendung": "Grafik-/Schrift-Werkzeug (SVG, Fonts)"
+            },
+            {
+              "dateiname": "svg_editor_g.html",
+              "pfad": "svg_editor_g.html",
+              "url": "https://juppijo.github.io/Rechner/svg_editor_g.html",
+              "verwendung": "SVG-Grafik-Editor (KI-Variante)"
+            },
+            {
+              "dateiname": "svg_editor_g2.html",
+              "pfad": "svg_editor_g2.html",
+              "url": "https://juppijo.github.io/Rechner/svg_editor_g2.html",
+              "verwendung": "SVG-Grafik-Editor (KI-Variante)"
+            },
+            {
+              "dateiname": "svg-editor-cl.html",
+              "pfad": "svg-editor-cl.html",
+              "url": "https://juppijo.github.io/Rechner/svg-editor-cl.html",
+              "verwendung": "SVG-Grafik-Editor (KI-Variante)"
+            },
+            {
+              "dateiname": "Thales.html",
+              "pfad": "Thales.html",
+              "url": "https://juppijo.github.io/Rechner/Thales.html",
+              "verwendung": "Mathe-Aufgaben/-Rechner (Satz des Thales)"
+            },
+            {
+              "dateiname": "Trigonometrie.html",
+              "pfad": "Trigonometrie.html",
+              "url": "https://juppijo.github.io/Rechner/Trigonometrie.html",
+              "verwendung": "Mathe-Aufgaben/-Rechner (Trigonometrie)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Gleichungen",
+          "dateien": [
+            {
+              "dateiname": "gleichungs-werkstatt.html",
+              "pfad": "Gleichungen/gleichungs-werkstatt.html",
+              "url": "https://juppijo.github.io/Rechner/Gleichungen/gleichungs-werkstatt.html",
+              "verwendung": "Gleichungs-Werkstatt (Mathe-Aufgaben/-Rechner)"
+            },
+            {
+              "dateiname": "JSON-Ansicht.html",
+              "pfad": "Gleichungen/JSON-Ansicht.html",
+              "url": "https://juppijo.github.io/Rechner/Gleichungen/JSON-Ansicht.html",
+              "verwendung": "JSON-Ansicht für die Gleichungs-Übungen"
+            },
+            {
+              "dateiname": "lgs_uebungsprogramm.html",
+              "pfad": "Gleichungen/lgs_uebungsprogramm.html",
+              "url": "https://juppijo.github.io/Rechner/Gleichungen/lgs_uebungsprogramm.html",
+              "verwendung": "Übungsprogramm für lineare Gleichungssysteme"
+            }
+          ]
+        },
+        {
+          "unterbereich": "LaTex-Editor",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "LaTex-Editor/index.html",
+              "url": "https://juppijo.github.io/Rechner/LaTex-Editor/index.html",
+              "verwendung": "LaTeX-Editor für Formeln (Startseite)"
+            },
+            {
+              "dateiname": "LaTex-Editor.html",
+              "pfad": "LaTex-Editor/LaTex-Editor.html",
+              "url": "https://juppijo.github.io/Rechner/LaTex-Editor/LaTex-Editor.html",
+              "verwendung": "LaTeX-Editor für Formeln"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Strom-Verbrauch-Cl",
+          "dateien": [
+            {
+              "dateiname": "excel_merger.html",
+              "pfad": "Strom-Verbrauch-Cl/excel_merger.html",
+              "url": "https://juppijo.github.io/Rechner/Strom-Verbrauch-Cl/excel_merger.html",
+              "verwendung": "Excel-Dateien für Stromverbrauch zusammenführen"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "Strom-Verbrauch-Cl/index.html",
+              "url": "https://juppijo.github.io/Rechner/Strom-Verbrauch-Cl/index.html",
+              "verwendung": "Stromverbrauch auswerten (Haushalt)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bereich": "robbie",
+      "unterbereiche": [
+        {
+          "unterbereich": "Hauptverzeichnis",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "index.html",
+              "url": "https://juppijo.github.io/robbie/index.html",
+              "verwendung": "Startseite: Projekt „robbie“"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bereich": "TaiChi",
+      "unterbereiche": [
+        {
+          "unterbereich": "Hauptverzeichnis",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "index.html",
+              "url": "https://juppijo.github.io/TaiChi/index.html",
+              "verwendung": "Startseite: TaiChi"
+            },
+            {
+              "dateiname": "QiGong_G2.html",
+              "pfad": "QiGong_G2.html",
+              "url": "https://juppijo.github.io/TaiChi/QiGong_G2.html",
+              "verwendung": "Qi-Gong-Übung (KI-Variante)"
+            },
+            {
+              "dateiname": "QiGong_G3.html",
+              "pfad": "QiGong_G3.html",
+              "url": "https://juppijo.github.io/TaiChi/QiGong_G3.html",
+              "verwendung": "Qi-Gong-Übung (KI-Variante)"
+            },
+            {
+              "dateiname": "Tai_Chi.html",
+              "pfad": "Tai_Chi.html",
+              "url": "https://juppijo.github.io/TaiChi/Tai_Chi.html",
+              "verwendung": "Tai-Chi-Anleitung / Übung"
+            },
+            {
+              "dateiname": "taichi_practice.html",
+              "pfad": "taichi_practice.html",
+              "url": "https://juppijo.github.io/TaiChi/taichi_practice.html",
+              "verwendung": "Tai-Chi-Anleitung / Übung"
+            },
+            {
+              "dateiname": "taichi_practice108.html",
+              "pfad": "taichi_practice108.html",
+              "url": "https://juppijo.github.io/TaiChi/taichi_practice108.html",
+              "verwendung": "Tai-Chi-Form mit 108 Bewegungen"
+            }
+          ]
+        },
+        {
+          "unterbereich": "8-Brokate",
+          "dateien": [
+            {
+              "dateiname": "8Brokate.html",
+              "pfad": "8-Brokate/8Brokate.html",
+              "url": "https://juppijo.github.io/TaiChi/8-Brokate/8Brokate.html",
+              "verwendung": "8 Brokate – Übungsablauf"
+            },
+            {
+              "dateiname": "8Brokate_App.html",
+              "pfad": "8-Brokate/8Brokate_App.html",
+              "url": "https://juppijo.github.io/TaiChi/8-Brokate/8Brokate_App.html",
+              "verwendung": "8 Brokate – Übungs-App"
+            },
+            {
+              "dateiname": "8Brokate_S.html",
+              "pfad": "8-Brokate/8Brokate_S.html",
+              "url": "https://juppijo.github.io/TaiChi/8-Brokate/8Brokate_S.html",
+              "verwendung": "8 Brokate – Übungsablauf (Smartphone)"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "8-Brokate/index.html",
+              "url": "https://juppijo.github.io/TaiChi/8-Brokate/index.html",
+              "verwendung": "Startseite: 8 Brokate"
+            }
+          ]
+        },
+        {
+          "unterbereich": "8-Brokate/images",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "8-Brokate/images/index.html",
+              "url": "https://juppijo.github.io/TaiChi/8-Brokate/images/index.html",
+              "verwendung": "Bildergalerie der 8 Brokate"
+            },
+            {
+              "dateiname": "zenjio-gallery.html",
+              "pfad": "8-Brokate/images/zenjio-gallery.html",
+              "url": "https://juppijo.github.io/TaiChi/8-Brokate/images/zenjio-gallery.html",
+              "verwendung": "Zenjio-Bildergalerie der 8 Brokate"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Kum-Nye",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "Kum-Nye/index.html",
+              "url": "https://juppijo.github.io/TaiChi/Kum-Nye/index.html",
+              "verwendung": "Kum Nye (tibetische Körperarbeit)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bereich": "TNH",
+      "unterbereiche": [
+        {
+          "unterbereich": "Hauptverzeichnis",
+          "dateien": [
+            {
+              "dateiname": "Atmen.html",
+              "pfad": "Atmen.html",
+              "url": "https://juppijo.github.io/TNH/Atmen.html",
+              "verwendung": "Atemübung"
+            },
+            {
+              "dateiname": "DIESECHSZEHNBUNGENDESBEWUSSTENATMENS.html",
+              "pfad": "DIESECHSZEHNBUNGENDESBEWUSSTENATMENS.html",
+              "url": "https://juppijo.github.io/TNH/DIESECHSZEHNBUNGENDESBEWUSSTENATMENS.html",
+              "verwendung": "Sechzehn Übungen des bewussten Atmens"
+            },
+            {
+              "dateiname": "fisher_anpassungstest.html",
+              "pfad": "fisher_anpassungstest.html",
+              "url": "https://juppijo.github.io/TNH/fisher_anpassungstest.html",
+              "verwendung": "Fisher-Anpassungstest (Beziehung)"
+            },
+            {
+              "dateiname": "fuenf_sprachen_der_liebe.html",
+              "pfad": "fuenf_sprachen_der_liebe.html",
+              "url": "https://juppijo.github.io/TNH/fuenf_sprachen_der_liebe.html",
+              "verwendung": "Fünf Sprachen der Liebe"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "index.html",
+              "url": "https://juppijo.github.io/TNH/index.html",
+              "verwendung": "Startseite: TNH (Thich Nhat Hanh)"
+            },
+            {
+              "dateiname": "zen_atem_pwa_gefuhrter_meditationsmodus (2).html",
+              "pfad": "zen_atem_pwa_gefuhrter_meditationsmodus (2).html",
+              "url": "https://juppijo.github.io/TNH/zen_atem_pwa_gefuhrter_meditationsmodus%20(2).html",
+              "verwendung": "Geführte Zen-Atemmeditation (weitere Version)"
+            },
+            {
+              "dateiname": "zen_atem_pwa_gefuhrter_meditationsmodus (4).html",
+              "pfad": "zen_atem_pwa_gefuhrter_meditationsmodus (4).html",
+              "url": "https://juppijo.github.io/TNH/zen_atem_pwa_gefuhrter_meditationsmodus%20(4).html",
+              "verwendung": "Geführte Zen-Atemmeditation (weitere Version)"
+            },
+            {
+              "dateiname": "zen_atem_pwa_gefuhrter_meditationsmodus (5).html",
+              "pfad": "zen_atem_pwa_gefuhrter_meditationsmodus (5).html",
+              "url": "https://juppijo.github.io/TNH/zen_atem_pwa_gefuhrter_meditationsmodus%20(5).html",
+              "verwendung": "Geführte Zen-Atemmeditation (weitere Version)"
+            },
+            {
+              "dateiname": "zen_atem_pwa_gefuhrter_meditationsmodus.html",
+              "pfad": "zen_atem_pwa_gefuhrter_meditationsmodus.html",
+              "url": "https://juppijo.github.io/TNH/zen_atem_pwa_gefuhrter_meditationsmodus.html",
+              "verwendung": "Geführte Zen-Atemmeditation"
+            },
+            {
+              "dateiname": "zen_breath_enhanced.html",
+              "pfad": "zen_breath_enhanced.html",
+              "url": "https://juppijo.github.io/TNH/zen_breath_enhanced.html",
+              "verwendung": "Geführte Zen-Atemmeditation (erweitert)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bereich": "Zami_Buecher",
+      "unterbereiche": [
+        {
+          "unterbereich": "Hauptverzeichnis",
+          "dateien": [
+            {
+              "dateiname": "buch_viewer_g.html",
+              "pfad": "buch_viewer_g.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/buch_viewer_g.html",
+              "verwendung": "Buch-Betrachter (Reader) (KI-Variante)"
+            },
+            {
+              "dateiname": "buch_viewer_pro.html",
+              "pfad": "buch_viewer_pro.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/buch_viewer_pro.html",
+              "verwendung": "Buch-Betrachter (Reader) (Pro-Version)"
+            },
+            {
+              "dateiname": "buchbinder_Cl.html",
+              "pfad": "buchbinder_Cl.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/buchbinder_Cl.html",
+              "verwendung": "Buchbinder – Kapitel zu einem Buch zusammenfügen (KI-Variante)"
+            },
+            {
+              "dateiname": "buchbinder_g.html",
+              "pfad": "buchbinder_g.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/buchbinder_g.html",
+              "verwendung": "Buchbinder – Kapitel zu einem Buch zusammenfügen (KI-Variante)"
+            },
+            {
+              "dateiname": "Fotoalbum.html",
+              "pfad": "Fotoalbum.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Fotoalbum.html",
+              "verwendung": "Fotoalbum / Foto-Karussell"
+            },
+            {
+              "dateiname": "Fotoalbum2.html",
+              "pfad": "Fotoalbum2.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Fotoalbum2.html",
+              "verwendung": "Fotoalbum / Foto-Karussell (weitere Version)"
+            },
+            {
+              "dateiname": "Fotoalbum_pro.html",
+              "pfad": "Fotoalbum_pro.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Fotoalbum_pro.html",
+              "verwendung": "Fotoalbum / Foto-Karussell (Pro-Version)"
+            },
+            {
+              "dateiname": "Foto-Karussell.html",
+              "pfad": "Foto-Karussell.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Foto-Karussell.html",
+              "verwendung": "Fotoalbum / Foto-Karussell"
+            },
+            {
+              "dateiname": "Gate_gate.html",
+              "pfad": "Gate_gate.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Gate_gate.html",
+              "verwendung": "Buch „Gate Gate“"
+            },
+            {
+              "dateiname": "Gate-buch.html",
+              "pfad": "Gate-buch.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Gate-buch.html",
+              "verwendung": "Buch „Gate Gate“"
+            },
+            {
+              "dateiname": "html-to-md-converter.html",
+              "pfad": "html-to-md-converter.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/html-to-md-converter.html",
+              "verwendung": "Konverter für Buch-Dateien"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "index.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/index.html",
+              "verwendung": "Startseite: Zami Bücher"
+            },
+            {
+              "dateiname": "Index2.html",
+              "pfad": "Index2.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Index2.html",
+              "verwendung": "Startseite der Bücherei (weitere Version)"
+            },
+            {
+              "dateiname": "Index3.html",
+              "pfad": "Index3.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Index3.html",
+              "verwendung": "Startseite der Bücherei (weitere Version)"
+            },
+            {
+              "dateiname": "Markdown-HTML-Konverter.html",
+              "pfad": "Markdown-HTML-Konverter.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Markdown-HTML-Konverter.html",
+              "verwendung": "Konverter für Buch-Dateien (Markdown -> HTML)"
+            },
+            {
+              "dateiname": "pdf-konverter-cl.html",
+              "pfad": "pdf-konverter-cl.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/pdf-konverter-cl.html",
+              "verwendung": "Konverter für Buch-Dateien (KI-Variante)"
+            },
+            {
+              "dateiname": "Schattenkrieger.html",
+              "pfad": "Schattenkrieger.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Schattenkrieger.html",
+              "verwendung": "Geschichte „Zaminia und die Schattenkrieger“"
+            },
+            {
+              "dateiname": "Wahre_Liebe.html",
+              "pfad": "Wahre_Liebe.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Wahre_Liebe.html",
+              "verwendung": "Buch „Wahre Liebe“"
+            },
+            {
+              "dateiname": "Wahre_Liebe_Cl.html",
+              "pfad": "Wahre_Liebe_Cl.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Wahre_Liebe_Cl.html",
+              "verwendung": "Buch „Wahre Liebe“ (KI-Variante)"
+            },
+            {
+              "dateiname": "Zaminia.html",
+              "pfad": "Zaminia.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Zaminia.html",
+              "verwendung": "Zaminia – Hauptseite des Buchs"
+            }
+          ]
+        },
+        {
+          "unterbereich": "EPUB",
+          "dateien": [
+            {
+              "dateiname": "Drive-Link-Umwandler.html",
+              "pfad": "EPUB/Drive-Link-Umwandler.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/EPUB/Drive-Link-Umwandler.html",
+              "verwendung": "Umwandler für Google-Drive-Links"
+            },
+            {
+              "dateiname": "epub_studio.html",
+              "pfad": "EPUB/epub_studio.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/EPUB/epub_studio.html",
+              "verwendung": "EPUB-Studio (Bücher erstellen/bearbeiten)"
+            },
+            {
+              "dateiname": "EPUB-Reader_Cl.html",
+              "pfad": "EPUB/EPUB-Reader_Cl.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/EPUB/EPUB-Reader_Cl.html",
+              "verwendung": "EPUB-Reader (KI-Variante)"
+            },
+            {
+              "dateiname": "EPUB-Reader-G.html",
+              "pfad": "EPUB/EPUB-Reader-G.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/EPUB/EPUB-Reader-G.html",
+              "verwendung": "EPUB-Reader (KI-Variante)"
+            },
+            {
+              "dateiname": "google_drive_direkt_download_konverter.html",
+              "pfad": "EPUB/google_drive_direkt_download_konverter.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/EPUB/google_drive_direkt_download_konverter.html",
+              "verwendung": "Google-Drive-Direktdownload-Konverter"
+            }
+          ]
+        },
+        {
+          "unterbereich": "html2md",
+          "dateien": [
+            {
+              "dateiname": "ticktick-und-krack-drive.html",
+              "pfad": "html2md/ticktick-und-krack-drive.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/html2md/ticktick-und-krack-drive.html",
+              "verwendung": "Seite „TickTick und Krack“ (HTML für Konvertierung)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Kunst_des_einfühlsamen_Zuhörens",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "Kunst_des_einfühlsamen_Zuhörens/index.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Kunst_des_einf%C3%BChlsamen_Zuh%C3%B6rens/index.html",
+              "verwendung": "Buch „Die Kunst des einfühlsamen Zuhörens“"
+            },
+            {
+              "dateiname": "smart.html",
+              "pfad": "Kunst_des_einfühlsamen_Zuhörens/smart.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Kunst_des_einf%C3%BChlsamen_Zuh%C3%B6rens/smart.html",
+              "verwendung": "Buch „Die Kunst des einfühlsamen Zuhörens“ (Mobilansicht)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Mirjam_ha-Magdalit",
+          "dateien": [
+            {
+              "dateiname": "Maria-Evangelium.html",
+              "pfad": "Mirjam_ha-Magdalit/Maria-Evangelium.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Mirjam_ha-Magdalit/Maria-Evangelium.html",
+              "verwendung": "Mirjam ha-Magdalit – Maria-Evangelium"
+            },
+            {
+              "dateiname": "Mirjam.html",
+              "pfad": "Mirjam_ha-Magdalit/Mirjam.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Mirjam_ha-Magdalit/Mirjam.html",
+              "verwendung": "Mirjam ha-Magdalit (Buch/Texte)"
+            },
+            {
+              "dateiname": "Mirjam_Foto_Link.html",
+              "pfad": "Mirjam_ha-Magdalit/Mirjam_Foto_Link.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Mirjam_ha-Magdalit/Mirjam_Foto_Link.html",
+              "verwendung": "Fotoalbum / Galerie Mirjam"
+            },
+            {
+              "dateiname": "Mirjam_Foto_Link2.html",
+              "pfad": "Mirjam_ha-Magdalit/Mirjam_Foto_Link2.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Mirjam_ha-Magdalit/Mirjam_Foto_Link2.html",
+              "verwendung": "Fotoalbum / Galerie Mirjam (weitere Version)"
+            },
+            {
+              "dateiname": "Mirjam_Foto_Link_GD.html",
+              "pfad": "Mirjam_ha-Magdalit/Mirjam_Foto_Link_GD.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Mirjam_ha-Magdalit/Mirjam_Foto_Link_GD.html",
+              "verwendung": "Fotoalbum / Galerie Mirjam (Google Drive)"
+            },
+            {
+              "dateiname": "Mirjam_ha-Magdalit.html",
+              "pfad": "Mirjam_ha-Magdalit/Mirjam_ha-Magdalit.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Mirjam_ha-Magdalit/Mirjam_ha-Magdalit.html",
+              "verwendung": "Mirjam ha-Magdalit (Haupttext)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Shambala_Luminia",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "Shambala_Luminia/index.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Shambala_Luminia/index.html",
+              "verwendung": "Startseite: Buch „Shambala Luminia“"
+            },
+            {
+              "dateiname": "Shambala.html",
+              "pfad": "Shambala_Luminia/Shambala.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Shambala_Luminia/Shambala.html",
+              "verwendung": "Buch „Shambala Luminia“"
+            },
+            {
+              "dateiname": "Shambala_cl.html",
+              "pfad": "Shambala_Luminia/Shambala_cl.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Shambala_Luminia/Shambala_cl.html",
+              "verwendung": "Buch „Shambala Luminia“ (KI-Variante)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Zaminia-und-die-Schattenkrieger",
+          "dateien": [
+            {
+              "dateiname": "Zaminia-und-die-Schattenkrieger.html",
+              "pfad": "Zaminia-und-die-Schattenkrieger/Zaminia-und-die-Schattenkrieger.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Zaminia-und-die-Schattenkrieger/Zaminia-und-die-Schattenkrieger.html",
+              "verwendung": "Geschichte „Zaminia und die Schattenkrieger“"
+            }
+          ]
+        },
+        {
+          "unterbereich": "ZanimiasWeltreise",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "ZanimiasWeltreise/index.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/index.html",
+              "verwendung": "Buch „Zaminias Weltreise“"
+            },
+            {
+              "dateiname": "index-s.html",
+              "pfad": "ZanimiasWeltreise/index-s.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/ZanimiasWeltreise/index-s.html",
+              "verwendung": "Buch „Zaminias Weltreise“"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bereich": "Zami_Home",
+      "unterbereiche": [
+        {
+          "unterbereich": "Hauptverzeichnis",
+          "dateien": [
+            {
+              "dateiname": "github-link-builder.html",
+              "pfad": "github-link-builder.html",
+              "url": "https://juppijo.github.io/Zami_Home/github-link-builder.html",
+              "verwendung": "GitHub-Werkzeug (Repos & Links)"
+            },
+            {
+              "dateiname": "GitHubLinks.html",
+              "pfad": "GitHubLinks.html",
+              "url": "https://juppijo.github.io/Zami_Home/GitHubLinks.html",
+              "verwendung": "GitHub-Werkzeug (Repos & Links)"
+            },
+            {
+              "dateiname": "Icon.html",
+              "pfad": "Icon.html",
+              "url": "https://juppijo.github.io/Zami_Home/Icon.html",
+              "verwendung": "Icon-Ansicht/Icon-Tool"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "index.html",
+              "url": "https://juppijo.github.io/Zami_Home/index.html",
+              "verwendung": "Startseite: Zami Home"
+            },
+            {
+              "dateiname": "json_editor.html",
+              "pfad": "json_editor.html",
+              "url": "https://juppijo.github.io/Zami_Home/json_editor.html",
+              "verwendung": "JSON-Werkzeug (Vergleichen/Bearbeiten)"
+            },
+            {
+              "dateiname": "JSON_Pro_Max_Vergleicher_Dashboard.html",
+              "pfad": "JSON_Pro_Max_Vergleicher_Dashboard.html",
+              "url": "https://juppijo.github.io/Zami_Home/JSON_Pro_Max_Vergleicher_Dashboard.html",
+              "verwendung": "JSON-Werkzeug (Vergleichen/Bearbeiten) (Pro-Version)"
+            },
+            {
+              "dateiname": "JSON_Ultimate_Transfer_Dashboard.html",
+              "pfad": "JSON_Ultimate_Transfer_Dashboard.html",
+              "url": "https://juppijo.github.io/Zami_Home/JSON_Ultimate_Transfer_Dashboard.html",
+              "verwendung": "JSON-Werkzeug (Vergleichen/Bearbeiten)"
+            },
+            {
+              "dateiname": "JSON-Kategorie.html",
+              "pfad": "JSON-Kategorie.html",
+              "url": "https://juppijo.github.io/Zami_Home/JSON-Kategorie.html",
+              "verwendung": "JSON-Kategorie Links"
+            },
+            {
+              "dateiname": "krita_tastatur.html",
+              "pfad": "krita_tastatur.html",
+              "url": "https://juppijo.github.io/Zami_Home/krita_tastatur.html",
+              "verwendung": "Krita-Tastenkürzel (Zeichenprogramm)"
+            },
+            {
+              "dateiname": "krita-tastenkuerzel.html",
+              "pfad": "krita-tastenkuerzel.html",
+              "url": "https://juppijo.github.io/Zami_Home/krita-tastenkuerzel.html",
+              "verwendung": "Krita-Tastenkürzel (Zeichenprogramm)"
+            },
+            {
+              "dateiname": "lebensmittel_nachschlagewerk_pro.html",
+              "pfad": "lebensmittel_nachschlagewerk_pro.html",
+              "url": "https://juppijo.github.io/Zami_Home/lebensmittel_nachschlagewerk_pro.html",
+              "verwendung": "Lebensmittel-Lexikon (Ernährung) (Pro-Version)"
+            },
+            {
+              "dateiname": "Lebensmittel-Lexikon.html",
+              "pfad": "Lebensmittel-Lexikon.html",
+              "url": "https://juppijo.github.io/Zami_Home/Lebensmittel-Lexikon.html",
+              "verwendung": "Lebensmittel-Lexikon (Ernährung)"
+            },
+            {
+              "dateiname": "link_manager.html",
+              "pfad": "link_manager.html",
+              "url": "https://juppijo.github.io/Zami_Home/link_manager.html",
+              "verwendung": "Link-Verwaltung / Linkhub"
+            },
+            {
+              "dateiname": "linkhub.html",
+              "pfad": "linkhub.html",
+              "url": "https://juppijo.github.io/Zami_Home/linkhub.html",
+              "verwendung": "Link-Verwaltung / Linkhub"
+            },
+            {
+              "dateiname": "linkhub_2.html",
+              "pfad": "linkhub_2.html",
+              "url": "https://juppijo.github.io/Zami_Home/linkhub_2.html",
+              "verwendung": "Link-Verwaltung / Linkhub ohne Daten"
+            },
+            {
+              "dateiname": "linkvault_pro.html",
+              "pfad": "linkvault_pro.html",
+              "url": "https://juppijo.github.io/Zami_Home/linkvault_pro.html",
+              "verwendung": "Link-Verwaltung / Linkhub (Pro-Version)"
+            },
+            {
+              "dateiname": "meine-notizen-wiki.html",
+              "pfad": "meine-notizen-wiki.html",
+              "url": "https://juppijo.github.io/Zami_Home/meine-notizen-wiki.html",
+              "verwendung": "Online Notizen"
+            },
+            {
+              "dateiname": "notizwerk.html",
+              "pfad": "notizwerk.html",
+              "url": "https://juppijo.github.io/Zami_Home/notizwerk.html",
+              "verwendung": "Online Notizen"
+            },
+            {
+              "dateiname": "StoppUhr.html",
+              "pfad": "StoppUhr.html",
+              "url": "https://juppijo.github.io/Zami_Home/StoppUhr.html",
+              "verwendung": "Stoppuhr"
+            },
+            {
+              "dateiname": "Stoppuhr_Cl.html",
+              "pfad": "Stoppuhr_Cl.html",
+              "url": "https://juppijo.github.io/Zami_Home/Stoppuhr_Cl.html",
+              "verwendung": "Stoppuhr (KI-Variante)"
+            },
+            {
+              "dateiname": "Tabellen-Editor.html",
+              "pfad": "Tabellen-Editor.html",
+              "url": "https://juppijo.github.io/Zami_Home/Tabellen-Editor.html",
+              "verwendung": "Tabellen-Editor"
+            },
+            {
+              "dateiname": "Zami-Bild.html",
+              "pfad": "Zami-Bild.html",
+              "url": "https://juppijo.github.io/Zami_Home/Zami-Bild.html",
+              "verwendung": "Medien-/Bildgalerie"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Bildsuche",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "Bildsuche/index.html",
+              "url": "https://juppijo.github.io/Zami_Home/Bildsuche/index.html",
+              "verwendung": "Bildersuche in lokalen Ordnern"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Bildsuche-Pro",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "Bildsuche-Pro/index.html",
+              "url": "https://juppijo.github.io/Zami_Home/Bildsuche-Pro/index.html",
+              "verwendung": "Bildersuche in lokalen Ordnern (Pro-Version)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Chat-Blue",
+          "dateien": [
+            {
+              "dateiname": "image_viewer.html",
+              "pfad": "Chat-Blue/image_viewer.html",
+              "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/image_viewer.html",
+              "verwendung": "Medien-/Bildgalerie"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "Chat-Blue/index.html",
+              "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/index.html",
+              "verwendung": "Chat-Betrachter („Chat Blue“)"
+            },
+            {
+              "dateiname": "latex_formula_chat_viewer.html",
+              "pfad": "Chat-Blue/latex_formula_chat_viewer.html",
+              "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/latex_formula_chat_viewer.html",
+              "verwendung": "Chat-Betrachter mit LaTeX-Formeln"
+            },
+            {
+              "dateiname": "media_gallery.html",
+              "pfad": "Chat-Blue/media_gallery.html",
+              "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/media_gallery.html",
+              "verwendung": "Medien-/Bildgalerie"
+            },
+            {
+              "dateiname": "media_gallery_named.html",
+              "pfad": "Chat-Blue/media_gallery_named.html",
+              "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/media_gallery_named.html",
+              "verwendung": "Medien-/Bildgalerie"
+            },
+            {
+              "dateiname": "media_viewer.html",
+              "pfad": "Chat-Blue/media_viewer.html",
+              "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/media_viewer.html",
+              "verwendung": "Medien-/Bildgalerie"
+            },
+            {
+              "dateiname": "player.html",
+              "pfad": "Chat-Blue/player.html",
+              "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/player.html",
+              "verwendung": "Medienplayer"
+            }
+          ]
+        },
+        {
+          "unterbereich": "GitHub_Desktop",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "GitHub_Desktop/index.html",
+              "url": "https://juppijo.github.io/Zami_Home/GitHub_Desktop/index.html",
+              "verwendung": "GitHub-Werkzeug (Repos & Links)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "GitHubRespo",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "GitHubRespo/index.html",
+              "url": "https://juppijo.github.io/Zami_Home/GitHubRespo/index.html",
+              "verwendung": "GitHub-Werkzeug (Repos & Links)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "html2doc",
+          "dateien": [
+            {
+              "dateiname": "html-to-docx-converter.html",
+              "pfad": "html2doc/html-to-docx-converter.html",
+              "url": "https://juppijo.github.io/Zami_Home/html2doc/html-to-docx-converter.html",
+              "verwendung": "HTML → Word Konverter"
+            },
+            {
+              "dateiname": "html-to-docx-converter-pro.html",
+              "pfad": "html2doc/html-to-docx-converter-pro.html",
+              "url": "https://juppijo.github.io/Zami_Home/html2doc/html-to-docx-converter-pro.html",
+              "verwendung": "HTML → Word Konverter (Pro-Version)"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "html2doc/index.html",
+              "url": "https://juppijo.github.io/Zami_Home/html2doc/index.html",
+              "verwendung": "HTML → Word Konverter"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bereich": "zaminia",
+      "unterbereiche": [
+        {
+          "unterbereich": "Hauptverzeichnis",
+          "dateien": [
+            {
+              "dateiname": "3A.html",
+              "pfad": "3A.html",
+              "url": "https://juppijo.github.io/zaminia/3A.html",
+              "verwendung": "3A-Programm (Kommunikation/Coaching)"
+            },
+            {
+              "dateiname": "analyseur_style.html",
+              "pfad": "analyseur_style.html",
+              "url": "https://juppijo.github.io/zaminia/analyseur_style.html",
+              "verwendung": "Stilanalyse für Texte"
+            },
+            {
+              "dateiname": "Asthma.html",
+              "pfad": "Asthma.html",
+              "url": "https://juppijo.github.io/zaminia/Asthma.html",
+              "verwendung": "Hilfe & Übungen bei Asthma"
+            },
+            {
+              "dateiname": "autogenes-training-app_Cl.html",
+              "pfad": "autogenes-training-app_Cl.html",
+              "url": "https://juppijo.github.io/zaminia/autogenes-training-app_Cl.html",
+              "verwendung": "Autogenes Training (App/Audio) (KI-Variante)"
+            },
+            {
+              "dateiname": "Bauchschmerzen .html",
+              "pfad": "Bauchschmerzen .html",
+              "url": "https://juppijo.github.io/zaminia/Bauchschmerzen%20.html",
+              "verwendung": "Hilfe bei Bauchschmerzen"
+            },
+            {
+              "dateiname": "github-compare.html",
+              "pfad": "github-compare.html",
+              "url": "https://juppijo.github.io/zaminia/github-compare.html",
+              "verwendung": "GitHub-Repos vergleichen"
+            },
+            {
+              "dateiname": "Healing.html",
+              "pfad": "Healing.html",
+              "url": "https://juppijo.github.io/zaminia/Healing.html",
+              "verwendung": "Heilung / Healing (Anleitung oder Prompt)"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "index.html",
+              "url": "https://juppijo.github.io/zaminia/index.html",
+              "verwendung": "Startseite: Zaminia"
+            },
+            {
+              "dateiname": "Kopfschmerzen.html",
+              "pfad": "Kopfschmerzen.html",
+              "url": "https://juppijo.github.io/zaminia/Kopfschmerzen.html",
+              "verwendung": "Hilfe & Übungen bei Kopfschmerzen"
+            },
+            {
+              "dateiname": "Lebensmittel.html",
+              "pfad": "Lebensmittel.html",
+              "url": "https://juppijo.github.io/zaminia/Lebensmittel.html",
+              "verwendung": "Rezept / Ernährung: Lebensmittel"
+            },
+            {
+              "dateiname": "LinkList.html",
+              "pfad": "LinkList.html",
+              "url": "https://juppijo.github.io/zaminia/LinkList.html",
+              "verwendung": "Link-Liste"
+            },
+            {
+              "dateiname": "Migräne.html",
+              "pfad": "Migräne.html",
+              "url": "https://juppijo.github.io/zaminia/Migr%C3%A4ne.html",
+              "verwendung": "Hilfe bei Migräne"
+            },
+            {
+              "dateiname": "Natur-Coach.html",
+              "pfad": "Natur-Coach.html",
+              "url": "https://juppijo.github.io/zaminia/Natur-Coach.html",
+              "verwendung": "Natur-Coach"
+            },
+            {
+              "dateiname": "NC1.html",
+              "pfad": "NC1.html",
+              "url": "https://juppijo.github.io/zaminia/NC1.html",
+              "verwendung": "Natur-Coach (weitere Version)"
+            },
+            {
+              "dateiname": "stil_trainer.html",
+              "pfad": "stil_trainer.html",
+              "url": "https://juppijo.github.io/zaminia/stil_trainer.html",
+              "verwendung": "Schreibstil-Trainer"
+            },
+            {
+              "dateiname": "vorlesen.html",
+              "pfad": "vorlesen.html",
+              "url": "https://juppijo.github.io/zaminia/vorlesen.html",
+              "verwendung": "Texte vorlesen lassen"
+            },
+            {
+              "dateiname": "yout.html",
+              "pfad": "yout.html",
+              "url": "https://juppijo.github.io/zaminia/yout.html",
+              "verwendung": "YouTube-Link-Seite"
+            },
+            {
+              "dateiname": "ZaminiasKunstwelt.html",
+              "pfad": "ZaminiasKunstwelt.html",
+              "url": "https://juppijo.github.io/zaminia/ZaminiasKunstwelt.html",
+              "verwendung": "Zaminias Kunstwelt (Bildergalerie)"
+            },
+            {
+              "dateiname": "Zen_Healing_Companion.html",
+              "pfad": "Zen_Healing_Companion.html",
+              "url": "https://juppijo.github.io/zaminia/Zen_Healing_Companion.html",
+              "verwendung": "Zen-Healing-Begleiter"
+            },
+            {
+              "dateiname": "Zen_Healing_Companion_Pro.html",
+              "pfad": "Zen_Healing_Companion_Pro.html",
+              "url": "https://juppijo.github.io/zaminia/Zen_Healing_Companion_Pro.html",
+              "verwendung": "Zen-Healing-Begleiter (Pro-Version)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Kochen",
+          "dateien": [
+            {
+              "dateiname": "lillet_rezepte.html",
+              "pfad": "Kochen/lillet_rezepte.html",
+              "url": "https://juppijo.github.io/zaminia/Kochen/lillet_rezepte.html",
+              "verwendung": "Rezept / Ernährung: lillet rezepte"
+            },
+            {
+              "dateiname": "quinoa_salat.html",
+              "pfad": "Kochen/quinoa_salat.html",
+              "url": "https://juppijo.github.io/zaminia/Kochen/quinoa_salat.html",
+              "verwendung": "Rezept / Ernährung: quinoa salat"
+            },
+            {
+              "dateiname": "salat_rezept.html",
+              "pfad": "Kochen/salat_rezept.html",
+              "url": "https://juppijo.github.io/zaminia/Kochen/salat_rezept.html",
+              "verwendung": "Rezept / Ernährung: salat rezept"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bereich": "Zaminia-Zen-Theme",
+      "unterbereiche": [
+        {
+          "unterbereich": "Hauptverzeichnis",
+          "dateien": [
+            {
+              "dateiname": "3DSchrift.html",
+              "pfad": "3DSchrift.html",
+              "url": "https://juppijo.github.io/Zaminia-Zen-Theme/3DSchrift.html",
+              "verwendung": "3D-Schriftzug-Generator"
+            },
+            {
+              "dateiname": "GITALL.html",
+              "pfad": "GITALL.html",
+              "url": "https://juppijo.github.io/Zaminia-Zen-Theme/GITALL.html",
+              "verwendung": "Übersicht aller GitHub-Repositories"
+            },
+            {
+              "dateiname": "GSheet.html",
+              "pfad": "GSheet.html",
+              "url": "https://juppijo.github.io/Zaminia-Zen-Theme/GSheet.html",
+              "verwendung": "Google-Sheet-Einbindung"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "index.html",
+              "url": "https://juppijo.github.io/Zaminia-Zen-Theme/index.html",
+              "verwendung": "Startseite: Zaminia Zen Theme"
+            },
+            {
+              "dateiname": "Mantras.html",
+              "pfad": "Mantras.html",
+              "url": "https://juppijo.github.io/Zaminia-Zen-Theme/Mantras.html",
+              "verwendung": "Sammlung von Mantras"
+            },
+            {
+              "dateiname": "RGB_Farbkanäle_Pro.html",
+              "pfad": "RGB_Farbkanäle_Pro.html",
+              "url": "https://juppijo.github.io/Zaminia-Zen-Theme/RGB_Farbkan%C3%A4le_Pro.html",
+              "verwendung": "RGB-Farbkanäle analysieren (Pro)"
+            },
+            {
+              "dateiname": "rgb_studio_farb_analysator_pro.html",
+              "pfad": "rgb_studio_farb_analysator_pro.html",
+              "url": "https://juppijo.github.io/Zaminia-Zen-Theme/rgb_studio_farb_analysator_pro.html",
+              "verwendung": "RGB-Studio: Farb-Analysator (Pro)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bereich": "ZenZamiSpiele-Co",
+      "unterbereiche": [
+        {
+          "unterbereich": "Hauptverzeichnis",
+          "dateien": [
+            {
+              "dateiname": "2×2 Cube Lab.html",
+              "pfad": "2×2 Cube Lab.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/2%C3%972%20Cube%20Lab.html",
+              "verwendung": "Zauberwürfel-Lab / Solver (2x2)"
+            },
+            {
+              "dateiname": "3d_2d_apfelm_nnchen_visualizer.html",
+              "pfad": "3d_2d_apfelm_nnchen_visualizer.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/3d_2d_apfelm_nnchen_visualizer.html",
+              "verwendung": "Apfelmännchen (Fraktal) in 2D/3D"
+            },
+            {
+              "dateiname": "3d_go_game.html",
+              "pfad": "3d_go_game.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/3d_go_game.html",
+              "verwendung": "Go-Brettspiel in 3D"
+            },
+            {
+              "dateiname": "3D-Apfelmännchen.html",
+              "pfad": "3D-Apfelmännchen.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/3D-Apfelm%C3%A4nnchen.html",
+              "verwendung": "Apfelmännchen (Fraktal) in 2D/3D"
+            },
+            {
+              "dateiname": "4_4_Cube_Lab.html",
+              "pfad": "4_4_Cube_Lab.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/4_4_Cube_Lab.html",
+              "verwendung": "Zauberwürfel-Lab / Solver (4x4)"
+            },
+            {
+              "dateiname": "4_4_Cube_Lab_S.html",
+              "pfad": "4_4_Cube_Lab_S.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/4_4_Cube_Lab_S.html",
+              "verwendung": "Zauberwürfel-Lab / Solver"
+            },
+            {
+              "dateiname": "4x4_cube_input.html",
+              "pfad": "4x4_cube_input.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/4x4_cube_input.html",
+              "verwendung": "Zauberwürfel-Lab / Solver"
+            },
+            {
+              "dateiname": "4×4 Würfel-Solver.html",
+              "pfad": "4×4 Würfel-Solver.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/4%C3%974%20W%C3%BCrfel-Solver.html",
+              "verwendung": "Zauberwürfel-Lab / Solver"
+            },
+            {
+              "dateiname": "bild-hotspots-cl.html",
+              "pfad": "bild-hotspots-cl.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/bild-hotspots-cl.html",
+              "verwendung": "Bild-Hotspots einfügen (Tool) (KI-Variante)"
+            },
+            {
+              "dateiname": "bild-hotspots-g.html",
+              "pfad": "bild-hotspots-g.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/bild-hotspots-g.html",
+              "verwendung": "Bild-Hotspots einfügen (Tool) (KI-Variante)"
+            },
+            {
+              "dateiname": "bild-hotspots-g1.html",
+              "pfad": "bild-hotspots-g1.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/bild-hotspots-g1.html",
+              "verwendung": "Bild-Hotspots einfügen (Tool) (KI-Variante)"
+            },
+            {
+              "dateiname": "chat_farben (3).html",
+              "pfad": "chat_farben (3).html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/chat_farben%20(3).html",
+              "verwendung": "Farben-Spiel / Farbwähler (weitere Version)"
+            },
+            {
+              "dateiname": "Direktchat-WebRTC-QR.html",
+              "pfad": "Direktchat-WebRTC-QR.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Direktchat-WebRTC-QR.html",
+              "verwendung": "Direktchat per WebRTC mit QR-Code"
+            },
+            {
+              "dateiname": "Direktchat–WebRTC.html",
+              "pfad": "Direktchat–WebRTC.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Direktchat%E2%80%93WebRTC.html",
+              "verwendung": "Direktchat per WebRTC (Peer-to-Peer)"
+            },
+            {
+              "dateiname": "dreieck_tangle_duel.html",
+              "pfad": "dreieck_tangle_duel.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/dreieck_tangle_duel.html",
+              "verwendung": "Kachelpuzzle"
+            },
+            {
+              "dateiname": "Dreieck-Duell.html",
+              "pfad": "Dreieck-Duell.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Dreieck-Duell.html",
+              "verwendung": "Dreieck-Spiel"
+            },
+            {
+              "dateiname": "Dreieck-Tangle-Puzzle.html",
+              "pfad": "Dreieck-Tangle-Puzzle.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Dreieck-Tangle-Puzzle.html",
+              "verwendung": "Kachelpuzzle"
+            },
+            {
+              "dateiname": "Escapespiel-Erde.html",
+              "pfad": "Escapespiel-Erde.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Escapespiel-Erde.html",
+              "verwendung": "Escape-Spiel „Rettung der Erde“"
+            },
+            {
+              "dateiname": "Frosch_Spiel.html",
+              "pfad": "Frosch_Spiel.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Frosch_Spiel.html",
+              "verwendung": "Hüpf-Frosch-Spiel"
+            },
+            {
+              "dateiname": "Gem_farben (4).html",
+              "pfad": "Gem_farben (4).html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Gem_farben%20(4).html",
+              "verwendung": "Farben-Spiel / Farbwähler (weitere Version)"
+            },
+            {
+              "dateiname": "Go–Das_Brettspiel.html",
+              "pfad": "Go–Das_Brettspiel.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Go%E2%80%93Das_Brettspiel.html",
+              "verwendung": "Go – das Brettspiel"
+            },
+            {
+              "dateiname": "huepf-frosch.html",
+              "pfad": "huepf-frosch.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/huepf-frosch.html",
+              "verwendung": "Hüpf-Frosch-Spiel"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "index.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/index.html",
+              "verwendung": "Startseite: ZenZamiSpiele & Co"
+            },
+            {
+              "dateiname": "IQ Puzzler 3D.html",
+              "pfad": "IQ Puzzler 3D.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/IQ%20Puzzler%203D.html",
+              "verwendung": "IQ-Puzzler in 3D"
+            },
+            {
+              "dateiname": "Puzzle_JO(ABC).html",
+              "pfad": "Puzzle_JO(ABC).html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Puzzle_JO(ABC).html",
+              "verwendung": "Kachelpuzzle"
+            },
+            {
+              "dateiname": "Puzzle_JO3.html",
+              "pfad": "Puzzle_JO3.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Puzzle_JO3.html",
+              "verwendung": "Kachelpuzzle (weitere Version)"
+            },
+            {
+              "dateiname": "rettungsmission_erde_escape_game.html",
+              "pfad": "rettungsmission_erde_escape_game.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/rettungsmission_erde_escape_game.html",
+              "verwendung": "Escape-Spiel „Rettung der Erde“"
+            },
+            {
+              "dateiname": "Rettungsmission-Erde.html",
+              "pfad": "Rettungsmission-Erde.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Rettungsmission-Erde.html",
+              "verwendung": "Escape-Spiel „Rettung der Erde“"
+            },
+            {
+              "dateiname": "Rubik's Cube Lab.html",
+              "pfad": "Rubik's Cube Lab.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Rubik's%20Cube%20Lab.html",
+              "verwendung": "Zauberwürfel-Lab / Solver"
+            },
+            {
+              "dateiname": "Rubik's Tangle + Solver.html",
+              "pfad": "Rubik's Tangle + Solver.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Rubik's%20Tangle%20%2B%20Solver.html",
+              "verwendung": "Zauberwürfel-Lab / Solver"
+            },
+            {
+              "dateiname": "rubik_s_tangle_1990_replica.html",
+              "pfad": "rubik_s_tangle_1990_replica.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/rubik_s_tangle_1990_replica.html",
+              "verwendung": "Zauberwürfel-Lab / Solver"
+            },
+            {
+              "dateiname": "rubik_s_tangle_puzzle.html",
+              "pfad": "rubik_s_tangle_puzzle.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/rubik_s_tangle_puzzle.html",
+              "verwendung": "Zauberwürfel-Lab / Solver"
+            },
+            {
+              "dateiname": "rubiks_cube.html",
+              "pfad": "rubiks_cube.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/rubiks_cube.html",
+              "verwendung": "Zauberwürfel-Lab / Solver"
+            },
+            {
+              "dateiname": "rubiks_solver.html",
+              "pfad": "rubiks_solver.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/rubiks_solver.html",
+              "verwendung": "Zauberwürfel-Lab / Solver"
+            },
+            {
+              "dateiname": "Tangle – Kachelpuzzle mit Solver.html",
+              "pfad": "Tangle – Kachelpuzzle mit Solver.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Tangle%20%E2%80%93%20Kachelpuzzle%20mit%20Solver.html",
+              "verwendung": "Zauberwürfel-Lab / Solver"
+            },
+            {
+              "dateiname": "webrtc_p2p_messenger.html",
+              "pfad": "webrtc_p2p_messenger.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/webrtc_p2p_messenger.html",
+              "verwendung": "WebRTC-P2P-Messenger"
+            },
+            {
+              "dateiname": "WT.html",
+              "pfad": "WT.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/WT.html",
+              "verwendung": "Spiel-Variante (WT)"
+            },
+            {
+              "dateiname": "WTS.html",
+              "pfad": "WTS.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/WTS.html",
+              "verwendung": "Spiel-Variante (WT)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Shambala_Luminia",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "Shambala_Luminia/index.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Shambala_Luminia/index.html",
+              "verwendung": "Spiel „Shambala Luminia“ (Startseite)"
+            },
+            {
+              "dateiname": "shambala_luminia_zaminias_pfad_der_weisheit.html",
+              "pfad": "Shambala_Luminia/shambala_luminia_zaminias_pfad_der_weisheit.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Shambala_Luminia/shambala_luminia_zaminias_pfad_der_weisheit.html",
+              "verwendung": "Spiel „Shambala Luminia – Zaminias Pfad der Weisheit“"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Steinverlegung",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "Steinverlegung/index.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/index.html",
+              "verwendung": "Steinverlegungs-Planer"
+            },
+            {
+              "dateiname": "stone-layout-planner.html",
+              "pfad": "Steinverlegung/stone-layout-planner.html",
+              "url": "https://juppijo.github.io/ZenZamiSpiele-Co/Steinverlegung/stone-layout-planner.html",
+              "verwendung": "Steinverlegungs-Planer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bereich": "WRZT",
+      "unterbereiche": [
+        {
+          "unterbereich": "Hauptverzeichnis",
+          "dateien": [
+            {
+              "dateiname": "astro_physform.html",
+              "pfad": "astro_physform.html",
+              "url": "https://juppijo.github.io/WRZT/astro_physform.html",
+              "verwendung": "Astrophysikalische Formeln zur WRZT"
+            },
+            {
+              "dateiname": "bbo_simulation.html",
+              "pfad": "bbo_simulation.html",
+              "url": "https://juppijo.github.io/WRZT/bbo_simulation.html",
+              "verwendung": "BBO-Kristall-Simulation (Photonen)"
+            },
+            {
+              "dateiname": "Einzelphotonen-Labor.html",
+              "pfad": "Einzelphotonen-Labor.html",
+              "url": "https://juppijo.github.io/WRZT/Einzelphotonen-Labor.html",
+              "verwendung": "Einzelphotonen-Labor (Simulation)"
+            },
+            {
+              "dateiname": "formel_sammler.html",
+              "pfad": "formel_sammler.html",
+              "url": "https://juppijo.github.io/WRZT/formel_sammler.html",
+              "verwendung": "Formel-Sammler / Formel-Editor"
+            },
+            {
+              "dateiname": "formel_sammler_pro.html",
+              "pfad": "formel_sammler_pro.html",
+              "url": "https://juppijo.github.io/WRZT/formel_sammler_pro.html",
+              "verwendung": "Formel-Sammler / Formel-Editor (Pro-Version)"
+            },
+            {
+              "dateiname": "Galaxie 3D mit schwarzem Loch.html",
+              "pfad": "Galaxie 3D mit schwarzem Loch.html",
+              "url": "https://juppijo.github.io/WRZT/Galaxie%203D%20mit%20schwarzem%20Loch.html",
+              "verwendung": "Galaxie Simulation 3D mit schwarzem Loch"
+            },
+            {
+              "dateiname": "GWelle3D.html",
+              "pfad": "GWelle3D.html",
+              "url": "https://juppijo.github.io/WRZT/GWelle3D.html",
+              "verwendung": "Wellenfeld und Wellenraumzeit in 3D"
+            },
+            {
+              "dateiname": "HTML_Design_Studio.html",
+              "pfad": "HTML_Design_Studio.html",
+              "url": "https://juppijo.github.io/WRZT/HTML_Design_Studio.html",
+              "verwendung": "Design-Studio für HTML-Seiten"
+            },
+            {
+              "dateiname": "html_merger.html",
+              "pfad": "html_merger.html",
+              "url": "https://juppijo.github.io/WRZT/html_merger.html",
+              "verwendung": "HTML-Dateien zusammenführen"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "index.html",
+              "url": "https://juppijo.github.io/WRZT/index.html",
+              "verwendung": "Startseite: WRZT"
+            },
+            {
+              "dateiname": "Index_Dashboard.html",
+              "pfad": "Index_Dashboard.html",
+              "url": "https://juppijo.github.io/WRZT/Index_Dashboard.html",
+              "verwendung": "Index Dashboard der WRZT"
+            },
+            {
+              "dateiname": "Kugel(5).html",
+              "pfad": "Kugel(5).html",
+              "url": "https://juppijo.github.io/WRZT/Kugel(5).html",
+              "verwendung": "Kugel-Visualisierung (weitere Version)"
+            },
+            {
+              "dateiname": "Laser-Labor_3D.html",
+              "pfad": "Laser-Labor_3D.html",
+              "url": "https://juppijo.github.io/WRZT/Laser-Labor_3D.html",
+              "verwendung": "Laser-Labor in 3D (Simulation)"
+            },
+            {
+              "dateiname": "Lisa.html",
+              "pfad": "Lisa.html",
+              "url": "https://juppijo.github.io/WRZT/Lisa.html",
+              "verwendung": "Lissajous- / Wellen-Visualisierung"
+            },
+            {
+              "dateiname": "Lorentz-Wand(2).html",
+              "pfad": "Lorentz-Wand(2).html",
+              "url": "https://juppijo.github.io/WRZT/Lorentz-Wand(2).html",
+              "verwendung": "Lorentz-Transformation / Kontraktion (weitere Version)"
+            },
+            {
+              "dateiname": "Lorentz-Wand.html",
+              "pfad": "Lorentz-Wand.html",
+              "url": "https://juppijo.github.io/WRZT/Lorentz-Wand.html",
+              "verwendung": "Lorentz-Transformation / Kontraktion"
+            },
+            {
+              "dateiname": "Lorenz2.html",
+              "pfad": "Lorenz2.html",
+              "url": "https://juppijo.github.io/WRZT/Lorenz2.html",
+              "verwendung": "Lorentz-Transformation / Kontraktion (weitere Version)"
+            },
+            {
+              "dateiname": "LWT.html",
+              "pfad": "LWT.html",
+              "url": "https://juppijo.github.io/WRZT/LWT.html",
+              "verwendung": "Lichtwellen-Theorie (LWT)"
+            },
+            {
+              "dateiname": "LWT_Def.html",
+              "pfad": "LWT_Def.html",
+              "url": "https://juppijo.github.io/WRZT/LWT_Def.html",
+              "verwendung": "Lichtwellen-Theorie – Definitionen"
+            },
+            {
+              "dateiname": "Netz.html",
+              "pfad": "Netz.html",
+              "url": "https://juppijo.github.io/WRZT/Netz.html",
+              "verwendung": "Wellen-Netzwerk der Wellenraumzeit-Theorie"
+            },
+            {
+              "dateiname": "Optikbank_3D.html",
+              "pfad": "Optikbank_3D.html",
+              "url": "https://juppijo.github.io/WRZT/Optikbank_3D.html",
+              "verwendung": "Optikbank in 3D (Simulation)"
+            },
+            {
+              "dateiname": "phasenverschiebung_3d.html",
+              "pfad": "phasenverschiebung_3d.html",
+              "url": "https://juppijo.github.io/WRZT/phasenverschiebung_3d.html",
+              "verwendung": "Phasenverschiebung von Wellen in 3D"
+            },
+            {
+              "dateiname": "physik_formel_editor.html",
+              "pfad": "physik_formel_editor.html",
+              "url": "https://juppijo.github.io/WRZT/physik_formel_editor.html",
+              "verwendung": "Formel-Sammler / Formel-Editor"
+            },
+            {
+              "dateiname": "Physiker.html",
+              "pfad": "Physiker.html",
+              "url": "https://juppijo.github.io/WRZT/Physiker.html",
+              "verwendung": "Physiker-Übersicht zur WRZT"
+            },
+            {
+              "dateiname": "Polarisationsfilter-Labor.html",
+              "pfad": "Polarisationsfilter-Labor.html",
+              "url": "https://juppijo.github.io/WRZT/Polarisationsfilter-Labor.html",
+              "verwendung": "Polarisationsfilter-Labor (Simulation)"
+            },
+            {
+              "dateiname": "Polarisationsfilter.html",
+              "pfad": "Polarisationsfilter.html",
+              "url": "https://juppijo.github.io/WRZT/Polarisationsfilter.html",
+              "verwendung": "Polarisationsfilter (Simulation)"
+            },
+            {
+              "dateiname": "trigonometrie_formeln.html",
+              "pfad": "trigonometrie_formeln.html",
+              "url": "https://juppijo.github.io/WRZT/trigonometrie_formeln.html",
+              "verwendung": "Trigonometrie-Formelsammlung zur Theorie"
+            },
+            {
+              "dateiname": "Undatron_3D.html",
+              "pfad": "Undatron_3D.html",
+              "url": "https://juppijo.github.io/WRZT/Undatron_3D.html",
+              "verwendung": "Undatron-Modell in 3D"
+            },
+            {
+              "dateiname": "Vergleich_html_cl.html",
+              "pfad": "Vergleich_html_cl.html",
+              "url": "https://juppijo.github.io/WRZT/Vergleich_html_cl.html",
+              "verwendung": "Versionsvergleich von HTML-Dateien (KI-Variante)"
+            },
+            {
+              "dateiname": "Vergleich_html_g.html",
+              "pfad": "Vergleich_html_g.html",
+              "url": "https://juppijo.github.io/WRZT/Vergleich_html_g.html",
+              "verwendung": "Versionsvergleich von HTML-Dateien (KI-Variante)"
+            },
+            {
+              "dateiname": "W_Formeln_A.html",
+              "pfad": "W_Formeln_A.html",
+              "url": "https://juppijo.github.io/WRZT/W_Formeln_A.html",
+              "verwendung": "Formelsammlung zur Theorie"
+            },
+            {
+              "dateiname": "wave_double_slit_f.html",
+              "pfad": "wave_double_slit_f.html",
+              "url": "https://juppijo.github.io/WRZT/wave_double_slit_f.html",
+              "verwendung": "Doppelspalt-Experiment"
+            },
+            {
+              "dateiname": "wave-net-simulation.html",
+              "pfad": "wave-net-simulation.html",
+              "url": "https://juppijo.github.io/WRZT/wave-net-simulation.html",
+              "verwendung": "Wellen-Netzwerk-Simulation"
+            },
+            {
+              "dateiname": "WD.html",
+              "pfad": "WD.html",
+              "url": "https://juppijo.github.io/WRZT/WD.html",
+              "verwendung": "Wellendynamik (WD)"
+            },
+            {
+              "dateiname": "Wellen_1.html",
+              "pfad": "Wellen_1.html",
+              "url": "https://juppijo.github.io/WRZT/Wellen_1.html",
+              "verwendung": "Wellenfeld und Wellenraumzeit (weitere Version)"
+            },
+            {
+              "dateiname": "wrznt_enhanced(3D).html",
+              "pfad": "wrznt_enhanced(3D).html",
+              "url": "https://juppijo.github.io/WRZT/wrznt_enhanced(3D).html",
+              "verwendung": "Wellenraumzeit-Netzwerk-Theorie (3D)"
+            },
+            {
+              "dateiname": "wrznt_ladund.html",
+              "pfad": "wrznt_ladund.html",
+              "url": "https://juppijo.github.io/WRZT/wrznt_ladund.html",
+              "verwendung": "Ladung im WRZNT-Modell"
+            },
+            {
+              "dateiname": "wrznt_netzwerk_simulation.html",
+              "pfad": "wrznt_netzwerk_simulation.html",
+              "url": "https://juppijo.github.io/WRZT/wrznt_netzwerk_simulation.html",
+              "verwendung": "Wellen-Netzwerk-Simulation"
+            },
+            {
+              "dateiname": "wrznt_netzwerk_simulation_3d.html",
+              "pfad": "wrznt_netzwerk_simulation_3d.html",
+              "url": "https://juppijo.github.io/WRZT/wrznt_netzwerk_simulation_3d.html",
+              "verwendung": "Wellen-Netzwerk-Simulation in 3D"
+            },
+            {
+              "dateiname": "WRZT.html",
+              "pfad": "WRZT.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT.html",
+              "verwendung": "Hauptseite zur Wellenraumzeit-Theorie"
+            },
+            {
+              "dateiname": "WRZT-Energie.html",
+              "pfad": "WRZT-Energie.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT-Energie.html",
+              "verwendung": "Energiebilanz (kinetisch/potenziell)"
+            },
+            {
+              "dateiname": "WRZT_Formelsammlung.html",
+              "pfad": "WRZT_Formelsammlung.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_Formelsammlung.html",
+              "verwendung": "Formelsammlung zur Theorie"
+            },
+            {
+              "dateiname": "wrzt_galaxienentstehung.html",
+              "pfad": "wrzt_galaxienentstehung.html",
+              "url": "https://juppijo.github.io/WRZT/wrzt_galaxienentstehung.html",
+              "verwendung": "Galaxienentstehung Simulation 3D"
+            },
+            {
+              "dateiname": "WRZT_Lorenz.html",
+              "pfad": "WRZT_Lorenz.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_Lorenz.html",
+              "verwendung": "Lorentz-Transformation / Kontraktion"
+            },
+            {
+              "dateiname": "WRZT_Lorenz_2.html",
+              "pfad": "WRZT_Lorenz_2.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_Lorenz_2.html",
+              "verwendung": "Lorentz-Transformation / Kontraktion (weitere Version)"
+            },
+            {
+              "dateiname": "WRZT_Theorie_JZ.html",
+              "pfad": "WRZT_Theorie_JZ.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_Theorie_JZ.html",
+              "verwendung": "Seite zur Wellenraumzeit-Theorie"
+            },
+            {
+              "dateiname": "wrzt_undatron_3d_wave_simulation.html",
+              "pfad": "wrzt_undatron_3d_wave_simulation.html",
+              "url": "https://juppijo.github.io/WRZT/wrzt_undatron_3d_wave_simulation.html",
+              "verwendung": "Undatron: 3D-Wellensimulation der WRZT"
+            },
+            {
+              "dateiname": "wrztbugwelle.html",
+              "pfad": "wrztbugwelle.html",
+              "url": "https://juppijo.github.io/WRZT/wrztbugwelle.html",
+              "verwendung": "Bugwellen-Simulation"
+            }
+          ]
+        },
+        {
+          "unterbereich": "G-E-Welle",
+          "dateien": [
+            {
+              "dateiname": "G-E-Welle-1.html",
+              "pfad": "G-E-Welle/G-E-Welle-1.html",
+              "url": "https://juppijo.github.io/WRZT/G-E-Welle/G-E-Welle-1.html",
+              "verwendung": "Wellenfeld und Wellenraumzeit (weitere Version)"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "G-E-Welle/index.html",
+              "url": "https://juppijo.github.io/WRZT/G-E-Welle/index.html",
+              "verwendung": "Wellenfeld und Wellenraumzeit (Startseite)"
+            },
+            {
+              "dateiname": "MD_Editor.html",
+              "pfad": "G-E-Welle/MD_Editor.html",
+              "url": "https://juppijo.github.io/WRZT/G-E-Welle/MD_Editor.html",
+              "verwendung": "Markdown-Editor für die Wellenfeld-Seiten"
+            },
+            {
+              "dateiname": "Wellenfeld-Sim.html",
+              "pfad": "G-E-Welle/Wellenfeld-Sim.html",
+              "url": "https://juppijo.github.io/WRZT/G-E-Welle/Wellenfeld-Sim.html",
+              "verwendung": "Wellenfeld-Simulation"
+            }
+          ]
+        },
+        {
+          "unterbereich": "HT",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "HT/index.html",
+              "url": "https://juppijo.github.io/WRZT/HT/index.html",
+              "verwendung": "Startseite: HT"
+            },
+            {
+              "dateiname": "photon2(2D).html",
+              "pfad": "HT/photon2(2D).html",
+              "url": "https://juppijo.github.io/WRZT/HT/photon2(2D).html",
+              "verwendung": "Photon-Visualisierung (2D)"
+            },
+            {
+              "dateiname": "photon2(3D).html",
+              "pfad": "HT/photon2(3D).html",
+              "url": "https://juppijo.github.io/WRZT/HT/photon2(3D).html",
+              "verwendung": "Photon-Visualisierung (3D)"
+            },
+            {
+              "dateiname": "spiral_undatron.html",
+              "pfad": "HT/spiral_undatron.html",
+              "url": "https://juppijo.github.io/WRZT/HT/spiral_undatron.html",
+              "verwendung": "Spiral-Undatron-Modell"
+            },
+            {
+              "dateiname": "wave_double_slit_f.html",
+              "pfad": "HT/wave_double_slit_f.html",
+              "url": "https://juppijo.github.io/WRZT/HT/wave_double_slit_f.html",
+              "verwendung": "Doppelspalt-Experiment"
+            }
+          ]
+        },
+        {
+          "unterbereich": "HTML_Merge_Studio",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "HTML_Merge_Studio/index.html",
+              "url": "https://juppijo.github.io/WRZT/HTML_Merge_Studio/index.html",
+              "verwendung": "HTML-Dateien zusammenführen (Studio)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "WRZNT",
+          "dateien": [
+            {
+              "dateiname": "curve3d.html",
+              "pfad": "WRZNT/curve3d.html",
+              "url": "https://juppijo.github.io/WRZT/WRZNT/curve3d.html",
+              "verwendung": "3D-Kurvendarstellung"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "WRZNT/index.html",
+              "url": "https://juppijo.github.io/WRZT/WRZNT/index.html",
+              "verwendung": "Startseite: WRZNT"
+            },
+            {
+              "dateiname": "Quanten-Spin-Raumwirbel-3d.html",
+              "pfad": "WRZNT/Quanten-Spin-Raumwirbel-3d.html",
+              "url": "https://juppijo.github.io/WRZT/WRZNT/Quanten-Spin-Raumwirbel-3d.html",
+              "verwendung": "Spin und Raumwirbel (3D)"
+            },
+            {
+              "dateiname": "Quanten-Spin-Raumwirbel.html",
+              "pfad": "WRZNT/Quanten-Spin-Raumwirbel.html",
+              "url": "https://juppijo.github.io/WRZT/WRZNT/Quanten-Spin-Raumwirbel.html",
+              "verwendung": "Spin und Raumwirbel"
+            },
+            {
+              "dateiname": "Rmin_Kurve_G3.html",
+              "pfad": "WRZNT/Rmin_Kurve_G3.html",
+              "url": "https://juppijo.github.io/WRZT/WRZNT/Rmin_Kurve_G3.html",
+              "verwendung": "Herleitung des Mindestradius R_min (KI-Variante)"
+            },
+            {
+              "dateiname": "sinus-cube-3d.html",
+              "pfad": "WRZNT/sinus-cube-3d.html",
+              "url": "https://juppijo.github.io/WRZT/WRZNT/sinus-cube-3d.html",
+              "verwendung": "Sinuswelle im Würfel (3D-Visualisierung)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "WRZNT_C",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "WRZNT_C/index.html",
+              "url": "https://juppijo.github.io/WRZT/WRZNT_C/index.html",
+              "verwendung": "Startseite: WRZNT_C"
+            }
+          ]
+        },
+        {
+          "unterbereich": "WRZT2",
+          "dateien": [
+            {
+              "dateiname": "dreieck.html",
+              "pfad": "WRZT2/dreieck.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT2/dreieck.html",
+              "verwendung": "Geometrische Herleitung (Dreieck)"
+            },
+            {
+              "dateiname": "ico.html",
+              "pfad": "WRZT2/ico.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT2/ico.html",
+              "verwendung": "Ikosaeder-Geometrie in der WRZT"
+            },
+            {
+              "dateiname": "Kopplung des Elektrons.html",
+              "pfad": "WRZT2/Kopplung des Elektrons.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT2/Kopplung%20des%20Elektrons.html",
+              "verwendung": "Elektrodynamische Kopplung des Elektrons"
+            },
+            {
+              "dateiname": "Lorenz_Geo.html",
+              "pfad": "WRZT2/Lorenz_Geo.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT2/Lorenz_Geo.html",
+              "verwendung": "Lorentz-Transformation (Geometrisch)"
+            },
+            {
+              "dateiname": "Lorenz_Trigo.html",
+              "pfad": "WRZT2/Lorenz_Trigo.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT2/Lorenz_Trigo.html",
+              "verwendung": "Lorentz-Transformation (Trigonometrisch)"
+            },
+            {
+              "dateiname": "milestone-geometrie.html",
+              "pfad": "WRZT2/milestone-geometrie.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT2/milestone-geometrie.html",
+              "verwendung": "Meilenstein-Geometrie der WRZT"
+            },
+            {
+              "dateiname": "Raumzeit-Feldwirbel.html",
+              "pfad": "WRZT2/Raumzeit-Feldwirbel.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT2/Raumzeit-Feldwirbel.html",
+              "verwendung": "Raumzeit-Feldwirbel"
+            },
+            {
+              "dateiname": "Spin-Herleitungen-1.html",
+              "pfad": "WRZT2/Spin-Herleitungen-1.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT2/Spin-Herleitungen-1.html",
+              "verwendung": "Spin und Raumwirbel (Herleitung 1)"
+            },
+            {
+              "dateiname": "Spin-Herleitungen-2.html",
+              "pfad": "WRZT2/Spin-Herleitungen-2.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT2/Spin-Herleitungen-2.html",
+              "verwendung": "Spin und Raumwirbel (Herleitung 2)"
+            },
+            {
+              "dateiname": "Topologischer-3D-Raumwirbel.html",
+              "pfad": "WRZT2/Topologischer-3D-Raumwirbel.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT2/Topologischer-3D-Raumwirbel.html",
+              "verwendung": "Topologischer 3D-Raumwirbel"
+            }
+          ]
+        },
+        {
+          "unterbereich": "WRZT2/Formelsammlungs-Kartei",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "WRZT2/Formelsammlungs-Kartei/index.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT2/Formelsammlungs-Kartei/index.html",
+              "verwendung": "Formelsammlungs-Kartei zur Theorie"
+            }
+          ]
+        },
+        {
+          "unterbereich": "WRZT2/Latex-Rechner-Cl",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "WRZT2/Latex-Rechner-Cl/index.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT2/Latex-Rechner-Cl/index.html",
+              "verwendung": "LaTeX-Formelrechner (KI-Variante)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "WRZT3",
+          "dateien": [
+            {
+              "dateiname": "klassischer_elektronenradius_praezision.html",
+              "pfad": "WRZT3/klassischer_elektronenradius_praezision.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/klassischer_elektronenradius_praezision.html",
+              "verwendung": "Klassischer Elektronenradius (Präzisionsrechnung)"
+            },
+            {
+              "dateiname": "Undatron.html",
+              "pfad": "WRZT3/Undatron.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/Undatron.html",
+              "verwendung": "Undatron-Modell"
+            },
+            {
+              "dateiname": "wellenraumzeit_rmin_a.html",
+              "pfad": "WRZT3/wellenraumzeit_rmin_a.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/wellenraumzeit_rmin_a.html",
+              "verwendung": "Herleitung des Mindestradius R_min"
+            },
+            {
+              "dateiname": "Wellenraumzeit_Theorie_Fiat_Lux.html",
+              "pfad": "WRZT3/Wellenraumzeit_Theorie_Fiat_Lux.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/Wellenraumzeit_Theorie_Fiat_Lux.html",
+              "verwendung": "Buchfassung „Fiat Lux“"
+            },
+            {
+              "dateiname": "WRZNT_Kreisbewegung_Undatron.html",
+              "pfad": "WRZT3/WRZNT_Kreisbewegung_Undatron.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZNT_Kreisbewegung_Undatron.html",
+              "verwendung": "Kreisbewegung im Undatron-Modell"
+            },
+            {
+              "dateiname": "WRZT-3.html",
+              "pfad": "WRZT3/WRZT-3.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-3.html",
+              "verwendung": "Wellenraumzeit-Theorie Version 3"
+            },
+            {
+              "dateiname": "WRZT_Alpha.html",
+              "pfad": "WRZT3/WRZT_Alpha.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Alpha.html",
+              "verwendung": "Feinstrukturkonstante α"
+            },
+            {
+              "dateiname": "wrzt_berechnung_g.html",
+              "pfad": "WRZT3/wrzt_berechnung_g.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/wrzt_berechnung_g.html",
+              "verwendung": "Mathematische Berechnungen (KI-Variante)"
+            },
+            {
+              "dateiname": "WRZT_Einheits_Manifest.html",
+              "pfad": "WRZT3/WRZT_Einheits_Manifest.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Einheits_Manifest.html",
+              "verwendung": "Einheits-Manifest der Wellenraumzeit-Theorie"
+            },
+            {
+              "dateiname": "WRZT_Erweitert_v2.html",
+              "pfad": "WRZT3/WRZT_Erweitert_v2.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Erweitert_v2.html",
+              "verwendung": "Erweiterte Fassung v2 der WRZT"
+            },
+            {
+              "dateiname": "WRZT_Fiat_Lux.html",
+              "pfad": "WRZT3/WRZT_Fiat_Lux.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Fiat_Lux.html",
+              "verwendung": "Buchfassung „Fiat Lux“"
+            },
+            {
+              "dateiname": "WRZT_Final_Edition.html",
+              "pfad": "WRZT3/WRZT_Final_Edition.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Final_Edition.html",
+              "verwendung": "Finale Ausgabe der Theorie"
+            },
+            {
+              "dateiname": "WRZT_Final_Edition_v3.html",
+              "pfad": "WRZT3/WRZT_Final_Edition_v3.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Final_Edition_v3.html",
+              "verwendung": "Finale Ausgabe der Theorie (v3)"
+            },
+            {
+              "dateiname": "WRZT_Formelsammlung_b.html",
+              "pfad": "WRZT3/WRZT_Formelsammlung_b.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Formelsammlung_b.html",
+              "verwendung": "Formelsammlung zur Theorie"
+            },
+            {
+              "dateiname": "WRZT_Gitter_Simulation.html",
+              "pfad": "WRZT3/WRZT_Gitter_Simulation.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Gitter_Simulation.html",
+              "verwendung": "Raumgitter-Simulation"
+            },
+            {
+              "dateiname": "WRZT_Herleitung_Rmin_LaTeX.html",
+              "pfad": "WRZT3/WRZT_Herleitung_Rmin_LaTeX.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Herleitung_Rmin_LaTeX.html",
+              "verwendung": "Herleitung des Mindestradius R_min (LaTeX)"
+            },
+            {
+              "dateiname": "WRZT_Interferenz.html",
+              "pfad": "WRZT3/WRZT_Interferenz.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Interferenz.html",
+              "verwendung": "Wellen-Interferenz-Simulation"
+            },
+            {
+              "dateiname": "WRZT_LaTeX_Katalog.html",
+              "pfad": "WRZT3/WRZT_LaTeX_Katalog.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_LaTeX_Katalog.html",
+              "verwendung": "LaTeX-Formeln / Katalog"
+            },
+            {
+              "dateiname": "WRZT_Praezision_Katalog.html",
+              "pfad": "WRZT3/WRZT_Praezision_Katalog.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Praezision_Katalog.html",
+              "verwendung": "Präzisionskatalog der Konstanten & Werte"
+            },
+            {
+              "dateiname": "WRZT_Sim.html",
+              "pfad": "WRZT3/WRZT_Sim.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Sim.html",
+              "verwendung": "WRZT-Simulation"
+            },
+            {
+              "dateiname": "WRZT_Trans.html",
+              "pfad": "WRZT3/WRZT_Trans.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Trans.html",
+              "verwendung": "Transformationen in der WRZT"
+            },
+            {
+              "dateiname": "WRZT_Urknall.html",
+              "pfad": "WRZT3/WRZT_Urknall.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT_Urknall.html",
+              "verwendung": "Urknall-Modell"
+            },
+            {
+              "dateiname": "ZentriCoulomb.html",
+              "pfad": "WRZT3/ZentriCoulomb.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/ZentriCoulomb.html",
+              "verwendung": "Zentripetalkraft & Coulomb-Kopplung"
+            }
+          ]
+        },
+        {
+          "unterbereich": "WRZT3/WRZT-Sections",
+          "dateien": [
+            {
+              "dateiname": "3D-Netzwerkmodell-section.html",
+              "pfad": "WRZT3/WRZT-Sections/3D-Netzwerkmodell-section.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/3D-Netzwerkmodell-section.html",
+              "verwendung": "Sektion: 3D-Netzwerkmodell"
+            },
+            {
+              "dateiname": "WRZT-Fachbegriffe-v306.html",
+              "pfad": "WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v306.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v306.html",
+              "verwendung": "Glossar der WRZT-Fachbegriffe (v306)"
+            },
+            {
+              "dateiname": "WRZT-Fachbegriffe-v310.html",
+              "pfad": "WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v310.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v310.html",
+              "verwendung": "Glossar der WRZT-Fachbegriffe (v310)"
+            },
+            {
+              "dateiname": "WRZT-Fachbegriffe-v312.html",
+              "pfad": "WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v312.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/WRZT-Fachbegriffe-v312.html",
+              "verwendung": "Glossar der WRZT-Fachbegriffe (v312)"
+            },
+            {
+              "dateiname": "wrzt_sektionen_editor.html",
+              "pfad": "WRZT3/WRZT-Sections/wrzt_sektionen_editor.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/wrzt_sektionen_editor.html",
+              "verwendung": "Editor für WRZT-Sektionen"
+            },
+            {
+              "dateiname": "WRZT-v303.html",
+              "pfad": "WRZT3/WRZT-Sections/WRZT-v303.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/WRZT-v303.html",
+              "verwendung": "Wellenraumzeit-Theorie (v303)"
+            },
+            {
+              "dateiname": "WRZT-v304.html",
+              "pfad": "WRZT3/WRZT-Sections/WRZT-v304.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/WRZT-v304.html",
+              "verwendung": "Wellenraumzeit-Theorie (v304)"
+            },
+            {
+              "dateiname": "WRZT-Vers302.html",
+              "pfad": "WRZT3/WRZT-Sections/WRZT-Vers302.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT3/WRZT-Sections/WRZT-Vers302.html",
+              "verwendung": "Wellenraumzeit-Theorie (Vers302)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "WRZT4",
+          "dateien": [
+            {
+              "dateiname": "arc.html",
+              "pfad": "WRZT4/arc.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/arc.html",
+              "verwendung": "Kreisbogen-Geometrie in WRZT4"
+            },
+            {
+              "dateiname": "elektron_wirbel.html",
+              "pfad": "WRZT4/elektron_wirbel.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/elektron_wirbel.html",
+              "verwendung": "Elektron-Wirbel-Modell"
+            },
+            {
+              "dateiname": "sofi_rechner.html",
+              "pfad": "WRZT4/sofi_rechner.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/sofi_rechner.html",
+              "verwendung": "Sonnenfinsternis-Rechner"
+            },
+            {
+              "dateiname": "Sonnenfinsternis.html",
+              "pfad": "WRZT4/Sonnenfinsternis.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Sonnenfinsternis.html",
+              "verwendung": "Sonnenfinsternis-Berechnung"
+            },
+            {
+              "dateiname": "Sonnenfinsternis2.html",
+              "pfad": "WRZT4/Sonnenfinsternis2.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Sonnenfinsternis2.html",
+              "verwendung": "Sonnenfinsternis-Berechnung (weitere Version)"
+            },
+            {
+              "dateiname": "Sonnenfinsternis3.html",
+              "pfad": "WRZT4/Sonnenfinsternis3.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Sonnenfinsternis3.html",
+              "verwendung": "Sonnenfinsternis-Berechnung (weitere Version)"
+            },
+            {
+              "dateiname": "Sonnenfinsternis_cl.html",
+              "pfad": "WRZT4/Sonnenfinsternis_cl.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Sonnenfinsternis_cl.html",
+              "verwendung": "Sonnenfinsternis-Berechnung (KI-Variante)"
+            },
+            {
+              "dateiname": "Torus.html",
+              "pfad": "WRZT4/Torus.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Torus.html",
+              "verwendung": "Torus-Modell des Elektrons"
+            },
+            {
+              "dateiname": "Torus_2.html",
+              "pfad": "WRZT4/Torus_2.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Torus_2.html",
+              "verwendung": "Torus-Modell des Elektrons (weitere Version)"
+            },
+            {
+              "dateiname": "Torus_3.html",
+              "pfad": "WRZT4/Torus_3.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Torus_3.html",
+              "verwendung": "Torus-Modell des Elektrons (weitere Version)"
+            },
+            {
+              "dateiname": "Torus-Elektronenmodell.html",
+              "pfad": "WRZT4/Torus-Elektronenmodell.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Torus-Elektronenmodell.html",
+              "verwendung": "Torus-Modell des Elektrons"
+            },
+            {
+              "dateiname": "Torus_R.html",
+              "pfad": "WRZT4/Torus_R.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Torus_R.html",
+              "verwendung": "Torus-Modell des Elektrons (Radius)"
+            },
+            {
+              "dateiname": "WRZT_Fiat_Lux_v4.html",
+              "pfad": "WRZT4/WRZT_Fiat_Lux_v4.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/WRZT_Fiat_Lux_v4.html",
+              "verwendung": "Buchfassung „Fiat Lux“ (v4)"
+            },
+            {
+              "dateiname": "WRZT_Final_Edition_v4.html",
+              "pfad": "WRZT4/WRZT_Final_Edition_v4.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/WRZT_Final_Edition_v4.html",
+              "verwendung": "Finale Ausgabe der Theorie (v4)"
+            },
+            {
+              "dateiname": "wrzt_torus_bugwelle.html",
+              "pfad": "WRZT4/wrzt_torus_bugwelle.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/wrzt_torus_bugwelle.html",
+              "verwendung": "Torus-Modell mit Bugwelle"
+            },
+            {
+              "dateiname": "wrzt_torus_lorentz_pinch.html",
+              "pfad": "WRZT4/wrzt_torus_lorentz_pinch.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/wrzt_torus_lorentz_pinch.html",
+              "verwendung": "Torus-Modell mit Lorentz-Pinch"
+            },
+            {
+              "dateiname": "WRZTv4.html",
+              "pfad": "WRZT4/WRZTv4.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/WRZTv4.html",
+              "verwendung": "Wellenraumzeit-Theorie Version 4"
+            }
+          ]
+        },
+        {
+          "unterbereich": "WRZT4/Fiat_Lux",
+          "dateien": [
+            {
+              "dateiname": "Annihilation-Kollaps-2.html",
+              "pfad": "WRZT4/Fiat_Lux/Annihilation-Kollaps-2.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/Annihilation-Kollaps-2.html",
+              "verwendung": "Elektron-Positron-Annihilation (weitere Version)"
+            },
+            {
+              "dateiname": "Annihilation-Kollaps.html",
+              "pfad": "WRZT4/Fiat_Lux/Annihilation-Kollaps.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/Annihilation-Kollaps.html",
+              "verwendung": "Elektron-Positron-Annihilation"
+            },
+            {
+              "dateiname": "Annihilation-Sim.html",
+              "pfad": "WRZT4/Fiat_Lux/Annihilation-Sim.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/Annihilation-Sim.html",
+              "verwendung": "Elektron-Positron-Annihilation (Simulation)"
+            },
+            {
+              "dateiname": "bild.html",
+              "pfad": "WRZT4/Fiat_Lux/bild.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/bild.html",
+              "verwendung": "Bildseite „Fiat Lux“"
+            },
+            {
+              "dateiname": "bugwellen_simulation.html",
+              "pfad": "WRZT4/Fiat_Lux/bugwellen_simulation.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/bugwellen_simulation.html",
+              "verwendung": "Bugwellen-Simulation"
+            },
+            {
+              "dateiname": "Ekin_Epot.html",
+              "pfad": "WRZT4/Fiat_Lux/Ekin_Epot.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/Ekin_Epot.html",
+              "verwendung": "Kinetische & potenzielle Energie („Fiat Lux“)"
+            },
+            {
+              "dateiname": "elektron_simulation.html",
+              "pfad": "WRZT4/Fiat_Lux/elektron_simulation.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/elektron_simulation.html",
+              "verwendung": "Elektron-Simulation („Fiat Lux“)"
+            },
+            {
+              "dateiname": "elektron-positron-annihilation.html",
+              "pfad": "WRZT4/Fiat_Lux/elektron-positron-annihilation.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/elektron-positron-annihilation.html",
+              "verwendung": "Elektron-Positron-Annihilation"
+            },
+            {
+              "dateiname": "elektron-positron.html",
+              "pfad": "WRZT4/Fiat_Lux/elektron-positron.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/elektron-positron.html",
+              "verwendung": "Elektron-Positron-Paar"
+            },
+            {
+              "dateiname": "Fiat_lux.html",
+              "pfad": "WRZT4/Fiat_Lux/Fiat_lux.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/Fiat_lux.html",
+              "verwendung": "Buchfassung „Fiat Lux“"
+            },
+            {
+              "dateiname": "index.html",
+              "pfad": "WRZT4/Fiat_Lux/index.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/index.html",
+              "verwendung": "Startseite: Buchfassung „Fiat Lux“"
+            },
+            {
+              "dateiname": "Inhaltsverzeichnis.html",
+              "pfad": "WRZT4/Fiat_Lux/Inhaltsverzeichnis.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/Inhaltsverzeichnis.html",
+              "verwendung": "Inhaltsverzeichnis „Fiat Lux“"
+            },
+            {
+              "dateiname": "Inhaltsverzeichnis_Cl.html",
+              "pfad": "WRZT4/Fiat_Lux/Inhaltsverzeichnis_Cl.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/Inhaltsverzeichnis_Cl.html",
+              "verwendung": "Inhaltsverzeichnis „Fiat Lux“ (KI-Variante)"
+            },
+            {
+              "dateiname": "Positronium.html",
+              "pfad": "WRZT4/Fiat_Lux/Positronium.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/Positronium.html",
+              "verwendung": "Positronium-Modell (e⁺e⁻-System)"
+            },
+            {
+              "dateiname": "positronium_3d_simulation.html",
+              "pfad": "WRZT4/Fiat_Lux/positronium_3d_simulation.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/positronium_3d_simulation.html",
+              "verwendung": "Positronium 3D-Simulation"
+            },
+            {
+              "dateiname": "positronium_3d_wave_interference.html",
+              "pfad": "WRZT4/Fiat_Lux/positronium_3d_wave_interference.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/positronium_3d_wave_interference.html",
+              "verwendung": "Positronium 3D-Welleninterferenz"
+            },
+            {
+              "dateiname": "positronium_3d_wave_interference_bugw.html",
+              "pfad": "WRZT4/Fiat_Lux/positronium_3d_wave_interference_bugw.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/positronium_3d_wave_interference_bugw.html",
+              "verwendung": "Positronium 3D-Welleninterferenz mit Bugwelle"
+            },
+            {
+              "dateiname": "positronium-3d.html",
+              "pfad": "WRZT4/Fiat_Lux/positronium-3d.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/positronium-3d.html",
+              "verwendung": "Positronium-Modell (3D)"
+            },
+            {
+              "dateiname": "positronium-bugwelle.html",
+              "pfad": "WRZT4/Fiat_Lux/positronium-bugwelle.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/positronium-bugwelle.html",
+              "verwendung": "Positronium-Modell mit Bugwelle"
+            },
+            {
+              "dateiname": "Positronium_g.html",
+              "pfad": "WRZT4/Fiat_Lux/Positronium_g.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/Positronium_g.html",
+              "verwendung": "Positronium-Modell (KI-Variante)"
+            },
+            {
+              "dateiname": "positronium-simulation.html",
+              "pfad": "WRZT4/Fiat_Lux/positronium-simulation.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/positronium-simulation.html",
+              "verwendung": "Positronium-Simulation"
+            },
+            {
+              "dateiname": "schraubenbewegung_simulation.html",
+              "pfad": "WRZT4/Fiat_Lux/schraubenbewegung_simulation.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/schraubenbewegung_simulation.html",
+              "verwendung": "Schraubenbewegung-Simulation"
+            },
+            {
+              "dateiname": "sinuswelle_3d.html",
+              "pfad": "WRZT4/Fiat_Lux/sinuswelle_3d.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/sinuswelle_3d.html",
+              "verwendung": "Sinuswelle in 3D"
+            },
+            {
+              "dateiname": "sinuswelle_kreis_feder_schwerependel.html",
+              "pfad": "WRZT4/Fiat_Lux/sinuswelle_kreis_feder_schwerependel.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/sinuswelle_kreis_feder_schwerependel.html",
+              "verwendung": "Sinuswelle, Kreis-, Feder- und Schwerependel"
+            },
+            {
+              "dateiname": "torus_elektron.html",
+              "pfad": "WRZT4/Fiat_Lux/torus_elektron.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/torus_elektron.html",
+              "verwendung": "Torus-Modell des Elektrons"
+            },
+            {
+              "dateiname": "WRZT.html",
+              "pfad": "WRZT4/Fiat_Lux/WRZT.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT.html",
+              "verwendung": "Buchfassung „Fiat Lux“ (WRZT)"
+            },
+            {
+              "dateiname": "WRZT_4.html",
+              "pfad": "WRZT4/Fiat_Lux/WRZT_4.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT_4.html",
+              "verwendung": "Buchfassung „Fiat Lux“ (v4)"
+            },
+            {
+              "dateiname": "WRZT-Annihilation.html",
+              "pfad": "WRZT4/Fiat_Lux/WRZT-Annihilation.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT-Annihilation.html",
+              "verwendung": "Elektron-Positron-Annihilation"
+            },
+            {
+              "dateiname": "WRZT_Bugwelle.html",
+              "pfad": "WRZT4/Fiat_Lux/WRZT_Bugwelle.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT_Bugwelle.html",
+              "verwendung": "Bugwellen-Simulation"
+            },
+            {
+              "dateiname": "wrzt_bugwellen_simulation.html",
+              "pfad": "WRZT4/Fiat_Lux/wrzt_bugwellen_simulation.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/wrzt_bugwellen_simulation.html",
+              "verwendung": "Bugwellen-Simulation"
+            },
+            {
+              "dateiname": "WRZT_Einfach_Erklaert.html",
+              "pfad": "WRZT4/Fiat_Lux/WRZT_Einfach_Erklaert.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT_Einfach_Erklaert.html",
+              "verwendung": "WRZT einfach erklärt"
+            },
+            {
+              "dateiname": "WRZT_Einfach_Erklaert_2.html",
+              "pfad": "WRZT4/Fiat_Lux/WRZT_Einfach_Erklaert_2.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT_Einfach_Erklaert_2.html",
+              "verwendung": "WRZT einfach erklärt (weitere Version)"
+            },
+            {
+              "dateiname": "WRZT_Fiat_Lux_v4-2.html",
+              "pfad": "WRZT4/Fiat_Lux/WRZT_Fiat_Lux_v4-2.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT_Fiat_Lux_v4-2.html",
+              "verwendung": "Buchfassung „Fiat Lux“ (v4-2)"
+            },
+            {
+              "dateiname": "WRZT_Fiat_Lux_v4-3.html",
+              "pfad": "WRZT4/Fiat_Lux/WRZT_Fiat_Lux_v4-3.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT_Fiat_Lux_v4-3.html",
+              "verwendung": "Buchfassung „Fiat Lux“ (v4-3)"
+            },
+            {
+              "dateiname": "WRZT_Fiat_Lux_v4-4.html",
+              "pfad": "WRZT4/Fiat_Lux/WRZT_Fiat_Lux_v4-4.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT_Fiat_Lux_v4-4.html",
+              "verwendung": "Buchfassung „Fiat Lux“ (v4-4)"
+            },
+            {
+              "dateiname": "WRZT_Formeln.html",
+              "pfad": "WRZT4/Fiat_Lux/WRZT_Formeln.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT_Formeln.html",
+              "verwendung": "Formelsammlung zur Theorie"
+            },
+            {
+              "dateiname": "WRZT_Gesamtmanifest.html",
+              "pfad": "WRZT4/Fiat_Lux/WRZT_Gesamtmanifest.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT_Gesamtmanifest.html",
+              "verwendung": "Gesamtmanifest der Wellenraumzeit-Theorie"
+            },
+            {
+              "dateiname": "WRZT_Kreisbogen_Simulation_CL2.html",
+              "pfad": "WRZT4/Fiat_Lux/WRZT_Kreisbogen_Simulation_CL2.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT_Kreisbogen_Simulation_CL2.html",
+              "verwendung": "Kreisbogen-Simulation (KI-Variante)"
+            },
+            {
+              "dateiname": "WRZT_Kreisbogen_Simulation_G2.html",
+              "pfad": "WRZT4/Fiat_Lux/WRZT_Kreisbogen_Simulation_G2.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT_Kreisbogen_Simulation_G2.html",
+              "verwendung": "Kreisbogen-Simulation (KI-Variante)"
+            },
+            {
+              "dateiname": "WRZT_L.html",
+              "pfad": "WRZT4/Fiat_Lux/WRZT_L.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT_L.html",
+              "verwendung": "Buchfassung „Fiat Lux“"
+            },
+            {
+              "dateiname": "WRZT-Logik.html",
+              "pfad": "WRZT4/Fiat_Lux/WRZT-Logik.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT-Logik.html",
+              "verwendung": "Logik der WRZT („Fiat Lux“)"
+            },
+            {
+              "dateiname": "WRZT-Quellenangaben.html",
+              "pfad": "WRZT4/Fiat_Lux/WRZT-Quellenangaben.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT-Quellenangaben.html",
+              "verwendung": "Quellenangaben („Fiat Lux“)"
+            },
+            {
+              "dateiname": "WRZT_Seite.html",
+              "pfad": "WRZT4/Fiat_Lux/WRZT_Seite.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT_Seite.html",
+              "verwendung": "Buchfassung „Fiat Lux“"
+            },
+            {
+              "dateiname": "wrzt_simulation_bugwelle.html",
+              "pfad": "WRZT4/Fiat_Lux/wrzt_simulation_bugwelle.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/wrzt_simulation_bugwelle.html",
+              "verwendung": "Bugwellen-Simulation"
+            },
+            {
+              "dateiname": "wrzt_simulation_bugwelle_3d.html",
+              "pfad": "WRZT4/Fiat_Lux/wrzt_simulation_bugwelle_3d.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/wrzt_simulation_bugwelle_3d.html",
+              "verwendung": "Bugwellen-Simulation in 3D"
+            },
+            {
+              "dateiname": "WRZT_T1.html",
+              "pfad": "WRZT4/Fiat_Lux/WRZT_T1.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/WRZT_T1.html",
+              "verwendung": "Buchfassung „Fiat Lux“ (Teil 1)"
+            },
+            {
+              "dateiname": "wrzt_tangential_sinus_kollaps.html",
+              "pfad": "WRZT4/Fiat_Lux/wrzt_tangential_sinus_kollaps.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT4/Fiat_Lux/wrzt_tangential_sinus_kollaps.html",
+              "verwendung": "Tangentialer Sinus-Kollaps"
+            }
+          ]
+        },
+        {
+          "unterbereich": "WRZT5",
+          "dateien": [
+            {
+              "dateiname": "dateisuche-cl.html",
+              "pfad": "WRZT5/dateisuche-cl.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT5/dateisuche-cl.html",
+              "verwendung": "Dateisuche in den Theorie-Dateien (KI-Variante)"
+            },
+            {
+              "dateiname": "dateisuche-g.html",
+              "pfad": "WRZT5/dateisuche-g.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT5/dateisuche-g.html",
+              "verwendung": "Dateisuche in den Theorie-Dateien (KI-Variante)"
+            },
+            {
+              "dateiname": "Gravitations_WRZT_simulation.html",
+              "pfad": "WRZT5/Gravitations_WRZT_simulation.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT5/Gravitations_WRZT_simulation.html",
+              "verwendung": "Gravitation und Trägheit (Simulation)"
+            },
+            {
+              "dateiname": "Mathe-Rechnungen-KI.html",
+              "pfad": "WRZT5/Mathe-Rechnungen-KI.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT5/Mathe-Rechnungen-KI.html",
+              "verwendung": "Mathematische Berechnungen (WRZT5)"
+            },
+            {
+              "dateiname": "neutrino.html",
+              "pfad": "WRZT5/neutrino.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT5/neutrino.html",
+              "verwendung": "Neutrino-Helix-Modell"
+            },
+            {
+              "dateiname": "wrzt_3d_gitter_simulation.html",
+              "pfad": "WRZT5/wrzt_3d_gitter_simulation.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT5/wrzt_3d_gitter_simulation.html",
+              "verwendung": "3D-Raumgitter-Simulation"
+            },
+            {
+              "dateiname": "wrzt_doku.html",
+              "pfad": "WRZT5/wrzt_doku.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT5/wrzt_doku.html",
+              "verwendung": "Dokumentation / Zusammenfassung (WRZT5)"
+            },
+            {
+              "dateiname": "WRZT-Gitter-3D.html",
+              "pfad": "WRZT5/WRZT-Gitter-3D.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT5/WRZT-Gitter-3D.html",
+              "verwendung": "Raumgitter-Simulation in 3D"
+            },
+            {
+              "dateiname": "WRZT-Gitter-Rotation-Sim.html",
+              "pfad": "WRZT5/WRZT-Gitter-Rotation-Sim.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT5/WRZT-Gitter-Rotation-Sim.html",
+              "verwendung": "Raumgitter-Rotations-Simulation"
+            },
+            {
+              "dateiname": "WRZT-Gitter.html",
+              "pfad": "WRZT5/WRZT-Gitter.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT5/WRZT-Gitter.html",
+              "verwendung": "Raumgitter-Simulation"
+            },
+            {
+              "dateiname": "WRZT_Kurve.html",
+              "pfad": "WRZT5/WRZT_Kurve.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT5/WRZT_Kurve.html",
+              "verwendung": "Kurvendarstellung (WRZT5)"
+            },
+            {
+              "dateiname": "wrzt-moebius-torus-g.html",
+              "pfad": "WRZT5/wrzt-moebius-torus-g.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT5/wrzt-moebius-torus-g.html",
+              "verwendung": "Möbius-Torus-Modell (KI-Variante)"
+            },
+            {
+              "dateiname": "wrzt-moebius-torus-proton.html",
+              "pfad": "WRZT5/wrzt-moebius-torus-proton.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT5/wrzt-moebius-torus-proton.html",
+              "verwendung": "Möbius-Torus-Proton-Modell (Pro-Version)"
+            },
+            {
+              "dateiname": "wrzt-moebius-torus.html",
+              "pfad": "WRZT5/wrzt-moebius-torus.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT5/wrzt-moebius-torus.html",
+              "verwendung": "Möbius-Torus-Modell"
+            },
+            {
+              "dateiname": "wrzt-neutrino-helix.html",
+              "pfad": "WRZT5/wrzt-neutrino-helix.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT5/wrzt-neutrino-helix.html",
+              "verwendung": "Neutrino-Helix-Modell"
+            },
+            {
+              "dateiname": "wrzt-proton-simulation.html",
+              "pfad": "WRZT5/wrzt-proton-simulation.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT5/wrzt-proton-simulation.html",
+              "verwendung": "Proton-/Quark-Modell (Simulation)"
+            },
+            {
+              "dateiname": "WRZT–Wertetabelle-2.html",
+              "pfad": "WRZT5/WRZT–Wertetabelle-2.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT5/WRZT%E2%80%93Wertetabelle-2.html",
+              "verwendung": "Wertetabelle zur Theorie (weitere Version)"
+            },
+            {
+              "dateiname": "WRZT–Wertetabelle.html",
+              "pfad": "WRZT5/WRZT–Wertetabelle.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT5/WRZT%E2%80%93Wertetabelle.html",
+              "verwendung": "Wertetabelle zur Theorie"
+            },
+            {
+              "dateiname": "WRZT_Zeitdilatation_3D.html",
+              "pfad": "WRZT5/WRZT_Zeitdilatation_3D.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT5/WRZT_Zeitdilatation_3D.html",
+              "verwendung": "Zeitdilatation in 3D"
+            },
+            {
+              "dateiname": "WRZT_Zeitdilatation_Simulation.html",
+              "pfad": "WRZT5/WRZT_Zeitdilatation_Simulation.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT5/WRZT_Zeitdilatation_Simulation.html",
+              "verwendung": "Zeitdilatations-Simulation"
+            },
+            {
+              "dateiname": "Zeitdilatationsfaktors.html",
+              "pfad": "WRZT5/Zeitdilatationsfaktors.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT5/Zeitdilatationsfaktors.html",
+              "verwendung": "Berechnung des Zeitdilatationsfaktors"
+            }
+          ]
+        },
+        {
+          "unterbereich": "WRZT_Calc",
+          "dateien": [
+            {
+              "dateiname": "index.html",
+              "pfad": "WRZT_Calc/index.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_Calc/index.html",
+              "verwendung": "Startseite: WRZT-Rechner"
+            }
+          ]
+        },
+        {
+          "unterbereich": "WRZT_O",
+          "dateien": [
+            {
+              "dateiname": "3Rmin.html",
+              "pfad": "WRZT_O/3Rmin.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/3Rmin.html",
+              "verwendung": "Herleitung des Mindestradius 3·R_min"
+            },
+            {
+              "dateiname": "alpha-Formeln.html",
+              "pfad": "WRZT_O/alpha-Formeln.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/alpha-Formeln.html",
+              "verwendung": "Formeln zur Feinstrukturkonstante α"
+            },
+            {
+              "dateiname": "Elektrodynamische-Kopplung.html",
+              "pfad": "WRZT_O/Elektrodynamische-Kopplung.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/Elektrodynamische-Kopplung.html",
+              "verwendung": "Elektrodynamische Kopplung"
+            },
+            {
+              "dateiname": "elektron-photon-radius-3.html",
+              "pfad": "WRZT_O/elektron-photon-radius-3.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/elektron-photon-radius-3.html",
+              "verwendung": "Elektron-Photon-Radius-Visualisierung"
+            },
+            {
+              "dateiname": "Fiat-Lux–Einheits-Manifest.html",
+              "pfad": "WRZT_O/Fiat-Lux–Einheits-Manifest.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/Fiat-Lux%E2%80%93Einheits-Manifest.html",
+              "verwendung": "Fiat-Lux Einheits-Manifest"
+            },
+            {
+              "dateiname": "Fz=Fc-Eph_2.html",
+              "pfad": "WRZT_O/Fz=Fc-Eph_2.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/Fz%3DFc-Eph_2.html",
+              "verwendung": "Kräftegleichgewicht Fz = Fc (Photonenenergie)"
+            },
+            {
+              "dateiname": "GravitationTrägheit.html",
+              "pfad": "WRZT_O/GravitationTrägheit.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/GravitationTr%C3%A4gheit.html",
+              "verwendung": "Gravitation und Trägheit"
+            },
+            {
+              "dateiname": "Kreisbewegung_Fundamentale_Wechselwirkungen.html",
+              "pfad": "WRZT_O/Kreisbewegung_Fundamentale_Wechselwirkungen.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/Kreisbewegung_Fundamentale_Wechselwirkungen.html",
+              "verwendung": "Kreisbewegung & fundamentale Wechselwirkungen"
+            },
+            {
+              "dateiname": "Lichtbrechung.html",
+              "pfad": "WRZT_O/Lichtbrechung.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/Lichtbrechung.html",
+              "verwendung": "Lichtbrechung in der WRZT"
+            },
+            {
+              "dateiname": "Lichtbrechung2.html",
+              "pfad": "WRZT_O/Lichtbrechung2.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/Lichtbrechung2.html",
+              "verwendung": "Lichtbrechung in der WRZT (weitere Version)"
+            },
+            {
+              "dateiname": "Lorenz.html",
+              "pfad": "WRZT_O/Lorenz.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/Lorenz.html",
+              "verwendung": "Lorentz-Transformation / Kontraktion"
+            },
+            {
+              "dateiname": "Magnetische-Feldkonstante.html",
+              "pfad": "WRZT_O/Magnetische-Feldkonstante.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/Magnetische-Feldkonstante.html",
+              "verwendung": "Magnetische Feldkonstante μ₀"
+            },
+            {
+              "dateiname": "Magnetische-Feldkonstante2.html",
+              "pfad": "WRZT_O/Magnetische-Feldkonstante2.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/Magnetische-Feldkonstante2.html",
+              "verwendung": "Magnetische Feldkonstante μ₀ (weitere Version)"
+            },
+            {
+              "dateiname": "manifest.html",
+              "pfad": "WRZT_O/manifest.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/manifest.html",
+              "verwendung": "Manifest der Wellenraumzeit-Theorie"
+            },
+            {
+              "dateiname": "Raumwirbel.html",
+              "pfad": "WRZT_O/Raumwirbel.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/Raumwirbel.html",
+              "verwendung": "Raumwirbel-Modell"
+            },
+            {
+              "dateiname": "Rmin_neu.html",
+              "pfad": "WRZT_O/Rmin_neu.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/Rmin_neu.html",
+              "verwendung": "Herleitung des Mindestradius R_min (neu)"
+            },
+            {
+              "dateiname": "section-universum.html",
+              "pfad": "WRZT_O/section-universum.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/section-universum.html",
+              "verwendung": "Sektion: Universum"
+            },
+            {
+              "dateiname": "Traegheit.html",
+              "pfad": "WRZT_O/Traegheit.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/Traegheit.html",
+              "verwendung": "Trägheit in der WRZT"
+            },
+            {
+              "dateiname": "U_Tensor.html",
+              "pfad": "WRZT_O/U_Tensor.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/U_Tensor.html",
+              "verwendung": "U-Tensor-Herleitung"
+            },
+            {
+              "dateiname": "Undatron_Formel.html",
+              "pfad": "WRZT_O/Undatron_Formel.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/Undatron_Formel.html",
+              "verwendung": "Undatron-Formel"
+            },
+            {
+              "dateiname": "urknall-LKM.html",
+              "pfad": "WRZT_O/urknall-LKM.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/urknall-LKM.html",
+              "verwendung": "Urknall-Modell (LKM)"
+            },
+            {
+              "dateiname": "urknall.html",
+              "pfad": "WRZT_O/urknall.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/urknall.html",
+              "verwendung": "Urknall-Modell"
+            },
+            {
+              "dateiname": "Urknall2.html",
+              "pfad": "WRZT_O/Urknall2.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/Urknall2.html",
+              "verwendung": "Urknall-Modell (weitere Version)"
+            },
+            {
+              "dateiname": "Wellenfeld-Gleichung.html",
+              "pfad": "WRZT_O/Wellenfeld-Gleichung.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/Wellenfeld-Gleichung.html",
+              "verwendung": "Wellenfeld-Gleichung"
+            },
+            {
+              "dateiname": "Wellenraumzeit.html",
+              "pfad": "WRZT_O/Wellenraumzeit.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/Wellenraumzeit.html",
+              "verwendung": "Wellenraumzeit-Grundlagen"
+            },
+            {
+              "dateiname": "wrznt.html",
+              "pfad": "WRZT_O/wrznt.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/wrznt.html",
+              "verwendung": "Wellenraumzeit-Netzwerk-Theorie"
+            },
+            {
+              "dateiname": "WRZNT_Buch_JZ.html",
+              "pfad": "WRZT_O/WRZNT_Buch_JZ.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/WRZNT_Buch_JZ.html",
+              "verwendung": "WRZNT-Buchfassung"
+            },
+            {
+              "dateiname": "WRZNT-Konstanten.html",
+              "pfad": "WRZT_O/WRZNT-Konstanten.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/WRZNT-Konstanten.html",
+              "verwendung": "Naturkonstanten der WRZNT"
+            },
+            {
+              "dateiname": "WRZT_CGTP.html",
+              "pfad": "WRZT_O/WRZT_CGTP.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/WRZT_CGTP.html",
+              "verwendung": "Seite zur Wellenraumzeit-Theorie (KI-Variante)"
+            },
+            {
+              "dateiname": "WRZT-Fachbegriffe-v305.html",
+              "pfad": "WRZT_O/WRZT-Fachbegriffe-v305.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/WRZT-Fachbegriffe-v305.html",
+              "verwendung": "Glossar der WRZT-Fachbegriffe (v305)"
+            },
+            {
+              "dateiname": "WRZT-Fachbegriffe-v307.html",
+              "pfad": "WRZT_O/WRZT-Fachbegriffe-v307.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/WRZT-Fachbegriffe-v307.html",
+              "verwendung": "Glossar der WRZT-Fachbegriffe (v307)"
+            },
+            {
+              "dateiname": "WRZT-Fachbegriffe-v308.html",
+              "pfad": "WRZT_O/WRZT-Fachbegriffe-v308.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/WRZT-Fachbegriffe-v308.html",
+              "verwendung": "Glossar der WRZT-Fachbegriffe (v308)"
+            },
+            {
+              "dateiname": "WRZT-Fachbegriffe-v309.html",
+              "pfad": "WRZT_O/WRZT-Fachbegriffe-v309.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/WRZT-Fachbegriffe-v309.html",
+              "verwendung": "Glossar der WRZT-Fachbegriffe (v309)"
+            },
+            {
+              "dateiname": "wrzt_kapitel_gravitation_lichtgeschwindigkeit.html",
+              "pfad": "WRZT_O/wrzt_kapitel_gravitation_lichtgeschwindigkeit.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/wrzt_kapitel_gravitation_lichtgeschwindigkeit.html",
+              "verwendung": "Kapitel: Gravitation & Lichtgeschwindigkeit"
+            },
+            {
+              "dateiname": "wrzt_rmin.html",
+              "pfad": "WRZT_O/wrzt_rmin.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/wrzt_rmin.html",
+              "verwendung": "Herleitung des Mindestradius R_min"
+            },
+            {
+              "dateiname": "wrzt_rmin1.html",
+              "pfad": "WRZT_O/wrzt_rmin1.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/wrzt_rmin1.html",
+              "verwendung": "Herleitung des Mindestradius R_min (v1)"
+            },
+            {
+              "dateiname": "wrzt_rmin2.html",
+              "pfad": "WRZT_O/wrzt_rmin2.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/wrzt_rmin2.html",
+              "verwendung": "Herleitung des Mindestradius R_min (v2)"
+            },
+            {
+              "dateiname": "wrzt_rmin3.html",
+              "pfad": "WRZT_O/wrzt_rmin3.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/wrzt_rmin3.html",
+              "verwendung": "Herleitung des Mindestradius R_min (v3)"
+            },
+            {
+              "dateiname": "WRZT_Theorie.html",
+              "pfad": "WRZT_O/WRZT_Theorie.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/WRZT_Theorie.html",
+              "verwendung": "Seite zur Wellenraumzeit-Theorie"
+            },
+            {
+              "dateiname": "wrzt_theorie_2.html",
+              "pfad": "WRZT_O/wrzt_theorie_2.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/wrzt_theorie_2.html",
+              "verwendung": "Seite zur Wellenraumzeit-Theorie (weitere Version)"
+            },
+            {
+              "dateiname": "wrzt_zusammenfassung.html",
+              "pfad": "WRZT_O/wrzt_zusammenfassung.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/wrzt_zusammenfassung.html",
+              "verwendung": "Zusammenfassung der Wellenraumzeit-Theorie"
+            },
+            {
+              "dateiname": "WRZTN3.html",
+              "pfad": "WRZT_O/WRZTN3.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/WRZTN3.html",
+              "verwendung": "Wellenraumzeit-Theorie (WRZTN3)"
+            },
+            {
+              "dateiname": "WRZTNetz.html",
+              "pfad": "WRZT_O/WRZTNetz.html",
+              "url": "https://juppijo.github.io/WRZT/WRZT_O/WRZTNetz.html",
+              "verwendung": "Wellenraumzeit-Netzwerk"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
