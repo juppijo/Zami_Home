@@ -708,6 +708,16 @@
         "icon": "✨"
       },
       {
+        "label": "arduino_inventar_cl.py",
+        "url": "https://juppijo.github.io/ESP32-S3/arduino_inventar_cl.py",
+        "icon": "✨"
+      },
+      {
+        "label": "arduino_inventar_g.py",
+        "url": "https://juppijo.github.io/ESP32-S3/arduino_inventar_g.py",
+        "icon": "✨"
+      },
+      {
         "label": "esp32.html",
         "url": "https://juppijo.github.io/ESP32-S3/esp32.html",
         "icon": "✨"
@@ -715,6 +725,11 @@
       {
         "label": "esp32_2.html",
         "url": "https://juppijo.github.io/ESP32-S3/esp32_2.html",
+        "icon": "✨"
+      },
+      {
+        "label": "markdown_zu_html.py",
+        "url": "https://juppijo.github.io/ESP32-S3/markdown_zu_html.py",
         "icon": "✨"
       }
     ]
@@ -5120,11 +5135,6 @@
       {
         "label": "html_inventar_manager.html",
         "url": "https://juppijo.github.io/Zami_Home/html_inventar_manager.html",
-        "icon": "✨"
-      },
-      {
-        "label": "html_inventar_manager2.html",
-        "url": "https://juppijo.github.io/Zami_Home/html_inventar_manager2.html",
         "icon": "✨"
       },
       {
