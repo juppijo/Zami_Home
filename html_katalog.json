@@ -3,7 +3,7 @@
     "quelle": "links_cl2.json (https://github.com/juppijo)",
     "aktualisiert_am": "2026-11-17",
     "gesamtanzahl_bereiche": 18,
-    "gesamtanzahl_html_dateien": 617,
+    "gesamtanzahl_html_dateien": 613,
     "sortierung": "Bereich -> Unterbereich -> Alphabetisch (Dateiname)"
   },
   "bereiche": [
@@ -493,12 +493,6 @@
               "pfad": "esp32.html",
               "url": "https://juppijo.github.io/ESP32-S3/esp32.html",
               "verwendung": "ESP32-S3 Steuerseite (weitere Version)"
-            },
-            {
-              "dateiname": "WRZT_LaTex.html",
-              "pfad": "WRZT_LaTex.html",
-              "url": "https://juppijo.github.io/ESP32-S3/WRZT_LaTex.html",
-              "verwendung": "LaTeX-Formeln zur Theorie"
             }
           ]
         },
@@ -521,17 +515,6 @@
               "pfad": "GPIO-Control-2/index.html",
               "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control-2/index.html",
               "verwendung": "GPIO-Steuerung per Web-Oberfläche (GPIO Control 2)"
-            }
-          ]
-        },
-        {
-          "unterbereich": "GPIO-Control-3",
-          "dateien": [
-            {
-              "dateiname": "index.html",
-              "pfad": "GPIO-Control-3/index.html",
-              "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control-3/index.html",
-              "verwendung": "GPIO-Steuerung per Web-Oberfläche (GPIO Control 3)"
             }
           ]
         },
@@ -566,12 +549,6 @@
               "pfad": "RGB_LED/RBG2.html",
               "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/RBG2.html",
               "verwendung": "RBG2"
-            },
-            {
-              "dateiname": "RBG3.html",
-              "pfad": "RGB_LED/RBG3.html",
-              "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/RBG3.html",
-              "verwendung": "RBG3"
             }
           ]
         }
@@ -3303,16 +3280,16 @@
               "verwendung": "Buch „Wahre Liebe“ (KI-Variante)"
             },
             {
-              "dateiname": "Wahre_Liebe.html",
-              "pfad": "Wahre_Liebe.html",
-              "url": "https://juppijo.github.io/Zami_Buecher/Wahre_Liebe.html",
-              "verwendung": "Buch „Wahre Liebe“"
-            },
-            {
               "dateiname": "Wahre_Liebe_G.html",
               "pfad": "Wahre_Liebe_G.html",
               "url": "https://juppijo.github.io/Zami_Buecher/Wahre_Liebe_G.html",
               "verwendung": "Wahre Liebe (KI-Variante)"
+            },
+            {
+              "dateiname": "Wahre_Liebe.html",
+              "pfad": "Wahre_Liebe.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Wahre_Liebe.html",
+              "verwendung": "Buch „Wahre Liebe“"
             },
             {
               "dateiname": "Zaminia.html",
@@ -3496,12 +3473,6 @@
               "pfad": "GitHubLinks.html",
               "url": "https://juppijo.github.io/Zami_Home/GitHubLinks.html",
               "verwendung": "GitHub-Werkzeug (Repos & Links)"
-            },
-            {
-              "dateiname": "html_inventar_manager.html",
-              "pfad": "html_inventar_manager.html",
-              "url": "https://juppijo.github.io/Zami_Home/html_inventar_manager.html",
-              "verwendung": "Html Inventar Manager"
             },
             {
               "dateiname": "html_katalog_manager.html",
