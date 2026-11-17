@@ -1,9 +1,9 @@
 {
   "meta": {
     "quelle": "links_cl2.json (https://github.com/juppijo)",
-    "aktualisiert_am": "2026-11-15",
+    "aktualisiert_am": "2026-11-17",
     "gesamtanzahl_bereiche": 18,
-    "gesamtanzahl_html_dateien": 610,
+    "gesamtanzahl_html_dateien": 617,
     "sortierung": "Bereich -> Unterbereich -> Alphabetisch (Dateiname)"
   },
   "bereiche": [
@@ -554,6 +554,24 @@
               "pfad": "RGB_LED/index.html",
               "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/index.html",
               "verwendung": "RGB-LED-Steuerung"
+            },
+            {
+              "dateiname": "RBG.html",
+              "pfad": "RGB_LED/RBG.html",
+              "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/RBG.html",
+              "verwendung": "RBG"
+            },
+            {
+              "dateiname": "RBG2.html",
+              "pfad": "RGB_LED/RBG2.html",
+              "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/RBG2.html",
+              "verwendung": "RBG2"
+            },
+            {
+              "dateiname": "RBG3.html",
+              "pfad": "RGB_LED/RBG3.html",
+              "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/RBG3.html",
+              "verwendung": "RBG3"
             }
           ]
         }
@@ -3273,6 +3291,12 @@
               "verwendung": "Geschichte „Zaminia und die Schattenkrieger“"
             },
             {
+              "dateiname": "Upekhā – Die Freiheit im Sein.html",
+              "pfad": "Upekhā – Die Freiheit im Sein.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Upekh%C4%81%20%E2%80%93%20Die%20Freiheit%20im%20Sein.html",
+              "verwendung": "Upekhā – Die Freiheit im Sein"
+            },
+            {
               "dateiname": "Wahre_Liebe_Cl.html",
               "pfad": "Wahre_Liebe_Cl.html",
               "url": "https://juppijo.github.io/Zami_Buecher/Wahre_Liebe_Cl.html",
@@ -3283,6 +3307,12 @@
               "pfad": "Wahre_Liebe.html",
               "url": "https://juppijo.github.io/Zami_Buecher/Wahre_Liebe.html",
               "verwendung": "Buch „Wahre Liebe“"
+            },
+            {
+              "dateiname": "Wahre_Liebe_G.html",
+              "pfad": "Wahre_Liebe_G.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Wahre_Liebe_G.html",
+              "verwendung": "Wahre Liebe (KI-Variante)"
             },
             {
               "dateiname": "Zaminia.html",
@@ -3466,6 +3496,18 @@
               "pfad": "GitHubLinks.html",
               "url": "https://juppijo.github.io/Zami_Home/GitHubLinks.html",
               "verwendung": "GitHub-Werkzeug (Repos & Links)"
+            },
+            {
+              "dateiname": "html_inventar_manager.html",
+              "pfad": "html_inventar_manager.html",
+              "url": "https://juppijo.github.io/Zami_Home/html_inventar_manager.html",
+              "verwendung": "Html Inventar Manager"
+            },
+            {
+              "dateiname": "html_katalog_manager.html",
+              "pfad": "html_katalog_manager.html",
+              "url": "https://juppijo.github.io/Zami_Home/html_katalog_manager.html",
+              "verwendung": "Html Katalog Manager"
             },
             {
               "dateiname": "Icon.html",

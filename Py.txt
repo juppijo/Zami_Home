@@ -1,0 +1,7 @@
+python katalog_ergaenzen.py links_cl2.json html_katalog.json
+python katalog_ergaenzen.py links_cl2.json html_katalog.json --dry-run   # nur anzeigen
+python katalog_ergaenzen.py links_cl2.json html_katalog.json -o neu.json  # in neue Datei schreiben
+
+python ergaenze_html_struktur.py                   # überschreibt html_struktur.json (mit Backup)
+python ergaenze_html_struktur.py --dry-run         # nur anzeigen
+python ergaenze_html_struktur.py --output neu.json # in andere Datei schreiben
