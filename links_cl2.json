@@ -1694,6 +1694,11 @@
     "title": "ESP32-S3",
     "links": [
       {
+        "label": "ESP_Set.png",
+        "url": "https://juppijo.github.io/ESP32-S3/ESP_Set.png",
+        "icon": "✨"
+      },
+      {
         "label": "GPIO-Control-2/GPIO2.ino",
         "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control-2/GPIO2.ino",
         "icon": "✨",
@@ -1812,6 +1817,21 @@
           "Doku"
         ],
         "comment": "Projektbeschreibung (ESP32 S3)"
+      },
+      {
+        "label": "RGB_LED/RBG.html",
+        "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/RBG.html",
+        "icon": "✨"
+      },
+      {
+        "label": "RGB_LED/RBG2.html",
+        "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/RBG2.html",
+        "icon": "✨"
+      },
+      {
+        "label": "RGB_LED/RBG3.html",
+        "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/RBG3.html",
+        "icon": "✨"
       },
       {
         "label": "RGB_LED/index.html",
@@ -11303,6 +11323,11 @@
         "comment": "EPUB-Reader (KI-Variante)"
       },
       {
+        "label": "EPUB/epub_add_cover.py",
+        "url": "https://juppijo.github.io/Zami_Buecher/EPUB/epub_add_cover.py",
+        "icon": "✨"
+      },
+      {
         "label": "EPUB/epub_studio.html",
         "url": "https://juppijo.github.io/Zami_Buecher/EPUB/epub_studio.html",
         "icon": "✨",
@@ -12011,6 +12036,11 @@
           "Geschichte"
         ],
         "comment": "Buch „Wahre Liebe“ (KI-Variante)"
+      },
+      {
+        "label": "Wahre_Liebe_G.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/Wahre_Liebe_G.html",
+        "icon": "✨"
       },
       {
         "label": "Zaminia-und-die-Schattenkrieger/Bild1.jpg",
@@ -13500,6 +13530,11 @@
       {
         "label": "html_inventar_manager.html",
         "url": "https://juppijo.github.io/Zami_Home/html_inventar_manager.html",
+        "icon": "✨"
+      },
+      {
+        "label": "html_katalog.json",
+        "url": "https://juppijo.github.io/Zami_Home/html_katalog.json",
         "icon": "✨"
       },
       {
