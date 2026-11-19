@@ -1739,20 +1739,6 @@
         "comment": "GPIO-Steuerung per Web-Oberfläche (GPIO Control 2)"
       },
       {
-        "label": "GPIO-Control-3/index.html",
-        "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control-3/index.html",
-        "icon": "✨",
-        "fav": false,
-        "hidden": false,
-        "flag": "purple",
-        "tags": [
-          "ESP32",
-          "GPIO",
-          "GPIO-Control-3"
-        ],
-        "comment": "GPIO-Steuerung per Web-Oberfläche (GPIO Control 3)"
-      },
-      {
         "label": "GPIO-Control/index.html",
         "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control/index.html",
         "icon": "✨",
@@ -1834,6 +1820,11 @@
         "icon": "✨"
       },
       {
+        "label": "RGB_LED/RBG4.html",
+        "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/RBG4.html",
+        "icon": "✨"
+      },
+      {
         "label": "RGB_LED/index.html",
         "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/index.html",
         "icon": "✨",
@@ -1846,19 +1837,6 @@
           "RGB_LED"
         ],
         "comment": "RGB-LED-Steuerung"
-      },
-      {
-        "label": "WRZT_LaTex.html",
-        "url": "https://juppijo.github.io/ESP32-S3/WRZT_LaTex.html",
-        "icon": "✨",
-        "fav": false,
-        "hidden": false,
-        "flag": "purple",
-        "tags": [
-          "LaTeX",
-          "WRZT"
-        ],
-        "comment": "LaTeX-Formeln zur Theorie"
       },
       {
         "label": "arduino_inventar_cl.py",
@@ -13366,6 +13344,11 @@
         "comment": "Lebensmittel-Lexikon (Ernährung)"
       },
       {
+        "label": "Py.txt",
+        "url": "https://juppijo.github.io/Zami_Home/Py.txt",
+        "icon": "✨"
+      },
+      {
         "label": "README.md",
         "url": "https://juppijo.github.io/Zami_Home/README.md",
         "icon": "✨",
@@ -13468,11 +13451,6 @@
         "comment": "Icon / Favicon (Zami Home)"
       },
       {
-        "label": "generate_html_inventory.py",
-        "url": "https://juppijo.github.io/Zami_Home/generate_html_inventory.py",
-        "icon": "✨"
-      },
-      {
         "label": "github-link-builder.html",
         "url": "https://juppijo.github.io/Zami_Home/github-link-builder.html",
         "icon": "✨",
@@ -13528,11 +13506,6 @@
         "comment": "HTML → Word Konverter"
       },
       {
-        "label": "html_inventar_manager.html",
-        "url": "https://juppijo.github.io/Zami_Home/html_inventar_manager.html",
-        "icon": "✨"
-      },
-      {
         "label": "html_katalog.json",
         "url": "https://juppijo.github.io/Zami_Home/html_katalog.json",
         "icon": "✨"
@@ -13540,11 +13513,6 @@
       {
         "label": "html_katalog_manager.html",
         "url": "https://juppijo.github.io/Zami_Home/html_katalog_manager.html",
-        "icon": "✨"
-      },
-      {
-        "label": "html_struktur.json",
-        "url": "https://juppijo.github.io/Zami_Home/html_struktur.json",
         "icon": "✨"
       },
       {
@@ -13585,6 +13553,11 @@
           "Tool"
         ],
         "comment": "JSON-Werkzeug (Vergleichen/Bearbeiten)"
+      },
+      {
+        "label": "katalog_ergaenzen.py",
+        "url": "https://juppijo.github.io/Zami_Home/katalog_ergaenzen.py",
+        "icon": "✨"
       },
       {
         "label": "krita-tastenkuerzel.html",

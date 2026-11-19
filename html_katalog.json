@@ -3,7 +3,7 @@
     "quelle": "links_cl2.json (https://github.com/juppijo)",
     "aktualisiert_am": "2026-11-17",
     "gesamtanzahl_bereiche": 18,
-    "gesamtanzahl_html_dateien": 613,
+    "gesamtanzahl_html_dateien": 615,
     "sortierung": "Bereich -> Unterbereich -> Alphabetisch (Dateiname)"
   },
   "bereiche": [
@@ -549,6 +549,18 @@
               "pfad": "RGB_LED/RBG2.html",
               "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/RBG2.html",
               "verwendung": "RBG2"
+            },
+            {
+              "dateiname": "RBG3.html",
+              "pfad": "RGB_LED/RBG3.html",
+              "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/RBG3.html",
+              "verwendung": "RBG3"
+            },
+            {
+              "dateiname": "RBG4.html",
+              "pfad": "RGB_LED/RBG4.html",
+              "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/RBG4.html",
+              "verwendung": "RBG4"
             }
           ]
         }
