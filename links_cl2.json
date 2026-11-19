@@ -1694,6 +1694,11 @@
     "title": "ESP32-S3",
     "links": [
       {
+        "label": "ESP32-S3-pinout.jpg",
+        "url": "https://juppijo.github.io/ESP32-S3/ESP32-S3-pinout.jpg",
+        "icon": "✨"
+      },
+      {
         "label": "ESP_Set.png",
         "url": "https://juppijo.github.io/ESP32-S3/ESP_Set.png",
         "icon": "✨"
@@ -1753,6 +1758,26 @@
         "comment": "GPIO-Steuerung per Web-Oberfläche (GPIO Control)"
       },
       {
+        "label": "GPIO5/GPIO5.ino",
+        "url": "https://juppijo.github.io/ESP32-S3/GPIO5/GPIO5.ino",
+        "icon": "✨"
+      },
+      {
+        "label": "GPIO5/KerzeGPIO5_G3.html",
+        "url": "https://juppijo.github.io/ESP32-S3/GPIO5/KerzeGPIO5_G3.html",
+        "icon": "✨"
+      },
+      {
+        "label": "GPIO5/Kerze_Cl.html",
+        "url": "https://juppijo.github.io/ESP32-S3/GPIO5/Kerze_Cl.html",
+        "icon": "✨"
+      },
+      {
+        "label": "GPIO5/Kerze_G.html",
+        "url": "https://juppijo.github.io/ESP32-S3/GPIO5/Kerze_G.html",
+        "icon": "✨"
+      },
+      {
         "label": "MiniCon/index.html",
         "url": "https://juppijo.github.io/ESP32-S3/MiniCon/index.html",
         "icon": "✨",
@@ -1793,6 +1818,26 @@
         "comment": "Mini-Controller-Oberfläche (style.css)"
       },
       {
+        "label": "RBG_CL2/Kerze.html",
+        "url": "https://juppijo.github.io/ESP32-S3/RBG_CL2/Kerze.html",
+        "icon": "✨"
+      },
+      {
+        "label": "RBG_CL2/RBG5.html",
+        "url": "https://juppijo.github.io/ESP32-S3/RBG_CL2/RBG5.html",
+        "icon": "✨"
+      },
+      {
+        "label": "RBG_CL2/RBG_CL2.ino",
+        "url": "https://juppijo.github.io/ESP32-S3/RBG_CL2/RBG_CL2.ino",
+        "icon": "✨"
+      },
+      {
+        "label": "RBG_CL2/SecretLogin.h",
+        "url": "https://juppijo.github.io/ESP32-S3/RBG_CL2/SecretLogin.h",
+        "icon": "✨"
+      },
+      {
         "label": "README.md",
         "url": "https://juppijo.github.io/ESP32-S3/README.md",
         "icon": "✨",
@@ -1807,16 +1852,6 @@
       {
         "label": "RGB_LED/RBG.html",
         "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/RBG.html",
-        "icon": "✨"
-      },
-      {
-        "label": "RGB_LED/RBG2.html",
-        "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/RBG2.html",
-        "icon": "✨"
-      },
-      {
-        "label": "RGB_LED/RBG3.html",
-        "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/RBG3.html",
         "icon": "✨"
       },
       {
@@ -1847,32 +1882,6 @@
         "label": "arduino_inventar_g.py",
         "url": "https://juppijo.github.io/ESP32-S3/arduino_inventar_g.py",
         "icon": "✨"
-      },
-      {
-        "label": "esp32.html",
-        "url": "https://juppijo.github.io/ESP32-S3/esp32.html",
-        "icon": "✨",
-        "fav": false,
-        "hidden": false,
-        "flag": "purple",
-        "tags": [
-          "ESP32",
-          "Hardware"
-        ],
-        "comment": "ESP32-S3 Steuerseite (weitere Version)"
-      },
-      {
-        "label": "esp32_2.html",
-        "url": "https://juppijo.github.io/ESP32-S3/esp32_2.html",
-        "icon": "✨",
-        "fav": false,
-        "hidden": false,
-        "flag": "purple",
-        "tags": [
-          "ESP32",
-          "Hardware"
-        ],
-        "comment": "ESP32-S3 Steuerseite (weitere Version)"
       },
       {
         "label": "markdown_zu_html.py",

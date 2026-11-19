@@ -1,9 +1,9 @@
 {
   "meta": {
     "quelle": "links_cl2.json (https://github.com/juppijo)",
-    "aktualisiert_am": "2026-11-17",
+    "aktualisiert_am": "2026-11-19",
     "gesamtanzahl_bereiche": 18,
-    "gesamtanzahl_html_dateien": 615,
+    "gesamtanzahl_html_dateien": 616,
     "sortierung": "Bereich -> Unterbereich -> Alphabetisch (Dateiname)"
   },
   "bereiche": [
@@ -480,23 +480,6 @@
       "bereich": "ESP32-S3",
       "unterbereiche": [
         {
-          "unterbereich": "Hauptverzeichnis",
-          "dateien": [
-            {
-              "dateiname": "esp32_2.html",
-              "pfad": "esp32_2.html",
-              "url": "https://juppijo.github.io/ESP32-S3/esp32_2.html",
-              "verwendung": "ESP32-S3 Steuerseite (weitere Version)"
-            },
-            {
-              "dateiname": "esp32.html",
-              "pfad": "esp32.html",
-              "url": "https://juppijo.github.io/ESP32-S3/esp32.html",
-              "verwendung": "ESP32-S3 Steuerseite (weitere Version)"
-            }
-          ]
-        },
-        {
           "unterbereich": "GPIO-Control",
           "dateien": [
             {
@@ -519,6 +502,29 @@
           ]
         },
         {
+          "unterbereich": "GPIO5",
+          "dateien": [
+            {
+              "dateiname": "Kerze_Cl.html",
+              "pfad": "GPIO5/Kerze_Cl.html",
+              "url": "https://juppijo.github.io/ESP32-S3/GPIO5/Kerze_Cl.html",
+              "verwendung": "Kerze (KI-Variante)"
+            },
+            {
+              "dateiname": "Kerze_G.html",
+              "pfad": "GPIO5/Kerze_G.html",
+              "url": "https://juppijo.github.io/ESP32-S3/GPIO5/Kerze_G.html",
+              "verwendung": "Kerze (KI-Variante)"
+            },
+            {
+              "dateiname": "KerzeGPIO5_G3.html",
+              "pfad": "GPIO5/KerzeGPIO5_G3.html",
+              "url": "https://juppijo.github.io/ESP32-S3/GPIO5/KerzeGPIO5_G3.html",
+              "verwendung": "KerzeGPIO5 G3"
+            }
+          ]
+        },
+        {
           "unterbereich": "MiniCon",
           "dateien": [
             {
@@ -526,6 +532,23 @@
               "pfad": "MiniCon/index.html",
               "url": "https://juppijo.github.io/ESP32-S3/MiniCon/index.html",
               "verwendung": "Mini-Controller-Oberfläche"
+            }
+          ]
+        },
+        {
+          "unterbereich": "RBG_CL2",
+          "dateien": [
+            {
+              "dateiname": "Kerze.html",
+              "pfad": "RBG_CL2/Kerze.html",
+              "url": "https://juppijo.github.io/ESP32-S3/RBG_CL2/Kerze.html",
+              "verwendung": "Kerze"
+            },
+            {
+              "dateiname": "RBG5.html",
+              "pfad": "RBG_CL2/RBG5.html",
+              "url": "https://juppijo.github.io/ESP32-S3/RBG_CL2/RBG5.html",
+              "verwendung": "RBG5"
             }
           ]
         },
@@ -543,18 +566,6 @@
               "pfad": "RGB_LED/RBG.html",
               "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/RBG.html",
               "verwendung": "RBG"
-            },
-            {
-              "dateiname": "RBG2.html",
-              "pfad": "RGB_LED/RBG2.html",
-              "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/RBG2.html",
-              "verwendung": "RBG2"
-            },
-            {
-              "dateiname": "RBG3.html",
-              "pfad": "RGB_LED/RBG3.html",
-              "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/RBG3.html",
-              "verwendung": "RBG3"
             },
             {
               "dateiname": "RBG4.html",
