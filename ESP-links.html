@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ESP32 S3 Links</title><style>
+:root{
+  --bg:#e8ebe1; --bg2:#d5dccb; --card:#f7f8f3; --ink:#232a21; --muted:#6c7667;
+  --line:#d3d9c9; --accent:#4d7a58; --accent-ink:#fff; --warm:#b5893f; --danger:#b4443a;
+  --shadow:0 1px 2px rgba(35,42,33,.06),0 8px 24px rgba(35,42,33,.08);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+body[data-theme="dunkel"]{
+  --bg:#121814; --bg2:#1a231d; --card:#1b231e; --ink:#e3e9de; --muted:#97a392;
+  --line:#2c372f; --accent:#8cc09a; --accent-ink:#10200f; --warm:#d6ad63; --danger:#e07a6f;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+}
+body[data-theme="ocean"]{
+  --bg:#d9ebef; --bg2:#b5dce5; --card:#f3fafb; --ink:#10303a; --muted:#587b85;
+  --line:#bddce3; --accent:#0e7b8e; --accent-ink:#fff; --warm:#dd9c4c; --danger:#b4443a;
+}
+body[data-theme="himmel"]{
+  --bg:#e2effc; --bg2:#c4e0fa; --card:#f8fbff; --ink:#1b2d46; --muted:#657e9c;
+  --line:#cbdff2; --accent:#2c7be0; --accent-ink:#fff; --warm:#eea53a; --danger:#c2453b;
+}
+body[data-theme="nachtblau"]{
+  --bg:#0a1126; --bg2:#15204a; --card:#121b36; --ink:#e2e8f8; --muted:#8e9bc2;
+  --line:#243258; --accent:#7aa2ff; --accent-ink:#0a1126; --warm:#f2c66d; --danger:#ff8a80;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.45);
+}
+body[data-theme="sonnenuntergang"]{
+  --bg:#f6e5da; --bg2:#f0c8b0; --card:#fff8f3; --ink:#3a2320; --muted:#8a6a62;
+  --line:#ebd1c3; --accent:#c4533a; --accent-ink:#fff; --warm:#d6932a; --danger:#a63a3a;
+}
+body[data-theme="lavendel"]{
+  --bg:#ebe6f5; --bg2:#d5cbec; --card:#f9f7fd; --ink:#2a2440; --muted:#7a7096;
+  --line:#dbd3ee; --accent:#7a5cc7; --accent-ink:#fff; --warm:#d99a4a; --danger:#b4443a;
+}
+body[data-theme="kirschbluete"]{
+  --bg:#fbe8ee; --bg2:#f5cbda; --card:#fff8fa; --ink:#3b2230; --muted:#94687b;
+  --line:#efd1dc; --accent:#d1507b; --accent-ink:#fff; --warm:#c99a3e; --danger:#a63a3a;
+}
+body[data-theme="sand"]{
+  --bg:#efe6d4; --bg2:#e0d0b0; --card:#fbf7ee; --ink:#38301f; --muted:#8a7d62;
+  --line:#e2d6bb; --accent:#a47a3b; --accent-ink:#fff; --warm:#c0692f; --danger:#a63a3a;
+}
+.catcell{display:flex;gap:6px}
+.catcell select{width:auto;max-width:46%;padding:11px 8px}
+.themesel{width:auto;padding:9px 12px;font-weight:600;cursor:pointer}
+.favbtn.onfav{color:var(--warm);border-color:var(--warm)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:16px}
+body{font-family:var(--sans);color:var(--ink);min-height:100vh;
+  background:radial-gradient(1200px 600px at 10% -10%,var(--bg2),transparent 70%),var(--bg);
+  transition:background .5s,color .3s;padding:clamp(14px,4vw,40px)}
+.wrap{max-width:980px;margin:0 auto}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:26px;flex-wrap:wrap}
+h1{font-family:var(--serif);font-weight:500;font-size:clamp(1.9rem,5vw,2.8rem);letter-spacing:-.01em;line-height:1.1}
+.sub{color:var(--muted);margin-top:6px;font-size:.95rem}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+button,.btn{font:inherit;font-size:.9rem;font-weight:600;padding:10px 16px;border-radius:12px;border:1px solid transparent;
+  background:var(--accent);color:var(--accent-ink);cursor:pointer;transition:filter .15s,transform .1s}
+button:hover{filter:brightness(1.08)} button:active{transform:scale(.97)}
+button.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+button.ghost:hover{background:var(--card);filter:none}
+button.icon{padding:9px 12px;font-size:1rem}
+button.danger{color:var(--danger)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+input,select{font:inherit;font-size:.95rem;padding:11px 14px;border-radius:12px;border:1px solid var(--line);
+  background:var(--card);color:var(--ink);min-width:0;width:100%}
+input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:18px;box-shadow:var(--shadow)}
+.form{display:grid;grid-template-columns:1fr 1.6fr 1fr auto;gap:10px;align-items:center}
+.form .actions{display:flex;gap:8px;flex-wrap:wrap}
+.bar{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
+.bar .search{flex:1;min-width:200px}
+.seg{display:flex;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.seg button{background:transparent;color:var(--muted);border-radius:0;padding:9px 13px}
+.seg button.on{background:var(--card);color:var(--ink)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.chip{background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-weight:500;font-size:.85rem}
+.chip.on{background:var(--ink);color:var(--card);border-color:var(--ink)}
+.chip small{opacity:.6;margin-left:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.grid.list{grid-template-columns:1fr;gap:8px}
+.card{position:relative;display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);
+  border-radius:16px;padding:14px;box-shadow:var(--shadow);transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card.fav{border-left:4px solid var(--warm)}
+.av{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;color:#fff;font-family:var(--serif);font-size:1.3rem}
+.main{flex:1;min-width:0;text-decoration:none;color:inherit;display:block}
+.main:focus-visible{outline-offset:6px}
+.name{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.host{color:var(--muted);font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tag{display:inline-block;margin-top:5px;font-size:.75rem;color:var(--accent);border:1px solid var(--line);border-radius:999px;padding:1px 9px}
+.acts{display:flex;gap:2px;opacity:.35;transition:opacity .2s}
+.card:hover .acts,.card:focus-within .acts{opacity:1}
+.acts button{background:transparent;color:var(--ink);padding:6px 8px;font-size:.95rem;border-radius:8px}
+.acts button:hover{background:var(--bg2);filter:none}
+.acts .on{color:var(--warm)}
+.empty{text-align:center;color:var(--muted);padding:46px 10px;font-family:var(--serif);font-size:1.1rem}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,30px);opacity:0;pointer-events:none;
+  background:var(--ink);color:var(--card);padding:12px 18px;border-radius:14px;display:flex;gap:14px;align-items:center;
+  transition:.3s;box-shadow:var(--shadow);z-index:10;max-width:92vw}
+.toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+.toast button{background:transparent;color:var(--warm);padding:2px 6px;border:0}
+footer{margin-top:36px;text-align:center;color:var(--muted);font-size:.8rem}
+@media(max-width:720px){.form{grid-template-columns:1fr}.acts{opacity:1}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body><div class="wrap"><header><div><h1>🌿 ESP32 S3 Links</h1><p class="sub">3 Links</p></div><div class="tools"><select class="themesel" id="theme" aria-label="Design"></select><button class="ghost icon" id="fs" title="Vollbild" aria-label="Vollbild">⛶</button></div></header><div class="bar"><input class="search" id="q" type="search" placeholder="Links durchsuchen…" aria-label="Suche"><button class="chip" id="favOnly" aria-pressed="false">☆ Favoriten</button></div><div class="chips" id="chips"></div><div class="grid" id="list"></div><div class="empty" id="none" hidden>Nichts gefunden 🍃</div><footer>Erstellt am 19.11.2026 mit Zen Link Manager</footer></div><script>const THEMES=[["moos","🌿 Moos"],["ocean","🌊 Ocean"],["himmel","☁️ Himmel"],["nachtblau","🌌 Nachtblau"],["sonnenuntergang","🌅 Sonnenuntergang"],["lavendel","💜 Lavendel"],["kirschbluete","🌸 Kirschblüte"],["sand","🏜️ Sand"],["dunkel","🌑 Dunkel"]];
+function fillThemes(sel){sel.innerHTML=THEMES.map(t=>'<option value="'+t[0]+'">'+t[1]+'</option>').join("")}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function host(u){try{return new URL(u).hostname.replace(/^www\./,"")}catch(e){return u}}
+function hue(s){let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))%360;return h}
+function cardHTML(l,editable){
+  const title=l.name||host(l.url), h=hue(host(l.url));
+  return '<div class="card'+(l.fav?' fav':'')+'">'+
+    '<div class="av" style="background:hsl('+h+' 32% 40%)" aria-hidden="true">'+esc(title.charAt(0).toUpperCase())+'</div>'+
+    '<a class="main" href="'+esc(l.url)+'" target="_blank" rel="noopener noreferrer">'+
+      '<div class="name">'+esc(title)+'</div><div class="host">'+esc(host(l.url))+'</div>'+
+      (l.cat?'<span class="tag">'+esc(l.cat)+'</span>':'')+'</a>'+
+    (editable?'<div class="acts">'+
+      '<button class="'+(l.fav?'on':'')+'" onclick="toggleFav(\''+l.id+'\')" title="Favorit" aria-label="Favorit">'+(l.fav?'★':'☆')+'</button>'+
+      '<button onclick="editLink(\''+l.id+'\')" title="Bearbeiten" aria-label="Bearbeiten">✎</button>'+
+      '<button onclick="removeLink(\''+l.id+'\')" title="Löschen" aria-label="Löschen">✕</button></div>':'')+
+  '</div>';
+}
+function matches(l,q,cat){
+  if(cat&&(l.cat||"")!==cat)return false;
+  q=q.trim().toLowerCase();
+  return !q||((l.name||"")+" "+l.url+" "+(l.cat||"")).toLowerCase().includes(q);
+}
+function chipsHTML(items,cat){
+  const counts={};items.forEach(l=>{if(l.cat)counts[l.cat]=(counts[l.cat]||0)+1});
+  const names=Object.keys(counts).sort((a,b)=>a.localeCompare(b));
+  if(!names.length)return"";
+  return [""].concat(names).map(n=>'<button class="chip'+(n===cat?' on':'')+'" data-cat="'+esc(n)+'">'+
+    (n||"Alle")+'<small>'+(n?counts[n]:items.length)+'</small></button>').join("");
+}
+function sorted(items){return items.map((l,i)=>[l,i]).sort((a,b)=>(!!b[0].fav-!!a[0].fav)||a[1]-b[1]).map(x=>x[0])}
+(function staticMain(DATA,THEME){
+  let q="",cat="",favOnly=false;
+  const list=document.getElementById("list"),chips=document.getElementById("chips"),
+        none=document.getElementById("none");
+  const sel=document.getElementById("theme");
+  fillThemes(sel);sel.value=THEME;document.body.dataset.theme=THEME;
+  document.getElementById("fs").onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
+  const fb=document.getElementById("favOnly");
+  if(!DATA.some(l=>l.fav))fb.hidden=true;
+  fb.onclick=()=>{favOnly=!favOnly;fb.classList.toggle("on",favOnly);fb.textContent=(favOnly?"★":"☆")+" Favoriten";draw()};
+  sel.onchange=()=>{document.body.dataset.theme=sel.value};
+  document.getElementById("q").oninput=e=>{q=e.target.value;draw()};
+  chips.innerHTML=chipsHTML(DATA,"");
+  chips.onclick=e=>{
+    const b=e.target.closest(".chip");if(!b)return;
+    cat=b.dataset.cat;
+    chips.querySelectorAll(".chip").forEach(c=>c.classList.toggle("on",c.dataset.cat===cat));
+    draw();
+  };
+  function draw(){
+    const items=sorted(DATA).filter(l=>matches(l,q,cat)&&(!favOnly||l.fav));
+    list.innerHTML=items.map(l=>cardHTML(l,false)).join("");
+    none.hidden=items.length>0;
+  }
+  draw();
+})(JSON.parse('[{"name":"ESP32-S3 2","url":"http://83.134.55.39:319/","cat":"EPS","fav":true},{"name":"ESP_32-S3 1","url":"http://83.134.55.39:318/","cat":"EPS","fav":true},{"name":"Kerze","url":"https://juppijo.github.io/ESP32-S3/RBG_CL2/Kerze.html","cat":"EPS","fav":true}]'),"nachtblau");</script></body></html>
