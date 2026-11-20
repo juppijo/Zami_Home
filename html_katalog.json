@@ -5,7 +5,7 @@
     "gesamtanzahl_bereiche": 18,
     "gesamtanzahl_html_dateien": 618,
     "sortierung": "Bereich -> Unterbereich -> Alphabetisch (Dateiname)",
-    "gesamtanzahl_favoriten": 0,
+    "gesamtanzahl_favoriten": 7,
     "bereichsfarben": {
       "Autogenes-Training": "#38bdf8",
       "Bilder": "#f472b6",
@@ -518,7 +518,8 @@
               "dateiname": "index.html",
               "pfad": "GPIO-Control-2/index.html",
               "url": "https://juppijo.github.io/ESP32-S3/GPIO-Control-2/index.html",
-              "verwendung": "GPIO-Steuerung per Web-Oberfläche (GPIO Control 2)"
+              "verwendung": "GPIO-Steuerung per Web-Oberfläche (GPIO Control 2)",
+              "favorit": true
             }
           ]
         },
@@ -563,13 +564,15 @@
               "dateiname": "Kerze.html",
               "pfad": "RBG_CL2/Kerze.html",
               "url": "https://juppijo.github.io/ESP32-S3/RBG_CL2/Kerze.html",
-              "verwendung": "Kerze"
+              "verwendung": "Kerze",
+              "favorit": true
             },
             {
               "dateiname": "RBG5.html",
               "pfad": "RBG_CL2/RBG5.html",
               "url": "https://juppijo.github.io/ESP32-S3/RBG_CL2/RBG5.html",
-              "verwendung": "RBG5"
+              "verwendung": "RBG5",
+              "favorit": true
             }
           ]
         },
@@ -592,7 +595,8 @@
               "dateiname": "RBG4.html",
               "pfad": "RGB_LED/RBG4.html",
               "url": "https://juppijo.github.io/ESP32-S3/RGB_LED/RBG4.html",
-              "verwendung": "RBG4"
+              "verwendung": "RBG4",
+              "favorit": true
             }
           ]
         }
@@ -3510,7 +3514,8 @@
               "dateiname": "ESP-links.html",
               "pfad": "ESP-links.html",
               "url": "https://juppijo.github.io/Zami_Home/ESP-links.html",
-              "verwendung": "ESP-links"
+              "verwendung": "ESP-links",
+              "favorit": true
             },
             {
               "dateiname": "github-link-builder.html",
@@ -3838,13 +3843,15 @@
               "dateiname": "LinkList.html",
               "pfad": "LinkList.html",
               "url": "https://juppijo.github.io/zaminia/LinkList.html",
-              "verwendung": "Link-Liste"
+              "verwendung": "Link-Liste",
+              "favorit": true
             },
             {
               "dateiname": "Meine-Links.html",
               "pfad": "Meine-Links.html",
               "url": "https://juppijo.github.io/zaminia/Meine-Links.html",
-              "verwendung": "Meine-Links"
+              "verwendung": "Meine-Links",
+              "favorit": true
             },
             {
               "dateiname": "Migräne.html",

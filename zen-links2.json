@@ -3,7 +3,7 @@
     "name": "Physiker",
     "url": "https://juppijo.github.io/WRZT/Physiker",
     "cat": "",
-    "fav": false
+    "fav": true
   },
   {
     "name": "Zaminias Kunstwelt",
@@ -45,7 +45,7 @@
     "name": "Link List",
     "url": "https://juppijo.github.io/zaminia/",
     "cat": "",
-    "fav": false
+    "fav": true
   },
   {
     "name": "Die 8 Brokate",
@@ -57,12 +57,18 @@
     "name": "ESP32-S3 2",
     "url": "http://83.134.55.39:319/",
     "cat": "EPS",
-    "fav": true
+    "fav": false
   },
   {
     "name": "ESP_32-S3 1",
     "url": "http://83.134.55.39:318/",
     "cat": "EPS",
+    "fav": true
+  },
+  {
+    "name": "Zen Link Manager",
+    "url": "https://juppijo.github.io/zaminia/LinkList.html",
+    "cat": "Links",
     "fav": true
   }
 ]
