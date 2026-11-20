@@ -13158,6 +13158,11 @@
         "comment": "Medienplayer"
       },
       {
+        "label": "ESP-links.html",
+        "url": "https://juppijo.github.io/Zami_Home/ESP-links.html",
+        "icon": "✨"
+      },
+      {
         "label": "GitHub Repository Index - GITALL.csv",
         "url": "https://juppijo.github.io/Zami_Home/GitHub%20Repository%20Index%20-%20GITALL.csv",
         "icon": "✨",
@@ -13829,6 +13834,11 @@
           "Tool"
         ],
         "comment": "Skript zum Umwandeln von Daten"
+      },
+      {
+        "label": "zen-links2.json",
+        "url": "https://juppijo.github.io/Zami_Home/zen-links2.json",
+        "icon": "✨"
       }
     ]
   },
@@ -14052,6 +14062,11 @@
           "Liste"
         ],
         "comment": "Link-Liste"
+      },
+      {
+        "label": "Meine-Links.html",
+        "url": "https://juppijo.github.io/zaminia/Meine-Links.html",
+        "icon": "✨"
       },
       {
         "label": "Migräne.html",

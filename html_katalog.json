@@ -3,7 +3,7 @@
     "quelle": "links_cl2.json (https://github.com/juppijo)",
     "aktualisiert_am": "2026-11-20",
     "gesamtanzahl_bereiche": 18,
-    "gesamtanzahl_html_dateien": 616,
+    "gesamtanzahl_html_dateien": 618,
     "sortierung": "Bereich -> Unterbereich -> Alphabetisch (Dateiname)",
     "gesamtanzahl_favoriten": 0,
     "bereichsfarben": {
@@ -3507,6 +3507,12 @@
           "unterbereich": "Hauptverzeichnis",
           "dateien": [
             {
+              "dateiname": "ESP-links.html",
+              "pfad": "ESP-links.html",
+              "url": "https://juppijo.github.io/Zami_Home/ESP-links.html",
+              "verwendung": "ESP-links"
+            },
+            {
               "dateiname": "github-link-builder.html",
               "pfad": "github-link-builder.html",
               "url": "https://juppijo.github.io/Zami_Home/github-link-builder.html",
@@ -3833,6 +3839,12 @@
               "pfad": "LinkList.html",
               "url": "https://juppijo.github.io/zaminia/LinkList.html",
               "verwendung": "Link-Liste"
+            },
+            {
+              "dateiname": "Meine-Links.html",
+              "pfad": "Meine-Links.html",
+              "url": "https://juppijo.github.io/zaminia/Meine-Links.html",
+              "verwendung": "Meine-Links"
             },
             {
               "dateiname": "Migräne.html",
