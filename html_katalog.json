@@ -1,10 +1,31 @@
 {
   "meta": {
     "quelle": "links_cl2.json (https://github.com/juppijo)",
-    "aktualisiert_am": "2026-11-19",
+    "aktualisiert_am": "2026-11-20",
     "gesamtanzahl_bereiche": 18,
     "gesamtanzahl_html_dateien": 616,
-    "sortierung": "Bereich -> Unterbereich -> Alphabetisch (Dateiname)"
+    "sortierung": "Bereich -> Unterbereich -> Alphabetisch (Dateiname)",
+    "gesamtanzahl_favoriten": 0,
+    "bereichsfarben": {
+      "Autogenes-Training": "#38bdf8",
+      "Bilder": "#f472b6",
+      "Dashboard": "#34d399",
+      "ESP32-S3": "#fbbf24",
+      "Garten": "#a78bfa",
+      "Kegeln": "#fb7185",
+      "Logik_des_Universums": "#2dd4bf",
+      "Musik_Zami": "#fb923c",
+      "Rechner": "#818cf8",
+      "robbie": "#a3e635",
+      "TaiChi": "#e879f9",
+      "TNH": "#60a5fa",
+      "WRZT": "#f472b6",
+      "Zami_Buecher": "#a78bfa",
+      "Zami_Home": "#fb923c",
+      "zaminia": "#fbbf24",
+      "Zaminia-Zen-Theme": "#f472b6",
+      "ZenZamiSpiele-Co": "#fb7185"
+    }
   },
   "bereiche": [
     {
