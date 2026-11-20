@@ -1,0 +1,32 @@
+{
+  "titel": "Meine Formelsammlung",
+  "mathematik": [
+    {
+      "name": "Satz des Pythagoras",
+      "formel": "$a^2 + b^2 = c^2$"
+    },
+    {
+      "name": "Quadratische Formel",
+      "formel": "$$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$"
+    },
+    {
+      "name": "Gaußsches Integral",
+      "formel": "\\[ \\int_{-\\infty}^{\\infty} e^{-x^2}\\,dx = \\sqrt{\\pi} \\]"
+    }
+  ],
+  "physik": {
+    "einstein": "$E = mc^2$",
+    "kinetische_energie": "\\(E_{kin} = \\frac{1}{2}mv^2\\)"
+  },
+
+  "text": {
+    "text0":"Es gilt $a+b$ und außerdem $c^2$.", 
+    "text1":"$\\alpha + \\beta = \\gamma$",
+    "text2":"$$\\int_0^1 x^2\\,dx = \\frac{1}{3}$$"
+  },
+  
+  "analysis": [
+    "$$\\sum_{n=1}^{\\infty} \\frac{1}{n^2} = \\frac{\\pi^2}{6}$$",
+    "$e^{i\\pi} + 1 = 0$"
+  ]
+}
