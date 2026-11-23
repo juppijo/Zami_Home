@@ -753,8 +753,8 @@
         "icon": "✨"
       },
       {
-        "label": "RGB_K_T/Kerze_12p.html",
-        "url": "https://juppijo.github.io/ESP32-S3/RGB_K_T/Kerze_12p.html",
+        "label": "RGB_K_T/Kerze_T.html",
+        "url": "https://juppijo.github.io/ESP32-S3/RGB_K_T/Kerze_T.html",
         "icon": "✨"
       },
       {
@@ -4125,6 +4125,16 @@
       {
         "label": "W_Formeln_A.html",
         "url": "https://juppijo.github.io/WRZT/W_Formeln_A.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Wellen/WRZT-Licht-Glas-Netz(3D)2.html",
+        "url": "https://juppijo.github.io/WRZT/Wellen/WRZT-Licht-Glas-Netz(3D)2.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Wellen/wrzt_3d_simulation_lichtwellen.html",
+        "url": "https://juppijo.github.io/WRZT/Wellen/wrzt_3d_simulation_lichtwellen.html",
         "icon": "✨"
       },
       {

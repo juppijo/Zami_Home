@@ -3,7 +3,7 @@
     "quelle": "links_cl2.json (https://github.com/juppijo)",
     "aktualisiert_am": "2026-11-23",
     "gesamtanzahl_bereiche": 18,
-    "gesamtanzahl_html_dateien": 621,
+    "gesamtanzahl_html_dateien": 624,
     "sortierung": "Bereich -> Unterbereich -> Alphabetisch (Dateiname)",
     "gesamtanzahl_favoriten": 7,
     "bereichsfarben": {
@@ -590,6 +590,12 @@
               "pfad": "RGB_K_T/Kerze_12p.html",
               "url": "https://juppijo.github.io/ESP32-S3/RGB_K_T/Kerze_12p.html",
               "verwendung": "Kerze 12p"
+            },
+            {
+              "dateiname": "Kerze_T.html",
+              "pfad": "RGB_K_T/Kerze_T.html",
+              "url": "https://juppijo.github.io/ESP32-S3/RGB_K_T/Kerze_T.html",
+              "verwendung": "Kerze mit Timer"
             }
           ]
         },
@@ -2085,6 +2091,23 @@
               "pfad": "HTML_Merge_Studio/index.html",
               "url": "https://juppijo.github.io/WRZT/HTML_Merge_Studio/index.html",
               "verwendung": "HTML-Dateien zusammenführen (Studio)"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Wellen",
+          "dateien": [
+            {
+              "dateiname": "WRZT-Licht-Glas-Netz(3D)2.html",
+              "pfad": "Wellen/WRZT-Licht-Glas-Netz(3D)2.html",
+              "url": "https://juppijo.github.io/WRZT/Wellen/WRZT-Licht-Glas-Netz(3D)2.html",
+              "verwendung": "WRZT Licht Glas Netz(3D)2"
+            },
+            {
+              "dateiname": "wrzt_3d_simulation_lichtwellen.html",
+              "pfad": "Wellen/wrzt_3d_simulation_lichtwellen.html",
+              "url": "https://juppijo.github.io/WRZT/Wellen/wrzt_3d_simulation_lichtwellen.html",
+              "verwendung": "Wrzt 3D Simulation Lichtwellen"
             }
           ]
         },

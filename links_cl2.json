@@ -1860,9 +1860,14 @@
         "comment": "Projektbeschreibung (ESP32 S3)"
       },
       {
-        "label": "RGB_K_T/Kerze_12p.html",
-        "url": "https://juppijo.github.io/ESP32-S3/RGB_K_T/Kerze_12p.html",
-        "icon": "✨"
+        "label": "RGB_K_T/Kerze_T.html",
+        "url": "https://juppijo.github.io/ESP32-S3/RGB_K_T/Kerze_T.html",
+        "icon": "✨",
+        "comment": "Kerze mit Timer",
+        "fav": false,
+        "hidden": false,
+        "flag": null,
+        "tags": []
       },
       {
         "label": "RGB_K_T/RGB_K_T.ino",
@@ -10763,6 +10768,16 @@
           "Nachschlagen"
         ],
         "comment": "Formelsammlung zur Theorie"
+      },
+      {
+        "label": "Wellen/WRZT-Licht-Glas-Netz(3D)2.html",
+        "url": "https://juppijo.github.io/WRZT/Wellen/WRZT-Licht-Glas-Netz(3D)2.html",
+        "icon": "✨"
+      },
+      {
+        "label": "Wellen/wrzt_3d_simulation_lichtwellen.html",
+        "url": "https://juppijo.github.io/WRZT/Wellen/wrzt_3d_simulation_lichtwellen.html",
+        "icon": "✨"
       },
       {
         "label": "Wellen_1.html",
