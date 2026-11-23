@@ -1,9 +1,9 @@
 {
   "meta": {
     "quelle": "links_cl2.json (https://github.com/juppijo)",
-    "aktualisiert_am": "2026-11-20",
+    "aktualisiert_am": "2026-11-23",
     "gesamtanzahl_bereiche": 18,
-    "gesamtanzahl_html_dateien": 618,
+    "gesamtanzahl_html_dateien": 621,
     "sortierung": "Bereich -> Unterbereich -> Alphabetisch (Dateiname)",
     "gesamtanzahl_favoriten": 7,
     "bereichsfarben": {
@@ -568,11 +568,28 @@
               "favorit": true
             },
             {
+              "dateiname": "Kerze_12p.html",
+              "pfad": "RBG_CL2/Kerze_12p.html",
+              "url": "https://juppijo.github.io/ESP32-S3/RBG_CL2/Kerze_12p.html",
+              "verwendung": "Kerze 12p"
+            },
+            {
               "dateiname": "RBG5.html",
               "pfad": "RBG_CL2/RBG5.html",
               "url": "https://juppijo.github.io/ESP32-S3/RBG_CL2/RBG5.html",
               "verwendung": "RBG5",
               "favorit": true
+            }
+          ]
+        },
+        {
+          "unterbereich": "RGB_K_T",
+          "dateien": [
+            {
+              "dateiname": "Kerze_12p.html",
+              "pfad": "RGB_K_T/Kerze_12p.html",
+              "url": "https://juppijo.github.io/ESP32-S3/RGB_K_T/Kerze_12p.html",
+              "verwendung": "Kerze 12p"
             }
           ]
         },
@@ -3379,6 +3396,17 @@
               "pfad": "EPUB/google_drive_direkt_download_konverter.html",
               "url": "https://juppijo.github.io/Zami_Buecher/EPUB/google_drive_direkt_download_konverter.html",
               "verwendung": "Google-Drive-Direktdownload-Konverter"
+            }
+          ]
+        },
+        {
+          "unterbereich": "Glaube",
+          "dateien": [
+            {
+              "dateiname": "Firmung_Begleitheft_Texte.html",
+              "pfad": "Glaube/Firmung_Begleitheft_Texte.html",
+              "url": "https://juppijo.github.io/Zami_Buecher/Glaube/Firmung_Begleitheft_Texte.html",
+              "verwendung": "Firmung Begleitheft Texte"
             }
           ]
         },

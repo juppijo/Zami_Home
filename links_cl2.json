@@ -1823,8 +1823,18 @@
         "icon": "✨"
       },
       {
+        "label": "RBG_CL2/Kerze_12p.html",
+        "url": "https://juppijo.github.io/ESP32-S3/RBG_CL2/Kerze_12p.html",
+        "icon": "✨"
+      },
+      {
         "label": "RBG_CL2/RBG5.html",
         "url": "https://juppijo.github.io/ESP32-S3/RBG_CL2/RBG5.html",
+        "icon": "✨"
+      },
+      {
+        "label": "RBG_CL2/RBG_CL12.ino",
+        "url": "https://juppijo.github.io/ESP32-S3/RBG_CL2/RBG_CL12.ino",
         "icon": "✨"
       },
       {
@@ -1848,6 +1858,16 @@
           "Doku"
         ],
         "comment": "Projektbeschreibung (ESP32 S3)"
+      },
+      {
+        "label": "RGB_K_T/Kerze_12p.html",
+        "url": "https://juppijo.github.io/ESP32-S3/RGB_K_T/Kerze_12p.html",
+        "icon": "✨"
+      },
+      {
+        "label": "RGB_K_T/RGB_K_T.ino",
+        "url": "https://juppijo.github.io/ESP32-S3/RGB_K_T/RGB_K_T.ino",
+        "icon": "✨"
       },
       {
         "label": "RGB_LED/RBG.html",
@@ -11420,6 +11440,11 @@
         "comment": "Buch „Gate Gate“"
       },
       {
+        "label": "Glaube/Firmung_Begleitheft_Texte.html",
+        "url": "https://juppijo.github.io/Zami_Buecher/Glaube/Firmung_Begleitheft_Texte.html",
+        "icon": "✨"
+      },
+      {
         "label": "Home.jpeg",
         "url": "https://juppijo.github.io/Zami_Buecher/Home.jpeg",
         "icon": "✨",
@@ -12943,6 +12968,11 @@
         "comment": "Stylesheet zu „Bildsuche“"
       },
       {
+        "label": "Chat-Blue/Beispiel.json",
+        "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/Beispiel.json",
+        "icon": "✨"
+      },
+      {
         "label": "Chat-Blue/css/style.css",
         "url": "https://juppijo.github.io/Zami_Home/Chat-Blue/css/style.css",
         "icon": "✨",
@@ -13730,11 +13760,6 @@
         ]
       },
       {
-        "label": "links_g-n.json",
-        "url": "https://juppijo.github.io/Zami_Home/links_g-n.json",
-        "icon": "✨"
-      },
-      {
         "label": "linksg.json",
         "url": "https://juppijo.github.io/Zami_Home/linksg.json",
         "icon": "✨",
@@ -13773,16 +13798,9 @@
         ]
       },
       {
-        "label": "notizwerk-sicherung-2026-10-25.json",
-        "url": "https://juppijo.github.io/Zami_Home/notizwerk-sicherung-2026-10-25.json",
-        "icon": "✨",
-        "comment": "Notizen Daten",
-        "fav": false,
-        "hidden": false,
-        "flag": "blue",
-        "tags": [
-          "Notizen"
-        ]
+        "label": "notizwerk-sicherung.json",
+        "url": "https://juppijo.github.io/Zami_Home/notizwerk-sicherung.json",
+        "icon": "✨"
       },
       {
         "label": "notizwerk.html",
